@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { FieldErrors } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AccountType } from 'generated/graphql';
@@ -45,6 +46,7 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
     onTransferProfile,
     data,
     handleSaveNext,
+    onValidityChange,
   }) => {
     const { _ } = useLingui();
     const { createDao } = useCreateDao();
@@ -185,6 +187,24 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
       ],
     );
 
+    const handleFormStateChange = useCallback(
+      ({
+        values,
+        errors,
+      }: {
+        isValid: boolean;
+        isDirty: boolean;
+        isSubmitting: boolean;
+        values: EditProfileFormSchemaType;
+        errors: FieldErrors<EditProfileFormSchemaType>;
+      }) => {
+        const hasName = values.name?.trim().length > 0;
+        const hasErrors = Object.keys(errors).length > 0;
+        onValidityChange?.(hasName && !hasErrors);
+      },
+      [onValidityChange],
+    );
+
     return (
       <>
         <TransferProfileModal
@@ -202,6 +222,8 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
           nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
           onUpload={onUpload}
           prefillValues={initialValues as EditProfileFormSchemaType}
+          onFormStateChange={handleFormStateChange}
+          validationMode="onChange"
         />
       </>
     );

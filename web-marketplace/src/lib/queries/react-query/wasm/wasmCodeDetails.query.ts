@@ -1,7 +1,7 @@
 import { QueryKey } from '@tanstack/react-query';
 
-import type { WasmCodeClient } from '../../../../pages/CreateOrganization/hooks/useCreateDao/useCreateDao.codeDetails';
-import { getCodeDetailsWithFallback } from '../../../../pages/CreateOrganization/hooks/useCreateDao/useCreateDao.codeDetails';
+import type { WasmCodeClient } from './wasmCodeDetails.helpers';
+import { getCodeDetailsWithFallback } from './wasmCodeDetails.helpers';
 
 export type GetCodeDetailsQueryParams = {
   client: WasmCodeClient;

@@ -5,7 +5,7 @@ import {
   wasmTypes,
 } from '@cosmjs/cosmwasm-stargate';
 import { GeneratedType, OfflineSigner, Registry } from '@cosmjs/proto-signing';
-import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
+import { AminoTypes, GasPrice, SigningStargateClient } from '@cosmjs/stargate';
 import {
   cosmosAminoConverters,
   cosmosProtoRegistry,
@@ -95,9 +95,12 @@ export async function setupSigningClient(
 
     setLoading(true);
     try {
+      const gasPrice = GasPrice.fromString('0.025uregen');
+
       const options: StargateConnectOptions = {
         registry: stargateRegistry,
         aminoTypes,
+        gasPrice,
       } as unknown as StargateConnectOptions;
 
       const signingClient = await SigningStargateClient.connectWithSigner(
@@ -108,6 +111,7 @@ export async function setupSigningClient(
       const cosmWasmOptions: CosmWasmConnectOptions = {
         registry: cosmWasmRegistry,
         aminoTypes,
+        gasPrice,
       };
       const signingCosmWasmClient =
         await SigningCosmWasmClient.connectWithSigner(

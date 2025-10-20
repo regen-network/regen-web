@@ -41,6 +41,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -134,7 +136,7 @@ msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} ch
 msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} carácter} other {{remainingCaptionCharacters} caracteres}}"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:229
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:293
 #: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:202
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
@@ -714,7 +716,7 @@ msgstr "precio promedio por crédito"
 msgid "back to projects"
 msgstr "volver a proyectos"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:192
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:257
 msgid "Background image"
 msgstr "Imagen de fondo"
 
@@ -956,7 +958,7 @@ msgstr "Para comprar con criptomonedas es necesario tener una cuenta con una dir
 #~ msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue. "
 #~ msgstr "Para comprar con criptomonedas, necesitas una cuenta con una dirección de billetera. Crea una billetera Keplr para continuar."
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:123
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:117
 msgid "By connecting to Regen Marketplace, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>"
 msgstr "Al conectarse a Regen Marketplace, usted acepta nuestros <0>Términos de servicio</0> y <1>Política de privacidad</1>"
 
@@ -1101,7 +1103,7 @@ msgstr "Elija una clase de crédito"
 msgid "Choose a credit type"
 msgstr "Elija un tipo de crédito"
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:47
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:48
 msgid "Choose a log in method"
 msgstr "Elija un método de inicio de sesión"
 
@@ -1429,7 +1431,7 @@ msgstr "Crear orden de venta"
 msgid "Created by"
 msgstr "Creado por"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Header.tsx:214
+#: src/components/organisms/RegistryLayout/RegistryLayout.Header.tsx:105
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr "Para crear una organización es necesario firmar una transacción en blockchain. Obtén más información sobre las billeteras en nuestra <0>guía del usuario</0>."
 
@@ -1832,7 +1834,7 @@ msgid "description"
 msgstr "descripción"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:216
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:281
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
@@ -2099,7 +2101,7 @@ msgstr "actividades elegibles"
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr "Los proyectos elegibles implementan actividades de conservación y/o restauración en diferentes proporciones/ritmos. Tebu reconoce que las actividades de restauración tienen un costo más alto al asignar un mayor valor a las acciones de restauración."
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:97
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:91
 msgid "Email"
 msgstr "Correo electrónico"
 
@@ -2705,8 +2707,7 @@ msgstr "MÁS INFORMACIÓN"
 msgid "Learn more about creating a credit class»"
 msgstr "Obtenga más información sobre cómo crear una clase de crédito»"
 
-#: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Select.tsx:30
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:52
+#: src/components/molecules/WalletGuideLearnMore.tsx:23
 msgid "Learn more about wallets in our <0>user guide.</0>"
 msgstr "Obtenga más información sobre las billeteras en nuestra <0>guía del usuario</0>."
 
@@ -2780,7 +2781,7 @@ msgstr "Las ubicaciones son privadas"
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:10
 #: src/components/organisms/LoginButton/LoginButton.tsx:79
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:108
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:102
 msgid "log in"
 msgstr "acceso"
 
@@ -3070,7 +3071,7 @@ msgstr "Debe tener destinatarios"
 #~ msgid "My prefinance projects"
 #~ msgstr "Mis proyectos de prefinanciamiento"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:168
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:233
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
@@ -3218,7 +3219,7 @@ msgstr "Nota: todos los datos de ubicación pueden hacerse privados en el formul
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr "NOTA: Como las publicaciones están ancladas a la cadena de bloques, no se pueden editar una vez publicadas."
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:88
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:82
 msgid "NOTE: Only project page creation and user profile creation available with email / social log in."
 msgstr "NOTA: Solo la creación de páginas de proyecto y la creación de perfiles de usuario están disponibles con inicio de sesión por correo electrónico o red social."
 
@@ -3285,7 +3286,7 @@ msgstr "o comprar con criptomonedas"
 msgid "or, find credit card projects"
 msgstr "o busque proyectos de tarjetas de crédito"
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:61
 msgid "or, log in with email / social"
 msgstr "o inicie sesión con correo electrónico / redes sociales"
 
@@ -3456,6 +3457,10 @@ msgstr "Por favor, confirme su dirección de correo electrónico"
 #: src/config/contents.ts:3
 msgid "Please connect to Keplr to use Regen Ledger features"
 msgstr "Conéctese a Keplr para utilizar las funciones de Regen Ledger"
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:45
+msgid "Please connect with Keplr to create an organization"
+msgstr "Conéctese con Keplr para crear una organización."
 
 #: src/pages/Post/Post.constants.ts:4
 msgid "Please contact the project admin to request access."
@@ -3711,7 +3716,7 @@ msgstr "Perfil"
 #~ msgid "profile banner"
 #~ msgstr "Banner de perfil"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:174
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:239
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr "Imagen de perfil"
@@ -4562,6 +4567,10 @@ msgstr "Índice social y cultural"
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr "Agotado"
+
+#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:172
+msgid "Something went wrong while creating the organization."
+msgstr "Algo salió mal al crear la organización."
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:135
 msgid "Sorry, another user has purchased all of the available credits from this project"

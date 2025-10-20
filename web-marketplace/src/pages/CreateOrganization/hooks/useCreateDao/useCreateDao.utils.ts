@@ -5,10 +5,13 @@ import type { QueryClient } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import {
+  CodeDetailsLike,
+  WasmCodeClient,
+} from 'lib/queries/react-query/wasm/wasmCodeDetails.helpers';
 import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/wasmCodeDetails.query';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
-import { CodeDetailsLike, WasmCodeClient } from './useCreateDao.codeDetails';
 import { lookupContractChecksum } from './useCreateDao.constants';
 
 export const parseCodeId = (

@@ -105,7 +105,7 @@ async function getLegacyCodeDetails(
   const encoderFallbacks: Uint8Array[] = [requestBytes, emptyRequest];
 
   const legacyPaths = [
-    (id: number) => `/cosmwasm.wasm.v1.Query/Code`,
+    (_: number) => `/cosmwasm.wasm.v1.Query/Code`,
     (id: number) => `/custom/wasm/code`,
     (id: number) => `/custom/wasm/code/${id}`,
     (id: number) => `/wasm/code`,
@@ -198,10 +198,20 @@ function decodeJsonCodeResponse(
     const dataBase64 = parsed?.data || parsed?.Data || parsed?.data_base64;
     const data = dataBase64 ? fromBase64(dataBase64) : undefined;
 
+    const creator =
+      codeInfo.creator ||
+      codeInfo.instantiate_permission?.address ||
+      parsed?.creator ||
+      '';
+
     return {
-      id: Number(codeInfo.code_id || codeInfo.codeId || codeId),
+      id: codeInfo.code_id
+        ? Number(codeInfo.code_id)
+        : codeInfo.codeId
+        ? Number(codeInfo.codeId)
+        : Number(codeId),
       checksum: checksumHex,
-      creator: codeInfo.creator || '',
+      creator,
       data,
     };
   } catch (err) {

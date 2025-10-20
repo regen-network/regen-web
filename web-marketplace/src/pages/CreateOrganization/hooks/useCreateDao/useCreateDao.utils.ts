@@ -241,8 +241,22 @@ const orgAdminAuthorizations = (daoAddress: string) => [
   orgEditAuthorization(daoAddress),
 ];
 
-// Cannot be added on instantiation because it requires the cw4_group and rbam contract addresses
-// which are not predictable
+const feegrantFilter = {
+  '#stargate': {
+    type_url: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
+    value: {
+      allowance: {
+        '#proto': {
+          type: 'cosmos.feegrant.v1beta1.AllowedMsgAllowance',
+          value: {
+            allowed_messages: { $contains: 'example' },
+          },
+        },
+      },
+    },
+  },
+};
+
 const ownerMembersAuthorizations = (
   cw4GroupAddress: string,
   rbamAddress: string,
@@ -252,11 +266,7 @@ const ownerMembersAuthorizations = (
     metadata: 'Can manage members of the organization',
     filter: {
       $or: [
-        {
-          stargate: {
-            type_url: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
-          },
-        },
+        feegrantFilter,
         {
           wasm: {
             execute: {
@@ -356,6 +366,7 @@ const adminMembersAuthorizations = (
     metadata: 'Can manage members of the organization except the owner',
     filter: {
       $or: [
+        feegrantFilter,
         {
           wasm: {
             execute: {

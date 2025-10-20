@@ -7,7 +7,6 @@ import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
-import type { WasmCodeClient } from 'lib/queries/react-query/wasm/wasmCodeDetails.helpers';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { PROFILE_S3_PATH } from 'pages/Dashboard/Dashboard.constants';
@@ -48,7 +47,7 @@ export const useCreateDao = () => {
 
   const createDao = useCallback(
     async (params: CreateDaoParams): Promise<CreateDaoResult> => {
-      const walletAddress = wallet?.address?.trim();
+      const walletAddress = wallet?.address;
 
       if (!walletAddress) {
         throw new Error(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
@@ -105,7 +104,7 @@ export const useCreateDao = () => {
 
         const { dao, daoVotingCw4, cw4Group, rbam } = await predictAllAddresses(
           {
-            client: signingCosmWasmClient as unknown as WasmCodeClient,
+            client: signingCosmWasmClient,
             queryClient,
             rpcEndpoint: ledgerRPCUri,
             adminFactoryAddress: cwAdminFactoryAddr,

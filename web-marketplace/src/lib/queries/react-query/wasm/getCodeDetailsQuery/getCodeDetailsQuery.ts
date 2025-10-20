@@ -1,15 +1,15 @@
+import type { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { QueryKey } from '@tanstack/react-query';
 
-import type { WasmCodeClient } from './wasmCodeDetails.helpers';
-import { getCodeDetailsWithFallback } from './wasmCodeDetails.helpers';
+import { getCodeDetails } from './getCodeDetailsQuery.helpers';
 
 export type GetCodeDetailsQueryParams = {
-  client: WasmCodeClient;
+  client: CosmWasmClient;
   codeId: number;
   rpcEndpoint?: string | null;
 };
 
-export const wasmCodeDetailsQueryKey = ({
+export const getCodeDetailsQueryKey = ({
   codeId,
   rpcEndpoint,
 }: Pick<GetCodeDetailsQueryParams, 'codeId' | 'rpcEndpoint'>): QueryKey => [
@@ -24,8 +24,8 @@ export const getCodeDetailsQuery = ({
   codeId,
   rpcEndpoint,
 }: GetCodeDetailsQueryParams) => ({
-  queryKey: wasmCodeDetailsQueryKey({ codeId, rpcEndpoint }),
-  queryFn: () => getCodeDetailsWithFallback(client, codeId),
+  queryKey: getCodeDetailsQueryKey({ codeId, rpcEndpoint }),
+  queryFn: () => getCodeDetails({ client, codeId }),
   staleTime: Infinity,
   cacheTime: Infinity,
 });

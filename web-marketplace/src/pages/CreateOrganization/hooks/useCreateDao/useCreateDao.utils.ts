@@ -1,15 +1,12 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import type { CodeDetails, CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
 import { fromHex, toBase64, toUtf8 } from '@cosmjs/encoding';
 import type { QueryClient } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
-import {
-  CodeDetailsLike,
-  WasmCodeClient,
-} from 'lib/queries/react-query/wasm/wasmCodeDetails.helpers';
-import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/wasmCodeDetails.query';
+import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/getCodeDetailsQuery/getCodeDetailsQuery';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { lookupContractChecksum } from './useCreateDao.constants';
@@ -562,7 +559,7 @@ type PredictAddressParams = {
   /**
    * A client capable of retrieving code details for a code ID.
    */
-  client: WasmCodeClient;
+  client: CosmWasmClient;
   /**
    * The code ID of the contract to be instantiated.
    */
@@ -672,7 +669,7 @@ export const sanitizeDaoParams = ({
 };
 
 export type PredictAllAddressesParams = {
-  client: WasmCodeClient;
+  client: CosmWasmClient;
   queryClient: QueryClient;
   rpcEndpoint?: string | null;
   adminFactoryAddress: string;
@@ -743,7 +740,7 @@ export const predictAllAddresses = async ({
 };
 
 async function resolveCodeChecksum(
-  client: WasmCodeClient,
+  client: CosmWasmClient,
   codeId: number,
   queryClient: QueryClient,
   rpcEndpoint?: string | null,
@@ -755,10 +752,10 @@ async function resolveCodeChecksum(
 
   const queryOptions = getCodeDetailsQuery({ client, codeId, rpcEndpoint });
 
-  const codeDetails = (await getFromCacheOrFetch<CodeDetailsLike>({
+  const codeDetails = (await getFromCacheOrFetch<CodeDetails>({
     reactQueryClient: queryClient,
     query: queryOptions,
-  })) as CodeDetailsLike | undefined;
+  })) as CodeDetails | undefined;
   const checksum = codeDetails?.checksum;
 
   if (checksum) {

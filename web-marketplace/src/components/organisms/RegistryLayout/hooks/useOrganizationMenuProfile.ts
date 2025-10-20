@@ -108,25 +108,35 @@ export const useOrganizationMenuProfile = ({
       ([] as Array<Maybe<DaoNode>>);
     if (daos.length === 0) return undefined;
 
-    const visibleDao = daos.find(dao => {
-      if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
-
+    const findAccountAssignment = (dao?: Maybe<DaoNode>) => {
+      if (!dao) return undefined;
       const assignments =
         dao.assignmentsByDaoAddress?.nodes ??
         ([] as Array<Maybe<DaoAssignmentNode>>);
+      return assignments.find(assignment => {
+        if (!activeAccount?.id) return assignment?.visible;
+        return assignment?.accountId === activeAccount.id;
+      });
+    };
 
-      return assignments.some(
-        assignment =>
-          assignment?.visible &&
-          (!activeAccount?.id || assignment?.accountId === activeAccount.id),
-      );
+    const visibleDao = daos.find(dao => {
+      if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
+      const assignment = findAccountAssignment(dao);
+      return assignment?.visible ?? false;
     });
 
-    const daoAddress = visibleDao?.address;
+    const daoToUse =
+      visibleDao ??
+      daos.find(dao => {
+        if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
+        return Boolean(findAccountAssignment(dao));
+      });
+
+    const daoAddress = daoToUse?.address;
     if (!daoAddress) return undefined;
 
     const organizationName =
-      visibleDao?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
+      daoToUse?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
 
     return {
       id: daoAddress,

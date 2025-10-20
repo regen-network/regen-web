@@ -135,7 +135,9 @@ const RegistryLayoutHeader: React.FC = () => {
         }),
         organizationProfile: menuOrganizationProfile,
         createOrganization:
-          !unfinalizedOrgCreation && activeAccount?.type !== 'ORGANIZATION'
+          !menuOrganizationProfile &&
+          !unfinalizedOrgCreation &&
+          activeAccount?.type !== 'ORGANIZATION'
             ? createOrganization
             : undefined,
         unfinalizedOrgCreation,

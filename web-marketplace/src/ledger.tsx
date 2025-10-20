@@ -82,16 +82,21 @@ export async function setupSigningClient(
       ...wasmTypes,
     ];
 
-    const aminoConverters = {
+    const stargateAminoConverters = {
       ...cosmosAminoConverters,
       ...ibcAminoConverters,
       ...regenAminoConverters,
+    } as const;
+
+    const cosmWasmAminoConverters = {
+      ...stargateAminoConverters,
       ...createWasmAminoConverters(),
     } as const;
 
     const stargateRegistry = new Registry(stargateProtoRegistry);
     const cosmWasmRegistry = new Registry(cosmWasmProtoRegistry);
-    const aminoTypes = new AminoTypes(aminoConverters);
+    const stargateAminoTypes = new AminoTypes(stargateAminoConverters);
+    const cosmWasmAminoTypes = new AminoTypes(cosmWasmAminoConverters);
 
     setLoading(true);
     try {
@@ -99,7 +104,7 @@ export async function setupSigningClient(
 
       const options: StargateConnectOptions = {
         registry: stargateRegistry,
-        aminoTypes,
+        aminoTypes: stargateAminoTypes,
         gasPrice,
       } as unknown as StargateConnectOptions;
 
@@ -110,7 +115,7 @@ export async function setupSigningClient(
       );
       const cosmWasmOptions: CosmWasmConnectOptions = {
         registry: cosmWasmRegistry,
-        aminoTypes,
+        aminoTypes: cosmWasmAminoTypes,
         gasPrice,
       };
       const signingCosmWasmClient =

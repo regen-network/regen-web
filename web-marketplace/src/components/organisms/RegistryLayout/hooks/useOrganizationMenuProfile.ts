@@ -22,19 +22,24 @@ type UseOrganizationMenuProfileParams = {
   dashboardLink: string;
 };
 
-type AssignmentNode = {
+type DaoAssignmentNode = {
   visible?: boolean | null;
-  daoByDaoAddress?: Maybe<{
-    address?: Maybe<string>;
-    organizationByDaoAddress?: Maybe<{
-      name?: Maybe<string>;
-    }>;
+  accountId?: Maybe<string>;
+};
+
+type DaoNode = {
+  address?: Maybe<string>;
+  organizationByDaoAddress?: Maybe<{
+    name?: Maybe<string>;
+  }>;
+  assignmentsByDaoAddress?: Maybe<{
+    nodes?: Maybe<Array<Maybe<DaoAssignmentNode>>>;
   }>;
 };
 
-type AccountWithAssignments = AccountFieldsFragment & {
-  assignmentsByAccountId?: Maybe<{
-    nodes?: Maybe<Array<Maybe<AssignmentNode>>>;
+type AccountWithDaoAssignments = AccountFieldsFragment & {
+  daosByAssignmentAccountIdAndDaoAddress?: Maybe<{
+    nodes?: Maybe<Array<Maybe<DaoNode>>>;
   }>;
 };
 
@@ -97,24 +102,31 @@ export const useOrganizationMenuProfile = ({
   }, [unfinishedEntry, _]);
 
   const organizationProfileFromAssignments = useMemo(() => {
-    const assignments =
-      (activeAccount as AccountWithAssignments | undefined)
-        ?.assignmentsByAccountId?.nodes ?? ([] as Array<Maybe<AssignmentNode>>);
-    if (assignments.length === 0) return undefined;
+    const daos =
+      (activeAccount as AccountWithDaoAssignments | undefined)
+        ?.daosByAssignmentAccountIdAndDaoAddress?.nodes ??
+      ([] as Array<Maybe<DaoNode>>);
+    if (daos.length === 0) return undefined;
 
-    const visibleAssignment = assignments.find(
-      assignment =>
-        assignment?.visible &&
-        assignment.daoByDaoAddress?.address &&
-        assignment.daoByDaoAddress?.organizationByDaoAddress?.name,
-    );
+    const visibleDao = daos.find(dao => {
+      if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
 
-    const daoAddress = visibleAssignment?.daoByDaoAddress?.address;
+      const assignments =
+        dao.assignmentsByDaoAddress?.nodes ??
+        ([] as Array<Maybe<DaoAssignmentNode>>);
+
+      return assignments.some(
+        assignment =>
+          assignment?.visible &&
+          (!activeAccount?.id || assignment?.accountId === activeAccount.id),
+      );
+    });
+
+    const daoAddress = visibleDao?.address;
     if (!daoAddress) return undefined;
 
     const organizationName =
-      visibleAssignment?.daoByDaoAddress?.organizationByDaoAddress?.name ??
-      _(DEFAULT_NAME);
+      visibleDao?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
 
     return {
       id: daoAddress,

@@ -19,4 +19,5 @@ export type OrganizationProfileStepProps = {
   }) => void;
   data: OrganizationMultiStepData | undefined;
   handleSaveNext: (payload: OrganizationMultiStepData) => void;
+  onValidityChange?: (isValid: boolean) => void;
 };

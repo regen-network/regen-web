@@ -1,16 +1,13 @@
 import { useCallback, useState } from 'react';
-import { toUtf8 } from '@cosmjs/encoding';
-import type { EncodeObject } from '@cosmjs/proto-signing';
-import { calculateFee, GasPrice } from '@cosmjs/stargate';
-import { i18n } from '@lingui/core';
+import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
+import type { WasmCodeClient } from 'lib/queries/react-query/wasm/wasmCodeDetails.helpers';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { PROFILE_S3_PATH } from 'pages/Dashboard/Dashboard.constants';
@@ -19,16 +16,13 @@ import {
   CREATE_ORG_SIGNING_CLIENT_ERROR,
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from '../../CreateOrganization.constants';
-import type { WasmCodeClient } from './useCreateDao.codeDetails';
 import {
   cw4GroupCodeId,
   cwAdminFactoryAddr,
   daoDaoCoreCodeId,
   daoVotingCw4CodeId,
-  defaultGasLimit,
   filterCodeId,
   gasMultiplier,
-  gasPrice,
   preProposeSingleCodeId,
   proposalSingleCodeId,
   protobufRegistryCodeId,
@@ -47,6 +41,7 @@ export const useCreateDao = () => {
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
   const queryClient = useQueryClient();
+  const { _ } = useLingui();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const [isCreating, setIsCreating] = useState(false);
@@ -56,10 +51,10 @@ export const useCreateDao = () => {
       const walletAddress = wallet?.address?.trim();
 
       if (!walletAddress) {
-        throw new Error(i18n._(CREATE_ORG_WALLET_REQUIRED_ERROR));
+        throw new Error(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
       }
       if (!signingCosmWasmClient) {
-        throw new Error(i18n._(CREATE_ORG_SIGNING_CLIENT_ERROR));
+        throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
 
       const codeIds = {
@@ -267,39 +262,13 @@ export const useCreateDao = () => {
           },
         };
 
-        let gasLimit = defaultGasLimit;
-
-        try {
-          const simulateMsg: EncodeObject = {
-            typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
-            value: MsgExecuteContract.fromPartial({
-              sender: walletAddress,
-              contract: cwAdminFactoryAddr,
-              msg: toUtf8(JSON.stringify(executeMsg)),
-            }),
-          };
-          const simulatedGas = await signingCosmWasmClient.simulate(
-            walletAddress,
-            [simulateMsg],
-            undefined,
-          );
-          gasLimit = Math.ceil(simulatedGas * gasMultiplier);
-        } catch (simulationError) {
-          /* eslint-disable no-console */
-          console.warn(
-            'useCreateDao: gas simulation failed, falling back to default gas limit',
-            simulationError,
-          );
-          /* eslint-enable no-console */
-        }
-
-        const fee = calculateFee(gasLimit, GasPrice.fromString(gasPrice));
-
         const executeResult = await signingCosmWasmClient.execute(
           walletAddress,
           cwAdminFactoryAddr,
           executeMsg,
-          fee,
+          gasMultiplier,
+          undefined,
+          [],
         );
 
         /* eslint-disable no-console */
@@ -334,8 +303,9 @@ export const useCreateDao = () => {
       wallet?.address,
       signingCosmWasmClient,
       setProcessingModalAtom,
-      setErrorBannerText,
+      _,
       queryClient,
+      setErrorBannerText,
     ],
   );
 

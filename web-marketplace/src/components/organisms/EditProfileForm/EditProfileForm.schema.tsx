@@ -21,17 +21,23 @@ export const createEditProfileFormSchema = ({
   requireProfileType = true,
   requiredMessage = 'Required',
 }: CreateSchemaParams = {}) =>
-  requireProfileType
-    ? baseSchema.superRefine((data, ctx) => {
-        if (!data.profileType) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            path: ['profileType'],
-            message: requiredMessage,
-          });
-        }
-      })
-    : baseSchema;
+  baseSchema.superRefine((data, ctx) => {
+    if (!data.name || data.name.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['name'],
+        message: requiredMessage,
+      });
+    }
+
+    if (requireProfileType && !data.profileType) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['profileType'],
+        message: requiredMessage,
+      });
+    }
+  });
 
 export const editProfileFormSchema = createEditProfileFormSchema();
 

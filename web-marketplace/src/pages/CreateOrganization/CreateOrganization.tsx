@@ -86,6 +86,15 @@ function CreateOrganizationContent({
     handleResetData,
     resumeStep,
   });
+  const [isStepValid, setIsStepValid] = useState(activeStep !== 0);
+
+  useEffect(() => {
+    if (activeStep === 0) {
+      setIsStepValid(false);
+    } else {
+      setIsStepValid(true);
+    }
+  }, [activeStep]);
 
   return (
     <>
@@ -104,6 +113,7 @@ function CreateOrganizationContent({
           onTransferProfile={handleApplyTransferProfile}
           data={data}
           handleSaveNext={handleSaveNext}
+          onValidityChange={setIsStepValid}
         />
       )}
       {activeStep === 1 && <MigrateProjectsStep />}
@@ -113,7 +123,7 @@ function CreateOrganizationContent({
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={isCreating}
+        saveDisabled={isCreating || !isStepValid}
         percentComplete={percentComplete}
       />
     </>

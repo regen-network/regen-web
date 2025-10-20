@@ -114,23 +114,15 @@ export const useOrganizationMenuProfile = ({
         dao.assignmentsByDaoAddress?.nodes ??
         ([] as Array<Maybe<DaoAssignmentNode>>);
       return assignments.find(assignment => {
-        if (!activeAccount?.id) return assignment?.visible;
+        if (!activeAccount?.id) return !!assignment;
         return assignment?.accountId === activeAccount.id;
       });
     };
 
-    const visibleDao = daos.find(dao => {
+    const daoToUse = daos.find(dao => {
       if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
-      const assignment = findAccountAssignment(dao);
-      return assignment?.visible ?? false;
+      return Boolean(findAccountAssignment(dao));
     });
-
-    const daoToUse =
-      visibleDao ??
-      daos.find(dao => {
-        if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
-        return Boolean(findAccountAssignment(dao));
-      });
 
     const daoAddress = daoToUse?.address;
     if (!daoAddress) return undefined;

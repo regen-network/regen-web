@@ -48,8 +48,7 @@ export const getVisibleOrganizationAssignments = (
         ([] as Array<Maybe<DaoAssignmentNode>>);
 
       const accountAssignment = assignments.find(
-        assignment =>
-          assignment?.accountId === account.id && assignment?.visible,
+        assignment => assignment?.accountId === account.id,
       );
 
       if (!accountAssignment) return null;

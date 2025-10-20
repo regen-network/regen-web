@@ -1,5 +1,5 @@
 import React, { MutableRefObject, useEffect, useMemo } from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -44,7 +44,6 @@ import {
 } from './EditProfileForm.constants';
 import {
   createEditProfileFormSchema,
-  editProfileFormSchema,
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
@@ -65,6 +64,14 @@ export interface EditProfileFormProps {
   // after the form has mounted (e.g. from a transfer profile modal)
   onPrefill?: (values: Partial<EditProfileFormSchemaType>) => void; // not used internally, documented for symmetry
   prefillValues?: Partial<EditProfileFormSchemaType>;
+  onFormStateChange?: (state: {
+    isValid: boolean;
+    isDirty: boolean;
+    isSubmitting: boolean;
+    values: EditProfileFormSchemaType;
+    errors: FieldErrors<EditProfileFormSchemaType>;
+  }) => void;
+  validationMode?: 'onChange' | 'onBlur' | 'onSubmit' | 'onTouched' | 'all';
 }
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
@@ -78,13 +85,15 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     hideProfileType,
     nameLabel,
     prefillValues,
+    onFormStateChange,
+    validationMode = 'onBlur',
   }) => {
     const { _ } = useLingui();
     const formSchema = useMemo(
       () =>
         hideProfileType
           ? createEditProfileFormSchema({ requireProfileType: false })
-          : editProfileFormSchema,
+          : createEditProfileFormSchema({ requireProfileType: true }),
       [hideProfileType],
     );
     const form = useZodForm({
@@ -95,11 +104,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           initialValues?.profileType ??
           (hideProfileType ? AccountType.Organization : undefined),
       },
-      mode: 'onBlur',
+      mode: validationMode,
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
-    const { isSubmitting, errors, isDirty } = useFormState({
+    const { isSubmitting, errors, isDirty, isValid } = useFormState({
       control: form.control,
     });
     const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
@@ -131,16 +140,23 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     /* Setter */
 
     const setProfileImage = ({ value }: { value: string }): void => {
-      form.setValue('profileImage', value, { shouldDirty: true });
+      form.setValue('profileImage', value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
     };
     const setBackgroundImage = ({ value }: { value: string }): void => {
-      form.setValue('backgroundImage', value, { shouldDirty: true });
+      form.setValue('backgroundImage', value, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
     };
 
     /* Effect */
 
     useUpdateDefaultAvatar({
-      setProfileImage: value => form.setValue('profileImage', value),
+      setProfileImage: value =>
+        form.setValue('profileImage', value, { shouldValidate: true }),
       profileType,
       profileImage,
     });
@@ -151,6 +167,20 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       }
     }, [isDirtyRef, isDirty]);
 
+    useEffect(() => {
+      void form.trigger();
+    }, [form]);
+
+    useEffect(() => {
+      onFormStateChange?.({
+        isValid,
+        isDirty,
+        isSubmitting,
+        values: form.getValues(),
+        errors,
+      });
+    }, [errors, form, isValid, isDirty, isSubmitting, onFormStateChange]);
+
     // When parent supplies new prefillValues, merge them into the form without
     // wiping user edits for untouched fields. Only set provided keys.
     useEffect(() => {
@@ -158,9 +188,14 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         for (const [key, value] of Object.entries(prefillValues)) {
           if (value !== undefined) {
             // @ts-expect-error: dynamic key assignment aligned with schema
-            form.setValue(key, value, { shouldDirty: true, shouldTouch: true });
+            form.setValue(key, value, {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
           }
         }
+        void form.trigger();
       }
     }, [prefillValues, form]);
 

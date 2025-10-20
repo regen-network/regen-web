@@ -242,18 +242,8 @@ const orgAdminAuthorizations = (daoAddress: string) => [
 ];
 
 const feegrantFilter = {
-  '#stargate': {
+  stargate: {
     type_url: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
-    value: {
-      allowance: {
-        '#proto': {
-          type: 'cosmos.feegrant.v1beta1.AllowedMsgAllowance',
-          value: {
-            allowed_messages: { $contains: '/cosmwasm.wasm.v1.MsgExecuteContract' },
-          },
-        },
-      },
-    },
   },
 };
 

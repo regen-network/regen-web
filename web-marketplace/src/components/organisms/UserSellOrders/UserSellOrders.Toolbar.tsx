@@ -7,6 +7,7 @@ import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
@@ -29,6 +30,7 @@ export const UserSellOrdersToolbar = ({
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
+  const { loginDisabled } = useWallet();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
@@ -47,25 +49,29 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Open sell orders</Trans>
         </Subtitle>
-        {hasTradableCredits ? (
-          <CreateButton
-            hasTradableCredits={hasTradableCredits}
-            setIsSellFlowStarted={setIsSellFlowStarted}
-          />
-        ) : (
-          <InfoTooltip
-            arrow
-            placement="top"
-            title={_(msg`You have no tradable credits that can be sold.`)}
-          >
-            <div>
+        <div className="flex sm:flex-row flex-col sm:items-center items-end">
+          <div className="sm:order-2 order-1">
+            {hasTradableCredits ? (
               <CreateButton
                 hasTradableCredits={hasTradableCredits}
                 setIsSellFlowStarted={setIsSellFlowStarted}
               />
-            </div>
-          </InfoTooltip>
-        )}
+            ) : (
+              <InfoTooltip
+                arrow
+                placement="top"
+                title={_(msg`You have no tradable credits that can be sold.`)}
+              >
+                <div>
+                  <CreateButton
+                    hasTradableCredits={hasTradableCredits}
+                    setIsSellFlowStarted={setIsSellFlowStarted}
+                  />
+                </div>
+              </InfoTooltip>
+            )}
+          </div>
+        </div>
       </div>
       {hasTradableCredits && isSellFlowStarted && (
         <Suspense fallback={null}>
@@ -77,7 +83,8 @@ export const UserSellOrdersToolbar = ({
             redirectOnSuccess={false}
             canCreateFiatOrder={
               !!privActiveAccount?.can_use_stripe_connect &&
-              !!activeAccount?.stripeConnectedAccountId
+              !!activeAccount?.stripeConnectedAccountId &&
+              !loginDisabled
             }
           />
         </Suspense>

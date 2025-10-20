@@ -171,18 +171,13 @@ export function getDashboardNavigationSections(
   hasWalletAddress = true,
   hasProjects = false,
   hasOrders = true,
-  walletConnect = false,
   hasCreditBatches = false,
 ): DashboardNavigationSection[] {
   const sections = [];
   if (hasWalletAddress) {
     sections.push(getCreditsSection(_, collapsed));
   }
-  if (
-    (walletConnect && hasProjects) ||
-    (!walletConnect && !hasProjects) ||
-    (!walletConnect && hasProjects)
-  ) {
+  if (!loginDisabled || hasProjects) {
     sections.push(getProjectsSection(_, collapsed));
   }
 

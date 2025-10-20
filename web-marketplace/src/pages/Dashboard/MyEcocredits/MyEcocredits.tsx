@@ -61,6 +61,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useAllowedDenomOptions } from 'features/marketplace/CreateSellOrderFlow/hooks/useAllowedDenomOptions';
 import { Link } from 'components/atoms';
@@ -121,6 +122,7 @@ export const MyEcocredits = (): JSX.Element => {
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
   const { privActiveAccount, activeAccount } = useAuth();
+  const { loginDisabled } = useWallet();
 
   const navigate = useNavigate();
   const { track } = useTracker();
@@ -299,15 +301,17 @@ export const MyEcocredits = (): JSX.Element => {
   const shareUrl =
     REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
 
-  const canCreateFiatOrder = useMemo(
-    () =>
+  const canCreateFiatOrder = useMemo(() => {
+    return (
       !!privActiveAccount?.can_use_stripe_connect &&
-      !!activeAccount?.stripeConnectedAccountId,
-    [
-      activeAccount?.stripeConnectedAccountId,
-      privActiveAccount?.can_use_stripe_connect,
-    ],
-  );
+      !!activeAccount?.stripeConnectedAccountId &&
+      !loginDisabled
+    );
+  }, [
+    activeAccount?.stripeConnectedAccountId,
+    loginDisabled,
+    privActiveAccount?.can_use_stripe_connect,
+  ]);
   const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 
   return (

@@ -5,6 +5,7 @@ import Card from 'web-components/src/components/cards/Card';
 import { Title } from 'web-components/src/components/typography';
 
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useStripeAccount } from './hooks/useStripeAccount';
 

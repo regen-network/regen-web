@@ -34,7 +34,6 @@ export const DashboardNavigation = ({
   mobileMenuOpen,
   hasWalletAddress,
   wallet,
-  walletConnect,
   hasProjects,
   hasOrders,
   hasCreditBatches,
@@ -46,7 +45,6 @@ export const DashboardNavigation = ({
   wallet?: String;
   hasOrders?: boolean;
   collapsed: boolean;
-  walletConnect?: boolean;
   hasProjects?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
 }) => {
@@ -79,7 +77,6 @@ export const DashboardNavigation = ({
         hasWalletAddress ?? true,
         hasProjects ?? false,
         hasOrders ?? true,
-        walletConnect ?? false,
         hasCreditBatches ?? false,
       ),
     [
@@ -92,7 +89,6 @@ export const DashboardNavigation = ({
       hasWalletAddress,
       hasProjects,
       hasOrders,
-      walletConnect,
       hasCreditBatches,
     ],
   );

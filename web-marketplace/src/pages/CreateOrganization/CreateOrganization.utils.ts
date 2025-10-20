@@ -49,7 +49,7 @@ export const getVisibleOrganizationAssignments = (
 
       const accountAssignment = assignments.find(
         assignment =>
-          assignment?.accountId === account.id && assignment.visible,
+          assignment?.accountId === account.id && assignment?.visible,
       );
 
       if (!accountAssignment) return null;

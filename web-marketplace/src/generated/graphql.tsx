@@ -9712,6 +9712,7 @@ export type AccountByCustodialAddressQuery = (
 
 export type AccountByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
+  daoAccountsOrderBy?: Maybe<Array<AccountsOrderBy> | AccountsOrderBy>;
 }>;
 
 
@@ -9732,19 +9733,27 @@ export type AccountByIdQuery = (
         { __typename?: 'FiatOrder' }
         & Pick<FiatOrder, 'createdAt' | 'txHash' | 'stripePaymentIntentId' | 'retiredCredits' | 'totalPrice' | 'askDenom' | 'creditsAmount' | 'projectOnChainId' | 'customerName' | 'anonymous'>
       )>> }
-    ), assignmentsByAccountId: (
-      { __typename?: 'AssignmentsConnection' }
+    ), daosByAssignmentAccountIdAndDaoAddress: (
+      { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
       & { nodes: Array<Maybe<(
-        { __typename?: 'Assignment' }
-        & Pick<Assignment, 'roleName' | 'visible'>
-        & { daoByDaoAddress?: Maybe<(
-          { __typename?: 'Dao' }
-          & Pick<Dao, 'address'>
-          & { organizationByDaoAddress?: Maybe<(
-            { __typename?: 'Organization' }
-            & Pick<Organization, 'name'>
-          )> }
-        )> }
+        { __typename?: 'Dao' }
+        & Pick<Dao, 'address'>
+        & { organizationByDaoAddress?: Maybe<(
+          { __typename?: 'Organization' }
+          & Pick<Organization, 'name'>
+        )>, accountsByAssignmentDaoAddressAndAccountId: (
+          { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
+          & { nodes: Array<Maybe<(
+            { __typename?: 'Account' }
+            & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
+          )>> }
+        ), assignmentsByDaoAddress: (
+          { __typename?: 'AssignmentsConnection' }
+          & { nodes: Array<Maybe<(
+            { __typename?: 'Assignment' }
+            & Pick<Assignment, 'roleName' | 'onChainRoleId' | 'visible' | 'accountId'>
+          )>> }
+        ) }
       )>> }
     ) }
   )> }
@@ -10355,7 +10364,7 @@ export type AccountByCustodialAddressQueryHookResult = ReturnType<typeof useAcco
 export type AccountByCustodialAddressLazyQueryHookResult = ReturnType<typeof useAccountByCustodialAddressLazyQuery>;
 export type AccountByCustodialAddressQueryResult = Apollo.QueryResult<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>;
 export const AccountByIdDocument = gql`
-    query AccountById($id: UUID!) {
+    query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
   accountById(id: $id) {
     id
     name
@@ -10391,14 +10400,28 @@ export const AccountByIdDocument = gql`
         anonymous
       }
     }
-    assignmentsByAccountId {
+    daosByAssignmentAccountIdAndDaoAddress {
       nodes {
-        roleName
-        visible
-        daoByDaoAddress {
-          address
-          organizationByDaoAddress {
+        address
+        organizationByDaoAddress {
+          name
+        }
+        accountsByAssignmentDaoAddressAndAccountId(orderBy: $daoAccountsOrderBy) {
+          nodes {
+            id
             name
+            type
+            image
+            addr
+            title
+          }
+        }
+        assignmentsByDaoAddress {
+          nodes {
+            roleName
+            onChainRoleId
+            visible
+            accountId
           }
         }
       }
@@ -10420,6 +10443,7 @@ export const AccountByIdDocument = gql`
  * const { data, loading, error } = useAccountByIdQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      daoAccountsOrderBy: // value for 'daoAccountsOrderBy'
  *   },
  * });
  */

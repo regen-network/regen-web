@@ -1,4 +1,4 @@
-query AccountById($id: UUID!) {
+query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
   accountById(id: $id) {
     id
     name
@@ -34,14 +34,30 @@ query AccountById($id: UUID!) {
         anonymous
       }
     }
-    assignmentsByAccountId {
+    daosByAssignmentAccountIdAndDaoAddress {
       nodes {
-        roleName
-        visible
-        daoByDaoAddress {
-          address
-          organizationByDaoAddress {
+        address
+        organizationByDaoAddress {
+          name
+        }
+        accountsByAssignmentDaoAddressAndAccountId(
+          orderBy: $daoAccountsOrderBy
+        ) {
+          nodes {
+            id
             name
+            type
+            image
+            addr
+            title
+          }
+        }
+        assignmentsByDaoAddress {
+          nodes {
+            roleName
+            onChainRoleId
+            visible
+            accountId
           }
         }
       }

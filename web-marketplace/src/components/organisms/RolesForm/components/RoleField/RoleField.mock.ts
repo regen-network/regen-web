@@ -14,7 +14,7 @@ export const authenticatedAccounts = [
     nonce: '6ce95c9d37012f7b7c008c5b82ce9c3f',
     accountTranslationsById: accountTranslationsByIdMock,
     fiatOrdersByAccountId: { nodes: [] },
-    assignmentsByAccountId: { nodes: [] },
+    daosByAssignmentAccountIdAndDaoAddress: { nodes: [] },
   },
 ];
 export const authenticatedAccountIds = [activeAccountId];
@@ -28,7 +28,7 @@ export const allAccounts = [
     addr: 'regen1dy4ezxgm4wrnpx2g33zkmheqtdjlsfsqcmc6dj',
     nonce: '410593e5fc774e5eb15f6329f586b61f',
     accountTranslationsById: accountTranslationsByIdMock,
-    assignmentsByAccountId: { nodes: [] },
+    daosByAssignmentAccountIdAndDaoAddress: { nodes: [] },
   },
   {
     id: '96a3d698-08fe-11ee-be56-0242ac120002',
@@ -37,6 +37,6 @@ export const allAccounts = [
     addr: 'regen12vrdt3hh2wn8w25m2k9yrg4smwjyktdplettxr',
     nonce: '0e0e1f5ca420ffc48b3915f5e6732935',
     accountTranslationsById: accountTranslationsByIdMock,
-    assignmentsByAccountId: { nodes: [] },
+    daosByAssignmentAccountIdAndDaoAddress: { nodes: [] },
   },
 ];

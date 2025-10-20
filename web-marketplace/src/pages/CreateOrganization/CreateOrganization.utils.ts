@@ -1,36 +1,69 @@
-import type { AccountByIdQuery } from 'generated/graphql';
+import type { AccountByIdQuery, Maybe } from 'generated/graphql';
 import { AccountType } from 'generated/graphql';
 
 export type AccountAssignmentNode = {
   roleName?: string | null;
   visible?: boolean | null;
-  daoByDaoAddress?: {
-    address?: string | null;
-    organizationByDaoAddress?: {
-      name?: string | null;
-    } | null;
-  } | null;
+  daoAddress?: string | null;
+  organizationName?: string | null;
+};
+
+type DaoAssignmentNode = {
+  roleName?: string | null;
+  visible?: boolean | null;
+  accountId?: Maybe<string>;
+};
+
+type DaoNode = {
+  address?: Maybe<string>;
+  organizationByDaoAddress?: Maybe<{
+    name?: Maybe<string>;
+  }>;
+  assignmentsByDaoAddress?: Maybe<{
+    nodes?: Maybe<Array<Maybe<DaoAssignmentNode>>>;
+  }>;
 };
 
 export const getVisibleOrganizationAssignments = (
   account?: AccountByIdQuery['accountById'],
 ): AccountAssignmentNode[] => {
-  if (!account || !('assignmentsByAccountId' in account)) return [];
+  if (!account || !('daosByAssignmentAccountIdAndDaoAddress' in account))
+    return [];
 
   const nodes =
     (
       account as {
-        assignmentsByAccountId?: {
-          nodes?: Array<AccountAssignmentNode | null>;
+        daosByAssignmentAccountIdAndDaoAddress?: {
+          nodes?: Array<DaoNode | null>;
         };
       }
-    ).assignmentsByAccountId?.nodes ?? [];
+    ).daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
 
-  return (nodes.filter(Boolean) as AccountAssignmentNode[]).filter(
-    assignment =>
-      assignment.visible &&
-      assignment.daoByDaoAddress?.organizationByDaoAddress?.name,
-  );
+  const visibleAssignments = (nodes.filter(Boolean) as DaoNode[])
+    .map(dao => {
+      if (!dao.address || !dao.organizationByDaoAddress?.name) return null;
+
+      const assignments =
+        dao.assignmentsByDaoAddress?.nodes ??
+        ([] as Array<Maybe<DaoAssignmentNode>>);
+
+      const accountAssignment = assignments.find(
+        assignment =>
+          assignment?.accountId === account.id && assignment.visible,
+      );
+
+      if (!accountAssignment) return null;
+
+      return {
+        roleName: accountAssignment.roleName,
+        visible: accountAssignment.visible,
+        daoAddress: dao.address,
+        organizationName: dao.organizationByDaoAddress.name,
+      };
+    })
+    .filter(Boolean) as AccountAssignmentNode[];
+
+  return visibleAssignments;
 };
 
 export const hasTransferableProfile = (

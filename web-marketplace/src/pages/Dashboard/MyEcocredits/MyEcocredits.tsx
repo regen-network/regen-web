@@ -61,6 +61,7 @@ import {
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useAllowedDenomOptions } from 'features/marketplace/CreateSellOrderFlow/hooks/useAllowedDenomOptions';
 import { Link } from 'components/atoms';
@@ -100,7 +101,6 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
-import { useWallet } from 'lib/wallet/wallet';
 
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
@@ -307,7 +307,11 @@ export const MyEcocredits = (): JSX.Element => {
       !!activeAccount?.stripeConnectedAccountId &&
       !loginDisabled
     );
-  }, [activeAccount, privActiveAccount]);
+  }, [
+    activeAccount?.stripeConnectedAccountId,
+    loginDisabled,
+    privActiveAccount?.can_use_stripe_connect,
+  ]);
   const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 
   return (

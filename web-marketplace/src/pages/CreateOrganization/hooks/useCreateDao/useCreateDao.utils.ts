@@ -243,6 +243,11 @@ const feegrantFilter = {
     type_url: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
   },
 };
+const feegrantRevokeFilter = {
+  stargate: {
+    type_url: '/cosmos.feegrant.v1beta1.MsgRevokeAllowance',
+  },
+};
 
 const ownerMembersAuthorizations = (
   cw4GroupAddress: string,
@@ -254,6 +259,7 @@ const ownerMembersAuthorizations = (
     filter: {
       $or: [
         feegrantFilter,
+        feegrantRevokeFilter,
         {
           wasm: {
             execute: {
@@ -354,6 +360,7 @@ const adminMembersAuthorizations = (
     filter: {
       $or: [
         feegrantFilter,
+        feegrantRevokeFilter,
         {
           wasm: {
             execute: {

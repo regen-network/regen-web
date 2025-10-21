@@ -1,7 +1,7 @@
 import type { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
-import { QueryKey } from '@tanstack/react-query';
 
 import { getCodeDetails } from './getCodeDetailsQuery.helpers';
+import { getCodeDetailsQueryKey } from './getCodeDetailsQuery.utils';
 
 export type GetCodeDetailsQueryParams = {
   client: CosmWasmClient;
@@ -9,22 +9,11 @@ export type GetCodeDetailsQueryParams = {
   rpcEndpoint?: string | null;
 };
 
-export const getCodeDetailsQueryKey = ({
-  codeId,
-  rpcEndpoint,
-}: Pick<GetCodeDetailsQueryParams, 'codeId' | 'rpcEndpoint'>): QueryKey => [
-  'wasm',
-  'code-details',
-  rpcEndpoint ?? 'default',
-  codeId,
-];
-
 export const getCodeDetailsQuery = ({
   client,
   codeId,
-  rpcEndpoint,
 }: GetCodeDetailsQueryParams) => ({
-  queryKey: getCodeDetailsQueryKey({ codeId, rpcEndpoint }),
+  queryKey: getCodeDetailsQueryKey({ codeId }),
   queryFn: () => getCodeDetails({ client, codeId }),
   staleTime: Infinity,
   cacheTime: Infinity,

@@ -3,9 +3,9 @@ import { useLingui } from '@lingui/react';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
-import { useOrganizationProgress } from 'lib/storage/organizationProgress.storage';
 import type { Wallet } from 'lib/wallet/wallet';
 
+import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_COMPANY_AVATAR,
@@ -54,27 +54,36 @@ export const useOrganizationMenuProfile = ({
   const organizationProgress = useOrganizationProgress();
   const walletAddress = wallet?.address;
 
-  const organizationProfile = useMemo(
-    () =>
-      activeAccount?.type === 'ORGANIZATION'
-        ? getProfile({
-            account: activeAccount,
-            privActiveAccount,
-            _: _,
-            profileLink,
-            dashboardLink,
-            address: wallet?.address,
-          })
-        : undefined,
-    [
-      activeAccount,
+  const hasDaoForActiveAccount = useMemo(() => {
+    if (activeAccount?.type !== 'ORGANIZATION') return false;
+
+    const daoNodes =
+      (activeAccount as AccountWithDaoAssignments | undefined)
+        ?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
+
+    return daoNodes.some(dao => !!dao?.address);
+  }, [activeAccount]);
+
+  const organizationProfile = useMemo(() => {
+    if (!hasDaoForActiveAccount) return undefined;
+
+    return getProfile({
+      account: activeAccount,
       privActiveAccount,
-      _,
+      _: _,
       profileLink,
       dashboardLink,
-      wallet?.address,
-    ],
-  );
+      address: wallet?.address,
+    });
+  }, [
+    hasDaoForActiveAccount,
+    activeAccount,
+    privActiveAccount,
+    _,
+    profileLink,
+    dashboardLink,
+    wallet?.address,
+  ]);
 
   const unfinishedEntry = useMemo(() => {
     if (!organizationProgress) return undefined;
@@ -156,5 +165,6 @@ export const useOrganizationMenuProfile = ({
     defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
+    hasDaoForActiveAccount,
   };
 };

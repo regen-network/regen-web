@@ -87,6 +87,7 @@ const RegistryLayoutHeader: React.FC = () => {
     defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
+    hasDaoForActiveAccount,
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
@@ -137,7 +138,7 @@ const RegistryLayoutHeader: React.FC = () => {
         createOrganization:
           !menuOrganizationProfile &&
           !unfinalizedOrgCreation &&
-          activeAccount?.type !== 'ORGANIZATION'
+          (activeAccount?.type !== 'ORGANIZATION' || !hasDaoForActiveAccount)
             ? createOrganization
             : undefined,
         unfinalizedOrgCreation,
@@ -170,6 +171,7 @@ const RegistryLayoutHeader: React.FC = () => {
       menuOrganizationProfile,
       createOrganization,
       unfinalizedOrgCreation,
+      hasDaoForActiveAccount,
       finishOrgCreation,
     ],
   );

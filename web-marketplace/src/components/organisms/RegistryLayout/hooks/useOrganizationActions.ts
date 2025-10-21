@@ -37,7 +37,12 @@ export const useOrganizationActions = ({
     useState(false);
   const [, setError] = useState<unknown>();
 
-  const { defaultAvatar, menuOrganizationProfile, unfinalizedOrgCreation } =
+  const {
+    defaultAvatar,
+    menuOrganizationProfile,
+    unfinalizedOrgCreation,
+    hasDaoForActiveAccount,
+  } =
     useOrganizationMenuProfile({
       activeAccount,
       privActiveAccount,
@@ -94,6 +99,7 @@ export const useOrganizationActions = ({
     defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
+    hasDaoForActiveAccount,
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,

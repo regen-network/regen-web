@@ -1,4 +1,9 @@
-import React, { MutableRefObject, useEffect, useMemo } from 'react';
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -108,7 +113,14 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
-    const { isSubmitting, errors, isDirty, isValid } = useFormState({
+    const {
+      isSubmitting,
+      errors,
+      isDirty,
+      isValid,
+      touchedFields,
+      isSubmitted,
+    } = useFormState({
       control: form.control,
     });
     const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
@@ -139,24 +151,38 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     /* Setter */
 
-    const setProfileImage = ({ value }: { value: string }): void => {
-      form.setValue('profileImage', value, {
-        shouldDirty: true,
-        shouldValidate: true,
-      });
-    };
-    const setBackgroundImage = ({ value }: { value: string }): void => {
-      form.setValue('backgroundImage', value, {
-        shouldDirty: true,
-        shouldValidate: true,
-      });
-    };
+    const setProfileImage = useCallback(
+      ({ value }: { value: string }): void => {
+        form.setValue('profileImage', value, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
+    const setBackgroundImage = useCallback(
+      ({ value }: { value: string }): void => {
+        form.setValue('backgroundImage', value, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
+    const handleDefaultAvatarUpdate = useCallback(
+      (value: string): void => {
+        form.setValue('profileImage', value, {
+          shouldDirty: false,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
 
     /* Effect */
 
     useUpdateDefaultAvatar({
-      setProfileImage: value =>
-        form.setValue('profileImage', value, { shouldValidate: true }),
+      setProfileImage: handleDefaultAvatarUpdate,
       profileType,
       profileImage,
     });
@@ -232,8 +258,12 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           type="text"
           label={nameLabel ?? _(msg`Name`)}
           {...form.register('name')}
-          helperText={errors.name?.message}
-          error={!!errors.name}
+          helperText={
+            errors.name && (isSubmitted || touchedFields?.name)
+              ? errors.name.message
+              : undefined
+          }
+          error={Boolean(errors.name && (isSubmitted || touchedFields?.name))}
         />
         <ImageField
           label={_(msg`Profile image`)}

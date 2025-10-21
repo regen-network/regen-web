@@ -11,7 +11,6 @@ import { Title } from 'web-components/src/components/typography';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
-import { useOrganizationProgress } from 'lib/storage/organizationProgress.storage';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
@@ -30,12 +29,12 @@ import {
   CREATE_ORG_INITIAL_VALUES,
   CREATE_ORG_STEPS,
 } from './CreateOrganization.constants';
-import { getVisibleOrganizationAssignments } from './CreateOrganization.utils';
 import { useCreateDao } from './hooks/useCreateDao/useCreateDao';
 import {
   OrganizationMultiStepData,
   useOrganizationFlow,
 } from './hooks/useOrganizationFlow';
+import { useOrganizationProgress } from './hooks/useOrganizationProgress';
 import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
@@ -154,11 +153,23 @@ export default function CreateOrganizationPage(): JSX.Element {
     return Math.min(matchedProgress.step, CREATE_ORG_STEPS.length - 1);
   }, [matchedProgress]);
 
-  const visibleOrganizationAssignments = useMemo(
-    () => getVisibleOrganizationAssignments(activeAccount),
-    [activeAccount],
-  );
-  const hasOrganizationAssignment = visibleOrganizationAssignments.length > 0;
+  const hasOrganizationAssignment = useMemo(() => {
+    if (
+      !activeAccount ||
+      !('daosByAssignmentAccountIdAndDaoAddress' in activeAccount)
+    ) {
+      return false;
+    }
+
+    const daos =
+      activeAccount.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
+
+    return daos.some(dao =>
+      dao?.assignmentsByDaoAddress?.nodes?.some(
+        assignment => assignment?.accountId === activeAccount.id,
+      ),
+    );
+  }, [activeAccount]);
 
   useEffect(() => {
     if (hasOrganizationAssignment) {

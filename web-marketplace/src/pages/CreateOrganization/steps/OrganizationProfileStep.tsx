@@ -199,18 +199,16 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
 
     const handleFormStateChange = useCallback(
       ({
-        values,
+        isValid,
         errors,
       }: {
         isValid: boolean;
         isDirty: boolean;
         isSubmitting: boolean;
-        values: EditProfileFormSchemaType;
         errors: FieldErrors<EditProfileFormSchemaType>;
       }) => {
-        const hasName = values.name?.trim().length > 0;
         const hasErrors = Object.keys(errors).length > 0;
-        onValidityChange?.(hasName && !hasErrors);
+        onValidityChange?.(isValid && !hasErrors);
       },
       [onValidityChange],
     );

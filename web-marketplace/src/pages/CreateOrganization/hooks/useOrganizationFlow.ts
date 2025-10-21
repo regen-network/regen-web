@@ -14,6 +14,7 @@ export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {
     daoAddress?: string;
     organizationId?: string;
+    walletAddress?: string;
   };
 };
 
@@ -27,6 +28,7 @@ type UseOrganizationFlowParams = {
   handleSaveNext: (payload: OrganizationMultiStepData) => void;
   handleResetData: () => void;
   resumeStep: number;
+  walletAddress?: string;
 };
 
 type ApplyTransferPayload = {
@@ -73,6 +75,7 @@ export const useOrganizationFlow = ({
   handleSaveNext,
   handleResetData,
   resumeStep,
+  walletAddress,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
   const [organizationId, setOrganizationId] = useState<string | undefined>(
@@ -90,12 +93,29 @@ export const useOrganizationFlow = ({
   const [orgProfileInitialValuesVersion, setOrgProfileInitialValuesVersion] =
     useState(0);
 
+  const storedWalletAddress = (data as Record<string, any>)?.dao
+    ?.walletAddress as string | undefined;
+  const matchesStoredWallet =
+    storedWalletAddress !== undefined && walletAddress !== undefined
+      ? storedWalletAddress === walletAddress
+      : false;
+
   const formData = useMemo(
-    () => data as Partial<EditProfileFormSchemaType> | undefined,
-    [data],
+    () =>
+      matchesStoredWallet
+        ? (data as Partial<EditProfileFormSchemaType> | undefined)
+        : undefined,
+    [data, matchesStoredWallet],
   );
 
   useEffect(() => {
+    if (!matchesStoredWallet) {
+      setHasUnfinishedOrganization(false);
+      setDaoAddress(undefined);
+      setOrganizationId(undefined);
+      return;
+    }
+
     const storedDaoAddress = (data as Record<string, any>)?.dao?.daoAddress as
       | string
       | undefined;
@@ -114,7 +134,7 @@ export const useOrganizationFlow = ({
     setHasUnfinishedOrganization(false);
     setDaoAddress(undefined);
     setOrganizationId(undefined);
-  }, [data]);
+  }, [data, matchesStoredWallet]);
 
   useEffect(() => {
     const mappedValues = mapInitialValues(formData);

@@ -5,12 +5,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { FieldErrors } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { FieldErrors } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AccountType } from 'generated/graphql';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   DEFAULT_NAME,
@@ -50,6 +51,8 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
   }) => {
     const { _ } = useLingui();
     const { createDao } = useCreateDao();
+    const { wallet } = useWallet();
+    const walletAddress = wallet?.address;
     const fileNamesToDeleteRef = useRef<string[]>([]);
     const onUpload = useOnUploadCallback({
       fileNamesToDeleteRef,
@@ -126,9 +129,12 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
           setShowTransferModal(false);
           const payload: OrganizationMultiStepData = {
             ...values,
-            dao: data?.dao ?? {
-              daoAddress,
-              organizationId,
+            dao: {
+              ...(data?.dao ?? {
+                daoAddress,
+                organizationId,
+              }),
+              walletAddress,
             },
           };
           handleSaveNext(payload);
@@ -161,7 +167,10 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
 
           const payload: OrganizationMultiStepData = {
             ...values,
-            dao: daoResult,
+            dao: {
+              ...daoResult,
+              walletAddress,
+            },
           };
           handleSaveNext(payload);
         } catch (error) {
@@ -183,6 +192,7 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
         handleSaveNext,
         activeAccountId,
         createDao,
+        walletAddress,
         _,
       ],
     );

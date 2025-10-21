@@ -52,6 +52,7 @@ export const useOrganizationMenuProfile = ({
 }: UseOrganizationMenuProfileParams) => {
   const { _ } = useLingui();
   const organizationProgress = useOrganizationProgress();
+  const walletAddress = wallet?.address;
 
   const organizationProfile = useMemo(
     () =>
@@ -75,10 +76,13 @@ export const useOrganizationMenuProfile = ({
     ],
   );
 
-  const unfinishedEntry = useMemo(
-    () => organizationProgress,
-    [organizationProgress],
-  );
+  const unfinishedEntry = useMemo(() => {
+    if (!organizationProgress) return undefined;
+    const storedWallet = organizationProgress.walletAddress;
+    if (!storedWallet) return undefined;
+    if (!walletAddress) return undefined;
+    return storedWallet === walletAddress ? organizationProgress : undefined;
+  }, [organizationProgress, walletAddress]);
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
 

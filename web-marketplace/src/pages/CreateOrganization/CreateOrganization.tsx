@@ -11,10 +11,8 @@ import { Title } from 'web-components/src/components/typography';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
-import {
-  clearStoredOrganizationProgress,
-  useOrganizationProgress,
-} from 'lib/storage/organizationProgress.storage';
+import { useOrganizationProgress } from 'lib/storage/organizationProgress.storage';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   MultiStepTemplate,
@@ -45,10 +43,12 @@ import { PersonalInfoStep } from './steps/PersonalInfoStep';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
+  walletAddress?: string;
 };
 
 function CreateOrganizationContent({
   resumeStep,
+  walletAddress,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -85,6 +85,7 @@ function CreateOrganizationContent({
     handleSaveNext,
     handleResetData,
     resumeStep,
+    walletAddress,
   });
   const [isStepValid, setIsStepValid] = useState(activeStep !== 0);
 
@@ -134,14 +135,24 @@ export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
   const { activeAccount } = useAuth();
+  const { wallet } = useWallet();
+  const walletAddress = wallet?.address;
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
 
+  const isProgressForCurrentWallet =
+    !!organizationProgress &&
+    !!walletAddress &&
+    organizationProgress.walletAddress === walletAddress;
+  const matchedProgress = isProgressForCurrentWallet
+    ? organizationProgress
+    : undefined;
+
   const resumeStep = useMemo(() => {
-    if (!organizationProgress) return 0;
-    return Math.min(organizationProgress.step, CREATE_ORG_STEPS.length - 1);
-  }, [organizationProgress]);
+    if (!matchedProgress) return 0;
+    return Math.min(matchedProgress.step, CREATE_ORG_STEPS.length - 1);
+  }, [matchedProgress]);
 
   const visibleOrganizationAssignments = useMemo(
     () => getVisibleOrganizationAssignments(activeAccount),
@@ -160,7 +171,6 @@ export default function CreateOrganizationPage(): JSX.Element {
   const handleCancelDiscard = useCallback(() => setShowDiscardModal(false), []);
   const handleConfirmDiscard = useCallback(() => {
     setShowDiscardModal(false);
-    clearStoredOrganizationProgress();
     navigate('/dashboard', { replace: true });
   }, [navigate]);
 
@@ -199,7 +209,10 @@ export default function CreateOrganizationPage(): JSX.Element {
         closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
         classes={{ titleWrap: 'pb-40' }}
       >
-        <CreateOrganizationContent resumeStep={resumeStep} />
+        <CreateOrganizationContent
+          resumeStep={resumeStep}
+          walletAddress={walletAddress}
+        />
       </MultiStepTemplate>
     </>
   );

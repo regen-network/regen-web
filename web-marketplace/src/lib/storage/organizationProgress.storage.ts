@@ -6,6 +6,7 @@ const LOCAL_STORAGE_EVENT = 'local-storage:update';
 type StoredDaoInfo = {
   daoAddress?: unknown;
   organizationId?: unknown;
+  walletAddress?: unknown;
 };
 
 type StoredFormValues = {
@@ -22,6 +23,7 @@ export type OrganizationProgress = {
   daoAddress: string;
   step: number;
   name?: string;
+  walletAddress?: string;
 };
 
 const isBrowser = typeof window !== 'undefined';
@@ -48,8 +50,14 @@ const parseOrganizationProgress = (
       typeof nameValue === 'string' && nameValue.trim().length > 0
         ? nameValue
         : undefined;
+    const walletAddressValue = parsed?.formValues?.dao?.walletAddress;
+    const walletAddress =
+      typeof walletAddressValue === 'string' &&
+      walletAddressValue.trim().length > 0
+        ? walletAddressValue
+        : undefined;
 
-    return { daoAddress, step, name };
+    return { daoAddress, step, name, walletAddress };
   } catch (_error) {
     return undefined;
   }

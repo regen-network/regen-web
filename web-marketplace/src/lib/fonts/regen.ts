@@ -40,8 +40,5 @@ const muli = Mulish({
     'sans-serif', // Generic fallback
   ],
 });
-console.log('Lato font loaded w:', lato);
-console.log('muli font loaded w:', muli);
-
 
 export const fonts = [lato, muli];

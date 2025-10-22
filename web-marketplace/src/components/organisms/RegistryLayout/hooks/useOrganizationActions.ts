@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
 
-import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import type {
+  AccountByIdQuery,
+  AccountFieldsFragment,
+  Maybe,
+} from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
@@ -10,7 +14,7 @@ import { useLoginData } from '../../LoginButton/hooks/useLoginData';
 import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
 
 type UseOrganizationActionsParams = {
-  activeAccount: Maybe<AccountFieldsFragment> | undefined;
+  activeAccount: AccountByIdQuery['accountById'];
   privActiveAccount: PrivateAccount | undefined;
   wallet?: Wallet | null;
   profileLink: string;
@@ -42,14 +46,13 @@ export const useOrganizationActions = ({
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     hasDaoForActiveAccount,
-  } =
-    useOrganizationMenuProfile({
-      activeAccount,
-      privActiveAccount,
-      wallet,
-      profileLink,
-      dashboardLink: '/dashboard',
-    });
+  } = useOrganizationMenuProfile({
+    activeAccount,
+    privActiveAccount,
+    wallet,
+    profileLink,
+    dashboardLink: '/dashboard',
+  });
 
   const createOrganization = useCallback(() => {
     if (privActiveAccount && !isConnected) {

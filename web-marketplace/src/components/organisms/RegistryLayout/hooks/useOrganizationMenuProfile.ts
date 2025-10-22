@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 
-import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import type { AccountByIdQuery, Maybe } from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 
@@ -15,32 +15,11 @@ import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { getAddress, getProfile } from '../RegistryLayout.utils';
 
 type UseOrganizationMenuProfileParams = {
-  activeAccount: Maybe<AccountFieldsFragment> | undefined;
+  activeAccount: AccountByIdQuery['accountById'];
   privActiveAccount: PrivateAccount | undefined;
   wallet: Wallet | null | undefined;
   profileLink: string;
   dashboardLink: string;
-};
-
-type DaoAssignmentNode = {
-  visible?: boolean | null;
-  accountId?: Maybe<string>;
-};
-
-type DaoNode = {
-  address?: Maybe<string>;
-  organizationByDaoAddress?: Maybe<{
-    name?: Maybe<string>;
-  }>;
-  assignmentsByDaoAddress?: Maybe<{
-    nodes?: Maybe<Array<Maybe<DaoAssignmentNode>>>;
-  }>;
-};
-
-type AccountWithDaoAssignments = AccountFieldsFragment & {
-  daosByAssignmentAccountIdAndDaoAddress?: Maybe<{
-    nodes?: Maybe<Array<Maybe<DaoNode>>>;
-  }>;
 };
 
 export const useOrganizationMenuProfile = ({
@@ -58,8 +37,7 @@ export const useOrganizationMenuProfile = ({
     if (activeAccount?.type !== 'ORGANIZATION') return false;
 
     const daoNodes =
-      (activeAccount as AccountWithDaoAssignments | undefined)
-        ?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
+      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
 
     return daoNodes.some(dao => !!dao?.address);
   }, [activeAccount]);
@@ -116,26 +94,11 @@ export const useOrganizationMenuProfile = ({
 
   const organizationProfileFromAssignments = useMemo(() => {
     const daos =
-      (activeAccount as AccountWithDaoAssignments | undefined)
-        ?.daosByAssignmentAccountIdAndDaoAddress?.nodes ??
-      ([] as Array<Maybe<DaoNode>>);
+      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
     if (daos.length === 0) return undefined;
 
-    const findAccountAssignment = (dao?: Maybe<DaoNode>) => {
-      if (!dao) return undefined;
-      const assignments =
-        dao.assignmentsByDaoAddress?.nodes ??
-        ([] as Array<Maybe<DaoAssignmentNode>>);
-      return assignments.find(assignment => {
-        if (!activeAccount?.id) return !!assignment;
-        return assignment?.accountId === activeAccount.id;
-      });
-    };
-
-    const daoToUse = daos.find(dao => {
-      if (!dao?.address || !dao.organizationByDaoAddress?.name) return false;
-      return Boolean(findAccountAssignment(dao));
-    });
+    // find the DAO that is an organization
+    const daoToUse = daos.find(dao => !!dao?.organizationByDaoAddress);
 
     const daoAddress = daoToUse?.address;
     if (!daoAddress) return undefined;

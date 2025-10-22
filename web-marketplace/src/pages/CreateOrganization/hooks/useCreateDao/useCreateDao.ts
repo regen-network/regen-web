@@ -270,15 +270,6 @@ export const useCreateDao = () => {
           [],
         );
 
-        /* eslint-disable no-console */
-        console.log({
-          useCreateDao_success: {
-            daoAddress,
-            transactionHash: executeResult.transactionHash,
-          },
-        });
-        /* eslint-enable no-console */
-
         return {
           daoAddress,
           votingModuleAddress: daoVotingCw4Address,

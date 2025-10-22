@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 
-import type { AccountByIdQuery, Maybe } from 'generated/graphql';
+import type { AccountByIdQuery } from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 
@@ -12,7 +12,7 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
-import { getAddress, getProfile } from '../RegistryLayout.utils';
+import { getAddress } from '../RegistryLayout.utils';
 
 type UseOrganizationMenuProfileParams = {
   activeAccount: AccountByIdQuery['accountById'];
@@ -41,27 +41,6 @@ export const useOrganizationMenuProfile = ({
 
     return daoNodes.some(dao => !!dao?.address);
   }, [activeAccount]);
-
-  const organizationProfile = useMemo(() => {
-    if (!hasDaoForActiveAccount) return undefined;
-
-    return getProfile({
-      account: activeAccount,
-      privActiveAccount,
-      _: _,
-      profileLink,
-      dashboardLink,
-      address: wallet?.address,
-    });
-  }, [
-    hasDaoForActiveAccount,
-    activeAccount,
-    privActiveAccount,
-    _,
-    profileLink,
-    dashboardLink,
-    wallet?.address,
-  ]);
 
   const unfinishedEntry = useMemo(() => {
     if (!organizationProgress) return undefined;
@@ -118,9 +97,7 @@ export const useOrganizationMenuProfile = ({
   }, [activeAccount, _]);
 
   const menuOrganizationProfile =
-    organizationProfile ??
-    fallbackOrganizationProfile ??
-    organizationProfileFromAssignments;
+    fallbackOrganizationProfile ?? organizationProfileFromAssignments;
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 

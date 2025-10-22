@@ -69,7 +69,7 @@ Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders
 To run the marketplace app:
 
 ```sh
-bun run start
+bun run dev
 ```
 
 To run Storybook:
@@ -88,7 +88,7 @@ cd web-www && bun run dev
 
 ### Marketplace
 
-Compile `web-marketplace` to `web-marketplace/build` respectively:
+Compile `web-marketplace` to `web-marketplace/.next` respectively:
 
 ```sh
 bun run build

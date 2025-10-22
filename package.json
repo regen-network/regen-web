@@ -28,6 +28,7 @@
     "storybook": "bun run --cwd web-storybook storybook",
     "test-marketplace": "bun run --cwd web-marketplace test",
     "test-components": "bun run --cwd web-components test",
+    "dev": "bun run --cwd web-marketplace dev",
     "start": "bun run --cwd web-marketplace start",
     "watch": "bun run --cwd web-components watch",
     "test-update-snapshot": "bun run --cwd web-marketplace test-update-snapshot",

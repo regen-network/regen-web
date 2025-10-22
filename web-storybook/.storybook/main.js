@@ -48,6 +48,7 @@ module.exports = {
             __dirname,
             '../../web-marketplace/src/components',
           ),
+          app: path.resolve(__dirname, '../../web-marketplace/src/app'),
           lib: path.resolve(__dirname, '../../web-marketplace/src/lib'),
           routes: path.resolve(__dirname, '../../web-marketplace/src/routes'),
           generated: path.resolve(
@@ -55,6 +56,7 @@ module.exports = {
             '../../web-marketplace/src/generated',
           ),
           pages: path.resolve(__dirname, '../../web-marketplace/src/pages'),
+          'legacy-pages': path.resolve(__dirname, '../../web-marketplace/src/legacy-pages'),
           features: path.resolve(
             __dirname,
             '../../web-marketplace/src/features',
@@ -66,6 +68,7 @@ module.exports = {
           config: path.resolve(__dirname, '../../web-marketplace/src/config'),
           ledger: path.resolve(__dirname, '../../web-marketplace/src/ledger'),
           clients: path.resolve(__dirname, '../../web-marketplace/src/clients'),
+          'next/font/google': path.resolve(__dirname, './fonts.mock.js'),
         },
       },
       plugins: [

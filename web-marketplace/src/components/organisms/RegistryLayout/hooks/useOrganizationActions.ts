@@ -17,7 +17,6 @@ type UseOrganizationActionsParams = {
   activeAccount: AccountByIdQuery['accountById'];
   privActiveAccount: PrivateAccount | undefined;
   wallet?: Wallet | null;
-  profileLink: string;
   navigate: NavigateFunction;
   connect?: (...args: any[]) => void;
   isConnected: boolean;
@@ -27,7 +26,6 @@ export const useOrganizationActions = ({
   activeAccount,
   privActiveAccount,
   wallet,
-  profileLink,
   navigate,
   connect,
   isConnected,
@@ -41,18 +39,11 @@ export const useOrganizationActions = ({
     useState(false);
   const [, setError] = useState<unknown>();
 
-  const {
-    defaultAvatar,
-    menuOrganizationProfile,
-    unfinalizedOrgCreation,
-    hasDaoForActiveAccount,
-  } = useOrganizationMenuProfile({
-    activeAccount,
-    privActiveAccount,
-    wallet,
-    profileLink,
-    dashboardLink: '/dashboard',
-  });
+  const { defaultAvatar, menuOrganizationProfile, unfinalizedOrgCreation } =
+    useOrganizationMenuProfile({
+      activeAccount,
+      wallet,
+    });
 
   const createOrganization = useCallback(() => {
     if (privActiveAccount && !isConnected) {
@@ -102,7 +93,6 @@ export const useOrganizationActions = ({
     defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
-    hasDaoForActiveAccount,
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,

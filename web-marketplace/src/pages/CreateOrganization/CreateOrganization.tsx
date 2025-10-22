@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
@@ -39,6 +39,7 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
+import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
@@ -153,30 +154,25 @@ export default function CreateOrganizationPage(): JSX.Element {
     return Math.min(matchedProgress.step, CREATE_ORG_STEPS.length - 1);
   }, [matchedProgress]);
 
-  const hasOrganizationAssignment = useMemo(() => {
-    if (
-      !activeAccount ||
-      !('daosByAssignmentAccountIdAndDaoAddress' in activeAccount)
-    ) {
-      return false;
-    }
-
-    const daos =
-      activeAccount.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
-
-    return daos.some(dao =>
-      dao?.assignmentsByDaoAddress?.nodes?.some(
-        assignment => assignment?.accountId === activeAccount.id,
-      ),
-    );
-  }, [activeAccount]);
+  const { menuOrganizationProfile, unfinalizedOrgCreation } =
+    useOrganizationMenuProfile({
+      activeAccount,
+      wallet,
+    });
 
   useEffect(() => {
-    if (hasOrganizationAssignment) {
+    if (menuOrganizationProfile && !unfinalizedOrgCreation) {
       setErrorBannerText(_(CREATE_ORG_ALREADY_IN_ORG_MESSAGE));
       navigate('/dashboard', { replace: true });
     }
-  }, [hasOrganizationAssignment, navigate, setErrorBannerText, _]);
+  }, [
+    ,
+    menuOrganizationProfile,
+    unfinalizedOrgCreation,
+    navigate,
+    setErrorBannerText,
+    _,
+  ]);
 
   const handleRequestClose = useCallback(() => setShowDiscardModal(true), []);
   const handleCancelDiscard = useCallback(() => setShowDiscardModal(false), []);
@@ -184,10 +180,6 @@ export default function CreateOrganizationPage(): JSX.Element {
     setShowDiscardModal(false);
     navigate('/dashboard', { replace: true });
   }, [navigate]);
-
-  if (hasOrganizationAssignment) {
-    return <></>;
-  }
 
   return (
     <>

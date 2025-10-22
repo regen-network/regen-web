@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
-import { useProjectEditContext } from 'legacy-pages';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 

@@ -234,7 +234,7 @@ export const useCreateDao = () => {
 
         initialItems.push({ key: 'dao_rbam_address', value: rbamAddress });
         initialItems.push({
-          key: 'dao_cw4_group_address',
+          key: 'cw4_group_address',
           value: cw4GroupAddress,
         });
 

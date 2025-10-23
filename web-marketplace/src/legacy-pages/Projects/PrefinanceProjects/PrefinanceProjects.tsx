@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -18,6 +17,8 @@ import {
 } from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { Link } from 'components/atoms/Link';
+
 import prefinancing from '../../../../public/svg/prefinancing.svg';
 import {
   API_URI,
@@ -31,7 +32,6 @@ import { useProjectsContext } from '../Projects.context';
 export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const { _ } = useLingui();
-    const router = useRouter();
     const { track } = useTracker();
     const {
       prefinanceProjects,
@@ -104,9 +104,9 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 area={project?.area}
                 areaUnit={project?.areaUnit}
                 purchaseInfo={project.purchaseInfo || {}}
-                onClick={() =>
-                  router.push(`/project/${project.slug ?? project.id}`)
-                }
+                href={`/project/${project.slug ?? project.id}`}
+                target={'_self'}
+                LinkComponent={Link}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}
                 truncateTitle={true}

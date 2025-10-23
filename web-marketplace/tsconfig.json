@@ -52,7 +52,8 @@
     "lib/rdf/types/rdf-validate-shacl/index.d.ts",
     "test",
     "types/url-search-params-polyfill.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "lingui.config.ts"
   ],
   "exclude": [
     "./node_modules"

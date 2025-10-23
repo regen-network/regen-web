@@ -8,6 +8,7 @@ import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useChangeLocale } from 'lib/i18n/hooks/useChangeLocale';
 
 import enFlag from '../../../../public/svg/flags/en.svg';
 import esFlag from '../../../../public/svg/flags/es.svg';
@@ -17,8 +18,9 @@ type Props = {
 };
 
 export const LanguageSwitcher = ({ className }: Props) => {
-  const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const changeLocale = useChangeLocale();
   const open = Boolean(anchorEl);
   const isEnglish = selectedLanguage === 'en';
   const flagImg = isEnglish ? enFlag : esFlag;
@@ -72,7 +74,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
           <MenuItem
             onClick={() => {
               handleClose();
-              setSelectedLanguage('en');
+              changeLocale('en');
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
@@ -84,7 +86,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
           <MenuItem
             onClick={() => {
               handleClose();
-              setSelectedLanguage('es');
+              changeLocale('es');
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >

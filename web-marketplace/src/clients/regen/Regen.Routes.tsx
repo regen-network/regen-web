@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { lazy, useMemo } from 'react';
 import {
   createBrowserRouter,
@@ -144,6 +145,15 @@ export default function RegenRoutes({ reactQueryClient }: RouterProps) {
         rpcQueryClient,
         address: activeWalletAddr,
         languageCode: selectedLanguage,
+        basename:
+          typeof window !== 'undefined'
+            ? (() => {
+                const segment = window.location.pathname.split('/')[1];
+                return segment === 'en' || segment === 'es'
+                  ? `/${segment}`
+                  : '';
+              })()
+            : '',
       }),
     [
       activeWalletAddr,
@@ -163,6 +173,7 @@ export type RouterParams = {
   rpcQueryClient: RPCQueryClient | undefined;
   address?: Maybe<string>;
   languageCode: string;
+  basename?: string;
 };
 
 export const getRegenRoutes = ({
@@ -414,6 +425,7 @@ export const getRegenRouter = ({
   rpcQueryClient,
   address,
   languageCode,
+  basename = '',
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
@@ -426,7 +438,7 @@ export const getRegenRouter = ({
       languageCode,
     }),
     {
-      basename: '',
+      basename,
     },
   );
 };

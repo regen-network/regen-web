@@ -116,6 +116,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       track={track}
       pathname={location.pathname}
       draftText={_(DRAFT_TEXT)}
+      LinkComponent={AppLink}
     />
   );
 

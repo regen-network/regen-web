@@ -52,7 +52,7 @@
     "@types/zxcvbn": "^4.4.0",
     "date-fns": "^2.25.0",
     "dayjs": "^1.10.8",
-    "formik": "2.2.9",
+    "formik": "^2.4.6",
     "formik-mui": "^5.0.0-alpha.0",
     "framer-motion": "^11.0.25",
     "html-react-parser": "^3.0.4",

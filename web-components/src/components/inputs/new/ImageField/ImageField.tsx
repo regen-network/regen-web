@@ -140,15 +140,13 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
                   const [file] = files;
                   toBase64(file).then(image => {
                     if (typeof image === 'string') {
-                      const fileName = file.name;
+                      const fileName = initialFileName ?? file.name;
                       const fileExtension =
                         fileName.match(EXTENSION_REGEX)?.[1] ??
                         DEFAULT_IMAGE_EXTENSION;
                       setInitialImage(image);
                       setFileType(file.type);
-                      setFileName(
-                        `${initialFileName}.${fileExtension}` ?? fileName,
-                      );
+                      setFileName(`${fileName}.${fileExtension}`);
                     }
                   });
                 }

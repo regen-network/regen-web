@@ -241,6 +241,7 @@ const Projects = (): JSX.Element => {
       !loading &&
       !isCreditClassesWithMetadataLoading &&
       !isSanityCreditClassesLoading &&
+      creditClassFilterOptions.length > 0 &&
       Object.keys(creditClassFilters).length === 0
     ) {
       const _creditClassInitialFilters = creditClassFilterOptions.reduce(

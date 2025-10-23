@@ -102,6 +102,7 @@ FiatLoggedInWithPaymentMethod.args = {
         fingerprint: 's7WT4PQ6SDYGr9R2',
         funding: 'credit',
         last4: '4242',
+        networks: null,
         three_d_secure_usage: { supported: true },
         wallet: null,
       },

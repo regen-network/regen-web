@@ -8,14 +8,16 @@ import { GlobeIcon } from 'web-components/src/components/icons/GlobeIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useChangeLocale } from 'lib/i18n/hooks/useChangeLocale';
 
 type Props = {
   className?: string;
 };
 
 export const LanguageSwitcher = ({ className }: Props) => {
-  const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const changeLocale = useChangeLocale();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -51,7 +53,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
         <MenuItem
           onClick={() => {
             handleClose();
-            setSelectedLanguage('en');
+            changeLocale('en');
           }}
         >
           English
@@ -59,7 +61,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
         <MenuItem
           onClick={() => {
             handleClose();
-            setSelectedLanguage('es');
+            changeLocale('es');
           }}
         >
           Español

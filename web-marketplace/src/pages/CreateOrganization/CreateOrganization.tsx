@@ -101,7 +101,7 @@ function CreateOrganizationContent({
     walletAddress,
     activeRef,
   });
-  console.log('ref', activeRef);
+
   return (
     <>
       {steps[activeStep].id === ORGANIZATION_PROFILE_FORM_ID && (

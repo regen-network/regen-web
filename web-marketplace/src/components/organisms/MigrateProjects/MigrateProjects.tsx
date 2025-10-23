@@ -1,53 +1,67 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useFormState } from 'react-hook-form';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 
 import { SelectProjectCard } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard';
 
-import { MigrateProjectsProps, Project } from './MigrateProjects.types';
+import { FormValues, MigrateProjectsProps } from './MigrateProjects.types';
+import { forwardRef, useImperativeHandle } from 'react';
+import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
 
-type FormValues = {
-  selectedProjectIds: string[];
-};
+export const MigrateProjects = forwardRef<
+  MultiStepFormApi,
+  MigrateProjectsProps
+>(
+  (
+    {
+      projects,
+      onSubmit,
+      // eslint-disable-next-line lingui/no-unlocalized-strings
+      formAriaLabel = 'migrate projects form',
+    },
+    ref,
+  ) => {
+    const form = useForm<FormValues>({
+      defaultValues: { selectedProjectIds: [] },
+    });
+    const { isSubmitting, isValid } = useFormState({ control: form.control });
 
-export const MigrateProjects = ({
-  projects,
-  onSubmit,
-  // eslint-disable-next-line lingui/no-unlocalized-strings
-  formAriaLabel = 'migrate projects form',
-}: MigrateProjectsProps) => {
-  const form = useForm<FormValues>({
-    defaultValues: { selectedProjectIds: [] },
-  });
+    useImperativeHandle(ref, () => ({
+      trigger: () => form.trigger([], { shouldFocus: true }),
+      submit: () => form.handleSubmit(onSubmit)(),
+      isSubmitting,
+      isValid,
+    }));
 
-  return (
-    <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">
-      <Form form={form} onSubmit={onSubmit} aria-label={formAriaLabel}>
-        <Controller
-          control={form.control}
-          name="selectedProjectIds"
-          render={({ field: { value: selectedIds, onChange } }) => (
-            <div className="grid sm:grid-cols-2 gap-30">
-              {projects.map((project: Project) => {
-                const isSelected = selectedIds.includes(project.id);
-                return (
-                  <SelectProjectCard
-                    key={project.id}
-                    project={project}
-                    selected={isSelected}
-                    onClick={() => {
-                      if (isSelected) {
-                        onChange(selectedIds.filter(id => id !== project.id));
-                      } else {
-                        onChange([...selectedIds, project.id]);
-                      }
-                    }}
-                  />
-                );
-              })}
-            </div>
-          )}
-        />
-      </Form>
-    </section>
-  );
-};
+    return (
+      <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">
+        <Form form={form} onSubmit={onSubmit} aria-label={formAriaLabel}>
+          <Controller
+            control={form.control}
+            name="selectedProjectIds"
+            render={({ field: { value: selectedIds, onChange } }) => (
+              <div className="grid sm:grid-cols-2 gap-30">
+                {projects.map(project => {
+                  const isSelected = selectedIds.includes(project.id);
+                  return (
+                    <SelectProjectCard
+                      key={project.id}
+                      project={project}
+                      selected={isSelected}
+                      onClick={() => {
+                        if (isSelected) {
+                          onChange(selectedIds.filter(id => id !== project.id));
+                        } else {
+                          onChange([...selectedIds, project.id]);
+                        }
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          />
+        </Form>
+      </section>
+    );
+  },
+);

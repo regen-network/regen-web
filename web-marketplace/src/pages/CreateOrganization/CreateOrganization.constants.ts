@@ -1,10 +1,14 @@
-import { i18n } from '@lingui/core';
 import { msg } from '@lingui/macro';
 
-export const CREATE_ORG_FORM_ID = 'create-organization';
+export const CREATE_ORGANIZATION_FORM_ID = 'create-organization';
+export const ORGANIZATION_PROFILE_FORM_ID = 'organization-profile';
+export const MIGRATE_PROJECTS_FORM_ID = 'migrate-projects';
+export const PERSONAL_INFO_FORM_ID = 'personal-info';
+export const INVITE_MEMBERS_FORM_ID = 'invite-members';
 
 export const ORG_PROFILE = msg`Organization Profile`;
 export const MIGRATE_PROJECTS = msg`Migrate Projects`;
+export const MIGRATE_PROJECTS_TITLE = msg`Migrate Projects from Personal Account`;
 export const PERSONAL_INFO = msg`Personal Info`;
 export const INVITE_MEMBERS = msg`Invite Members`;
 export const CREATE_ORG_DEFAULT_USER = msg`User`;
@@ -21,35 +25,13 @@ export const CREATE_ORG_TRANSFER_MODAL_SECTION_TITLE = msg`Data will be transfer
 export const CREATE_ORG_TRANSFER_MODAL_SKIP_LABEL = msg`SKIP`;
 export const CREATE_ORG_TRANSFER_MODAL_CONFIRM_LABEL = msg`YES, TRANSFER PROFILE`;
 export const CREATE_ORG_ORGANIZATION_NAME_LABEL = msg`Organization Name`;
-export const CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION = msg`Link or migrate existing projects to your organization.`;
+export const CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION = msg`If you would like to migrate your personal account projects to your new organization, select the projects below. This is optional.`;
+export const CREATE_ORG_MIGRATE_PROJECTS_NOTE = msg`Note: Migrating a project will also migrate all of its tradable credits and active sell orders.`;
 export const CREATE_ORG_PERSONAL_INFO_DESCRIPTION = msg`Provide personal contact information for this organization.`;
 export const CREATE_ORG_INVITE_MEMBERS_DESCRIPTION = msg`Invite teammates to collaborate on your organization.`;
 export const CREATE_ORG_WALLET_REQUIRED_ERROR = msg`A connected wallet is required to create an organization.`;
 export const CREATE_ORG_SIGNING_CLIENT_ERROR = msg`Failed to initialize signing client`;
 export const CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR = msg`Active account is required to create an organization.`;
-
-export const CREATE_ORG_STEPS = [
-  {
-    id: 'organization-profile',
-    name: i18n._(ORG_PROFILE),
-    title: i18n._(ORG_PROFILE),
-  },
-  {
-    id: 'migrate-projects',
-    name: i18n._(MIGRATE_PROJECTS),
-    title: i18n._(MIGRATE_PROJECTS),
-  },
-  {
-    id: 'personal-info',
-    name: i18n._(PERSONAL_INFO),
-    title: i18n._(PERSONAL_INFO),
-  },
-  {
-    id: 'invite-members',
-    name: i18n._(INVITE_MEMBERS),
-    title: i18n._(INVITE_MEMBERS),
-  },
-] as const;
 
 export type CreateOrgInitialValues = {};
 export const CREATE_ORG_INITIAL_VALUES: CreateOrgInitialValues = {};

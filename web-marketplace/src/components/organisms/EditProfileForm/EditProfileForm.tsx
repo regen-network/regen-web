@@ -1,7 +1,9 @@
 import React, {
+  forwardRef,
   MutableRefObject,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
 } from 'react';
 import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
@@ -53,6 +55,7 @@ import {
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
 import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
+import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
 
 export interface EditProfileFormProps {
   initialValues?: EditProfileFormSchemaType;
@@ -69,30 +72,25 @@ export interface EditProfileFormProps {
   // after the form has mounted (e.g. from a transfer profile modal)
   onPrefill?: (values: Partial<EditProfileFormSchemaType>) => void; // not used internally, documented for symmetry
   prefillValues?: Partial<EditProfileFormSchemaType>;
-  onFormStateChange?: (state: {
-    isValid: boolean;
-    isDirty: boolean;
-    isSubmitting: boolean;
-    values: EditProfileFormSchemaType;
-    errors: FieldErrors<EditProfileFormSchemaType>;
-  }) => void;
   validationMode?: 'onChange' | 'onBlur' | 'onSubmit' | 'onTouched' | 'all';
 }
-const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
-  ({
-    children,
-    initialValues,
-    isDirtyRef,
-    onSubmit,
-    onSuccess,
-    onUpload,
-    formId,
-    hideProfileType,
-    nameLabel,
-    prefillValues,
-    onFormStateChange,
-    validationMode = 'onBlur',
-  }) => {
+const EditProfileForm = forwardRef<MultiStepFormApi, EditProfileFormProps>(
+  (
+    {
+      children,
+      initialValues,
+      isDirtyRef,
+      onSubmit,
+      onSuccess,
+      onUpload,
+      formId,
+      hideProfileType,
+      nameLabel,
+      prefillValues,
+      validationMode = 'onBlur',
+    },
+    ref,
+  ) => {
     const { _ } = useLingui();
     const formSchema = useMemo(
       () =>
@@ -111,6 +109,14 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       },
       mode: validationMode,
     });
+
+    useImperativeHandle(ref, () => ({
+      trigger: () => form.trigger([], { shouldFocus: true }),
+      submit: () => form.handleSubmit(onSubmit)(),
+      isSubmitting,
+      isValid,
+    }));
+
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
     const {
@@ -192,20 +198,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         isDirtyRef.current = isDirty;
       }
     }, [isDirtyRef, isDirty]);
-
-    useEffect(() => {
-      void form.trigger();
-    }, [form]);
-
-    useEffect(() => {
-      onFormStateChange?.({
-        isValid,
-        isDirty,
-        isSubmitting,
-        values: form.getValues(),
-        errors,
-      });
-    }, [errors, form, isValid, isDirty, isSubmitting, onFormStateChange]);
 
     // When parent supplies new prefillValues, merge them into the form without
     // wiping user edits for untouched fields. Only set provided keys.
@@ -365,6 +357,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         {children}
       </Form>
     );
-  };
+  },
+);
 
 export { EditProfileForm };

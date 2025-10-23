@@ -1,5 +1,17 @@
 import type { AccountByIdQuery } from 'generated/graphql';
 import { AccountType } from 'generated/graphql';
+import { TranslatorType } from 'lib/i18n/i18n.types';
+import {
+  ORG_PROFILE,
+  MIGRATE_PROJECTS,
+  MIGRATE_PROJECTS_TITLE,
+  PERSONAL_INFO,
+  INVITE_MEMBERS,
+  INVITE_MEMBERS_FORM_ID,
+  MIGRATE_PROJECTS_FORM_ID,
+  ORGANIZATION_PROFILE_FORM_ID,
+  PERSONAL_INFO_FORM_ID,
+} from './CreateOrganization.constants';
 
 export const hasTransferableProfile = (
   account?: AccountByIdQuery['accountById'],
@@ -16,3 +28,29 @@ export const hasTransferableProfile = (
       account.twitterLink?.trim(),
   );
 };
+
+export const getCreateOrgSteps = (_: TranslatorType, hasProjects: boolean) =>
+  (
+    [
+      {
+        id: ORGANIZATION_PROFILE_FORM_ID,
+        name: _(ORG_PROFILE),
+        title: _(ORG_PROFILE),
+      },
+      {
+        id: MIGRATE_PROJECTS_FORM_ID,
+        name: _(MIGRATE_PROJECTS),
+        title: _(MIGRATE_PROJECTS_TITLE),
+      },
+      {
+        id: PERSONAL_INFO_FORM_ID,
+        name: _(PERSONAL_INFO),
+        title: _(PERSONAL_INFO),
+      },
+      {
+        id: INVITE_MEMBERS_FORM_ID,
+        name: _(INVITE_MEMBERS),
+        title: _(INVITE_MEMBERS),
+      },
+    ] as const
+  ).filter(step => (step.id === MIGRATE_PROJECTS_FORM_ID ? hasProjects : true));

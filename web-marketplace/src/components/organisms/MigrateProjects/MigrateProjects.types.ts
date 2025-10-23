@@ -1,25 +1,14 @@
-import { Account } from 'web-components/src/components/user/UserInfo';
+import { SubmitHandler } from 'react-hook-form';
+import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 
-export interface Project {
-  /** Unique identifier for the project */
-  id: string;
-  /** Name of the project */
-  title: string;
-  /** Location of the project */
-  location: string;
-  /** Area of the project */
-  area: string;
-  /** Thumbnail image URL */
-  imageSrc: string;
-  /** Program of the project */
-  program?: Account;
-}
-
+export type FormValues = {
+  selectedProjectIds: string[];
+};
 export interface MigrateProjectsProps {
   /** Array of projects to display. */
   projects: Project[];
   /** Callback when the form is submitted. */
-  onSubmit: (data: any) => void;
+  onSubmit: SubmitHandler<FormValues>;
   /** Form aria label. */
   formAriaLabel?: string;
 }

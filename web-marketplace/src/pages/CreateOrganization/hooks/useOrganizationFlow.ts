@@ -8,7 +8,8 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { CREATE_ORG_FORM_ID } from '../CreateOrganization.constants';
+import { getCreateOrgSteps } from '../CreateOrganization.utils';
+import { MultiStepFormApi } from '../CreateOrganization.types';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {
@@ -21,7 +22,6 @@ export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
 type UseOrganizationFlowParams = {
   activeStep: number;
   isLastStep: boolean;
-  isCreating: boolean;
   data: OrganizationMultiStepData | undefined;
   handleActiveStep: (step: number) => void;
   handleBack: () => void;
@@ -29,6 +29,7 @@ type UseOrganizationFlowParams = {
   handleResetData: () => void;
   resumeStep: number;
   walletAddress?: string;
+  activeRef: React.RefObject<MultiStepFormApi>;
 };
 
 type ApplyTransferPayload = {
@@ -68,7 +69,6 @@ const mapInitialValues = (
 export const useOrganizationFlow = ({
   activeStep,
   isLastStep,
-  isCreating,
   data,
   handleActiveStep,
   handleBack,
@@ -76,6 +76,7 @@ export const useOrganizationFlow = ({
   handleResetData,
   resumeStep,
   walletAddress,
+  activeRef,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
   const [organizationId, setOrganizationId] = useState<string | undefined>(
@@ -155,33 +156,17 @@ export const useOrganizationFlow = ({
     handleBack();
   }, [activeStep, handleBack]);
 
-  const handleNextClick = useCallback(() => {
-    if (isCreating) return;
+  const handleNextClick = useCallback(async () => {
+    const step = activeRef.current;
+    if (!step) return;
 
-    if (activeStep === 0) {
-      const form = document.getElementById(CREATE_ORG_FORM_ID) as
-        | HTMLFormElement
-        | undefined;
+    if (!step.isValid || step.isSubmitting) return;
 
-      if (!form) return;
+    const ok = await step.trigger();
+    if (!ok) return;
 
-      const isValid = form.checkValidity();
-      if (!isValid) {
-        form.reportValidity?.();
-        return;
-      }
-
-      if (typeof form.requestSubmit === 'function') {
-        form.requestSubmit();
-      } else {
-        form.dispatchEvent(
-          new Event('submit', { bubbles: true, cancelable: true }),
-        );
-      }
-      return;
-    }
-
-    handleSaveNext({});
+    // run submit logic for that step
+    await step.submit();
 
     if (hasUnfinishedOrganization && daoAddress && isLastStep) {
       handleResetData();
@@ -189,15 +174,7 @@ export const useOrganizationFlow = ({
       setOrganizationId(undefined);
       setHasUnfinishedOrganization(false);
     }
-  }, [
-    activeStep,
-    daoAddress,
-    handleSaveNext,
-    handleResetData,
-    hasUnfinishedOrganization,
-    isCreating,
-    isLastStep,
-  ]);
+  }, [daoAddress, handleResetData, hasUnfinishedOrganization, isLastStep]);
 
   const handleApplyTransferProfile = useCallback(
     ({ nextValues }: ApplyTransferPayload) => {

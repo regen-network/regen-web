@@ -50,17 +50,11 @@ export type Account = Node & {
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByRegistryId: CreditClassesConnection;
-  /** Reads a single `Organization` that is related to this `Account`. */
-  organizationByAccountId?: Maybe<Organization>;
-  /**
-   * Reads and enables pagination through a set of `Organization`.
-   * @deprecated Please use organizationByAccountId instead
-   */
-  organizationsByAccountId: OrganizationsConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByCreatorId: AccountsConnection;
   /** Reads and enables pagination through a set of `Project`. */
@@ -81,6 +75,8 @@ export type Account = Node & {
   fiatOrdersByAccountId: FiatOrdersConnection;
   /** Reads and enables pagination through a set of `SellOrder`. */
   sellOrdersBySellerAccountId: SellOrdersConnection;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByAccountId: AssignmentsConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -107,6 +103,10 @@ export type Account = Node & {
   projectsByProjectPartnerAccountIdAndProjectId: AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsBySellOrderSellerAccountIdAndProjectId: AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Dao`. */
+  daosByAssignmentAccountIdAndDaoAddress: AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection;
+  /** Reads and enables pagination through a set of `Role`. */
+  rolesByAssignmentAccountIdAndRoleName: AccountRolesByAssignmentAccountIdAndRoleNameManyToManyConnection;
 };
 
 
@@ -118,17 +118,6 @@ export type AccountCreditClassesByRegistryIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditClassesOrderBy>>;
   condition?: Maybe<CreditClassCondition>;
-};
-
-
-export type AccountOrganizationsByAccountIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<OrganizationsOrderBy>>;
-  condition?: Maybe<OrganizationCondition>;
 };
 
 
@@ -243,6 +232,17 @@ export type AccountSellOrdersBySellerAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<SellOrdersOrderBy>>;
   condition?: Maybe<SellOrderCondition>;
+};
+
+
+export type AccountAssignmentsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
 };
 
 
@@ -390,6 +390,28 @@ export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
   filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountDaosByAssignmentAccountIdAndDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DaosOrderBy>>;
+  condition?: Maybe<DaoCondition>;
+};
+
+
+export type AccountRolesByAssignmentAccountIdAndRoleNameArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<RolesOrderBy>>;
+  condition?: Maybe<RoleCondition>;
 };
 
 /** A connection to a list of `Account` values, with data from `Project`. */
@@ -654,6 +676,8 @@ export type AccountCondition = {
   active?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `stripeConnectedAccountId` field. */
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `title` field. */
+  title?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -767,6 +791,42 @@ export type AccountCreditClassesByProjectVerifierIdAndCreditClassIdManyToManyEdg
   filter?: Maybe<ProjectFilter>;
 };
 
+/** A connection to a list of `Dao` values, with data from `Assignment`. */
+export type AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection = {
+  __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection';
+  /** A list of `Dao` objects. */
+  nodes: Array<Maybe<Dao>>;
+  /** A list of edges which contains the `Dao`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Dao` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Dao` edge in the connection, with data from `Assignment`. */
+export type AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyEdge = {
+  __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Dao` at the end of the edge. */
+  node?: Maybe<Dao>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByDaoAddress: AssignmentsConnection;
+};
+
+
+/** A `Dao` edge in the connection, with data from `Assignment`. */
+export type AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyEdgeAssignmentsByDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
 /** An input for mutations affecting `Account` */
 export type AccountInput = {
   id?: Maybe<Scalars['UUID']>;
@@ -788,6 +848,7 @@ export type AccountInput = {
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -811,6 +872,7 @@ export type AccountPatch = {
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Project` values, with data from `Post`. */
@@ -942,6 +1004,42 @@ export type AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdgeUploadsByP
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<UploadsOrderBy>>;
   condition?: Maybe<UploadCondition>;
+};
+
+/** A connection to a list of `Role` values, with data from `Assignment`. */
+export type AccountRolesByAssignmentAccountIdAndRoleNameManyToManyConnection = {
+  __typename?: 'AccountRolesByAssignmentAccountIdAndRoleNameManyToManyConnection';
+  /** A list of `Role` objects. */
+  nodes: Array<Maybe<Role>>;
+  /** A list of edges which contains the `Role`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<AccountRolesByAssignmentAccountIdAndRoleNameManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Role` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Role` edge in the connection, with data from `Assignment`. */
+export type AccountRolesByAssignmentAccountIdAndRoleNameManyToManyEdge = {
+  __typename?: 'AccountRolesByAssignmentAccountIdAndRoleNameManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Role` at the end of the edge. */
+  node?: Maybe<Role>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByRoleName: AssignmentsConnection;
+};
+
+
+/** A `Role` edge in the connection, with data from `Assignment`. */
+export type AccountRolesByAssignmentAccountIdAndRoleNameManyToManyEdgeAssignmentsByRoleNameArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
 };
 
 export type AccountTranslation = Node & {
@@ -1092,6 +1190,106 @@ export enum AccountsOrderBy {
   ActiveDesc = 'ACTIVE_DESC',
   StripeConnectedAccountIdAsc = 'STRIPE_CONNECTED_ACCOUNT_ID_ASC',
   StripeConnectedAccountIdDesc = 'STRIPE_CONNECTED_ACCOUNT_ID_DESC',
+  TitleAsc = 'TITLE_ASC',
+  TitleDesc = 'TITLE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
+export type Assignment = Node & {
+  __typename?: 'Assignment';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
+  roleName: Scalars['String'];
+  visible: Scalars['Boolean'];
+  onChainRoleId: Scalars['BigFloat'];
+  /** Reads a single `Account` that is related to this `Assignment`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Assignment`. */
+  daoByDaoAddress?: Maybe<Dao>;
+  /** Reads a single `Role` that is related to this `Assignment`. */
+  roleByRoleName?: Maybe<Role>;
+};
+
+/**
+ * A condition to be used against `Assignment` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type AssignmentCondition = {
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `daoAddress` field. */
+  daoAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `roleName` field. */
+  roleName?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `visible` field. */
+  visible?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `onChainRoleId` field. */
+  onChainRoleId?: Maybe<Scalars['BigFloat']>;
+};
+
+/** An input for mutations affecting `Assignment` */
+export type AssignmentInput = {
+  createdAt?: Maybe<Scalars['Datetime']>;
+  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
+  roleName: Scalars['String'];
+  visible?: Maybe<Scalars['Boolean']>;
+  onChainRoleId: Scalars['BigFloat'];
+};
+
+/** Represents an update to a `Assignment`. Fields that are set will be updated. */
+export type AssignmentPatch = {
+  createdAt?: Maybe<Scalars['Datetime']>;
+  accountId?: Maybe<Scalars['UUID']>;
+  daoAddress?: Maybe<Scalars['String']>;
+  roleName?: Maybe<Scalars['String']>;
+  visible?: Maybe<Scalars['Boolean']>;
+  onChainRoleId?: Maybe<Scalars['BigFloat']>;
+};
+
+/** A connection to a list of `Assignment` values. */
+export type AssignmentsConnection = {
+  __typename?: 'AssignmentsConnection';
+  /** A list of `Assignment` objects. */
+  nodes: Array<Maybe<Assignment>>;
+  /** A list of edges which contains the `Assignment` and cursor to aid in pagination. */
+  edges: Array<AssignmentsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Assignment` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Assignment` edge in the connection. */
+export type AssignmentsEdge = {
+  __typename?: 'AssignmentsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Assignment` at the end of the edge. */
+  node?: Maybe<Assignment>;
+};
+
+/** Methods to use when ordering `Assignment`. */
+export enum AssignmentsOrderBy {
+  Natural = 'NATURAL',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
+  DaoAddressAsc = 'DAO_ADDRESS_ASC',
+  DaoAddressDesc = 'DAO_ADDRESS_DESC',
+  RoleNameAsc = 'ROLE_NAME_ASC',
+  RoleNameDesc = 'ROLE_NAME_DESC',
+  VisibleAsc = 'VISIBLE_ASC',
+  VisibleDesc = 'VISIBLE_DESC',
+  OnChainRoleIdAsc = 'ON_CHAIN_ROLE_ID_ASC',
+  OnChainRoleIdDesc = 'ON_CHAIN_ROLE_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -1165,6 +1363,45 @@ export type CreateAccountTranslationPayload = {
 /** The output of our create `AccountTranslation` mutation. */
 export type CreateAccountTranslationPayloadAccountTranslationEdgeArgs = {
   orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+};
+
+/** All input for the create `Assignment` mutation. */
+export type CreateAssignmentInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Assignment` to be created by this mutation. */
+  assignment: AssignmentInput;
+};
+
+/** The output of our create `Assignment` mutation. */
+export type CreateAssignmentPayload = {
+  __typename?: 'CreateAssignmentPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Assignment` that was created by this mutation. */
+  assignment?: Maybe<Assignment>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Assignment`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Assignment`. */
+  daoByDaoAddress?: Maybe<Dao>;
+  /** Reads a single `Role` that is related to this `Assignment`. */
+  roleByRoleName?: Maybe<Role>;
+  /** An edge for our `Assignment`. May be used by Relay 1. */
+  assignmentEdge?: Maybe<AssignmentsEdge>;
+};
+
+
+/** The output of our create `Assignment` mutation. */
+export type CreateAssignmentPayloadAssignmentEdgeArgs = {
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
 };
 
 /** All input for the create `CreditBatch` mutation. */
@@ -1272,6 +1509,39 @@ export type CreateCreditClassVersionPayload = {
 /** The output of our create `CreditClassVersion` mutation. */
 export type CreateCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
+};
+
+/** All input for the create `Dao` mutation. */
+export type CreateDaoInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Dao` to be created by this mutation. */
+  dao: DaoInput;
+};
+
+/** The output of our create `Dao` mutation. */
+export type CreateDaoPayload = {
+  __typename?: 'CreateDaoPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Dao` that was created by this mutation. */
+  dao?: Maybe<Dao>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Dao`. May be used by Relay 1. */
+  daoEdge?: Maybe<DaosEdge>;
+};
+
+
+/** The output of our create `Dao` mutation. */
+export type CreateDaoPayloadDaoEdgeArgs = {
+  orderBy?: Maybe<Array<DaosOrderBy>>;
 };
 
 /** All input for the create `Document` mutation. */
@@ -1470,8 +1740,8 @@ export type CreateOrganizationPayload = {
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `Organization`. */
-  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Organization`. */
+  daoByDaoAddress?: Maybe<Dao>;
   /** An edge for our `Organization`. May be used by Relay 1. */
   organizationEdge?: Maybe<OrganizationsEdge>;
 };
@@ -1480,6 +1750,43 @@ export type CreateOrganizationPayload = {
 /** The output of our create `Organization` mutation. */
 export type CreateOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+};
+
+/** All input for the create `OrganizationProject` mutation. */
+export type CreateOrganizationProjectInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationProject` to be created by this mutation. */
+  organizationProject: OrganizationProjectInput;
+};
+
+/** The output of our create `OrganizationProject` mutation. */
+export type CreateOrganizationProjectPayload = {
+  __typename?: 'CreateOrganizationProjectPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationProject` that was created by this mutation. */
+  organizationProject?: Maybe<OrganizationProject>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Organization` that is related to this `OrganizationProject`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** Reads a single `Project` that is related to this `OrganizationProject`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `OrganizationProject`. May be used by Relay 1. */
+  organizationProjectEdge?: Maybe<OrganizationProjectsEdge>;
+};
+
+
+/** The output of our create `OrganizationProject` mutation. */
+export type CreateOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
 /** All input for the create `Post` mutation. */
@@ -1622,6 +1929,8 @@ export type CreateProjectPayload = {
   accountByVerifierId?: Maybe<Account>;
   /** Reads a single `Account` that is related to this `Project`. */
   accountByAdminAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Project`. */
+  daoByAdminDaoAddress?: Maybe<Dao>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -1665,6 +1974,39 @@ export type CreateProjectTranslationPayload = {
 /** The output of our create `ProjectTranslation` mutation. */
 export type CreateProjectTranslationPayloadProjectTranslationEdgeArgs = {
   orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
+};
+
+/** All input for the create `Role` mutation. */
+export type CreateRoleInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Role` to be created by this mutation. */
+  role: RoleInput;
+};
+
+/** The output of our create `Role` mutation. */
+export type CreateRolePayload = {
+  __typename?: 'CreateRolePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Role` that was created by this mutation. */
+  role?: Maybe<Role>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Role`. May be used by Relay 1. */
+  roleEdge?: Maybe<RolesEdge>;
+};
+
+
+/** The output of our create `Role` mutation. */
+export type CreateRolePayloadRoleEdgeArgs = {
+  orderBy?: Maybe<Array<RolesOrderBy>>;
 };
 
 /** All input for the create `S3Deletion` mutation. */
@@ -2308,6 +2650,215 @@ export enum CreditClassesOrderBy {
 }
 
 
+export type Dao = Node & {
+  __typename?: 'Dao';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  address: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `Organization` that is related to this `Dao`. */
+  organizationByDaoAddress?: Maybe<Organization>;
+  /**
+   * Reads and enables pagination through a set of `Organization`.
+   * @deprecated Please use organizationByDaoAddress instead
+   */
+  organizationsByDaoAddress: OrganizationsConnection;
+  /** Reads a single `Project` that is related to this `Dao`. */
+  projectByAdminDaoAddress?: Maybe<Project>;
+  /**
+   * Reads and enables pagination through a set of `Project`.
+   * @deprecated Please use projectByAdminDaoAddress instead
+   */
+  projectsByAdminDaoAddress: ProjectsConnection;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByDaoAddress: AssignmentsConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByAssignmentDaoAddressAndAccountId: DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Role`. */
+  rolesByAssignmentDaoAddressAndRoleName: DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyConnection;
+};
+
+
+export type DaoOrganizationsByDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+  condition?: Maybe<OrganizationCondition>;
+};
+
+
+export type DaoProjectsByAdminDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type DaoAssignmentsByDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+
+export type DaoAccountsByAssignmentDaoAddressAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type DaoRolesByAssignmentDaoAddressAndRoleNameArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<RolesOrderBy>>;
+  condition?: Maybe<RoleCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `Assignment`. */
+export type DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection = {
+  __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Assignment`. */
+export type DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyEdge = {
+  __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByAccountId: AssignmentsConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Assignment`. */
+export type DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyEdgeAssignmentsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+/** A condition to be used against `Dao` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type DaoCondition = {
+  /** Checks for equality with the object’s `address` field. */
+  address?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `Dao` */
+export type DaoInput = {
+  address: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `Dao`. Fields that are set will be updated. */
+export type DaoPatch = {
+  address?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `Role` values, with data from `Assignment`. */
+export type DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyConnection = {
+  __typename?: 'DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyConnection';
+  /** A list of `Role` objects. */
+  nodes: Array<Maybe<Role>>;
+  /** A list of edges which contains the `Role`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Role` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Role` edge in the connection, with data from `Assignment`. */
+export type DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyEdge = {
+  __typename?: 'DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Role` at the end of the edge. */
+  node?: Maybe<Role>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByRoleName: AssignmentsConnection;
+};
+
+
+/** A `Role` edge in the connection, with data from `Assignment`. */
+export type DaoRolesByAssignmentDaoAddressAndRoleNameManyToManyEdgeAssignmentsByRoleNameArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+/** A connection to a list of `Dao` values. */
+export type DaosConnection = {
+  __typename?: 'DaosConnection';
+  /** A list of `Dao` objects. */
+  nodes: Array<Maybe<Dao>>;
+  /** A list of edges which contains the `Dao` and cursor to aid in pagination. */
+  edges: Array<DaosEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Dao` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Dao` edge in the connection. */
+export type DaosEdge = {
+  __typename?: 'DaosEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Dao` at the end of the edge. */
+  node?: Maybe<Dao>;
+};
+
+/** Methods to use when ordering `Dao`. */
+export enum DaosOrderBy {
+  Natural = 'NATURAL',
+  AddressAsc = 'ADDRESS_ASC',
+  AddressDesc = 'ADDRESS_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 
 /** All input for the `deleteAccountByAddr` mutation. */
 export type DeleteAccountByAddrInput = {
@@ -2420,6 +2971,58 @@ export type DeleteAccountTranslationPayload = {
 /** The output of our delete `AccountTranslation` mutation. */
 export type DeleteAccountTranslationPayloadAccountTranslationEdgeArgs = {
   orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+};
+
+/** All input for the `deleteAssignmentByAccountIdAndDaoAddressAndRoleName` mutation. */
+export type DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
+  roleName: Scalars['String'];
+};
+
+/** All input for the `deleteAssignment` mutation. */
+export type DeleteAssignmentInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Assignment` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Assignment` mutation. */
+export type DeleteAssignmentPayload = {
+  __typename?: 'DeleteAssignmentPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Assignment` that was deleted by this mutation. */
+  assignment?: Maybe<Assignment>;
+  deletedAssignmentId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Assignment`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Assignment`. */
+  daoByDaoAddress?: Maybe<Dao>;
+  /** Reads a single `Role` that is related to this `Assignment`. */
+  roleByRoleName?: Maybe<Role>;
+  /** An edge for our `Assignment`. May be used by Relay 1. */
+  assignmentEdge?: Maybe<AssignmentsEdge>;
+};
+
+
+/** The output of our delete `Assignment` mutation. */
+export type DeleteAssignmentPayloadAssignmentEdgeArgs = {
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
 };
 
 /** All input for the `deleteCreditBatchByBatchDenom` mutation. */
@@ -2591,6 +3194,50 @@ export type DeleteCreditClassVersionPayload = {
 /** The output of our delete `CreditClassVersion` mutation. */
 export type DeleteCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
+};
+
+/** All input for the `deleteDaoByAddress` mutation. */
+export type DeleteDaoByAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  address: Scalars['String'];
+};
+
+/** All input for the `deleteDao` mutation. */
+export type DeleteDaoInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Dao` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Dao` mutation. */
+export type DeleteDaoPayload = {
+  __typename?: 'DeleteDaoPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Dao` that was deleted by this mutation. */
+  dao?: Maybe<Dao>;
+  deletedDaoId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Dao`. May be used by Relay 1. */
+  daoEdge?: Maybe<DaosEdge>;
+};
+
+
+/** The output of our delete `Dao` mutation. */
+export type DeleteDaoPayloadDaoEdgeArgs = {
+  orderBy?: Maybe<Array<DaosOrderBy>>;
 };
 
 /** All input for the `deleteDocumentById` mutation. */
@@ -2833,14 +3480,14 @@ export type DeleteMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArg
   orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
 };
 
-/** All input for the `deleteOrganizationByAccountId` mutation. */
-export type DeleteOrganizationByAccountIdInput = {
+/** All input for the `deleteOrganizationByDaoAddress` mutation. */
+export type DeleteOrganizationByDaoAddressInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars['String']>;
-  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
 };
 
 /** All input for the `deleteOrganizationById` mutation. */
@@ -2877,8 +3524,8 @@ export type DeleteOrganizationPayload = {
   deletedOrganizationId?: Maybe<Scalars['ID']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `Organization`. */
-  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Organization`. */
+  daoByDaoAddress?: Maybe<Dao>;
   /** An edge for our `Organization`. May be used by Relay 1. */
   organizationEdge?: Maybe<OrganizationsEdge>;
 };
@@ -2887,6 +3534,55 @@ export type DeleteOrganizationPayload = {
 /** The output of our delete `Organization` mutation. */
 export type DeleteOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+};
+
+/** All input for the `deleteOrganizationProjectByOrganizationIdAndProjectId` mutation. */
+export type DeleteOrganizationProjectByOrganizationIdAndProjectIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+};
+
+/** All input for the `deleteOrganizationProject` mutation. */
+export type DeleteOrganizationProjectInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `OrganizationProject` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `OrganizationProject` mutation. */
+export type DeleteOrganizationProjectPayload = {
+  __typename?: 'DeleteOrganizationProjectPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationProject` that was deleted by this mutation. */
+  organizationProject?: Maybe<OrganizationProject>;
+  deletedOrganizationProjectId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Organization` that is related to this `OrganizationProject`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** Reads a single `Project` that is related to this `OrganizationProject`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `OrganizationProject`. May be used by Relay 1. */
+  organizationProjectEdge?: Maybe<OrganizationProjectsEdge>;
+};
+
+
+/** The output of our delete `OrganizationProject` mutation. */
+export type DeleteOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
 /** All input for the `deletePostByIri` mutation. */
@@ -2982,6 +3678,16 @@ export type DeletePostTranslationPayload = {
 /** The output of our delete `PostTranslation` mutation. */
 export type DeletePostTranslationPayloadPostTranslationEdgeArgs = {
   orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
+};
+
+/** All input for the `deleteProjectByAdminDaoAddress` mutation. */
+export type DeleteProjectByAdminDaoAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  adminDaoAddress: Scalars['String'];
 };
 
 /** All input for the `deleteProjectById` mutation. */
@@ -3095,6 +3801,8 @@ export type DeleteProjectPayload = {
   accountByVerifierId?: Maybe<Account>;
   /** Reads a single `Account` that is related to this `Project`. */
   accountByAdminAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Project`. */
+  daoByAdminDaoAddress?: Maybe<Dao>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -3150,6 +3858,50 @@ export type DeleteProjectTranslationPayload = {
 /** The output of our delete `ProjectTranslation` mutation. */
 export type DeleteProjectTranslationPayloadProjectTranslationEdgeArgs = {
   orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
+};
+
+/** All input for the `deleteRoleByName` mutation. */
+export type DeleteRoleByNameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+/** All input for the `deleteRole` mutation. */
+export type DeleteRoleInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Role` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Role` mutation. */
+export type DeleteRolePayload = {
+  __typename?: 'DeleteRolePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Role` that was deleted by this mutation. */
+  role?: Maybe<Role>;
+  deletedRoleId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Role`. May be used by Relay 1. */
+  roleEdge?: Maybe<RolesEdge>;
+};
+
+
+/** The output of our delete `Role` mutation. */
+export type DeleteRolePayloadRoleEdgeArgs = {
+  orderBy?: Maybe<Array<RolesOrderBy>>;
 };
 
 /** All input for the `deleteS3DeletionById` mutation. */
@@ -3900,12 +4652,16 @@ export type Mutation = {
   createAccount?: Maybe<CreateAccountPayload>;
   /** Creates a single `AccountTranslation`. */
   createAccountTranslation?: Maybe<CreateAccountTranslationPayload>;
+  /** Creates a single `Assignment`. */
+  createAssignment?: Maybe<CreateAssignmentPayload>;
   /** Creates a single `CreditBatch`. */
   createCreditBatch?: Maybe<CreateCreditBatchPayload>;
   /** Creates a single `CreditClass`. */
   createCreditClass?: Maybe<CreateCreditClassPayload>;
   /** Creates a single `CreditClassVersion`. */
   createCreditClassVersion?: Maybe<CreateCreditClassVersionPayload>;
+  /** Creates a single `Dao`. */
+  createDao?: Maybe<CreateDaoPayload>;
   /** Creates a single `Document`. */
   createDocument?: Maybe<CreateDocumentPayload>;
   /** Creates a single `DocumentTranslation`. */
@@ -3918,6 +4674,8 @@ export type Mutation = {
   createMetadataGraphTranslation?: Maybe<CreateMetadataGraphTranslationPayload>;
   /** Creates a single `Organization`. */
   createOrganization?: Maybe<CreateOrganizationPayload>;
+  /** Creates a single `OrganizationProject`. */
+  createOrganizationProject?: Maybe<CreateOrganizationProjectPayload>;
   /** Creates a single `Post`. */
   createPost?: Maybe<CreatePostPayload>;
   /** Creates a single `PostTranslation`. */
@@ -3928,6 +4686,8 @@ export type Mutation = {
   createProjectPartner?: Maybe<CreateProjectPartnerPayload>;
   /** Creates a single `ProjectTranslation`. */
   createProjectTranslation?: Maybe<CreateProjectTranslationPayload>;
+  /** Creates a single `Role`. */
+  createRole?: Maybe<CreateRolePayload>;
   /** Creates a single `S3Deletion`. */
   createS3Deletion?: Maybe<CreateS3DeletionPayload>;
   /** Creates a single `SellOrder`. */
@@ -3948,6 +4708,10 @@ export type Mutation = {
   updateAccountTranslation?: Maybe<UpdateAccountTranslationPayload>;
   /** Updates a single `AccountTranslation` using a unique key and a patch. */
   updateAccountTranslationByIdAndLanguageCode?: Maybe<UpdateAccountTranslationPayload>;
+  /** Updates a single `Assignment` using its globally unique id and a patch. */
+  updateAssignment?: Maybe<UpdateAssignmentPayload>;
+  /** Updates a single `Assignment` using a unique key and a patch. */
+  updateAssignmentByAccountIdAndDaoAddressAndRoleName?: Maybe<UpdateAssignmentPayload>;
   /** Updates a single `CreditBatch` using its globally unique id and a patch. */
   updateCreditBatch?: Maybe<UpdateCreditBatchPayload>;
   /** Updates a single `CreditBatch` using a unique key and a patch. */
@@ -3966,6 +4730,10 @@ export type Mutation = {
   updateCreditClassVersion?: Maybe<UpdateCreditClassVersionPayload>;
   /** Updates a single `CreditClassVersion` using a unique key and a patch. */
   updateCreditClassVersionByIdAndCreatedAt?: Maybe<UpdateCreditClassVersionPayload>;
+  /** Updates a single `Dao` using its globally unique id and a patch. */
+  updateDao?: Maybe<UpdateDaoPayload>;
+  /** Updates a single `Dao` using a unique key and a patch. */
+  updateDaoByAddress?: Maybe<UpdateDaoPayload>;
   /** Updates a single `Document` using its globally unique id and a patch. */
   updateDocument?: Maybe<UpdateDocumentPayload>;
   /** Updates a single `Document` using a unique key and a patch. */
@@ -3993,7 +4761,11 @@ export type Mutation = {
   /** Updates a single `Organization` using a unique key and a patch. */
   updateOrganizationById?: Maybe<UpdateOrganizationPayload>;
   /** Updates a single `Organization` using a unique key and a patch. */
-  updateOrganizationByAccountId?: Maybe<UpdateOrganizationPayload>;
+  updateOrganizationByDaoAddress?: Maybe<UpdateOrganizationPayload>;
+  /** Updates a single `OrganizationProject` using its globally unique id and a patch. */
+  updateOrganizationProject?: Maybe<UpdateOrganizationProjectPayload>;
+  /** Updates a single `OrganizationProject` using a unique key and a patch. */
+  updateOrganizationProjectByOrganizationIdAndProjectId?: Maybe<UpdateOrganizationProjectPayload>;
   /** Updates a single `Post` using its globally unique id and a patch. */
   updatePost?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
@@ -4010,6 +4782,8 @@ export type Mutation = {
   updateProjectBySlug?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
   updateProjectByOnChainId?: Maybe<UpdateProjectPayload>;
+  /** Updates a single `Project` using a unique key and a patch. */
+  updateProjectByAdminDaoAddress?: Maybe<UpdateProjectPayload>;
   /** Updates a single `ProjectPartner` using its globally unique id and a patch. */
   updateProjectPartner?: Maybe<UpdateProjectPartnerPayload>;
   /** Updates a single `ProjectPartner` using a unique key and a patch. */
@@ -4018,6 +4792,10 @@ export type Mutation = {
   updateProjectTranslation?: Maybe<UpdateProjectTranslationPayload>;
   /** Updates a single `ProjectTranslation` using a unique key and a patch. */
   updateProjectTranslationByIdAndLanguageCode?: Maybe<UpdateProjectTranslationPayload>;
+  /** Updates a single `Role` using its globally unique id and a patch. */
+  updateRole?: Maybe<UpdateRolePayload>;
+  /** Updates a single `Role` using a unique key and a patch. */
+  updateRoleByName?: Maybe<UpdateRolePayload>;
   /** Updates a single `S3Deletion` using its globally unique id and a patch. */
   updateS3Deletion?: Maybe<UpdateS3DeletionPayload>;
   /** Updates a single `S3Deletion` using a unique key and a patch. */
@@ -4048,6 +4826,10 @@ export type Mutation = {
   deleteAccountTranslation?: Maybe<DeleteAccountTranslationPayload>;
   /** Deletes a single `AccountTranslation` using a unique key. */
   deleteAccountTranslationByIdAndLanguageCode?: Maybe<DeleteAccountTranslationPayload>;
+  /** Deletes a single `Assignment` using its globally unique id. */
+  deleteAssignment?: Maybe<DeleteAssignmentPayload>;
+  /** Deletes a single `Assignment` using a unique key. */
+  deleteAssignmentByAccountIdAndDaoAddressAndRoleName?: Maybe<DeleteAssignmentPayload>;
   /** Deletes a single `CreditBatch` using its globally unique id. */
   deleteCreditBatch?: Maybe<DeleteCreditBatchPayload>;
   /** Deletes a single `CreditBatch` using a unique key. */
@@ -4066,6 +4848,10 @@ export type Mutation = {
   deleteCreditClassVersion?: Maybe<DeleteCreditClassVersionPayload>;
   /** Deletes a single `CreditClassVersion` using a unique key. */
   deleteCreditClassVersionByIdAndCreatedAt?: Maybe<DeleteCreditClassVersionPayload>;
+  /** Deletes a single `Dao` using its globally unique id. */
+  deleteDao?: Maybe<DeleteDaoPayload>;
+  /** Deletes a single `Dao` using a unique key. */
+  deleteDaoByAddress?: Maybe<DeleteDaoPayload>;
   /** Deletes a single `Document` using its globally unique id. */
   deleteDocument?: Maybe<DeleteDocumentPayload>;
   /** Deletes a single `Document` using a unique key. */
@@ -4093,7 +4879,11 @@ export type Mutation = {
   /** Deletes a single `Organization` using a unique key. */
   deleteOrganizationById?: Maybe<DeleteOrganizationPayload>;
   /** Deletes a single `Organization` using a unique key. */
-  deleteOrganizationByAccountId?: Maybe<DeleteOrganizationPayload>;
+  deleteOrganizationByDaoAddress?: Maybe<DeleteOrganizationPayload>;
+  /** Deletes a single `OrganizationProject` using its globally unique id. */
+  deleteOrganizationProject?: Maybe<DeleteOrganizationProjectPayload>;
+  /** Deletes a single `OrganizationProject` using a unique key. */
+  deleteOrganizationProjectByOrganizationIdAndProjectId?: Maybe<DeleteOrganizationProjectPayload>;
   /** Deletes a single `Post` using its globally unique id. */
   deletePost?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
@@ -4110,6 +4900,8 @@ export type Mutation = {
   deleteProjectBySlug?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
   deleteProjectByOnChainId?: Maybe<DeleteProjectPayload>;
+  /** Deletes a single `Project` using a unique key. */
+  deleteProjectByAdminDaoAddress?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `ProjectPartner` using its globally unique id. */
   deleteProjectPartner?: Maybe<DeleteProjectPartnerPayload>;
   /** Deletes a single `ProjectPartner` using a unique key. */
@@ -4118,6 +4910,10 @@ export type Mutation = {
   deleteProjectTranslation?: Maybe<DeleteProjectTranslationPayload>;
   /** Deletes a single `ProjectTranslation` using a unique key. */
   deleteProjectTranslationByIdAndLanguageCode?: Maybe<DeleteProjectTranslationPayload>;
+  /** Deletes a single `Role` using its globally unique id. */
+  deleteRole?: Maybe<DeleteRolePayload>;
+  /** Deletes a single `Role` using a unique key. */
+  deleteRoleByName?: Maybe<DeleteRolePayload>;
   /** Deletes a single `S3Deletion` using its globally unique id. */
   deleteS3Deletion?: Maybe<DeleteS3DeletionPayload>;
   /** Deletes a single `S3Deletion` using a unique key. */
@@ -4152,6 +4948,12 @@ export type MutationCreateAccountTranslationArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateAssignmentArgs = {
+  input: CreateAssignmentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateCreditBatchArgs = {
   input: CreateCreditBatchInput;
 };
@@ -4166,6 +4968,12 @@ export type MutationCreateCreditClassArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateCreditClassVersionArgs = {
   input: CreateCreditClassVersionInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateDaoArgs = {
+  input: CreateDaoInput;
 };
 
 
@@ -4206,6 +5014,12 @@ export type MutationCreateOrganizationArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateOrganizationProjectArgs = {
+  input: CreateOrganizationProjectInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreatePostArgs = {
   input: CreatePostInput;
 };
@@ -4232,6 +5046,12 @@ export type MutationCreateProjectPartnerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateProjectTranslationArgs = {
   input: CreateProjectTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateRoleArgs = {
+  input: CreateRoleInput;
 };
 
 
@@ -4296,6 +5116,18 @@ export type MutationUpdateAccountTranslationByIdAndLanguageCodeArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAssignmentArgs = {
+  input: UpdateAssignmentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAssignmentByAccountIdAndDaoAddressAndRoleNameArgs = {
+  input: UpdateAssignmentByAccountIdAndDaoAddressAndRoleNameInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditBatchArgs = {
   input: UpdateCreditBatchInput;
 };
@@ -4346,6 +5178,18 @@ export type MutationUpdateCreditClassVersionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditClassVersionByIdAndCreatedAtArgs = {
   input: UpdateCreditClassVersionByIdAndCreatedAtInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDaoArgs = {
+  input: UpdateDaoInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDaoByAddressArgs = {
+  input: UpdateDaoByAddressInput;
 };
 
 
@@ -4428,8 +5272,20 @@ export type MutationUpdateOrganizationByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateOrganizationByAccountIdArgs = {
-  input: UpdateOrganizationByAccountIdInput;
+export type MutationUpdateOrganizationByDaoAddressArgs = {
+  input: UpdateOrganizationByDaoAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrganizationProjectArgs = {
+  input: UpdateOrganizationProjectInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrganizationProjectByOrganizationIdAndProjectIdArgs = {
+  input: UpdateOrganizationProjectByOrganizationIdAndProjectIdInput;
 };
 
 
@@ -4482,6 +5338,12 @@ export type MutationUpdateProjectByOnChainIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectByAdminDaoAddressArgs = {
+  input: UpdateProjectByAdminDaoAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectPartnerArgs = {
   input: UpdateProjectPartnerInput;
 };
@@ -4502,6 +5364,18 @@ export type MutationUpdateProjectTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectTranslationByIdAndLanguageCodeArgs = {
   input: UpdateProjectTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRoleArgs = {
+  input: UpdateRoleInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRoleByNameArgs = {
+  input: UpdateRoleByNameInput;
 };
 
 
@@ -4596,6 +5470,18 @@ export type MutationDeleteAccountTranslationByIdAndLanguageCodeArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAssignmentArgs = {
+  input: DeleteAssignmentInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAssignmentByAccountIdAndDaoAddressAndRoleNameArgs = {
+  input: DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditBatchArgs = {
   input: DeleteCreditBatchInput;
 };
@@ -4646,6 +5532,18 @@ export type MutationDeleteCreditClassVersionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditClassVersionByIdAndCreatedAtArgs = {
   input: DeleteCreditClassVersionByIdAndCreatedAtInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDaoArgs = {
+  input: DeleteDaoInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDaoByAddressArgs = {
+  input: DeleteDaoByAddressInput;
 };
 
 
@@ -4728,8 +5626,20 @@ export type MutationDeleteOrganizationByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteOrganizationByAccountIdArgs = {
-  input: DeleteOrganizationByAccountIdInput;
+export type MutationDeleteOrganizationByDaoAddressArgs = {
+  input: DeleteOrganizationByDaoAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrganizationProjectArgs = {
+  input: DeleteOrganizationProjectInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrganizationProjectByOrganizationIdAndProjectIdArgs = {
+  input: DeleteOrganizationProjectByOrganizationIdAndProjectIdInput;
 };
 
 
@@ -4782,6 +5692,12 @@ export type MutationDeleteProjectByOnChainIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectByAdminDaoAddressArgs = {
+  input: DeleteProjectByAdminDaoAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectPartnerArgs = {
   input: DeleteProjectPartnerInput;
 };
@@ -4802,6 +5718,18 @@ export type MutationDeleteProjectTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectTranslationByIdAndLanguageCodeArgs = {
   input: DeleteProjectTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRoleArgs = {
+  input: DeleteRoleInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRoleByNameArgs = {
+  input: DeleteRoleByNameInput;
 };
 
 
@@ -4871,10 +5799,44 @@ export type Organization = Node & {
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
-  accountId: Scalars['UUID'];
   legalName: Scalars['String'];
-  /** Reads a single `Account` that is related to this `Organization`. */
-  accountByAccountId?: Maybe<Account>;
+  daoAddress: Scalars['String'];
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
+  linkedinLink?: Maybe<Scalars['String']>;
+  /** Reads a single `Dao` that is related to this `Organization`. */
+  daoByDaoAddress?: Maybe<Dao>;
+  /** Reads and enables pagination through a set of `OrganizationProject`. */
+  organizationProjectsByOrganizationId: OrganizationProjectsConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByOrganizationProjectOrganizationIdAndProjectId: OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection;
+};
+
+
+export type OrganizationOrganizationProjectsByOrganizationIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
+  condition?: Maybe<OrganizationProjectCondition>;
+};
+
+
+export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /**
@@ -4888,10 +5850,24 @@ export type OrganizationCondition = {
   createdAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `accountId` field. */
-  accountId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `legalName` field. */
   legalName?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `daoAddress` field. */
+  daoAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `description` field. */
+  description?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `image` field. */
+  image?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `bgImage` field. */
+  bgImage?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `twitterLink` field. */
+  twitterLink?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `websiteLink` field. */
+  websiteLink?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `linkedinLink` field. */
+  linkedinLink?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `Organization` */
@@ -4899,8 +5875,15 @@ export type OrganizationInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
-  accountId: Scalars['UUID'];
   legalName?: Maybe<Scalars['String']>;
+  daoAddress: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
+  linkedinLink?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Organization`. Fields that are set will be updated. */
@@ -4908,9 +5891,114 @@ export type OrganizationPatch = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
-  accountId?: Maybe<Scalars['UUID']>;
   legalName?: Maybe<Scalars['String']>;
+  daoAddress?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  bgImage?: Maybe<Scalars['String']>;
+  twitterLink?: Maybe<Scalars['String']>;
+  websiteLink?: Maybe<Scalars['String']>;
+  linkedinLink?: Maybe<Scalars['String']>;
 };
+
+export type OrganizationProject = Node & {
+  __typename?: 'OrganizationProject';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+  /** Reads a single `Organization` that is related to this `OrganizationProject`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** Reads a single `Project` that is related to this `OrganizationProject`. */
+  projectByProjectId?: Maybe<Project>;
+};
+
+/**
+ * A condition to be used against `OrganizationProject` object types. All fields
+ * are tested for equality and combined with a logical ‘and.’
+ */
+export type OrganizationProjectCondition = {
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `organizationId` field. */
+  organizationId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+};
+
+/** An input for mutations affecting `OrganizationProject` */
+export type OrganizationProjectInput = {
+  createdAt?: Maybe<Scalars['Datetime']>;
+  organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+};
+
+/** Represents an update to a `OrganizationProject`. Fields that are set will be updated. */
+export type OrganizationProjectPatch = {
+  createdAt?: Maybe<Scalars['Datetime']>;
+  organizationId?: Maybe<Scalars['UUID']>;
+  projectId?: Maybe<Scalars['UUID']>;
+};
+
+/** A connection to a list of `Project` values, with data from `OrganizationProject`. */
+export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection = {
+  __typename?: 'OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `OrganizationProject`, and the cursor to aid in pagination. */
+  edges: Array<OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `OrganizationProject`. */
+export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge = {
+  __typename?: 'OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `OrganizationProject` values. */
+export type OrganizationProjectsConnection = {
+  __typename?: 'OrganizationProjectsConnection';
+  /** A list of `OrganizationProject` objects. */
+  nodes: Array<Maybe<OrganizationProject>>;
+  /** A list of edges which contains the `OrganizationProject` and cursor to aid in pagination. */
+  edges: Array<OrganizationProjectsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `OrganizationProject` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `OrganizationProject` edge in the connection. */
+export type OrganizationProjectsEdge = {
+  __typename?: 'OrganizationProjectsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `OrganizationProject` at the end of the edge. */
+  node?: Maybe<OrganizationProject>;
+};
+
+/** Methods to use when ordering `OrganizationProject`. */
+export enum OrganizationProjectsOrderBy {
+  Natural = 'NATURAL',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  OrganizationIdAsc = 'ORGANIZATION_ID_ASC',
+  OrganizationIdDesc = 'ORGANIZATION_ID_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** A connection to a list of `Organization` values. */
 export type OrganizationsConnection = {
@@ -4943,10 +6031,24 @@ export enum OrganizationsOrderBy {
   CreatedAtDesc = 'CREATED_AT_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
-  AccountIdAsc = 'ACCOUNT_ID_ASC',
-  AccountIdDesc = 'ACCOUNT_ID_DESC',
   LegalNameAsc = 'LEGAL_NAME_ASC',
   LegalNameDesc = 'LEGAL_NAME_DESC',
+  DaoAddressAsc = 'DAO_ADDRESS_ASC',
+  DaoAddressDesc = 'DAO_ADDRESS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  DescriptionAsc = 'DESCRIPTION_ASC',
+  DescriptionDesc = 'DESCRIPTION_DESC',
+  ImageAsc = 'IMAGE_ASC',
+  ImageDesc = 'IMAGE_DESC',
+  BgImageAsc = 'BG_IMAGE_ASC',
+  BgImageDesc = 'BG_IMAGE_DESC',
+  TwitterLinkAsc = 'TWITTER_LINK_ASC',
+  TwitterLinkDesc = 'TWITTER_LINK_DESC',
+  WebsiteLinkAsc = 'WEBSITE_LINK_ASC',
+  WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
+  LinkedinLinkAsc = 'LINKEDIN_LINK_ASC',
+  LinkedinLinkDesc = 'LINKEDIN_LINK_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -4977,6 +6079,7 @@ export type Post = Node & {
   contents: Scalars['JSON'];
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  canDownloadFiles: Scalars['Boolean'];
   /** Reads a single `Account` that is related to this `Post`. */
   accountByCreatorAccountId?: Maybe<Account>;
   /** Reads a single `Project` that is related to this `Post`. */
@@ -5016,6 +6119,8 @@ export type PostCondition = {
   published?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `canDownloadFiles` field. */
+  canDownloadFiles?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Post` object types. All fields are combined with a logical ‘and.’ */
@@ -5040,6 +6145,7 @@ export type PostInput = {
   contents: Scalars['JSON'];
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  canDownloadFiles?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Post`. Fields that are set will be updated. */
@@ -5052,6 +6158,7 @@ export type PostPatch = {
   contents?: Maybe<Scalars['JSON']>;
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  canDownloadFiles?: Maybe<Scalars['Boolean']>;
 };
 
 /**
@@ -5200,6 +6307,8 @@ export enum PostsOrderBy {
   PublishedDesc = 'PUBLISHED_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
+  CanDownloadFilesAsc = 'CAN_DOWNLOAD_FILES_ASC',
+  CanDownloadFilesDesc = 'CAN_DOWNLOAD_FILES_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5220,6 +6329,7 @@ export type Project = Node & {
   approved?: Maybe<Scalars['Boolean']>;
   published?: Maybe<Scalars['Boolean']>;
   adminAccountId?: Maybe<Scalars['UUID']>;
+  adminDaoAddress?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `Project`. */
   accountByDeveloperId?: Maybe<Account>;
   /** Reads a single `CreditClass` that is related to this `Project`. */
@@ -5228,6 +6338,8 @@ export type Project = Node & {
   accountByVerifierId?: Maybe<Account>;
   /** Reads a single `Account` that is related to this `Project`. */
   accountByAdminAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Project`. */
+  daoByAdminDaoAddress?: Maybe<Dao>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   creditBatchesByProjectId: CreditBatchesConnection;
   /** Reads and enables pagination through a set of `Document`. */
@@ -5242,6 +6354,8 @@ export type Project = Node & {
   projectTranslationsById: ProjectTranslationsConnection;
   /** Reads and enables pagination through a set of `SellOrder`. */
   sellOrdersByProjectId: SellOrdersConnection;
+  /** Reads and enables pagination through a set of `OrganizationProject`. */
+  organizationProjectsByProjectId: OrganizationProjectsConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByUploadProjectIdAndAccountId: ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -5250,6 +6364,8 @@ export type Project = Node & {
   accountsByProjectPartnerProjectIdAndAccountId: ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsBySellOrderProjectIdAndSellerAccountId: ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Organization`. */
+  organizationsByOrganizationProjectProjectIdAndOrganizationId: ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection;
 };
 
 
@@ -5333,6 +6449,17 @@ export type ProjectSellOrdersByProjectIdArgs = {
 };
 
 
+export type ProjectOrganizationProjectsByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
+  condition?: Maybe<OrganizationProjectCondition>;
+};
+
+
 export type ProjectAccountsByUploadProjectIdAndAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -5374,6 +6501,17 @@ export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
+};
+
+
+export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+  condition?: Maybe<OrganizationCondition>;
 };
 
 /** A connection to a list of `Account` values, with data from `Post`. */
@@ -5533,6 +6671,8 @@ export type ProjectCondition = {
   published?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `adminAccountId` field. */
   adminAccountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `adminDaoAddress` field. */
+  adminDaoAddress?: Maybe<Scalars['String']>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -5561,6 +6701,30 @@ export type ProjectInput = {
   approved?: Maybe<Scalars['Boolean']>;
   published?: Maybe<Scalars['Boolean']>;
   adminAccountId?: Maybe<Scalars['UUID']>;
+  adminDaoAddress?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Organization` values, with data from `OrganizationProject`. */
+export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection = {
+  __typename?: 'ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection';
+  /** A list of `Organization` objects. */
+  nodes: Array<Maybe<Organization>>;
+  /** A list of edges which contains the `Organization`, info from the `OrganizationProject`, and the cursor to aid in pagination. */
+  edges: Array<ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Organization` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Organization` edge in the connection, with data from `OrganizationProject`. */
+export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge = {
+  __typename?: 'ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Organization` at the end of the edge. */
+  node?: Maybe<Organization>;
+  createdAt?: Maybe<Scalars['Datetime']>;
 };
 
 export type ProjectPartner = Node & {
@@ -5645,6 +6809,7 @@ export type ProjectPatch = {
   approved?: Maybe<Scalars['Boolean']>;
   published?: Maybe<Scalars['Boolean']>;
   adminAccountId?: Maybe<Scalars['UUID']>;
+  adminDaoAddress?: Maybe<Scalars['String']>;
 };
 
 export type ProjectTranslation = Node & {
@@ -5788,6 +6953,8 @@ export enum ProjectsOrderBy {
   PublishedDesc = 'PUBLISHED_DESC',
   AdminAccountIdAsc = 'ADMIN_ACCOUNT_ID_ASC',
   AdminAccountIdDesc = 'ADMIN_ACCOUNT_ID_DESC',
+  AdminDaoAddressAsc = 'ADMIN_DAO_ADDRESS_ASC',
+  AdminDaoAddressDesc = 'ADMIN_DAO_ADDRESS_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5808,12 +6975,16 @@ export type Query = Node & {
   allAccounts?: Maybe<AccountsConnection>;
   /** Reads and enables pagination through a set of `AccountTranslation`. */
   allAccountTranslations?: Maybe<AccountTranslationsConnection>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  allAssignments?: Maybe<AssignmentsConnection>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   allCreditBatches?: Maybe<CreditBatchesConnection>;
   /** Reads and enables pagination through a set of `CreditClass`. */
   allCreditClasses?: Maybe<CreditClassesConnection>;
   /** Reads and enables pagination through a set of `CreditClassVersion`. */
   allCreditClassVersions?: Maybe<CreditClassVersionsConnection>;
+  /** Reads and enables pagination through a set of `Dao`. */
+  allDaos?: Maybe<DaosConnection>;
   /** Reads and enables pagination through a set of `Document`. */
   allDocuments?: Maybe<DocumentsConnection>;
   /** Reads and enables pagination through a set of `DocumentTranslation`. */
@@ -5826,6 +6997,8 @@ export type Query = Node & {
   allMetadataGraphTranslations?: Maybe<MetadataGraphTranslationsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
   allOrganizations?: Maybe<OrganizationsConnection>;
+  /** Reads and enables pagination through a set of `OrganizationProject`. */
+  allOrganizationProjects?: Maybe<OrganizationProjectsConnection>;
   /** Reads and enables pagination through a set of `Post`. */
   allPosts?: Maybe<PostsConnection>;
   /** Reads and enables pagination through a set of `PostTranslation`. */
@@ -5836,6 +7009,8 @@ export type Query = Node & {
   allProjectPartners?: Maybe<ProjectPartnersConnection>;
   /** Reads and enables pagination through a set of `ProjectTranslation`. */
   allProjectTranslations?: Maybe<ProjectTranslationsConnection>;
+  /** Reads and enables pagination through a set of `Role`. */
+  allRoles?: Maybe<RolesConnection>;
   /** Reads and enables pagination through a set of `S3Deletion`. */
   allS3Deletions?: Maybe<S3DeletionsConnection>;
   /** Reads and enables pagination through a set of `SellOrder`. */
@@ -5848,12 +7023,14 @@ export type Query = Node & {
   accountByAddr?: Maybe<Account>;
   accountByCustodialAddress?: Maybe<Account>;
   accountTranslationByIdAndLanguageCode?: Maybe<AccountTranslation>;
+  assignmentByAccountIdAndDaoAddressAndRoleName?: Maybe<Assignment>;
   creditBatchById?: Maybe<CreditBatch>;
   creditBatchByBatchDenom?: Maybe<CreditBatch>;
   creditClassById?: Maybe<CreditClass>;
   creditClassByUri?: Maybe<CreditClass>;
   creditClassByOnChainId?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
+  daoByAddress?: Maybe<Dao>;
   documentById?: Maybe<Document>;
   documentTranslationByIdAndLanguageCode?: Maybe<DocumentTranslation>;
   fiatOrderById?: Maybe<FiatOrder>;
@@ -5861,14 +7038,17 @@ export type Query = Node & {
   metadataGraphByIri?: Maybe<MetadataGraph>;
   metadataGraphTranslationByIriAndLanguageCode?: Maybe<MetadataGraphTranslation>;
   organizationById?: Maybe<Organization>;
-  organizationByAccountId?: Maybe<Organization>;
+  organizationByDaoAddress?: Maybe<Organization>;
+  organizationProjectByOrganizationIdAndProjectId?: Maybe<OrganizationProject>;
   postByIri?: Maybe<Post>;
   postTranslationByIriAndLanguageCode?: Maybe<PostTranslation>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
+  projectByAdminDaoAddress?: Maybe<Project>;
   projectPartnerByProjectIdAndAccountId?: Maybe<ProjectPartner>;
   projectTranslationByIdAndLanguageCode?: Maybe<ProjectTranslation>;
+  roleByName?: Maybe<Role>;
   s3DeletionById?: Maybe<S3Deletion>;
   sellOrderByOnChainId?: Maybe<SellOrder>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
@@ -5883,12 +7063,16 @@ export type Query = Node & {
   account?: Maybe<Account>;
   /** Reads a single `AccountTranslation` using its globally unique `ID`. */
   accountTranslation?: Maybe<AccountTranslation>;
+  /** Reads a single `Assignment` using its globally unique `ID`. */
+  assignment?: Maybe<Assignment>;
   /** Reads a single `CreditBatch` using its globally unique `ID`. */
   creditBatch?: Maybe<CreditBatch>;
   /** Reads a single `CreditClass` using its globally unique `ID`. */
   creditClass?: Maybe<CreditClass>;
   /** Reads a single `CreditClassVersion` using its globally unique `ID`. */
   creditClassVersion?: Maybe<CreditClassVersion>;
+  /** Reads a single `Dao` using its globally unique `ID`. */
+  dao?: Maybe<Dao>;
   /** Reads a single `Document` using its globally unique `ID`. */
   document?: Maybe<Document>;
   /** Reads a single `DocumentTranslation` using its globally unique `ID`. */
@@ -5901,6 +7085,8 @@ export type Query = Node & {
   metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
   /** Reads a single `Organization` using its globally unique `ID`. */
   organization?: Maybe<Organization>;
+  /** Reads a single `OrganizationProject` using its globally unique `ID`. */
+  organizationProject?: Maybe<OrganizationProject>;
   /** Reads a single `Post` using its globally unique `ID`. */
   post?: Maybe<Post>;
   /** Reads a single `PostTranslation` using its globally unique `ID`. */
@@ -5911,6 +7097,8 @@ export type Query = Node & {
   projectPartner?: Maybe<ProjectPartner>;
   /** Reads a single `ProjectTranslation` using its globally unique `ID`. */
   projectTranslation?: Maybe<ProjectTranslation>;
+  /** Reads a single `Role` using its globally unique `ID`. */
+  role?: Maybe<Role>;
   /** Reads a single `S3Deletion` using its globally unique `ID`. */
   s3Deletion?: Maybe<S3Deletion>;
   /** Reads a single `SellOrder` using its globally unique `ID`. */
@@ -5953,6 +7141,18 @@ export type QueryAllAccountTranslationsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllAssignmentsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllCreditBatchesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -5987,6 +7187,18 @@ export type QueryAllCreditClassVersionsArgs = {
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
   condition?: Maybe<CreditClassVersionCondition>;
   filter?: Maybe<CreditClassVersionFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllDaosArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DaosOrderBy>>;
+  condition?: Maybe<DaoCondition>;
 };
 
 
@@ -6065,6 +7277,18 @@ export type QueryAllOrganizationsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllOrganizationProjectsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
+  condition?: Maybe<OrganizationProjectCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllPostsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -6125,6 +7349,18 @@ export type QueryAllProjectTranslationsArgs = {
   orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
   condition?: Maybe<ProjectTranslationCondition>;
   filter?: Maybe<ProjectTranslationFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllRolesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<RolesOrderBy>>;
+  condition?: Maybe<RoleCondition>;
 };
 
 
@@ -6203,6 +7439,14 @@ export type QueryAccountTranslationByIdAndLanguageCodeArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAssignmentByAccountIdAndDaoAddressAndRoleNameArgs = {
+  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
+  roleName: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryCreditBatchByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -6236,6 +7480,12 @@ export type QueryCreditClassByOnChainIdArgs = {
 export type QueryCreditClassVersionByIdAndCreatedAtArgs = {
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryDaoByAddressArgs = {
+  address: Scalars['String'];
 };
 
 
@@ -6284,8 +7534,15 @@ export type QueryOrganizationByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryOrganizationByAccountIdArgs = {
-  accountId: Scalars['UUID'];
+export type QueryOrganizationByDaoAddressArgs = {
+  daoAddress: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryOrganizationProjectByOrganizationIdAndProjectIdArgs = {
+  organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
 };
 
 
@@ -6321,6 +7578,12 @@ export type QueryProjectByOnChainIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryProjectByAdminDaoAddressArgs = {
+  adminDaoAddress: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectPartnerByProjectIdAndAccountIdArgs = {
   projectId: Scalars['UUID'];
   accountId: Scalars['UUID'];
@@ -6331,6 +7594,12 @@ export type QueryProjectPartnerByProjectIdAndAccountIdArgs = {
 export type QueryProjectTranslationByIdAndLanguageCodeArgs = {
   id: Scalars['UUID'];
   languageCode: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRoleByNameArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -6400,6 +7669,12 @@ export type QueryAccountTranslationArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAssignmentArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryCreditBatchArgs = {
   nodeId: Scalars['ID'];
 };
@@ -6413,6 +7688,12 @@ export type QueryCreditClassArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryCreditClassVersionArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryDaoArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -6454,6 +7735,12 @@ export type QueryOrganizationArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryOrganizationProjectArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryPostArgs = {
   nodeId: Scalars['ID'];
 };
@@ -6484,6 +7771,12 @@ export type QueryProjectTranslationArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryRoleArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryS3DeletionArgs = {
   nodeId: Scalars['ID'];
 };
@@ -6505,6 +7798,178 @@ export type QueryShaclGraphArgs = {
 export type QueryUploadArgs = {
   nodeId: Scalars['ID'];
 };
+
+export type Role = Node & {
+  __typename?: 'Role';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  name: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByRoleName: AssignmentsConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByAssignmentRoleNameAndAccountId: RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Dao`. */
+  daosByAssignmentRoleNameAndDaoAddress: RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyConnection;
+};
+
+
+export type RoleAssignmentsByRoleNameArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+
+export type RoleAccountsByAssignmentRoleNameAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type RoleDaosByAssignmentRoleNameAndDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DaosOrderBy>>;
+  condition?: Maybe<DaoCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `Assignment`. */
+export type RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyConnection = {
+  __typename?: 'RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Assignment`. */
+export type RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyEdge = {
+  __typename?: 'RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByAccountId: AssignmentsConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Assignment`. */
+export type RoleAccountsByAssignmentRoleNameAndAccountIdManyToManyEdgeAssignmentsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+/** A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type RoleCondition = {
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `Dao` values, with data from `Assignment`. */
+export type RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyConnection = {
+  __typename?: 'RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyConnection';
+  /** A list of `Dao` objects. */
+  nodes: Array<Maybe<Dao>>;
+  /** A list of edges which contains the `Dao`, info from the `Assignment`, and the cursor to aid in pagination. */
+  edges: Array<RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Dao` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Dao` edge in the connection, with data from `Assignment`. */
+export type RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyEdge = {
+  __typename?: 'RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Dao` at the end of the edge. */
+  node?: Maybe<Dao>;
+  /** Reads and enables pagination through a set of `Assignment`. */
+  assignmentsByDaoAddress: AssignmentsConnection;
+};
+
+
+/** A `Dao` edge in the connection, with data from `Assignment`. */
+export type RoleDaosByAssignmentRoleNameAndDaoAddressManyToManyEdgeAssignmentsByDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+  condition?: Maybe<AssignmentCondition>;
+};
+
+/** An input for mutations affecting `Role` */
+export type RoleInput = {
+  name: Scalars['String'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `Role`. Fields that are set will be updated. */
+export type RolePatch = {
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `Role` values. */
+export type RolesConnection = {
+  __typename?: 'RolesConnection';
+  /** A list of `Role` objects. */
+  nodes: Array<Maybe<Role>>;
+  /** A list of edges which contains the `Role` and cursor to aid in pagination. */
+  edges: Array<RolesEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Role` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Role` edge in the connection. */
+export type RolesEdge = {
+  __typename?: 'RolesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Role` at the end of the edge. */
+  node?: Maybe<Role>;
+};
+
+/** Methods to use when ordering `Role`. */
+export enum RolesOrderBy {
+  Natural = 'NATURAL',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** Table serving as a FIFO queue for files to be deleted from AWS S3. */
 export type S3Deletion = Node & {
@@ -6895,6 +8360,61 @@ export type UpdateAccountTranslationPayloadAccountTranslationEdgeArgs = {
   orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
 };
 
+/** All input for the `updateAssignmentByAccountIdAndDaoAddressAndRoleName` mutation. */
+export type UpdateAssignmentByAccountIdAndDaoAddressAndRoleNameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Assignment` being updated. */
+  assignmentPatch: AssignmentPatch;
+  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
+  roleName: Scalars['String'];
+};
+
+/** All input for the `updateAssignment` mutation. */
+export type UpdateAssignmentInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Assignment` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Assignment` being updated. */
+  assignmentPatch: AssignmentPatch;
+};
+
+/** The output of our update `Assignment` mutation. */
+export type UpdateAssignmentPayload = {
+  __typename?: 'UpdateAssignmentPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Assignment` that was updated by this mutation. */
+  assignment?: Maybe<Assignment>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `Assignment`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Assignment`. */
+  daoByDaoAddress?: Maybe<Dao>;
+  /** Reads a single `Role` that is related to this `Assignment`. */
+  roleByRoleName?: Maybe<Role>;
+  /** An edge for our `Assignment`. May be used by Relay 1. */
+  assignmentEdge?: Maybe<AssignmentsEdge>;
+};
+
+
+/** The output of our update `Assignment` mutation. */
+export type UpdateAssignmentPayloadAssignmentEdgeArgs = {
+  orderBy?: Maybe<Array<AssignmentsOrderBy>>;
+};
+
 /** All input for the `updateCreditBatchByBatchDenom` mutation. */
 export type UpdateCreditBatchByBatchDenomInput = {
   /**
@@ -7079,6 +8599,53 @@ export type UpdateCreditClassVersionPayload = {
 /** The output of our update `CreditClassVersion` mutation. */
 export type UpdateCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
+};
+
+/** All input for the `updateDaoByAddress` mutation. */
+export type UpdateDaoByAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Dao` being updated. */
+  daoPatch: DaoPatch;
+  address: Scalars['String'];
+};
+
+/** All input for the `updateDao` mutation. */
+export type UpdateDaoInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Dao` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Dao` being updated. */
+  daoPatch: DaoPatch;
+};
+
+/** The output of our update `Dao` mutation. */
+export type UpdateDaoPayload = {
+  __typename?: 'UpdateDaoPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Dao` that was updated by this mutation. */
+  dao?: Maybe<Dao>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Dao`. May be used by Relay 1. */
+  daoEdge?: Maybe<DaosEdge>;
+};
+
+
+/** The output of our update `Dao` mutation. */
+export type UpdateDaoPayloadDaoEdgeArgs = {
+  orderBy?: Maybe<Array<DaosOrderBy>>;
 };
 
 /** All input for the `updateDocumentById` mutation. */
@@ -7338,8 +8905,8 @@ export type UpdateMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArg
   orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
 };
 
-/** All input for the `updateOrganizationByAccountId` mutation. */
-export type UpdateOrganizationByAccountIdInput = {
+/** All input for the `updateOrganizationByDaoAddress` mutation. */
+export type UpdateOrganizationByDaoAddressInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
@@ -7347,7 +8914,7 @@ export type UpdateOrganizationByAccountIdInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Organization` being updated. */
   organizationPatch: OrganizationPatch;
-  accountId: Scalars['UUID'];
+  daoAddress: Scalars['String'];
 };
 
 /** All input for the `updateOrganizationById` mutation. */
@@ -7387,8 +8954,8 @@ export type UpdateOrganizationPayload = {
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `Organization`. */
-  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Organization`. */
+  daoByDaoAddress?: Maybe<Dao>;
   /** An edge for our `Organization`. May be used by Relay 1. */
   organizationEdge?: Maybe<OrganizationsEdge>;
 };
@@ -7397,6 +8964,58 @@ export type UpdateOrganizationPayload = {
 /** The output of our update `Organization` mutation. */
 export type UpdateOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+};
+
+/** All input for the `updateOrganizationProjectByOrganizationIdAndProjectId` mutation. */
+export type UpdateOrganizationProjectByOrganizationIdAndProjectIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `OrganizationProject` being updated. */
+  organizationProjectPatch: OrganizationProjectPatch;
+  organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+};
+
+/** All input for the `updateOrganizationProject` mutation. */
+export type UpdateOrganizationProjectInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `OrganizationProject` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `OrganizationProject` being updated. */
+  organizationProjectPatch: OrganizationProjectPatch;
+};
+
+/** The output of our update `OrganizationProject` mutation. */
+export type UpdateOrganizationProjectPayload = {
+  __typename?: 'UpdateOrganizationProjectPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationProject` that was updated by this mutation. */
+  organizationProject?: Maybe<OrganizationProject>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Organization` that is related to this `OrganizationProject`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** Reads a single `Project` that is related to this `OrganizationProject`. */
+  projectByProjectId?: Maybe<Project>;
+  /** An edge for our `OrganizationProject`. May be used by Relay 1. */
+  organizationProjectEdge?: Maybe<OrganizationProjectsEdge>;
+};
+
+
+/** The output of our update `OrganizationProject` mutation. */
+export type UpdateOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
 /** All input for the `updatePostByIri` mutation. */
@@ -7498,6 +9117,18 @@ export type UpdatePostTranslationPayload = {
 /** The output of our update `PostTranslation` mutation. */
 export type UpdatePostTranslationPayloadPostTranslationEdgeArgs = {
   orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
+};
+
+/** All input for the `updateProjectByAdminDaoAddress` mutation. */
+export type UpdateProjectByAdminDaoAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Project` being updated. */
+  projectPatch: ProjectPatch;
+  adminDaoAddress: Scalars['String'];
 };
 
 /** All input for the `updateProjectById` mutation. */
@@ -7621,6 +9252,8 @@ export type UpdateProjectPayload = {
   accountByVerifierId?: Maybe<Account>;
   /** Reads a single `Account` that is related to this `Project`. */
   accountByAdminAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `Project`. */
+  daoByAdminDaoAddress?: Maybe<Dao>;
   /** An edge for our `Project`. May be used by Relay 1. */
   projectEdge?: Maybe<ProjectsEdge>;
 };
@@ -7679,6 +9312,53 @@ export type UpdateProjectTranslationPayload = {
 /** The output of our update `ProjectTranslation` mutation. */
 export type UpdateProjectTranslationPayloadProjectTranslationEdgeArgs = {
   orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
+};
+
+/** All input for the `updateRoleByName` mutation. */
+export type UpdateRoleByNameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Role` being updated. */
+  rolePatch: RolePatch;
+  name: Scalars['String'];
+};
+
+/** All input for the `updateRole` mutation. */
+export type UpdateRoleInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Role` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Role` being updated. */
+  rolePatch: RolePatch;
+};
+
+/** The output of our update `Role` mutation. */
+export type UpdateRolePayload = {
+  __typename?: 'UpdateRolePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Role` that was updated by this mutation. */
+  role?: Maybe<Role>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Role`. May be used by Relay 1. */
+  roleEdge?: Maybe<RolesEdge>;
+};
+
+
+/** The output of our update `Role` mutation. */
+export type UpdateRolePayloadRoleEdgeArgs = {
+  orderBy?: Maybe<Array<RolesOrderBy>>;
 };
 
 /** All input for the `updateS3DeletionById` mutation. */
@@ -8032,6 +9712,7 @@ export type AccountByCustodialAddressQuery = (
 
 export type AccountByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
+  daoAccountsOrderBy?: Maybe<Array<AccountsOrderBy> | AccountsOrderBy>;
 }>;
 
 
@@ -8051,6 +9732,28 @@ export type AccountByIdQuery = (
       & { nodes: Array<Maybe<(
         { __typename?: 'FiatOrder' }
         & Pick<FiatOrder, 'createdAt' | 'txHash' | 'stripePaymentIntentId' | 'retiredCredits' | 'totalPrice' | 'askDenom' | 'creditsAmount' | 'projectOnChainId' | 'customerName' | 'anonymous'>
+      )>> }
+    ), daosByAssignmentAccountIdAndDaoAddress: (
+      { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Dao' }
+        & Pick<Dao, 'address'>
+        & { organizationByDaoAddress?: Maybe<(
+          { __typename?: 'Organization' }
+          & Pick<Organization, 'name'>
+        )>, accountsByAssignmentDaoAddressAndAccountId: (
+          { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
+          & { nodes: Array<Maybe<(
+            { __typename?: 'Account' }
+            & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
+          )>> }
+        ), assignmentsByDaoAddress: (
+          { __typename?: 'AssignmentsConnection' }
+          & { nodes: Array<Maybe<(
+            { __typename?: 'Assignment' }
+            & Pick<Assignment, 'roleName' | 'onChainRoleId' | 'visible' | 'accountId'>
+          )>> }
+        ) }
       )>> }
     ) }
   )> }
@@ -8661,7 +10364,7 @@ export type AccountByCustodialAddressQueryHookResult = ReturnType<typeof useAcco
 export type AccountByCustodialAddressLazyQueryHookResult = ReturnType<typeof useAccountByCustodialAddressLazyQuery>;
 export type AccountByCustodialAddressQueryResult = Apollo.QueryResult<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>;
 export const AccountByIdDocument = gql`
-    query AccountById($id: UUID!) {
+    query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
   accountById(id: $id) {
     id
     name
@@ -8697,6 +10400,32 @@ export const AccountByIdDocument = gql`
         anonymous
       }
     }
+    daosByAssignmentAccountIdAndDaoAddress {
+      nodes {
+        address
+        organizationByDaoAddress {
+          name
+        }
+        accountsByAssignmentDaoAddressAndAccountId(orderBy: $daoAccountsOrderBy) {
+          nodes {
+            id
+            name
+            type
+            image
+            addr
+            title
+          }
+        }
+        assignmentsByDaoAddress {
+          nodes {
+            roleName
+            onChainRoleId
+            visible
+            accountId
+          }
+        }
+      }
+    }
   }
 }
     `;
@@ -8714,6 +10443,7 @@ export const AccountByIdDocument = gql`
  * const { data, loading, error } = useAccountByIdQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      daoAccountsOrderBy: // value for 'daoAccountsOrderBy'
  *   },
  * });
  */

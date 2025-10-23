@@ -112,7 +112,13 @@ export function MultiStepProvider<T extends object>({
     withLocalStorage,
   );
 
-  const maxAllowedStep = forceStep || data?.maxAllowedStep || 0;
+  // Respect forceStep even when it's 0 by avoiding truthy fallback
+  const maxAllowedStep =
+    forceStep !== undefined
+      ? forceStep
+      : data?.maxAllowedStep !== undefined
+      ? data?.maxAllowedStep
+      : 0;
 
   const {
     activeStep,

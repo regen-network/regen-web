@@ -1,5 +1,10 @@
-import React, { MutableRefObject, useEffect, useMemo } from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
+import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -18,6 +23,7 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import { AccountType } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
@@ -42,7 +48,7 @@ import {
   WEBSITE_PLACEHOLDER,
 } from './EditProfileForm.constants';
 import {
-  editProfileFormSchema,
+  createEditProfileFormSchema,
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
@@ -55,20 +61,66 @@ export interface EditProfileFormProps {
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
+  // Optional enhancements for reuse in Create Organization flow
+  formId?: string;
+  hideProfileType?: boolean;
+  nameLabel?: string;
+  // Allows parent steps (e.g. Create Organization) to inject partial values
+  // after the form has mounted (e.g. from a transfer profile modal)
+  onPrefill?: (values: Partial<EditProfileFormSchemaType>) => void; // not used internally, documented for symmetry
+  prefillValues?: Partial<EditProfileFormSchemaType>;
+  onFormStateChange?: (state: {
+    isValid: boolean;
+    isDirty: boolean;
+    isSubmitting: boolean;
+    values: EditProfileFormSchemaType;
+    errors: FieldErrors<EditProfileFormSchemaType>;
+  }) => void;
+  validationMode?: 'onChange' | 'onBlur' | 'onSubmit' | 'onTouched' | 'all';
 }
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
-  ({ children, initialValues, isDirtyRef, onSubmit, onSuccess, onUpload }) => {
+  ({
+    children,
+    initialValues,
+    isDirtyRef,
+    onSubmit,
+    onSuccess,
+    onUpload,
+    formId,
+    hideProfileType,
+    nameLabel,
+    prefillValues,
+    onFormStateChange,
+    validationMode = 'onBlur',
+  }) => {
     const { _ } = useLingui();
+    const formSchema = useMemo(
+      () =>
+        hideProfileType
+          ? createEditProfileFormSchema({ requireProfileType: false })
+          : createEditProfileFormSchema({ requireProfileType: true }),
+      [hideProfileType],
+    );
     const form = useZodForm({
-      schema: editProfileFormSchema,
+      schema: formSchema,
       defaultValues: {
         ...initialValues,
+        profileType:
+          initialValues?.profileType ??
+          (hideProfileType ? AccountType.Organization : undefined),
       },
-      mode: 'onBlur',
+      mode: validationMode,
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
-    const { isSubmitting, errors, isDirty } = useFormState({
+    const {
+      isSubmitting,
+      errors,
+      isDirty,
+      isValid,
+      touchedFields,
+      isSubmitted,
+    } = useFormState({
       control: form.control,
     });
     const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
@@ -99,17 +151,38 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     /* Setter */
 
-    const setProfileImage = ({ value }: { value: string }): void => {
-      form.setValue('profileImage', value, { shouldDirty: true });
-    };
-    const setBackgroundImage = ({ value }: { value: string }): void => {
-      form.setValue('backgroundImage', value, { shouldDirty: true });
-    };
+    const setProfileImage = useCallback(
+      ({ value }: { value: string }): void => {
+        form.setValue('profileImage', value, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
+    const setBackgroundImage = useCallback(
+      ({ value }: { value: string }): void => {
+        form.setValue('backgroundImage', value, {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
+    const handleDefaultAvatarUpdate = useCallback(
+      (value: string): void => {
+        form.setValue('profileImage', value, {
+          shouldDirty: false,
+          shouldValidate: true,
+        });
+      },
+      [form],
+    );
 
     /* Effect */
 
     useUpdateDefaultAvatar({
-      setProfileImage: value => form.setValue('profileImage', value),
+      setProfileImage: handleDefaultAvatarUpdate,
       profileType,
       profileImage,
     });
@@ -120,10 +193,43 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       }
     }, [isDirtyRef, isDirty]);
 
+    useEffect(() => {
+      void form.trigger();
+    }, [form]);
+
+    useEffect(() => {
+      onFormStateChange?.({
+        isValid,
+        isDirty,
+        isSubmitting,
+        values: form.getValues(),
+        errors,
+      });
+    }, [errors, form, isValid, isDirty, isSubmitting, onFormStateChange]);
+
+    // When parent supplies new prefillValues, merge them into the form without
+    // wiping user edits for untouched fields. Only set provided keys.
+    useEffect(() => {
+      if (prefillValues && Object.keys(prefillValues).length) {
+        for (const [key, value] of Object.entries(prefillValues)) {
+          if (value !== undefined) {
+            // @ts-expect-error: dynamic key assignment aligned with schema
+            form.setValue(key, value, {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+          }
+        }
+        void form.trigger();
+      }
+    }, [prefillValues, form]);
+
     return (
       <Form
         className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-300 mb-[120px] rounded-[10px]"
         form={form}
+        id={formId}
         onSubmit={async data => {
           const hasError = validateEditProfileForm({
             setError: form.setError,
@@ -140,18 +246,24 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           }
         }}
       >
-        <RadioCard
-          label={_(PROFILE_TYPE)}
-          items={radioCardItems}
-          selectedValue={profileType ?? ''}
-          {...form.register('profileType')}
-        />
+        {!hideProfileType && (
+          <RadioCard
+            label={_(PROFILE_TYPE)}
+            items={radioCardItems}
+            selectedValue={profileType ?? ''}
+            {...form.register('profileType')}
+          />
+        )}
         <TextField
           type="text"
-          label={_(msg`Name`)}
+          label={nameLabel ?? _(msg`Name`)}
           {...form.register('name')}
-          helperText={errors.name?.message}
-          error={!!errors.name}
+          helperText={
+            errors.name && (isSubmitted || touchedFields?.name)
+              ? errors.name.message
+              : undefined
+          }
+          error={Boolean(errors.name && (isSubmitted || touchedFields?.name))}
         />
         <ImageField
           label={_(msg`Profile image`)}
@@ -197,7 +309,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <TextAreaField
           type="text"
           label={_(msg`Description`)}
-          rows={3}
           minRows={3}
           disabled={isSubmitting}
           multiline

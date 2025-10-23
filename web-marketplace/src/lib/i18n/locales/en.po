@@ -22,6 +22,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #~ msgid " Exit to homepage "
 #~ msgstr ""
 
@@ -114,7 +116,7 @@ msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} ch
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:212
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:293
 #: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:202
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
@@ -272,6 +274,10 @@ msgstr ""
 msgid "A brief description of your ecological impact project and the property on which it is implemented. This is your elevator pitch to credit buyers."
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:27
+msgid "A connected wallet is required to create an organization."
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:117
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr ""
@@ -327,6 +333,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:106
 msgid "Actions"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:29
+msgid "Active account is required to create an organization."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
@@ -618,6 +628,7 @@ msgid "Are you sure you want to delete this post?"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:86
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:14
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
@@ -685,7 +696,7 @@ msgstr ""
 msgid "back to projects"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:175
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:257
 msgid "Background image"
 msgstr ""
 
@@ -927,7 +938,7 @@ msgstr ""
 #~ msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue. "
 #~ msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:123
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:117
 msgid "By connecting to Regen Marketplace, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>"
 msgstr ""
 
@@ -971,6 +982,7 @@ msgid "Cancel"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:37
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:16
 msgid "CANCEL"
 msgstr ""
 
@@ -1071,7 +1083,7 @@ msgstr ""
 msgid "Choose a credit type"
 msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:47
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:48
 msgid "Choose a log in method"
 msgstr ""
 
@@ -1159,6 +1171,10 @@ msgstr ""
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:234
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:12
+msgid "close create organization"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:30
@@ -1393,6 +1409,10 @@ msgstr ""
 
 #: src/pages/Post/hooks/useAttestEvents.ts:174
 msgid "Created by"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.Header.tsx:105
+msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
@@ -1750,6 +1770,10 @@ msgstr ""
 msgid "Data stream"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:20
+msgid "Data will be transferred from this profile:"
+msgstr ""
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:61
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:8
 msgid "date"
@@ -1790,7 +1814,7 @@ msgid "description"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:281
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
@@ -2057,7 +2081,7 @@ msgstr ""
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:97
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:91
 msgid "Email"
 msgstr ""
 
@@ -2177,6 +2201,10 @@ msgstr ""
 msgid "Factor:"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:28
+msgid "Failed to initialize signing client"
+msgstr ""
+
 #: src/pages/Faucet/hook/useRequestFunds.tsx:27
 #: src/pages/Faucet/hook/useRequestFunds.tsx:34
 msgid "Failed to request funds"
@@ -2239,6 +2267,10 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:118
 msgid "find another credit card project"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:11
+msgid "Finish"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:39
@@ -2420,6 +2452,10 @@ msgstr ""
 msgid "If you merge these accounts, you can log in with either your wallet address, email or google  to the same account."
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:15
+msgid "If you proceed, you will lose all the unsaved changes you made. This cannot be undone."
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:87
 msgid "If you proceed, you will lose all unsaved changes you made. This cannot be undone."
 msgstr ""
@@ -2522,9 +2558,14 @@ msgstr ""
 msgid "Invite Member"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:4
-#~ msgid "Invite Members"
-#~ msgstr ""
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:9
+msgid "Invite Members"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:26
+#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:10
+msgid "Invite teammates to collaborate on your organization."
+msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:35
 msgid "Is this member visible on the organization page?"
@@ -2644,8 +2685,7 @@ msgstr ""
 msgid "Learn more about creating a credit class»"
 msgstr ""
 
-#: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Select.tsx:22
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:52
+#: src/components/molecules/WalletGuideLearnMore.tsx:23
 msgid "Learn more about wallets in our <0>user guide.</0>"
 msgstr ""
 
@@ -2668,6 +2708,11 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:21
 msgid "Link copied!"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:24
+#: src/pages/CreateOrganization/steps/MigrateProjectsStep.tsx:10
+msgid "Link or migrate existing projects to your organization."
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:29
@@ -2714,7 +2759,7 @@ msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:10
 #: src/components/organisms/LoginButton/LoginButton.tsx:79
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:108
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:102
 msgid "log in"
 msgstr ""
 
@@ -2927,6 +2972,10 @@ msgstr ""
 msgid "Migrate project"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:7
+msgid "Migrate Projects"
+msgstr ""
+
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:147
 msgid "min start date"
 msgstr ""
@@ -3000,7 +3049,7 @@ msgstr ""
 #~ msgid "My prefinance projects"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:233
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
@@ -3148,7 +3197,7 @@ msgstr ""
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:88
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:82
 msgid "NOTE: Only project page creation and user profile creation available with email / social log in."
 msgstr ""
 
@@ -3215,7 +3264,7 @@ msgstr ""
 msgid "or, find credit card projects"
 msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:61
 msgid "or, log in with email / social"
 msgstr ""
 
@@ -3261,12 +3310,17 @@ msgstr ""
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:23
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
 msgid "Organization Name"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
 msgid "Organization profile"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:6
+msgid "Organization Profile"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:104
@@ -3338,6 +3392,10 @@ msgstr ""
 msgid "Personal Dashboard"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:8
+msgid "Personal Info"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
 msgid "Personal profile"
 msgstr ""
@@ -3376,6 +3434,10 @@ msgstr ""
 
 #: src/config/contents.ts:3
 msgid "Please connect to Keplr to use Regen Ledger features"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:45
+msgid "Please connect with Keplr to create an organization"
 msgstr ""
 
 #: src/pages/Post/Post.constants.ts:4
@@ -3632,7 +3694,7 @@ msgstr ""
 #~ msgid "profile banner"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:239
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
@@ -3867,6 +3929,11 @@ msgstr ""
 
 #: src/pages/Projects/Projects.tsx:296
 msgid "projects tabs"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:25
+#: src/pages/CreateOrganization/steps/PersonalInfoStep.tsx:10
+msgid "Provide personal contact information for this organization."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
@@ -4292,7 +4359,7 @@ msgstr ""
 msgid "See the blockchain record"
 msgstr ""
 
-#: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Select.tsx:19
+#: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Select.tsx:26
 msgid "Select a wallet"
 msgstr ""
 
@@ -4446,6 +4513,10 @@ msgstr ""
 msgid "Size in hectares or acres"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:21
+msgid "SKIP"
+msgstr ""
+
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:105
 msgid "skip this step"
 msgstr ""
@@ -4473,6 +4544,10 @@ msgstr ""
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
+msgstr ""
+
+#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:172
+msgid "Something went wrong while creating the organization."
 msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:135
@@ -5048,6 +5123,10 @@ msgstr ""
 msgid "Traditional grazing"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:18
+msgid "Transfer organization profile data from your personal account to your new organization profile?"
+msgstr ""
+
 #: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:129
 msgid "Transfer pending"
 msgstr ""
@@ -5155,8 +5234,12 @@ msgstr ""
 #~ msgid "Use your social account to log in to Regen Marketplace. "
 #~ msgstr ""
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:222
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:228
 msgid "useMultiStep must be used within a MultiStepProvider"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:10
+msgid "User"
 msgstr ""
 
 #: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:15
@@ -5512,6 +5595,10 @@ msgstr ""
 msgid "yes, discard"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:17
+msgid "YES, DISCARD"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:3
 msgid "Yes, I'm interested in buying credits for myself or my organization!"
 msgstr ""
@@ -5536,6 +5623,14 @@ msgstr ""
 msgid "yes, remove & connect"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:22
+msgid "YES, TRANSFER PROFILE"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:13
+msgid "You already belong to an organization. Please manage your existing organization from your dashboard."
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.tsx:59
 msgid "You are not yet listed as an issuer on any credit classes"
 msgstr ""
@@ -5558,6 +5653,10 @@ msgstr ""
 
 #: src/components/organisms/SettingsForm/SettingsForm.constants.ts:3
 msgid "You can customize the project page url below."
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:19
+msgid "You can edit this profile data on the next step."
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:15

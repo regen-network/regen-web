@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -10,24 +11,24 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
-import {
-  getDefaultAvatar,
-  getWalletAddress,
-} from 'pages/Dashboard/Dashboard.utils';
+import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
 import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { AccountConnectWalletModal } from '../AccountConnectWalletModal/AccountConnectWalletModal';
+import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
 import { ListProject } from '../ListProject/ListProject';
 import { LoginButton } from '../LoginButton/LoginButton';
 import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../UserAccountSettings/UserAccountSettings.constants';
+import { useOrganizationActions } from './hooks/useOrganizationActions';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -36,6 +37,7 @@ import {
 } from './RegistryLayout.config';
 import {
   AVATAR_ALT,
+  CONNECT_TO_KEPLR_ORGANIZATION,
   CREATE_ORG,
   FINISH_ORG_CREATION,
   fullWidthRegExp,
@@ -63,19 +65,53 @@ const getProfileLink = (
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { activeAccount, privActiveAccount } = useAuth();
-
-  const { wallet, disconnect, accountByAddr } = useWallet();
+  const { wallet, disconnect, accountByAddr, connect, isConnected } =
+    useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
   const hasPrefinanceProjects = useLoaderData();
   const profileLink = getProfileLink(activeAccount, wallet);
+
+  const {
+    modalState,
+    walletsUiConfig,
+    createOrganization,
+    finishOrgCreation,
+    defaultAvatar,
+    menuOrganizationProfile,
+    unfinalizedOrgCreation,
+    isConnectWalletModalOpen,
+    handleConnectWalletModalClose,
+    handleWalletConnect,
+    setError,
+  } = useOrganizationActions({
+    activeAccount,
+    privActiveAccount,
+    wallet,
+    navigate,
+    connect,
+    isConnected,
+  });
+
+  const connectWalletDescription = (
+    <Trans>
+      Creating an organization requires signing a blockchain transaction. Learn
+      more about wallets in our{' '}
+      <Link
+        href="https://guides.regen.network/guides/wallets"
+        className="font-bold bg-clip-text text-transparent bg-blue-green-gradient"
+      >
+        user guide.
+      </Link>
+    </Trans>
+  );
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
@@ -92,10 +128,19 @@ const RegistryLayoutHeader: React.FC = () => {
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
-          profileLink: profileLink,
+          profileLink,
           dashboardLink: '/dashboard',
           address: wallet?.address,
         }),
+        organizationProfile: menuOrganizationProfile,
+        createOrganization:
+          !menuOrganizationProfile && !unfinalizedOrgCreation
+            ? createOrganization
+            : undefined,
+        unfinalizedOrgCreation,
+        finishOrgCreation: unfinalizedOrgCreation
+          ? finishOrgCreation
+          : undefined,
         textContent: {
           signedInAs: _(SIGNED_IN_AS),
           copyText: {
@@ -119,10 +164,12 @@ const RegistryLayoutHeader: React.FC = () => {
       _,
       profileLink,
       wallet?.address,
+      menuOrganizationProfile,
+      createOrganization,
+      unfinalizedOrgCreation,
+      finishOrgCreation,
     ],
   );
-
-  const defaultAvatar = getDefaultAvatar(activeAccount);
 
   const color = headerColors[pathname]
     ? headerColors[pathname]
@@ -175,6 +222,24 @@ const RegistryLayoutHeader: React.FC = () => {
           </Box>
         }
         isUserLoggedIn={!noAccountAndNoWallet}
+      />
+      <AccountConnectWalletModal
+        open={isConnectWalletModalOpen}
+        onClose={handleConnectWalletModalClose}
+        title={_(CONNECT_TO_KEPLR_ORGANIZATION)}
+        description={connectWalletDescription}
+        wallets={[
+          {
+            ...walletsUiConfig[0],
+            onClick: handleWalletConnect,
+          },
+        ]}
+        state={modalState}
+      />
+      <ConnectWalletFlow
+        isConnectModalOpened={isConnectWalletModalOpen}
+        setError={setError}
+        onConnectModalClose={handleConnectWalletModalClose}
       />
     </>
   );

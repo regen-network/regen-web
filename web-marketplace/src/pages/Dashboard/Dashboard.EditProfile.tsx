@@ -70,7 +70,7 @@ export const EditProfile = () => {
   const onSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
       const {
-        profileType,
+        profileType: submittedProfileType,
         profileImage,
         backgroundImage,
         name,
@@ -78,6 +78,7 @@ export const EditProfile = () => {
         twitterLink,
         websiteLink,
       } = values;
+      const profileType = submittedProfileType ?? DEFAULT_PROFILE_TYPE;
       const isDefaultAvatar = DEFAULT_PROFILE_AVATARS.includes(profileImage);
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
       await updateAccountById({

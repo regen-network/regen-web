@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
-import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
+import {
+  createWasmAminoConverters,
+  SigningCosmWasmClient,
+  wasmTypes,
+} from '@cosmjs/cosmwasm-stargate';
+import { GeneratedType, OfflineSigner, Registry } from '@cosmjs/proto-signing';
+import { AminoTypes, GasPrice, SigningStargateClient } from '@cosmjs/stargate';
 import {
   cosmosAminoConverters,
   cosmosProtoRegistry,
@@ -28,6 +33,7 @@ export type QueryClient = Awaited<
 interface ContextValue {
   loading: boolean;
   signingClient?: SigningStargateClient;
+  signingCosmWasmClient?: SigningCosmWasmClient;
   queryClient?: QueryClient;
   error: unknown;
 }
@@ -39,52 +45,98 @@ interface ConnectParams {
 const LedgerContext = React.createContext<ContextValue>({
   loading: false,
   signingClient: undefined,
+  signingCosmWasmClient: undefined,
   queryClient: undefined,
   error: undefined,
 });
 
+type StargateOfflineSigner = Parameters<
+  typeof SigningStargateClient.connectWithSigner
+>[1];
+type StargateConnectOptions = Parameters<
+  typeof SigningStargateClient.connectWithSigner
+>[2];
+type CosmWasmOfflineSigner = Parameters<
+  typeof SigningCosmWasmClient.connectWithSigner
+>[1];
+type CosmWasmConnectOptions = Parameters<
+  typeof SigningCosmWasmClient.connectWithSigner
+>[2];
+
 export async function setupSigningClient(
   setSigningClient: UseStateSetter<SigningStargateClient | undefined>,
+  setSigningCosmWasmClient: UseStateSetter<SigningCosmWasmClient | undefined>,
   setLoading: UseStateSetter<boolean>,
   setError: UseStateSetter<unknown>,
   signer: OfflineSigner,
-) {
+): Promise<void> {
   if (chain && ledgerRPCUri) {
-    const protoRegistry = [
+    const stargateProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [
       ...cosmosProtoRegistry,
       ...ibcProtoRegistry,
       ...regenProtoRegistry,
     ];
 
-    const aminoConverters = {
+    const cosmWasmProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [
+      ...stargateProtoRegistry,
+      ...wasmTypes,
+    ];
+
+    const stargateAminoConverters = {
       ...cosmosAminoConverters,
       ...ibcAminoConverters,
       ...regenAminoConverters,
-    };
+    } as const;
 
-    const registry = new Registry(protoRegistry);
-    const aminoTypes = new AminoTypes(aminoConverters);
+    const cosmWasmAminoConverters = {
+      ...stargateAminoConverters,
+      ...createWasmAminoConverters(),
+    } as const;
+
+    const stargateRegistry = new Registry(stargateProtoRegistry);
+    const cosmWasmRegistry = new Registry(cosmWasmProtoRegistry);
+    const stargateAminoTypes = new AminoTypes(stargateAminoConverters);
+    const cosmWasmAminoTypes = new AminoTypes(cosmWasmAminoConverters);
 
     setLoading(true);
     try {
+      const gasPrice = GasPrice.fromString('0.025uregen');
+
+      const options: StargateConnectOptions = {
+        registry: stargateRegistry,
+        aminoTypes: stargateAminoTypes,
+        gasPrice,
+      } as unknown as StargateConnectOptions;
+
       const signingClient = await SigningStargateClient.connectWithSigner(
         ledgerRPCUri,
-        signer,
-        {
-          registry,
-          aminoTypes,
-        },
+        signer as unknown as StargateOfflineSigner,
+        options,
       );
+      const cosmWasmOptions: CosmWasmConnectOptions = {
+        registry: cosmWasmRegistry,
+        aminoTypes: cosmWasmAminoTypes,
+        gasPrice,
+      };
+      const signingCosmWasmClient =
+        await SigningCosmWasmClient.connectWithSigner(
+          ledgerRPCUri,
+          signer as unknown as CosmWasmOfflineSigner,
+          cosmWasmOptions,
+        );
       setSigningClient(signingClient);
+      setSigningCosmWasmClient(signingCosmWasmClient);
       setLoading(false);
     } catch (e) {
-      setError(e);
+      setSigningClient(undefined);
+      setSigningCosmWasmClient(undefined);
+      setError(e as unknown);
       setLoading(false);
     }
   }
 }
 
-export async function getRPCQueryClient() {
+export async function getRPCQueryClient(): Promise<QueryClient> {
   const { createRPCQueryClient } = regen.ClientFactory;
   const client = await createRPCQueryClient({
     rpcEndpoint: ledgerRPCUri,
@@ -95,14 +147,14 @@ export async function getRPCQueryClient() {
     rpcEndpoint: ledgerRPCUri,
   });
 
-  return { ...ibcClient, ...client };
+  return { ...ibcClient, ...client } as QueryClient;
 }
 
 async function setupRPCQueryClient(
   setQueryClient: UseStateSetter<QueryClient | undefined>,
   setLoading: UseStateSetter<boolean>,
   setError: UseStateSetter<unknown>,
-) {
+): Promise<void> {
   if (ledgerRPCUri) {
     setLoading(true);
     try {
@@ -110,7 +162,7 @@ async function setupRPCQueryClient(
       setQueryClient(queryClient);
       setLoading(false);
     } catch (e) {
-      setError(e);
+      setError(e as unknown);
       setLoading(false);
     }
   }
@@ -129,6 +181,9 @@ export const LedgerProvider: React.FC<
   const [signingClient, setSigningClient] = useState<
     SigningStargateClient | undefined
   >();
+  const [signingCosmWasmClient, setSigningCosmWasmClient] = useState<
+    SigningCosmWasmClient | undefined
+  >();
   const [queryClient, setQueryClient] = useState<QueryClient | undefined>();
   const [loadingSigningClient, setLoadingSigningClient] =
     useState<boolean>(false);
@@ -136,14 +191,15 @@ export const LedgerProvider: React.FC<
   const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
-    if (!!wallet?.offlineSigner && !signingClient)
+    if (wallet?.offlineSigner && (!signingClient || !signingCosmWasmClient))
       setupSigningClient(
         setSigningClient,
+        setSigningCosmWasmClient,
         setLoadingSigningClient,
         setError,
         wallet?.offlineSigner,
       );
-  }, [wallet?.offlineSigner, signingClient]);
+  }, [wallet?.offlineSigner, signingClient, signingCosmWasmClient]);
 
   useEffect(() => {
     setupRPCQueryClient(setQueryClient, setLoadingQueryClient, setError);
@@ -155,6 +211,7 @@ export const LedgerProvider: React.FC<
         error,
         loading: loadingSigningClient || loadingQueryClient,
         signingClient,
+        signingCosmWasmClient,
         queryClient,
       }}
     >

@@ -28,14 +28,16 @@ import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner
 
 const RegistryLayout: React.FC = () => {
   const location = useLocation();
-  const isDashboard = location.pathname.startsWith('/dashboard');
+  const path = location.pathname;
+  const isFullScreen =
+    path.startsWith('/dashboard') || path.startsWith('/organizations/create');
 
   return (
     <>
-      {!isDashboard &&
+      {!isFullScreen &&
         (IS_TERRASOS ? <TerrasosHeader /> : <RegistryLayoutHeader />)}
       <Outlet />
-      {!isDashboard &&
+      {!isFullScreen &&
         (IS_TERRASOS ? (
           <RegistryLayoutTerrasosFooter />
         ) : (

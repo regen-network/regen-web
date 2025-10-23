@@ -9,6 +9,13 @@ interface StorageApi<T> {
   isLoading: boolean;
 }
 
+const dispatchStorageEvent = (key: string): void => {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(
+    new CustomEvent('local-storage:update', { detail: { key } }),
+  );
+};
+
 export default function useStorage<T>(
   key: string,
   withLocalStorage: boolean,
@@ -35,6 +42,7 @@ export default function useStorage<T>(
       if (!_.isEqual(data, currentValue)) {
         try {
           localStorage.setItem(key, JSON.stringify(data));
+          dispatchStorageEvent(key);
         } catch (err) {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -46,7 +54,10 @@ export default function useStorage<T>(
   // TODO: Remove data (key/value)
   const removeData = (): void => {
     try {
-      if (withLocalStorage) localStorage.removeItem(key);
+      if (withLocalStorage) {
+        localStorage.removeItem(key);
+        dispatchStorageEvent(key);
+      }
       // reset state to initial values
       saveData(initialValue);
     } catch (err) {

@@ -9,29 +9,32 @@ import {
 } from 'web-components/test/test-utils';
 
 import { MigrateProjects } from './MigrateProjects';
-import { Project } from './MigrateProjects.types';
+import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 
 const mockProjects: Project[] = [
   {
     id: '1',
-    title: 'Project Alpha',
-    imageSrc: 'alpha.jpg',
-    location: 'Location A',
-    area: '100 ha.',
+    name: 'Project Alpha',
+    imgSrc: 'alpha.jpg',
+    place: 'Location A',
+    area: 100,
+    areaUnit: 'ha.',
   },
   {
     id: '2',
-    title: 'Project Beta',
-    imageSrc: 'beta.jpg',
-    location: 'Location B',
-    area: '200 ha.',
+    name: 'Project Beta',
+    imgSrc: 'beta.jpg',
+    place: 'Location B',
+    area: 200,
+    areaUnit: 'ha.',
   },
   {
     id: '3',
-    title: 'Project Gamma',
-    imageSrc: 'gamma.jpg',
-    location: 'Location C',
-    area: '300 ha.',
+    name: 'Project Gamma',
+    imgSrc: 'gamma.jpg',
+    place: 'Location C',
+    area: 204,
+    areaUnit: 'ha.',
   },
 ];
 

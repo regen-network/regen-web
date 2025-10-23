@@ -108,7 +108,6 @@ export const useFetchProjectByAdmin = ({
   const onlyOffChainProjectsWithData =
     onlyOffChainProjects?.map((project, index) => {
       const sanityProject = sanityProjects?.[index];
-
       return {
         offChain: true,
         published: !!project?.published,

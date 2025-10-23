@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
+
 import { Center } from 'web-components/src/components/box';
 
 export const InviteMembersStep: React.FC = () => {

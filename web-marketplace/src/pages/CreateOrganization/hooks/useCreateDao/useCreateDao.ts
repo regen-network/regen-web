@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -43,7 +43,6 @@ export const useCreateDao = () => {
   const { _ } = useLingui();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
-  const [isCreating, setIsCreating] = useState(false);
 
   const createDao = useCallback(
     async (params: CreateDaoParams): Promise<CreateDaoResult> => {
@@ -79,7 +78,6 @@ export const useCreateDao = () => {
         ),
       };
 
-      setIsCreating(true);
       setProcessingModalAtom(atom => void (atom.open = true));
 
       try {
@@ -285,7 +283,6 @@ export const useCreateDao = () => {
         setErrorBannerText(String(error));
         throw error;
       } finally {
-        setIsCreating(false);
         setProcessingModalAtom(atom => void (atom.open = false));
       }
     },
@@ -299,5 +296,5 @@ export const useCreateDao = () => {
     ],
   );
 
-  return { createDao, isCreating };
+  return { createDao };
 };

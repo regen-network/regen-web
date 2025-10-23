@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
@@ -25,11 +32,13 @@ import {
   CREATE_ORG_DISCARD_DESCRIPTION,
   CREATE_ORG_DISCARD_TITLE,
   CREATE_ORG_FINISH_LABEL,
-  CREATE_ORG_FORM_ID,
   CREATE_ORG_INITIAL_VALUES,
-  CREATE_ORG_STEPS,
+  CREATE_ORGANIZATION_FORM_ID,
+  INVITE_MEMBERS_FORM_ID,
+  MIGRATE_PROJECTS_FORM_ID,
+  ORGANIZATION_PROFILE_FORM_ID,
+  PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
-import { useCreateDao } from './hooks/useCreateDao/useCreateDao';
 import {
   OrganizationMultiStepData,
   useOrganizationFlow,
@@ -40,15 +49,20 @@ import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
+import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
+import { getCreateOrgSteps } from './CreateOrganization.utils';
+import { MultiStepFormApi } from './CreateOrganization.types';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
   walletAddress?: string;
+  steps: ReturnType<typeof getCreateOrgSteps>;
 };
 
 function CreateOrganizationContent({
   resumeStep,
   walletAddress,
+  steps,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -62,7 +76,7 @@ function CreateOrganizationContent({
     handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
   const { activeAccount } = useAuth();
-  const { isCreating } = useCreateDao();
+  const activeRef = useRef<MultiStepFormApi>(null);
 
   const {
     daoAddress,
@@ -78,7 +92,6 @@ function CreateOrganizationContent({
   } = useOrganizationFlow({
     activeStep,
     isLastStep,
-    isCreating,
     data,
     handleActiveStep,
     handleBack,
@@ -86,22 +99,14 @@ function CreateOrganizationContent({
     handleResetData,
     resumeStep,
     walletAddress,
+    activeRef,
   });
-  const [isStepValid, setIsStepValid] = useState(activeStep !== 0);
-
-  useEffect(() => {
-    if (activeStep === 0) {
-      setIsStepValid(false);
-    } else {
-      setIsStepValid(true);
-    }
-  }, [activeStep]);
-
+  console.log('ref', activeRef);
   return (
     <>
-      {activeStep === 0 && (
+      {steps[activeStep].id === ORGANIZATION_PROFILE_FORM_ID && (
         <OrganizationProfileStep
-          formId={CREATE_ORG_FORM_ID}
+          ref={activeRef}
           key={`org-profile-${orgProfileInitialValuesVersion}`}
           initialValues={orgProfileInitialValues}
           activeAccountId={activeAccount?.id}
@@ -112,19 +117,20 @@ function CreateOrganizationContent({
           organizationId={organizationId}
           setOrganizationId={setOrganizationId}
           onTransferProfile={handleApplyTransferProfile}
-          data={data}
-          handleSaveNext={handleSaveNext}
-          onValidityChange={setIsStepValid}
         />
       )}
-      {activeStep === 1 && <MigrateProjectsStep />}
-      {activeStep === 2 && <PersonalInfoStep />}
-      {activeStep === 3 && <InviteMembersStep />}
+      {steps[activeStep].id === MIGRATE_PROJECTS_FORM_ID && (
+        <MigrateProjectsStep ref={activeRef} />
+      )}
+      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
+      {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
       <SaveFooter
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={isCreating || !isStepValid}
+        saveDisabled={
+          activeRef.current?.isSubmitting || !activeRef.current?.isValid
+        }
         percentComplete={percentComplete}
       />
     </>
@@ -149,10 +155,21 @@ export default function CreateOrganizationPage(): JSX.Element {
     ? organizationProgress
     : undefined;
 
+  const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
+    adminAccountId: activeAccount?.id,
+    adminAddress: activeAccount?.addr,
+  });
+
+  const steps = useMemo(
+    () =>
+      getCreateOrgSteps(_, !isLoadingAdminProjects && adminProjects.length > 0),
+    [_, isLoadingAdminProjects, adminProjects],
+  );
+
   const resumeStep = useMemo(() => {
     if (!matchedProgress) return 0;
-    return Math.min(matchedProgress.step, CREATE_ORG_STEPS.length - 1);
-  }, [matchedProgress]);
+    return Math.min(matchedProgress.step, steps.length - 1);
+  }, [matchedProgress, steps]);
 
   const { menuOrganizationProfile, unfinalizedOrgCreation } =
     useOrganizationMenuProfile({
@@ -203,18 +220,22 @@ export default function CreateOrganizationPage(): JSX.Element {
         </div>
       </SadBeeModal>
       <MultiStepTemplate
-        formId={CREATE_ORG_FORM_ID}
+        formId={CREATE_ORGANIZATION_FORM_ID}
         initialValues={CREATE_ORG_INITIAL_VALUES}
-        steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
+        steps={steps}
         withLocalStorage
         forceStep={resumeStep}
         onClose={handleRequestClose}
         closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
-        classes={{ titleWrap: 'pb-40' }}
+        classes={{
+          titleWrap: 'pb-40 max-w-[unset]',
+          formWrap: 'max-w-[800px]',
+        }}
       >
         <CreateOrganizationContent
           resumeStep={resumeStep}
           walletAddress={walletAddress}
+          steps={steps}
         />
       </MultiStepTemplate>
     </>

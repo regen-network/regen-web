@@ -1,15 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { Project } from 'web-marketplace/src/components/organisms/MigrateProjects/MigrateProjects.types';
 
 import { SelectProjectCard } from './SelectProjectCard';
+import { Project } from './SelectProjectCard.types';
 
 const mockProject: Project = {
   id: '1',
-  title: 'Test Project',
-  imageSrc: '/path/to/image.jpg',
-  location: 'Test Location',
-  area: '1000 hectares',
+  name: 'Test Project',
+  imgSrc: '/path/to/image.jpg',
+  place: 'Test Location',
+  area: 100,
+  areaUnit: 'hectares',
   program: {
     id: 'program-1',
     name: 'Test Program',
@@ -23,8 +24,8 @@ describe('SelectProjectCard', () => {
   it('renders project information correctly', () => {
     render(<SelectProjectCard project={mockProject} />);
 
-    expect(screen.getByText(mockProject.title)).toBeInTheDocument();
-    expect(screen.getByText(mockProject.location)).toBeInTheDocument();
+    expect(screen.getByText(mockProject.name)).toBeInTheDocument();
+    expect(screen.getByText(mockProject.place)).toBeInTheDocument();
     expect(screen.getByText(/1,000\s*ha\./)).toBeInTheDocument();
   });
 
@@ -57,7 +58,7 @@ describe('SelectProjectCard', () => {
     const handleClick = vi.fn();
     render(<SelectProjectCard project={mockProject} onClick={handleClick} />);
 
-    const checkbox = screen.getByLabelText(mockProject.title);
+    const checkbox = screen.getByLabelText(mockProject.name);
     checkbox.click();
 
     expect(handleClick).toHaveBeenCalledTimes(1);
@@ -67,7 +68,7 @@ describe('SelectProjectCard', () => {
   it('has the correct accessibility attributes', () => {
     render(<SelectProjectCard project={mockProject} />);
 
-    const checkbox = screen.getByRole('checkbox', { name: mockProject.title });
+    const checkbox = screen.getByRole('checkbox', { name: mockProject.name });
     expect(checkbox).toBeInTheDocument();
 
     const label = checkbox.closest('label');
@@ -82,18 +83,10 @@ describe('SelectProjectCard', () => {
   });
 
   it('renders correctly even if area is not provided', () => {
-    const projectWithoutArea = { ...mockProject, area: undefined as any };
+    const projectWithoutArea = { ...mockProject, area: undefined };
     render(<SelectProjectCard project={projectWithoutArea} />);
 
-    expect(screen.getByText(mockProject.title)).toBeInTheDocument();
-    expect(screen.queryByText('hectares')).not.toBeInTheDocument();
-  });
-
-  it('renders correctly with an invalid area format', () => {
-    const projectWithInvalidArea = { ...mockProject, area: 'invalid-area' };
-    render(<SelectProjectCard project={projectWithInvalidArea} />);
-
-    expect(screen.getByText(mockProject.title)).toBeInTheDocument();
+    expect(screen.getByText(mockProject.name)).toBeInTheDocument();
     expect(screen.queryByText('hectares')).not.toBeInTheDocument();
   });
 });

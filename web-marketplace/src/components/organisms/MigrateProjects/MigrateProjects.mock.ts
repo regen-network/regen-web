@@ -1,13 +1,14 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { Project } from './MigrateProjects.types';
+import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 
 export const mockProjects: Project[] = [
   {
     id: '1',
-    title: 'Willow Grove Farm',
-    location: 'Gloucestershire, United Kingdom',
-    area: '16.5 ha',
-    imageSrc: '/coorong.png',
+    name: 'Willow Grove Farm',
+    place: 'Gloucestershire, United Kingdom',
+    area: 16.5,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
     program: {
       id: '1',
       address: '0x1234567890123456789012345678901234567890',
@@ -19,24 +20,27 @@ export const mockProjects: Project[] = [
   },
   {
     id: '2',
-    title: 'Meadowridge Farm',
-    location: 'Somerset, United Kingdom',
-    area: '30 ha',
-    imageSrc: '/coorong.png',
+    name: 'Meadowridge Farm',
+    place: 'Somerset, United Kingdom',
+    area: 30,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
   },
   {
     id: '3',
-    title: 'Springbrook Farm',
-    location: 'Norfolk, United Kingdom',
-    area: '204 ha',
-    imageSrc: '/coorong.png',
+    name: 'Springbrook Farm',
+    place: 'Norfolk, United Kingdom',
+    area: 204,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
   },
   {
     id: '4',
-    title: 'Rosewood Farm',
-    location: 'Lincolnshire, United Kingdom',
-    area: '204 ha',
-    imageSrc: '/coorong.png',
+    name: 'Rosewood Farm',
+    place: 'Lincolnshire, United Kingdom',
+    area: 204,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
     program: {
       id: '1',
       address: '0x1234567890123456789012345678901234567890',
@@ -48,17 +52,19 @@ export const mockProjects: Project[] = [
   },
   {
     id: '5',
-    title: 'Ashbourne Farm',
-    location: 'Lincolnshire, United Kingdom',
-    area: '204 ha',
-    imageSrc: '/coorong.png',
+    name: 'Ashbourne Farm',
+    place: 'Lincolnshire, United Kingdom',
+    area: 204,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
   },
   {
     id: '6',
-    title: 'Willow Grove Farm',
-    location: 'Gloucestershire, United Kingdom',
-    area: '16.5 ha',
-    imageSrc: '/coorong.png',
+    name: 'Willow Grove Farm',
+    place: 'Gloucestershire, United Kingdom',
+    area: 16.5,
+    areaUnit: 'ha.',
+    imgSrc: '/coorong.png',
     program: {
       id: '1',
       address: '0x1234567890123456789012345678901234567890',

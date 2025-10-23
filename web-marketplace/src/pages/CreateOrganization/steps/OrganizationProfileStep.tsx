@@ -1,4 +1,5 @@
-import React, {
+import {
+  forwardRef,
   useCallback,
   useEffect,
   useMemo,
@@ -22,33 +23,38 @@ import {
 import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
 
 import TransferProfileModal from '../components/TransferProfileModal';
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
   CREATE_ORG_ORGANIZATION_NAME_LABEL,
+  ORGANIZATION_PROFILE_FORM_ID,
 } from '../CreateOrganization.constants';
 import { hasTransferableProfile } from '../CreateOrganization.utils';
 import { useCreateDao } from '../hooks/useCreateDao/useCreateDao';
 import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
 import type { OrganizationProfileStepProps } from './OrganizationProfileStep.types';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
-  ({
-    formId,
-    initialValues,
-    activeAccountId,
-    activeAccount,
-    hasUnfinishedOrganization,
-    daoAddress,
-    setDaoAddress,
-    organizationId,
-    setOrganizationId,
-    onTransferProfile,
-    data,
-    handleSaveNext,
-    onValidityChange,
-  }) => {
+export const OrganizationProfileStep = forwardRef<
+  MultiStepFormApi,
+  OrganizationProfileStepProps
+>(
+  (
+    {
+      initialValues,
+      activeAccountId,
+      activeAccount,
+      hasUnfinishedOrganization,
+      daoAddress,
+      setDaoAddress,
+      organizationId,
+      setOrganizationId,
+      onTransferProfile,
+    },
+    ref,
+  ) => {
     const { _ } = useLingui();
     const { createDao } = useCreateDao();
     const { wallet } = useWallet();
@@ -57,6 +63,7 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
     const onUpload = useOnUploadCallback({
       fileNamesToDeleteRef,
     });
+    const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
 
     const [showTransferModal, setShowTransferModal] = useState(false);
     const [transferHandled, setTransferHandled] = useState(
@@ -197,22 +204,6 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
       ],
     );
 
-    const handleFormStateChange = useCallback(
-      ({
-        isValid,
-        errors,
-      }: {
-        isValid: boolean;
-        isDirty: boolean;
-        isSubmitting: boolean;
-        errors: FieldErrors<EditProfileFormSchemaType>;
-      }) => {
-        const hasErrors = Object.keys(errors).length > 0;
-        onValidityChange?.(isValid && !hasErrors);
-      },
-      [onValidityChange],
-    );
-
     return (
       <>
         <TransferProfileModal
@@ -223,16 +214,17 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
           avatar={activeAccount?.image || DEFAULT_PROFILE_USER_AVATAR}
         />
         <EditProfileForm
-          formId={formId}
+          ref={ref}
+          formId={ORGANIZATION_PROFILE_FORM_ID}
           onSubmit={handleSubmit}
           initialValues={initialValues as EditProfileFormSchemaType}
           hideProfileType
           nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
           onUpload={onUpload}
           prefillValues={initialValues as EditProfileFormSchemaType}
-          onFormStateChange={handleFormStateChange}
           validationMode="onChange"
         />
       </>
     );
-  };
+  },
+);

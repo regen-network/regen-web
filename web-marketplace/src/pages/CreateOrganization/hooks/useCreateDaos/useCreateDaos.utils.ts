@@ -9,7 +9,7 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/getCodeDetailsQuery/getCodeDetailsQuery';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
-import { lookupContractChecksum } from './useCreateDao.constants';
+import { lookupContractChecksum } from './useCreateDaos.constants';
 
 export const parseCodeId = (
   envVarName: string,

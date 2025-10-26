@@ -4,7 +4,7 @@ import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { SelectProjectCard } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard';
 
 import { FormValues, MigrateProjectsProps } from './MigrateProjects.types';
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
 
 export const MigrateProjects = forwardRef<
@@ -25,12 +25,41 @@ export const MigrateProjects = forwardRef<
     });
     const { isSubmitting, isValid } = useFormState({ control: form.control });
 
-    useImperativeHandle(ref, () => ({
-      trigger: () => form.trigger([], { shouldFocus: true }),
-      submit: () => form.handleSubmit(onSubmit)(),
-      isSubmitting,
-      isValid,
-    }));
+    const onSubmitRef = useRef(onSubmit);
+    const isSubmittingRef = useRef(isSubmitting);
+    const isValidRef = useRef(isValid);
+
+    useEffect(() => {
+      onSubmitRef.current = onSubmit;
+    }, [onSubmit]);
+    useEffect(() => {
+      isSubmittingRef.current = isSubmitting;
+    }, [isSubmitting]);
+    useEffect(() => {
+      isValidRef.current = isValid;
+    }, [isValid]);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        trigger: (names?: string | string[]) =>
+          form.trigger(names ?? [], { shouldFocus: true }),
+        submit: () => form.handleSubmit(vals => onSubmitRef.current?.(vals))(),
+        isSubmitting: () => isSubmittingRef.current,
+        isValid: () => isValidRef.current,
+      }),
+      [],
+    ); // <- stable, never torn down
+    // useImperativeHandle(
+    //   ref,
+    //   () => ({
+    //     trigger: () => form.trigger([], { shouldFocus: true }),
+    //     submit: () => form.handleSubmit(onSubmit)(),
+    //     isSubmitting: () => isSubmitting,
+    //     isValid: () => isValid,
+    //   }),
+    //   [form, onSubmit, isSubmitting, isValid],
+    // );
 
     return (
       <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">

@@ -32,6 +32,7 @@ export const CREATE_ORG_INVITE_MEMBERS_DESCRIPTION = msg`Invite teammates to col
 export const CREATE_ORG_WALLET_REQUIRED_ERROR = msg`A connected wallet is required to create an organization.`;
 export const CREATE_ORG_SIGNING_CLIENT_ERROR = msg`Failed to initialize signing client`;
 export const CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR = msg`Active account is required to create an organization.`;
+export const CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR = msg`An organization is required to migrate projects`;
 
 export type CreateOrgInitialValues = {};
 export const CREATE_ORG_INITIAL_VALUES: CreateOrgInitialValues = {};

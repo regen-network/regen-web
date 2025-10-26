@@ -12,8 +12,10 @@ import { useLingui } from '@lingui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AccountType } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_BG,
@@ -23,19 +25,17 @@ import {
 import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import { MultiStepFormApi } from 'pages/CreateOrganization/CreateOrganization.types';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import TransferProfileModal from '../components/TransferProfileModal';
 import {
-  CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
   CREATE_ORG_ORGANIZATION_NAME_LABEL,
   ORGANIZATION_PROFILE_FORM_ID,
 } from '../CreateOrganization.constants';
 import { hasTransferableProfile } from '../CreateOrganization.utils';
-import { useCreateDao } from '../hooks/useCreateDao/useCreateDao';
+import { useCreateDaos } from '../hooks/useCreateDaos/useCreateDaos';
 import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
 import type { OrganizationProfileStepProps } from './OrganizationProfileStep.types';
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 export const OrganizationProfileStep = forwardRef<
   MultiStepFormApi,
@@ -44,8 +44,6 @@ export const OrganizationProfileStep = forwardRef<
   (
     {
       initialValues,
-      activeAccountId,
-      activeAccount,
       hasUnfinishedOrganization,
       daoAddress,
       setDaoAddress,
@@ -56,8 +54,9 @@ export const OrganizationProfileStep = forwardRef<
     ref,
   ) => {
     const { _ } = useLingui();
-    const { createDao } = useCreateDao();
+    const { createDaos } = useCreateDaos();
     const { wallet } = useWallet();
+    const { activeAccount } = useAuth();
     const walletAddress = wallet?.address;
     const fileNamesToDeleteRef = useRef<string[]>([]);
     const onUpload = useOnUploadCallback({
@@ -149,26 +148,24 @@ export const OrganizationProfileStep = forwardRef<
         }
 
         try {
-          if (!activeAccountId) {
-            throw new Error(_(CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR));
-          }
-
           const organizationIdValue = organizationId ?? uuidv4();
           setOrganizationId(organizationIdValue);
 
-          const daoResult = await createDao({
-            name: values.name,
-            description: values.description,
-            profileImage: values.profileImage,
-            backgroundImage: values.backgroundImage,
-            websiteLink: values.websiteLink,
-            twitterLink: values.twitterLink,
-            organizationId: organizationIdValue,
-            currentAccountId: activeAccountId,
-          });
+          const daoResult = await createDaos([
+            {
+              name: values.name,
+              description: values.description,
+              profileImage: values.profileImage,
+              backgroundImage: values.backgroundImage,
+              websiteLink: values.websiteLink,
+              twitterLink: values.twitterLink,
+              organizationId: organizationIdValue,
+              type: 'organization',
+            },
+          ]);
 
-          setDaoAddress(daoResult.daoAddress);
-          setOrganizationId(daoResult.organizationId);
+          setDaoAddress(daoResult[0].daoAddress);
+          setOrganizationId(daoResult[0].organizationId);
           setTransferHandled(true);
           setShowTransferModal(false);
 
@@ -197,8 +194,7 @@ export const OrganizationProfileStep = forwardRef<
         setOrganizationId,
         data,
         handleSaveNext,
-        activeAccountId,
-        createDao,
+        createDaos,
         walletAddress,
         _,
       ],

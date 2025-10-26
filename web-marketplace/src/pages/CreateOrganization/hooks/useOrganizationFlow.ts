@@ -8,8 +8,8 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { getCreateOrgSteps } from '../CreateOrganization.utils';
 import { MultiStepFormApi } from '../CreateOrganization.types';
+import { getCreateOrgSteps } from '../CreateOrganization.utils';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {

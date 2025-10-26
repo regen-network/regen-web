@@ -24,9 +24,10 @@ export const useFetchSellOrders = (
       return getSellOrdersBySellerQuery({
         client: queryClient as QueryClient,
         reactQueryClient,
-        sellerAddress: sellerAddress,
+        sellerAddress,
         offset: BigInt(pagination?.offset ?? 0),
         limit: BigInt(pagination?.limit ?? 100),
+        enabled: !!queryClient,
       });
     }
     return getSellOrdersExtendedQuery({

@@ -1,11 +1,4 @@
-import {
-  createRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
@@ -19,6 +12,9 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
+import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 import {
   MultiStepTemplate,
@@ -39,6 +35,8 @@ import {
   ORGANIZATION_PROFILE_FORM_ID,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
+import { MultiStepFormApi } from './CreateOrganization.types';
+import { getCreateOrgSteps } from './CreateOrganization.utils';
 import {
   OrganizationMultiStepData,
   useOrganizationFlow,
@@ -48,10 +46,7 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
-import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
-import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
-import { getCreateOrgSteps } from './CreateOrganization.utils';
-import { MultiStepFormApi } from './CreateOrganization.types';
+import { Loading } from 'web-components/src/components/loading';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
@@ -73,9 +68,9 @@ function CreateOrganizationContent({
     handleSaveNext,
     isLastStep,
     data,
+    isLoadingAdminProjects,
     handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
-  const { activeAccount } = useAuth();
   const activeRef = useRef<MultiStepFormApi>(null);
 
   const {
@@ -101,7 +96,14 @@ function CreateOrganizationContent({
     walletAddress,
     activeRef,
   });
-
+  console.log(
+    'parent ',
+    activeRef.current,
+  );
+  console.log(
+    'parent valid',
+    activeRef.current?.isValid(),
+  );
   return (
     <>
       {steps[activeStep].id === ORGANIZATION_PROFILE_FORM_ID && (
@@ -109,8 +111,6 @@ function CreateOrganizationContent({
           ref={activeRef}
           key={`org-profile-${orgProfileInitialValuesVersion}`}
           initialValues={orgProfileInitialValues}
-          activeAccountId={activeAccount?.id}
-          activeAccount={activeAccount}
           hasUnfinishedOrganization={hasUnfinishedOrganization}
           daoAddress={daoAddress}
           setDaoAddress={setDaoAddress}
@@ -129,7 +129,7 @@ function CreateOrganizationContent({
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
         saveDisabled={
-          activeRef.current?.isSubmitting || !activeRef.current?.isValid
+          activeRef.current?.isSubmitting() || !activeRef.current?.isValid()
         }
         percentComplete={percentComplete}
       />
@@ -236,6 +236,7 @@ export default function CreateOrganizationPage(): JSX.Element {
           resumeStep={resumeStep}
           walletAddress={walletAddress}
           steps={steps}
+          isLoadingAdminProjects={isLoadingAdminProjects}
         />
       </MultiStepTemplate>
     </>

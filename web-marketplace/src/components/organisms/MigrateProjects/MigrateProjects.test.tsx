@@ -33,7 +33,7 @@ const mockProjects: Project[] = [
     name: 'Project Gamma',
     imgSrc: 'gamma.jpg',
     place: 'Location C',
-    area: 204,
+    area: 300,
     areaUnit: 'ha.',
   },
 ];

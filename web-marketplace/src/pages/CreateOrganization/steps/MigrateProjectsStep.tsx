@@ -1,20 +1,20 @@
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { useLingui } from '@lingui/react';
 
+import { Loading } from 'web-components/src/components/loading';
 import { Body } from 'web-components/src/components/typography';
 
 import { useAuth } from 'lib/auth/auth';
 
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
+import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
 
 import {
   CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION,
   CREATE_ORG_MIGRATE_PROJECTS_NOTE,
 } from '../CreateOrganization.constants';
-import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
-import { Loading } from 'web-components/src/components/loading';
-import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
-import { forwardRef } from 'react';
 import { MultiStepFormApi } from '../CreateOrganization.types';
+import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
 
 export const MigrateProjectsStep = forwardRef<MultiStepFormApi>(
   (_props, ref) => {
@@ -26,7 +26,33 @@ export const MigrateProjectsStep = forwardRef<MultiStepFormApi>(
       adminAddress: activeAccount?.addr,
     });
 
-    const migrateProjects = useMigrateProjects();
+    const migrateProjects = useMigrateProjects(adminProjects);
+
+    const innerRef = useRef<MultiStepFormApi>(null);
+    // console.log('innerREF', innerRef.current, innerRef.current?.isValid());
+    // console.log('ref', ref?.current, ref?.current?.isValid());
+    // useImperativeHandle(
+    //   ref,
+    //   () => ({
+    //     trigger: (names?: string | string[]) =>
+    //       innerRef.current?.trigger?.(names) ?? Promise.resolve(false),
+    //     submit: () => innerRef.current?.submit?.() ?? Promise.resolve(),
+    //     isSubmitting: () => innerRef.current?.isSubmitting?.() ?? false,
+    //     isValid: () => innerRef.current?.isValid?.() ?? false,
+    //   }),
+    //   [],
+    // );
+    useImperativeHandle(
+      ref,
+      () => ({
+        trigger: names =>
+          innerRef.current?.trigger?.(names) ?? Promise.resolve(false),
+        submit: () => innerRef.current?.submit?.() ?? Promise.resolve(),
+        isSubmitting: () => innerRef.current?.isSubmitting?.() ?? false,
+        isValid: () => innerRef.current?.isValid?.() ?? false,
+      }),
+      [],
+    );
 
     return (
       <div>
@@ -36,7 +62,12 @@ export const MigrateProjectsStep = forwardRef<MultiStepFormApi>(
             {_(CREATE_ORG_MIGRATE_PROJECTS_NOTE)}
           </Body>
         </div>
-        {isLoadingAdminProjects ? (
+        <MigrateProjects
+          ref={innerRef}
+          projects={adminProjects}
+          onSubmit={migrateProjects}
+        />
+        {/* {isLoadingAdminProjects ? (
           <Loading />
         ) : (
           <MigrateProjects
@@ -44,7 +75,7 @@ export const MigrateProjectsStep = forwardRef<MultiStepFormApi>(
             projects={adminProjects}
             onSubmit={migrateProjects}
           />
-        )}
+        )} */}
       </div>
     );
   },

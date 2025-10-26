@@ -1,15 +1,16 @@
 import type { AccountByIdQuery } from 'generated/graphql';
 import { AccountType } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import {
-  ORG_PROFILE,
-  MIGRATE_PROJECTS,
-  MIGRATE_PROJECTS_TITLE,
-  PERSONAL_INFO,
   INVITE_MEMBERS,
   INVITE_MEMBERS_FORM_ID,
+  MIGRATE_PROJECTS,
   MIGRATE_PROJECTS_FORM_ID,
+  MIGRATE_PROJECTS_TITLE,
+  ORG_PROFILE,
   ORGANIZATION_PROFILE_FORM_ID,
+  PERSONAL_INFO,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
 

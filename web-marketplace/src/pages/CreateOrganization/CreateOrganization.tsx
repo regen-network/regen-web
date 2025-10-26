@@ -35,7 +35,6 @@ import {
   ORGANIZATION_PROFILE_FORM_ID,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
-import { MultiStepFormApi } from './CreateOrganization.types';
 import { getCreateOrgSteps } from './CreateOrganization.utils';
 import {
   OrganizationMultiStepData,
@@ -68,10 +67,8 @@ function CreateOrganizationContent({
     handleSaveNext,
     isLastStep,
     data,
-    isLoadingAdminProjects,
     handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
-  const activeRef = useRef<MultiStepFormApi>(null);
 
   const {
     daoAddress,
@@ -94,21 +91,16 @@ function CreateOrganizationContent({
     handleResetData,
     resumeStep,
     walletAddress,
-    activeRef,
+    steps,
   });
-  console.log(
-    'parent ',
-    activeRef.current,
-  );
-  console.log(
-    'parent valid',
-    activeRef.current?.isValid(),
-  );
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
   return (
     <>
       {steps[activeStep].id === ORGANIZATION_PROFILE_FORM_ID && (
         <OrganizationProfileStep
-          ref={activeRef}
           key={`org-profile-${orgProfileInitialValuesVersion}`}
           initialValues={orgProfileInitialValues}
           hasUnfinishedOrganization={hasUnfinishedOrganization}
@@ -117,10 +109,15 @@ function CreateOrganizationContent({
           organizationId={organizationId}
           setOrganizationId={setOrganizationId}
           onTransferProfile={handleApplyTransferProfile}
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
         />
       )}
       {steps[activeStep].id === MIGRATE_PROJECTS_FORM_ID && (
-        <MigrateProjectsStep ref={activeRef} />
+        <MigrateProjectsStep
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
+        />
       )}
       {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
       {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
@@ -128,9 +125,7 @@ function CreateOrganizationContent({
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={
-          activeRef.current?.isSubmitting() || !activeRef.current?.isValid()
-        }
+        saveDisabled={!isValid || isSubmitting}
         percentComplete={percentComplete}
       />
     </>
@@ -219,26 +214,29 @@ export default function CreateOrganizationPage(): JSX.Element {
           />
         </div>
       </SadBeeModal>
-      <MultiStepTemplate
-        formId={CREATE_ORGANIZATION_FORM_ID}
-        initialValues={CREATE_ORG_INITIAL_VALUES}
-        steps={steps}
-        withLocalStorage
-        forceStep={resumeStep}
-        onClose={handleRequestClose}
-        closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
-        classes={{
-          titleWrap: 'pb-40 max-w-[unset]',
-          formWrap: 'max-w-[800px]',
-        }}
-      >
-        <CreateOrganizationContent
-          resumeStep={resumeStep}
-          walletAddress={walletAddress}
+      {isLoadingAdminProjects ? (
+        <Loading />
+      ) : (
+        <MultiStepTemplate
+          formId={CREATE_ORGANIZATION_FORM_ID}
+          initialValues={CREATE_ORG_INITIAL_VALUES}
           steps={steps}
-          isLoadingAdminProjects={isLoadingAdminProjects}
-        />
-      </MultiStepTemplate>
+          withLocalStorage
+          forceStep={resumeStep}
+          onClose={handleRequestClose}
+          closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
+          classes={{
+            titleWrap: 'pb-40 max-w-[unset]',
+            formWrap: 'max-w-[800px]',
+          }}
+        >
+          <CreateOrganizationContent
+            resumeStep={resumeStep}
+            walletAddress={walletAddress}
+            steps={steps}
+          />
+        </MultiStepTemplate>
+      )}
     </>
   );
 }

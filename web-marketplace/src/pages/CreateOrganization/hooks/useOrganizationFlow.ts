@@ -8,7 +8,6 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { MultiStepFormApi } from '../CreateOrganization.types';
 import { getCreateOrgSteps } from '../CreateOrganization.utils';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
@@ -29,7 +28,7 @@ type UseOrganizationFlowParams = {
   handleResetData: () => void;
   resumeStep: number;
   walletAddress?: string;
-  activeRef: React.RefObject<MultiStepFormApi>;
+  steps: ReturnType<typeof getCreateOrgSteps>;
 };
 
 type ApplyTransferPayload = {
@@ -76,7 +75,7 @@ export const useOrganizationFlow = ({
   handleResetData,
   resumeStep,
   walletAddress,
-  activeRef,
+  steps,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
   const [organizationId, setOrganizationId] = useState<string | undefined>(
@@ -157,16 +156,24 @@ export const useOrganizationFlow = ({
   }, [activeStep, handleBack]);
 
   const handleNextClick = useCallback(async () => {
-    const step = activeRef.current;
-    if (!step) return;
+    const formId = steps[activeStep].id;
+    const form = document.getElementById(formId) as HTMLFormElement | undefined;
 
-    if (!step.isValid || step.isSubmitting) return;
+    if (!form) return;
 
-    const ok = await step.trigger();
-    if (!ok) return;
+    const isValid = form.checkValidity();
+    if (!isValid) {
+      form.reportValidity?.();
+      return;
+    }
 
-    // run submit logic for that step
-    await step.submit();
+    if (typeof form.requestSubmit === 'function') {
+      form.requestSubmit();
+    } else {
+      form.dispatchEvent(
+        new Event('submit', { bubbles: true, cancelable: true }),
+      );
+    }
 
     if (hasUnfinishedOrganization && daoAddress && isLastStep) {
       handleResetData();

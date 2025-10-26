@@ -1,6 +1,6 @@
-export interface MultiStepFormApi {
-  trigger: (names?: string | string[]) => Promise<boolean>;
-  submit: () => Promise<void>;
-  isSubmitting: boolean;
-  isValid: boolean;
+import { UseStateSetter } from 'types/react/use-state';
+
+export interface FormStateSetter {
+  setIsValid: UseStateSetter<boolean>;
+  setIsSubmitting: UseStateSetter<boolean>;
 }

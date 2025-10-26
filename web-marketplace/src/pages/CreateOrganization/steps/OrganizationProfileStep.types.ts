@@ -1,4 +1,5 @@
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+import { FormStateSetter } from '../CreateOrganization.types';
 
 export type OrganizationProfileStepProps = {
   initialValues: Partial<EditProfileFormSchemaType>;
@@ -10,4 +11,4 @@ export type OrganizationProfileStepProps = {
   onTransferProfile: (payload: {
     nextValues: Partial<EditProfileFormSchemaType>;
   }) => void;
-};
+} & FormStateSetter;

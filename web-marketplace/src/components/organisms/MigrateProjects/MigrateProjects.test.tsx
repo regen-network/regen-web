@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 import {
   fireEvent,
   render,
@@ -9,7 +10,6 @@ import {
 } from 'web-components/test/test-utils';
 
 import { MigrateProjects } from './MigrateProjects';
-import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 
 const mockProjects: Project[] = [
   {

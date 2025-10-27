@@ -14,8 +14,8 @@ import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchE
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { useCreateDaos } from '../useCreateDaos/useCreateDaos';
-import { CreateDaoParams } from '../useCreateDaos/useCreateDaos.types';
+import { useCreateDao } from '../useCreateDao/useCreateDao';
+import { CreateDaoParams } from '../useCreateDao/useCreateDao.types';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
 import { regen } from '@regen-network/api';
 
@@ -25,7 +25,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
-  const { createDaos } = useCreateDaos();
+  const { createDaos } = useCreateDao();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const {
     data: sellOrdersData,

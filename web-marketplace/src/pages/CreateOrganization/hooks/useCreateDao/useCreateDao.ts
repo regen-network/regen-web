@@ -29,8 +29,8 @@ import {
   proposalSingleCodeId,
   protobufRegistryCodeId,
   rbamCodeId,
-} from './useCreateDaos.constants';
-import type { CreateDaoParams } from './useCreateDaos.types';
+} from './useCreateDao.constants';
+import type { CreateDaoParams } from './useCreateDao.types';
 import {
   encodeJsonToBase64,
   organizationRoles,
@@ -38,9 +38,9 @@ import {
   predictAllAddresses,
   projectRoles,
   sanitizeDaoParams,
-} from './useCreateDaos.utils';
+} from './useCreateDao.utils';
 
-export const useCreateDaos = () => {
+export const useCreateDao = () => {
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
   const queryClient = useQueryClient();

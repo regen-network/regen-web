@@ -25,7 +25,7 @@ import {
   ORGANIZATION_PROFILE_FORM_ID,
 } from '../CreateOrganization.constants';
 import { hasTransferableProfile } from '../CreateOrganization.utils';
-import { useCreateDaos } from '../hooks/useCreateDaos/useCreateDaos';
+import { useCreateDao } from '../hooks/useCreateDao/useCreateDao';
 import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
 import type { OrganizationProfileStepProps } from './OrganizationProfileStep.types';
 
@@ -41,7 +41,7 @@ export const OrganizationProfileStep = ({
   setIsValid,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
-  const { createDaos } = useCreateDaos();
+  const { createDaos } = useCreateDao();
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
   const walletAddress = wallet?.address;

@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
+import { Loading } from 'web-components/src/components/loading';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
@@ -11,7 +12,11 @@ import { Title } from 'web-components/src/components/typography';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
+import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 import {
   MultiStepTemplate,
@@ -25,11 +30,14 @@ import {
   CREATE_ORG_DISCARD_DESCRIPTION,
   CREATE_ORG_DISCARD_TITLE,
   CREATE_ORG_FINISH_LABEL,
-  CREATE_ORG_FORM_ID,
   CREATE_ORG_INITIAL_VALUES,
-  CREATE_ORG_STEPS,
+  CREATE_ORGANIZATION_FORM_ID,
+  INVITE_MEMBERS_FORM_ID,
+  MIGRATE_PROJECTS_FORM_ID,
+  ORGANIZATION_PROFILE_FORM_ID,
+  PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
-import { useCreateDao } from './hooks/useCreateDao/useCreateDao';
+import { getCreateOrgSteps } from './CreateOrganization.utils';
 import {
   OrganizationMultiStepData,
   useOrganizationFlow,
@@ -39,16 +47,19 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
-import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
   walletAddress?: string;
+  steps: ReturnType<typeof getCreateOrgSteps>;
+  projects: NormalizeProject[];
 };
 
 function CreateOrganizationContent({
   resumeStep,
   walletAddress,
+  steps,
+  projects,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -61,8 +72,6 @@ function CreateOrganizationContent({
     data,
     handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
-  const { activeAccount } = useAuth();
-  const { isCreating } = useCreateDao();
 
   const {
     daoAddress,
@@ -78,7 +87,6 @@ function CreateOrganizationContent({
   } = useOrganizationFlow({
     activeStep,
     isLastStep,
-    isCreating,
     data,
     handleActiveStep,
     handleBack,
@@ -86,45 +94,42 @@ function CreateOrganizationContent({
     handleResetData,
     resumeStep,
     walletAddress,
+    steps,
   });
-  const [isStepValid, setIsStepValid] = useState(activeStep !== 0);
 
-  useEffect(() => {
-    if (activeStep === 0) {
-      setIsStepValid(false);
-    } else {
-      setIsStepValid(true);
-    }
-  }, [activeStep]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   return (
     <>
-      {activeStep === 0 && (
+      {steps[activeStep].id === ORGANIZATION_PROFILE_FORM_ID && (
         <OrganizationProfileStep
-          formId={CREATE_ORG_FORM_ID}
           key={`org-profile-${orgProfileInitialValuesVersion}`}
           initialValues={orgProfileInitialValues}
-          activeAccountId={activeAccount?.id}
-          activeAccount={activeAccount}
           hasUnfinishedOrganization={hasUnfinishedOrganization}
           daoAddress={daoAddress}
           setDaoAddress={setDaoAddress}
           organizationId={organizationId}
           setOrganizationId={setOrganizationId}
           onTransferProfile={handleApplyTransferProfile}
-          data={data}
-          handleSaveNext={handleSaveNext}
-          onValidityChange={setIsStepValid}
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
         />
       )}
-      {activeStep === 1 && <MigrateProjectsStep />}
-      {activeStep === 2 && <PersonalInfoStep />}
-      {activeStep === 3 && <InviteMembersStep />}
+      {steps[activeStep].id === MIGRATE_PROJECTS_FORM_ID && (
+        <MigrateProjectsStep
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
+          projects={projects}
+        />
+      )}
+      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
+      {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
       <SaveFooter
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={isCreating || !isStepValid}
+        saveDisabled={!isValid || isSubmitting}
         percentComplete={percentComplete}
       />
     </>
@@ -149,10 +154,25 @@ export default function CreateOrganizationPage(): JSX.Element {
     ? organizationProgress
     : undefined;
 
+  const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
+    adminAccountId: activeAccount?.id,
+    adminAddress: activeAccount?.addr,
+  });
+  const projects = useMemo(
+    () => adminProjects.filter(p => !!p.offChainId),
+    [adminProjects],
+  );
+
+  const steps = useMemo(
+    () =>
+      getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
+    [_, isLoadingAdminProjects, projects],
+  );
+
   const resumeStep = useMemo(() => {
     if (!matchedProgress) return 0;
-    return Math.min(matchedProgress.step, CREATE_ORG_STEPS.length - 1);
-  }, [matchedProgress]);
+    return Math.min(matchedProgress.step, steps.length - 1);
+  }, [matchedProgress, steps]);
 
   const { menuOrganizationProfile, unfinalizedOrgCreation } =
     useOrganizationMenuProfile({
@@ -166,7 +186,6 @@ export default function CreateOrganizationPage(): JSX.Element {
       navigate('/dashboard', { replace: true });
     }
   }, [
-    ,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     navigate,
@@ -202,21 +221,30 @@ export default function CreateOrganizationPage(): JSX.Element {
           />
         </div>
       </SadBeeModal>
-      <MultiStepTemplate
-        formId={CREATE_ORG_FORM_ID}
-        initialValues={CREATE_ORG_INITIAL_VALUES}
-        steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
-        withLocalStorage
-        forceStep={resumeStep}
-        onClose={handleRequestClose}
-        closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
-        classes={{ titleWrap: 'pb-40' }}
-      >
-        <CreateOrganizationContent
-          resumeStep={resumeStep}
-          walletAddress={walletAddress}
-        />
-      </MultiStepTemplate>
+      {isLoadingAdminProjects ? (
+        <Loading className="min-h-[100vh]" />
+      ) : (
+        <MultiStepTemplate
+          formId={CREATE_ORGANIZATION_FORM_ID}
+          initialValues={CREATE_ORG_INITIAL_VALUES}
+          steps={steps}
+          withLocalStorage
+          forceStep={resumeStep}
+          onClose={handleRequestClose}
+          closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
+          classes={{
+            titleWrap: 'pb-40 max-w-[unset]',
+            formWrap: 'max-w-[800px]',
+          }}
+        >
+          <CreateOrganizationContent
+            resumeStep={resumeStep}
+            walletAddress={walletAddress}
+            steps={steps}
+            projects={projects}
+          />
+        </MultiStepTemplate>
+      )}
     </>
   );
 }

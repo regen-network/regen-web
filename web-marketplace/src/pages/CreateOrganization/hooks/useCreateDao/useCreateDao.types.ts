@@ -6,14 +6,6 @@ export type CreateDaoParams = {
   websiteLink?: string;
   twitterLink?: string;
   organizationId: string;
-  currentAccountId: string;
-};
-
-export type CreateDaoResult = {
-  daoAddress: string;
-  votingModuleAddress: string;
-  cw4GroupAddress: string;
-  rbamAddress: string;
-  transactionHash: string;
-  organizationId: string;
+  type: 'organization' | 'project';
+  projectId?: string;
 };

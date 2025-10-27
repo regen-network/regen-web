@@ -8,7 +8,7 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { CREATE_ORG_FORM_ID } from '../CreateOrganization.constants';
+import { getCreateOrgSteps } from '../CreateOrganization.utils';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {
@@ -21,7 +21,6 @@ export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
 type UseOrganizationFlowParams = {
   activeStep: number;
   isLastStep: boolean;
-  isCreating: boolean;
   data: OrganizationMultiStepData | undefined;
   handleActiveStep: (step: number) => void;
   handleBack: () => void;
@@ -29,6 +28,7 @@ type UseOrganizationFlowParams = {
   handleResetData: () => void;
   resumeStep: number;
   walletAddress?: string;
+  steps: ReturnType<typeof getCreateOrgSteps>;
 };
 
 type ApplyTransferPayload = {
@@ -68,7 +68,6 @@ const mapInitialValues = (
 export const useOrganizationFlow = ({
   activeStep,
   isLastStep,
-  isCreating,
   data,
   handleActiveStep,
   handleBack,
@@ -76,6 +75,7 @@ export const useOrganizationFlow = ({
   handleResetData,
   resumeStep,
   walletAddress,
+  steps,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
   const [organizationId, setOrganizationId] = useState<string | undefined>(
@@ -155,33 +155,25 @@ export const useOrganizationFlow = ({
     handleBack();
   }, [activeStep, handleBack]);
 
-  const handleNextClick = useCallback(() => {
-    if (isCreating) return;
+  const handleNextClick = useCallback(async () => {
+    const formId = steps[activeStep].id;
+    const form = document.getElementById(formId) as HTMLFormElement | undefined;
 
-    if (activeStep === 0) {
-      const form = document.getElementById(CREATE_ORG_FORM_ID) as
-        | HTMLFormElement
-        | undefined;
+    if (!form) return;
 
-      if (!form) return;
-
-      const isValid = form.checkValidity();
-      if (!isValid) {
-        form.reportValidity?.();
-        return;
-      }
-
-      if (typeof form.requestSubmit === 'function') {
-        form.requestSubmit();
-      } else {
-        form.dispatchEvent(
-          new Event('submit', { bubbles: true, cancelable: true }),
-        );
-      }
+    const isValid = form.checkValidity();
+    if (!isValid) {
+      form.reportValidity?.();
       return;
     }
 
-    handleSaveNext({});
+    if (typeof form.requestSubmit === 'function') {
+      form.requestSubmit();
+    } else {
+      form.dispatchEvent(
+        new Event('submit', { bubbles: true, cancelable: true }),
+      );
+    }
 
     if (hasUnfinishedOrganization && daoAddress && isLastStep) {
       handleResetData();
@@ -190,13 +182,12 @@ export const useOrganizationFlow = ({
       setHasUnfinishedOrganization(false);
     }
   }, [
-    activeStep,
     daoAddress,
-    handleSaveNext,
     handleResetData,
     hasUnfinishedOrganization,
-    isCreating,
     isLastStep,
+    activeStep,
+    steps,
   ]);
 
   const handleApplyTransferProfile = useCallback(

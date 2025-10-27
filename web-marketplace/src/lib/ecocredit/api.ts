@@ -463,9 +463,27 @@ export const queryBalances = async ({
   request,
 }: QueryBalancesProps): Promise<QueryBalancesResponse> => {
   try {
-    return await client.regen.ecocredit.v1.balances({
-      ...request,
-    });
+    if (!request.pagination) {
+      let balances: BatchBalanceInfo[] = [];
+      let response: QueryBalancesResponse | undefined;
+      while (!response || response.pagination?.nextKey?.length) {
+        if (response?.pagination?.nextKey?.length) {
+          request.pagination = {
+            key: response.pagination.nextKey,
+            countTotal: false,
+            offset: 0n,
+            limit: 100n,
+            reverse: false,
+          };
+        }
+        response = await client.regen.ecocredit.v1.balances(request);
+        balances.push(...response.balances);
+      }
+      return { balances };
+    } else
+      return await client.regen.ecocredit.v1.balances({
+        ...request,
+      });
   } catch (err) {
     throw new Error(
       `Error in the Balances query of the ledger ecocredit module: ${err}`,

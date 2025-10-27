@@ -22,11 +22,12 @@ export function getSellOrdersBySellerQuery(queryConfig: {
   client: QueryClient;
   reactQueryClient: ReactQueryClient;
   sellerAddress: string;
-  offset: bigint;
-  limit: bigint;
+  offset?: bigint;
+  limit?: bigint;
   // Currently Regen Ledger queries do not support sorting - for
   // cases where we need sorting functionality we fetch all sell orders.
   serverPagination?: boolean;
+  enabled: boolean;
 }) {
   const {
     client,
@@ -39,8 +40,8 @@ export function getSellOrdersBySellerQuery(queryConfig: {
 
   const queryKey = getSellOrdersBySellerKey(
     sellerAddress,
-    serverPagination ? offset.toString() : undefined,
-    serverPagination ? limit.toString() : undefined,
+    serverPagination && offset ? offset.toString() : undefined,
+    serverPagination && limit ? limit.toString() : undefined,
   );
 
   return {
@@ -49,7 +50,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
       let sellOrders: SellOrderInfo[] = [];
       let response: QuerySellOrdersResponse | undefined;
 
-      if (serverPagination) {
+      if (serverPagination && offset && limit) {
         // fetch paged sellOrdersBySeller
         const request: QuerySellOrdersBySellerRequest = {
           seller: sellerAddress,
@@ -134,7 +135,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
       });
     },
     keepPreviousData: true,
-    enabled: !!client,
+    enabled: queryConfig.enabled,
     initialData: undefined,
   };
 }

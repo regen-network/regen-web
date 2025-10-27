@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import SuccessIcon from '../../icons/SuccessIcon';
 import { ProjectCard } from '../ProjectCard/ProjectCard';
 import { SelectProjectCardProps } from './SelectProjectCard.types';
@@ -14,20 +12,7 @@ export const SelectProjectCard = ({
   selected,
   onClick,
 }: SelectProjectCardProps) => {
-  const { id: projectId, imageSrc, title, location, area } = project;
-
-  const { areaNumber, areaUnit } = useMemo(() => {
-    if (typeof area !== 'string' || !area.includes(' ')) {
-      return { areaNumber: undefined, areaUnit: undefined };
-    }
-    const parts = area.split(' ');
-    const number = parseFloat(parts[0]);
-
-    return {
-      areaNumber: isNaN(number) ? undefined : number,
-      areaUnit: parts[1],
-    };
-  }, [area]);
+  const { id: projectId, imgSrc, name, place, area, areaUnit } = project;
 
   const cardId = `select-project-card-${projectId}`;
 
@@ -46,7 +31,7 @@ export const SelectProjectCard = ({
         checked={selected}
         onChange={() => onClick?.(projectId)}
         className="sr-only"
-        aria-label={title}
+        aria-label={name}
       />
       {selected && (
         <div className="absolute flex justify-center z-50 items-center w-full h-full">
@@ -59,10 +44,10 @@ export const SelectProjectCard = ({
         </div>
       )}
       <ProjectCard
-        imgSrc={imageSrc}
-        name={title}
-        place={location}
-        area={areaNumber}
+        imgSrc={imgSrc}
+        name={name}
+        place={place}
+        area={area}
         areaUnit={areaUnit}
         hasBottomCard={false}
         draftText=""

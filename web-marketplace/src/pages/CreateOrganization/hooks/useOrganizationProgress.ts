@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { CREATE_ORG_FORM_ID } from '../CreateOrganization.constants';
+import { CREATE_ORGANIZATION_FORM_ID } from '../CreateOrganization.constants';
 import type { OrganizationMultiStepData } from './useOrganizationFlow';
 
 type StoredCreateOrgData = {
@@ -21,7 +21,7 @@ const readProgress = (): OrganizationProgress | undefined => {
   if (typeof window === 'undefined') return undefined;
 
   try {
-    const rawValue = window.localStorage.getItem(CREATE_ORG_FORM_ID);
+    const rawValue = window.localStorage.getItem(CREATE_ORGANIZATION_FORM_ID);
     if (!rawValue) return undefined;
 
     const stored = JSON.parse(rawValue) as StoredCreateOrgData;
@@ -45,13 +45,12 @@ const readProgress = (): OrganizationProgress | undefined => {
 };
 
 const shouldHandle = (key?: string | null): boolean =>
-  !key || key === CREATE_ORG_FORM_ID;
+  !key || key === CREATE_ORGANIZATION_FORM_ID;
 
 export const useOrganizationProgress = (): OrganizationProgress | undefined => {
   const [progress, setProgress] = useState<OrganizationProgress | undefined>(
     () => readProgress(),
   );
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
 

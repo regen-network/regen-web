@@ -149,8 +149,8 @@ export const OrganizationProfileStep = ({
           type: 'organization',
         });
 
-        setDaoAddress(daoResult[0].daoAddress);
-        setOrganizationId(daoResult[0].organizationId);
+        setDaoAddress(daoResult.daoAddress);
+        setOrganizationId(daoResult.organizationId);
         setTransferHandled(true);
         setShowTransferModal(false);
 

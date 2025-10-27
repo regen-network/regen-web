@@ -52,14 +52,14 @@ type CreateOrganizationContentProps = {
   resumeStep: number;
   walletAddress?: string;
   steps: ReturnType<typeof getCreateOrgSteps>;
-  adminProjects: NormalizeProject[];
+  projects: NormalizeProject[];
 };
 
 function CreateOrganizationContent({
   resumeStep,
   walletAddress,
   steps,
-  adminProjects,
+  projects,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -120,7 +120,7 @@ function CreateOrganizationContent({
         <MigrateProjectsStep
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
-          adminProjects={adminProjects}
+          projects={projects}
         />
       )}
       {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
@@ -158,11 +158,15 @@ export default function CreateOrganizationPage(): JSX.Element {
     adminAccountId: activeAccount?.id,
     adminAddress: activeAccount?.addr,
   });
+  const projects = useMemo(
+    () => adminProjects.filter(p => !!p.offChainId),
+    [adminProjects],
+  );
 
   const steps = useMemo(
     () =>
-      getCreateOrgSteps(_, !isLoadingAdminProjects && adminProjects.length > 0),
-    [_, isLoadingAdminProjects, adminProjects],
+      getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
+    [_, isLoadingAdminProjects, projects],
   );
 
   const resumeStep = useMemo(() => {
@@ -237,7 +241,7 @@ export default function CreateOrganizationPage(): JSX.Element {
             resumeStep={resumeStep}
             walletAddress={walletAddress}
             steps={steps}
-            adminProjects={adminProjects}
+            projects={projects}
           />
         </MultiStepTemplate>
       )}

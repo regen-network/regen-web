@@ -14,17 +14,17 @@ import { FormStateSetter } from '../CreateOrganization.types';
 import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
 
 type MigrateStepsStepProps = {
-  adminProjects: NormalizeProject[];
+  projects: NormalizeProject[];
 } & FormStateSetter;
 
 export const MigrateProjectsStep = ({
   setIsValid,
   setIsSubmitting,
-  adminProjects,
+  projects,
 }: MigrateStepsStepProps) => {
   const { _ } = useLingui();
 
-  const migrateProjects = useMigrateProjects(adminProjects);
+  const migrateProjects = useMigrateProjects(projects);
 
   return (
     <div>
@@ -36,7 +36,7 @@ export const MigrateProjectsStep = ({
       </div>
 
       <MigrateProjects
-        projects={adminProjects}
+        projects={projects}
         onSubmit={migrateProjects}
         setIsSubmitting={setIsSubmitting}
         setIsValid={setIsValid}

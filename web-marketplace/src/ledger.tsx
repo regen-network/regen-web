@@ -63,6 +63,8 @@ type CosmWasmConnectOptions = Parameters<
   typeof SigningCosmWasmClient.connectWithSigner
 >[2];
 
+export const gasPrice = GasPrice.fromString('0.025uregen');
+
 export async function setupSigningClient(
   setSigningClient: UseStateSetter<SigningStargateClient | undefined>,
   setSigningCosmWasmClient: UseStateSetter<SigningCosmWasmClient | undefined>,
@@ -75,6 +77,8 @@ export async function setupSigningClient(
       ...cosmosProtoRegistry,
       ...ibcProtoRegistry,
       ...regenProtoRegistry,
+      // adding wasm types here too when we need to mix cosmwasm messages with non cosmwasm messages in one single tx
+      ...wasmTypes,
     ];
 
     const cosmWasmProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [
@@ -82,15 +86,17 @@ export async function setupSigningClient(
       ...wasmTypes,
     ];
 
+    const wasmAminoConverters = createWasmAminoConverters();
     const stargateAminoConverters = {
       ...cosmosAminoConverters,
       ...ibcAminoConverters,
       ...regenAminoConverters,
+      ...wasmAminoConverters,
     } as const;
 
     const cosmWasmAminoConverters = {
       ...stargateAminoConverters,
-      ...createWasmAminoConverters(),
+      ...wasmAminoConverters,
     } as const;
 
     const stargateRegistry = new Registry(stargateProtoRegistry);
@@ -100,8 +106,6 @@ export async function setupSigningClient(
 
     setLoading(true);
     try {
-      const gasPrice = GasPrice.fromString('0.025uregen');
-
       const options: StargateConnectOptions = {
         registry: stargateRegistry,
         aminoTypes: stargateAminoTypes,

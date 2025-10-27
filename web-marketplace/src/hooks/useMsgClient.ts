@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
+import { calculateFee, DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 import { QueryBalanceResponse } from '@regen-network/api/cosmos/bank/v1beta1/query';
 import { TxRaw } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,7 +14,7 @@ import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQ
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { useLedger } from '../ledger';
+import { gasPrice, useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { useWallet, Wallet } from '../lib/wallet/wallet';
 
@@ -28,9 +28,13 @@ const defaultFee = {
   gas: '200000',
 } as StdFee;
 
+// Starting with Cosmos SDK 0.47, we see many cases in which 1.3 is not enough anymore
+// E.g. https://github.com/cosmos/cosmos-sdk/issues/16020
+const defaultGasMultiplier = 1.4;
+
 interface TxData {
   msgs: any[];
-  fee?: StdFee;
+  fee?: StdFee | 'auto' | number;
   memo?: string;
 }
 
@@ -76,7 +80,21 @@ export default function useMsgClient(
       if (!signingClient || !wallet?.address) return;
       const { msgs, fee: txFee, memo } = tx;
 
-      const fee = txFee ?? defaultFee;
+      let fee: StdFee;
+      if (txFee === 'auto' || typeof txFee === 'number') {
+        console.log('estimating gas...');
+        const gasEstimation = await signingClient.simulate(
+          wallet.address,
+          msgs,
+          memo || '',
+        );
+        const multiplier =
+          typeof txFee === 'number' ? txFee : defaultGasMultiplier;
+        fee = calculateFee(Math.round(gasEstimation * multiplier), gasPrice);
+      } else {
+        fee = txFee ?? defaultFee;
+      }
+      console.log('calculated fee', fee);
 
       const userRegenBalanceRes = await getFromCacheOrFetch({
         query: getBalanceQuery({

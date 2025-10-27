@@ -3,6 +3,8 @@ import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { toUtf8 } from '@cosmjs/encoding';
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 
 import { QueryClient, useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -15,6 +17,7 @@ import {
   CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
   CREATE_ORG_SIGNING_CLIENT_ERROR,
   CREATE_ORG_WALLET_REQUIRED_ERROR,
+  CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR,
 } from 'pages/CreateOrganization/CreateOrganization.constants';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
@@ -31,6 +34,15 @@ import {
   predictAllAddresses,
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
+import useMsgClient from 'hooks/useMsgClient';
+import { getSellOrdersBySellerKey } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery.utils';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { orgRoles } from 'hooks/org-members/constants';
+import { MsgSend_SendCredits } from '@regen-network/api/regen/ecocredit/v1/tx';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
+import { useAuth } from 'lib/auth/auth';
+import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 
 export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { _ } = useLingui();
@@ -39,11 +51,12 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
-  const {
-    data: sellOrdersData,
-    refetch,
-    isLoading: isLoadingSellOrders,
-  } = useQuery(
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const { signAndBroadcast } = useMsgClient();
+  const dao = useDaoOrganization();
+  const { activeAccountId } = useAuth();
+
+  const { data: sellOrdersData, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersBySellerQuery({
       enabled: !!queryClient && !!wallet?.address,
       client: queryClient as QueryClient,
@@ -55,8 +68,6 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
   });
-
-  console.log('projects', projects);
 
   const migrateProjects = useCallback(
     async (values: FormValues) => {
@@ -71,37 +82,39 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       if (!signingCosmWasmClient) {
         throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
-
       const organizationId = data.dao?.organizationId;
       if (!organizationId) {
-        setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
-        return;
+        throw new Error(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
       }
+      if (!dao) {
+        throw new Error(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
+      }
+
       const projectIds = values.selectedProjectIds;
       if (projectIds.length > 0) {
+        setProcessingModalAtom(atom => void (atom.open = true));
         const selectedProjects = projects.filter(project =>
           projectIds.includes(project.id),
         );
-        console.log('selectedProjects', selectedProjects);
 
         const onChainProjectIds = projects
           .filter(
             project => projectIds.includes(project.id) && !project.offChain,
           )
           .map(project => project.id);
-        console.log('onChainProjectIds', onChainProjectIds);
 
         const selectedCredits = credits.filter(credit => {
           const projectId = credit.projectId;
           return projectId && onChainProjectIds.includes(projectId);
         });
         console.log('selectedCredits', selectedCredits);
-        const selectedSellOrders = sellOrdersData?.filter(order => {
-          const credits = selectedCredits.find(
-            credits => credits.denom === order.batchDenom,
-          );
-          return !!credits;
-        });
+        const selectedSellOrders =
+          sellOrdersData?.filter(order => {
+            const credits = selectedCredits.find(
+              credits => credits.denom === order.batchDenom,
+            );
+            return !!credits;
+          }) || [];
         console.log('selectedSellOrders', selectedSellOrders);
 
         // Preparing msgs:
@@ -114,8 +127,32 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           ),
         );
-        // 2. Send selected credits to projects DAO addresses
-        // 2.1. Predict all DAO addresses
+
+        // 2. Send selected credits to organization dao address
+        const sendCreditsMsg =
+          regen.ecocredit.v1.MessageComposer.withTypeUrl.send({
+            sender: walletAddress,
+            recipient: dao.address,
+            credits: selectedCredits
+              .map(credits => {
+                if (!credits.balance) return null;
+                return {
+                  batchDenom: credits.denom,
+                  tradableAmount: (
+                    Number(credits.balance.tradableAmount) +
+                    Number(credits.balance.escrowedAmount)
+                  ).toFixed(6),
+                  retiredAmount: '',
+                  retirementJurisdiction: '',
+                  retirementReason: '',
+                };
+              })
+              .filter(Boolean) as MsgSend_SendCredits[],
+          });
+
+        console.log('sendCreditsMsg', sendCreditsMsg);
+
+        // 3. Create project DAOs msgs
         const selectedProjectsWithAddresses = await Promise.all(
           selectedProjects.map(async project => {
             const { dao, daoVotingCw4, cw4Group, rbam } =
@@ -136,37 +173,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           'selectedProjectsWithAddresses',
           selectedProjectsWithAddresses,
         );
-        // 2.2. Send credits msgs
-        const sendCreditsMsgs = selectedCredits
-          .map(credits => {
-            if (!credits.balance) return null;
-            const project = selectedProjectsWithAddresses.find(
-              p => p.id === credits.projectId,
-            );
-            if (!project) return null;
-
-            return regen.ecocredit.v1.MessageComposer.withTypeUrl.send({
-              sender: walletAddress,
-              recipient: project.dao.address,
-              credits: [
-                {
-                  batchDenom: credits.denom,
-                  tradableAmount: (
-                    Number(credits.balance.tradableAmount) +
-                    Number(credits.balance.escrowedAmount)
-                  ).toFixed(6),
-                  retiredAmount: '',
-                  retirementJurisdiction: '',
-                  retirementReason: '',
-                },
-              ],
-            });
-          })
-          .filter(Boolean);
-        console.log('sendCreditsMsgs', sendCreditsMsgs);
-
-        // 3. Create project DAOs
-        const executeMsgs = selectedProjectsWithAddresses.map(project => {
+        const createDaosMsgs = selectedProjectsWithAddresses.map(project => {
           const now = Date.now();
 
           const proposalModules = getProposalModules({
@@ -214,20 +221,132 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
               expect: project.dao.address,
             },
           };
-          return executeMsg;
+          return {
+            typeUrl: MsgExecuteContract.typeUrl,
+            value: MsgExecuteContract.fromPartial({
+              sender: walletAddress,
+              contract: cwAdminFactoryAddr,
+              msg: toUtf8(JSON.stringify(executeMsg)),
+              funds: [],
+            }),
+          };
         });
-        // 4. Through the project DAOS, recreate sell orders for credits that were previously listed
-        //  (account for fiat sell orders too)
+        console.log('createDaosMsgs', createDaosMsgs);
 
-        try {
-          // TODO sign and broadcast all msgs
-        } catch (error) {
-          setErrorBannerText(String(error));
-          return;
-        }
+        // 4. Through the org DAO, recreate sell orders for credits that were previously listed
+        const sellMsg =
+          regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.sell({
+            seller: dao.address,
+            orders: selectedSellOrders.map(order => ({
+              batchDenom: order.batchDenom,
+              quantity: order.quantity,
+              askPrice: {
+                denom: order.askDenom,
+                amount: order.askAmount,
+              },
+              disableAutoRetire: order.disableAutoRetire,
+              expiration: order.expiration,
+            })),
+          });
+        const executeActionsMsg = {
+          execute_actions: {
+            actions: {
+              authorization_id:
+                orgRoles.owner.authorizations.can_manage_sell_orders,
+              role_id: orgRoles.owner.roleId,
+              msg: {
+                // wasm: {
+                //   execute: {
+                //     contract_addr: dao.daoRbamAddress,
+                //     msg: encodeJsonToBase64({
+                //       assign: {
+                //         assign: [
+                //           {
+                //             addr: 'regen1dfyjl8h5k9uv3v0yjvjkpk32jmehtjkudxgc4s',
+                //             role_id: 2,
+                //           },
+                //         ],
+                //       },
+                //     }),
+                //     funds: [],
+                //   },
+                // },
+                '#stargate': {
+                  type_url: sellMsg.typeUrl,
+                  value: {
+                    seller: sellMsg.value.seller,
+                    orders: sellMsg.value.orders.map(order => ({
+                      batch_denom: order.batchDenom,
+                      quantity: order.quantity,
+                      ask_price: order.askPrice,
+                      disable_auto_retire: order.disableAutoRetire,
+                      expiration: order.expiration,
+                    })),
+                  },
+                },
+              },
+            },
+          },
+        };
+        console.log('executeActionsMsg', executeActionsMsg);
+        const sellExecuteMsg = {
+          typeUrl: MsgExecuteContract.typeUrl,
+          value: MsgExecuteContract.fromPartial({
+            sender: walletAddress,
+            contract: dao.daoRbamAddress,
+            msg: toUtf8(JSON.stringify(executeActionsMsg)),
+            funds: [],
+          }),
+        };
+
+        await signAndBroadcast(
+          {
+            msgs: [
+              ...cancelSellOrdersMsgs,
+              sendCreditsMsg,
+              ...createDaosMsgs,
+              sellExecuteMsg,
+            ],
+            fee: 2,
+            // fee: {
+            //   amount: [{ denom: 'uregen', amount: '5000' }],
+            //   gas: '3000000',
+            // },
+          },
+          undefined,
+          {
+            onSuccess: async deliverTxResponse => {
+              console.log('deliverTxResponse', deliverTxResponse);
+              // TODO transfer stripe connect settings to DAO if can_use_stripe_connect
+              // TODO get sell order ids from events and update fiat sell orders in DB
+
+              // Reload data
+              await reactQueryClient.invalidateQueries({
+                queryKey: getSellOrdersBySellerKey(walletAddress),
+              });
+              await reactQueryClient.invalidateQueries({
+                queryKey: getProjectsByAdminKey({
+                  admin: walletAddress,
+                }),
+              });
+              await reactQueryClient.invalidateQueries({
+                queryKey: getAccountProjectsByIdQueryKey({
+                  id: activeAccountId,
+                }),
+              });
+              reloadBalances();
+
+              setProcessingModalAtom(atom => void (atom.open = false));
+              handleSaveNext({ ...data, ...values });
+            },
+            onError: error => {
+              setProcessingModalAtom(atom => void (atom.open = false));
+              setErrorBannerText(String(error));
+              return;
+            },
+          },
+        );
       }
-
-      // handleSaveNext({ ...data, ...values });
     },
     [
       projects,

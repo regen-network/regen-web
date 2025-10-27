@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 
 import type { AccountByIdQuery } from 'generated/graphql';
-import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 
 import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
@@ -13,6 +12,7 @@ import {
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import { getAddress } from '../RegistryLayout.utils';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 type UseOrganizationMenuProfileParams = {
   activeAccount: AccountByIdQuery['accountById'];
@@ -37,19 +37,14 @@ export const useOrganizationMenuProfile = ({
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
 
+  const organization = useDaoOrganization();
+
   const menuOrganizationProfile = useMemo(() => {
-    const daos =
-      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
-    if (daos.length === 0) return undefined;
-
-    // find the DAO that is an organization
-    const daoToUse = daos.find(dao => !!dao?.organizationByDaoAddress);
-
-    const daoAddress = daoToUse?.address;
+    const daoAddress = organization?.address;
     if (!daoAddress) return undefined;
 
     const organizationName =
-      daoToUse?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
+      organization?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
 
     return {
       id: daoAddress,
@@ -60,7 +55,7 @@ export const useOrganizationMenuProfile = ({
       profileLink: `/profiles/${daoAddress}`,
       dashboardLink: '/dashboard',
     };
-  }, [activeAccount, _]);
+  }, [activeAccount, _, organization]);
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 

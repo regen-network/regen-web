@@ -1,31 +1,37 @@
 import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
+import { regen } from '@regen-network/api';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { QueryClient, useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { ledgerRPCUri } from 'lib/ledger';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR } from 'pages/CreateOrganization/CreateOrganization.constants';
+import {
+  CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
+  CREATE_ORG_SIGNING_CLIENT_ERROR,
+} from 'pages/CreateOrganization/CreateOrganization.constants';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { useCreateDao } from '../useCreateDao/useCreateDao';
-import { CreateDaoParams } from '../useCreateDao/useCreateDao.types';
+import {
+  codeIds,
+  cwAdminFactoryAddr,
+} from '../useCreateDao/useCreateDao.constants';
+import { predictAllAddresses } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
-import { regen } from '@regen-network/api';
 
 export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
-  const { queryClient } = useLedger();
+  const { queryClient, signingCosmWasmClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
-  const { createDao } = useCreateDao();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const {
     data: sellOrdersData,
@@ -50,6 +56,10 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
         // prevent submission while loading data
         return;
       }
+      if (!signingCosmWasmClient) {
+        throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
+      }
+
       const organizationId = data.dao?.organizationId;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
@@ -57,20 +67,27 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       }
       const projectIds = values.selectedProjectIds;
       if (projectIds.length > 0) {
-        const daosParams = projectIds
-          .map(projectId => {
-            const project = projects.find(p => p.id === projectId);
-            if (!project) {
-              return null;
-            }
-            return {
-              type: 'project',
-              name: project.name || project.id || project.offChainId,
-              projectId,
-              organizationId,
-            };
-          })
-          .filter(Boolean) as CreateDaoParams[];
+        // const daosParams = projectIds
+        //   .map(projectId => {
+        //     const project = projects.find(p => p.id === projectId);
+        //     if (!project) {
+        //       return null;
+        //     }
+        //     return {
+        //       type: 'project',
+        //       name: project.name || project.id || project.offChainId,
+        //       projectId,
+        //       organizationId,
+        //     };
+        //   })
+        //   .filter(Boolean) as CreateDaoParams[];
+
+        const selectedProjects = projects.filter(project =>
+          project.offChain
+            ? projectIds.includes(project.id)
+            : project.offChainId && projectIds.includes(project.offChainId),
+        );
+        console.log('selectedProjects', selectedProjects);
 
         const onChainProjectIds = projects
           .filter(
@@ -91,6 +108,8 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           return !!credits;
         });
         console.log('selectedSellOrders', selectedSellOrders);
+
+        // Preparing msgs:
         // 1. Cancel selected sell orders so we can send previously escrowed credits
         const cancelSellOrdersMsgs = selectedSellOrders?.map(order =>
           regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.cancelSellOrder(
@@ -100,7 +119,29 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           ),
         );
-        // 2. TODO Send selected credits to projects DAO addresses
+        // 2. Send selected credits to projects DAO addresses
+        // 2.1. Predict all DAO addresses
+        const selectedProjectsWithAddresses = await Promise.all(
+          selectedProjects.map(async project => {
+            const { dao, daoVotingCw4, cw4Group, rbam } =
+              await predictAllAddresses({
+                client: signingCosmWasmClient,
+                queryClient: reactQueryClient,
+                rpcEndpoint: ledgerRPCUri,
+                adminFactoryAddress: cwAdminFactoryAddr,
+                daoCoreCodeId: codeIds.daoCore,
+                daoVotingCw4CodeId: codeIds.votingCw4,
+                cw4GroupCodeId: codeIds.cw4Group,
+                rbamCodeId: codeIds.rbam,
+              });
+            return { ...project, dao, daoVotingCw4, cw4Group, rbam };
+          }),
+        );
+        console.log(
+          'selectedProjectsWithAddresses',
+          selectedProjectsWithAddresses,
+        );
+        //
         // 3. Recreate sell orders for credits that were previously listed
         // 4. TODO update fiat sell orders if any
 
@@ -114,7 +155,20 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
 
       handleSaveNext({ ...data, ...values });
     },
-    [projects, handleSaveNext, data, _, createDao, credits, setErrorBannerText],
+    [
+      projects,
+      handleSaveNext,
+      data,
+      _,
+      credits,
+      setErrorBannerText,
+      isLoadingCredits,
+      isLoadingSellOrders,
+      sellOrdersData,
+      wallet?.address,
+      signingCosmWasmClient,
+      reactQueryClient,
+    ],
   );
   return migrateProjects;
 };

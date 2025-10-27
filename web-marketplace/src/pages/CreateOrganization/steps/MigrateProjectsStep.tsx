@@ -2,15 +2,16 @@ import { useLingui } from '@lingui/react';
 
 import { Body } from 'web-components/src/components/typography';
 
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+
 import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
 
 import {
   CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION,
   CREATE_ORG_MIGRATE_PROJECTS_NOTE,
 } from '../CreateOrganization.constants';
-import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
 import { FormStateSetter } from '../CreateOrganization.types';
-import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
 
 type MigrateStepsStepProps = {
   adminProjects: NormalizeProject[];

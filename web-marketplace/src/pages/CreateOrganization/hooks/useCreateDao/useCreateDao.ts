@@ -18,26 +18,18 @@ import {
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from '../../CreateOrganization.constants';
 import {
-  cw4GroupCodeId,
+  codeIds,
   cwAdminFactoryAddr,
-  daoDaoCoreCodeId,
-  daoVotingCw4CodeId,
-  filterCodeId,
   gasMultiplier,
-  preProposeSingleCodeId,
-  proposalSingleCodeId,
-  protobufRegistryCodeId,
-  rbamCodeId,
 } from './useCreateDao.constants';
+import { CreateDaoParams } from './useCreateDao.types';
 import {
   encodeJsonToBase64,
   organizationRoles,
-  parseCodeId,
   predictAllAddresses,
   projectRoles,
   sanitizeDaoParams,
 } from './useCreateDao.utils';
-import { CreateDaoParams } from './useCreateDao.types';
 
 export const useCreateDao = () => {
   const { wallet } = useWallet();
@@ -61,29 +53,6 @@ export const useCreateDao = () => {
       if (!signingCosmWasmClient) {
         throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
-
-      const codeIds = {
-        daoCore: parseCodeId('VITE_DAODAO_CORE_CODE_ID', daoDaoCoreCodeId),
-        votingCw4: parseCodeId(
-          'VITE_DAO_VOTING_CW4_CODE_ID',
-          daoVotingCw4CodeId,
-        ),
-        cw4Group: parseCodeId('VITE_CW4_GROUP_CODE_ID', cw4GroupCodeId),
-        rbam: parseCodeId('VITE_RBAM_CODE_ID', rbamCodeId),
-        proposalSingle: parseCodeId(
-          'VITE_PROPOSAL_SINGLE_CODE_ID',
-          proposalSingleCodeId,
-        ),
-        preProposeSingle: parseCodeId(
-          'VITE_PRE_PROPOSE_SINGLE_CODE_ID',
-          preProposeSingleCodeId,
-        ),
-        filter: parseCodeId('VITE_FILTER_CODE_ID', filterCodeId),
-        protobufRegistry: parseCodeId(
-          'VITE_PROTOCOLBUF_REGISTRY_CODE_ID',
-          protobufRegistryCodeId,
-        ),
-      };
 
       setProcessingModalAtom(atom => void (atom.open = true));
 

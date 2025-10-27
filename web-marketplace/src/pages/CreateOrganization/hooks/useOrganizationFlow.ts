@@ -181,7 +181,14 @@ export const useOrganizationFlow = ({
       setOrganizationId(undefined);
       setHasUnfinishedOrganization(false);
     }
-  }, [daoAddress, handleResetData, hasUnfinishedOrganization, isLastStep]);
+  }, [
+    daoAddress,
+    handleResetData,
+    hasUnfinishedOrganization,
+    isLastStep,
+    activeStep,
+    steps,
+  ]);
 
   const handleApplyTransferProfile = useCallback(
     ({ nextValues }: ApplyTransferPayload) => {

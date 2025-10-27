@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
+import { Loading } from 'web-components/src/components/loading';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
@@ -11,6 +12,7 @@ import { Title } from 'web-components/src/components/typography';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
@@ -45,8 +47,6 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
-import { Loading } from 'web-components/src/components/loading';
-import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
@@ -182,7 +182,6 @@ export default function CreateOrganizationPage(): JSX.Element {
       navigate('/dashboard', { replace: true });
     }
   }, [
-    ,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     navigate,

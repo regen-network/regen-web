@@ -1,4 +1,5 @@
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+
 import { FormStateSetter } from '../CreateOrganization.types';
 
 export type OrganizationProfileStepProps = {

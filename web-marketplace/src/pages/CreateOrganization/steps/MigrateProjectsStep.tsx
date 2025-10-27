@@ -1,12 +1,7 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { useLingui } from '@lingui/react';
 
-import { Loading } from 'web-components/src/components/loading';
 import { Body } from 'web-components/src/components/typography';
 
-import { useAuth } from 'lib/auth/auth';
-
-import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
 
 import {
@@ -15,20 +10,18 @@ import {
 } from '../CreateOrganization.constants';
 import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjects';
 import { FormStateSetter } from '../CreateOrganization.types';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-type MigrateStepsStepProps = FormStateSetter;
+type MigrateStepsStepProps = {
+  adminProjects: NormalizeProject[];
+} & FormStateSetter;
 
 export const MigrateProjectsStep = ({
   setIsValid,
   setIsSubmitting,
+  adminProjects,
 }: MigrateStepsStepProps) => {
   const { _ } = useLingui();
-  const { activeAccountId, activeAccount } = useAuth();
-
-  const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
-    adminAccountId: activeAccountId,
-    adminAddress: activeAccount?.addr,
-  });
 
   const migrateProjects = useMigrateProjects(adminProjects);
 
@@ -41,16 +34,12 @@ export const MigrateProjectsStep = ({
         </Body>
       </div>
 
-      {isLoadingAdminProjects ? (
-        <Loading />
-      ) : (
-        <MigrateProjects
-          projects={adminProjects}
-          onSubmit={migrateProjects}
-          setIsSubmitting={setIsSubmitting}
-          setIsValid={setIsValid}
-        />
-      )}
+      <MigrateProjects
+        projects={adminProjects}
+        onSubmit={migrateProjects}
+        setIsSubmitting={setIsSubmitting}
+        setIsValid={setIsValid}
+      />
     </div>
   );
 };

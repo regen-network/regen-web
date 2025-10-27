@@ -46,17 +46,20 @@ import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { Loading } from 'web-components/src/components/loading';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
   walletAddress?: string;
   steps: ReturnType<typeof getCreateOrgSteps>;
+  adminProjects: NormalizeProject[];
 };
 
 function CreateOrganizationContent({
   resumeStep,
   walletAddress,
   steps,
+  adminProjects,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -117,6 +120,7 @@ function CreateOrganizationContent({
         <MigrateProjectsStep
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
+          adminProjects={adminProjects}
         />
       )}
       {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
@@ -215,7 +219,7 @@ export default function CreateOrganizationPage(): JSX.Element {
         </div>
       </SadBeeModal>
       {isLoadingAdminProjects ? (
-        <Loading />
+        <Loading className="min-h-[100vh]" />
       ) : (
         <MultiStepTemplate
           formId={CREATE_ORGANIZATION_FORM_ID}
@@ -234,6 +238,7 @@ export default function CreateOrganizationPage(): JSX.Element {
             resumeStep={resumeStep}
             walletAddress={walletAddress}
             steps={steps}
+            adminProjects={adminProjects}
           />
         </MultiStepTemplate>
       )}

@@ -26,7 +26,6 @@ function useQueryIsIssuer({ address }: Props) {
       issuer: activeAddress,
     }),
   );
-  console.log('classesByIssuerData', classesByIssuerData);
 
   const isIssuer =
     (classesByIssuerData?.data.allClassIssuers?.nodes?.length ?? 0) > 0;

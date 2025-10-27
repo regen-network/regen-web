@@ -17,6 +17,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useCreateDaos } from '../useCreateDaos/useCreateDaos';
 import { CreateDaoParams } from '../useCreateDaos/useCreateDaos.types';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
+import { regen } from '@regen-network/api';
 
 export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { _ } = useLingui();
@@ -29,7 +30,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const {
     data: sellOrdersData,
     refetch,
-    isLoading,
+    isLoading: isLoadingSellOrders,
   } = useQuery(
     getSellOrdersBySellerQuery({
       enabled: !!queryClient && !!wallet?.address,
@@ -38,12 +39,17 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       sellerAddress: wallet?.address as string,
     }),
   );
+  // TODO fetch fiat sell orders
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
   });
 
   const migrateProjects = useCallback(
     async (values: FormValues) => {
+      if (isLoadingSellOrders || isLoadingCredits) {
+        // prevent submission while loading data
+        return;
+      }
       const organizationId = data.dao?.organizationId;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
@@ -73,15 +79,33 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           .map(project => project.id);
         console.log('onChainProjectIds', onChainProjectIds);
 
-        // const selectedCredits = credits.filter(credit => {
-        //   const projectId = credit.projectId;
-        //   return projectId && onChainProjectIds.includes(projectId);
-        // });
-        // console.log('selectedCredits', selectedCredits);
+        const selectedCredits = credits.filter(credit => {
+          const projectId = credit.projectId;
+          return projectId && onChainProjectIds.includes(projectId);
+        });
+        console.log('selectedCredits', selectedCredits);
+        const selectedSellOrders = sellOrdersData?.filter(order => {
+          const credits = selectedCredits.find(
+            credits => credits.denom === order.batchDenom,
+          );
+          return !!credits;
+        });
+        console.log('selectedSellOrders', selectedSellOrders);
+        // 1. Cancel selected sell orders so we can send previously escrowed credits
+        const cancelSellOrdersMsgs = selectedSellOrders?.map(order =>
+          regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.cancelSellOrder(
+            {
+              seller: wallet?.address as string,
+              sellOrderId: order.id,
+            },
+          ),
+        );
+        // 2. TODO Send selected credits to projects DAO addresses
+        // 3. Recreate sell orders for credits that were previously listed
+        // 4. TODO update fiat sell orders if any
+
         try {
-          // TODO transfer ecocredits and sell orders
-          // 1. Cancel sell orders so they are (keep ids so we can update fiat sell_order later on_chain_id and seller_account_id->org id)
-          await createDaos(daosParams);
+          // TODO sign and broadcast all msgs
         } catch (error) {
           setErrorBannerText(String(error));
           return;

@@ -9,7 +9,7 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/getCodeDetailsQuery/getCodeDetailsQuery';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
-import { lookupContractChecksum } from './useCreateDao.constants';
+import { CODE_IDS, lookupContractChecksum } from './useCreateDao.constants';
 
 export const parseCodeId = (
   envVarName: string,
@@ -785,3 +785,117 @@ export const rewriteMediaUrl = (
   const organizationSegment = `${basePath}/${params.organizationId}/`;
   return trimmed.replace(accountSegment, organizationSegment);
 };
+
+type GetProposalModulesParams = {
+  walletAddress: string;
+  daoAddress: string;
+  cw4GroupAddress: string;
+  rbamAddress: string;
+  rbamSalt: string;
+  now: number;
+  daoType: 'organization' | 'project';
+};
+export const getProposalModules = ({
+  walletAddress,
+  daoAddress,
+  cw4GroupAddress,
+  rbamAddress,
+  rbamSalt,
+  now,
+  daoType,
+}: GetProposalModulesParams) => [
+  {
+    admin: { core_module: {} },
+    code_id: CODE_IDS.rbam,
+    label: `dao-rbam_${now}`,
+    msg: encodeJsonToBase64({
+      dao: daoAddress,
+      filter_code_id: CODE_IDS.filter,
+      initial_roles:
+        daoType === 'organization'
+          ? organizationRoles(
+              walletAddress,
+              daoAddress,
+              cw4GroupAddress,
+              rbamAddress,
+            )
+          : projectRoles(walletAddress, cw4GroupAddress, rbamAddress),
+      protobuf_registry_code_id: CODE_IDS.protobufRegistry,
+    }),
+    funds: [],
+    salt: rbamSalt,
+  },
+  {
+    admin: { core_module: {} },
+    code_id: CODE_IDS.proposalSingle,
+    label: `dao-proposal-single_${now}`,
+    msg: encodeJsonToBase64({
+      allow_revoting: false,
+      close_proposal_on_execution_failure: true,
+      max_voting_period: { time: 604800 },
+      only_members_execute: true,
+      pre_propose_info: {
+        module_may_propose: {
+          info: {
+            admin: { core_module: {} },
+            code_id: CODE_IDS.preProposeSingle,
+            label: `dao-pre-propose-single_${now}`,
+            msg: encodeJsonToBase64({
+              deposit_info: null,
+              submission_policy: {
+                specific: {
+                  dao_members: true,
+                  allowlist: [],
+                  denylist: [],
+                },
+              },
+              extension: {},
+            }),
+            funds: [],
+          },
+        },
+      },
+      threshold: {
+        threshold_quorum: {
+          quorum: { percent: '0.70' },
+          threshold: { majority: {} },
+        },
+      },
+      veto: null,
+    }),
+    funds: [],
+  },
+];
+
+type GetVotingModulesParam = {
+  walletAddress: string;
+  cw4GroupSalt: string;
+  daoVotingCw4Salt: string;
+  now: number;
+};
+export const getVotingModule = ({
+  walletAddress,
+  cw4GroupSalt,
+  daoVotingCw4Salt,
+  now,
+}: GetVotingModulesParam) => ({
+  admin: { core_module: {} },
+  code_id: CODE_IDS.votingCw4,
+  label: `dao-voting-cw4__${now}`,
+  msg: encodeJsonToBase64({
+    group_contract: {
+      new: {
+        cw4_group_code_id: CODE_IDS.cw4Group,
+        cw4_group_salt: cw4GroupSalt,
+        initial_members: [
+          {
+            addr: walletAddress,
+            weight: 1000,
+          },
+        ],
+      },
+    },
+  }),
+  funds: [],
+  salt: daoVotingCw4Salt,
+});

@@ -21,7 +21,7 @@ export function lookupContractChecksum(codeId: number): string | undefined {
 
 export const gasMultiplier = 2;
 
-export const codeIds = {
+export const CODE_IDS = {
   daoCore: parseCodeId('VITE_DAODAO_CORE_CODE_ID', daoDaoCoreCodeId),
   votingCw4: parseCodeId('VITE_DAO_VOTING_CW4_CODE_ID', daoVotingCw4CodeId),
   cw4Group: parseCodeId('VITE_CW4_GROUP_CODE_ID', cw4GroupCodeId),
@@ -39,4 +39,4 @@ export const codeIds = {
     'VITE_PROTOCOLBUF_REGISTRY_CODE_ID',
     protobufRegistryCodeId,
   ),
-};
+} as const;

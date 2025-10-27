@@ -18,16 +18,16 @@ import {
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from '../../CreateOrganization.constants';
 import {
-  codeIds,
+  CODE_IDS,
   cwAdminFactoryAddr,
   gasMultiplier,
 } from './useCreateDao.constants';
 import { CreateDaoParams } from './useCreateDao.types';
 import {
   encodeJsonToBase64,
-  organizationRoles,
+  getProposalModules,
+  getVotingModule,
   predictAllAddresses,
-  projectRoles,
   sanitizeDaoParams,
 } from './useCreateDao.utils';
 
@@ -82,10 +82,10 @@ export const useCreateDao = () => {
             queryClient,
             rpcEndpoint: ledgerRPCUri,
             adminFactoryAddress: cwAdminFactoryAddr,
-            daoCoreCodeId: codeIds.daoCore,
-            daoVotingCw4CodeId: codeIds.votingCw4,
-            cw4GroupCodeId: codeIds.cw4Group,
-            rbamCodeId: codeIds.rbam,
+            daoCoreCodeId: CODE_IDS.daoCore,
+            daoVotingCw4CodeId: CODE_IDS.votingCw4,
+            cw4GroupCodeId: CODE_IDS.cw4Group,
+            rbamCodeId: CODE_IDS.rbam,
           },
         );
 
@@ -99,91 +99,22 @@ export const useCreateDao = () => {
 
         const now = Date.now();
 
-        const proposalModules = [
-          {
-            admin: { core_module: {} },
-            code_id: codeIds.rbam,
-            label: `dao-rbam_${now}`,
-            msg: encodeJsonToBase64({
-              dao: daoAddress,
-              filter_code_id: codeIds.filter,
-              initial_roles:
-                params.type === 'organization'
-                  ? organizationRoles(
-                      walletAddress,
-                      daoAddress,
-                      cw4GroupAddress,
-                      rbamAddress,
-                    )
-                  : projectRoles(walletAddress, cw4GroupAddress, rbamAddress),
-              protobuf_registry_code_id: codeIds.protobufRegistry,
-            }),
-            funds: [],
-            salt: rbamSalt,
-          },
-          {
-            admin: { core_module: {} },
-            code_id: codeIds.proposalSingle,
-            label: `dao-proposal-single_${now}`,
-            msg: encodeJsonToBase64({
-              allow_revoting: false,
-              close_proposal_on_execution_failure: true,
-              max_voting_period: { time: 604800 },
-              only_members_execute: true,
-              pre_propose_info: {
-                module_may_propose: {
-                  info: {
-                    admin: { core_module: {} },
-                    code_id: codeIds.preProposeSingle,
-                    label: `dao-pre-propose-single_${now}`,
-                    msg: encodeJsonToBase64({
-                      deposit_info: null,
-                      submission_policy: {
-                        specific: {
-                          dao_members: true,
-                          allowlist: [],
-                          denylist: [],
-                        },
-                      },
-                      extension: {},
-                    }),
-                    funds: [],
-                  },
-                },
-              },
-              threshold: {
-                threshold_quorum: {
-                  quorum: { percent: '0.70' },
-                  threshold: { majority: {} },
-                },
-              },
-              veto: null,
-            }),
-            funds: [],
-          },
-        ];
+        const proposalModules = getProposalModules({
+          daoType: params.type,
+          walletAddress,
+          daoAddress,
+          cw4GroupAddress,
+          rbamAddress,
+          rbamSalt,
+          now,
+        });
 
-        const votingModule = {
-          admin: { core_module: {} },
-          code_id: codeIds.votingCw4,
-          label: `dao-voting-cw4__${now}`,
-          msg: encodeJsonToBase64({
-            group_contract: {
-              new: {
-                cw4_group_code_id: codeIds.cw4Group,
-                cw4_group_salt: cw4GroupSalt,
-                initial_members: [
-                  {
-                    addr: walletAddress,
-                    weight: 1000,
-                  },
-                ],
-              },
-            },
-          }),
-          funds: [],
-          salt: daoVotingCw4Salt,
-        };
+        const votingModule = getVotingModule({
+          walletAddress,
+          cw4GroupSalt,
+          daoVotingCw4Salt,
+          now,
+        });
 
         const initialItems: Array<{ key: string; value: string }> = [
           { key: 'type', value: params.type },
@@ -236,7 +167,7 @@ export const useCreateDao = () => {
 
         const executeMsg = {
           instantiate2_contract_with_self_admin: {
-            code_id: codeIds.daoCore,
+            code_id: CODE_IDS.daoCore,
             instantiate_msg: encodeJsonToBase64(instantiatePayload),
             label: ['dao', 'rbam', String(now)].join('-'),
             salt: daoSalt,

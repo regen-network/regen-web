@@ -138,18 +138,16 @@ export const OrganizationProfileStep = ({
         const organizationIdValue = organizationId ?? uuidv4();
         setOrganizationId(organizationIdValue);
 
-        const daoResult = await createDao([
-          {
-            name: values.name,
-            description: values.description,
-            profileImage: values.profileImage,
-            backgroundImage: values.backgroundImage,
-            websiteLink: values.websiteLink,
-            twitterLink: values.twitterLink,
-            organizationId: organizationIdValue,
-            type: 'organization',
-          },
-        ]);
+        const daoResult = await createDao({
+          name: values.name,
+          description: values.description,
+          profileImage: values.profileImage,
+          backgroundImage: values.backgroundImage,
+          websiteLink: values.websiteLink,
+          twitterLink: values.twitterLink,
+          organizationId: organizationIdValue,
+          type: 'organization',
+        });
 
         setDaoAddress(daoResult[0].daoAddress);
         setOrganizationId(daoResult[0].organizationId);

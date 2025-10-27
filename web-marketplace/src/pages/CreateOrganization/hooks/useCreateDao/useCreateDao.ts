@@ -48,7 +48,7 @@ export const useCreateDao = () => {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const { activeAccountId } = useAuth();
 
-  const createDaos = useCallback(
+  const createDao = useCallback(
     async (params: CreateDaoParams) => {
       const walletAddress = wallet?.address;
 
@@ -308,5 +308,5 @@ export const useCreateDao = () => {
     ],
   );
 
-  return { createDaos };
+  return { createDao };
 };

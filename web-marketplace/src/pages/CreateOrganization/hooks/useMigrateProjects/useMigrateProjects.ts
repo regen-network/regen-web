@@ -25,7 +25,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
-  const { createDaos } = useCreateDao();
+  const { createDao } = useCreateDao();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const {
     data: sellOrdersData,
@@ -114,15 +114,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
 
       handleSaveNext({ ...data, ...values });
     },
-    [
-      projects,
-      handleSaveNext,
-      data,
-      _,
-      createDaos,
-      credits,
-      setErrorBannerText,
-    ],
+    [projects, handleSaveNext, data, _, createDao, credits, setErrorBannerText],
   );
   return migrateProjects;
 };

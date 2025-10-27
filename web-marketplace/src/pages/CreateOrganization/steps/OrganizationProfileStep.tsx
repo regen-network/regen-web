@@ -41,7 +41,7 @@ export const OrganizationProfileStep = ({
   setIsValid,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
-  const { createDaos } = useCreateDao();
+  const { createDao } = useCreateDao();
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
   const walletAddress = wallet?.address;
@@ -138,7 +138,7 @@ export const OrganizationProfileStep = ({
         const organizationIdValue = organizationId ?? uuidv4();
         setOrganizationId(organizationIdValue);
 
-        const daoResult = await createDaos([
+        const daoResult = await createDao([
           {
             name: values.name,
             description: values.description,
@@ -181,7 +181,7 @@ export const OrganizationProfileStep = ({
       setOrganizationId,
       data,
       handleSaveNext,
-      createDaos,
+      createDao,
       walletAddress,
       _,
     ],

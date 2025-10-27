@@ -11,6 +11,8 @@ import type { EditProfileFormSchemaType } from 'components/organisms/EditProfile
 import { getCreateOrgSteps } from '../CreateOrganization.utils';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
+  contactName?: string;
+  contactEmail?: string;
   dao?: {
     daoAddress?: string;
     organizationId?: string;

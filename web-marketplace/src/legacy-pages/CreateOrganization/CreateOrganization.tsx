@@ -123,7 +123,12 @@ function CreateOrganizationContent({
           projects={projects}
         />
       )}
-      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
+      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && (
+        <PersonalInfoStep
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
+        />
+      )}
       {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
       <SaveFooter
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
@@ -139,7 +144,7 @@ function CreateOrganizationContent({
 export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
-  const { activeAccount } = useAuth();
+  const { activeAccount, privActiveAccount } = useAuth();
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
@@ -164,9 +169,18 @@ export default function CreateOrganizationPage(): JSX.Element {
     [adminProjects],
   );
 
+  const hasProjects = !isLoadingAdminProjects && projects.length > 0;
+  const activeAccountName = activeAccount?.name;
+  const privAccountEmail = privActiveAccount?.email;
+  const shouldShowPersonalInfoStep = useMemo(() => {
+    const hasName = Boolean(activeAccountName?.trim());
+    const hasEmail = Boolean(privAccountEmail?.trim());
+    return !(hasName && hasEmail);
+  }, [activeAccountName, privAccountEmail]);
+
   const steps = useMemo(
-    () => getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
-    [_, isLoadingAdminProjects, projects],
+    () => getCreateOrgSteps(_, hasProjects, shouldShowPersonalInfoStep),
+    [_, hasProjects, shouldShowPersonalInfoStep],
   );
 
   const resumeStep = useMemo(() => {

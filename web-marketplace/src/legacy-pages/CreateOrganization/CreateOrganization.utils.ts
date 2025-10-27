@@ -30,7 +30,11 @@ export const hasTransferableProfile = (
   );
 };
 
-export const getCreateOrgSteps = (_: TranslatorType, hasProjects: boolean) =>
+export const getCreateOrgSteps = (
+  _: TranslatorType,
+  hasProjects: boolean,
+  showPersonalInfoStep = true,
+) =>
   (
     [
       {
@@ -54,4 +58,12 @@ export const getCreateOrgSteps = (_: TranslatorType, hasProjects: boolean) =>
         title: _(INVITE_MEMBERS),
       },
     ] as const
-  ).filter(step => (step.id === MIGRATE_PROJECTS_FORM_ID ? hasProjects : true));
+  ).filter(step => {
+    if (step.id === MIGRATE_PROJECTS_FORM_ID) {
+      return hasProjects;
+    }
+    if (step.id === PERSONAL_INFO_FORM_ID) {
+      return showPersonalInfoStep;
+    }
+    return true;
+  });

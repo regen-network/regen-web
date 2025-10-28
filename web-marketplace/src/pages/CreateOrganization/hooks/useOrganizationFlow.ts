@@ -13,7 +13,6 @@ import { getCreateOrgSteps } from '../CreateOrganization.utils';
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {
     daoAddress?: string;
-
     organizationId?: string;
     walletAddress?: string;
   };

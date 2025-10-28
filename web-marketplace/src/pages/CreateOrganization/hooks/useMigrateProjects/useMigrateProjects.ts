@@ -244,11 +244,11 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           .filter(Boolean);
 
         // 5. Through the org DAO, recreate sell orders for credits that were previously listed
-        // Encode MsgSell to protobuf bytes
         let sellExecuteMsg:
           | ReturnType<typeof getMsgExecuteContract>
           | undefined;
         if (selectedSellOrders.length > 0) {
+          // Encode MsgSell to protobuf bytes
           const protoBytes = MsgSell.encode({
             seller: dao.address,
             orders: selectedSellOrders.map(order => ({

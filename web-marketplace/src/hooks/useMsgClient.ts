@@ -82,7 +82,6 @@ export default function useMsgClient(
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
-        console.log('estimating gas...');
         const gasEstimation = await signingClient.simulate(
           wallet.address,
           msgs,
@@ -94,7 +93,6 @@ export default function useMsgClient(
       } else {
         fee = txFee ?? defaultFee;
       }
-      console.log('calculated fee', fee);
 
       const userRegenBalanceRes = await getFromCacheOrFetch({
         query: getBalanceQuery({
@@ -132,6 +130,7 @@ export default function useMsgClient(
       reactQueryClient,
       setIsWaitingForSigning,
       setErrorCodeAtom,
+      queryClient,
     ],
   );
 

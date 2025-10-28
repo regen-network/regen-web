@@ -55,7 +55,7 @@ export const useOrganizationMenuProfile = ({
       profileLink: `/profiles/${daoAddress}`,
       dashboardLink: '/dashboard',
     };
-  }, [activeAccount, _, organization]);
+  }, [_, organization]);
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
 

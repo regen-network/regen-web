@@ -109,11 +109,11 @@ export const projectRoles: {
   author: {
     roleId: 18,
     authorizations: {
-      can_anchor_attest_data: 18,
+      can_anchor_attest_data: 19,
     },
   },
   viewer: {
-    roleId: 19,
+    roleId: 20,
     authorizations: {},
   },
 };

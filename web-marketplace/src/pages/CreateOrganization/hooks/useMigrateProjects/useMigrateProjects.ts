@@ -68,7 +68,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       sellerAddress: wallet?.address as string,
     }),
   );
-  // TODO fetch fiat sell orders
+
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
   });

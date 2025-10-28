@@ -71,10 +71,7 @@ export const PersonalInfoStep = ({
     emailConfirmationText: _(EMAIL_ADDED),
     showSuccessBanner: false,
     onVerificationSuccess: async () => {
-      // Refresh profile data to get the updated email
       await refreshProfileData();
-
-      // Process pending values immediately after email verification
       if (pendingValues) {
         const currentName = (
           (getValues('name') as string | undefined) ?? ''
@@ -146,6 +143,7 @@ export const PersonalInfoStep = ({
   const personalInfoSchema = useMemo(
     () =>
       emailFormSchema.extend({
+        email: emailFormSchema.shape.email.trim(),
         name: z
           .string()
           .trim()
@@ -184,7 +182,6 @@ export const PersonalInfoStep = ({
       email: defaultEmail,
     };
 
-    // Only reset if email changed and we're not in the middle of email verification
     if (currentValues.email !== nextValues.email && !pendingValues) {
       reset(nextValues);
       void trigger();
@@ -206,30 +203,25 @@ export const PersonalInfoStep = ({
   };
 
   const onSubmit: Parameters<typeof handleSubmit>[0] = async values => {
-    const trimmedValues = {
-      name: values.name.trim(),
-      email: values.email.trim(),
-    };
-
     if (!hasAccountEmail) {
       await onEmailSubmit({
-        email: trimmedValues.email,
+        email: values.email,
         callback: () => {
           setPendingValues({
-            name: trimmedValues.name,
-            email: trimmedValues.email,
+            name: values.name,
+            email: values.email,
           });
         },
       });
       return;
     }
 
-    await updateProfileName(trimmedValues.name);
+    await updateProfileName(values.name);
 
     const payload: OrganizationMultiStepData = {
       ...(data ?? {}),
-      contactName: trimmedValues.name,
-      contactEmail: accountEmail || trimmedValues.email,
+      contactName: values.name,
+      contactEmail: accountEmail || values.email,
     };
     handleSaveNext(payload);
   };
@@ -284,10 +276,6 @@ export const PersonalInfoStep = ({
         signInButton={{
           text: _(EMAIL_CONFIRMATION_SUBMIT),
           disabled: false,
-          onClick: () => {
-            // The verification is handled by onMailCodeChange when 6 digits are entered
-            // This button doesn't need to do anything as the modal will close automatically
-          },
         }}
         mailLink={{ text: modalEmail, href: '#' }}
         onClose={handleConfirmationModalClose}

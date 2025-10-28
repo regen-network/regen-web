@@ -172,19 +172,10 @@ export default function CreateOrganizationPage(): JSX.Element {
   const hasProjects = !isLoadingAdminProjects && projects.length > 0;
 
   const shouldShowPersonalInfoStep = useMemo(() => {
-    const hasStoredPersonalInfo =
-      Boolean(matchedProgress?.contactName?.trim()) ||
-      Boolean(matchedProgress?.contactEmail?.trim());
-    if (hasStoredPersonalInfo) return true;
     const initialHasName = Boolean(activeAccount?.name?.trim());
     const initialHasEmail = Boolean(privActiveAccount?.email?.trim());
     return !(initialHasName && initialHasEmail);
-  }, [
-    matchedProgress?.contactName,
-    matchedProgress?.contactEmail,
-    activeAccount?.name,
-    privActiveAccount?.email,
-  ]);
+  }, [activeAccount?.name, privActiveAccount?.email]);
 
   const steps = useMemo(
     () => getCreateOrgSteps(_, hasProjects, shouldShowPersonalInfoStep),

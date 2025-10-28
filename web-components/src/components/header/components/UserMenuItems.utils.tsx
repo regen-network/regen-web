@@ -94,11 +94,12 @@ export const getUserMenuItems = ({
       icon: <CogIcon linearGradient />,
       label: textContent.personalDashboard,
     },
-    // Separator (only when create org is available)
-    orgEnabled &&
-      (createOrganization || organizationProfile) && {
-        children: <Separator className="w-full my-[14px]" />,
-      },
+    // Separator (organization actions section)
+    (createOrganization ||
+      organizationProfile ||
+      (unfinalizedOrgCreation && finishOrgCreation)) && {
+      children: <Separator className="w-full my-[14px]" />,
+    },
     // Organization card (no hover link)
     orgEnabled &&
       organizationProfile && {

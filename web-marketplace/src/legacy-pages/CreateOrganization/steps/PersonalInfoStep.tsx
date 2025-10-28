@@ -1,11 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 import { Body } from 'web-components/src/components/typography';
 
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import {
   EMAIL_CONFIRMATION_ARIA_LABEL,
@@ -13,6 +15,9 @@ import {
   EMAIL_CONFIRMATION_DESCRIPTION,
   EMAIL_CONFIRMATION_TITLE,
 } from 'lib/constants/shared.constants';
+import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { useWallet } from 'lib/wallet/wallet';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -45,6 +50,9 @@ export const PersonalInfoStep = ({
 }: PersonalInfoStepProps) => {
   const { _ } = useLingui();
   const { activeAccount, privActiveAccount } = useAuth();
+  const reactQueryClient = useQueryClient();
+  const { wallet } = useWallet();
+  const [updateAccountById] = useUpdateAccountByIdMutation();
   const { data, handleSaveNext } = useMultiStep<OrganizationMultiStepData>();
   const [pendingValues, setPendingValues] =
     useState<PersonalInfoFormValues | null>(null);
@@ -71,6 +79,40 @@ export const PersonalInfoStep = ({
       email: accountEmail || data?.contactEmail || '',
     }),
     [accountName, accountEmail, data?.contactEmail, data?.contactName],
+  );
+
+  const refreshProfileData = useCallback(async () => {
+    if (wallet?.address) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAccountByAddrQueryKey({ addr: wallet.address }),
+      });
+    }
+    if (activeAccount?.id) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
+      });
+    }
+  }, [activeAccount?.id, reactQueryClient, wallet?.address]);
+
+  const updateProfileName = useCallback(
+    async (name: string) => {
+      const trimmedName = name.trim();
+      if (!activeAccount?.id || trimmedName.length === 0) return;
+
+      await updateAccountById({
+        variables: {
+          input: {
+            id: activeAccount.id,
+            accountPatch: {
+              name: trimmedName,
+            },
+          },
+        },
+      });
+
+      await refreshProfileData();
+    },
+    [activeAccount?.id, refreshProfileData, updateAccountById],
   );
 
   const { name: defaultName, email: defaultEmail } = defaultValues;
@@ -139,20 +181,33 @@ export const PersonalInfoStep = ({
     if (!pendingValues) return;
     if (!accountEmail) return;
 
-    const currentName = (
-      (getValues('name') as string | undefined) ?? ''
-    ).trim();
-    const contactName =
-      currentName.length > 0 ? currentName : pendingValues.name;
+    const processPendingValues = async () => {
+      const currentName = (
+        (getValues('name') as string | undefined) ?? ''
+      ).trim();
+      const contactName =
+        currentName.length > 0 ? currentName : pendingValues.name;
 
-    const payload: OrganizationMultiStepData = {
-      ...(data ?? {}),
-      contactName,
-      contactEmail: accountEmail,
+      const payload: OrganizationMultiStepData = {
+        ...(data ?? {}),
+        contactName,
+        contactEmail: accountEmail,
+      };
+
+      await updateProfileName(contactName);
+      handleSaveNext(payload);
+      setPendingValues(null);
     };
-    handleSaveNext(payload);
-    setPendingValues(null);
-  }, [pendingValues, accountEmail, data, getValues, handleSaveNext]);
+
+    void processPendingValues();
+  }, [
+    pendingValues,
+    accountEmail,
+    data,
+    getValues,
+    handleSaveNext,
+    updateProfileName,
+  ]);
 
   const handleConfirmationModalClose = () => {
     onConfirmationModalClose();
@@ -177,6 +232,8 @@ export const PersonalInfoStep = ({
       });
       return;
     }
+
+    await updateProfileName(trimmedValues.name);
 
     const payload: OrganizationMultiStepData = {
       ...(data ?? {}),

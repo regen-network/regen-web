@@ -170,13 +170,21 @@ export default function CreateOrganizationPage(): JSX.Element {
   );
 
   const hasProjects = !isLoadingAdminProjects && projects.length > 0;
-  const activeAccountName = activeAccount?.name;
-  const privAccountEmail = privActiveAccount?.email;
+
   const shouldShowPersonalInfoStep = useMemo(() => {
-    const hasName = Boolean(activeAccountName?.trim());
-    const hasEmail = Boolean(privAccountEmail?.trim());
-    return !(hasName && hasEmail);
-  }, [activeAccountName, privAccountEmail]);
+    const hasStoredPersonalInfo =
+      Boolean(matchedProgress?.contactName?.trim()) ||
+      Boolean(matchedProgress?.contactEmail?.trim());
+    if (hasStoredPersonalInfo) return true;
+    const initialHasName = Boolean(activeAccount?.name?.trim());
+    const initialHasEmail = Boolean(privActiveAccount?.email?.trim());
+    return !(initialHasName && initialHasEmail);
+  }, [
+    matchedProgress?.contactName,
+    matchedProgress?.contactEmail,
+    activeAccount?.name,
+    privActiveAccount?.email,
+  ]);
 
   const steps = useMemo(
     () => getCreateOrgSteps(_, hasProjects, shouldShowPersonalInfoStep),
@@ -235,30 +243,32 @@ export default function CreateOrganizationPage(): JSX.Element {
           />
         </div>
       </SadBeeModal>
-      {isLoadingAdminProjects ? (
-        <Loading className="min-h-[100vh]" />
-      ) : (
-        <MultiStepTemplate
-          formId={CREATE_ORGANIZATION_FORM_ID}
-          initialValues={CREATE_ORG_INITIAL_VALUES}
-          steps={steps}
-          withLocalStorage
-          forceStep={resumeStep}
-          onClose={handleRequestClose}
-          closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
-          classes={{
-            titleWrap: 'pb-40 max-w-[unset]',
-            formWrap: 'max-w-[800px]',
-          }}
-        >
-          <CreateOrganizationContent
-            resumeStep={resumeStep}
-            walletAddress={walletAddress}
+      <div className="bg-bc-neutral-100 min-h-[100vh]">
+        {isLoadingAdminProjects ? (
+          <Loading className="min-h-[100vh]" />
+        ) : (
+          <MultiStepTemplate
+            formId={CREATE_ORGANIZATION_FORM_ID}
+            initialValues={CREATE_ORG_INITIAL_VALUES}
             steps={steps}
-            projects={projects}
-          />
-        </MultiStepTemplate>
-      )}
+            withLocalStorage
+            forceStep={resumeStep}
+            onClose={handleRequestClose}
+            closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
+            classes={{
+              titleWrap: 'pb-40 max-w-[unset]',
+              formWrap: 'max-w-[800px]',
+            }}
+          >
+            <CreateOrganizationContent
+              resumeStep={resumeStep}
+              walletAddress={walletAddress}
+              steps={steps}
+              projects={projects}
+            />
+          </MultiStepTemplate>
+        )}
+      </div>
     </>
   );
 }

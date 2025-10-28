@@ -30,6 +30,7 @@ export const CREATE_ORG_MIGRATE_PROJECTS_NOTE = msg`Note: Migrating a project wi
 export const CREATE_ORG_PERSONAL_INFO_DESCRIPTION = msg`Provide personal contact information for this organization.`;
 export const CREATE_ORG_PERSONAL_INFO_NAME_LABEL = msg`Name`;
 export const CREATE_ORG_PERSONAL_INFO_EMAIL_LABEL = msg`Email address`;
+export const CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER = msg`An email is required to send you notifications related to your organization.`;
 export const CREATE_ORG_PERSONAL_INFO_NAME_REQUIRED = msg`Contact name is required.`;
 export const CREATE_ORG_INVITE_MEMBERS_DESCRIPTION = msg`Invite teammates to collaborate on your organization.`;
 export const CREATE_ORG_WALLET_REQUIRED_ERROR = msg`A connected wallet is required to create an organization.`;

@@ -34,6 +34,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
   CREATE_ORG_EMAIL_PENDING_MESSAGE,
+  CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER,
   CREATE_ORG_PERSONAL_INFO_EMAIL_LABEL,
   CREATE_ORG_PERSONAL_INFO_NAME_LABEL,
   CREATE_ORG_PERSONAL_INFO_NAME_REQUIRED,
@@ -68,6 +69,30 @@ export const PersonalInfoStep = ({
     onEmailSubmit,
   } = useEmailConfirmationData({
     emailConfirmationText: _(EMAIL_ADDED),
+    showSuccessBanner: false,
+    onVerificationSuccess: async () => {
+      // Refresh profile data to get the updated email
+      await refreshProfileData();
+
+      // Process pending values immediately after email verification
+      if (pendingValues) {
+        const currentName = (
+          (getValues('name') as string | undefined) ?? ''
+        ).trim();
+        const contactName =
+          currentName.length > 0 ? currentName : pendingValues.name;
+
+        const payload: OrganizationMultiStepData = {
+          ...(data ?? {}),
+          contactName,
+          contactEmail: pendingValues.email,
+        };
+
+        await updateProfileName(contactName);
+        handleSaveNext(payload);
+        setPendingValues(null);
+      }
+    },
   });
 
   const accountName = activeAccount?.name?.trim() ?? '';
@@ -159,14 +184,12 @@ export const PersonalInfoStep = ({
       email: defaultEmail,
     };
 
-    if (
-      currentValues.email !== nextValues.email ||
-      (!currentValues.name && nextValues.name)
-    ) {
+    // Only reset if email changed and we're not in the middle of email verification
+    if (currentValues.email !== nextValues.email && !pendingValues) {
       reset(nextValues);
       void trigger();
     }
-  }, [defaultEmail, defaultName, getValues, reset, trigger]);
+  }, [defaultEmail, defaultName, getValues, reset, trigger, pendingValues]);
 
   useEffect(() => {
     setIsValid(formIsValid);
@@ -176,38 +199,6 @@ export const PersonalInfoStep = ({
     const waitingForConfirmation = pendingValues !== null && !accountEmail;
     setIsSubmitting(formIsSubmitting || waitingForConfirmation);
   }, [formIsSubmitting, pendingValues, accountEmail, setIsSubmitting]);
-
-  useEffect(() => {
-    if (!pendingValues) return;
-    if (!accountEmail) return;
-
-    const processPendingValues = async () => {
-      const currentName = (
-        (getValues('name') as string | undefined) ?? ''
-      ).trim();
-      const contactName =
-        currentName.length > 0 ? currentName : pendingValues.name;
-
-      const payload: OrganizationMultiStepData = {
-        ...(data ?? {}),
-        contactName,
-        contactEmail: accountEmail,
-      };
-
-      await updateProfileName(contactName);
-      handleSaveNext(payload);
-      setPendingValues(null);
-    };
-
-    void processPendingValues();
-  }, [
-    pendingValues,
-    accountEmail,
-    data,
-    getValues,
-    handleSaveNext,
-    updateProfileName,
-  ]);
 
   const handleConfirmationModalClose = () => {
     onConfirmationModalClose();
@@ -266,6 +257,7 @@ export const PersonalInfoStep = ({
             disabled={hasAccountEmail}
             error={showEmailError}
             helperText={showEmailError ? errors.email?.message : undefined}
+            description={_(CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER)}
           />
         </div>
       </Form>
@@ -291,8 +283,11 @@ export const PersonalInfoStep = ({
         }}
         signInButton={{
           text: _(EMAIL_CONFIRMATION_SUBMIT),
-          disabled: true,
-          onClick: () => void 0,
+          disabled: false,
+          onClick: () => {
+            // The verification is handled by onMailCodeChange when 6 digits are entered
+            // This button doesn't need to do anything as the modal will close automatically
+          },
         }}
         mailLink={{ text: modalEmail, href: '#' }}
         onClose={handleConfirmationModalClose}

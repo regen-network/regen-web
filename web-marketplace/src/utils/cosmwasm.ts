@@ -25,7 +25,7 @@ export const getExecuteActionsStargate = (actions: StargateAction[]) => ({
 type GetMsgExecuteContractParams = {
   walletAddress: string;
   contract: string;
-  executeActionsMsg: any;
+  executeActionsMsg: Record<string, unknown>;
 };
 
 export const getMsgExecuteContract = ({

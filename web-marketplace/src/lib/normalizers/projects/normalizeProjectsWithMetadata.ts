@@ -119,6 +119,7 @@ export type NormalizeProject = ProjectWithOrderData & {
   program?: Maybe<AccountFieldsFragment>;
   area?: number;
   cardSellOrders?: Array<CardSellOrder>;
+  allCardSellOrders?: Array<CardSellOrder>;
   filteredSellOrders?: Array<UISellOrderInfo>;
   marketType?: string[];
   complianceCredits: {
@@ -159,6 +160,10 @@ export const normalizeProjectWithMetadata = ({
 
   const cardSellOrders = getCardSellOrders(
     filteredSellOrders,
+    offChainProject?.sellOrdersByProjectId?.nodes,
+  );
+  const allCardSellOrders = getCardSellOrders(
+    projectWithOrderData?.sellOrders || [],
     offChainProject?.sellOrdersByProjectId?.nodes,
   );
 
@@ -218,6 +223,7 @@ export const normalizeProjectWithMetadata = ({
       projectWithOrderData?.region,
     cardSellOrders,
     filteredSellOrders,
+    allCardSellOrders,
     complianceCredits: sanityProject?.complianceCredits ?? {
       creditsAvailable: 0,
       creditsRetired: 0,

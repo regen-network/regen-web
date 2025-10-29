@@ -158,14 +158,14 @@ export default function CreateOrganizationPage(): JSX.Element {
     adminAccountId: activeAccount?.id,
     adminAddress: activeAccount?.addr,
   });
+
   const projects = useMemo(
     () => adminProjects.filter(p => !!p.offChainId),
     [adminProjects],
   );
 
   const steps = useMemo(
-    () =>
-      getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
+    () => getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
     [_, isLoadingAdminProjects, projects],
   );
 

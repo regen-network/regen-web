@@ -190,11 +190,11 @@ export default function useCreateBatchSubmit(): Return {
       try {
         setStatus('message');
         message = await prepareMsg(accountAddress, data);
-        if (!message) return;
       } catch (err) {
         setError(err as string);
       }
     }
+    if (!message) return;
 
     try {
       setStatus('sign');

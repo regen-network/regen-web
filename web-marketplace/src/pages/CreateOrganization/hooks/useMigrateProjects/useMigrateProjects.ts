@@ -47,6 +47,7 @@ import {
   predictAllAddresses,
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
+import { EncodeObject } from '@cosmjs/proto-signing';
 
 export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { _ } = useLingui();
@@ -288,7 +289,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
               sendCreditsMsg,
               ...updateProjectAdminMsgs,
               sellExecuteMsg,
-            ].filter(Boolean),
+            ].filter(Boolean) as EncodeObject[],
             fee: 2,
           },
           undefined,

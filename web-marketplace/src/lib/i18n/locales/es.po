@@ -5094,6 +5094,10 @@ msgstr "Esta dirección de billetera ya está en uso en otra cuenta. ¿Quieres f
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:145
+msgid "Timed out waiting for project DAOs to be indexed."
+msgstr "Se agotó el tiempo de espera para que se indexaran los DAO del proyecto."
+
 #: src/legacy-pages/Post/Post.constants.ts:10
 msgid "Timeline"
 msgstr "Cronología"
@@ -5292,6 +5296,14 @@ msgstr "Actualizar detalles de la imagen"
 #: src/legacy-pages/ProjectEdit/ProjectEdit.constants.ts:4
 msgid "Update project metadata"
 msgstr "Actualizar metadatos del proyecto"
+
+#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:206
+msgid "Updating Card Order {0} failed: {1}"
+msgstr "Error al actualizar el pedido de la tarjeta {0}: {1}"
+
+#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:169
+msgid "Updating Offchain Project {0} failed: {1}"
+msgstr "Error al actualizar el proyecto fuera de la cadena {0}: {1}"
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26
 msgid "Upload image"

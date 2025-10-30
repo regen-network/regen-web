@@ -534,6 +534,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       reloadData,
       updateOffChainProjectAdmin,
       updateCardSellOrders,
+      errorBannerText,
     ],
   );
 

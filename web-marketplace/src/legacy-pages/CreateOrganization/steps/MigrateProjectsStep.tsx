@@ -24,7 +24,7 @@ export const MigrateProjectsStep = ({
 }: MigrateStepsStepProps) => {
   const { _ } = useLingui();
 
-  const migrateProjects = useMigrateProjects(projects);
+  const { migrateProjects } = useMigrateProjects(projects);
 
   return (
     <div>

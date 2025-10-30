@@ -24,6 +24,7 @@ export default function useStorage<T>(
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<T | undefined>(() => {
     if (withLocalStorage) {
+      console.log('Loading data from localStorage', key)
       try {
         const value = localStorage.getItem(key);
         return value ? JSON.parse(value) : initialValue;

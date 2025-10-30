@@ -1,0 +1,7 @@
+mutation updateSellOrder($input: UpdateSellOrderByOnChainIdInput!) {
+  updateSellOrderByOnChainId(input: $input) {
+    sellOrder {
+      onChainId
+    }
+  }
+}

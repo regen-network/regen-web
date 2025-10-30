@@ -113,6 +113,8 @@ export type Account = Node & {
   /** Reads and enables pagination through a set of `Project`. */
   projectsBySellOrderSellerAccountIdAndProjectId: AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Dao`. */
+  daosBySellOrderSellerAccountIdAndSellerDaoAddress: AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyConnection;
+  /** Reads and enables pagination through a set of `Dao`. */
   daosByAssignmentAccountIdAndDaoAddress: AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection;
   /** Reads and enables pagination through a set of `Role`. */
   rolesByAssignmentAccountIdAndRoleName: AccountRolesByAssignmentAccountIdAndRoleNameManyToManyConnection;
@@ -421,6 +423,17 @@ export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
   filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DaosOrderBy>>;
+  condition?: Maybe<DaoCondition>;
 };
 
 
@@ -856,6 +869,42 @@ export type AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyEdgeAssignmen
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AssignmentsOrderBy>>;
   condition?: Maybe<AssignmentCondition>;
+};
+
+/** A connection to a list of `Dao` values, with data from `SellOrder`. */
+export type AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyConnection = {
+  __typename?: 'AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyConnection';
+  /** A list of `Dao` objects. */
+  nodes: Array<Maybe<Dao>>;
+  /** A list of edges which contains the `Dao`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Dao` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Dao` edge in the connection, with data from `SellOrder`. */
+export type AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyEdge = {
+  __typename?: 'AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Dao` at the end of the edge. */
+  node?: Maybe<Dao>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerDaoAddress: SellOrdersConnection;
+};
+
+
+/** A `Dao` edge in the connection, with data from `SellOrder`. */
+export type AccountDaosBySellOrderSellerAccountIdAndSellerDaoAddressManyToManyEdgeSellOrdersBySellerDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
 };
 
 /** An input for mutations affecting `Account` */
@@ -2331,6 +2380,8 @@ export type CreateSellOrderPayload = {
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Account` that is related to this `SellOrder`. */
   accountBySellerAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `SellOrder`. */
+  daoBySellerDaoAddress?: Maybe<Dao>;
   /** An edge for our `SellOrder`. May be used by Relay 1. */
   sellOrderEdge?: Maybe<SellOrdersEdge>;
 };
@@ -2920,6 +2971,8 @@ export type Dao = Node & {
   createdAt?: Maybe<Scalars['Datetime']>;
   daoRbamAddress: Scalars['String'];
   cw4GroupAddress: Scalars['String'];
+  canUseStripeConnect: Scalars['Boolean'];
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
   /** Reads a single `Organization` that is related to this `Dao`. */
   organizationByDaoAddress?: Maybe<Organization>;
   /**
@@ -2934,8 +2987,14 @@ export type Dao = Node & {
    * @deprecated Please use projectByAdminDaoAddress instead
    */
   projectsByAdminDaoAddress: ProjectsConnection;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerDaoAddress: SellOrdersConnection;
   /** Reads and enables pagination through a set of `Assignment`. */
   assignmentsByDaoAddress: AssignmentsConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsBySellOrderSellerDaoAddressAndProjectId: DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsBySellOrderSellerDaoAddressAndSellerAccountId: DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByAssignmentDaoAddressAndAccountId: DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Role`. */
@@ -2966,6 +3025,17 @@ export type DaoProjectsByAdminDaoAddressArgs = {
 };
 
 
+export type DaoSellOrdersBySellerDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
+};
+
+
 export type DaoAssignmentsByDaoAddressArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -2974,6 +3044,29 @@ export type DaoAssignmentsByDaoAddressArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AssignmentsOrderBy>>;
   condition?: Maybe<AssignmentCondition>;
+};
+
+
+export type DaoProjectsBySellOrderSellerDaoAddressAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
 };
 
 
@@ -3034,6 +3127,42 @@ export type DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyEdgeAssignmen
   condition?: Maybe<AssignmentCondition>;
 };
 
+/** A connection to a list of `Account` values, with data from `SellOrder`. */
+export type DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyConnection = {
+  __typename?: 'DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `SellOrder`. */
+export type DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyEdge = {
+  __typename?: 'DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerAccountId: SellOrdersConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `SellOrder`. */
+export type DaoAccountsBySellOrderSellerDaoAddressAndSellerAccountIdManyToManyEdgeSellOrdersBySellerAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
+};
+
 /** A condition to be used against `Dao` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type DaoCondition = {
   /** Checks for equality with the object’s `address` field. */
@@ -3044,6 +3173,10 @@ export type DaoCondition = {
   daoRbamAddress?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `cw4GroupAddress` field. */
   cw4GroupAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `canUseStripeConnect` field. */
+  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `stripeConnectedAccountId` field. */
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `Dao` */
@@ -3052,6 +3185,8 @@ export type DaoInput = {
   createdAt?: Maybe<Scalars['Datetime']>;
   daoRbamAddress: Scalars['String'];
   cw4GroupAddress: Scalars['String'];
+  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Dao`. Fields that are set will be updated. */
@@ -3060,6 +3195,44 @@ export type DaoPatch = {
   createdAt?: Maybe<Scalars['Datetime']>;
   daoRbamAddress?: Maybe<Scalars['String']>;
   cw4GroupAddress?: Maybe<Scalars['String']>;
+  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Project` values, with data from `SellOrder`. */
+export type DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyConnection = {
+  __typename?: 'DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `SellOrder`. */
+export type DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyEdge = {
+  __typename?: 'DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersByProjectId: SellOrdersConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `SellOrder`. */
+export type DaoProjectsBySellOrderSellerDaoAddressAndProjectIdManyToManyEdgeSellOrdersByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
 };
 
 /** A connection to a list of `Role` values, with data from `Assignment`. */
@@ -3131,6 +3304,10 @@ export enum DaosOrderBy {
   DaoRbamAddressDesc = 'DAO_RBAM_ADDRESS_DESC',
   Cw4GroupAddressAsc = 'CW4_GROUP_ADDRESS_ASC',
   Cw4GroupAddressDesc = 'CW4_GROUP_ADDRESS_DESC',
+  CanUseStripeConnectAsc = 'CAN_USE_STRIPE_CONNECT_ASC',
+  CanUseStripeConnectDesc = 'CAN_USE_STRIPE_CONNECT_DESC',
+  StripeConnectedAccountIdAsc = 'STRIPE_CONNECTED_ACCOUNT_ID_ASC',
+  StripeConnectedAccountIdDesc = 'STRIPE_CONNECTED_ACCOUNT_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -4429,6 +4606,8 @@ export type DeleteSellOrderPayload = {
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Account` that is related to this `SellOrder`. */
   accountBySellerAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `SellOrder`. */
+  daoBySellerDaoAddress?: Maybe<Dao>;
   /** An edge for our `SellOrder`. May be used by Relay 1. */
   sellOrderEdge?: Maybe<SellOrdersEdge>;
 };
@@ -7410,6 +7589,8 @@ export type Project = Node & {
   accountsByProjectPartnerProjectIdAndAccountId: ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsBySellOrderProjectIdAndSellerAccountId: ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Dao`. */
+  daosBySellOrderProjectIdAndSellerDaoAddress: ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyConnection;
   /** Reads and enables pagination through a set of `Organization`. */
   organizationsByOrganizationProjectProjectIdAndOrganizationId: ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection;
 };
@@ -7547,6 +7728,17 @@ export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
+};
+
+
+export type ProjectDaosBySellOrderProjectIdAndSellerDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DaosOrderBy>>;
+  condition?: Maybe<DaoCondition>;
 };
 
 
@@ -7719,6 +7911,42 @@ export type ProjectCondition = {
   adminAccountId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `adminDaoAddress` field. */
   adminDaoAddress?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Dao` values, with data from `SellOrder`. */
+export type ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyConnection = {
+  __typename?: 'ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyConnection';
+  /** A list of `Dao` objects. */
+  nodes: Array<Maybe<Dao>>;
+  /** A list of edges which contains the `Dao`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Dao` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Dao` edge in the connection, with data from `SellOrder`. */
+export type ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyEdge = {
+  __typename?: 'ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Dao` at the end of the edge. */
+  node?: Maybe<Dao>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerDaoAddress: SellOrdersConnection;
+};
+
+
+/** A `Dao` edge in the connection, with data from `SellOrder`. */
+export type ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyEdgeSellOrdersBySellerDaoAddressArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
 };
 
 /** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
@@ -8114,6 +8342,7 @@ export type Query = Node & {
   privateAccountByGoogleEmail?: Maybe<PrivateAccount>;
   passcodeById?: Maybe<Passcode>;
   postTokenById?: Maybe<PostToken>;
+  canManageSellOrder?: Maybe<Scalars['Boolean']>;
   /** Reads and enables pagination through a set of `Account`. */
   getAccountsByNameOrAddr?: Maybe<AccountsConnection>;
   getCurrentAccount?: Maybe<Account>;
@@ -8784,6 +9013,13 @@ export type QueryPostTokenByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryCanManageSellOrderArgs = {
+  sellerAccountId?: Maybe<Scalars['UUID']>;
+  sellerDaoAddress?: Maybe<Scalars['String']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryGetAccountsByNameOrAddrArgs = {
   input?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -9247,13 +9483,16 @@ export type SellOrder = Node & {
   onChainId: Scalars['String'];
   projectId: Scalars['UUID'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  sellerAccountId: Scalars['UUID'];
+  sellerAccountId?: Maybe<Scalars['UUID']>;
   price: Scalars['BigFloat'];
   currency: Scalars['String'];
+  sellerDaoAddress?: Maybe<Scalars['String']>;
   /** Reads a single `Project` that is related to this `SellOrder`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Account` that is related to this `SellOrder`. */
   accountBySellerAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `SellOrder`. */
+  daoBySellerDaoAddress?: Maybe<Dao>;
 };
 
 /**
@@ -9273,6 +9512,8 @@ export type SellOrderCondition = {
   price?: Maybe<Scalars['BigFloat']>;
   /** Checks for equality with the object’s `currency` field. */
   currency?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `sellerDaoAddress` field. */
+  sellerDaoAddress?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `SellOrder` */
@@ -9280,9 +9521,10 @@ export type SellOrderInput = {
   onChainId: Scalars['String'];
   projectId: Scalars['UUID'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  sellerAccountId: Scalars['UUID'];
+  sellerAccountId?: Maybe<Scalars['UUID']>;
   price: Scalars['BigFloat'];
   currency?: Maybe<Scalars['String']>;
+  sellerDaoAddress?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `SellOrder`. Fields that are set will be updated. */
@@ -9293,6 +9535,7 @@ export type SellOrderPatch = {
   sellerAccountId?: Maybe<Scalars['UUID']>;
   price?: Maybe<Scalars['BigFloat']>;
   currency?: Maybe<Scalars['String']>;
+  sellerDaoAddress?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `SellOrder` values. */
@@ -9332,6 +9575,8 @@ export enum SellOrdersOrderBy {
   PriceDesc = 'PRICE_DESC',
   CurrencyAsc = 'CURRENCY_ASC',
   CurrencyDesc = 'CURRENCY_DESC',
+  SellerDaoAddressAsc = 'SELLER_DAO_ADDRESS_ASC',
+  SellerDaoAddressDesc = 'SELLER_DAO_ADDRESS_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -10844,6 +11089,8 @@ export type UpdateSellOrderPayload = {
   projectByProjectId?: Maybe<Project>;
   /** Reads a single `Account` that is related to this `SellOrder`. */
   accountBySellerAccountId?: Maybe<Account>;
+  /** Reads a single `Dao` that is related to this `SellOrder`. */
+  daoBySellerDaoAddress?: Maybe<Dao>;
   /** An edge for our `SellOrder`. May be used by Relay 1. */
   sellOrderEdge?: Maybe<SellOrdersEdge>;
 };
@@ -11568,6 +11815,22 @@ export type UpdateProjectByIdMutation = (
     & { project?: Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'id'>
+    )> }
+  )> }
+);
+
+export type UpdateSellOrderMutationVariables = Exact<{
+  input: UpdateSellOrderByOnChainIdInput;
+}>;
+
+
+export type UpdateSellOrderMutation = (
+  { __typename?: 'Mutation' }
+  & { updateSellOrderByOnChainId?: Maybe<(
+    { __typename?: 'UpdateSellOrderPayload' }
+    & { sellOrder?: Maybe<(
+      { __typename?: 'SellOrder' }
+      & Pick<SellOrder, 'onChainId'>
     )> }
   )> }
 );
@@ -12602,3 +12865,38 @@ export function useUpdateProjectByIdMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateProjectByIdMutationHookResult = ReturnType<typeof useUpdateProjectByIdMutation>;
 export type UpdateProjectByIdMutationResult = Apollo.MutationResult<UpdateProjectByIdMutation>;
 export type UpdateProjectByIdMutationOptions = Apollo.BaseMutationOptions<UpdateProjectByIdMutation, UpdateProjectByIdMutationVariables>;
+export const UpdateSellOrderDocument = gql`
+    mutation updateSellOrder($input: UpdateSellOrderByOnChainIdInput!) {
+  updateSellOrderByOnChainId(input: $input) {
+    sellOrder {
+      onChainId
+    }
+  }
+}
+    `;
+export type UpdateSellOrderMutationFn = Apollo.MutationFunction<UpdateSellOrderMutation, UpdateSellOrderMutationVariables>;
+
+/**
+ * __useUpdateSellOrderMutation__
+ *
+ * To run a mutation, you first call `useUpdateSellOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSellOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSellOrderMutation, { data, loading, error }] = useUpdateSellOrderMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateSellOrderMutation(baseOptions?: Apollo.MutationHookOptions<UpdateSellOrderMutation, UpdateSellOrderMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateSellOrderMutation, UpdateSellOrderMutationVariables>(UpdateSellOrderDocument, options);
+      }
+export type UpdateSellOrderMutationHookResult = ReturnType<typeof useUpdateSellOrderMutation>;
+export type UpdateSellOrderMutationResult = Apollo.MutationResult<UpdateSellOrderMutation>;
+export type UpdateSellOrderMutationOptions = Apollo.BaseMutationOptions<UpdateSellOrderMutation, UpdateSellOrderMutationVariables>;

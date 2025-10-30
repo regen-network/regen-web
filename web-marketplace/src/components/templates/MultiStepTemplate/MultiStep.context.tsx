@@ -150,12 +150,14 @@ export function MultiStepProvider<T extends object>({
       formValues: formValues as T,
       maxAllowedStep: nextStep,
     };
+    console.log('Saving data:', _data);
     if (dataDisplay || data?.dataDisplay)
       _data.dataDisplay = dataDisplay || data?.dataDisplay;
     saveData(_data);
   };
 
   const handleSaveNext = (formValues: T | {}, dataDisplay?: any): void => {
+    console.log('Saving next step:', formValues);
     const nextStep = activeStep + 1;
     const maxAllowed = Math.max(nextStep, maxAllowedStep);
     handleSave(formValues, maxAllowed, dataDisplay);
@@ -208,6 +210,7 @@ export function MultiStepProvider<T extends object>({
   };
 
   // Wait to check local storage before rendering component
+  console.log('MultiStepProvider isLoading:', isLoading);
   if (isLoading) {
     return null;
   }
@@ -262,7 +265,7 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
   const isLastStep = activeStep === numSteps - 1;
   const isReviewStep = activeStep === numSteps - 2;
   const percentComplete = calculatePercentComplete(numSteps, activeStep + 1);
-
+  console.log('activeStep', activeStep);
   const handleActiveStep = (step: number): void => {
     if (step > numSteps) return;
     if (step < 0) return;
@@ -270,8 +273,13 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
   };
 
   const goNext = (): void => {
+    console.log('goNext called, isLastStep:', isLastStep);
     if (isLastStep) return;
-    setActiveStep(prev => prev + 1);
+    setActiveStep(prev => {
+      console.log('goNext from', prev);
+
+      return prev + 1;
+    });
   };
 
   const goBack = (): void => {

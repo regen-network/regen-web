@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Avatar, Box, Link, SxProps, useTheme } from '@mui/material';
+import { Box, Link, SxProps, useTheme } from '@mui/material';
 
 import Banner from '../../../components/banner';
 import { Flex } from '../../../components/box';
@@ -15,14 +15,12 @@ import {
   PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
   PROFILE_AVATAR_MARGIN_TOP_MOBILE,
   PROFILE_AVATAR_MARGIN_TOP_TABLET,
-  PROFILE_AVATAR_SIZE_DESKTOP,
-  PROFILE_AVATAR_SIZE_MOBILE,
-  PROFILE_AVATAR_SIZE_TABLET,
   PROFILE_BG_HEIGHT_DESKTOP,
   PROFILE_BG_HEIGHT_MOBILE,
 } from './ProfileHeader.constants';
 import { ProfileHeaderInfos } from './ProfileHeader.Infos';
 import { ProfileInfos, ProfileVariant } from './ProfileHeader.types';
+import UserAvatar from '../../user/UserAvatar';
 
 export interface Props {
   name: string;
@@ -121,9 +119,11 @@ const ProfileHeader = ({
         height="100%"
         sx={{ ...containerStyles, px: { xs: 0, sm: 10 } }}
       >
-        <Avatar
+        <UserAvatar
           src={avatar}
           alt={altAvatar}
+          size="xxl"
+          className="h-[120px] w-[120px] sm:h-[150px] sm:w-[150px] md:h-[200px] md:w-[200px] border-solid border-[5px] border-grey-0"
           sx={{
             mt: {
               xs: PROFILE_AVATAR_MARGIN_TOP_MOBILE,
@@ -131,18 +131,7 @@ const ProfileHeader = ({
               md: PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
             },
             mb: { xs: 2.5 },
-            border: theme => `5px solid ${theme.palette.grey[50]}`,
             mr: { sm: 4 },
-            width: {
-              xs: PROFILE_AVATAR_SIZE_MOBILE,
-              sm: PROFILE_AVATAR_SIZE_TABLET,
-              md: PROFILE_AVATAR_SIZE_DESKTOP,
-            },
-            height: {
-              xs: PROFILE_AVATAR_SIZE_MOBILE,
-              sm: PROFILE_AVATAR_SIZE_TABLET,
-              md: PROFILE_AVATAR_SIZE_DESKTOP,
-            },
           }}
         />
         <Flex

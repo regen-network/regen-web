@@ -19,7 +19,6 @@ import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loader';
-import { buyCreditsLoader } from 'legacy-pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
 import { EditProfile } from 'legacy-pages/Dashboard/Dashboard.EditProfile';
 import { DashboardSettings } from 'legacy-pages/Dashboard/Dashboard.Settings';
@@ -223,16 +222,7 @@ export const getRegenRoutes = ({
             />
             <Route path="prefinance" element={<PrefinanceProjects />} />
           </Route>
-          <Route
-            path="project/:projectId/buy"
-            element={<BuyCredits />}
-            loader={buyCreditsLoader({
-              queryClient: reactQueryClient,
-              apolloClient,
-              address,
-              languageCode,
-            })}
-          />
+          <Route path="project/:projectId/buy" element={<BuyCredits />} />
           <Route
             path="post/:iri"
             element={<Post />}

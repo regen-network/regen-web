@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { setI18n } from '@lingui/react/server';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RegenProviders } from 'clients/regen/Regen.Providers';
+import { RegenPrefetch } from 'clients/regen/Regen.Prefetch';
 import terrasosMuiTheme from 'clients/terrasos/Terrasos.muiTheme';
 import { TerrasosProviders } from 'clients/terrasos/Terrasos.Providers';
 import type { Metadata, Viewport } from 'next';
@@ -15,11 +15,6 @@ import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
 
 import PageLoader from 'components/atoms/PageLoader';
-import { ScrollToTop } from 'components/atoms/ScrollToTop';
-import { LayoutCookiesTopBanner } from 'components/layout/Layout.CookiesTopBanner';
-import { LayoutModalManager } from 'components/layout/Layout.ModalManager';
-import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
-import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { fontClassNames } from '../../lib/fonts';
 import { AnalyticsWrapper } from '../AnalyticsWrapper';
@@ -31,6 +26,7 @@ import QueryClientWrapper from '../QueryClientWrapper';
 import '../../App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../../styles/slick-overrides.css';
 // Import the stylesheet that our predev/prebuild scripts generate
 // (see scripts/setClientCSS.js and package.json).
 import '../../generated/client-tailwind.css';
@@ -136,13 +132,8 @@ export default async function LangLayout({
                         {IS_TERRASOS ? (
                           <TerrasosProviders>{children}</TerrasosProviders>
                         ) : (
-                          <RegenProviders>{children}</RegenProviders>
+                          <RegenPrefetch>{children}</RegenPrefetch>
                         )}
-                        <PageViewTracking />
-                        <ScrollToTop />
-                        <RetryFailedFunctions />
-                        <LayoutCookiesTopBanner />
-                        <LayoutModalManager />
                       </AuthProvider>
                     </AnalyticsWrapper>
                   </Suspense>

@@ -174,7 +174,7 @@ export default function MediaCard({
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
-              WebkitLignClamp: '2',
+              WebkitLineClamp: '2',
               WebkitBoxOrient: 'vertical',
             },
           ]}

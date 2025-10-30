@@ -27,6 +27,7 @@ import { HeaderNavLink } from '../atoms/HeaderNavLink';
 import { HomeIconLink } from '../atoms/HomeIconLink';
 import { ListProject } from '../organisms/ListProject/ListProject';
 import { LoginButton } from '../organisms/LoginButton/LoginButton';
+import { useHasPrefinanceProjects } from '../organisms/RegistryLayout/hooks/useHasPrefinanceProjects';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -83,8 +84,7 @@ export const LayoutHeader = () => {
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
   const clientConfig = getClientConfig();
 
-  // TODO: Dynamically determine if there are prefinance projects available.
-  const hasPrefinanceProjects = false;
+  const hasPrefinanceProjects = useHasPrefinanceProjects();
   const profileLink = getProfileLink(activeAccount, wallet);
 
   const {

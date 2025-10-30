@@ -1,0 +1,34 @@
+/*
+  Purpose: Override slick-carousel defaults when Next.js App Router uses
+  MUI CSS Layers (enableCssLayer: true). MUI/TSS styles are emitted inside the
+  `mui` CSS layer, while third-party CSS like slick.css is unlayered.
+  Unlayered rules outrank layered rules with the same specificity, which causes
+  slick defaults to win over our layered slider overrides. That leads to:
+    - .slick-list keeping overflow: hidden (hides 3rd card when visibleOverflow)
+    - .slick-track not using display:flex (heights don’t equalize)
+
+  These unlayered overrides restore intended behavior without disabling
+  CSS Layers. They are scoped narrowly to the slider and only loosen overflow
+  when we explicitly render an overflow-x scroll container.
+
+  Safe to remove when one of the following is true:
+    1) We move these specific overrides to an unlayered GlobalStyles file, or
+    2) slick.css is wrapped in a lower-priority CSS layer than `mui`, or
+    3) MUI changes layer precedence so layered rules can outrank unlayered, or
+    4) We stop using slick or rework the slider not to rely on these overrides.
+*/
+
+/* Equal-height slides */
+.slick-track { display: flex; }
+.slick-track .slick-slide { display: flex; height: auto; }
+.slick-track .slick-slide > div { display: flex; width: 100%; height: 100%; }
+
+.slick-dots ul {
+  margin: 13px 0px -6.5px;
+}
+.slick-dots li {
+  width: 13px;
+}
+
+/* Only when we intentionally enable visible overflow in ResponsiveSlider */
+.overflow-x-scroll .slick-list { overflow: visible; }

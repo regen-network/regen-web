@@ -1,6 +1,5 @@
 import { Layout, StripeElementsOptions } from '@stripe/stripe-js';
-
-import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
+import { fonts } from 'web-marketplace/src/lib/fonts/regen';
 
 export const paymentElementOptions = {
   layout: 'tabs' as Layout,
@@ -20,7 +19,7 @@ export const defaultStripeOptions: StripeElementsOptions = {
     variables: {
       colorText: '#000',
       colorDanger: '#DE4526',
-      fontFamily: defaultFontFamily,
+      fontFamily: fonts[0].style.fontFamily,
       spacingUnit: '5px',
       borderRadius: '2px',
     },

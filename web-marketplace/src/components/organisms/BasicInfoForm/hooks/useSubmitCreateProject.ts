@@ -50,6 +50,7 @@ export const useSubmitCreateProject = () => {
       if (projectId) {
         await reactQueryClient.invalidateQueries({
           queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
+          refetchType: 'all',
         });
         if (shouldNavigate) navigate(`/project-pages/${projectId}/location`);
       }

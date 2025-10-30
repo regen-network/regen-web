@@ -1,4 +1,4 @@
-import { cn } from '../../utils/styles/cn';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import EditIcon from '../icons/EditIcon';
 

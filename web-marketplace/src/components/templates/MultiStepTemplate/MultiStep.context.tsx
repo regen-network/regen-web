@@ -3,7 +3,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { useStorage } from 'hooks';
-import { Loading } from 'web-components/src/components/loading';
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an
@@ -208,9 +207,14 @@ export function MultiStepProvider<T extends object>({
     resultStatus,
   };
 
+  // Wait to check local storage before rendering component
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <MultiStepContext.Provider value={value}>
-      {isLoading ? <Loading /> : children}
+      {children}
     </MultiStepContext.Provider>
   );
 }

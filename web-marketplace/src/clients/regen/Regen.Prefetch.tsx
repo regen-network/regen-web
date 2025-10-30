@@ -3,16 +3,15 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { cookies } from 'next/headers';
-
 import { getClient } from 'app/ApolloClient';
+import { COOKIE_LOCALE } from 'middleware';
+import { cookies } from 'next/headers';
 
 import { getHasPrefinanceProjectsQuery } from 'lib/queries/react-query/registry-server/getHasPrefinanceProjectsQuery/getHasPrefinanceProjectsQuery';
 
 import { LayoutSharedComponents } from 'components/layout/Layout.SharedComponents';
 
 import { RegenProviders } from './Regen.Providers';
-import { COOKIE_LOCALE } from 'middleware';
 
 type Props = {
   children: React.ReactNode;

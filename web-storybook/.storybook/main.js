@@ -68,6 +68,7 @@ module.exports = {
           config: path.resolve(__dirname, '../../web-marketplace/src/config'),
           ledger: path.resolve(__dirname, '../../web-marketplace/src/ledger'),
           clients: path.resolve(__dirname, '../../web-marketplace/src/clients'),
+          middleware: path.resolve(__dirname, '../../web-marketplace/src/middleware'),
           'next/font/google': path.resolve(__dirname, './fonts.mock.js'),
         },
       },

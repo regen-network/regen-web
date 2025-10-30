@@ -3,6 +3,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
+
 import { getClient } from 'app/ApolloClient';
 
 import { getHasPrefinanceProjectsQuery } from 'lib/queries/react-query/registry-server/getHasPrefinanceProjectsQuery/getHasPrefinanceProjectsQuery';
@@ -10,6 +12,7 @@ import { getHasPrefinanceProjectsQuery } from 'lib/queries/react-query/registry-
 import { LayoutSharedComponents } from 'components/layout/Layout.SharedComponents';
 
 import { RegenProviders } from './Regen.Providers';
+import { COOKIE_LOCALE } from 'middleware';
 
 type Props = {
   children: React.ReactNode;
@@ -24,7 +27,8 @@ export async function RegenPrefetch({ children }: Props) {
    */
   try {
     const apolloClient = await getClient();
-    const languageCode = 'en'; // TODO: get user language from cookies/url segment
+    const cookieStore = await cookies();
+    const languageCode = cookieStore.get(COOKIE_LOCALE)?.value || 'en';
 
     await queryClient.prefetchQuery(
       getHasPrefinanceProjectsQuery({

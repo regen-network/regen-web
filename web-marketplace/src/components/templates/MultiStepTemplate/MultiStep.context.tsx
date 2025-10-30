@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { useStorage } from 'hooks';
+import { Loading } from 'web-components/src/components/loading';
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an
@@ -130,7 +131,7 @@ export function MultiStepProvider<T extends object>({
     goBack,
   } = useSteps(steps.length, maxAllowedStep);
 
-  const [resultStatus, setResultStatus] = React.useState<ResultStatus>();
+  const [resultStatus, setResultStatus] = useState<ResultStatus>();
 
   const handleNext = (): void => {
     goNext();
@@ -150,14 +151,12 @@ export function MultiStepProvider<T extends object>({
       formValues: formValues as T,
       maxAllowedStep: nextStep,
     };
-    console.log('Saving data:', _data);
     if (dataDisplay || data?.dataDisplay)
       _data.dataDisplay = dataDisplay || data?.dataDisplay;
     saveData(_data);
   };
 
   const handleSaveNext = (formValues: T | {}, dataDisplay?: any): void => {
-    console.log('Saving next step:', formValues);
     const nextStep = activeStep + 1;
     const maxAllowed = Math.max(nextStep, maxAllowedStep);
     handleSave(formValues, maxAllowed, dataDisplay);
@@ -209,15 +208,9 @@ export function MultiStepProvider<T extends object>({
     resultStatus,
   };
 
-  // Wait to check local storage before rendering component
-  console.log('MultiStepProvider isLoading:', isLoading);
-  if (isLoading) {
-    return null;
-  }
-
   return (
     <MultiStepContext.Provider value={value}>
-      {children}
+      {isLoading ? <Loading /> : children}
     </MultiStepContext.Provider>
   );
 }
@@ -265,7 +258,7 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
   const isLastStep = activeStep === numSteps - 1;
   const isReviewStep = activeStep === numSteps - 2;
   const percentComplete = calculatePercentComplete(numSteps, activeStep + 1);
-  console.log('activeStep', activeStep);
+
   const handleActiveStep = (step: number): void => {
     if (step > numSteps) return;
     if (step < 0) return;
@@ -273,13 +266,8 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
   };
 
   const goNext = (): void => {
-    console.log('goNext called, isLastStep:', isLastStep);
     if (isLastStep) return;
-    setActiveStep(prev => {
-      console.log('goNext from', prev);
-
-      return prev + 1;
-    });
+    setActiveStep(prev => prev + 1);
   };
 
   const goBack = (): void => {

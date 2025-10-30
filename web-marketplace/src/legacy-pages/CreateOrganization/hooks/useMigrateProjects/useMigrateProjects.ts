@@ -74,7 +74,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { queryClient, signingCosmWasmClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
-  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const [errorBannerText, setErrorBannerText] = useAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
   const dao = useDaoOrganization();
@@ -500,7 +500,6 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
               await reloadData();
 
               setProcessingModalAtom(atom => void (atom.open = false));
-              handleSaveNext({ ...data, ...values });
             },
             onError: error => {
               setProcessingModalAtom(atom => void (atom.open = false));
@@ -509,6 +508,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           },
         );
+        if (!errorBannerText) handleSaveNext({ ...data, ...values });
       } else handleSaveNext({ ...data, ...values });
     },
     [

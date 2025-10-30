@@ -12,8 +12,8 @@ import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';

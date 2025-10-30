@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
@@ -19,6 +18,9 @@ import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
+import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
+import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
+import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../lib/ledger';
@@ -56,9 +58,6 @@ import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../organisms/UserAccountSettings/UserAccountSettings.constants';
-import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
-import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
-import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 
 const getProfileLink = (
   activeAccount: Maybe<AccountFieldsFragment> | undefined,
@@ -72,7 +71,6 @@ const getProfileLink = (
 
 export const LayoutHeader = () => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
   const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, disconnect, accountByAddr, connect, isConnected } =
@@ -103,7 +101,6 @@ export const LayoutHeader = () => {
     activeAccount,
     privActiveAccount,
     wallet,
-    navigate,
     connect,
     isConnected,
   });

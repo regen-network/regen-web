@@ -15,7 +15,7 @@ type Props = {
 
 export const RegenProviders = ({ children }: Props) => {
   const pathname = usePathname();
-  const isDashboard = pathname.startsWith('/dashboard');
+  const isFullScreen = pathname.startsWith('/dashboard') || pathname.startsWith('/organizations/create');
   return (
     <ChainWrapper>
       <WalletProvider>
@@ -23,9 +23,9 @@ export const RegenProviders = ({ children }: Props) => {
           {/* TODO: When the /dashboard has been migrated, the LayoutHeader and LayoutFooter 
               should be in a layout component for non-dashboard pages */}
           <div className="min-h-screen flex flex-col">
-            {!isDashboard && <LayoutHeader />}
+            {!isFullScreen && <LayoutHeader />}
             <main className="flex-1">{children}</main>
-            {!isDashboard && <LayoutFooter />}
+            {!isFullScreen && <LayoutFooter />}
           </div>
         </LedgerProviderWithWallet>
       </WalletProvider>

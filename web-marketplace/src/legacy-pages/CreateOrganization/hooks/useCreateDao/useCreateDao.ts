@@ -10,7 +10,7 @@ import { useAuth } from 'lib/auth/auth';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { PROFILE_S3_PATH } from 'pages/Dashboard/Dashboard.constants';
+import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,

@@ -28,8 +28,8 @@ import {
   CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
   CREATE_ORG_SIGNING_CLIENT_ERROR,
   CREATE_ORG_WALLET_REQUIRED_ERROR,
-} from 'pages/CreateOrganization/CreateOrganization.constants';
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+} from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { orgRoles } from 'hooks/org-members/constants';

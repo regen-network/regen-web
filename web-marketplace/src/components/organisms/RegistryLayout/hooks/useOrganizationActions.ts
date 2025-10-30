@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { NavigateFunction } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
-import type {
-  AccountByIdQuery,
-  AccountFieldsFragment,
-  Maybe,
-} from 'generated/graphql';
+import type { AccountByIdQuery } from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
@@ -17,7 +13,6 @@ type UseOrganizationActionsParams = {
   activeAccount: AccountByIdQuery['accountById'];
   privActiveAccount: PrivateAccount | undefined;
   wallet?: Wallet | null;
-  navigate: NavigateFunction;
   connect?: (...args: any[]) => void;
   isConnected: boolean;
 };
@@ -26,7 +21,6 @@ export const useOrganizationActions = ({
   activeAccount,
   privActiveAccount,
   wallet,
-  navigate,
   connect,
   isConnected,
 }: UseOrganizationActionsParams) => {
@@ -44,6 +38,7 @@ export const useOrganizationActions = ({
       activeAccount,
       wallet,
     });
+  const router = useRouter();
 
   const createOrganization = useCallback(() => {
     if (privActiveAccount && !isConnected) {
@@ -51,14 +46,14 @@ export const useOrganizationActions = ({
       setIsConnectWalletModalOpen(true);
       onButtonClick();
     } else if (isConnected) {
-      navigate('/organizations/create');
+      router.push('/organizations/create');
     }
-  }, [navigate, privActiveAccount, isConnected, onButtonClick]);
+  }, [router, privActiveAccount, isConnected, onButtonClick]);
 
   const finishOrgCreation = useCallback(() => {
     onButtonClick();
-    navigate('/organizations/create');
-  }, [navigate, onButtonClick]);
+    router.push('/organizations/create');
+  }, [router, onButtonClick]);
 
   const handleConnectWalletModalClose = useCallback(() => {
     setIsConnectWalletModalOpen(false);
@@ -76,13 +71,13 @@ export const useOrganizationActions = ({
   useEffect(() => {
     if (shouldRedirectToCreateOrg && isConnected && !isConnectWalletModalOpen) {
       setShouldRedirectToCreateOrg(false);
-      navigate('/organizations/create');
+      router.push('/organizations/create');
     }
   }, [
     shouldRedirectToCreateOrg,
     isConnected,
     isConnectWalletModalOpen,
-    navigate,
+    router,
   ]);
 
   return {

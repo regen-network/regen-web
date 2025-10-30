@@ -2,7 +2,7 @@ import { SubmitHandler } from 'react-hook-form';
 
 import { Project } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard.types';
 
-import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
+import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
 
 export type FormValues = {
   selectedProjectIds: string[];

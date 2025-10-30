@@ -53,8 +53,8 @@ import {
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
 import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
-import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
-import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
+import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
+import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 
 export interface EditProfileFormProps extends Partial<FormStateSetter> {
   initialValues?: EditProfileFormSchemaType;

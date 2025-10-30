@@ -5,7 +5,7 @@ import { AccountType } from 'generated/graphql';
 import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { getCreateOrgSteps } from '../CreateOrganization.utils';

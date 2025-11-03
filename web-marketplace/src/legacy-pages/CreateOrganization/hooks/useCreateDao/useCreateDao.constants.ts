@@ -1,4 +1,15 @@
-import { parseCodeId } from './useCreateDao.utils';
+const parseCodeId = (
+  envVarName: string,
+  rawValue: string | undefined,
+): number => {
+  const parsed = Number(rawValue?.toString().trim());
+
+  if (!Number.isInteger(parsed) || parsed < 0) {
+    throw new Error(`Invalid ${envVarName} configuration`);
+  }
+
+  return parsed;
+};
 
 export const daoDaoCoreCodeId = process.env.NEXT_PUBLIC_DAODAO_CORE_CODE_ID;
 export const filterCodeId = process.env.NEXT_PUBLIC_FILTER_CODE_ID;

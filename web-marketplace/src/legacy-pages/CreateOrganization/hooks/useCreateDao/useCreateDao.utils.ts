@@ -11,19 +11,6 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { CODE_IDS, lookupContractChecksum } from './useCreateDao.constants';
 
-export function parseCodeId(
-  envVarName: string,
-  rawValue: string | undefined,
-): number {
-  const parsed = Number(rawValue?.toString().trim());
-
-  if (!Number.isInteger(parsed) || parsed < 0) {
-    throw new Error(`Invalid ${envVarName} configuration`);
-  }
-
-  return parsed;
-}
-
 // Roles and authorizations definitions
 const creditClassesAuthorization = {
   name: 'can_manage_credit_classes',

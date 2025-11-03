@@ -17,6 +17,12 @@ type DashboardContextType = {
   selectedAccountOnChainRoleId?: string;
   selectedAccountAddress?: string;
   selectedAccountRoleAccountId?: string;
+  organizationRole?: string;
+  isOrganizationOwner: boolean;
+  isOrganizationAdmin: boolean;
+  isOrganizationEditor: boolean;
+  isOrganizationAuthor: boolean;
+  isOrganizationViewer: boolean;
 };
 
 export const useDashboardContext = (): DashboardContextType => {

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -10,6 +10,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
+import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
 
@@ -30,13 +31,31 @@ export const UserSellOrdersToolbar = ({
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
-  const { loginDisabled } = useWallet();
+  const { loginDisabled, wallet } = useWallet();
+  const {
+    selectedAccountAddress,
+    isOrganizationDashboard,
+    isOrganizationOwner,
+    isOrganizationAdmin,
+  } = useDashboardContext();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
+  const accountAddress = selectedAccountAddress ?? wallet?.address;
+  const canManageSellOrders =
+    !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
+  const { credits } = useFetchEcocredits({
+    address: accountAddress,
+    isPaginatedQuery: false,
+  });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
-  const hasTradableCredits = tradableCredits.length > 0;
+  const hasTradableCredits = canManageSellOrders && tradableCredits.length > 0;
+
+  useEffect(() => {
+    if (!hasTradableCredits && isSellFlowStarted) {
+      setIsSellFlowStarted(false);
+    }
+  }, [hasTradableCredits, isSellFlowStarted]);
 
   return (
     <>
@@ -60,7 +79,11 @@ export const UserSellOrdersToolbar = ({
               <InfoTooltip
                 arrow
                 placement="top"
-                title={_(msg`You have no tradable credits that can be sold.`)}
+                title={
+                  canManageSellOrders
+                    ? _(msg`You have no tradable credits that can be sold.`)
+                    : _(msg`You do not have permission to create sell orders.`)
+                }
               >
                 <div>
                   <CreateButton
@@ -86,6 +109,7 @@ export const UserSellOrdersToolbar = ({
               !!activeAccount?.stripeConnectedAccountId &&
               !loginDisabled
             }
+            accountAddress={accountAddress}
           />
         </Suspense>
       )}

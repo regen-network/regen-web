@@ -13,6 +13,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
+  CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR,
   CREATE_ORG_SIGNING_CLIENT_ERROR,
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from '../../CreateOrganization.constants';
@@ -51,6 +52,9 @@ export const useCreateDao = () => {
       }
       if (!signingCosmWasmClient) {
         throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
+      }
+      if (!cwAdminFactoryAddr) {
+        throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));
       }
 
       setProcessingModalAtom(atom => void (atom.open = true));

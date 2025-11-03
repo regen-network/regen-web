@@ -308,6 +308,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
                       .filter(attr => attr.key === 'sell_order_id')
                       .map(attr => attr.value.replace(/"/g, '')), // remove quotes if needed
                 );
+              /** eslint-disable-next-line no-console */
               console.log('sellOrderIds', sellOrderIds);
               // TODO and update fiat sell orders in DB based on new sellOrderIds
 

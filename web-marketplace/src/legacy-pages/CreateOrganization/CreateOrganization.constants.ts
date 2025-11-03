@@ -34,6 +34,7 @@ export const CREATE_ORG_SIGNING_CLIENT_ERROR = msg`Failed to initialize signing 
 export const CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR = msg`Active account is required to create an organization.`;
 export const CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR = msg`An organization id is required to migrate projects`;
 export const CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR = msg`An organization DAO address is required to migrate projects`;
+export const CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR = msg`CW Admin Factory address is not configured.`;
 
 export type CreateOrgInitialValues = {};
 export const CREATE_ORG_INITIAL_VALUES: CreateOrgInitialValues = {};

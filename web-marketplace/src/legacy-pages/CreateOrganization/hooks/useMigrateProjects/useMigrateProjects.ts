@@ -8,6 +8,7 @@ import { MsgSend_SendCredits } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import {
+  CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR,
   CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR,
   CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
   CREATE_ORG_SIGNING_CLIENT_ERROR,
@@ -94,6 +95,9 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       if (!dao) {
         throw new Error(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
       }
+      if (!cwAdminFactoryAddr) {
+        throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));
+      }
 
       const projectIds = values.selectedProjectIds;
       if (projectIds.length > 0) {
@@ -140,7 +144,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
                 client: signingCosmWasmClient,
                 queryClient: reactQueryClient,
                 rpcEndpoint: ledgerRPCUri,
-                adminFactoryAddress: cwAdminFactoryAddr,
+                adminFactoryAddress: cwAdminFactoryAddr as string,
                 daoCoreCodeId: CODE_IDS.daoCore,
                 daoVotingCw4CodeId: CODE_IDS.votingCw4,
                 cw4GroupCodeId: CODE_IDS.cw4Group,
@@ -308,8 +312,6 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
                       .filter(attr => attr.key === 'sell_order_id')
                       .map(attr => attr.value.replace(/"/g, '')), // remove quotes if needed
                 );
-              /** eslint-disable-next-line no-console */
-              console.log('sellOrderIds', sellOrderIds);
               // TODO and update fiat sell orders in DB based on new sellOrderIds
 
               // Reload data

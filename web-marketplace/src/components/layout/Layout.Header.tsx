@@ -86,6 +86,7 @@ export const LayoutHeader = () => {
 
   const hasPrefinanceProjects = useHasPrefinanceProjects();
   const profileLink = getProfileLink(activeAccount, wallet);
+  const personalDashboardLink = '/dashboard';
 
   const {
     modalState,
@@ -135,11 +136,16 @@ export const LayoutHeader = () => {
           privActiveAccount,
           _,
           profileLink,
-          dashboardLink: '/dashboard',
+          dashboardLink: personalDashboardLink,
           address: wallet?.address,
         }),
         orgEnabled: ORG_ENABLED,
-        organizationProfile: menuOrganizationProfile,
+        organizationProfile: menuOrganizationProfile
+          ? {
+              ...menuOrganizationProfile,
+              dashboardLink: '/dashboard/organization',
+            }
+          : undefined,
         createOrganization:
           !menuOrganizationProfile && !unfinalizedOrgCreation
             ? createOrganization

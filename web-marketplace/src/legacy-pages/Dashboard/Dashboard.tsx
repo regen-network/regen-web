@@ -339,6 +339,8 @@ export const Dashboard = () => {
       isOrganizationDashboard,
       selectedAccountRoleName: selectedAccount?.roleName,
       selectedAccountOnChainRoleId: selectedAccount?.onChainRoleId,
+      selectedAccountAddress: selectedAccount?.address,
+      selectedAccountRoleAccountId: selectedAccount?.roleAccountId,
     }),
     [
       isCreditClassCreator,
@@ -348,6 +350,10 @@ export const Dashboard = () => {
       selectedAccountId,
       selectedAccount,
       isOrganizationDashboard,
+      selectedAccount?.roleName,
+      selectedAccount?.onChainRoleId,
+      selectedAccount?.address,
+      selectedAccount?.roleAccountId,
     ],
   );
 
@@ -419,11 +425,13 @@ export const Dashboard = () => {
     return null;
   }, [selectedAccount, activeAccount]);
 
-  const { orders, isLoading: ordersLoading } = useOrders();
+  const { orders, isLoading: ordersLoading } = useOrders({
+    address: dashboardAccountAddress ?? wallet?.address,
+  });
   const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
-    useBridgeAvailability();
+    useBridgeAvailability(dashboardAccountAddress ?? wallet?.address);
 
   if (!activeAccount && !wallet?.address && !privActiveAccount) return null;
 

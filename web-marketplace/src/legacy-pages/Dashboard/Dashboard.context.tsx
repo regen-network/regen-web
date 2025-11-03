@@ -15,6 +15,8 @@ type DashboardContextType = {
   isOrganizationDashboard?: boolean;
   selectedAccountRoleName?: string;
   selectedAccountOnChainRoleId?: string;
+  selectedAccountAddress?: string;
+  selectedAccountRoleAccountId?: string;
 };
 
 export const useDashboardContext = (): DashboardContextType => {

@@ -73,6 +73,7 @@ import { CreditSendModal } from 'components/organisms/Modals/CreditSendModal/Cre
 import { Portfolio } from 'components/organisms/Portfolio/Portfolio';
 import { useMsgClient } from 'hooks';
 
+import { useDashboardContext } from '../Dashboard.context';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
@@ -122,7 +123,9 @@ export const MyEcocredits = (): JSX.Element => {
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
   const { privActiveAccount, activeAccount } = useAuth();
-  const { loginDisabled } = useWallet();
+  const { loginDisabled, wallet: connectedWallet } = useWallet();
+  const { selectedAccountAddress } = useDashboardContext();
+  const accountAddress = selectedAccountAddress ?? connectedWallet?.address;
 
   const navigate = useNavigate();
   const { track } = useTracker();
@@ -136,7 +139,7 @@ export const MyEcocredits = (): JSX.Element => {
     retirementsSetPaginationParams,
     retirementsPaginationParams,
     reloadRetirements,
-  } = useFetchRetirements({});
+  } = useFetchRetirements({ address: accountAddress });
 
   const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
   const onTxSuccessful = ({
@@ -192,7 +195,6 @@ export const MyEcocredits = (): JSX.Element => {
   const {
     signAndBroadcast,
     setDeliverTxResponse,
-    wallet,
     deliverTxResponse,
     error,
     setError,
@@ -216,7 +218,7 @@ export const MyEcocredits = (): JSX.Element => {
     isLoadingCredits,
     paginationParams,
     setPaginationParams,
-  } = useFetchEcocredits({});
+  } = useFetchEcocredits({ address: accountAddress });
 
   const {
     basketTokens,
@@ -224,7 +226,7 @@ export const MyEcocredits = (): JSX.Element => {
     basketsWithClasses,
     creditBaskets,
     reloadBasketsBalance,
-  } = useFetchBaskets({ credits });
+  } = useFetchBaskets({ credits, address: accountAddress });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
 

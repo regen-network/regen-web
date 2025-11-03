@@ -2,13 +2,13 @@
 import { useMemo } from 'react';
 import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
-import { useWallet } from 'lib/wallet/wallet';
-
 import { useFetchBridgedEcocredits } from 'components/organisms/BridgedEcocreditsTable/hooks/useFetchBridgedEcocredits';
 
-export const useBridgeAvailability = () => {
+import { useWallet } from 'lib/wallet/wallet';
+
+export const useBridgeAvailability = (addressOverride?: string) => {
   const { wallet } = useWallet();
-  const accountAddress = wallet?.address;
+  const accountAddress = addressOverride ?? wallet?.address;
 
   // Fetch bridgable credits (same as BridgableEcocreditsTable)
   const { credits: bridgableCredits, isLoadingCredits: isLoadingBridgable } =

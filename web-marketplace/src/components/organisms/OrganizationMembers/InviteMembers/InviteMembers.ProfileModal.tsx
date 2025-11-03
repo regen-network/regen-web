@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
-import { plural } from '@lingui/macro';
+import { plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import useClickOutside from 'utils/hooks/useClickOutside';
 
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';

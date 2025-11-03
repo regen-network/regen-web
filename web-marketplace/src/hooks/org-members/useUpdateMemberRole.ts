@@ -270,7 +270,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   });
 
               return {
-                contractAddress: project?.projectByProjectId?.adminDaoAddress,
+                contractAddress: projectDao.daoRbamAddress,
                 msg: {
                   execute_actions: {
                     actions: [...memberRoleActions, ...projectOwnerActions],

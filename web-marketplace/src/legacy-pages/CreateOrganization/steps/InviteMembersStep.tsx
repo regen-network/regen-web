@@ -118,8 +118,7 @@ export const InviteMembersStep = () => {
 
   return (
     <div className="text-center">
-      <Title variant="h3">{_(INVITE_MEMBERS)}</Title>
-      <Body className="pt-20 pb-40">
+      <Body className="pb-40">
         <Trans>
           Organization members have permissions for all projects associated with
           an organization. You can also skip this step and invite members later.

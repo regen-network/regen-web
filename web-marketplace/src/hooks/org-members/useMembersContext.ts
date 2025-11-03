@@ -7,7 +7,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { useAuth } from 'lib/auth/auth';

@@ -15,7 +15,9 @@ type Props = {
 
 export const RegenProviders = ({ children }: Props) => {
   const pathname = usePathname();
-  const isFullScreen = pathname.startsWith('/dashboard') || pathname.startsWith('/organizations/create');
+  const isFullScreen =
+    pathname.startsWith('/dashboard') ||
+    pathname.startsWith('/organizations/create');
   return (
     <ChainWrapper>
       <WalletProvider>

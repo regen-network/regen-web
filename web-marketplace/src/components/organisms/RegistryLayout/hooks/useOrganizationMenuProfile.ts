@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
-
-import type { AccountByIdQuery } from 'generated/graphql';
-import type { Wallet } from 'lib/wallet/wallet';
-
 import { useOrganizationProgress } from 'legacy-pages/CreateOrganization/hooks/useOrganizationProgress';
 import {
   DEFAULT_NAME,
@@ -11,8 +7,12 @@ import {
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
-import { getAddress } from '../RegistryLayout.utils';
+import type { AccountByIdQuery } from 'generated/graphql';
+import type { Wallet } from 'lib/wallet/wallet';
+
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
+import { getAddress } from '../RegistryLayout.utils';
 
 type UseOrganizationMenuProfileParams = {
   activeAccount: AccountByIdQuery['accountById'];

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-
 import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,

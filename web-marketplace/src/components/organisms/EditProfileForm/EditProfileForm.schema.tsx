@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 import { AccountType } from 'generated/graphql';
+import { TranslatorType } from 'lib/i18n/i18n.types';
+import { REQUIRED } from './EditProfileForm.constants';
 
 const baseSchema = z.object({
   profileType: z.nativeEnum(AccountType).optional(),
@@ -14,19 +16,19 @@ const baseSchema = z.object({
 
 type CreateSchemaParams = {
   requireProfileType?: boolean;
-  requiredMessage?: string;
+  _: TranslatorType;
 };
 
 export const createEditProfileFormSchema = ({
   requireProfileType = true,
-  requiredMessage = 'Required',
-}: CreateSchemaParams = {}) =>
+  _,
+}: CreateSchemaParams) =>
   baseSchema.superRefine((data, ctx) => {
     if (!data.name || data.name.trim().length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['name'],
-        message: requiredMessage,
+        message: _(REQUIRED),
       });
     }
 
@@ -34,11 +36,9 @@ export const createEditProfileFormSchema = ({
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['profileType'],
-        message: requiredMessage,
+        message: _(REQUIRED),
       });
     }
   });
-
-export const editProfileFormSchema = createEditProfileFormSchema();
 
 export type EditProfileFormSchemaType = z.infer<typeof baseSchema>;

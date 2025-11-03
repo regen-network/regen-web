@@ -113,7 +113,7 @@
     "graphql:codegen-indexer": "graphql-codegen --config indexer-codegen.yml",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "analyze:next": "ANALYZE=true bun run build",
-    "i18n:extract": "lingui extract --overwrite",
+    "i18n:extract": "NEXT_PUBLIC_SUPPORTED_LOCALES=\"en,es\" lingui extract --overwrite",
     "i18n:translate": "ts-node -r dotenv/config scripts/translatePoFile.js src/lib/i18n/locales/es.po es",
     "test": "vitest"
   },

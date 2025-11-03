@@ -1,12 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { v4 as uuidv4 } from 'uuid';
-
-import { AccountType } from 'generated/graphql';
-import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
-
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_BG,
@@ -14,6 +8,12 @@ import {
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
+import { v4 as uuidv4 } from 'uuid';
+
+import { AccountType } from 'generated/graphql';
+import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
+
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';

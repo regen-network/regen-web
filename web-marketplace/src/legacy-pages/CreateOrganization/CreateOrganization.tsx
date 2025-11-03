@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
+import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import { Loading } from 'web-components/src/components/loading';
@@ -15,7 +16,6 @@ import { SAVE_TEXT } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 import {

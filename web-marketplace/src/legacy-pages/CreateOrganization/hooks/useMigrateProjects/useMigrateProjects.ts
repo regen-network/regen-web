@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { EncodeObject } from '@cosmjs/proto-signing';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/events';
@@ -6,6 +7,13 @@ import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import { MsgSend_SendCredits } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import {
+  CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR,
+  CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
+  CREATE_ORG_SIGNING_CLIENT_ERROR,
+  CREATE_ORG_WALLET_REQUIRED_ERROR,
+} from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import {
   getExecuteActionsStargate,
   getMsgExecuteContract,
@@ -23,13 +31,6 @@ import { getSellOrdersBySellerKey } from 'lib/queries/react-query/ecocredit/mark
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR,
-  CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR,
-  CREATE_ORG_SIGNING_CLIENT_ERROR,
-  CREATE_ORG_WALLET_REQUIRED_ERROR,
-} from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
-import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { orgRoles } from 'hooks/org-members/constants';
@@ -47,7 +48,6 @@ import {
   predictAllAddresses,
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
-import { EncodeObject } from '@cosmjs/proto-signing';
 
 export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { _ } = useLingui();

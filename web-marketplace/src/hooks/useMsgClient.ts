@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { EncodeObject } from '@cosmjs/proto-signing';
 import { calculateFee, DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 import { TxRaw } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import { useQueryClient } from '@tanstack/react-query';
@@ -15,7 +16,6 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { gasPrice, useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { useWallet, Wallet } from '../lib/wallet/wallet';
-import { EncodeObject } from '@cosmjs/proto-signing';
 
 const defaultFee = {
   amount: [

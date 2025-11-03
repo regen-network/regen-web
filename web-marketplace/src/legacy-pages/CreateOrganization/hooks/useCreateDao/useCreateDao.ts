@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -9,8 +10,6 @@ import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,

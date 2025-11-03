@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
-import { AccountType } from 'generated/graphql';
-
 import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
+
+import { AccountType } from 'generated/graphql';
+
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { getCreateOrgSteps } from '../CreateOrganization.utils';

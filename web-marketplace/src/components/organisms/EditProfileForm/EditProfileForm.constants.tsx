@@ -31,3 +31,4 @@ export const WEBSITE_PLACEHOLDER = 'https://yourwebsite.com';
 export const TWITTER_PLACEHOLDER = 'https://twitter.com/yourtwitterhandle';
 export const PROFILE_AVATAR_FILE_NAME = 'avatar';
 export const PROFILE_BG_FILE_NAME = 'bg';
+export const REQUIRED = msg`Required`;

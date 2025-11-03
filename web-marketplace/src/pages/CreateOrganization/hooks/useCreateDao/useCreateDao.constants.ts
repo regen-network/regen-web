@@ -1,4 +1,15 @@
-import { parseCodeId } from './useCreateDao.utils';
+const parseCodeId = (
+  envVarName: string,
+  rawValue: string | undefined,
+): number => {
+  const parsed = Number(rawValue?.toString().trim());
+
+  if (!Number.isInteger(parsed) || parsed < 0) {
+    throw new Error(`Invalid ${envVarName} configuration`);
+  }
+
+  return parsed;
+};
 
 export const daoDaoCoreCodeId = import.meta.env.VITE_DAODAO_CORE_CODE_ID;
 export const filterCodeId = import.meta.env.VITE_FILTER_CODE_ID;

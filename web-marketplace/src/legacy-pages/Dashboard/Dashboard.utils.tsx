@@ -109,20 +109,22 @@ export const getProfileUrl = (account: {
 type GetPortfolioTabsParams = {
   portfolioLabel: string;
   bridgeLabel: string;
+  basePath: string;
 };
 
 export const getPortfolioTabs = ({
   portfolioLabel,
   bridgeLabel,
+  basePath,
 }: GetPortfolioTabsParams): IconTabProps[] => [
   {
     label: portfolioLabel,
-    href: '/dashboard/portfolio',
+    href: `${basePath}/portfolio`,
     icon: <CreditsIcon fontSize="small" linearGradient />,
   },
   {
     label: bridgeLabel,
-    href: '/dashboard/portfolio/bridge',
+    href: `${basePath}/portfolio/bridge`,
     icon: <BridgeIcon linearGradient />,
   },
 ];
@@ -131,15 +133,21 @@ export const getActivePortfolioTab = (
   tabs: IconTabProps[],
   pathname: string,
 ): number => {
+  const normalizedPath = pathname.endsWith('/')
+    ? pathname.slice(0, -1)
+    : pathname;
+
   return Math.max(
     tabs.findIndex(tab => {
-      if (tab.href === '/dashboard/portfolio/bridge') {
-        return pathname.includes('/dashboard/portfolio/bridge');
+      const normalizedHref = tab.href?.endsWith('/')
+        ? tab.href.slice(0, -1)
+        : tab.href;
+
+      if (normalizedHref?.endsWith('/bridge')) {
+        return normalizedPath.startsWith(normalizedHref);
       }
-      if (tab.href === '/dashboard/portfolio') {
-        return pathname === '/dashboard/portfolio';
-      }
-      return false;
+
+      return normalizedPath === normalizedHref;
     }),
     0,
   );

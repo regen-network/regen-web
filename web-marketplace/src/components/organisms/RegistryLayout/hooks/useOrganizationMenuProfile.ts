@@ -10,6 +10,12 @@ import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 import type { AccountByIdQuery } from 'generated/graphql';
 import type { Wallet } from 'lib/wallet/wallet';
 
+import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+} from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { getAddress } from '../RegistryLayout.utils';
@@ -53,7 +59,7 @@ export const useOrganizationMenuProfile = ({
       truncatedAddress: getAddress({ walletAddress: daoAddress }),
       address: daoAddress,
       profileLink: `/profiles/${daoAddress}`,
-      dashboardLink: '/dashboard',
+      dashboardLink: '/dashboard/organization',
     };
   }, [_, organization]);
 

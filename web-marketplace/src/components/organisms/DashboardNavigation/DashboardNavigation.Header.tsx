@@ -34,7 +34,7 @@ export const DashboardNavHeader = ({
   hasWalletAddress = true,
   wallet,
 }: Props) => {
-  const { name, address, image, id } = activeAccount;
+  const { name = '', address, image, id } = activeAccount;
 
   const avatarSrc =
     image ||
@@ -46,7 +46,7 @@ export const DashboardNavHeader = ({
           : AccountType.Organization,
     });
 
-  const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
+  const short = address ? `${address.slice(0, 9)}…${address.slice(-6)}` : '';
 
   const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
@@ -87,7 +87,7 @@ export const DashboardNavHeader = ({
           </button>
 
           <div className="group flex items-center gap-3">
-            {hasWalletAddress ? (
+            {hasWalletAddress && address ? (
               <CopyButton
                 className="group/copy flex items-center gap-3"
                 content={short}
@@ -104,7 +104,7 @@ export const DashboardNavHeader = ({
               </CopyButton>
             ) : (
               <Body size="xs" className="text-sc-text-sub-header">
-                {address.length > 21 ? short : address}
+                {address ? (address.length > 21 ? short : address) : ''}
               </Body>
             )}
           </div>
@@ -112,7 +112,11 @@ export const DashboardNavHeader = ({
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.('/profiles/' + (wallet || id))}
+            onClick={() =>
+              onViewProfileClick?.(
+                '/profiles/' + (wallet || address || id || ''),
+              )
+            }
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>

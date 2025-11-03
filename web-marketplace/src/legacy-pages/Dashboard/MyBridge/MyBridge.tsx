@@ -9,17 +9,21 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Bridge } from 'components/organisms';
 
+import { useDashboardContext } from '../Dashboard.context';
+
 export const MyBridge = (): JSX.Element => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const { selectedAccountAddress } = useDashboardContext();
+  const accountAddress = selectedAccountAddress ?? wallet?.address;
 
   const MyBridgeOutlet = useCallback(
     (): JSX.Element => (
       <Outlet
-        context={{ accountAddress: wallet?.address, privateAccess: true }}
+        context={{ accountAddress, privateAccess: true }}
       />
     ),
-    [wallet?.address],
+    [accountAddress],
   );
 
   const tabs: IconTabProps[] = useMemo(

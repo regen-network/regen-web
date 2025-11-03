@@ -22,4 +22,5 @@ export const IS_REGEN = MARKETPLACE_CLIENT === 'regen';
 export const COLOR_SCHEME: ColorScheme = IS_TERRASOS ? 'terrasos' : 'regen';
 export const MARKETPLACE_APP_URL = process.env.NEXT_PUBLIC_MARKETPLACE_APP_URL;
 export const LINK_PREFIX = IS_REGEN ? '' : MARKETPLACE_APP_URL;
-export const ORG_ENABLED = process.env.NEXT_PUBLIC_ORGANIZATION_DISABLED !== 'true';
+export const ORG_ENABLED =
+  process.env.NEXT_PUBLIC_ORGANIZATION_DISABLED !== 'true';

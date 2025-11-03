@@ -10,7 +10,6 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
-import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
 
@@ -23,39 +22,40 @@ const CreateSellOrderFlow = lazy(async () => ({
 interface UserSellOrdersToolbarProps {
   wrapperClassName?: string;
   refetchSellOrders: () => void;
+  canManageSellOrders?: boolean;
+  accountAddress?: string;
 }
 
 export const UserSellOrdersToolbar = ({
   wrapperClassName,
   refetchSellOrders,
+  canManageSellOrders = true,
+  accountAddress,
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
   const { loginDisabled, wallet } = useWallet();
-  const {
-    selectedAccountAddress,
-    isOrganizationDashboard,
-    isOrganizationOwner,
-    isOrganizationAdmin,
-  } = useDashboardContext();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const accountAddress = selectedAccountAddress ?? wallet?.address;
-  const canManageSellOrders =
-    !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
+  const sellerAddress = accountAddress ?? wallet?.address;
   const { credits } = useFetchEcocredits({
-    address: accountAddress,
+    address: sellerAddress,
     isPaginatedQuery: false,
   });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
-  const hasTradableCredits = canManageSellOrders && tradableCredits.length > 0;
+  const hasTradableCredits = tradableCredits.length > 0;
+  const canStartSellFlow = canManageSellOrders && hasTradableCredits;
 
   useEffect(() => {
-    if (!hasTradableCredits && isSellFlowStarted) {
+    if ((!canManageSellOrders || !hasTradableCredits) && isSellFlowStarted) {
       setIsSellFlowStarted(false);
     }
-  }, [hasTradableCredits, isSellFlowStarted]);
+  }, [canManageSellOrders, hasTradableCredits, isSellFlowStarted]);
+
+  const tooltipText = !canManageSellOrders
+    ? _(msg`You do not have permission to create sell orders.`)
+    : _(msg`You have no tradable credits that can be sold.`);
 
   return (
     <>
@@ -70,24 +70,16 @@ export const UserSellOrdersToolbar = ({
         </Subtitle>
         <div className="flex sm:flex-row flex-col sm:items-center items-end">
           <div className="sm:order-2 order-1">
-            {hasTradableCredits ? (
+            {canStartSellFlow ? (
               <CreateButton
-                hasTradableCredits={hasTradableCredits}
+                hasTradableCredits={true}
                 setIsSellFlowStarted={setIsSellFlowStarted}
               />
             ) : (
-              <InfoTooltip
-                arrow
-                placement="top"
-                title={
-                  canManageSellOrders
-                    ? _(msg`You have no tradable credits that can be sold.`)
-                    : _(msg`You do not have permission to create sell orders.`)
-                }
-              >
+              <InfoTooltip arrow placement="top" title={tooltipText}>
                 <div>
                   <CreateButton
-                    hasTradableCredits={hasTradableCredits}
+                    hasTradableCredits={false}
                     setIsSellFlowStarted={setIsSellFlowStarted}
                   />
                 </div>
@@ -96,7 +88,7 @@ export const UserSellOrdersToolbar = ({
           </div>
         </div>
       </div>
-      {hasTradableCredits && isSellFlowStarted && (
+      {canStartSellFlow && isSellFlowStarted && (
         <Suspense fallback={null}>
           <CreateSellOrderFlow
             isFlowStarted={isSellFlowStarted}
@@ -109,7 +101,7 @@ export const UserSellOrdersToolbar = ({
               !!activeAccount?.stripeConnectedAccountId &&
               !loginDisabled
             }
-            accountAddress={accountAddress}
+            accountAddress={sellerAddress}
           />
         </Suspense>
       )}

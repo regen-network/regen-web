@@ -23,7 +23,6 @@ import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_BG,
-  DEFAULT_PROFILE_TYPE,
   PROFILE_S3_PATH,
   PROFILE_SAVED,
 } from './Dashboard.constants';
@@ -45,22 +44,14 @@ export const EditProfile = () => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
 
   const initialValues: EditProfileFormSchemaType = useMemo(() => {
-    const {
-      name,
-      description,
-      image,
-      bgImage,
-      type,
-      twitterLink,
-      websiteLink,
-    } = activeAccount ?? {};
+    const { name, description, image, bgImage, twitterLink, websiteLink } =
+      activeAccount ?? {};
 
     return {
       name: name ? name : _(DEFAULT_NAME),
       description: description?.trimEnd() ?? '',
       profileImage: image ? image : defaultAvatar,
       backgroundImage: bgImage ? bgImage : DEFAULT_PROFILE_BG,
-      profileType: type ?? DEFAULT_PROFILE_TYPE,
       twitterLink: twitterLink ?? '',
       websiteLink: websiteLink ?? '',
     };
@@ -70,7 +61,6 @@ export const EditProfile = () => {
   const onSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
       const {
-        profileType: submittedProfileType,
         profileImage,
         backgroundImage,
         name,
@@ -78,7 +68,6 @@ export const EditProfile = () => {
         twitterLink,
         websiteLink,
       } = values;
-      const profileType = submittedProfileType ?? DEFAULT_PROFILE_TYPE;
       const isDefaultAvatar = DEFAULT_PROFILE_AVATARS.includes(profileImage);
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
       await updateAccountById({
@@ -90,7 +79,6 @@ export const EditProfile = () => {
               description,
               image: isDefaultAvatar ? undefined : profileImage,
               bgImage: isDefaultBg ? undefined : backgroundImage,
-              type: profileType,
               twitterLink,
               websiteLink,
             },
@@ -158,6 +146,7 @@ export const EditProfile = () => {
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       onUpload={onUpload}
+      hideProfileType
       initialValues={initialValues}
       isDirtyRef={isDirtyRef}
     >

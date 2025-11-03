@@ -1,8 +1,8 @@
 export interface AccountOption {
-  id: string;
-  name: string;
-  address: string;
-  image: string;
+  id?: string;
+  name?: string;
+  address?: string;
+  image?: string;
   type: 'user' | 'org';
   displayName?: string;
 }
@@ -55,7 +55,7 @@ export interface DashboardNavFooterProps {
 
 export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
-  activeId: string;
+  activeId?: string;
   onSelect: (id: string) => void;
 }
 

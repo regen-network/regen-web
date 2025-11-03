@@ -44,6 +44,7 @@ import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
 import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { ORG_ENABLED } from 'lib/env';
 
 // import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { AuthRoute } from 'components/atoms/AuthRoute';
@@ -321,10 +322,12 @@ export const getRegenRoutes = ({
               </Route>
             </Route>
           </Route>
-          <Route
-            path="organizations/create"
-            element={<KeplrOrAuthRoute component={CreateOrganization} />}
-          />
+          {ORG_ENABLED && (
+            <Route
+              path="organizations/create"
+              element={<KeplrOrAuthRoute component={CreateOrganization} />}
+            />
+          )}
           <Route path="credit-classes">
             <Route path=":creditClassId" element={<CreditClassDetails />} />
             <Route

@@ -42,6 +42,7 @@ export const ExtraComponent = ({
     createOrganization,
     unfinalizedOrgCreation,
     finishOrgCreation,
+    orgEnabled: true,
     textContent: {
       signedInAs: 'signed in as',
       copyText: { tooltipText: 'Copy address', toastText: 'Address copied' },

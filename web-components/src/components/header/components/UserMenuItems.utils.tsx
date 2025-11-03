@@ -35,6 +35,7 @@ interface GetUserMenuItemsParams {
   finishOrgCreation?: () => void;
   unfinalizedOrgCreation?: boolean;
   textContent: TextContent;
+  orgEnabled?: boolean;
 }
 
 const className = 'pl-20';
@@ -50,6 +51,7 @@ export const getUserMenuItems = ({
   unfinalizedOrgCreation,
   finishOrgCreation,
   textContent,
+  orgEnabled,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     // Personal card
@@ -93,30 +95,33 @@ export const getUserMenuItems = ({
       label: textContent.personalDashboard,
     },
     // Separator (only when create org is available)
-    (createOrganization || organizationProfile) && {
-      children: <Separator className="w-full my-[14px]" />,
-    },
+    orgEnabled &&
+      (createOrganization || organizationProfile) && {
+        children: <Separator className="w-full my-[14px]" />,
+      },
     // Organization card (no hover link)
-    organizationProfile && {
-      children: (
-        <div className="w-full">
-          <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
-            {textContent.organization}
+    orgEnabled &&
+      organizationProfile && {
+        children: (
+          <div className="w-full">
+            <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
+              {textContent.organization}
+            </div>
+            <div className="px-10">
+              <UserMenuItemProfile
+                {...organizationProfile}
+                profileLink={undefined}
+                personalProfileText={textContent.personalProfile}
+                copyText={textContent.copyText}
+                linkComponent={linkComponent}
+              />
+            </div>
           </div>
-          <div className="px-10">
-            <UserMenuItemProfile
-              {...organizationProfile}
-              profileLink={undefined}
-              personalProfileText={textContent.personalProfile}
-              copyText={textContent.copyText}
-              linkComponent={linkComponent}
-            />
-          </div>
-        </div>
-      ),
-    },
+        ),
+      },
     // Organization profile item
-    organizationProfile &&
+    orgEnabled &&
+      organizationProfile &&
       !unfinalizedOrgCreation && {
         pathname,
         linkComponent: navLinkComponent,
@@ -128,7 +133,8 @@ export const getUserMenuItems = ({
         label: textContent.organizationProfile,
       },
     // Organization dashboard
-    organizationProfile &&
+    orgEnabled &&
+      organizationProfile &&
       !unfinalizedOrgCreation && {
         pathname,
         linkComponent: navLinkComponent,
@@ -139,7 +145,8 @@ export const getUserMenuItems = ({
         label: textContent.organizationDashboard,
       },
     // Create organization CTA (when no org)
-    !organizationProfile &&
+    orgEnabled &&
+      !organizationProfile &&
       createOrganization && {
         children: (
           <TextButton
@@ -151,7 +158,8 @@ export const getUserMenuItems = ({
         ),
       },
     // Finish org creation CTA
-    unfinalizedOrgCreation &&
+    orgEnabled &&
+      unfinalizedOrgCreation &&
       finishOrgCreation && {
         children: (
           <TextButton

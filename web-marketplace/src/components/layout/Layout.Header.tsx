@@ -16,6 +16,7 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
+import { ORG_ENABLED } from 'lib/env';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
@@ -137,6 +138,7 @@ export const LayoutHeader = () => {
           dashboardLink: '/dashboard',
           address: wallet?.address,
         }),
+        orgEnabled: ORG_ENABLED,
         organizationProfile: menuOrganizationProfile,
         createOrganization:
           !menuOrganizationProfile && !unfinalizedOrgCreation

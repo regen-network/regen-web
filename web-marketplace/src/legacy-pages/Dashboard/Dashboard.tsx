@@ -29,6 +29,13 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
@@ -60,6 +67,26 @@ type DashboardNavAccount = AccountOption & {
   roleName?: string;
   onChainRoleId?: string;
 };
+
+const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = {
+  '1': ROLE_OWNER,
+  '2': ROLE_ADMIN,
+  '3': ROLE_EDITOR,
+  '4': ROLE_AUTHOR,
+  '5': ROLE_VIEWER,
+};
+
+const ORGANIZATION_ROLES = [
+  ROLE_OWNER,
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_AUTHOR,
+  ROLE_VIEWER,
+];
+
+// Set to a specific role string (e.g. 'admin') to force permissions while testing.
+// Leave undefined to use the actual assignment role.
+const ORGANIZATION_ROLE_OVERRIDE: string | undefined = 'admin';
 
 export const Dashboard = () => {
   const { _ } = useLingui();
@@ -267,6 +294,46 @@ export const Dashboard = () => {
     );
   }, [navigationAccounts, selectedAccountId]);
 
+  const organizationRoleActual = useMemo(() => {
+    if (!isOrganizationDashboard || selectedAccount?.type !== 'org')
+      return undefined;
+
+    if (selectedAccount.roleName) {
+      return selectedAccount.roleName;
+    }
+
+    if (selectedAccount.onChainRoleId) {
+      const mappedRole =
+        ON_CHAIN_ROLE_ID_TO_ROLE[selectedAccount.onChainRoleId];
+      if (mappedRole) return mappedRole;
+    }
+
+    return undefined;
+  }, [
+    isOrganizationDashboard,
+    selectedAccount?.type,
+    selectedAccount?.roleName,
+    selectedAccount?.onChainRoleId,
+  ]);
+
+  const organizationRoleOverride =
+    isOrganizationDashboard && ORGANIZATION_ROLE_OVERRIDE
+      ? (() => {
+          const normalized = ORGANIZATION_ROLE_OVERRIDE.toLowerCase();
+          return ORGANIZATION_ROLES.includes(normalized)
+            ? normalized
+            : undefined;
+        })()
+      : undefined;
+
+  const organizationRole = organizationRoleOverride ?? organizationRoleActual;
+
+  const isOrganizationOwner = organizationRole === ROLE_OWNER;
+  const isOrganizationAdmin = organizationRole === ROLE_ADMIN;
+  const isOrganizationEditor = organizationRole === ROLE_EDITOR;
+  const isOrganizationAuthor = organizationRole === ROLE_AUTHOR;
+  const isOrganizationViewer = organizationRole === ROLE_VIEWER;
+
   const dashboardAccountAddress = isOrganizationDashboard
     ? organizationAccount?.address ?? selectedAccount?.address
     : loginDisabled
@@ -341,6 +408,13 @@ export const Dashboard = () => {
       selectedAccountOnChainRoleId: selectedAccount?.onChainRoleId,
       selectedAccountAddress: selectedAccount?.address,
       selectedAccountRoleAccountId: selectedAccount?.roleAccountId,
+      organizationRole,
+      organizationRoleActual,
+      isOrganizationOwner,
+      isOrganizationAdmin,
+      isOrganizationEditor,
+      isOrganizationAuthor,
+      isOrganizationViewer,
     }),
     [
       isCreditClassCreator,
@@ -350,10 +424,13 @@ export const Dashboard = () => {
       selectedAccountId,
       selectedAccount,
       isOrganizationDashboard,
-      selectedAccount?.roleName,
-      selectedAccount?.onChainRoleId,
-      selectedAccount?.address,
-      selectedAccount?.roleAccountId,
+      organizationRole,
+      organizationRoleActual,
+      isOrganizationOwner,
+      isOrganizationAdmin,
+      isOrganizationEditor,
+      isOrganizationAuthor,
+      isOrganizationViewer,
     ],
   );
 

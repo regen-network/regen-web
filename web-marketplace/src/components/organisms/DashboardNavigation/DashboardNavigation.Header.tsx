@@ -47,6 +47,7 @@ export const DashboardNavHeader = ({
     });
 
   const short = address ? `${address.slice(0, 9)}…${address.slice(-6)}` : '';
+  const copyAddress = address ?? '';
 
   const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
@@ -90,7 +91,7 @@ export const DashboardNavHeader = ({
             {hasWalletAddress && address ? (
               <CopyButton
                 className="group/copy flex items-center gap-3"
-                content={short}
+                content={copyAddress}
                 toastText={_(COPIED)}
                 iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
                 tooltipText={''}

@@ -124,8 +124,15 @@ export const MyEcocredits = (): JSX.Element => {
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
   const { privActiveAccount, activeAccount } = useAuth();
   const { loginDisabled, wallet: connectedWallet } = useWallet();
-  const { selectedAccountAddress } = useDashboardContext();
+  const {
+    selectedAccountAddress,
+    isOrganizationDashboard,
+    isOrganizationOwner,
+    isOrganizationAdmin,
+  } = useDashboardContext();
   const accountAddress = selectedAccountAddress ?? connectedWallet?.address;
+  const canManagePortfolioActions =
+    !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
 
   const navigate = useNavigate();
   const { track } = useTracker();
@@ -290,12 +297,178 @@ export const MyEcocredits = (): JSX.Element => {
     onTxBroadcast: onCreateSellOrderBroadcast,
   });
 
-  const sxs = {
-    arrow: {
+  const arrowSx = useMemo<SxProps<Theme>>(
+    () => ({
       width: theme.spacing(6),
       height: theme.spacing(6),
-    } as SxProps<Theme>,
-  };
+    }),
+    [theme],
+  );
+
+  const hasTradableCredits = useMemo(
+    () =>
+      credits.some(credit => Number(credit.balance?.tradableAmount ?? 0) > 0),
+    [credits],
+  );
+
+  const renderCreditActionButtons = useMemo(() => {
+    if (!canManagePortfolioActions || !hasTradableCredits) return undefined;
+
+    return (i: number) => {
+      if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
+        return undefined;
+      }
+
+      const buttons = [
+        {
+          icon: <AvailableCreditsIconAlt sx={arrowSx} />,
+          label: _(CREATE_SELL_ORDER_SHORT),
+          onClick: () => {
+            track<Sell1Event>('sell1', {
+              projectId: credits[i].projectId,
+              projectName: credits[i]?.projectName,
+              creditClassId: credits[i]?.classId,
+            });
+            setSellOrderCreateOpen(i);
+          },
+        },
+        {
+          icon: (
+            <ArrowDownIcon
+              sx={arrowSx}
+              color={theme.palette.secondary.dark}
+              direction="next"
+            />
+          ),
+          label: _(CREDIT_SEND_TITLE),
+          onClick: () => {
+            track<Send1Event>('send1', {
+              batchDenom: credits[i].denom,
+              projectId: credits[i].projectId,
+              projectName: credits[i]?.projectName,
+              creditClassId: credits[i]?.classId,
+            });
+            setCreditSendOpen(i);
+          },
+        },
+        {
+          icon: (
+            <ArrowDownIcon
+              sx={arrowSx}
+              color={theme.palette.secondary.dark}
+              direction="down"
+            />
+          ),
+          label: _(CREDIT_RETIRE_TITLE),
+          onClick: () => {
+            track<Retire1Event>('retire1', {
+              batchDenom: credits[i].denom,
+              projectId: credits[i].projectId,
+              projectName: credits[i]?.projectName,
+              creditClassId: credits[i]?.classId,
+            });
+            setCreditRetireOpen(i);
+          },
+        },
+      ];
+
+      if (creditBaskets[i] && creditBaskets[i].length > 0) {
+        buttons.splice(1, 0, {
+          icon: <PutInBasketIcon />,
+          label: _(BASKET_PUT_TITLE),
+          onClick: () => {
+            track<PutInBasket1Event>('putInBasket1', {
+              batchDenom: credits[i].denom,
+              projectId: credits[i].projectId,
+              creditClassId: credits[i]?.classId,
+            });
+            setBasketPutOpen(i);
+          },
+        });
+      }
+
+      return <TableActionButtons buttons={buttons} />;
+    };
+  }, [
+    _,
+    arrowSx,
+    canManagePortfolioActions,
+    credits,
+    creditBaskets,
+    hasTradableCredits,
+    setBasketPutOpen,
+    setCreditRetireOpen,
+    setCreditSendOpen,
+    setSellOrderCreateOpen,
+    theme.palette.secondary.dark,
+    track,
+  ]);
+
+  const renderBasketActionButtons = useMemo(() => {
+    if (!canManagePortfolioActions) return undefined;
+
+    return (i: number) => (
+      <TableActionButtons
+        buttons={[
+          {
+            icon: <TakeFromBasketIcon />,
+            label: _(BASKET_TAKE_TITLE),
+            onClick: () => {
+              openTakeModal(i);
+            },
+          },
+        ]}
+      />
+    );
+  }, [_, canManagePortfolioActions, openTakeModal]);
+
+  const permittedBatchDenoms = useMemo(() => {
+    if (!canManagePortfolioActions) return [];
+
+    if (!isOrganizationDashboard) {
+      return credits
+        .filter(credit => Number(credit.balance?.tradableAmount) > 0)
+        .map(credit => credit.denom)
+        .filter((denom): denom is string => !!denom);
+    }
+
+    return credits
+      .filter(credit => {
+        if (!credit.denom) return false;
+        return selectedAccountAddress
+          ? credit.balance?.address === selectedAccountAddress
+          : true;
+      })
+      .filter(credit => Number(credit.balance?.tradableAmount) > 0)
+      .map(credit => credit.denom)
+      .filter((denom): denom is string => !!denom);
+  }, [
+    canManagePortfolioActions,
+    credits,
+    isOrganizationDashboard,
+    selectedAccountAddress,
+  ]);
+
+  const sellOrderBatchOptions = useMemo(() => {
+    if (!canManagePortfolioActions || sellOrderCreateOpen < 0) return [];
+
+    const primaryDenom = credits[sellOrderCreateOpen]?.denom;
+    const additionalDenoms = getOtherSellOrderBatchDenomOptions({
+      credits,
+      sellOrderCreateOpen,
+    }).map(option => option.value);
+
+    return [primaryDenom, ...additionalDenoms]
+      .filter((value): value is string => !!value)
+      .filter((value, index, array) => array.indexOf(value) === index)
+      .filter(value => permittedBatchDenoms.includes(value))
+      .map(value => ({ label: value, value }));
+  }, [
+    canManagePortfolioActions,
+    credits,
+    permittedBatchDenoms,
+    sellOrderCreateOpen,
+  ]);
 
   if (creditRetireOpen > -1) {
     lastRetiredProjectIdRef.current = credits[creditRetireOpen]?.projectId;
@@ -332,104 +505,11 @@ export const MyEcocredits = (): JSX.Element => {
           retirementsPaginationParams={retirementsPaginationParams}
           activePortfolioTab={activePortfolioTab}
           isIgnoreOffset
-          renderCreditActionButtons={
-            credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
-              ? (i: number) => {
-                  // No CTA available without tradable credit for given credit batch
-                  if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
-                    return undefined;
-                  }
-                  const buttons = [
-                    {
-                      icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
-                      label: _(CREATE_SELL_ORDER_SHORT),
-                      onClick: () => {
-                        track<Sell1Event>('sell1', {
-                          projectId: credits[i].projectId,
-                          projectName: credits[i]?.projectName,
-                          creditClassId: credits[i]?.classId,
-                        });
-                        setSellOrderCreateOpen(i);
-                      },
-                    },
-                    {
-                      icon: (
-                        <ArrowDownIcon
-                          sx={sxs.arrow}
-                          color={theme.palette.secondary.dark}
-                          direction="next"
-                        />
-                      ),
-                      label: _(CREDIT_SEND_TITLE),
-                      onClick: () => {
-                        track<Send1Event>('send1', {
-                          batchDenom: credits[i].denom,
-                          projectId: credits[i].projectId,
-                          projectName: credits[i]?.projectName,
-                          creditClassId: credits[i]?.classId,
-                        });
-                        setCreditSendOpen(i);
-                      },
-                    },
-                    {
-                      icon: (
-                        <ArrowDownIcon
-                          sx={sxs.arrow}
-                          color={theme.palette.secondary.dark}
-                          direction="down"
-                        />
-                      ),
-                      label: _(CREDIT_RETIRE_TITLE),
-                      onClick: () => {
-                        track<Retire1Event>('retire1', {
-                          batchDenom: credits[i].denom,
-                          projectId: credits[i].projectId,
-                          projectName: credits[i]?.projectName,
-                          creditClassId: credits[i]?.classId,
-                        });
-                        setCreditRetireOpen(i);
-                      },
-                    },
-                  ];
-
-                  // Only add ability to put credits into basket
-                  // if there's at least one basket that accepts those credits
-                  if (creditBaskets[i] && creditBaskets[i].length > 0) {
-                    buttons.splice(1, 0, {
-                      // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-                      icon: <PutInBasketIcon />,
-                      label: _(BASKET_PUT_TITLE),
-                      onClick: () => {
-                        track<PutInBasket1Event>('putInBasket1', {
-                          batchDenom: credits[i].denom,
-                          projectId: credits[i].projectId,
-                          creditClassId: credits[i]?.classId,
-                        });
-                        setBasketPutOpen(i);
-                      },
-                    });
-                  }
-                  return <TableActionButtons buttons={buttons} />;
-                }
-              : // Hide full CTA column if no credits tradable for all credit batches
-                undefined
-          }
-          renderBasketActionButtons={(i: number) => (
-            <TableActionButtons
-              buttons={[
-                {
-                  icon: <TakeFromBasketIcon />,
-                  label: _(BASKET_TAKE_TITLE),
-                  onClick: () => {
-                    openTakeModal(i);
-                  },
-                },
-              ]}
-            />
-          )}
+          renderCreditActionButtons={renderCreditActionButtons}
+          renderBasketActionButtons={renderBasketActionButtons}
         />
       </WithLoader>
-      {creditSendOpen > -1 && !!accountAddress && (
+      {canManagePortfolioActions && creditSendOpen > -1 && !!accountAddress && (
         <CreditSendModal
           title={_(CREDIT_SEND_TITLE)}
           sender={accountAddress}
@@ -444,7 +524,7 @@ export const MyEcocredits = (): JSX.Element => {
           addressPrefix={addressPrefix}
         />
       )}
-      {basketPutOpen > -1 && (
+      {canManagePortfolioActions && basketPutOpen > -1 && (
         <BasketPutModal
           basketOptions={
             creditBaskets[basketPutOpen]
@@ -476,122 +556,131 @@ export const MyEcocredits = (): JSX.Element => {
           invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
         />
       )}
-      {creditRetireOpen > -1 && !!accountAddress && (
-        <CreditRetireModal
-          batchDenom={credits[creditRetireOpen].denom}
-          availableTradableAmount={Number(
-            credits[creditRetireOpen].balance?.tradableAmount,
-          )}
-          mapboxToken={mapboxToken}
-          open={creditRetireOpen > -1}
-          onClose={() => setCreditRetireOpen(-1)}
-          onSubmit={creditRetireSubmit}
-          retirementInfoText={_(RETIREMENT_INFO_TEXT)}
-        />
-      )}
-      {!!basketTakeTokens?.basket && !!accountAddress && (
-        <BasketTakeModal
-          title={_(BASKET_TAKE_TITLE)}
-          subtitle={_(BASKET_TAKE_SUBTITLE)}
-          open={true}
-          accountAddress={accountAddress}
-          basket={basketTakeTokens?.basket}
-          basketDisplayDenom={
-            basketTakeTokens?.metadata?.metadata?.display || ''
-          }
-          balance={
-            parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
-            Math.pow(10, basketTakeTokens?.basket?.exponent)
-          }
-          mapboxToken={mapboxToken}
-          onClose={() => setBasketTakeTokens(undefined)}
-          onSubmit={basketTakeSubmit}
-          amountLabel={_(AMOUNT_LABEL)}
-          amountErrorText={_(BASKET_TAKE_AMOUNT_ERROR_TEXT)}
-          retireOnTakeLabel={_(RETIRE_ON_TAKE_LABEL)}
-          retireOnTakeTooltip={_(RETIRE_ON_TAKE_TOOLTIP)}
-          submitLabel={_(BASKET_TAKE_SUBMIT_LABEL)}
-          submitErrorText={_(SUBMIT_ERROR_TEXT)}
-          retirementInfoText={_(RETIREMENT_INFO_TEXT)}
-          bottomTextMapping={bottomFieldsTextMapping}
-          stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
-          maxLabel={_(MAX_LABEL)}
-          availableLabel={_(AVAILABLE_LABEL)}
-          requiredMessage={_(REQUIRED_MESSAGE)}
-          invalidAmount={_(INVALID_AMOUNT)}
-          insufficientCredits={_(INSUFFICIENT_CREDITS)}
-          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
-          invalidMemoLength={_(INVALID_MEMO_LENGTH)}
-        />
-      )}
-      {sellOrderCreateOpen > -1 && !!accountAddress && (
-        <CreateSellOrderModal
-          batchDenoms={[
-            {
-              label: credits[sellOrderCreateOpen].denom ?? '0',
-              value: credits[sellOrderCreateOpen].denom ?? '0',
-            },
-            ...getOtherSellOrderBatchDenomOptions({
+      {canManagePortfolioActions &&
+        creditRetireOpen > -1 &&
+        !!accountAddress && (
+          <CreditRetireModal
+            batchDenom={credits[creditRetireOpen].denom}
+            availableTradableAmount={Number(
+              credits[creditRetireOpen].balance?.tradableAmount,
+            )}
+            mapboxToken={mapboxToken}
+            open={creditRetireOpen > -1}
+            onClose={() => setCreditRetireOpen(-1)}
+            onSubmit={creditRetireSubmit}
+            retirementInfoText={_(RETIREMENT_INFO_TEXT)}
+          />
+        )}
+      {canManagePortfolioActions &&
+        !!basketTakeTokens?.basket &&
+        !!accountAddress && (
+          <BasketTakeModal
+            title={_(BASKET_TAKE_TITLE)}
+            subtitle={_(BASKET_TAKE_SUBTITLE)}
+            open={true}
+            accountAddress={accountAddress}
+            basket={basketTakeTokens?.basket}
+            basketDisplayDenom={
+              basketTakeTokens?.metadata?.metadata?.display || ''
+            }
+            balance={
+              parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
+              Math.pow(10, basketTakeTokens?.basket?.exponent)
+            }
+            mapboxToken={mapboxToken}
+            onClose={() => setBasketTakeTokens(undefined)}
+            onSubmit={basketTakeSubmit}
+            amountLabel={_(AMOUNT_LABEL)}
+            amountErrorText={_(BASKET_TAKE_AMOUNT_ERROR_TEXT)}
+            retireOnTakeLabel={_(RETIRE_ON_TAKE_LABEL)}
+            retireOnTakeTooltip={_(RETIRE_ON_TAKE_TOOLTIP)}
+            submitLabel={_(BASKET_TAKE_SUBMIT_LABEL)}
+            submitErrorText={_(SUBMIT_ERROR_TEXT)}
+            retirementInfoText={_(RETIREMENT_INFO_TEXT)}
+            bottomTextMapping={bottomFieldsTextMapping}
+            stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
+            maxLabel={_(MAX_LABEL)}
+            availableLabel={_(AVAILABLE_LABEL)}
+            requiredMessage={_(REQUIRED_MESSAGE)}
+            invalidAmount={_(INVALID_AMOUNT)}
+            insufficientCredits={_(INSUFFICIENT_CREDITS)}
+            invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+            invalidMemoLength={_(INVALID_MEMO_LENGTH)}
+          />
+        )}
+      {canManagePortfolioActions &&
+        sellOrderCreateOpen > -1 &&
+        !!accountAddress &&
+        sellOrderBatchOptions.length > 0 && (
+          <CreateSellOrderModal
+            batchDenoms={sellOrderBatchOptions}
+            allowedDenoms={allowedDenomOptions}
+            sellDenom={'REGEN'}
+            availableAmountByBatch={getAvailableAmountByBatch({
               credits,
-              sellOrderCreateOpen,
-            }),
-          ]}
-          allowedDenoms={allowedDenomOptions}
-          sellDenom={'REGEN'}
-          availableAmountByBatch={getAvailableAmountByBatch({ credits })}
-          open={true}
-          onClose={() => setSellOrderCreateOpen(-1)}
-          onSubmit={createSellOrderSubmit}
-          title={_(CREATE_SELL_ORDER_TITLE)}
-          canCreateFiatOrder={canCreateFiatOrder}
+              permittedDenoms: permittedBatchDenoms,
+            })}
+            open={true}
+            onClose={() => setSellOrderCreateOpen(-1)}
+            onSubmit={createSellOrderSubmit}
+            title={_(CREATE_SELL_ORDER_TITLE)}
+            canCreateFiatOrder={canCreateFiatOrder}
+          />
+        )}
+      {canManagePortfolioActions && (
+        <ProcessingModal
+          open={!deliverTxResponse && isProcessingModalOpen}
+          onClose={() => setIsProcessingModalOpen(false)}
+          title={_(PROCESSING_MODAL_TITLE)}
+          bodyText={_(PROCESSING_MODAL_BODY)}
         />
       )}
-      <ProcessingModal
-        open={!deliverTxResponse && isProcessingModalOpen}
-        onClose={() => setIsProcessingModalOpen(false)}
-        title={_(PROCESSING_MODAL_TITLE)}
-        bodyText={_(PROCESSING_MODAL_BODY)}
-      />
-      {!error && txHash && cardItems && (txModalTitle || txModalHeader) && (
-        <TxSuccessfulModal
+      {canManagePortfolioActions &&
+        !error &&
+        txHash &&
+        cardItems &&
+        (txModalTitle || txModalHeader) && (
+          <TxSuccessfulModal
+            seeMoreText={_(SEE_MORE)}
+            seeLessText={_(SEE_LESS)}
+            open={!error && (!!txModalTitle || !!deliverTxResponse)}
+            onClose={handleTxModalClose}
+            txHash={txHash ?? ''}
+            txHashUrl={txHashUrl}
+            title={txModalHeader ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
+            cardTitle={txModalTitle ?? ''}
+            buttonTitle={txButtonTitle ?? _(TX_MODAL_TITLE)}
+            cardItems={cardItems}
+            linkComponent={Link}
+            onButtonClick={onButtonClick}
+            socialItems={getSocialItems({
+              twitter: {
+                text: SOCIAL_TWITTER_TEXT_MAPPING[txModalHeader ?? ''],
+                url: shareUrl,
+              },
+              linkedIn: { url: shareUrl },
+            })}
+            shareTitle={_(SHARE_TITLE)}
+            blockchainRecordText={_(BLOCKCHAIN_RECORD)}
+          />
+        )}
+      {canManagePortfolioActions && (
+        <TxErrorModal
           seeMoreText={_(SEE_MORE)}
           seeLessText={_(SEE_LESS)}
-          open={!error && (!!txModalTitle || !!deliverTxResponse)}
+          error={error ?? ''}
+          open={!!error}
           onClose={handleTxModalClose}
-          txHash={txHash ?? ''}
+          txHash={txHash || ''}
           txHashUrl={txHashUrl}
-          title={txModalHeader ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
           cardTitle={txModalTitle ?? ''}
-          buttonTitle={txButtonTitle ?? _(TX_MODAL_TITLE)}
-          cardItems={cardItems}
+          buttonTitle={_(ERROR_BUTTON)}
           linkComponent={Link}
           onButtonClick={onButtonClick}
-          socialItems={getSocialItems({
-            twitter: {
-              text: SOCIAL_TWITTER_TEXT_MAPPING[txModalHeader ?? ''],
-              url: shareUrl,
-            },
-            linkedIn: { url: shareUrl },
-          })}
-          shareTitle={_(SHARE_TITLE)}
+          title={_(TX_ERROR_MODAL_TITLE)}
           blockchainRecordText={_(BLOCKCHAIN_RECORD)}
         />
       )}
-      <TxErrorModal
-        seeMoreText={_(SEE_MORE)}
-        seeLessText={_(SEE_LESS)}
-        error={error ?? ''}
-        open={!!error}
-        onClose={handleTxModalClose}
-        txHash={txHash || ''}
-        txHashUrl={txHashUrl}
-        cardTitle={txModalTitle ?? ''}
-        buttonTitle={_(ERROR_BUTTON)}
-        linkComponent={Link}
-        onButtonClick={onButtonClick}
-        title={_(TX_ERROR_MODAL_TITLE)}
-        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
-      />
     </>
   );
 };

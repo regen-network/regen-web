@@ -50,6 +50,7 @@ type CreateSellOrderFlowProps = {
   refetchSellOrders?: () => void;
   redirectOnSuccess?: boolean;
   canCreateFiatOrder?: boolean;
+  accountAddress?: string;
 };
 
 /**
@@ -68,6 +69,7 @@ export const CreateSellOrderFlow = ({
   refetchSellOrders,
   redirectOnSuccess = true,
   canCreateFiatOrder,
+  accountAddress: accountAddressOverride,
 }: CreateSellOrderFlowProps): JSX.Element => {
   const { _ } = useLingui();
   // Modal visibility states
@@ -142,14 +144,19 @@ export const CreateSellOrderFlow = ({
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
 
-  const accountAddress = wallet?.address;
+  const accountAddress = accountAddressOverride ?? wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
 
-  const sellableBatchDenomsOption: Option[] = credits.map(credit => ({
-    label: credit.denom,
-    value: credit.denom,
-  }));
+  const sellableBatchDenomsOption: Option[] = credits
+    .filter(
+      credit =>
+        credit.denom && Number(credit.balance?.tradableAmount ?? 0) > 0,
+    )
+    .map(credit => ({
+      label: credit.denom as string,
+      value: credit.denom as string,
+    }));
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
     accountAddress,
@@ -193,7 +200,10 @@ export const CreateSellOrderFlow = ({
       <CreateSellOrderModal
         batchDenoms={sellableBatchDenomsOption}
         sellDenom={'REGEN'}
-        availableAmountByBatch={getAvailableAmountByBatch({ credits })}
+        availableAmountByBatch={getAvailableAmountByBatch({
+          credits,
+          permittedDenoms: sellableBatchDenomsOption.map(option => option.value),
+        })}
         open={isCreateSellOrderOpen}
         onClose={closeCreateModal}
         onSubmit={createSellOrderSubmit}

@@ -25,7 +25,7 @@ import { useSaveProfile } from '../hooks/useSaveProfile';
 import { AccountsOrderBy } from 'generated/graphql';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
-const InviteMembersStep = () => {
+export const InviteMembersStep = () => {
   const { _ } = useLingui();
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
@@ -149,4 +149,3 @@ const InviteMembersStep = () => {
     </div>
   );
 };
-export default InviteMembersStep;

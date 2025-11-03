@@ -349,7 +349,7 @@ const ownerMembersAuthorizations = (
   },
 ];
 
-const adminMembersAuthorization = (
+export const adminMembersAuthorization = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,

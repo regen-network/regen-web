@@ -140,7 +140,7 @@ export function useRemoveMember(params: MembersHookParams) {
               }
 
               return {
-                contractAddress: project?.projectByProjectId?.adminDaoAddress,
+                contractAddress: projectDao.daoRbamAddress,
                 msg: {
                   execute_actions: {
                     actions: removeMemberActions({

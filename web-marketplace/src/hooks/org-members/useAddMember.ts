@@ -106,7 +106,7 @@ export function useAddMember(params: MembersHookParams) {
             if (isMemberOfProject) return null;
 
             return {
-              contractAddress: project?.projectByProjectId?.adminDaoAddress,
+              contractAddress: projectDao.daoRbamAddress,
               msg: {
                 execute_actions: {
                   actions: addMemberActions({

@@ -204,7 +204,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           };
           return getMsgExecuteContract({
             walletAddress,
-            contract: cwAdminFactoryAddr,
+            contract: cwAdminFactoryAddr as string,
             executeActionsMsg: executeMsg,
           });
         });

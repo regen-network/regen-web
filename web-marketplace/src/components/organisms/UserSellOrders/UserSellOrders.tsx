@@ -10,6 +10,8 @@ import { useWallet } from 'lib/wallet/wallet';
 import { CANCEL_SELL_ORDER_ACTION } from 'features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants';
 import { useNormalizedSellOrders } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 
+import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
+
 import { CancelSellOrderFlow } from '../../../features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow';
 import { NoUserSellOrdersCard } from './UserSellOrders.NoOrdersCard';
 import { UserSellOrdersToolbar } from './UserSellOrders.Toolbar';
@@ -21,6 +23,8 @@ const SellOrdersTable = safeLazy(
 export const UserSellOrders = () => {
   const { wallet } = useWallet();
   const { _ } = useLingui();
+  const { selectedAccountAddress } = useDashboardContext();
+  const accountAddress = selectedAccountAddress ?? wallet?.address;
   const openCancelModalRef = useRef<((index: number) => void) | null>(null);
 
   const {
@@ -31,10 +35,10 @@ export const UserSellOrders = () => {
     sortCallbacks,
     totalSellOrders,
     paginationParams,
-  } = useNormalizedSellOrders({ sellerAddress: wallet?.address });
+  } = useNormalizedSellOrders({ sellerAddress: accountAddress });
 
   const userSellOrders = normalizedSellOrders?.filter(
-    (sellOrder: any) => sellOrder.seller === wallet?.address,
+    (sellOrder: any) => sellOrder.seller === accountAddress,
   );
 
   // Callback to store the openCancelModal function from the child component

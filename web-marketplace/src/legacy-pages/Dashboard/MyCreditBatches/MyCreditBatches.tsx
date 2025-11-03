@@ -12,6 +12,8 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
+import { useDashboardContext } from '../Dashboard.context';
+
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 import { MyCreditBatchesTable } from './MyCreditBatches.Table';
 
@@ -19,9 +21,11 @@ export const MyCreditBatches = (): JSX.Element => {
   const { _ } = useLingui();
   const theme = useTheme();
   const { wallet } = useWallet();
+  const { selectedAccountAddress } = useDashboardContext();
+  const accountAddress = selectedAccountAddress ?? wallet?.address;
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({
-      address: wallet?.address,
+      address: accountAddress,
     });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 

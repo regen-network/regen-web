@@ -29,22 +29,30 @@ import { ORDER_STATUS } from 'components/organisms/Order/Order.constants';
 
 import { Order } from '../Orders.types';
 
-export const useOrders = () => {
+type UseOrdersParams = {
+  address?: string | null;
+};
+
+export const useOrders = ({ address }: UseOrdersParams = {}) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { queryClient } = useLedger();
   const { activeAccount, loading, privActiveAccount } = useAuth();
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const fiatOrders = useMemo(
-    () =>
+  const buyerAddress = address ?? activeWalletAddr;
+
+  const fiatOrders = useMemo(() => {
+    if (address && address !== activeAccount?.addr) return [];
+
+    return (
       activeAccount?.fiatOrdersByAccountId?.nodes.map(order => ({
         ...order,
         timestamp: order?.createdAt,
         projectId: order?.projectOnChainId,
-      })),
-    [activeAccount?.fiatOrdersByAccountId?.nodes],
-  );
+      })) ?? []
+    );
+  }, [address, activeAccount?.addr, activeAccount?.fiatOrdersByAccountId?.nodes]);
 
   const paymentMethodResults = useQueries({
     queries:
@@ -79,8 +87,8 @@ export const useOrders = () => {
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
     getOrdersByBuyerAddressQuery({
       client: apolloClient,
-      enabled: !!activeWalletAddr && !!apolloClient,
-      buyerAddress: activeWalletAddr as string,
+      enabled: !!buyerAddress && !!apolloClient,
+      buyerAddress: buyerAddress as string,
     }),
   );
   const cryptoOrders = data?.data?.allOrders?.nodes;
@@ -186,7 +194,7 @@ export const useOrders = () => {
   );
 
   const isWeb2UserWithoutWallet =
-    !!privActiveAccount?.email && !activeAccount?.addr;
+    !!privActiveAccount?.email && !buyerAddress;
 
   const isLoading =
     loading ||

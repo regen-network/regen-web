@@ -8,6 +8,8 @@ import { useLedger } from 'ledger';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
+
 import WithLoader from 'components/atoms/WithLoader';
 import { Order } from 'components/organisms/Order/Order';
 
@@ -18,7 +20,10 @@ export const Orders = () => {
   const location = useLocation();
 
   const { queryClient } = useLedger();
-  const { orders, isLoading } = useOrders();
+  const { selectedAccountAddress } = useDashboardContext();
+  const { orders, isLoading } = useOrders({
+    address: selectedAccountAddress,
+  });
   const { loginDisabled } = useWallet();
 
   const { data: allowedDenomsData } = useQuery(

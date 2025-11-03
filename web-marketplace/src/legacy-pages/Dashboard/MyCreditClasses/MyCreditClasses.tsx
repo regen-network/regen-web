@@ -19,6 +19,8 @@ import { Link as LinkComponent } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
+import { useDashboardContext } from '../Dashboard.context';
+
 import {
   MY_CREDIT_CLASS_BUTTON,
   NO_CREDIT_CLASSES_MESSAGE,
@@ -28,9 +30,11 @@ export const MyCreditClasses = (): JSX.Element => {
   const { _ } = useLingui();
   //const theme = useTheme();
   const { wallet } = useWallet();
+  const { selectedAccountAddress } = useDashboardContext();
+  const adminAddress = selectedAccountAddress ?? wallet?.address;
   const { creditClasses, isLoadingCreditClasses } =
     useFetchCreditClassesWithOrder({
-      admin: wallet?.address,
+      admin: adminAddress,
     });
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const hasNoCreditClasses = creditClasses && creditClasses.length === 0;

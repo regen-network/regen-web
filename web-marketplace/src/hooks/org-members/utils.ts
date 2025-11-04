@@ -1,20 +1,23 @@
+// import { cosmos } from '@regen-network/api';
+// import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
+import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
+
 import {
   AccountByIdQuery,
   OrganizationByDaoAddressQuery,
 } from 'generated/graphql';
-import { orgRoles, projectRoles } from './constants';
-// import { cosmos } from '@regen-network/api';
-// import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
-import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import {
-  ROLE_ADMIN,
-  ROLE_OWNER,
-} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+
 import {
   adminMembersAuthorization,
   encodeJsonToBase64,
 } from 'pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+
+import { orgRoles, projectRoles } from './constants';
 
 type UpdateAuthorizationActionParams = {
   /** the address of the dao-rbam contract */

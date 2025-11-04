@@ -1,8 +1,8 @@
+import { MembersHookParams } from './types';
 import { useAddMember } from './useAddMember';
 import { useRemoveMember } from './useRemoveMember';
 import { useUpdateMemberRole } from './useUpdateMemberRole';
 import { useUpdateMemberVisibility } from './useUpdateMemberVisibility';
-import { MembersHookParams } from './types';
 
 export function useUpdateMembers(params: MembersHookParams) {
   const addMember = useAddMember(params);

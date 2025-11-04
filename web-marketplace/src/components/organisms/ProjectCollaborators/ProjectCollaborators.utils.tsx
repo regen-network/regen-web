@@ -1,10 +1,10 @@
-import { MessageDescriptor } from '@lingui/core';
-
 import AuthorIcon from 'web-components/src/components/icons/AuthorIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { OwnerIcon } from 'web-components/src/components/icons/OwnerIcon';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   ROLE_ADMIN,
@@ -13,10 +13,7 @@ import {
   ROLE_OWNER,
   ROLE_VIEWER,
 } from '../ActionDropdown/ActionDropdown.constants';
-import {
-  ProjectRole,
-  RoleOption,
-} from '../BaseMembersTable/BaseMembersTable.types';
+import { RoleOption } from '../BaseMembersTable/BaseMembersTable.types';
 import {
   ROLE_OWNER_DESCRIPTION,
   ROLE_OWNER_LABEL,
@@ -31,7 +28,6 @@ import {
   ROLE_VIEWER_DESCRIPTION,
   ROLE_VIEWER_LABEL,
 } from './ProjectCollaborators.constants';
-import { TranslatorType } from 'lib/i18n/i18n.types';
 
 export const getRoleItems = (_: TranslatorType) =>
   [

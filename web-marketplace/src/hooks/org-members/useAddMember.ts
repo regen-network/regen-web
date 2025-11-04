@@ -1,30 +1,29 @@
 import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
-
-import { useWallet } from 'lib/wallet/wallet';
-import { useLedger } from 'ledger';
-import { useAuth } from 'lib/auth/auth';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
-import { apiServerUrl } from 'lib/env';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
+import { useLedger } from 'ledger';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
+import { useWallet } from 'lib/wallet/wallet';
+
 import type { MemberData } from 'components/organisms/OrganizationMembers/OrganizationMembers.BaseTable';
-import { useMembersContext } from './useMembersContext';
-import { addMemberActions, getNewRoleId } from './utils';
+
 import { MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';
+import { useMembersContext } from './useMembersContext';
+import { addMemberActions, getNewRoleId } from './utils';
 
 export function useAddMember(params: MembersHookParams) {
   const { daoAddress, daoRbamAddress, cw4GroupAddress, currentUserRole } =
@@ -223,6 +222,7 @@ export function useAddMember(params: MembersHookParams) {
       activeAccountId,
       refetchMembers,
       params.daoAccountsOrderBy,
+      setProcessingModal,
     ],
   );
 

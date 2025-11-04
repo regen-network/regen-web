@@ -324,7 +324,6 @@ export const MediaFormPhotos = ({
                     )}
                   >
                     <TextAreaFieldChartCounter
-                      value={galleryPhotos?.[currentIndex]?.['schema:caption']}
                       charsLeft={remainingCaptionCharacters}
                       remainingCharactersText={plural(
                         remainingCaptionCharacters,

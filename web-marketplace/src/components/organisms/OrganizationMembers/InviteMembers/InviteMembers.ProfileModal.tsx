@@ -2,15 +2,15 @@ import { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
 import { plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import useClickOutside from 'utils/hooks/useClickOutside';
 
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Title as H, Body } from 'web-components/src/components/typography';
+import { Body, Title } from 'web-components/src/components/typography';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -31,7 +31,6 @@ import {
   personalProfileSchema,
   PersonalProfileSchemaType,
 } from './InviteMembers.schema';
-import Modal from 'web-components/src/components/modal';
 
 interface PersonalProfileModalProps {
   open: boolean;
@@ -106,16 +105,16 @@ export const PersonalProfileModal = ({
           onClose();
         }}
       >
-        <div className="flex-shrink-0 px-20 md:px-50 pb-30 sm:pb-50">
-          <H variant="h4" className="mb-20 text-center">
+        <header className="flex-shrink-0 px-20 md:px-50 pb-30 sm:pb-50">
+          <Title variant="h4" className="mb-20 text-center">
             {_(PERSONAL_PROFILE_TITLE)}
-          </H>
+          </Title>
           <Body size="lg" className="text-center px-10">
             {_(PERSONAL_PROFILE_SUBHEADER)}
           </Body>
-        </div>
+        </header>
 
-        <div className="flex-1">
+        <section className="flex-1">
           <div className="flex flex-col bg-bc-neutral-0 border border-solid border-bc-neutral-300 rounded px-20 py-30 md:p-40">
             {/* Name */}
             <TextField
@@ -175,7 +174,6 @@ export const PersonalProfileModal = ({
               error={!!errors.description}
             >
               <TextAreaFieldChartCounter
-                value={descriptionValue}
                 charsLeft={remainingDescriptionCharacters}
                 remainingCharactersText={plural(
                   remainingDescriptionCharacters,
@@ -187,9 +185,9 @@ export const PersonalProfileModal = ({
               />
             </TextAreaField>
           </div>
-        </div>
+        </section>
 
-        <div className="flex-shrink-0 px-20 py-20 md:px-40 md:py-40">
+        <footer className="flex-shrink-0 px-20 py-20 md:px-40 md:py-40">
           <CancelButtonFooter
             onCancel={onClose}
             cancelLabel={_(CANCEL_LABEL)}
@@ -198,7 +196,7 @@ export const PersonalProfileModal = ({
             type="submit"
             className="h-[53px] w-[138px] text-[18px]"
           />
-        </div>
+        </footer>
       </Form>
     </Modal>
   );

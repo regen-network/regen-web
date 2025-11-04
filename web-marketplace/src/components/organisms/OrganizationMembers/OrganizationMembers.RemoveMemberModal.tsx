@@ -1,6 +1,8 @@
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import Modal from 'web-components/src/components/modal';
+import { Title } from 'web-components/src/components/typography/Title';
 
 import {
   CANCEL_LABEL,
@@ -8,8 +10,6 @@ import {
   REMOVE_MEMBER_DESCRIPTION,
   REMOVE_MEMBER_TITLE,
 } from './OrganizationMembers.constants';
-import { Title } from 'web-components/src/components/typography/Title';
-import Modal from 'web-components/src/components/modal';
 
 interface RemoveMemberModalProps {
   open: boolean;

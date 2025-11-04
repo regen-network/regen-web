@@ -1,41 +1,42 @@
 import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { useQueryClient } from '@tanstack/react-query';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
-import { useWallet } from 'lib/wallet/wallet';
-import { useLedger } from 'ledger';
-import { useAuth } from 'lib/auth/auth';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import {
   useDeleteAssignmentMutation,
   useUpdateAssignmentMutation,
 } from 'generated/graphql';
+import { useLedger } from 'ledger';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
+import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { useWallet } from 'lib/wallet/wallet';
 
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+
+import {
+  MEMBER_NOT_FOUND,
+  MISSING_REQUIRED_PARAMS,
+  orgRoles,
+  projectRoles,
+} from './constants';
+import { AssignmentToDelete, MembersHookParams } from './types';
+import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
   getNewRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from './utils';
-import {
-  orgRoles,
-  projectRoles,
-  MEMBER_NOT_FOUND,
-  MISSING_REQUIRED_PARAMS,
-} from './constants';
-import { useMembersContext } from './useMembersContext';
-import {
-  ROLE_ADMIN,
-  ROLE_OWNER,
-} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
-import { MembersHookParams, AssignmentToDelete } from './types';
-import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
-import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
 
 export function useUpdateMemberRole(params: MembersHookParams) {
   const {
@@ -65,7 +66,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
   const [deleteAssignment] = useDeleteAssignmentMutation();
 
   const updateRole = useCallback(
-    async (id: string, roleNameNew: any) => {
+    async (id: string, roleNameNew: BaseMemberRole) => {
       const role = roleNameNew; // keep original type compatibility
       if (
         !wallet?.address ||
@@ -393,6 +394,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       updateAssignment,
       refetchMembers,
       params.daoAccountsOrderBy,
+      deleteAssignment,
     ],
   );
 

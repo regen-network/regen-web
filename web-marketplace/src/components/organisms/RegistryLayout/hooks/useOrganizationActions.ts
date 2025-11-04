@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
 
-import type {
-  AccountByIdQuery,
-  AccountFieldsFragment,
-  Maybe,
-} from 'generated/graphql';
+import type { AccountByIdQuery } from 'generated/graphql';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';

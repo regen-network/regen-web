@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import { Provider as JotaiProvider } from 'jotai';
+
+import { AccountsOrderBy } from 'generated/graphql';
 
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
-import { mockMembers, mockAccounts } from '../OrganizationMembers.mock';
+import { mockAccounts, mockMembers } from '../OrganizationMembers.mock';
 import { Member } from '../OrganizationMembers.types';
 import { OrganizationMembersInviteTable } from './InviteMembers.Table';
-import { AccountsOrderBy } from 'generated/graphql';
 
 i18n.activate('en');
 

@@ -10,9 +10,9 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { getAddress } from '../RegistryLayout.utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 type UseOrganizationMenuProfileParams = {
   activeAccount: AccountByIdQuery['accountById'];

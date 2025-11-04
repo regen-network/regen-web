@@ -142,7 +142,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           {...form.register('schema:description')}
         >
           <TextAreaFieldChartCounter
-            value={description}
             charsLeft={remainingSummaryCharacters}
             remainingCharactersText={plural(remainingSummaryCharacters, {
               one: `${remainingSummaryCharacters} character remaining`,
@@ -165,7 +164,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           {...form.register('regen:story')}
         >
           <TextAreaFieldChartCounter
-            value={story}
             charsLeft={remainingStoryCharacters}
             remainingCharactersText={plural(remainingStoryCharacters, {
               one: `${remainingStoryCharacters} character remaining`,
@@ -186,7 +184,6 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
           {...form.register('regen:storyTitle')}
         >
           <TextAreaFieldChartCounter
-            value={storyTitle}
             charsLeft={remainingStoryTitleCharacters}
             remainingCharactersText={plural(remainingStoryTitleCharacters, {
               one: `${remainingStoryTitleCharacters} character remaining`,

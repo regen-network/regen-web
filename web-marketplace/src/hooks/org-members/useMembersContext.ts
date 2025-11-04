@@ -1,7 +1,4 @@
 import { useCallback, useMemo } from 'react';
-import { useAtom } from 'jotai';
-import { useSetAtom } from 'jotai';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -9,28 +6,29 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom, useSetAtom } from 'jotai';
+import { timer } from 'utils/timer';
 
-import { useAuth } from 'lib/auth/auth';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useUpdateAssignmentMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
-
-import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
+import { MISSING_REQUIRED_PARAMS } from './constants';
+import { MembersHookParams, RefetchMembersParams } from './types';
 import {
+  findAssignment,
   getAuthorizationName,
   getProjectsCurrentUserCanManageMembers,
   getRoleAuthorizationIds,
-  findAssignment,
 } from './utils';
-import { MISSING_REQUIRED_PARAMS } from './constants';
-import { timer } from 'utils/timer';
-import { MembersHookParams, RefetchMembersParams } from './types';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { useUpdateAssignmentMutation } from 'generated/graphql';
 
 export function useMembersContext(params: MembersHookParams) {
   const { currentUserRole, daoAddress } = params;

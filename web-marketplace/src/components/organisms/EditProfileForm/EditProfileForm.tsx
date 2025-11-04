@@ -1,12 +1,10 @@
 import React, {
-  forwardRef,
   MutableRefObject,
   useCallback,
   useEffect,
-  useImperativeHandle,
   useMemo,
 } from 'react';
-import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
+import { useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -35,6 +33,8 @@ import {
   UPDATE,
 } from 'lib/constants/shared.constants';
 
+import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
+import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -55,8 +55,6 @@ import {
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
 import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
-import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
-import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
 
 export interface EditProfileFormProps extends Partial<FormStateSetter> {
   initialValues?: EditProfileFormSchemaType;
@@ -298,7 +296,6 @@ const EditProfileForm = ({
         {...form.register('description')}
       >
         <TextAreaFieldChartCounter
-          value={description}
           charsLeft={remainingDescriptionCharacters}
           remainingCharactersText={plural(remainingDescriptionCharacters, {
             one: `${remainingDescriptionCharacters} character remaining`,

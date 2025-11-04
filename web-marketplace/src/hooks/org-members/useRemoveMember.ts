@@ -1,24 +1,23 @@
 import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { useQueryClient } from '@tanstack/react-query';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
-import { useWallet } from 'lib/wallet/wallet';
-import { useLedger } from 'ledger';
-import { useAuth } from 'lib/auth/auth';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useDeleteAssignmentMutation } from 'generated/graphql';
-
-import { removeMemberActions } from './utils';
-import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
-import { useMembersContext } from './useMembersContext';
-import { AssignmentToDelete, MembersHookParams } from './types';
+import { useLedger } from 'ledger';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { useWallet } from 'lib/wallet/wallet';
+
+import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
+import { AssignmentToDelete, MembersHookParams } from './types';
+import { useMembersContext } from './useMembersContext';
+import { removeMemberActions } from './utils';
 
 export function useRemoveMember(params: MembersHookParams) {
   const {

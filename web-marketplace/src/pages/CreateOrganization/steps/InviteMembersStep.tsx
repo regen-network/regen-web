@@ -1,7 +1,6 @@
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Title, Body } from 'web-components/src/components/typography';
-import { INVITE_MEMBERS } from '../CreateOrganization.constants';
+import { Body } from 'web-components/src/components/typography';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
 import { useAuth } from 'lib/auth/auth';
@@ -36,7 +35,7 @@ export const InviteMembersStep = () => {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const { data, refetch } = useQuery(
+  const { data } = useQuery(
     getAccountByIdQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!activeAccountId,
@@ -91,7 +90,7 @@ export const InviteMembersStep = () => {
             : null;
         }) ?? []
       ).filter(Boolean) as Member[],
-    [dao],
+    [dao, activeAccount?.id, _],
   );
 
   const { addMember, removeMember, updateRole, updateVisibility } =

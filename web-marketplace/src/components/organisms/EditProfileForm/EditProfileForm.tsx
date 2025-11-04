@@ -5,7 +5,7 @@ import React, {
   useMemo,
 } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/core/macro';
+import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -24,6 +24,7 @@ import { ImageFieldBackground } from 'web-components/src/components/inputs/new/I
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
 
 import { AccountType } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -34,6 +35,7 @@ import {
   TITLE_IGNORE_CROP,
   UPDATE,
 } from 'lib/constants/shared.constants';
+import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import Form, { FormRef } from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -123,11 +125,11 @@ const EditProfileForm = ({
     control: form.control,
     name: 'profileType',
   });
-  const profileImage = useWatch({
+  const watchedProfileImage = useWatch({
     control: form.control,
     name: 'profileImage',
   });
-  const backgroundImage = useWatch({
+  const watchedBackgroundImage = useWatch({
     control: form.control,
     name: 'backgroundImage',
   });
@@ -176,7 +178,8 @@ const EditProfileForm = ({
   useUpdateDefaultAvatar({
     setProfileImage: handleDefaultAvatarUpdate,
     profileType,
-    profileImage,
+    profileImage: watchedProfileImage,
+    enabled: !hideProfileType,
   });
 
   useEffect(() => {
@@ -204,6 +207,30 @@ const EditProfileForm = ({
       void form.trigger();
     }
   }, [prefillValues, form]);
+
+  const resolvedProfileImage =
+    watchedProfileImage || initialValues?.profileImage || '';
+  const resolvedBackgroundImage =
+    watchedBackgroundImage || initialValues?.backgroundImage || '';
+
+  const displayProfileImage = useMemo(
+    () =>
+      getOptimizedImageSrc(
+        resolvedProfileImage,
+        IMAGE_STORAGE_BASE_URL,
+        API_URI,
+      ),
+    [resolvedProfileImage],
+  );
+  const displayBackgroundImage = useMemo(
+    () =>
+      getOptimizedImageSrc(
+        resolvedBackgroundImage,
+        IMAGE_STORAGE_BASE_URL,
+        API_URI,
+      ),
+    [resolvedBackgroundImage],
+  );
 
   return (
     <Form
@@ -260,9 +287,12 @@ const EditProfileForm = ({
         titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         circularCrop
         onUpload={onUpload}
-        value={profileImage}
+        value={resolvedProfileImage}
       >
-        <ImageFieldAvatar value={profileImage} />
+        <ImageFieldAvatar
+          key={displayProfileImage || 'profile-image-placeholder'}
+          value={displayProfileImage}
+        />
       </ImageField>
       <ImageField
         label={_(msg`Background image`)}
@@ -281,9 +311,12 @@ const EditProfileForm = ({
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}
-        value={backgroundImage}
+        value={resolvedBackgroundImage}
       >
-        <ImageFieldBackground value={backgroundImage} />
+        <ImageFieldBackground
+          key={displayBackgroundImage || 'background-image-placeholder'}
+          value={displayBackgroundImage}
+        />
       </ImageField>
       <TextAreaField
         type="text"

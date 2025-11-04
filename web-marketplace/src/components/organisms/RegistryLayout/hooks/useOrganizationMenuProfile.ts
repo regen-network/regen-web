@@ -6,7 +6,10 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 
+import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
+
 import type { AccountByIdQuery } from 'generated/graphql';
+import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import type { Wallet } from 'lib/wallet/wallet';
 
 import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
@@ -16,6 +19,7 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import useOrganizationProfile from 'hooks/useOrganizationProfile';
 
 import { getAddress } from '../RegistryLayout.utils';
 
@@ -43,24 +47,42 @@ export const useOrganizationMenuProfile = ({
   const unfinalizedOrgCreation = !!unfinishedEntry;
 
   const organization = useDaoOrganization();
+  const { organizationProfile } = useOrganizationProfile({
+    daoAddress: organization?.address,
+  });
 
   const menuOrganizationProfile = useMemo(() => {
     const daoAddress = organization?.address;
     if (!daoAddress) return undefined;
 
     const organizationName =
-      organization?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
+      organizationProfile?.name?.trim() ||
+      organization?.organizationByDaoAddress?.name?.trim() ||
+      _(DEFAULT_NAME);
+
+    const rawImage = organizationProfile?.image?.trim() || '';
+    const optimizedImage = rawImage
+      ? getOptimizedImageSrc(rawImage, IMAGE_STORAGE_BASE_URL, API_URI)
+      : '';
+    const organizationImage =
+      optimizedImage || rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
       id: daoAddress,
       name: organizationName,
-      profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
+      profileImage: organizationImage,
       truncatedAddress: getAddress({ walletAddress: daoAddress }),
       address: daoAddress,
       profileLink: `/profiles/${daoAddress}`,
       dashboardLink: '/dashboard/organization',
     };
-  }, [_, organization]);
+  }, [
+    _,
+    organization?.address,
+    organization?.organizationByDaoAddress?.name,
+    organizationProfile?.name,
+    organizationProfile?.image,
+  ]);
 
   return {
     menuOrganizationProfile,

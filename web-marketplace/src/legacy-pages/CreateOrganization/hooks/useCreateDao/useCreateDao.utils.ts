@@ -11,10 +11,10 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { CODE_IDS, lookupContractChecksum } from './useCreateDao.constants';
 
-export const parseCodeId = (
+export function parseCodeId(
   envVarName: string,
   rawValue: string | undefined,
-): number => {
+): number {
   const parsed = Number(rawValue?.toString().trim());
 
   if (!Number.isInteger(parsed) || parsed < 0) {
@@ -22,7 +22,7 @@ export const parseCodeId = (
   }
 
   return parsed;
-};
+}
 
 // Roles and authorizations definitions
 const creditClassesAuthorization = {

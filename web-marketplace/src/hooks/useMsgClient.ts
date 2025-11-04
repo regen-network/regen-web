@@ -46,7 +46,7 @@ export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
   callbacks?: OptionalCallbacks,
-) => Promise<void | string>;
+) => Promise<DeliverTxResponse | string | undefined>;
 
 type MsgClientType = {
   signAndBroadcast: SignAndBroadcastType;
@@ -62,7 +62,7 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { signingClient, queryClient } = useLedger();
+  const { signingClient, signingCosmWasmClient, queryClient } = useLedger();
   const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
@@ -76,12 +76,15 @@ export default function useMsgClient(
 
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
-      if (!signingClient || !wallet?.address) return;
+      const client = signingCosmWasmClient ?? signingClient;
+      if (!client || !wallet?.address) {
+        return;
+      }
       const { msgs, fee: txFee, memo } = tx;
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
-        const gasEstimation = await signingClient.simulate(
+        const gasEstimation = await client.simulate(
           wallet.address,
           msgs,
           memo || '',
@@ -113,18 +116,14 @@ export default function useMsgClient(
 
       setIsWaitingForSigning(true);
 
-      const txRaw = await signingClient.sign(
-        wallet.address,
-        msgs,
-        fee,
-        memo || '',
-      );
+      const txRaw = await client.sign(wallet.address, msgs, fee, memo || '');
       setIsWaitingForSigning(false);
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
     },
     [
       signingClient,
+      signingCosmWasmClient,
       wallet?.address,
       reactQueryClient,
       setIsWaitingForSigning,
@@ -135,9 +134,12 @@ export default function useMsgClient(
 
   const broadcast = useCallback(
     async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
-      if (!signingClient || !txBytes) return;
+      const client = signingCosmWasmClient ?? signingClient;
+      if (!client || !txBytes) {
+        return;
+      }
       handleTxQueued && handleTxQueued();
-      const _deliverTxResponse = await signingClient.broadcastTx(txBytes);
+      const _deliverTxResponse = await client.broadcastTx(txBytes);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
@@ -153,6 +155,7 @@ export default function useMsgClient(
     },
     [
       signingClient,
+      signingCosmWasmClient,
       handleTxQueued,
       handleTxDelivered,
       setTxSuccessfulModalAtom,
@@ -171,6 +174,7 @@ export default function useMsgClient(
           if (closeForm) closeForm();
           const deliverTxResponse = await broadcast(txBytes);
           if (onSuccess) onSuccess(deliverTxResponse);
+          return deliverTxResponse;
         }
       } catch (err) {
         if (closeForm) closeForm();

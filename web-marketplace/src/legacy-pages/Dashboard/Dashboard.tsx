@@ -11,6 +11,7 @@ import { startCase } from 'lodash';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
+import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import type { Account } from 'generated/graphql';
@@ -24,6 +25,7 @@ import {
   DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
 } from 'lib/constants/shared.constants';
+import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -40,11 +42,12 @@ import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import useOrganizationProfile from 'hooks/useOrganizationProfile';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
   BRIDGE,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
   ORGANIZATION_DASHBOARD,
   PERSONAL_ACCOUNT,
   PERSONAL_DASHBOARD,
@@ -76,18 +79,6 @@ const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = {
   '5': ROLE_VIEWER,
 };
 
-const ORGANIZATION_ROLES = [
-  ROLE_OWNER,
-  ROLE_ADMIN,
-  ROLE_EDITOR,
-  ROLE_AUTHOR,
-  ROLE_VIEWER,
-];
-
-// Set to a specific role string (e.g. 'admin') to force permissions while testing.
-// Leave undefined to use the actual assignment role.
-const ORGANIZATION_ROLE_OVERRIDE: string | undefined = 'admin';
-
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -99,8 +90,6 @@ export const Dashboard = () => {
     authenticatedAccounts,
     privActiveAccount,
   } = useAuth();
-
-  const organizationDao = useDaoOrganization();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -162,31 +151,46 @@ export const Dashboard = () => {
     return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
+  const daos =
+    activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
+
+  const organizationDao = useMemo(
+    () => daos.find(dao => !!dao?.organizationByDaoAddress) ?? undefined,
+    [daos],
+  );
+
+  const organizationAddress = organizationDao?.address ?? null;
+
+  const { organizationProfile, isLoadingOrganizationProfile } =
+    useOrganizationProfile({
+      daoAddress: organizationAddress,
+    });
+
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
-    if (!organizationDao) return undefined;
-    const organizationAddress = organizationDao.address ?? '';
-    if (!organizationAddress) return undefined;
+    if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment = organizationDao.assignmentsByDaoAddress?.nodes?.find(
-      node => node?.accountId === activeAccountId,
-    );
-
-    const assignedAccount =
-      organizationDao.accountsByAssignmentDaoAddressAndAccountId?.nodes?.find(
-        account => account?.id === assignment?.accountId,
-      );
+    const assignment =
+      organizationDao.assignmentsByDaoAddress?.nodes?.find(
+        node => node?.accountId === activeAccountId,
+      ) ?? organizationDao.assignmentsByDaoAddress?.nodes?.[0];
 
     const organizationName =
-      assignedAccount?.name ||
-      organizationDao.organizationByDaoAddress?.name ||
-      organizationAddress;
+      organizationProfile?.name?.trim() ||
+      organizationDao.organizationByDaoAddress?.name?.trim();
+
+    const rawImage = organizationProfile?.image?.trim() || '';
+    const optimizedImage = rawImage
+      ? getOptimizedImageSrc(rawImage, IMAGE_STORAGE_BASE_URL, API_URI)
+      : '';
+    const organizationImage =
+      optimizedImage || rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
       id: organizationAddress,
       name: organizationName,
       address: organizationAddress,
       type: 'org' as const,
-      image: assignedAccount?.image ?? undefined,
+      image: organizationImage,
       source: 'dao',
       roleAccountId: assignment?.accountId ?? undefined,
       roleName: assignment?.roleName ?? undefined,
@@ -194,7 +198,13 @@ export const Dashboard = () => {
         ? String(assignment.onChainRoleId)
         : undefined,
     };
-  }, [organizationDao, activeAccountId]);
+  }, [
+    organizationAddress,
+    organizationDao,
+    activeAccountId,
+    organizationProfile?.name,
+    organizationProfile?.image,
+  ]);
 
   const authAccounts = useMemo<DashboardNavAccount[]>(() => {
     const mapped =
@@ -249,25 +259,6 @@ export const Dashboard = () => {
     privActiveAccount?.email,
   ]);
 
-  const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
-    const list: DashboardNavAccount[] = [...authAccounts];
-    if (organizationAccount) {
-      const exists = list.some(
-        account => account.id === organizationAccount.id,
-      );
-      if (!exists) {
-        list.push(organizationAccount);
-      }
-    }
-    return list;
-  }, [authAccounts, organizationAccount]);
-
-  useEffect(() => {
-    if (isOrganizationDashboard && !organizationAccount && !loading) {
-      navigate('/dashboard', { replace: true });
-    }
-  }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
-
   const personalAccountId = useMemo(() => {
     if (activeAccount?.id) return activeAccount.id;
     if (activeAccount?.addr) return activeAccount.addr;
@@ -285,6 +276,17 @@ export const Dashboard = () => {
     ? organizationAccount?.id ?? ''
     : personalAccountId;
 
+  const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
+    const list: DashboardNavAccount[] = [...authAccounts];
+    if (organizationAccount) {
+      const exists = list.some(
+        account => account.id === organizationAccount.id,
+      );
+      if (!exists) list.push(organizationAccount);
+    }
+    return list;
+  }, [authAccounts, organizationAccount]);
+
   const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!selectedAccountId) return navigationAccounts[0];
     return (
@@ -293,6 +295,23 @@ export const Dashboard = () => {
       navigationAccounts[0]
     );
   }, [navigationAccounts, selectedAccountId]);
+
+  useEffect(() => {
+    if (
+      isOrganizationDashboard &&
+      !organizationAccount &&
+      !loading &&
+      !isLoadingOrganizationProfile
+    ) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [
+    isOrganizationDashboard,
+    organizationAccount,
+    loading,
+    navigate,
+    isLoadingOrganizationProfile,
+  ]);
 
   const organizationRoleActual = useMemo(() => {
     if (!isOrganizationDashboard || selectedAccount?.type !== 'org')
@@ -316,17 +335,7 @@ export const Dashboard = () => {
     selectedAccount?.onChainRoleId,
   ]);
 
-  const organizationRoleOverride =
-    isOrganizationDashboard && ORGANIZATION_ROLE_OVERRIDE
-      ? (() => {
-          const normalized = ORGANIZATION_ROLE_OVERRIDE.toLowerCase();
-          return ORGANIZATION_ROLES.includes(normalized)
-            ? normalized
-            : undefined;
-        })()
-      : undefined;
-
-  const organizationRole = organizationRoleOverride ?? organizationRoleActual;
+  const organizationRole = organizationRoleActual;
 
   const isOrganizationOwner = organizationRole === ROLE_OWNER;
   const isOrganizationAdmin = organizationRole === ROLE_ADMIN;
@@ -410,6 +419,9 @@ export const Dashboard = () => {
       selectedAccountRoleAccountId: selectedAccount?.roleAccountId,
       organizationRole,
       organizationRoleActual,
+      organizationDaoAddress: organizationAccount?.address ?? undefined,
+      organizationRbamAddress: organizationDao?.daoRbamAddress ?? undefined,
+      organizationProfile: organizationProfile ?? null,
       isOrganizationOwner,
       isOrganizationAdmin,
       isOrganizationEditor,
@@ -424,6 +436,9 @@ export const Dashboard = () => {
       selectedAccountId,
       selectedAccount,
       isOrganizationDashboard,
+      organizationAccount?.address,
+      organizationDao?.daoRbamAddress,
+      organizationProfile,
       organizationRole,
       organizationRoleActual,
       isOrganizationOwner,

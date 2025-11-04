@@ -18,6 +18,17 @@ type DashboardContextType = {
   selectedAccountAddress?: string;
   selectedAccountRoleAccountId?: string;
   organizationRole?: string;
+  organizationDaoAddress?: string;
+  organizationRbamAddress?: string;
+  organizationProfile?: {
+    id: string;
+    name: string;
+    description?: string | null;
+    image?: string | null;
+    bgImage?: string | null;
+    twitterLink?: string | null;
+    websiteLink?: string | null;
+  } | null;
   isOrganizationOwner: boolean;
   isOrganizationAdmin: boolean;
   isOrganizationEditor: boolean;

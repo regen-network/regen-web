@@ -1,6 +1,13 @@
-// import { cosmos } from '@regen-network/api';
-// import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
-import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
+import {
+  AllowedMsgAllowance,
+  BasicAllowance,
+} from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
+import {
+  MsgGrantAllowance,
+  MsgRevokeAllowance,
+} from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
+import { getStargateAction } from 'utils/cosmwasm';
 
 import {
   AccountByIdQuery,
@@ -18,6 +25,7 @@ import {
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { orgRoles, projectRoles } from './constants';
+import { Any } from '@regen-network/api/google/protobuf/any';
 
 type UpdateAuthorizationActionParams = {
   /** the address of the dao-rbam contract */
@@ -196,6 +204,10 @@ type AddMemberActions = {
   memberAddress: string;
   /** the id of the role to assign to the added member */
   roleIdToAdd: number;
+  /** whether to grant a feegrant allowance to the member or not */
+  withFeegrant?: boolean;
+  /** the address of the dao, only useful if withFeegrant is true */
+  daoAddress?: string;
 };
 
 export const addMemberActions = ({
@@ -205,6 +217,8 @@ export const addMemberActions = ({
   roleId,
   memberAddress,
   roleIdToAdd,
+  withFeegrant,
+  daoAddress,
 }: AddMemberActions) => [
   updateMembersAction({
     authorizationId,
@@ -231,13 +245,21 @@ export const addMemberActions = ({
       },
     ],
   }),
+  ...(withFeegrant && daoAddress
+    ? [
+        feegrantGrantAllowanceAction({
+          daoAddress,
+          authorizationId,
+          roleId,
+          memberAddress,
+        }),
+      ]
+    : []),
 ];
 
 type FeegrantActionParams = {
   /** the address of the dao */
   daoAddress: string;
-  /** the address of the dao-rbam contract */
-  daoRbamAddress: string;
   /** the id of the role that includes an authorization to grant feegrant allowance */
   roleId: number;
   /** the id of the authorization that has permission to grant feegrant allowance */
@@ -246,26 +268,59 @@ type FeegrantActionParams = {
   memberAddress: string;
 };
 
-export const feegrantAction = ({
+export const feegrantGrantAllowanceAction = ({
   daoAddress,
   authorizationId,
   roleId,
   memberAddress,
-}: FeegrantActionParams) => ({
-  authorization_id: authorizationId,
-  role_id: roleId,
-  msg: {
-    '#stargate': {
-      type_url: MsgGrantAllowance.typeUrl,
-      value: {
-        granter: daoAddress,
-        grantee: memberAddress,
-        // TODO
-        // allowance: AllowedMsgAllowance...
-      },
-    },
-  },
-});
+}: FeegrantActionParams) => {
+  // First create a BasicAllowance with no spend limit and no expiration
+  const basicAllowance = BasicAllowance.fromPartial({});
+
+  // Then wrap it inside AllowedMsgAllowance
+  const allowedMsgAllowance = AllowedMsgAllowance.fromPartial({
+    allowance: Any.fromPartial({
+      typeUrl: BasicAllowance.typeUrl,
+      value: BasicAllowance.encode(basicAllowance).finish(),
+    }),
+    allowedMessages: [MsgExecuteContract.typeUrl],
+  });
+
+  const protoBytes = MsgGrantAllowance.encode({
+    granter: daoAddress,
+    grantee: memberAddress,
+    allowance: Any.fromPartial({
+      typeUrl: AllowedMsgAllowance.typeUrl,
+      value: AllowedMsgAllowance.encode(allowedMsgAllowance).finish(),
+    }),
+  }).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgGrantAllowance.typeUrl,
+    value: protoBytes,
+  });
+};
+
+export const feegrantRevokeAllowanceAction = ({
+  daoAddress,
+  authorizationId,
+  roleId,
+  memberAddress,
+}: FeegrantActionParams) => {
+  const protoBytes = MsgRevokeAllowance.encode({
+    granter: daoAddress,
+    grantee: memberAddress,
+  }).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgRevokeAllowance.typeUrl,
+    value: protoBytes,
+  });
+};
 
 type UpdateMemberRoleActionsParams = {
   /** the address of the dao-rbam contract */
@@ -327,14 +382,20 @@ type RemoveMemberActionsParams = {
   memberAddress: string;
   /** the role id of the member to remove, to be able to revoke it */
   memberRoleId: number;
+  /** whether to revoke a feegrant allowance from the member or not */
+  withFeegrant?: boolean;
+  /** the address of the dao, only useful if withFeegrant is true */
+  daoAddress?: string;
 };
 export const removeMemberActions = ({
+  daoAddress,
   daoRbamAddress,
   cw4GroupAddress,
   authorizationId,
   roleId,
   memberAddress,
   memberRoleId,
+  withFeegrant,
 }: RemoveMemberActionsParams) => [
   updateMembersAction({
     authorizationId,
@@ -356,6 +417,16 @@ export const removeMemberActions = ({
       },
     ],
   }),
+  ...(withFeegrant && daoAddress
+    ? [
+        feegrantRevokeAllowanceAction({
+          daoAddress,
+          authorizationId,
+          roleId,
+          memberAddress,
+        }),
+      ]
+    : []),
 ];
 
 type UpdateMembersActionParams = {
@@ -477,7 +548,7 @@ export function findAssignment({
       node => node?.address === daoAddress,
     )?.assignmentsByDaoAddress?.nodes;
   return assignments?.find(
-    assig => assig?.accountId == accountId && assig?.roleName === roleName,
+    assig => assig?.accountId === accountId && assig?.roleName === roleName,
   );
 }
 

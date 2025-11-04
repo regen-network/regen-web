@@ -17,7 +17,7 @@ export const getInviteSchema = (_: TranslatorType) =>
   z
     .object({
       role: z.enum([ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER]),
-      addressOrEmail: z.string().min(1),
+      addressOrEmail: z.string().trim().min(1),
       visible: z.boolean().default(true),
     })
     .refine(

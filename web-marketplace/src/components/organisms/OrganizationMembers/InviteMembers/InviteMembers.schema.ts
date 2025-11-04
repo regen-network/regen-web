@@ -24,7 +24,7 @@ export const getInviteSchema = (_: TranslatorType) =>
       schema =>
         schema.role !== 'viewer' &&
         z.string().email().safeParse(schema.addressOrEmail).success
-          ? isValidAddress(schema.addressOrEmail)
+          ? false
           : true,
       {
         message: _(REGEN_ADDRESS_REQUIRED_ERROR),

@@ -79,7 +79,7 @@ const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
 
 type ResultStatus = 'success' | 'error' | undefined;
 
-type FormData<T> = {
+export type FormData<T> = {
   formValues: T;
   dataDisplay?: any; // optional, complementary data to display in review step (ie. projectName, because value field is projectId)
   maxAllowedStep: number;
@@ -140,6 +140,7 @@ export function MultiStepProvider<T extends object>({
     goBack();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
 
   const handleSave = (
     formValues: T | {},

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { z } from 'zod';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
@@ -28,7 +27,6 @@ import {
 import { getResendCodeButtonLink } from 'components/organisms/LoginButton/utils/getResendCodeButtonLink';
 import { getResendCodeLabel } from 'components/organisms/LoginButton/utils/getResendCodeLabel';
 import { useEmailConfirmationData } from 'components/organisms/LoginFlow/hooks/useEmailConfirmationData';
-import { emailFormSchema } from 'components/organisms/LoginModal/LoginModal.schema';
 import { EMAIL_ADDED } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -37,11 +35,14 @@ import {
   CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER,
   CREATE_ORG_PERSONAL_INFO_EMAIL_LABEL,
   CREATE_ORG_PERSONAL_INFO_NAME_LABEL,
-  CREATE_ORG_PERSONAL_INFO_NAME_REQUIRED,
   PERSONAL_INFO_FORM_ID,
 } from '../CreateOrganization.constants';
 import type { FormStateSetter } from '../CreateOrganization.types';
 import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
+import {
+  getPersonalInfoSchema,
+  PersonalInfoFormValues,
+} from './PersonalInfoStep.schema';
 
 type PersonalInfoStepProps = FormStateSetter;
 
@@ -57,51 +58,6 @@ export const PersonalInfoStep = ({
   const { data, handleSaveNext } = useMultiStep<OrganizationMultiStepData>();
   const [pendingValues, setPendingValues] =
     useState<PersonalInfoFormValues | null>(null);
-
-  const {
-    email: modalEmail,
-    emailModalError,
-    isConfirmationModalOpen,
-    resendTimeLeft,
-    onConfirmationModalClose,
-    onMailCodeChange,
-    onResendPasscode,
-    onEmailSubmit,
-  } = useEmailConfirmationData({
-    emailConfirmationText: _(EMAIL_ADDED),
-    showSuccessBanner: false,
-    onVerificationSuccess: async () => {
-      await refreshProfileData();
-      if (pendingValues) {
-        const currentName = (
-          (getValues('name') as string | undefined) ?? ''
-        ).trim();
-        const contactName =
-          currentName.length > 0 ? currentName : pendingValues.name;
-
-        const payload: OrganizationMultiStepData = {
-          ...(data ?? {}),
-          contactName,
-          contactEmail: pendingValues.email,
-        };
-
-        await updateProfileName(contactName);
-        handleSaveNext(payload);
-        setPendingValues(null);
-      }
-    },
-  });
-
-  const accountName = activeAccount?.name?.trim() ?? '';
-  const accountEmail = privActiveAccount?.email?.trim() ?? '';
-
-  const defaultValues = useMemo<PersonalInfoFormValues>(
-    () => ({
-      name: (data?.contactName ?? accountName) || '',
-      email: accountEmail || data?.contactEmail || '',
-    }),
-    [accountName, accountEmail, data?.contactEmail, data?.contactName],
-  );
 
   const refreshProfileData = useCallback(async () => {
     if (wallet?.address) {
@@ -134,35 +90,66 @@ export const PersonalInfoStep = ({
 
       await refreshProfileData();
     },
-    [activeAccount?.id, refreshProfileData, updateAccountById],
+    [activeAccount?.id, updateAccountById, refreshProfileData],
+  );
+
+  const onVerificationSuccess = useCallback(async () => {
+    if (pendingValues) {
+      const currentName = (
+        (getValues('name') as string | undefined) ?? ''
+      ).trim();
+      const contactName =
+        currentName.length > 0 ? currentName : pendingValues.name;
+
+      const payload: OrganizationMultiStepData = {
+        ...(data ?? {}),
+        contactName,
+        contactEmail: pendingValues.email,
+      };
+
+      await updateProfileName(contactName);
+      handleSaveNext(payload);
+      setPendingValues(null);
+    }
+  }, [data, handleSaveNext, pendingValues, updateProfileName]);
+
+  const {
+    email: modalEmail,
+    emailModalError,
+    isConfirmationModalOpen,
+    resendTimeLeft,
+    onConfirmationModalClose,
+    onMailCodeChange,
+    onResendPasscode,
+    onEmailSubmit,
+  } = useEmailConfirmationData({
+    emailConfirmationText: _(EMAIL_ADDED),
+    showSuccessBanner: false,
+    onVerificationSuccess,
+  });
+
+  const accountName = activeAccount?.name?.trim() ?? '';
+  const accountEmail = privActiveAccount?.email?.trim() ?? '';
+
+  const defaultValues = useMemo<PersonalInfoFormValues>(
+    () => ({
+      name: (data?.contactName ?? accountName) || '',
+      email: accountEmail || data?.contactEmail || '',
+    }),
+    [accountName, accountEmail, data?.contactEmail, data?.contactName],
   );
 
   const { name: defaultName, email: defaultEmail } = defaultValues;
   const hasAccountEmail = accountEmail.length > 0;
 
-  const personalInfoSchema = useMemo(
-    () =>
-      emailFormSchema.extend({
-        email: emailFormSchema.shape.email.trim(),
-        name: z
-          .string()
-          .trim()
-          .min(1, { message: _(CREATE_ORG_PERSONAL_INFO_NAME_REQUIRED) }),
-      }),
-    [_],
-  );
-
-  type PersonalInfoFormValues = z.infer<typeof personalInfoSchema>;
-
   const form = useZodForm({
-    schema: personalInfoSchema,
+    schema: getPersonalInfoSchema(_),
     defaultValues,
     mode: 'onChange',
   });
 
   const {
     register,
-    handleSubmit,
     reset,
     trigger,
     getValues,
@@ -176,7 +163,7 @@ export const PersonalInfoStep = ({
   } = form;
 
   useEffect(() => {
-    const currentValues = getValues() as PersonalInfoFormValues;
+    const currentValues = getValues();
     const nextValues = {
       name: currentValues.name || defaultName || '',
       email: defaultEmail,
@@ -202,29 +189,39 @@ export const PersonalInfoStep = ({
     setPendingValues(null);
   };
 
-  const onSubmit: Parameters<typeof handleSubmit>[0] = async values => {
-    if (!hasAccountEmail) {
-      await onEmailSubmit({
-        email: values.email,
-        callback: () => {
-          setPendingValues({
-            name: values.name,
-            email: values.email,
-          });
-        },
-      });
-      return;
-    }
+  const onSubmit = useCallback(
+    async (values: PersonalInfoFormValues) => {
+      if (!hasAccountEmail) {
+        await onEmailSubmit({
+          email: values.email,
+          callback: () => {
+            setPendingValues({
+              name: values.name,
+              email: values.email,
+            });
+          },
+        });
+        return;
+      }
 
-    await updateProfileName(values.name);
+      await updateProfileName(values.name);
 
-    const payload: OrganizationMultiStepData = {
-      ...(data ?? {}),
-      contactName: values.name,
-      contactEmail: accountEmail || values.email,
-    };
-    handleSaveNext(payload);
-  };
+      const payload: OrganizationMultiStepData = {
+        ...(data ?? {}),
+        contactName: values.name,
+        contactEmail: accountEmail || values.email,
+      };
+      handleSaveNext(payload);
+    },
+    [
+      accountEmail,
+      data,
+      handleSaveNext,
+      hasAccountEmail,
+      onEmailSubmit,
+      updateProfileName,
+    ],
+  );
 
   const showNameError = !!errors.name && (dirtyFields.name || submitCount > 0);
   const showEmailError =
@@ -252,6 +249,7 @@ export const PersonalInfoStep = ({
             description={_(CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER)}
           />
         </div>
+        <button type="submit">Submit</button>
       </Form>
       {pendingValues && !accountEmail && (
         <Body className="text-center" size="sm">

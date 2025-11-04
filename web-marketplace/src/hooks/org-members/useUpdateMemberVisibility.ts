@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
-import { useSetAtom } from 'jotai';
-import { useQueryClient } from '@tanstack/react-query';
 import { useLingui } from '@lingui/react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
-import { useAuth } from 'lib/auth/auth';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useUpdateAssignmentMutation } from 'generated/graphql';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { useAuth } from 'lib/auth/auth';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
 import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';

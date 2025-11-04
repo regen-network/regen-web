@@ -243,7 +243,6 @@ const EditProfileForm = ({
         {...form.register('description')}
       >
         <TextAreaFieldChartCounter
-          value={description}
           charsLeft={remainingDescriptionCharacters}
           remainingCharactersText={plural(remainingDescriptionCharacters, {
             one: `${remainingDescriptionCharacters} character remaining`,

@@ -7,6 +7,8 @@ import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
+import { AccountsOrderBy } from 'generated/graphql';
+
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
@@ -23,7 +25,6 @@ import {
   BaseUser,
   ProjectRole,
 } from './BaseMembersTable.types';
-import { AccountsOrderBy } from 'generated/graphql';
 
 interface BaseMembersTableProps<T extends BaseUser> {
   users: T[];

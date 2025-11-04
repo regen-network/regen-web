@@ -4,14 +4,12 @@ import { Theme } from '../../../../theme/muiTheme';
 import { Body } from '../../../typography';
 
 type Props = {
-  value?: string;
   remainingCharactersText: string;
   charsLeft: number;
   sx?: SxProps<Theme>;
 };
 
 export const TextAreaFieldChartCounter = ({
-  value,
   remainingCharactersText,
   charsLeft,
   sx = {},

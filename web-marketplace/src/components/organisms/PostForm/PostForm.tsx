@@ -266,7 +266,6 @@ export const PostForm = ({
         helperText={
           errors.title?.message || (
             <TextAreaFieldChartCounter
-              value={title}
               charsLeft={remainingTitleCharacters}
               remainingCharactersText={plural(remainingTitleCharacters, {
                 one: `${remainingTitleCharacters} character remaining`,

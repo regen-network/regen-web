@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
+import { AccountsOrderBy } from 'generated/graphql';
+
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembers } from './OrganizationMembers';
-import { mockMembers, mockAccounts } from './OrganizationMembers.mock';
+import { mockAccounts, mockMembers } from './OrganizationMembers.mock';
 import { Member } from './OrganizationMembers.types';
-import { AccountsOrderBy } from 'generated/graphql';
 
 const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',

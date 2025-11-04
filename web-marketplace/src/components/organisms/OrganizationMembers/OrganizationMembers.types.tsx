@@ -1,7 +1,8 @@
+import { UseStateSetter } from 'web-components/src/types/react/useState';
+
 import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
 
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
-import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 export type Member = {
   id: string;

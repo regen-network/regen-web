@@ -1,11 +1,9 @@
-import { useCallback, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
-import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import {
   COLLABORATORS_DESCRIPTION,

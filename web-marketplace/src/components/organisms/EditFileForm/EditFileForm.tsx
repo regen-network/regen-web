@@ -116,7 +116,6 @@ export const EditFileForm = ({
         {...register(`files.${currentIndex}.description`)}
       >
         <TextAreaFieldChartCounter
-          value={description}
           charsLeft={remainingDescriptionCharacters}
           remainingCharactersText={plural(remainingDescriptionCharacters, {
             one: `${remainingDescriptionCharacters} character remaining`,

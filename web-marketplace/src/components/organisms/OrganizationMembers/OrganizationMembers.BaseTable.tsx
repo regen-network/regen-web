@@ -3,7 +3,12 @@ import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import Banner from 'web-components/src/components/banner';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import {
+  AccountsOrderBy,
+  GetAccountsByNameOrAddrQuery,
+} from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
@@ -14,6 +19,7 @@ import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { InviteMemberModal } from './InviteMembers/InviteMembers.InviteModal';
 import { PersonalProfileModal } from './InviteMembers/InviteMembers.ProfileModal';
+import { PersonalProfileSchemaType } from './InviteMembers/InviteMembers.schema';
 import {
   INVITE_MEMBERS,
   MEMBER_REMOVED_BANNER,
@@ -21,16 +27,10 @@ import {
   ORGANIZATION_MEMBERS_DESCRIPTION,
   VISIBILITY_ON_PROFILE,
 } from './OrganizationMembers.constants';
+import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
 import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
-import { UseStateSetter } from 'web-components/src/types/react/useState';
-import {
-  AccountsOrderBy,
-  GetAccountsByNameOrAddrQuery,
-} from 'generated/graphql';
-import { PersonalProfileSchemaType } from './InviteMembers/InviteMembers.schema';
 
 export type MemberData = {
   role: BaseMemberRole | undefined;

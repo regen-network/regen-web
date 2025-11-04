@@ -1,17 +1,21 @@
 import { z } from 'zod';
-import { TranslatorType } from 'lib/i18n/i18n.types';
-import {
-  INVALID_EMAIL_OR_REGEN_ADDRESS_ERROR,
-  INVALID_REGEN_ADDRESS_ERROR,
-  REGEN_ADDRESS_REQUIRED_ERROR,
-} from '../OrganizationMembers.constants';
+
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import {
   ROLE_ADMIN,
   ROLE_EDITOR,
   ROLE_OWNER,
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+
+import {
+  INVALID_EMAIL_OR_REGEN_ADDRESS_ERROR,
+  INVALID_REGEN_ADDRESS_ERROR,
+  REGEN_ADDRESS_REQUIRED_ERROR,
+} from '../OrganizationMembers.constants';
 
 export const getInviteSchema = (_: TranslatorType) =>
   z

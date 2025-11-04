@@ -8,6 +8,7 @@ import { deleteImage } from 'web-components/src/utils/s3';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
@@ -18,14 +19,18 @@ import { useWallet } from 'lib/wallet/wallet';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+import useOrganizationProfile from 'hooks/useOrganizationProfile';
+import { useUpdateOrganizationProfile } from 'hooks/useUpdateOrganizationProfile';
 
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_BG,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
   PROFILE_S3_PATH,
   PROFILE_SAVED,
 } from './Dashboard.constants';
+import { useDashboardContext } from './Dashboard.context';
 import { getDefaultAvatar } from './Dashboard.utils';
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 
@@ -42,8 +47,58 @@ export const EditProfile = () => {
     profileBannerCardAtom,
   );
   const fileNamesToDeleteRef = useRef<string[]>([]);
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const {
+    isOrganizationDashboard,
+    organizationDaoAddress,
+    organizationRbamAddress,
+    organizationProfile: organizationProfileFromContext,
+  } = useDashboardContext();
+  const {
+    organizationProfile: latestOrganizationProfile,
+    isLoadingOrganizationProfile,
+  } = useOrganizationProfile({
+    daoAddress: organizationDaoAddress,
+  });
+  const updateOrganizationProfile = useUpdateOrganizationProfile();
+  const organizationProfile =
+    latestOrganizationProfile ?? organizationProfileFromContext ?? null;
+  const organizationIdentifier =
+    organizationProfile?.id ?? organizationDaoAddress ?? undefined;
+  const hasOrgContext =
+    Boolean(organizationDaoAddress) && Boolean(organizationRbamAddress);
+  const isOrgDashboard = hasOrgContext && (isOrganizationDashboard ?? true);
+  const shouldBlockRender =
+    isOrgDashboard &&
+    (!hasOrgContext ||
+      (isLoadingOrganizationProfile && !organizationProfile) ||
+      !organizationProfile);
 
   const initialValues: EditProfileFormSchemaType = useMemo(() => {
+    if (isOrgDashboard) {
+      const trimmedOrgName = organizationProfile?.name?.trim();
+      const resolvedName = trimmedOrgName || _(DEFAULT_NAME);
+
+      const resolvedDescription =
+        organizationProfile?.description?.trimEnd() ?? '';
+
+      const normalizedOrgImage = organizationProfile?.image?.trim();
+      const normalizedOrgBackground = organizationProfile?.bgImage?.trim();
+      const resolvedProfileImage =
+        normalizedOrgImage || DEFAULT_PROFILE_COMPANY_AVATAR;
+      const resolvedBackgroundImage =
+        normalizedOrgBackground || DEFAULT_PROFILE_BG;
+
+      return {
+        name: resolvedName,
+        description: resolvedDescription,
+        profileImage: resolvedProfileImage,
+        backgroundImage: resolvedBackgroundImage,
+        twitterLink: organizationProfile?.twitterLink?.trim() ?? '',
+        websiteLink: organizationProfile?.websiteLink?.trim() ?? '',
+      };
+    }
+
     const { name, description, image, bgImage, twitterLink, websiteLink } =
       activeAccount ?? {};
 
@@ -55,7 +110,44 @@ export const EditProfile = () => {
       twitterLink: twitterLink ?? '',
       websiteLink: websiteLink ?? '',
     };
-  }, [_, activeAccount, defaultAvatar]);
+  }, [
+    _,
+    activeAccount,
+    defaultAvatar,
+    isOrgDashboard,
+    organizationProfile?.bgImage,
+    organizationProfile?.description,
+    organizationProfile?.image,
+    organizationProfile?.name,
+    organizationProfile?.twitterLink,
+    organizationProfile?.websiteLink,
+  ]);
+
+  const editProfileFormKey = useMemo(() => {
+    if (isOrgDashboard) {
+      return [
+        'org',
+        organizationIdentifier ?? '',
+        organizationProfile?.image ?? '',
+        organizationProfile?.bgImage ?? '',
+      ].join('|');
+    }
+
+    return [
+      'personal',
+      activeAccount?.id ?? '',
+      activeAccount?.image ?? '',
+      activeAccount?.bgImage ?? '',
+    ].join('|');
+  }, [
+    activeAccount?.bgImage,
+    activeAccount?.id,
+    activeAccount?.image,
+    isOrgDashboard,
+    organizationIdentifier,
+    organizationProfile?.bgImage,
+    organizationProfile?.image,
+  ]);
 
   /* callbacks */
   const onSubmit = useCallback(
@@ -70,52 +162,111 @@ export const EditProfile = () => {
       } = values;
       const isDefaultAvatar = DEFAULT_PROFILE_AVATARS.includes(profileImage);
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
-      await updateAccountById({
-        variables: {
-          input: {
-            id: activeAccount?.id,
-            accountPatch: {
+
+      let shouldCloseProcessingModal = false;
+
+      try {
+        if (isOrgDashboard) {
+          if (
+            !organizationDaoAddress ||
+            !organizationRbamAddress ||
+            !organizationIdentifier
+          ) {
+            throw new Error('Organization context not found.');
+          }
+
+          setProcessingModalAtom(atom => void (atom.open = true));
+          shouldCloseProcessingModal = true;
+
+          await updateOrganizationProfile({
+            daoAddress: organizationDaoAddress,
+            rbamAddress: organizationRbamAddress,
+            organizationId: organizationIdentifier,
+            values: {
               name,
               description,
-              image: isDefaultAvatar ? undefined : profileImage,
-              bgImage: isDefaultBg ? undefined : backgroundImage,
+              profileImage: isDefaultAvatar ? undefined : profileImage,
+              backgroundImage: isDefaultBg ? undefined : backgroundImage,
               twitterLink,
               websiteLink,
             },
-          },
-        },
-      });
-      // Delete old avatar and/or bg image
-      await Promise.all(
-        fileNamesToDeleteRef?.current.map(async fileName => {
-          await deleteImage(
-            PROFILE_S3_PATH,
-            activeAccount?.id ?? '',
-            fileName,
-            apiServerUrl,
-          );
-        }),
-      );
-      fileNamesToDeleteRef.current = [];
-      // hide the banner if a user has set name, profile image, background image and one of the external links
-      if (
-        !profileBannerCard[activeAccount?.id] &&
-        name &&
-        profileImage &&
-        backgroundImage &&
-        (twitterLink || websiteLink)
-      ) {
-        setProfileBannerCard({
-          ...profileBannerCard,
-          [activeAccount?.id]: true,
-        });
+            currentValues: {
+              description: organizationProfile?.description ?? '',
+              profileImage: organizationProfile?.image ?? null,
+              backgroundImage: organizationProfile?.bgImage ?? null,
+              websiteLink: organizationProfile?.websiteLink ?? null,
+              twitterLink: organizationProfile?.twitterLink ?? null,
+            },
+          });
+        } else {
+          await updateAccountById({
+            variables: {
+              input: {
+                id: activeAccount?.id,
+                accountPatch: {
+                  name,
+                  description,
+                  image: isDefaultAvatar ? undefined : profileImage,
+                  bgImage: isDefaultBg ? undefined : backgroundImage,
+                  twitterLink,
+                  websiteLink,
+                },
+              },
+            },
+          });
+
+          // hide the banner if a user has set name, profile image, background image and one of the external links
+          if (
+            !profileBannerCard[activeAccount?.id] &&
+            name &&
+            profileImage &&
+            backgroundImage &&
+            (twitterLink || websiteLink)
+          ) {
+            setProfileBannerCard({
+              ...profileBannerCard,
+              [activeAccount?.id ?? '']: true,
+            });
+          }
+        }
+
+        // Delete old avatar and/or bg image
+        await Promise.all(
+          fileNamesToDeleteRef?.current.map(async fileName => {
+            const targetId = isOrgDashboard
+              ? organizationIdentifier ?? ''
+              : activeAccount?.id ?? '';
+            await deleteImage(
+              PROFILE_S3_PATH,
+              targetId,
+              fileName,
+              apiServerUrl,
+            );
+          }),
+        );
+        fileNamesToDeleteRef.current = [];
+      } finally {
+        if (shouldCloseProcessingModal) {
+          setProcessingModalAtom(atom => void (atom.open = false));
+        }
       }
     },
     [
       activeAccount?.id,
-      profileBannerCard,
+      isOrgDashboard,
+      organizationDaoAddress,
+      organizationIdentifier,
+      organizationProfile?.bgImage,
+      organizationProfile?.description,
+      organizationProfile?.image,
+      organizationProfile?.twitterLink,
+      organizationProfile?.websiteLink,
+      organizationRbamAddress,
       setProfileBannerCard,
+      setProcessingModalAtom,
+      profileBannerCard,
       updateAccountById,
+      updateOrganizationProfile,
     ],
   );
 
@@ -132,22 +283,53 @@ export const EditProfile = () => {
     }
   }, [activeAccount, reactQueryClient, wallet?.address]);
 
+  const refreshOrganizationData = useCallback(
+    async (daoAddr?: string) => {
+      if (!daoAddr) return;
+      await Promise.all([
+        reactQueryClient.invalidateQueries({
+          queryKey: ['dao-config', daoAddr],
+        }),
+        reactQueryClient.invalidateQueries({
+          queryKey: ['organization-profile', daoAddr],
+        }),
+      ]);
+    },
+    [reactQueryClient],
+  );
+
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
-    refreshProfileData();
-  }, [setBannerTextAtom, _, refreshProfileData]);
-
+    if (!isOrgDashboard) {
+      refreshProfileData();
+    } else {
+      void refreshOrganizationData(organizationDaoAddress);
+    }
+  }, [
+    setBannerTextAtom,
+    _,
+    refreshProfileData,
+    isOrgDashboard,
+    refreshOrganizationData,
+    organizationDaoAddress,
+  ]);
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
   });
 
+  if (shouldBlockRender) return null;
+
+  if (isOrgDashboard && isLoadingOrganizationProfile) return null;
+
   return (
     <EditProfileForm
+      key={editProfileFormKey}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       onUpload={onUpload}
       hideProfileType
       initialValues={initialValues}
+      prefillValues={isOrgDashboard ? initialValues : undefined}
       isDirtyRef={isDirtyRef}
     >
       <EditProfileFormActionBar />

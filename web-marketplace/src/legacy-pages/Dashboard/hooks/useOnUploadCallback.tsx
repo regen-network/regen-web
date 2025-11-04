@@ -23,10 +23,15 @@ export const useOnUploadCallback = ({ fileNamesToDeleteRef }: Params) => {
   const onUpload = useCallback(
     async (imageFile: File, value?: string) => {
       const currentTime = new Date().getTime();
+      if (!activeAccount?.id) {
+        setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
+        return '';
+      }
+
       try {
         const result = await uploadFile(
           imageFile,
-          `${PROFILE_S3_PATH}/${activeAccount?.id}/${currentTime}`,
+          `${PROFILE_S3_PATH}/${activeAccount.id}/${currentTime}`,
           apiUri,
         );
         if (value) fileNamesToDeleteRef.current.push(value);

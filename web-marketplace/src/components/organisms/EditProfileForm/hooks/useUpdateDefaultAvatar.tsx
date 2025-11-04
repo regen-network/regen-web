@@ -10,6 +10,7 @@ type Params = {
   profileType?: AccountType;
   profileImage: string;
   setProfileImage: (value: string) => void;
+  enabled?: boolean;
 };
 
 const matchesDefaultAvatar = (value: string, defaultPath: string): boolean => {
@@ -22,10 +23,12 @@ export const useUpdateDefaultAvatar = ({
   setProfileImage,
   profileImage,
   profileType,
+  enabled = true,
 }: Params) => {
   const previousProfileType = useRef<AccountType | undefined>(profileType);
 
   useEffect(() => {
+    if (!enabled) return;
     if (!profileType) return;
     const prevType = previousProfileType.current;
 
@@ -56,5 +59,5 @@ export const useUpdateDefaultAvatar = ({
     ) {
       setProfileImage(DEFAULT_PROFILE_USER_AVATAR);
     }
-  }, [profileType, profileImage, setProfileImage]);
+  }, [enabled, profileType, profileImage, setProfileImage]);
 };

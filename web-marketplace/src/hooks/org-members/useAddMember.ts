@@ -45,6 +45,7 @@ export function useAddMember(params: MembersHookParams) {
     projectRoleId,
     projectAuthorizationId,
     refetchMembers,
+    checkProjectsErrors,
   } = useMembersContext(params);
 
   const addMember = useCallback(
@@ -161,45 +162,48 @@ export function useAddMember(params: MembersHookParams) {
           setErrorBannerText(String(e));
         }
 
-        if (projectsCurrentUserCanManageMembers)
-          for (const project of projectsCurrentUserCanManageMembers) {
-            if (!project) continue;
-
-            // If user is already member of the project,
-            const isMemberOfProject =
-              project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes.some(
-                assignment =>
-                  assignment?.accountByAccountId?.privateAccountById?.email ===
-                  addressOrEmail,
-              );
-            // then we keep his/her role there unchanged
-            if (isMemberOfProject) continue;
-
-            try {
-              await postData({
-                url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
-                parseTextResponse: true,
-                data: {
-                  email: addressOrEmail,
-                  roleName: role,
-                  daoAddress: project?.projectByProjectId?.adminDaoAddress,
-                  visible,
-                  onChainRoleId: projectRoleIdToAdd,
-                },
-                token,
-                retryCsrfRequest,
-                onSuccess: async () => {
-                  await reactQueryClient.invalidateQueries({
-                    queryKey: getOrganizationByDaoAddressQueryKey({
-                      daoAddress,
-                    }),
-                  });
-                },
-              });
-            } catch (e) {
-              setErrorBannerText(String(e));
-            }
-          }
+        if (projectsCurrentUserCanManageMembers) {
+          const projectsFiltered = projectsCurrentUserCanManageMembers.filter(
+            project => {
+              if (!project) return false;
+              // If user is already member of the project,
+              const isMemberOfProject =
+                project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes.some(
+                  assignment =>
+                    assignment?.accountByAccountId?.privateAccountById
+                      ?.email === addressOrEmail,
+                );
+              // then we keep his/her role there unchanged
+              return !isMemberOfProject;
+            },
+          );
+          const projectsRes = await Promise.allSettled(
+            projectsFiltered.map(
+              async project =>
+                await postData({
+                  url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+                  parseTextResponse: true,
+                  data: {
+                    email: addressOrEmail,
+                    roleName: role,
+                    daoAddress: project?.projectByProjectId?.adminDaoAddress,
+                    visible,
+                    onChainRoleId: projectRoleIdToAdd,
+                  },
+                  token,
+                  retryCsrfRequest,
+                  onSuccess: async () => {
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: getOrganizationByDaoAddressQueryKey({
+                        daoAddress,
+                      }),
+                    });
+                  },
+                }),
+            ),
+          );
+          checkProjectsErrors(projectsRes, projectsFiltered);
+        }
       }
     },
     [

@@ -43,6 +43,8 @@ export function useRemoveMember(params: MembersHookParams) {
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
+    checkProjectsErrors,
+    checkErrors,
   } = useMembersContext(params);
 
   const removeMember = useCallback(
@@ -177,17 +179,22 @@ export function useRemoveMember(params: MembersHookParams) {
               },
             });
           }
-          for (const assignment of offchainProjectAssignmentsToDelete) {
-            await deleteAssignment({
-              variables: {
-                input: {
-                  daoAddress: assignment.daoAddress,
-                  roleName: assignment.roleName,
-                  accountId: id,
+
+          const delAssignmentsRes = await Promise.allSettled(
+            offchainProjectAssignmentsToDelete.map(async assignment => {
+              await deleteAssignment({
+                variables: {
+                  input: {
+                    daoAddress: assignment.daoAddress,
+                    roleName: assignment.roleName,
+                    accountId: id,
+                  },
                 },
-              },
-            });
-          }
+              });
+            }),
+          );
+          checkErrors(delAssignmentsRes, offchainProjectAssignmentsToDelete);
+
           await refetchMembers({
             address: memberAddress,
             role,
@@ -213,10 +220,10 @@ export function useRemoveMember(params: MembersHookParams) {
           setErrorBannerText(String(e));
         }
 
-        if (projectsCurrentUserCanManageMembers)
-          for (const project of projectsCurrentUserCanManageMembers) {
-            if (!project) continue;
-            try {
+        if (projectsCurrentUserCanManageMembers) {
+          const projectsRes = await Promise.allSettled(
+            projectsCurrentUserCanManageMembers.map(async project => {
+              if (!project) return;
               const projectDaoAddress =
                 project?.projectByProjectId?.adminDaoAddress;
               const projectRoleName =
@@ -233,16 +240,16 @@ export function useRemoveMember(params: MembersHookParams) {
                   },
                 },
               });
-              await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({
-                  id: activeAccountId,
-                  daoAccountsOrderBy: params.daoAccountsOrderBy,
-                }),
-              });
-            } catch (e) {
-              setErrorBannerText(String(e));
-            }
-          }
+            }),
+          );
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountByIdQueryKey({
+              id: activeAccountId,
+              daoAccountsOrderBy: params.daoAccountsOrderBy,
+            }),
+          });
+          checkProjectsErrors(projectsRes, projectsCurrentUserCanManageMembers);
+        }
       }
     },
     [

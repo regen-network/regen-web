@@ -62,6 +62,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
+    checkProjectsErrors,
   } = useMembersContext(params);
   const [deleteAssignment] = useDeleteAssignmentMutation();
 
@@ -340,10 +341,10 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           setErrorBannerText(String(e));
         }
 
-        if (projectsCurrentUserCanManageMembers)
-          for (const project of projectsCurrentUserCanManageMembers) {
-            if (!project) continue;
-            try {
+        if (projectsCurrentUserCanManageMembers) {
+          const projectsRes = await Promise.allSettled(
+            projectsCurrentUserCanManageMembers.map(async project => {
+              if (!project) return;
               const projectDaoAddress =
                 project?.projectByProjectId?.adminDaoAddress;
               const projectOldRoleName =
@@ -361,16 +362,16 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   },
                 },
               });
-              await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({
-                  id: activeAccountId,
-                  daoAccountsOrderBy: params.daoAccountsOrderBy,
-                }),
-              });
-            } catch (e) {
-              setErrorBannerText(String(e));
-            }
-          }
+            }),
+          );
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountByIdQueryKey({
+              id: activeAccountId,
+              daoAccountsOrderBy: params.daoAccountsOrderBy,
+            }),
+          });
+          checkProjectsErrors(projectsRes, projectsCurrentUserCanManageMembers);
+        }
       }
     },
     [

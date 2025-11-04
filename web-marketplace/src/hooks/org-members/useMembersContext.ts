@@ -10,7 +10,10 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
-import { useUpdateAssignmentMutation } from 'generated/graphql';
+import {
+  OrganizationProject,
+  useUpdateAssignmentMutation,
+} from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
@@ -178,6 +181,44 @@ export function useMembersContext(params: MembersHookParams) {
     ],
   );
 
+  const checkErrors = useCallback(
+    (
+      projectsRes: PromiseSettledResult<any>[],
+      daos?: { daoAddress?: string | null }[],
+    ) => {
+      const errors: string[] = [];
+      projectsRes.forEach((res, idx) => {
+        if (res.status === 'rejected') {
+          const daoAddr = daos?.[idx]?.daoAddress;
+          const reason =
+            res.reason instanceof Error
+              ? res.reason.message
+              : String(res.reason);
+          errors.push(`• ${daoAddr}: ${reason}`);
+        }
+      });
+      if (errors.length) {
+        setErrorBannerText(_(msg`Failed for projects:\n${errors.join('\n')}`));
+      }
+    },
+    [_, setErrorBannerText],
+  );
+
+  const checkProjectsErrors = useCallback(
+    (
+      projectsRes: PromiseSettledResult<any>[],
+      projects: ReturnType<typeof getProjectsCurrentUserCanManageMembers>,
+    ) => {
+      checkErrors(
+        projectsRes,
+        projects?.map(project => ({
+          daoAddress: project?.projectByProjectId?.adminDaoAddress,
+        })),
+      );
+    },
+    [checkErrors],
+  );
+
   return {
     // computed
     projectsCurrentUserCanManageMembers,
@@ -187,5 +228,7 @@ export function useMembersContext(params: MembersHookParams) {
     projectAuthorizationId,
     // helpers
     refetchMembers,
+    checkProjectsErrors,
+    checkErrors,
   };
 }

@@ -10,10 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
-import {
-  OrganizationProject,
-  useUpdateAssignmentMutation,
-} from 'generated/graphql';
+import { useUpdateAssignmentMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
@@ -24,7 +21,7 @@ import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/
 import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { MISSING_REQUIRED_PARAMS, orgRoles } from './constants';
+import { MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams, RefetchMembersParams } from './types';
 import {
   findAssignment,

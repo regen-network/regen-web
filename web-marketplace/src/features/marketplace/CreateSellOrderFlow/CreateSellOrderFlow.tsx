@@ -150,8 +150,7 @@ export const CreateSellOrderFlow = ({
 
   const sellableBatchDenomsOption: Option[] = credits
     .filter(
-      credit =>
-        credit.denom && Number(credit.balance?.tradableAmount ?? 0) > 0,
+      credit => credit.denom && Number(credit.balance?.tradableAmount ?? 0) > 0,
     )
     .map(credit => ({
       label: credit.denom as string,
@@ -201,8 +200,11 @@ export const CreateSellOrderFlow = ({
         batchDenoms={sellableBatchDenomsOption}
         sellDenom={'REGEN'}
         availableAmountByBatch={getAvailableAmountByBatch({
-          credits,
-          permittedDenoms: sellableBatchDenomsOption.map(option => option.value),
+          credits: credits.filter(credit =>
+            sellableBatchDenomsOption.some(
+              option => option.value === credit.denom,
+            ),
+          ),
         })}
         open={isCreateSellOrderOpen}
         onClose={closeCreateModal}

@@ -1,14 +1,22 @@
 import { useCallback } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
-import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom, useSetAtom } from 'jotai';
+import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { ledgerRPCUri } from 'lib/ledger';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
@@ -39,6 +47,42 @@ export const useCreateDao = () => {
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const { activeAccountId } = useAuth();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  const { refetch } = useQuery(
+    getAccountByIdQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!activeAccountId,
+      id: activeAccountId,
+      languageCode: selectedLanguage,
+    }),
+  );
+
+  const refetchAccount = useCallback(
+    async (daoAddress: string) => {
+      let hasDaoOrganization = false;
+      let i = 0;
+      // wait for the organization dao to be indexed
+      while (!hasDaoOrganization && i < 10) {
+        const res = await refetch();
+        const dao =
+          res?.data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+            dao => dao?.address === daoAddress,
+          );
+        hasDaoOrganization = !!dao;
+        if (hasDaoOrganization) {
+          break;
+        }
+
+        i++;
+        await timer(1000);
+      }
+      return hasDaoOrganization;
+    },
+    [refetch],
+  );
 
   const createDao = useCallback(
     async (params: CreateDaoParams) => {
@@ -185,6 +229,16 @@ export const useCreateDao = () => {
           gasMultiplier,
         );
 
+        const hasDaoOrganization = await refetchAccount(daoAddress);
+        if (!hasDaoOrganization) {
+          setProcessingModalAtom(atom => void (atom.open = false));
+          setErrorBannerText(
+            _(
+              msg`Could not find the organization associated with the created DAO. Please try refreshing the page later.`,
+            ),
+          );
+          return;
+        }
         return {
           daoAddress,
           transactionHash: executeResult.transactionHash,
@@ -208,6 +262,7 @@ export const useCreateDao = () => {
       _,
       queryClient,
       setErrorBannerText,
+      refetchAccount,
     ],
   );
 

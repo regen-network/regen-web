@@ -159,21 +159,22 @@ export const OrganizationProfileStep = ({
           organizationId: organizationIdValue,
           type: 'organization',
         });
+        if (daoResult) {
+          setDaoAddress(daoResult.daoAddress);
+          setOrganizationId(daoResult.organizationId);
+          setTransferHandled(true);
+          setShowTransferModal(false);
 
-        setDaoAddress(daoResult.daoAddress);
-        setOrganizationId(daoResult.organizationId);
-        setTransferHandled(true);
-        setShowTransferModal(false);
-
-        const payload: OrganizationMultiStepData = {
-          ...(data ?? {}),
-          ...values,
-          dao: {
-            ...daoResult,
-            walletAddress,
-          },
-        };
-        handleSaveNext(payload);
+          const payload: OrganizationMultiStepData = {
+            ...(data ?? {}),
+            ...values,
+            dao: {
+              ...daoResult,
+              walletAddress,
+            },
+          };
+          handleSaveNext(payload);
+        }
       } catch (error) {
         if (error instanceof Error) {
           throw error;

@@ -150,7 +150,7 @@ export default function CreateOrganizationPage(): JSX.Element {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
-
+  console.log('activeAccount', activeAccount);
   const isProgressForCurrentWallet =
     !!organizationProgress &&
     !!walletAddress &&

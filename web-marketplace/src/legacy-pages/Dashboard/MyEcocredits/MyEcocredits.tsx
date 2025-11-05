@@ -617,8 +617,9 @@ export const MyEcocredits = (): JSX.Element => {
             allowedDenoms={allowedDenomOptions}
             sellDenom={'REGEN'}
             availableAmountByBatch={getAvailableAmountByBatch({
-              credits,
-              permittedDenoms: permittedBatchDenoms,
+              credits: credits.filter(credit =>
+                permittedBatchDenoms.includes(credit.denom ?? ''),
+              ),
             })}
             open={true}
             onClose={() => setSellOrderCreateOpen(-1)}

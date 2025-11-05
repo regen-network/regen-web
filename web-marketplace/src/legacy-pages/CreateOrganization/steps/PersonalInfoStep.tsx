@@ -249,7 +249,6 @@ export const PersonalInfoStep = ({
             description={_(CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER)}
           />
         </div>
-        <button type="submit">Submit</button>
       </Form>
       {pendingValues && !accountEmail && (
         <Body className="text-center" size="sm">

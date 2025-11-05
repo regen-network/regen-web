@@ -74,7 +74,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
   const { queryClient, signingCosmWasmClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
-  const [errorBannerText, setErrorBannerText] = useAtom(errorBannerTextAtom);
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
   const dao = useDaoOrganization();
@@ -502,7 +502,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
               }
 
               await reloadData();
-
+              handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
             },
             onError: error => {
@@ -512,7 +512,6 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           },
         );
-        if (!errorBannerText) handleSaveNext({ ...data, ...values });
       } else handleSaveNext({ ...data, ...values });
     },
     [
@@ -538,7 +537,6 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       reloadData,
       updateOffChainProjectAdmin,
       updateCardSellOrders,
-      errorBannerText,
     ],
   );
 

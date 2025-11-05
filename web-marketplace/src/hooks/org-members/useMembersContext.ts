@@ -24,7 +24,7 @@ import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/
 import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { MISSING_REQUIRED_PARAMS } from './constants';
+import { MISSING_REQUIRED_PARAMS, orgRoles } from './constants';
 import { MembersHookParams, RefetchMembersParams } from './types';
 import {
   findAssignment,

@@ -3,7 +3,26 @@
 
 import { msg } from '@lingui/macro';
 
-export const orgRoles = {
+type OrgRole = {
+  roleId: number;
+  authorizations: {
+    can_manage_members?: number;
+    can_create_projects?: number;
+    can_manage_credit_issuance?: number;
+    can_manage_credits?: number;
+    can_manage_sell_orders?: number;
+    can_manage_credit_classes?: number;
+    can_edit_organization?: number;
+    can_manage_members_except_owner?: number;
+    can_update_credit_classes_metadata?: number;
+  };
+};
+export const orgRoles: {
+  owner: OrgRole;
+  admin: OrgRole;
+  editor: OrgRole;
+  viewer: OrgRole;
+} = {
   owner: {
     roleId: 1,
     authorizations: {
@@ -36,9 +55,28 @@ export const orgRoles = {
     },
   },
   viewer: { roleId: 20, authorizations: {} },
-} as const;
+};
 
-export const projectRoles = {
+type ProjectRole = {
+  roleId: number;
+  authorizations: {
+    can_manage_members?: number;
+    can_manage_projects?: number;
+    can_manage_credit_issuance?: number;
+    can_manage_credits?: number;
+    can_manage_sell_orders?: number;
+    can_anchor_attest_data?: number;
+    can_manage_members_except_owner?: number;
+  };
+};
+
+export const projectRoles: {
+  owner: ProjectRole;
+  admin: ProjectRole;
+  editor: ProjectRole;
+  author: ProjectRole;
+  viewer: ProjectRole;
+} = {
   owner: {
     roleId: 1,
     authorizations: {
@@ -78,7 +116,7 @@ export const projectRoles = {
     roleId: 20,
     authorizations: {},
   },
-} as const;
+};
 
 export const MISSING_REQUIRED_PARAMS = msg`missing required parameters`;
 export const MEMBER_NOT_FOUND = msg`member not found`;

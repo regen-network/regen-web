@@ -30,7 +30,10 @@ import {
   predictAllAddresses,
   sanitizeDaoParams,
 } from './useCreateDao.utils';
-import { feegrantGrantAllowanceAction } from 'hooks/org-members/utils';
+import {
+  feegrantGrantAllowanceAction,
+  getRoleAuthorizationIds,
+} from 'hooks/org-members/utils';
 import { orgRoles } from 'hooks/org-members/constants';
 
 export const useCreateDao = () => {
@@ -177,14 +180,18 @@ export const useCreateDao = () => {
           },
         };
 
+        const { roleId, authorizationId } = getRoleAuthorizationIds({
+          type: 'organization',
+          currentUserRole: 'owner',
+          authorizationName: 'can_manage_members',
+        });
         const feegrantMsg = {
           execute_actions: {
             actions: [
               feegrantGrantAllowanceAction({
                 daoAddress,
-                authorizationId:
-                  orgRoles.owner.authorizations.can_manage_members,
-                roleId: orgRoles.owner.roleId,
+                authorizationId: authorizationId as number,
+                roleId: roleId as number,
                 memberAddress: walletAddress,
               }),
             ],

@@ -247,17 +247,21 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       }
       const walletAddress = wallet?.address;
       if (!walletAddress) {
-        throw new Error(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
+        setErrorBannerText(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
+        return;
       }
       if (!signingCosmWasmClient) {
-        throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
+        setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
+        return;
       }
       const organizationId = data.dao?.organizationId;
       if (!organizationId) {
-        throw new Error(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
+        setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
+        return;
       }
       if (!dao) {
-        throw new Error(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
+        setErrorBannerText(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
+        return;
       }
       if (!cwAdminFactoryAddr) {
         throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));

@@ -1,29 +1,33 @@
-import { Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
-import { Body } from 'web-components/src/components/typography';
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
-import { useAuth } from 'lib/auth/auth';
 import { useMemo, useState } from 'react';
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
-import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { useAtom } from 'jotai';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useUpdateMembers } from 'hooks/org-members';
-import { useSaveProfile } from '../hooks/useSaveProfile';
+
+import { Body } from 'web-components/src/components/typography';
+
 import { AccountsOrderBy } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
+
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'pages/Dashboard/Dashboard.constants';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
+import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
+import { useUpdateMembers } from 'hooks/org-members';
+
+import { useSaveProfile } from '../hooks/useSaveProfile';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
@@ -120,8 +124,6 @@ export const InviteMembersStep = () => {
       address: debouncedValue,
     }),
   );
-  console.log('daos', daoData?.daoByAddress);
-  console.log('accounts', accounts);
 
   const { saveProfile, onUpload } = useSaveProfile(daoAccountsOrderBy);
 

@@ -11578,6 +11578,19 @@ export type CreditClassByUriQuery = (
   )> }
 );
 
+export type DaoByAddressQueryVariables = Exact<{
+  address: Scalars['String'];
+}>;
+
+
+export type DaoByAddressQuery = (
+  { __typename?: 'Query' }
+  & { daoByAddress?: Maybe<(
+    { __typename?: 'Dao' }
+    & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
+  )> }
+);
+
 export type DeleteAssignmentMutationVariables = Exact<{
   input: DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput;
 }>;
@@ -11611,6 +11624,16 @@ export type GetAccountsByNameOrAddrQuery = (
         & { nodes: Array<Maybe<(
           { __typename?: 'AccountTranslation' }
           & Pick<AccountTranslation, 'languageCode' | 'description'>
+        )>> }
+      ), daosByAssignmentAccountIdAndDaoAddress: (
+        { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'Dao' }
+          & Pick<Dao, 'address'>
+          & { organizationByDaoAddress?: Maybe<(
+            { __typename?: 'Organization' }
+            & Pick<Organization, 'name'>
+          )> }
         )>> }
       ) }
     )>> }
@@ -12528,6 +12551,43 @@ export function useCreditClassByUriLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type CreditClassByUriQueryHookResult = ReturnType<typeof useCreditClassByUriQuery>;
 export type CreditClassByUriLazyQueryHookResult = ReturnType<typeof useCreditClassByUriLazyQuery>;
 export type CreditClassByUriQueryResult = Apollo.QueryResult<CreditClassByUriQuery, CreditClassByUriQueryVariables>;
+export const DaoByAddressDocument = gql`
+    query DaoByAddress($address: String!) {
+  daoByAddress(address: $address) {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+  }
+}
+    `;
+
+/**
+ * __useDaoByAddressQuery__
+ *
+ * To run a query within a React component, call `useDaoByAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDaoByAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDaoByAddressQuery({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useDaoByAddressQuery(baseOptions: Apollo.QueryHookOptions<DaoByAddressQuery, DaoByAddressQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DaoByAddressQuery, DaoByAddressQueryVariables>(DaoByAddressDocument, options);
+      }
+export function useDaoByAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DaoByAddressQuery, DaoByAddressQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DaoByAddressQuery, DaoByAddressQueryVariables>(DaoByAddressDocument, options);
+        }
+export type DaoByAddressQueryHookResult = ReturnType<typeof useDaoByAddressQuery>;
+export type DaoByAddressLazyQueryHookResult = ReturnType<typeof useDaoByAddressLazyQuery>;
+export type DaoByAddressQueryResult = Apollo.QueryResult<DaoByAddressQuery, DaoByAddressQueryVariables>;
 export const DeleteAssignmentDocument = gql`
     mutation DeleteAssignment($input: DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput!) {
   deleteAssignmentByAccountIdAndDaoAddressAndRoleName(input: $input) {
@@ -12580,6 +12640,14 @@ export const GetAccountsByNameOrAddrDocument = gql`
         nodes {
           languageCode
           description
+        }
+      }
+      daosByAssignmentAccountIdAndDaoAddress {
+        nodes {
+          address
+          organizationByDaoAddress {
+            name
+          }
         }
       }
     }

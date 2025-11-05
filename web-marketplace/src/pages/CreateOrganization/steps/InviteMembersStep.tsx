@@ -23,6 +23,7 @@ import { useUpdateMembers } from 'hooks/org-members';
 import { useSaveProfile } from '../hooks/useSaveProfile';
 import { AccountsOrderBy } from 'generated/graphql';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
@@ -112,6 +113,15 @@ export const InviteMembersStep = () => {
       languageCode: selectedLanguage,
     }),
   );
+  const { data: daoData } = useQuery(
+    getDaoByAddressQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!debouncedValue,
+      address: debouncedValue,
+    }),
+  );
+  console.log('daos', daoData?.daoByAddress);
+  console.log('accounts', accounts);
 
   const { saveProfile, onUpload } = useSaveProfile(daoAccountsOrderBy);
 
@@ -142,6 +152,7 @@ export const InviteMembersStep = () => {
           onSaveProfile={saveProfile}
           onUpload={onUpload}
           sortDir={daoAccountsOrderBy}
+          daoWithAddress={daoData?.daoByAddress}
         />
       )}
     </div>

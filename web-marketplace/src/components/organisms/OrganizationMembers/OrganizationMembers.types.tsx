@@ -1,6 +1,9 @@
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
+import {
+  DaoByAddressQuery,
+  GetAccountsByNameOrAddrQuery,
+} from 'generated/graphql';
 
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 
@@ -30,6 +33,7 @@ export interface InviteMemberModalProps {
   }) => void;
   accounts?: GetAccountsByNameOrAddrQuery | null;
   setDebouncedValue: UseStateSetter<string>;
+  daoWithAddress?: DaoByAddressQuery['daoByAddress'];
 }
 
 export type VisibilitySwitchProps = {

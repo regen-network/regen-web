@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
 
@@ -13,7 +13,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
-import { Link } from 'components/atoms';
+import { Link } from 'components/atoms/Link';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;
@@ -65,7 +65,7 @@ export const Stakeholders = ({ stakeholders, className }: Props) => {
                     ? { mb: { xs: 8.25, sm: 0 } }
                     : undefined;
                 return (
-                  <Grid item xs={12} sm={sm} sx={sx}>
+                  <Grid item xs={12} sm={sm} sx={sx} key={i}>
                     {Array.isArray(accounts) ? (
                       <>
                         <UserInfoWithTitle

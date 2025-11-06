@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import {
   SortCallbacksType,
@@ -10,7 +12,7 @@ import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
@@ -18,8 +20,6 @@ import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketp
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import {

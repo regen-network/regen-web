@@ -39,7 +39,7 @@ export const SharePublicMenuItem = ({
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
       <ShareIcon className="text-brand-300" />
     </ListItemIcon>
-    <ListItemText className={'publicPost' ? 'py-10' : undefined}>
+    <ListItemText className={publicPost ? 'py-10' : undefined}>
       {SHARE_PUBLIC_LINK}
       {!publicPost && <Body size="xs">{PRESERVES_PRIVACY}</Body>}
     </ListItemText>

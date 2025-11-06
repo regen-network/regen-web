@@ -1,5 +1,4 @@
 import { forwardRef, ReactNode, useState } from 'react';
-import { Crop } from 'react-image-crop';
 import { Box, ButtonBase, SxProps } from '@mui/material';
 
 import { Theme } from '../../../../theme/muiTheme';
@@ -25,7 +24,7 @@ interface Props {
   disabled?: boolean;
   optional?: boolean | string;
   circularCrop?: boolean;
-  fixedCrop?: Partial<Crop>;
+  aspect?: number;
   children: ReactNode;
   uploadText: string;
   updateText: string;
@@ -52,7 +51,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
       initialFileName,
       disabled = false,
       circularCrop = false,
-      fixedCrop = {},
+      aspect,
       children,
       uploadText,
       updateText,
@@ -141,15 +140,13 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
                   const [file] = files;
                   toBase64(file).then(image => {
                     if (typeof image === 'string') {
-                      const fileName = file.name;
+                      const fileName = initialFileName ?? file.name;
                       const fileExtension =
                         fileName.match(EXTENSION_REGEX)?.[1] ??
                         DEFAULT_IMAGE_EXTENSION;
                       setInitialImage(image);
                       setFileType(file.type);
-                      setFileName(
-                        `${initialFileName}.${fileExtension}` ?? fileName,
-                      );
+                      setFileName(`${fileName}.${fileExtension}`);
                     }
                   });
                 }
@@ -162,7 +159,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
         </FieldFormControl>
         <CropImageModal
           circularCrop={circularCrop}
-          fixedCrop={fixedCrop}
+          aspect={aspect}
           initialImage={initialImage}
           open={!!initialImage}
           uploadText={uploadText}

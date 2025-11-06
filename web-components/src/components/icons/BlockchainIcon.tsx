@@ -19,14 +19,14 @@ export const BlockchainIcon = (props: Props) => {
         <path
           d="M12.5 5L19.4282 8.5V15.5L12.5 19L5.5718 15.5V8.5L12.5 5Z"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinejoin="round"
         />
         <path
           d="M12.5 1L22.8923 6.5V17.5L12.5 23L2.1077 17.5V6.5L12.5 1Z"
           stroke="currentColor"
-          stroke-linejoin="round"
-          stroke-dasharray="2 2"
+          strokeLinejoin="round"
+          strokeDasharray="2 2"
         />
         <line
           x1="12.5"

@@ -1,4 +1,5 @@
-import { lazy } from 'react';
+/* eslint-disable lingui/no-unlocalized-strings */
+import { lazy, useMemo } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,149 +9,176 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loader';
+import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
+import { EditProfile } from 'legacy-pages/Dashboard/Dashboard.EditProfile';
+import { DashboardSettings } from 'legacy-pages/Dashboard/Dashboard.Settings';
+import MyBridge from 'legacy-pages/Dashboard/MyBridge';
+import { MyBridgableEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
+import { MyBridgedEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
+import MyCreditBatches from 'legacy-pages/Dashboard/MyCreditBatches';
+import MyCreditClasses from 'legacy-pages/Dashboard/MyCreditClasses';
+import MyEcocredits from 'legacy-pages/Dashboard/MyEcocredits';
+import MyProjects from 'legacy-pages/Dashboard/MyProjects';
+import { ecocreditBatchesLoader } from 'legacy-pages/EcocreditBatches/EcocreditBatches.loader';
+import Faucet from 'legacy-pages/Faucet';
+import { homeLoader } from 'legacy-pages/Home/Home.loader';
+import { CreditBatchesTab } from 'legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'legacy-pages/Profile/CreditClassTab/CreditClassTab';
+import { PortfolioTab } from 'legacy-pages/Profile/PortfolioTab/Profile.PortfolioTab';
+import ProjectsTab from 'legacy-pages/Profile/ProjectsTab';
+import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
+import Settings from 'legacy-pages/Settings';
 import { safeLazy } from 'utils/safeLazy';
-import { CreditBatchesTab } from 'web-marketplace/src/pages/Profile/CreditBatchesTab/CreditBatchesTab';
-import { CreditClassTab } from 'web-marketplace/src/pages/Profile/CreditClassTab/CreditClassTab';
-import { PortfolioTab } from 'web-marketplace/src/pages/Profile/PortfolioTab/Profile.PortfolioTab';
-import ProjectsTab from 'web-marketplace/src/pages/Profile/ProjectsTab';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
 import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+import { ORG_ENABLED } from 'lib/env';
 
-import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
-import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
-import { CertificatePage } from 'pages/Certificate/Certificate';
-import { EditProfile } from 'pages/Dashboard/Dashboard.EditProfile';
-import { DashboardSettings } from 'pages/Dashboard/Dashboard.Settings';
-import MyBridge from 'pages/Dashboard/MyBridge';
-import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
-import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
-import MyCreditBatches from 'pages/Dashboard/MyCreditBatches';
-import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
-import MyEcocredits from 'pages/Dashboard/MyEcocredits';
-import MyProjects from 'pages/Dashboard/MyProjects';
-import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
-import Faucet from 'pages/Faucet';
-import { homeLoader } from 'pages/Home/Home.loader';
-import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
-import Settings from 'pages/Settings';
+// import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 //import { Members } from 'components/organisms/Members/Members';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
-import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
+import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
 
-const Additionality = safeLazy(() => import('../../pages/Additionality'));
-const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
-const BasicInfo = safeLazy(() => import('../../pages/BasicInfo'));
-const BatchDetails = safeLazy(() => import('../../pages/BatchDetails'));
-const BasketDetails = safeLazy(() => import('../../pages/BasketDetails'));
-const BuyCredits = safeLazy(() => import('../../pages/BuyCredits'));
-const Sell = safeLazy(() => import('../../pages/Sell/Sell'));
-const ChooseCreditClassPage = safeLazy(
-  () => import('../../pages/ChooseCreditClass'),
+const Additionality = safeLazy(
+  () => import('../../legacy-pages/Additionality'),
 );
-const CreateCreditClassInfo = safeLazy(
-  () => import('../../pages/CreateCreditClassInfo'),
+const AllProjects = safeLazy(
+  () => import('../../legacy-pages/Projects/AllProjects'),
+);
+const BasicInfo = safeLazy(() => import('../../legacy-pages/BasicInfo'));
+const BatchDetails = safeLazy(() => import('../../legacy-pages/BatchDetails'));
+const BasketDetails = safeLazy(
+  () => import('../../legacy-pages/BasketDetails'),
+);
+const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
+const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
+
+const ChooseCreditClassPage = safeLazy(
+  () => import('../../legacy-pages/ChooseCreditClass'),
 );
 const CreateCreditClass = safeLazy(
-  () => import('../../pages/CreateCreditClass'),
+  () => import('../../legacy-pages/CreateCreditClass'),
 );
 const CreditClassDetails = safeLazy(
-  () => import('../../pages/CreditClassDetails'),
+  () => import('../../legacy-pages/CreditClassDetails'),
 );
-const Description = safeLazy(() => import('../../pages/Description'));
-const EcocreditBatches = safeLazy(() => import('../../pages/EcocreditBatches'));
-const Profile = safeLazy(() => import('../../pages/Profile'));
+const Description = safeLazy(() => import('../../legacy-pages/Description'));
+const EcocreditBatches = safeLazy(
+  () => import('../../legacy-pages/EcocreditBatches'),
+);
+const Profile = safeLazy(() => import('../../legacy-pages/Profile'));
 
 // ErrorPage cannot use safeLazy because it could create a circular dependency
 // since safeLazy itself uses ErrorPage as its fallback component when imports fail.
-const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
-const Home = safeLazy(() => import('../../pages/Home'));
-const LandStewards = safeLazy(() => import('../../pages/LandStewards'));
-const LoginPage = safeLazy(() => import('../../pages/Login'));
-const Media = safeLazy(() => import('../../pages/Media'));
-const MethodologyDetails = safeLazy(
-  () => import('../../pages/MethodologyDetails'),
-);
-const NotFoundPage = safeLazy(() => import('../../pages/NotFound'));
-const Post = safeLazy(() => import('../../pages/Post'));
+const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
+const Home = safeLazy(() => import('../../legacy-pages/Home'));
+const LoginPage = safeLazy(() => import('../../legacy-pages/Login'));
+const Media = safeLazy(() => import('../../legacy-pages/Media'));
+const NotFoundPage = safeLazy(() => import('../../legacy-pages/NotFound'));
+const Post = safeLazy(() => import('../../legacy-pages/Post'));
 const PrefinanceProjects = safeLazy(
-  () => import('../../pages/Projects/PrefinanceProjects'),
+  () => import('../../legacy-pages/Projects/PrefinanceProjects'),
 );
-const Project = safeLazy(() => import('../../pages/Project'));
-const Projects = safeLazy(() => import('../../pages/Projects'));
-const ProjectCreate = safeLazy(() => import('../../pages/ProjectCreate'));
-const ProjectFinished = safeLazy(() => import('../../pages/ProjectFinished'));
-const ProjectLocation = safeLazy(() => import('../../pages/ProjectLocation'));
-const ProjectReview = safeLazy(() => import('../../pages/ProjectReview'));
-const Roles = safeLazy(() => import('../../pages/Roles'));
-const VerifyEmail = safeLazy(() => import('../../pages/VerifyEmail'));
-const ProjectEdit = safeLazy(() => import('../../pages/ProjectEdit'));
-const Activity = safeLazy(() => import('../../pages/Activity'));
-const CreateBatch = safeLazy(() => import('../../pages/CreateBatch'));
+const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
+const ProjectCreate = safeLazy(
+  () => import('../../legacy-pages/ProjectCreate'),
+);
+const ProjectFinished = safeLazy(
+  () => import('../../legacy-pages/ProjectFinished'),
+);
+const ProjectLocation = safeLazy(
+  () => import('../../legacy-pages/ProjectLocation'),
+);
+const ProjectReview = safeLazy(
+  () => import('../../legacy-pages/ProjectReview'),
+);
+const Roles = safeLazy(() => import('../../legacy-pages/Roles'));
+const VerifyEmail = safeLazy(() => import('../../legacy-pages/VerifyEmail'));
+const ProjectEdit = safeLazy(() => import('../../legacy-pages/ProjectEdit'));
+const Activity = safeLazy(() => import('../../legacy-pages/Activity'));
+const CreateBatch = safeLazy(() => import('../../legacy-pages/CreateBatch'));
 const ConnectWalletPage = safeLazy(
-  () => import('../../pages/ConnectWalletPage'),
+  () => import('../../legacy-pages/ConnectWalletPage'),
 );
-const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
-const Orders = safeLazy(() => import('../../pages/Orders'));
+const Dashboard = safeLazy(() => import('../../legacy-pages/Dashboard'));
+const Orders = safeLazy(() => import('../../legacy-pages/Orders'));
 const CreateOrganization = safeLazy(
-  () => import('../../pages/CreateOrganization'),
+  () => import('../../legacy-pages/CreateOrganization'),
 );
 // const ManageProject = safeLazy(
-//   () => import('../../pages/Dashboard/MyProjects/ManageProject'),
+//   () => import('../../legacy-pages/Dashboard/MyProjects/ManageProject'),
 // );
 
 type RouterProps = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
 };
 
-export const RegenRoutes = ({
-  reactQueryClient,
-  apolloClientFactory,
-}: RouterProps) => {
+export default function RegenRoutes({ reactQueryClient }: RouterProps) {
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { queryClient: rpcQueryClient } = useLedger();
+  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  return (
-    <RouterProvider
-      router={getRegenRouter({
+  const router = useMemo(
+    () =>
+      getRegenRouter({
         reactQueryClient,
-        apolloClientFactory,
+        apolloClient,
         rpcQueryClient,
         address: activeWalletAddr,
         languageCode: selectedLanguage,
-      })}
-      fallbackElement={<PageLoader />}
-    />
+        basename:
+          typeof window !== 'undefined'
+            ? (() => {
+                const segment = window.location.pathname.split('/')[1];
+                return segment === 'en' || segment === 'es'
+                  ? `/${segment}`
+                  : '';
+              })()
+            : '',
+      }),
+    [
+      activeWalletAddr,
+      apolloClient,
+      selectedLanguage,
+      reactQueryClient,
+      rpcQueryClient,
+    ],
   );
-};
+
+  return <RouterProvider router={router} fallbackElement={<PageLoader />} />;
+}
 
 export type RouterParams = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
+  apolloClient: ApolloClient<NormalizedCacheObject>;
   rpcQueryClient: RPCQueryClient | undefined;
   address?: Maybe<string>;
   languageCode: string;
+  basename?: string;
 };
 
 export const getRegenRoutes = ({
   reactQueryClient,
-  apolloClientFactory,
+  apolloClient,
   rpcQueryClient,
   address,
   languageCode,
@@ -162,7 +190,7 @@ export const getRegenRoutes = ({
         element={<RegistryLayout />}
         loader={registryLayoutLoader({
           queryClient: reactQueryClient,
-          apolloClientFactory,
+          apolloClient,
           languageCode,
         })}
       >
@@ -181,12 +209,6 @@ export const getRegenRoutes = ({
             element={<Navigate to="/" replace />}
           />
           <Route
-            // TODO: thould this route be moved to /credit-classes?
-            path="create-credit-class"
-            element={<CreateCreditClassInfo />}
-          />
-          <Route path="project-developers" element={<LandStewards />} />
-          <Route
             path="methodology-review-process"
             element={<Navigate to="/" replace />}
           />
@@ -201,33 +223,14 @@ export const getRegenRoutes = ({
             />
             <Route path="prefinance" element={<PrefinanceProjects />} />
           </Route>
-          <Route path="project">
-            <Route
-              path=":projectId"
-              element={<Project />}
-              loader={projectDetailsLoader({
-                queryClient: reactQueryClient,
-                apolloClientFactory,
-              })}
-            ></Route>
-          </Route>
-          <Route
-            path="project/:projectId/buy"
-            element={<BuyCredits />}
-            loader={buyCreditsLoader({
-              queryClient: reactQueryClient,
-              apolloClientFactory,
-              address,
-              languageCode,
-            })}
-          />
+          <Route path="project/:projectId/buy" element={<BuyCredits />} />
           <Route
             path="post/:iri"
             element={<Post />}
             // TODO
             // loader={postLoader({
             //   queryClient: reactQueryClient,
-            //   apolloClientFactory,
+            //   apolloClient,
             // })}
           />
           <Route path="profiles/:accountAddressOrId" element={<Profile />}>
@@ -319,31 +322,14 @@ export const getRegenRoutes = ({
               </Route>
             </Route>
           </Route>
-          <Route
-            path="organizations/create"
-            element={<KeplrOrAuthRoute component={CreateOrganization} />}
-          />
-          <Route
-            path="methodologies/:methodologyId"
-            element={<MethodologyDetails />}
-          />
+          {ORG_ENABLED && (
+            <Route
+              path="organizations/create"
+              element={<KeplrOrAuthRoute component={CreateOrganization} />}
+            />
+          )}
           <Route path="credit-classes">
-            {/* TODO: Index route is same as /create-credit-class for now */}
-            <Route index element={<CreateCreditClassInfo />} />
-            <Route path=":creditClassId/*">
-              <Route
-                index
-                element={<CreditClassDetails isLandSteward={true} />}
-              />
-              <Route
-                path="buyer"
-                element={<CreditClassDetails isLandSteward={false} />}
-              />
-              <Route
-                path="land-steward"
-                element={<CreditClassDetails isLandSteward={true} />}
-              />
-            </Route>
+            <Route path=":creditClassId" element={<CreditClassDetails />} />
             <Route
               path="create"
               element={<KeplrRoute component={CreateCreditClass} />}
@@ -428,23 +414,24 @@ export const getRegenRoutes = ({
 
 export const getRegenRouter = ({
   reactQueryClient,
-  apolloClientFactory,
+  apolloClient,
   rpcQueryClient,
   address,
   languageCode,
+  basename = '',
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
     getRegenRoutes({
       reactQueryClient,
-      apolloClientFactory,
+      apolloClient,
       rpcQueryClient,
       address,
       languageCode,
     }),
     {
-      basename: import.meta.env.PUBLIC_URL,
+      basename,
     },
   );
 };

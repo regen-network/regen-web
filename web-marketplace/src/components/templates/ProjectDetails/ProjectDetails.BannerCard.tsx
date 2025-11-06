@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';
@@ -16,6 +16,8 @@ import { useAuth } from 'lib/auth/auth';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 
 import { COPY_TOOLTIP } from './ProjectDetails.constant';
 import { projectsBannerCardAtom } from './ProjectDetails.store';
@@ -58,10 +60,18 @@ export const ProjectDetailsBannerCard = ({
           <BannerCard
             title={content.title as string}
             description={content.descriptionRaw}
-            image={{
-              src: getSanityImgSrc(content.image),
-              alt: content.image?.imageAlt || _(msg`project banner`),
-            }}
+            image={
+              <SanityNextImage
+                image={content.image}
+                fallback={
+                  content.image?.imageHref
+                    ? { src: content.image?.imageHref, height: 80, width: 80 }
+                    : null
+                }
+                alt={content.image?.imageAlt || _(msg`project banner`)}
+                className="w-50 h-50 sm:w-[80px] sm:h-[80px]"
+              />
+            }
             buttonLabel={content.buttonLabel as string}
             icon={<ShareIcon />}
             buttonLabelClassName="text-grey-500"

@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/src/components/section';
@@ -27,7 +26,8 @@ import {
 } from 'lib/constants/shared.constants';
 import { LINK_PREFIX } from 'lib/env';
 
-import { AccountLink, Link } from 'components/atoms';
+import { Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';
 
 import {
@@ -137,7 +137,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             <WithLoader isLoading={!batch.projectName} variant="skeleton">
               <Link
                 href={`/project/${batch?.projectId}`}
-                sx={tableStyles.ellipsisColumn}
+                className="block truncate max-w-[125px]"
               >
                 {batch?.projectName}
               </Link>
@@ -149,9 +149,9 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             >
               <Link
                 href={`${LINK_PREFIX}/credit-classes/${batch.classId}`}
-                sx={tableStyles.ellipsisContentColumn}
+                className="block truncate max-w-[125px]"
               >
-                <BlockContent content={batch.className} />
+                <BlockContent className="truncate" content={batch.className} />
               </Link>
             </WithLoader>,
             <Link

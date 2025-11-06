@@ -55,6 +55,7 @@ import ErrorIcon from './ErrorIcon';
 import EyeIcon from './EyeIcon';
 import FarmerIcon from './FarmerIcon';
 import FilterIcon from './FilterIcon';
+import { GlobeIcon } from './GlobeIcon';
 import USFlagIcon from './flags/USFlagIcon';
 import { GreenPinIcon } from './GreenPinIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
@@ -296,6 +297,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<GreenPinIcon />} label="GreenPinIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
+    <LabeledIcon icon={<GlobeIcon/>} label="GlobeIcon" />
     <LabeledIcon
       icon={<HyloIcon color="grey" className="w-40 h-40" />}
       label="HyloIcon"
@@ -404,7 +406,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TrashIcon />} label="TrashIcon" />
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
-    <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<TwitterIcon />} label="TwitterIcon" />
     <LabeledIcon icon={<TwitterBadgeIcon />} label="TwitterBadgeIcon" />
     <LabeledIcon icon={<UnlockIcon />} label="UnlockIcon" />
     <LabeledIcon icon={<UsdcIcon />} label="UsdcIcon" />

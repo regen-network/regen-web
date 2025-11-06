@@ -1,12 +1,13 @@
+import Image from 'next/image';
+
 import RegenIcon from 'web-components/src/components/icons/RegenIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 
+import terrasosFooterLogo from '../../../../public/svg/logos/terrasosFooterLogo.svg';
 import { TERRASOS_BASE_PATHNAME } from '../TerrasosHeader/TerrasosHeader.constants';
 import { TerrasosColumnItem, TerrasosSocialItem } from './Terrasos.types';
-
-import terrasosFooterLogo from 'assets/svgs/logos/terrasosFooterLogo.svg';
 
 export interface Props {
   poweredBy: string;
@@ -38,7 +39,7 @@ export const TerrasosFooter = ({
         <div className="flex flex-col items-center self-stretch md:items-start md:justify-center md:flex-row md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full md:mx-auto">
           <div className="max-w-[300px] md:max-w-none md:w-[40%] md:pl-[12px]">
             <div className="flex flex-col items-center md:items-start gap-30 md:pr-[10%]">
-              <img
+              <Image
                 src={terrasosFooterLogo}
                 alt={logoAlt}
                 className="w-[226px]"
@@ -106,7 +107,9 @@ export const TerrasosFooter = ({
                         {item.subLinks && (
                           <div className="flex flex-col items-center md:items-start">
                             {item.subLinks.map(subLink => (
-                              <Link href={subLink.href}>{subLink.label}</Link>
+                              <Link key={subLink.label} href={subLink.href}>
+                                {subLink.label}
+                              </Link>
                             ))}
                           </div>
                         )}

@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
+import { useOrganizationProgress } from 'legacy-pages/CreateOrganization/hooks/useOrganizationProgress';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import type { AccountByIdQuery } from 'generated/graphql';
 import type { Wallet } from 'lib/wallet/wallet';
 
-import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { getAddress } from '../RegistryLayout.utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 type UseOrganizationMenuProfileParams = {
   activeAccount: AccountByIdQuery['accountById'];

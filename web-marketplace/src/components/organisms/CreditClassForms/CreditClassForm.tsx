@@ -1,5 +1,6 @@
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { Field, FieldArray, Form, useFormikContext } from 'formik';
 
@@ -83,7 +84,7 @@ export const CreditClassForm = (props: {
                 }}
                 sx={{ float: 'right', mt: [5.5] }}
               >
-                <Trans>+ add another issuer'</Trans>
+                <Trans>+ add another issuer</Trans>
               </TextButton>
             </Box>
           )}

@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { Controller, useForm, useFormState } from 'react-hook-form';
+import { MIGRATE_PROJECTS_FORM_ID } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
+import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 
 import { SelectProjectCard } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard';
 
-import { MIGRATE_PROJECTS_FORM_ID } from 'pages/CreateOrganization/CreateOrganization.constants';
-
 import { FormValues, MigrateProjectsProps } from './MigrateProjects.types';
-import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
 
 export const MigrateProjects = ({
   projects,

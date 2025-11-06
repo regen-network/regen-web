@@ -1,7 +1,8 @@
 import { Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Grid } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
@@ -152,7 +153,7 @@ export const BottomCreditRetireFields: React.FC<
               optional
               emptyOptionText={_(EMPTY_OPTION_TEXT)}
               label={_(STATE_LABEL)}
-              country={country}
+              country={country as string}
               key={fieldId}
               error={!!errors?.retireFields?.[fieldIndex]?.stateProvince}
               helperText={

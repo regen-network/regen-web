@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
@@ -19,6 +18,9 @@ import {
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { Link as AppLink } from 'components/atoms';
+
+import defaultProject from '../../../public/jpg/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
 
 type Props = {
@@ -76,8 +78,8 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = import.meta.env.VITE_API_URI;
+  const imageStorageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.NEXT_PUBLIC_API_URI;
   const { track } = useTracker();
   const location = useLocation();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
@@ -100,19 +102,21 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       name={project.metadata?.['schema:name']}
       imgSrc={
         project.metadata?.['regen:previewPhoto']?.['schema:url'] ||
-        '/jpg/default-project.jpg'
+        defaultProject.src
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       place={project.metadata?.['schema:location']?.place_name}
       area={project.metadata?.['regen:projectSize']?.['qudt:numericValue']}
       areaUnit={getAreaUnit(
+        _,
         project.metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit,
         project.metadata?.['regen:projectSize']?.['qudt:numericValue'],
       )}
       track={track}
       pathname={location.pathname}
       draftText={_(DRAFT_TEXT)}
+      LinkComponent={AppLink}
     />
   );
 
@@ -122,13 +126,13 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
         const projectId = project?.onChainId || project?.slug;
         return (
           project && (
-            <Link
+            <AppLink
               className={styles.swipeItem}
               key={projectId || i}
               href={`/project/${projectId}`}
             >
               <LinkedProject project={project} />
-            </Link>
+            </AppLink>
           )
         );
       })}
@@ -150,12 +154,12 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
               key={projectId || i}
               className={styles.item}
             >
-              <Link
+              <AppLink
                 className={styles.projectCard}
                 href={`/project/${projectId}`}
               >
                 <LinkedProject project={project} />
-              </Link>
+              </AppLink>
             </Grid>
           )
         );

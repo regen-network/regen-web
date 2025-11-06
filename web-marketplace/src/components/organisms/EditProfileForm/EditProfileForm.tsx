@@ -1,17 +1,17 @@
 import React, {
-  forwardRef,
   MutableRefObject,
   useCallback,
   useEffect,
-  useImperativeHandle,
   useMemo,
 } from 'react';
-import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/macro';
+import { useFormState, useWatch } from 'react-hook-form';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
+import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
@@ -55,8 +55,6 @@ import {
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
 import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
-import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
-import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
 
 export interface EditProfileFormProps extends Partial<FormStateSetter> {
   initialValues?: EditProfileFormSchemaType;
@@ -94,9 +92,9 @@ const EditProfileForm = ({
   const formSchema = useMemo(
     () =>
       hideProfileType
-        ? createEditProfileFormSchema({ requireProfileType: false })
-        : createEditProfileFormSchema({ requireProfileType: true }),
-    [hideProfileType],
+        ? createEditProfileFormSchema({ requireProfileType: false, _ })
+        : createEditProfileFormSchema({ requireProfileType: true, _ }),
+    [hideProfileType, _],
   );
   const form = useZodForm({
     schema: formSchema,
@@ -276,9 +274,7 @@ const EditProfileForm = ({
           label: { width: '100%' },
           button: { width: '100%' },
         }}
-        fixedCrop={{
-          aspect: PROFILE_BG_ASPECT_RATIO,
-        }}
+        aspect={PROFILE_BG_ASPECT_RATIO}
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}
@@ -330,10 +326,7 @@ const EditProfileForm = ({
           helperText={errors?.twitterLink?.message}
           error={!!errors?.twitterLink}
           startAdornment={
-            <TwitterIcon
-              color="currentColor"
-              className="ml-[9px] mr-[8px] text-grey-300"
-            />
+            <TwitterIcon className="ml-[9px] mr-[8px] text-grey-300" />
           }
           sx={{
             mt: { xs: 0, sm: 0 },

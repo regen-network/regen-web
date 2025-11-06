@@ -13,11 +13,11 @@ export default {
 
 type Story = StoryObj<typeof PaymentInfoForm>;
 
-const stripeKey = import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
+const stripeKey = process.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
 
 const WrappedPaymentInfoForm = (args: PaymentInfoFormProps) => {
   const options = { amount: 1000, currency: 'usd', ...defaultStripeOptions };
-  const stripePromise = loadStripe(stripeKey);
+  const stripePromise = loadStripe(stripeKey || '');
 
   return (
     <Elements options={options} stripe={stripePromise}>
@@ -102,6 +102,7 @@ FiatLoggedInWithPaymentMethod.args = {
         fingerprint: 's7WT4PQ6SDYGr9R2',
         funding: 'credit',
         last4: '4242',
+        networks: null,
         three_d_secure_usage: { supported: true },
         wallet: null,
       },

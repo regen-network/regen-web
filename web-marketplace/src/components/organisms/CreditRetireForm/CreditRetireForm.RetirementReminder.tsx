@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { SxProps } from '@mui/material';
 
 import { Body } from 'web-components/src/components/typography';

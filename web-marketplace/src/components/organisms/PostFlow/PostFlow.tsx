@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
@@ -20,6 +20,7 @@ import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
   DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
 } from 'lib/constants/shared.constants';
 import { apiServerUrl } from 'lib/env';
@@ -30,7 +31,6 @@ import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getP
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { DISCARD_CHANGES_BUTTON } from '../../../lib/constants/shared.constants';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
 import PostForm from '../PostForm';
@@ -53,7 +53,6 @@ type Props = {
   projectSlug?: string | null;
   offChainProjectId?: string;
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
-  scrollIntoDataStream?: () => void;
   disableScrollLock?: boolean;
 };
 
@@ -66,7 +65,6 @@ export const PostFlow = ({
   projectSlug,
   offChainProjectId: _offChainProjectId,
   setDraftPost,
-  scrollIntoDataStream,
   disableScrollLock = false,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -90,7 +88,7 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -202,12 +200,11 @@ export const PostFlow = ({
           setDraftPost(undefined);
         }
         onModalClose();
-        navigate(
+        router.push(
           `/project/${
             projectSlug ?? offChainProjectId ?? projectId
           }#data-stream`,
         );
-        scrollIntoDataStream && scrollIntoDataStream();
       }
     }
   }, [
@@ -219,12 +216,11 @@ export const PostFlow = ({
     initialValues?.iri,
     iri,
     isFetching,
-    navigate,
+    router,
     offChainProjectId,
     onModalClose,
     projectId,
     projectSlug,
-    scrollIntoDataStream,
     setBannerText,
     setDraftPost,
     setProcessingModalAtom,

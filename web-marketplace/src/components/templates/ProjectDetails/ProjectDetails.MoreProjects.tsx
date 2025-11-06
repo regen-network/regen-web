@@ -1,5 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import cx from 'classnames';
@@ -13,7 +13,7 @@ import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import useMoreProjects from './hooks/useMoreProjects';
 
-type Props = { skippedProjectId: string; projectAdmin?: Account };
+type Props = { skippedProjectId: string; projectAdmin: Account };
 
 export function MoreProjects({
   skippedProjectId,

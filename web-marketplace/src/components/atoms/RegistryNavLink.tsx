@@ -1,4 +1,5 @@
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 import {
   NavLinkProps,
@@ -13,8 +14,8 @@ import { Link } from './Link';
  */
 export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
   ({ children, href, overrideClassname, className, disabled }) => {
-    const isActive =
-      window && window.location && window.location.pathname === href;
+    const pathname = usePathname();
+    const isActive = pathname === href;
     const { classes } = useNavLinkStyles({ isActive: !!isActive, disabled });
 
     const handleDisabledButtonClick = (

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
@@ -15,7 +19,7 @@ import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getB
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { useAddDataToBatches } from './useAddDataToBatches';
 
 export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
@@ -74,7 +78,7 @@ export const useFetchPaginatedBatches = ({
       request: {
         pagination: paginationRequest,
       },
-      keepPreviousData: true,
+      placeholderData: keepPreviousData,
       enabled: !!queryClient && !projectId && !address && !creditClassId,
     }),
   );
@@ -87,7 +91,7 @@ export const useFetchPaginatedBatches = ({
         pagination: paginationRequest,
         issuer: address as string,
       },
-      keepPreviousData: true,
+      placeholderData: keepPreviousData,
       enabled: !!queryClient && !!address,
     }),
   );
@@ -100,7 +104,7 @@ export const useFetchPaginatedBatches = ({
         pagination: paginationRequest,
         projectId: projectId as string,
       },
-      keepPreviousData: true,
+      placeholderData: keepPreviousData,
       enabled: !!queryClient && !!projectId,
     }),
   );
@@ -113,7 +117,7 @@ export const useFetchPaginatedBatches = ({
         pagination: paginationRequest,
         classId: creditClassId as string,
       },
-      keepPreviousData: true,
+      placeholderData: keepPreviousData,
       enabled: !!queryClient && !!creditClassId,
     }),
   );

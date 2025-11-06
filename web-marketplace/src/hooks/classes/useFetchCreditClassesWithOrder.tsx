@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 
 import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeCreditClassesWithOrders } from 'lib/normalizers/creditClass/normalizeCreditClassesWithOrders/normalizeCreditClassesWithOrders';
 import { getClassesByAdminQuery } from 'lib/queries/react-query/ecocredit/getClassesByAdminQuery/getClassesByAdminQuery';

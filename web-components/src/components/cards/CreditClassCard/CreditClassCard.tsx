@@ -77,7 +77,6 @@ const CreditClassCard = ({
               zIndex: 1,
               py: { xs: 1, sm: 1.5 },
             }}
-            sxIcon={{ with: 20, height: 20 }}
           />
         )}
         <Box className={classes.image}>
@@ -91,6 +90,7 @@ const CreditClassCard = ({
           <Subtitle
             size="xs"
             color="info.main"
+            component="div"
             sx={{
               fontWeight: 800,
               mb: 3,
@@ -111,13 +111,14 @@ const CreditClassCard = ({
             {parseText(title)}
           </Title>
           <Body
+            component="div"
             size="sm"
             mobileSize="xs"
             sx={{
               mb: 5,
               display: '-webkit-box',
-              '-webkit-line-clamp': '3',
-              '-webkit-box-orient': 'vertical',
+              WebkitLineClamp: '3',
+              WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
             }}
           >

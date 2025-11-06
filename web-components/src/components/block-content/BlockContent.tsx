@@ -38,11 +38,18 @@ const CustomBlockContent: React.FC<
           );
         }
         return blank ? (
-          <a href={href} target="_blank" rel="noreferrer noopener">
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-sc-text-link"
+          >
             {children}
           </a>
         ) : (
-          <a href={href}>{children}</a>
+          <a href={href} className="text-sc-text-link">
+            {children}
+          </a>
         );
       },
       underline: (props: any) => (

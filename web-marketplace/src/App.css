@@ -1,9 +1,5 @@
-.project-top {
-  background-image: url(./assets/background3.jpg);
-}
-
 .topo-background {
-  background-image: url(./assets/home/topographic-light.svg);
+  background-image: url(../public/svg/topographic-light.svg);
   background-size: auto;
   background-repeat: repeat;
   background-position: center;
@@ -13,12 +9,12 @@
 
 @media (prefers-color-scheme: dark) {
   .topo-background.dark {
-    background-image: url(./assets/home/topographic-dark.jpg);
+    background-image: url(../public/jpg/topographic-dark.jpg);
   }
 }
 
 .topo-background-alternate:nth-of-type(odd) {
-  background-image: url(./assets/home/topographic-light.svg);
+  background-image: url(../public/svg/topographic-light.svg);
   background-size: auto;
   background-repeat: repeat;
   background-position: center;
@@ -28,14 +24,14 @@
 
 @media (prefers-color-scheme: dark) {
   .topo-background-alternate.dark:nth-of-type(odd) {
-    background-image: url(./assets/home/topographic-dark.jpg);
+    background-image: url(../public/jpg/topographic-dark.jpg);
   }
 }
 
 @media print {
   body {
     -webkit-print-color-adjust: exact !important;
-    color-adjust: exact !important;
+    print-color-adjust: exact !important;
     zoom: 245%; /* printing certificate on chrome */
   }
 }
@@ -48,9 +44,4 @@
   margin-bottom: 0px;
   margin: 0;
   -webkit-print-color-adjust: exact;
-}
-
-body {
-  font-family: 'Lato', -apple-system, sans-serif;
-  background-color: #ffffff;
 }

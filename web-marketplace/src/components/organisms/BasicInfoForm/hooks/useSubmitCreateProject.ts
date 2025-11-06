@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 
 import { ProjectInput, useCreateProjectMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getProjectCreateBaseData } from 'lib/rdf';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
 import {
   BasicInfoFormDraftSchemaType,
   BasicInfoFormSchemaType,
@@ -50,6 +50,7 @@ export const useSubmitCreateProject = () => {
       if (projectId) {
         await reactQueryClient.invalidateQueries({
           queryKey: getAccountProjectsByIdQueryKey({ id: activeAccountId }),
+          refetchType: 'all',
         });
         if (shouldNavigate) navigate(`/project-pages/${projectId}/location`);
       }

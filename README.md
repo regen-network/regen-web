@@ -69,7 +69,7 @@ Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders
 To run the marketplace app:
 
 ```sh
-bun run start
+bun run dev
 ```
 
 To run Storybook:
@@ -88,7 +88,7 @@ cd web-www && bun run dev
 
 ### Marketplace
 
-Compile `web-marketplace` to `web-marketplace/build` respectively:
+Compile `web-marketplace` to `web-marketplace/.next` respectively:
 
 ```sh
 bun run build
@@ -273,7 +273,7 @@ Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
   - If the constant is an object:
 ```
 import { i18n } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 const myObject = {
   myKey: i18n._(msg`MyValue`)
@@ -397,3 +397,5 @@ Then you will be able to run any commands, i.e. the build:
 ```sh
 /opt/build-bin/build bun run build
 ```
+
+**Note:** In some instances we had experienced issues when buiding the Next.js app in Netlify because the CI build produces a serverless function that in some cases exceeds the 250 MB limit, even though the local build does not. For detailed debugging instructions, please refer to the [netlify-plugin-upload-function-bundle README](./web-marketplace/scripts/netlify-plugin-upload-function-bundle/README.md).

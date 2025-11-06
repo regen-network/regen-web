@@ -66,24 +66,24 @@ export default function NumberTextField({
           <Grid
             item
             className={classes.arrow}
-            onClick={(): void =>
-              setFieldValue(
+            onClick={(): void => {
+              void setFieldValue(
                 name,
                 max ? Math.min(max, value + increment) : value + increment,
-              )
-            }
+              );
+            }}
           >
             <SpinIcon />
           </Grid>
           <Grid
             item
             className={classes.arrow}
-            onClick={(): void =>
-              setFieldValue(
+            onClick={(): void => {
+              void setFieldValue(
                 name,
                 min ? Math.max(min, value - increment) : value - increment,
-              )
-            }
+              );
+            }}
           >
             <SpinIcon direction="down" />
           </Grid>

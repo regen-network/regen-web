@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { MsgBridge } from '@regen-network/api/regen/ecocredit/v1/tx';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
@@ -11,7 +11,7 @@ import { BridgedEcocredits } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { normalizeBridgedEcocredits } from 'lib/normalizers/bridge/normalizeBridgedEcocredits';
 import { getBridgeTxStatusQuery } from 'lib/queries/react-query/bridge/getBridgeTxStatusQuery/getBridgeTxStatusQuery';
@@ -99,7 +99,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       getBridgeTxStatusQuery({
         request: { txHash: tx.txResponse.txhash },
         enabled: isQueryEnabled({ page, queryIndex: index, rowsPerPage }),
-        keepPreviousData: true,
+        placeholderData: keepPreviousData,
         refetchInterval:
           statusToRefetchRef.current[index] ||
           isTimestampBelowDuration({

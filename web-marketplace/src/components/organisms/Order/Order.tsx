@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { CardContent, CardHeader, useTheme } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -101,6 +102,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                   src={project.imgSrc}
                   imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                   apiServerUrl={API_URI}
+                  alt={project.name}
                 />
               </Link>
             </div>
@@ -158,6 +160,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                   area={project.area}
                   iconClassName="mr-5 text-brand-400"
                   areaUnit={getAreaUnit(
+                    _,
                     project.areaUnit as qudtUnit | undefined,
                     project.area,
                   )}

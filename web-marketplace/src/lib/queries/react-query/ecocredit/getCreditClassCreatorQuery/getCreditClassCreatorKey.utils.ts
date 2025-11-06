@@ -1,4 +1,4 @@
 export const getCreditClassCreatorKey = (address?: string): string[] => [
-  'CreditClassCreator',
+  'creditClassCreator',
   address ?? '',
 ];

@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 

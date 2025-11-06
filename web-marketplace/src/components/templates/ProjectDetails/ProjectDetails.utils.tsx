@@ -1,14 +1,17 @@
 import { MouseEvent } from 'react';
 import { i18n } from '@lingui/core';
-import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
-import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import PhoneIcon from 'web-components/src/components/icons/PhoneIcon';
-import StaticMap from 'web-components/src/components/map/StaticMap';
 import { Props as ActionCardProps } from 'web-components/src/components/molecules/ActionCard/ActionCard';
 import { GalleryItem } from 'web-components/src/components/organisms/Gallery/Gallery.types';
-import { Asset } from 'web-components/src/components/sliders/ProjectMedia';
 import { Account } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
@@ -34,20 +37,6 @@ import {
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
-
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-
-import {
-  API_URI,
-  IMAGE_STORAGE_BASE_URL,
-  MAPBOX_TOKEN,
-} from './ProjectDetails.config';
 
 type FindSanityCreditClassParams = {
   sanityCreditClassData: AllCreditClassQuery | undefined;
@@ -107,61 +96,6 @@ export const parseOffChainProject = (
     creditClass,
     creditClassVersion,
     creditClassName,
-  };
-};
-
-type ParseMediaParams = {
-  offChainProjectMetadata?: Pick<
-    ProjectPageMetadataLD,
-    'regen:galleryPhotos' | 'regen:previewPhoto' | 'schema:creditText'
-  >;
-  onChainProjectMetadata?: AnchoredProjectMetadataBaseLD;
-  geojson: any;
-  geocodingJurisdictionData?: MapiResponse<GeocodeResponse> | null;
-};
-
-type ParseMediaReturn = {
-  assets: Asset[];
-  imageStorageBaseUrl?: string;
-  apiServerUrl?: string;
-  imageCredits?: string;
-};
-
-export const parseMedia = ({
-  offChainProjectMetadata,
-  onChainProjectMetadata,
-  geojson,
-  geocodingJurisdictionData,
-}: ParseMediaParams): ParseMediaReturn => {
-  let assets: Asset[] = [];
-
-  const previewPhotoUrl =
-    offChainProjectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
-    onChainProjectMetadata?.['regen:previewPhoto']?.['schema:url'];
-  const previewPhotoCredit =
-    offChainProjectMetadata?.['regen:previewPhoto']?.['schema:creditText'] ||
-    onChainProjectMetadata?.['regen:previewPhoto']?.['schema:creditText'];
-
-  const jurisdictionFallback = geocodingJurisdictionData?.body.features?.[0];
-
-  if (previewPhotoUrl) {
-    assets.push({ src: previewPhotoUrl, type: 'image' });
-  }
-
-  if (geojson || jurisdictionFallback) {
-    assets.push(
-      <StaticMap
-        geojson={geojson ?? jurisdictionFallback}
-        mapboxToken={MAPBOX_TOKEN}
-      />,
-    );
-  }
-
-  return {
-    assets: assets ?? [],
-    imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
-    apiServerUrl: API_URI,
-    imageCredits: previewPhotoCredit,
   };
 };
 

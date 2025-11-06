@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/src/components/header';
@@ -20,16 +20,12 @@ export const getMenuItems = (
           href: '/projects/1',
           label: _(msg`All projects`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../pages/Projects/AllProjects'),
         },
         {
           pathname,
           href: '/projects/prefinance',
           label: _(msg`Prefinance projects`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../pages/Projects/PrefinanceProjects'),
         },
       ]
     : undefined;
@@ -48,15 +44,12 @@ export const getMenuItems = (
           href: '/stats/activity',
           label: _(msg`Activity`),
           linkComponent: Link,
-          importCallback: (): Promise<any> => import('../../../pages/Activity'),
         },
         {
           pathname,
           href: '/ecocredit-batches/1',
           label: _(msg`Ecocredit batches`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../pages/EcocreditBatches'),
         },
       ],
     },

@@ -1,8 +1,8 @@
-const { plugin } = require('@graphql-codegen/introspection');
 const baseConfig = require('../.eslintrc');
 
 module.exports = {
   ...baseConfig,
+  extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
   ignorePatterns: ['src/generated/*.tsx'],
   overrides: [
     ...baseConfig.overrides,
@@ -36,6 +36,30 @@ module.exports = {
             ],
           },
         ],
+      },
+    },
+    // Disallow next/link everywhere in src
+    {
+      files: ['src/**/*.{ts,tsx}'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              {
+                name: 'next/link',
+                message: 'Use components/atoms/Link instead of next/link.',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    // Allow next/link only inside Link component
+    {
+      files: ['src/components/atoms/Link.tsx'],
+      rules: {
+        'no-restricted-imports': 'off',
       },
     },
   ],

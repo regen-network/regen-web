@@ -5,8 +5,7 @@ import {
   REGEN_DENOM,
   USDC_DENOM,
 } from 'config/allowedBaseDenoms';
-
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 export const cryptoSellOrders = [
   {

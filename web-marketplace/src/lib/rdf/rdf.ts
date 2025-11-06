@@ -1,4 +1,4 @@
-import { plural } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
@@ -10,11 +10,11 @@ import {
   ProjectMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   ANCHORED_PROJECT_CONTEXT,
   DEFAULT_PROJECT_CONTEXT,
-  QUDT_UNIT_MAP,
   UNANCHORED_PROJECT_CONTEXT,
   UNANCHORED_PROJECT_KEYS,
 } from './rdf.constants';
@@ -28,7 +28,7 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
       stream.push(null);
     },
   });
-  const parser = new Parser({ factory });
+  const parser = new Parser({ factory: factory as any });
   return factory.dataset().import(parser.import(stream));
 }
 
@@ -41,7 +41,10 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string) {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));
   const data = await loadDataset(JSON.stringify(dataJSON));
   const result = await import('./rdf-lib').then(async ({ SHACLValidator }) => {
-    const validator = new SHACLValidator(shapes, { factory, group });
+    const validator = new SHACLValidator(shapes, {
+      factory: factory as any,
+      group,
+    });
     const report = await validator.validate(data);
     return report;
   });
@@ -100,19 +103,27 @@ export function getProjectBaseData(
 
 export type qudtUnit = 'unit:HA' | 'unit:AC';
 
-export const getAreaUnit = (value?: qudtUnit, area?: number): string => {
+export const getAreaUnit = (
+  _: TranslatorType,
+  value?: qudtUnit,
+  area?: number,
+): string => {
   if (!value || !area) return '';
   if (value === 'unit:HA') {
-    return plural(area, {
-      one: 'hectare',
-      other: 'hectares',
-    });
+    return _(
+      msg`${plural(area, {
+        one: 'hectare',
+        other: 'hectares',
+      })}`,
+    );
   }
   if (value === 'unit:AC') {
-    return plural(area, {
-      one: 'acre',
-      other: 'acres',
-    });
+    return _(
+      msg`${plural(area, {
+        one: 'acre',
+        other: 'acres',
+      })}`,
+    );
   }
   return value;
 };

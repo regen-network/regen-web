@@ -71,6 +71,7 @@ export const HeaderDropdownItem: React.FC<
         </div>
       )}
       {props.pathname &&
+        props?.href &&
         (props.disabled ? (
           <InfoTooltip title={props.disabledTooltipText} arrow>
             <div>

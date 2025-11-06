@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
@@ -12,9 +12,8 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { MetaDetail } from 'components/molecules';
 
+import ComplianceMarketIcon from '../../../../../public/svg/checkmarkList.svg';
 import { InfoTemplate } from './TerrasosCreditsInfo.InfoTemplate';
-
-import ComplianceMarketIcon from 'assets/svgs/checkmarkList.svg';
 
 type Props = {
   learnMoreLink: LinkType;

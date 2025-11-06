@@ -1,4 +1,6 @@
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import HamburgerIcon from 'web-components/src/components/icons/HamburgerIcon';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
@@ -6,8 +8,6 @@ import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AccountType } from 'generated/graphql';
-
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import { UNNAMED } from './DashboardNavigation.constants';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
@@ -48,7 +48,7 @@ export const DashboardNavigationMobileHeader = ({
         type="button"
         onClick={onMenuClick}
         className="md:hidden z-50 border-none bg-bc-neutral-0 pt-5"
-        aria-label="Open menu"
+        aria-label={_(msg`Open menu`)}
       >
         <HamburgerIcon className="w-[29px] h-[22px] cursor-pointer" />
       </button>

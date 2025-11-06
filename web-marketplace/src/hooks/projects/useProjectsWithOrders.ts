@@ -3,12 +3,24 @@ import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { UNREGISTERED_PATH } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import {
+  sortPinnedProject,
+  sortProjects,
+} from 'legacy-pages/Projects/AllProjects/utils/sortProjects';
+import { useOffChainProjects } from 'legacy-pages/Projects/hooks/useOffChainProjects';
+import { ProjectsSellOrders } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.types';
+import {
+  CREDIT_CARD_BUYING_OPTION_ID,
+  CRYPTO_BUYING_OPTION_ID,
+} from 'legacy-pages/Projects/Projects.constants';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {
@@ -29,18 +41,6 @@ import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAll
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
-import {
-  sortPinnedProject,
-  sortProjects,
-} from 'pages/Projects/AllProjects/utils/sortProjects';
-import { useOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
-import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
-import {
-  CREDIT_CARD_BUYING_OPTION_ID,
-  CRYPTO_BUYING_OPTION_ID,
-} from 'pages/Projects/Projects.constants';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
@@ -202,7 +202,6 @@ export function useProjectsWithOrders({
       sanityProjectsData,
       adminId,
       limitOffChainProjects,
-      random,
       skippedProjectId,
     });
   const onlyOffChainProjects = allOffChainProjects.filter(

@@ -1,3 +1,5 @@
+import { keepPreviousData } from '@tanstack/react-query';
+
 import { queryBatches } from 'lib/ecocredit/api';
 
 import {
@@ -19,6 +21,6 @@ export const getBatchesQuery = ({
     if (!client) return;
     return await queryBatches({ client, request });
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { RadioCardItem } from 'web-components/src/components/atoms/RadioCard/RadioCard.types';
 import OrganizationIcon from 'web-components/src/components/icons/OrganizationIcon';
@@ -31,3 +31,4 @@ export const WEBSITE_PLACEHOLDER = 'https://yourwebsite.com';
 export const TWITTER_PLACEHOLDER = 'https://twitter.com/yourtwitterhandle';
 export const PROFILE_AVATAR_FILE_NAME = 'avatar';
 export const PROFILE_BG_FILE_NAME = 'bg';
+export const REQUIRED = msg`Required`;

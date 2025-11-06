@@ -12,43 +12,56 @@ import {
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
+import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
 import { safeLazy } from 'utils/safeLazy';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
-import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
-const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
-const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
-const Project = safeLazy(() => import('../../pages/Project'));
-const Projects = safeLazy(() => import('../../pages/Projects'));
+const AllProjects = safeLazy(
+  () => import('../../legacy-pages/Projects/AllProjects'),
+);
+const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
+const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
 };
 
-export const TerrasosRoutes = ({
+export default function TerrasosRoutes({
   reactQueryClient,
   apolloClientFactory,
-}: RouterProps) => {
+}: RouterProps): JSX.Element {
+  // Sets React Router’s basename to the current locale (e.g., /en, /es)
+  // so all legacy React Router paths (/, /projects, etc.) resolve under /{lang}.
+  // TODO: Remove `basename` when the legacy React Router is fully migrated
+  // to Next’s App Router and no React Router routes remain.
+  const basename =
+    typeof window !== 'undefined'
+      ? (() => {
+          const segment = window.location.pathname.split('/')[1];
+          return segment === 'en' || segment === 'es' ? `/${segment}` : '';
+        })()
+      : '';
   return (
     <RouterProvider
       router={getRouter({
         reactQueryClient,
         apolloClientFactory,
+        basename,
       })}
       fallbackElement={<PageLoader />}
     />
   );
-};
+}
 
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
+  basename?: string;
 };
 
 export const getTerrasosRoutes = ({
@@ -75,14 +88,6 @@ export const getTerrasosRoutes = ({
             })}
           />
         </Route>
-        <Route
-          path="project/:projectId"
-          element={<Project />}
-          loader={projectDetailsLoader({
-            queryClient: reactQueryClient,
-            apolloClientFactory,
-          })}
-        />
       </Route>
     </Route>,
   );
@@ -91,13 +96,14 @@ export const getTerrasosRoutes = ({
 export const getRouter = ({
   reactQueryClient,
   apolloClientFactory,
+  basename = '',
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
     getTerrasosRoutes({ reactQueryClient, apolloClientFactory }),
     {
-      basename: import.meta.env.PUBLIC_URL,
+      basename,
     },
   );
 };

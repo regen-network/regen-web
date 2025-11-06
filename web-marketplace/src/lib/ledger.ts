@@ -1,7 +1,7 @@
 import { apiUri } from './apiUri';
 
-export const chainId = import.meta.env.VITE_LEDGER_CHAIN_ID;
-export const isBridgeEnabled = import.meta.env.VITE_BRIDGE === 'true';
+export const chainId = process.env.NEXT_PUBLIC_LEDGER_CHAIN_ID;
+export const isBridgeEnabled = process.env.NEXT_PUBLIC_BRIDGE === 'true';
 
 const uriBase = `${apiUri}/`;
 

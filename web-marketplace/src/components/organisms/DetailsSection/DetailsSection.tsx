@@ -7,12 +7,13 @@ import { CredibilityCard } from 'web-components/src/components/cards/Credibility
 import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Body, Label, Title } from 'web-components/src/components/typography';
-import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';
 
 import { Link } from 'components/atoms';
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 
 import { DetailsSectionButton } from './DetailsSection.Button';
 import {
@@ -66,6 +67,7 @@ export const DetailsSection: React.FC<
                     {header.title}
                   </Title>
                   <Body
+                    component="div"
                     size="lg"
                     mobileSize="md"
                     className={cn(
@@ -120,7 +122,7 @@ export const DetailsSection: React.FC<
                         wrap="nowrap"
                       >
                         <DetailsSectionCredit
-                          src={credit.creditImage}
+                          image={credit.creditImage}
                           label={_(CREDIT)}
                         />
                         <Grid
@@ -130,7 +132,7 @@ export const DetailsSection: React.FC<
                           =
                         </Grid>
                         <DetailsSectionCredit
-                          src={credit.creditTypeImage}
+                          image={credit.creditTypeImage}
                           label={credit.creditTypeUnit}
                           learnMore={credit.creditTypeUnitDefinition}
                         />
@@ -155,10 +157,11 @@ export const DetailsSection: React.FC<
               className={`${projectId ? 'md:-mt-[90px]' : ''} pt-0`}
               items={credibilityCards.map((card, index) => (
                 <CredibilityCard
+                  key={`credibility-card-${index}`}
                   index={index}
                   title={card?.credibilityCard?.title as string}
                   descriptionRaw={card?.credibilityCard?.descriptionRaw}
-                  icon={card?.credibilityCard?.icon?.asset?.url}
+                  icon={<SanityNextImage image={card?.credibilityCard?.icon} />}
                   claims={
                     card?.claims?.map(claim => ({
                       description: claim?.description as string,

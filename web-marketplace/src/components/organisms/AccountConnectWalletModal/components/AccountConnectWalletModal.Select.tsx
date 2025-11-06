@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/system';
 
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { WalletGuideLearnMore } from 'components/molecules/WalletGuideLearnMore';
+import { LoginProvider } from 'components/organisms/LoginModal/LoginModal.types';
 
-import { LoginProvider } from '../AccountConnectWalletModal.types';
 import { LoginModalProviders } from './AccountConnectWalletModal.Providers';
 
 export interface Props {

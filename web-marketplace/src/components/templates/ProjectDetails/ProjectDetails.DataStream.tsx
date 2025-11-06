@@ -31,6 +31,7 @@ import { PostsQueryResponse } from 'lib/queries/react-query/registry-server/getP
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
+import { useHash } from 'hooks/useHash';
 
 import {
   CREATE_POST,
@@ -64,6 +65,7 @@ export const DataStream = ({
   const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
+  const hash = useHash();
 
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
@@ -74,9 +76,17 @@ export const DataStream = ({
       projectId: offChainProjectId,
       year: year && year !== years[0] ? year : undefined,
       languageCode: selectedLanguage,
-      getNextPageParam: lastPage => lastPage?.next,
     }),
   );
+
+  useEffect(() => {
+    if (hash && !isLoading) {
+      const element = document.getElementById(hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [hash, isLoading]);
 
   useEffect(() => {
     if (data?.pages?.[0]?.years) {
@@ -103,7 +113,7 @@ export const DataStream = ({
           >
             {isAdmin && adminDescription && projectLocation && (
               <div className="mt-15">
-                <Body className="mb-15 max-w-[683px]" size="lg">
+                <Body className="mb-15 max-w-[683px]" size="lg" component="div">
                   <BlockContent content={adminDescription} />
                 </Body>
                 <ContainedButton onClick={openCreatePostModal}>

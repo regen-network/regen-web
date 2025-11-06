@@ -9,6 +9,7 @@ import { i18n } from '@lingui/core';
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 import 'web-components/src/theme/fonts.css';
 import '../../tailwind.css';
+import './fonts.css'
 
 window.Buffer = Buffer;
 

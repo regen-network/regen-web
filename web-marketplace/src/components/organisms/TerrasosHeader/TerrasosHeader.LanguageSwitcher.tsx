@@ -2,25 +2,28 @@
 import { useState } from 'react';
 import { ButtonBase, Menu, MenuItem } from '@mui/material';
 import { useAtom } from 'jotai';
+import Image from 'next/image';
 
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useChangeLocale } from 'lib/i18n/hooks/useChangeLocale';
 
-import enFlag from 'assets/svgs/flags/en.svg';
-import esFlag from 'assets/svgs/flags/es.svg';
+import enFlag from '../../../../public/svg/flags/en.svg';
+import esFlag from '../../../../public/svg/flags/es.svg';
 
 type Props = {
   className?: string;
 };
 
 export const LanguageSwitcher = ({ className }: Props) => {
-  const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const changeLocale = useChangeLocale();
   const open = Boolean(anchorEl);
   const isEnglish = selectedLanguage === 'en';
-  const flagUrl = isEnglish ? enFlag : esFlag;
+  const flagImg = isEnglish ? enFlag : esFlag;
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,12 +41,12 @@ export const LanguageSwitcher = ({ className }: Props) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         sx={{
-          fontFamily: 'Montserrat',
+          fontFamily: 'var(--font-montserrat)',
           fontWeight: '500',
         }}
       >
-        <img
-          src={flagUrl}
+        <Image
+          src={flagImg}
           alt={isEnglish ? 'English' : 'Español'}
           className="mt-5 mr-[6px] w-[25px] md:mt-0 md:w-fit"
         />
@@ -71,24 +74,24 @@ export const LanguageSwitcher = ({ className }: Props) => {
           <MenuItem
             onClick={() => {
               handleClose();
-              setSelectedLanguage('en');
+              changeLocale('en');
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={enFlag} alt="English" className="mr-[6px]" /> English
-            (Inglés)
+            <Image src={enFlag} alt="English" className="mr-[6px]" />
+            English (Inglés)
           </MenuItem>
         )}
         {isEnglish && (
           <MenuItem
             onClick={() => {
               handleClose();
-              setSelectedLanguage('es');
+              changeLocale('es');
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={esFlag} alt="Español" className="mr-[6px]" /> Español
-            (Spanish)
+            <Image src={esFlag} alt="Español" className="mr-[6px]" />
+            Español (Spanish)
           </MenuItem>
         )}
       </Menu>

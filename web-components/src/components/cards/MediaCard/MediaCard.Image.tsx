@@ -71,11 +71,10 @@ export const MediaCardImage = ({
     {draft && (
       <Body
         size="xs"
-        className="flex items-center absolute bottom-20 right-20 bg-grey-0 rounded-[50px] px-10 py-[6px] border border-solid border-grey-300"
+        className="text-grey-500 flex items-center absolute bottom-20 right-20 bg-grey-0 rounded-[50px] px-10 py-[6px] border border-solid border-grey-300"
       >
         <DraftDocumentIcon />
-        &nbsp;
-        {draftText}
+        <span className="pl-3">{draftText}</span>
       </Body>
     )}
     {children}

@@ -41,14 +41,7 @@ export const CreditClassCardItem = ({
       >
         {items?.map(({ name, icon }) => (
           <Flex key={name} component="li" sx={[...sxToArray(sxListItem)]}>
-            {icon && icon.src && (
-              <Box
-                component="img"
-                src={icon?.src}
-                alt={icon?.alt}
-                sx={{ mr: 2.5, width: 24, height: 24 }}
-              />
-            )}
+            {icon && <div className="flex mr-10">{icon}</div>}
             {name && typeof name == 'string' && <Body>{name}</Body>}
           </Flex>
         ))}

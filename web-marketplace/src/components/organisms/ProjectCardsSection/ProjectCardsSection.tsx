@@ -1,9 +1,16 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import {
+  COMPLIANCE_MARKET,
+  VOLUNTARY_MARKET,
+} from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import { TerrasosCredits } from 'legacy-pages/Projects/AllProjects/AllProjects.TerrasosCredits';
+import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
+import { useRouter } from 'next/navigation';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { CardsGridContainer } from 'web-components/src/components/organisms/CardsGridContainer/CardsGridContainer';
@@ -11,7 +18,7 @@ import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,
@@ -23,13 +30,6 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import {
-  COMPLIANCE_MARKET,
-  VOLUNTARY_MARKET,
-} from 'pages/Projects/AllProjects/AllProjects.constants';
-import { TerrasosCredits } from 'pages/Projects/AllProjects/AllProjects.TerrasosCredits';
-import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
@@ -69,7 +69,7 @@ export function ProjectCardsSection({
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
     sanitySoldOutProjects,
   });
-  const navigate = useNavigate();
+  const router = useRouter();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const purchaseDetailsTitles = useMemo(
     () => getProjectCardPurchaseDetailsTitleMapping(_),
@@ -114,7 +114,7 @@ export function ProjectCardsSection({
                 }
                 purchaseInfo={project.purchaseInfo}
                 href={href}
-                onClick={() => navigate(href)}
+                onClick={() => router.push(href)}
                 target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

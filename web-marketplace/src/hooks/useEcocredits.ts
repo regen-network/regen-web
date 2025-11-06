@@ -17,7 +17,7 @@ import { getEcocreditsQuery } from 'lib/queries/react-query/ecocredit/getEcocred
 import { getEcocreditsQueryKey } from 'lib/queries/react-query/ecocredit/getEcocreditsQuery/getEcocreditsQuery.utils';
 
 import { useLedger } from '../ledger';
-import { client as sanityClient } from '../lib/clients/sanity';
+import { client as sanityClient } from '../lib/clients/apolloSanity';
 import useQueryBalances from './useQueryBalances';
 
 const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {
@@ -154,20 +154,20 @@ export default function useEcocredits({
 
   const reloadBalances = async (): Promise<void> => {
     if (!address) return;
-    await reactQueryClient.invalidateQueries(
-      getBalancesQueryKey(
+    await reactQueryClient.invalidateQueries({
+      queryKey: getBalancesQueryKey(
         address,
         paginationParams?.offset ?? 0,
         paginationParams?.rowsPerPage ?? 0,
       ),
-    );
-    await reactQueryClient.invalidateQueries(
-      getEcocreditsQueryKey({
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: getEcocreditsQueryKey({
         address,
         paginationParams,
         creditClassId,
       }),
-    );
+    });
   };
 
   return {

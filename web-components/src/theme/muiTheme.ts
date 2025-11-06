@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable lingui/no-unlocalized-strings */
 import { createTheme } from '@mui/material/styles';
 
@@ -16,12 +17,8 @@ const defaultTheme = createTheme({
 
 export const { pxToRem } = defaultTheme.typography;
 
-export const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(
-  ',',
-);
-export const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(
-  ',',
-);
+export const headerFontFamily = 'var(--font-muli)';
+export const defaultFontFamily = 'var(--font-sans)';
 
 const headerDefaults = {
   fontWeight: 900,

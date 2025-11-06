@@ -1,7 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useSetAtom } from 'jotai';
+import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import {
+  BUYINGS_OPTIONS_FILTERS_PARAM,
+  CREDIT_CARD_BUYING_OPTION_ID,
+} from 'legacy-pages/Projects/Projects.constants';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -13,14 +19,10 @@ import {
 } from 'web-components/src/components/typography';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
-import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import {
-  BUYINGS_OPTIONS_FILTERS_PARAM,
-  CREDIT_CARD_BUYING_OPTION_ID,
-} from 'pages/Projects/Projects.constants';
 import { Link } from 'components/atoms';
 import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
+import keplrWallet from '../../../../public//svg/keplr-wallet.svg';
 import {
   CARD_BUTTON,
   CARD_SUBTITLE,
@@ -40,7 +42,7 @@ export const ChooseHowToPurchaseModal = ({
 }: ChooseHowToPurchaseModalProps) => {
   const { _ } = useLingui();
   const setBuyFromProjectIdAtom = useSetAtom(buyFromProjectIdAtom);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Modal open={open} onClose={onClose} className="!py-50 !px-20 sm:!px-30">
@@ -73,9 +75,8 @@ export const ChooseHowToPurchaseModal = ({
             size="small"
             onClick={() => {
               onClose();
-              navigate(
+              router.push(
                 `/projects/1?${BUYINGS_OPTIONS_FILTERS_PARAM}=${CREDIT_CARD_BUYING_OPTION_ID}`,
-                {},
               );
             }}
           >
@@ -83,7 +84,8 @@ export const ChooseHowToPurchaseModal = ({
           </OutlinedButton>
         </div>
         <div className="self-end -mt-50 md:mt-0 md:-ml-30">
-          <img src="/svg/keplr-wallet.svg" />
+          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+          <Image src={keplrWallet} alt="Keplr Wallet" />
         </div>
       </Card>
     </Modal>

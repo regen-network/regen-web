@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CREDITS_AMOUNT = 'creditsAmount';
 export const CURRENCY_AMOUNT = 'currencyAmount';

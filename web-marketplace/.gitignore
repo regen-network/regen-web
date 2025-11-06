@@ -23,3 +23,12 @@ yarn-debug.log*
 yarn-error.log*
 
 stats.html
+
+.next
+next-env.d.ts
+dist
+
+tsconfig.tsbuildinfo
+
+# generated client CSS
+/src/generated/client-tailwind.css

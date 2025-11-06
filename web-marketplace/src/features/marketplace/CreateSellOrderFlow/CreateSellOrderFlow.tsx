@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
+import useCreateSellOrderSubmit from 'legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
+import { CREATE_SELL_ORDER_TITLE } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants';
+import {
+  getAvailableAmountByBatch,
+  getDenomAllowedOptions,
+} from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
+import { useRouter } from 'next/navigation';
 
 import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
@@ -31,9 +37,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
-import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
-import { getAvailableAmountByBatch } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { useMsgClient } from 'hooks';
@@ -83,7 +86,7 @@ export const CreateSellOrderFlow = ({
 
   // Services access
   const { isConnected } = useWallet();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const closeCreateModal = (): void => {
     setIsCreateSellOrderOpen(false);
@@ -122,7 +125,7 @@ export const CreateSellOrderFlow = ({
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
     if (redirectOnSuccess) {
-      navigate('/dashboard/portfolio');
+      router.push('/dashboard/portfolio');
     } else {
       handleTxModalClose();
     }

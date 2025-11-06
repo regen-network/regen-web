@@ -1,0 +1,64 @@
+'use client';
+
+import { useCallback, useEffect, useRef } from 'react';
+import { useLingui } from '@lingui/react';
+import { useAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
+
+import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
+
+import { txSuccessfulModalAtom } from 'lib/atoms/modals.atoms';
+import { getHashUrl } from 'lib/block-explorer';
+import {
+  BLOCKCHAIN_RECORD,
+  SEE_LESS,
+  SEE_MORE,
+  TX_MODAL_TITLE,
+  TX_SUCCESSFUL_MODAL_TITLE,
+} from 'lib/constants/shared.constants';
+
+import { Link } from 'components/atoms';
+
+export const LayoutTxSuccessfulModal = (): JSX.Element => {
+  const { _ } = useLingui();
+  const location = usePathname();
+
+  const [
+    { cardItems, title, cardTitle, open, txHash, buttonTitle, buttonLink },
+    setTxSuccessfulModalAtom,
+  ] = useAtom(txSuccessfulModalAtom);
+  const onClose = useCallback(
+    (): void => setTxSuccessfulModalAtom(atom => void (atom.open = false)),
+    [setTxSuccessfulModalAtom],
+  );
+
+  const txHashUrl = getHashUrl(txHash);
+
+  // Close the modal only on actual pathname changes
+  const prevLocationRef = useRef(location);
+  useEffect(() => {
+    if (prevLocationRef.current !== location) {
+      prevLocationRef.current = location;
+      onClose();
+    }
+  }, [location, onClose]);
+
+  return (
+    <TxSuccessfulModal
+      seeMoreText={_(SEE_MORE)}
+      seeLessText={_(SEE_LESS)}
+      open={!!open}
+      cardItems={cardItems}
+      title={title ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
+      cardTitle={cardTitle ?? ''}
+      buttonTitle={buttonTitle ?? _(TX_MODAL_TITLE)}
+      buttonLink={buttonLink}
+      onClose={onClose}
+      txHash={txHash ?? ''}
+      txHashUrl={txHashUrl}
+      linkComponent={Link}
+      onButtonClick={onClose}
+      blockchainRecordText={_(BLOCKCHAIN_RECORD)}
+    />
+  );
+};

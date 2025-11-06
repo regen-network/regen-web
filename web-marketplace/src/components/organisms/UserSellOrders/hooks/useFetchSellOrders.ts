@@ -1,5 +1,9 @@
 import { useCallback, useMemo } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  QueryObserverOptions,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { QueryClient, useLedger } from 'ledger';
 import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
@@ -19,7 +23,9 @@ export const useFetchSellOrders = (
 ): UseFetchSellOrdersResponse => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const sellOrdersQuery = useMemo(() => {
+  const sellOrdersQuery = useMemo<
+    QueryObserverOptions<SellOrderInfoExtented[] | undefined>
+  >(() => {
     if (sellerAddress) {
       return getSellOrdersBySellerQuery({
         client: queryClient as QueryClient,
@@ -52,16 +58,13 @@ export const useFetchSellOrders = (
     reactQueryClient,
   ]);
 
-  const { data: sellOrders, isLoading: isLoadingSellOrders } =
-    useQuery(sellOrdersQuery);
+  const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery<
+    SellOrderInfoExtented[] | undefined
+  >(sellOrdersQuery);
 
-  // Refetch callback
   const refetchSellOrders = useCallback(async (): Promise<
     SellOrderInfoExtented[] | undefined
   > => {
-    // Here invalidating the cache will automatically run again all query using this key.
-    // Below we're returning the new result from the cache because this callback needs to return the new value
-    // but in most cases it's enough for reload callbacks to just invalidate a key for refreshing the data and the UI.
     await reactQueryClient.invalidateQueries({
       queryKey: sellOrdersQuery.queryKey,
     });

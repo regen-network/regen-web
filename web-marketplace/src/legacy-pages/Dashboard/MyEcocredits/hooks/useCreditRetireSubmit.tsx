@@ -2,21 +2,30 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  creditRetireAction,
+  wrapRbamActions,
+} from 'utils/dashboard.rbam.utils';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner.constants';
 import {
   Retire2Event,
   RetireFailureEvent,
   RetireSuccessEvent,
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { CreditRetireFormSchemaType } from 'components/organisms/CreditRetireForm/CreditRetireForm.schema';
+import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { useDashboardContext } from '../../Dashboard.context';
 import {
   RETIRE_HEADER,
   RETIRE_SUCCESS_BUTTON,
@@ -51,6 +60,15 @@ const useCreditRetireSubmit = ({
 }: Props): Params => {
   const { _ } = useLingui();
   const { track } = useTracker();
+  const { wallet } = useWallet();
+  const reactQueryClient = useQueryClient();
+  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
+    useDashboardContext();
+
+  const roleConfig = organizationRole
+    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
+    : undefined;
+
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditRetireOpen].denom;
@@ -67,21 +85,50 @@ const useCreditRetireSubmit = ({
       const { amount: amountValue, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
       const amount = values.amount.toString();
-      const msgRetire = regen.ecocredit.v1.MessageComposer.withTypeUrl.retire({
-        owner: accountAddress,
-        jurisdiction: retirementJurisdiction || '',
-        credits: [
-          {
-            batchDenom,
-            amount,
-          },
-        ],
-        reason: note || '',
-      });
+
+      // Build the message based on context (organization vs personal)
+      let finalMsg;
+
+      if (
+        isOrganizationDashboard &&
+        roleConfig &&
+        organizationRbamAddress &&
+        wallet?.address
+      ) {
+        // Organization context: wrap in RBAM execute_actions
+        const action = creditRetireAction({
+          roleId: roleConfig.roleId,
+          authorizationId: roleConfig.authorizations.can_manage_credits!,
+          owner: accountAddress, // DAO address
+          batchDenom: batchDenom!,
+          amount,
+          jurisdiction: retirementJurisdiction || '',
+          reason: note,
+        });
+
+        finalMsg = wrapRbamActions({
+          walletAddress: wallet.address,
+          rbamAddress: organizationRbamAddress,
+          actions: [action],
+        });
+      } else {
+        // Personal context: use standard message
+        finalMsg = regen.ecocredit.v1.MessageComposer.withTypeUrl.retire({
+          owner: accountAddress,
+          jurisdiction: retirementJurisdiction || '',
+          credits: [
+            {
+              batchDenom,
+              amount,
+            },
+          ],
+          reason: note || '',
+        });
+      }
 
       const tx = {
-        msgs: [msgRetire],
-        fee: undefined,
+        msgs: [finalMsg],
+        fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
       };
 
       const onError = (err?: Error): void => {
@@ -101,6 +148,11 @@ const useCreditRetireSubmit = ({
           projectId: credits[creditRetireOpen].projectId,
           projectName: credits[creditRetireOpen].projectName,
           quantity: amountValue,
+        });
+
+        // Invalidate retirements query to show new retirement certificate
+        reactQueryClient.invalidateQueries({
+          queryKey: getAllRetirementsByOwnerQueryKey(accountAddress!),
         });
       };
       await signAndBroadcast(tx, () => setCreditRetireOpen(-1), {
@@ -137,6 +189,10 @@ const useCreditRetireSubmit = ({
       creditRetireOpen,
       track,
       accountAddress,
+      isOrganizationDashboard,
+      roleConfig,
+      organizationRbamAddress,
+      wallet?.address,
       signAndBroadcast,
       setCreditRetireOpen,
       setCardItems,
@@ -145,6 +201,7 @@ const useCreditRetireSubmit = ({
       setTxModalTitle,
       creditRetireTitle,
       setTxButtonTitle,
+      reactQueryClient,
     ],
   );
 

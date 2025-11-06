@@ -9,7 +9,6 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
-
 import WithLoader from 'components/atoms/WithLoader';
 import { Order } from 'components/organisms/Order/Order';
 

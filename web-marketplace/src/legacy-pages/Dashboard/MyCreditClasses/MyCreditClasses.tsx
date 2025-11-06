@@ -20,7 +20,6 @@ import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { useDashboardContext } from '../Dashboard.context';
-
 import {
   MY_CREDIT_CLASS_BUTTON,
   NO_CREDIT_CLASSES_MESSAGE,

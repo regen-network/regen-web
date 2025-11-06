@@ -135,6 +135,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
       });
     },
     keepPreviousData: true,
+    refetchOnMount: 'always',
     enabled: queryConfig.enabled,
     initialData: undefined,
   };

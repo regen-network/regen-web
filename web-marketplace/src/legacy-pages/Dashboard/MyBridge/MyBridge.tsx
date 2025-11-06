@@ -19,9 +19,7 @@ export const MyBridge = (): JSX.Element => {
 
   const MyBridgeOutlet = useCallback(
     (): JSX.Element => (
-      <Outlet
-        context={{ accountAddress, privateAccess: true }}
-      />
+      <Outlet context={{ accountAddress, privateAccess: true }} />
     ),
     [accountAddress],
   );

@@ -23,7 +23,9 @@ type UserSellOrdersProps = {
   canManageActions?: boolean;
 };
 
-export const UserSellOrders = ({ canManageActions = true }: UserSellOrdersProps) => {
+export const UserSellOrders = ({
+  canManageActions = true,
+}: UserSellOrdersProps) => {
   const { wallet } = useWallet();
   const { _ } = useLingui();
   const { selectedAccountAddress } = useDashboardContext();

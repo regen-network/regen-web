@@ -8,6 +8,8 @@ import {
 
 import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
+import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
 import { sanitizeDaoParams } from 'pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 import {
@@ -55,7 +57,7 @@ export const useUpdateOrganizationProfile = () => {
   const { organizationRole } = useDashboardContext();
   const { wallet, signAndBroadcast } = useMsgClient();
   const { signingCosmWasmClient } = useLedger();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
 
   return useCallback(
     async ({
@@ -69,10 +71,20 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error('Wallet not connected.');
       }
 
-      const normalizedRole = organizationRole?.toLowerCase() as
-        | keyof typeof orgRoles
-        | undefined;
-      const roleConfig = normalizedRole ? orgRoles[normalizedRole] : undefined;
+      const normalizedRole = organizationRole?.toLowerCase();
+      const isValidOrgRole = (
+        role: string | undefined,
+      ): role is keyof typeof orgRoles => {
+        return !!role && role in orgRoles;
+      };
+
+      if (!isValidOrgRole(normalizedRole)) {
+        throw new Error(
+          `Invalid organization role: ${organizationRole}. Only Owner, Admin, Editor, and Viewer can edit organizations.`,
+        );
+      }
+
+      const roleConfig = orgRoles[normalizedRole];
       const authorizationId = roleConfig?.authorizations.can_edit_organization;
       const roleId = roleConfig?.roleId;
 
@@ -224,9 +236,17 @@ export const useUpdateOrganizationProfile = () => {
       // allow indexer to persist the latest RBAM metadata before refetching
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      await queryClient.invalidateQueries({
-        queryKey: ['organization-profile', daoAddress],
-      });
+      if (wallet?.address) {
+        await queryClient.invalidateQueries({
+          queryKey: getAccountByAddrQueryKey({ addr: wallet.address }),
+        });
+      }
+
+      if (activeAccount?.id) {
+        await queryClient.invalidateQueries({
+          queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
+        });
+      }
 
       await queryClient.invalidateQueries({
         queryKey: ['dao-config', daoAddress],
@@ -239,6 +259,7 @@ export const useUpdateOrganizationProfile = () => {
       wallet?.address,
       signingCosmWasmClient,
       activeAccountId,
+      activeAccount?.id,
     ],
   );
 };

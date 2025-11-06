@@ -7,20 +7,6 @@ type StargateAction = {
   typeUrl: string;
   value: Uint8Array;
 };
-export const getExecuteActionsStargate = (actions: StargateAction[]) => ({
-  execute_actions: {
-    actions: actions.map(action => ({
-      authorization_id: action.authorizationId,
-      role_id: action.roleId,
-      msg: {
-        stargate: {
-          type_url: action.typeUrl,
-          value: toBase64(action.value),
-        },
-      },
-    })),
-  },
-});
 
 export type WasmExecuteAction =
   | {
@@ -65,6 +51,49 @@ export type WasmExecuteAction =
       funds?: { denom: string; amount: string }[];
     };
 
+/**
+ * Helper to build a single Stargate action for RBAM execute_actions.
+ * Used for native Cosmos SDK messages (like MsgSend, MsgRetire, etc.)
+ */
+export const getStargateAction = ({
+  authorizationId,
+  roleId,
+  typeUrl,
+  value,
+}: StargateAction) => ({
+  authorization_id: authorizationId,
+  role_id: roleId,
+  msg: {
+    stargate: {
+      type_url: typeUrl,
+      value: toBase64(value),
+    },
+  },
+});
+
+/**
+ * Wraps multiple Stargate actions into an execute_actions message.
+ * Used for batch execution of native Cosmos SDK messages through RBAM.
+ */
+export const getExecuteActionsStargate = (actions: StargateAction[]) => ({
+  execute_actions: {
+    actions: actions.map(action => ({
+      authorization_id: action.authorizationId,
+      role_id: action.roleId,
+      msg: {
+        stargate: {
+          type_url: action.typeUrl,
+          value: toBase64(action.value),
+        },
+      },
+    })),
+  },
+});
+
+/**
+ * Wraps multiple CosmWasm execute actions into an execute_actions message.
+ * Used for batch execution of contract calls through RBAM.
+ */
 export const getExecuteActionsWasm = (actions: WasmExecuteAction[]) => ({
   execute_actions: {
     actions: actions.map(action => ({
@@ -89,6 +118,10 @@ type GetMsgExecuteContractParams = {
   executeActionsMsg: Record<string, unknown>;
 };
 
+/**
+ * Creates a MsgExecuteContract for executing a contract call.
+ * Generic helper for wrapping any contract execution message.
+ */
 export const getMsgExecuteContract = ({
   walletAddress,
   contract,

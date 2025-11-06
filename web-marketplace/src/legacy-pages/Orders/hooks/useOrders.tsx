@@ -52,7 +52,11 @@ export const useOrders = ({ address }: UseOrdersParams = {}) => {
         projectId: order?.projectOnChainId,
       })) ?? []
     );
-  }, [address, activeAccount?.addr, activeAccount?.fiatOrdersByAccountId?.nodes]);
+  }, [
+    address,
+    activeAccount?.addr,
+    activeAccount?.fiatOrdersByAccountId?.nodes,
+  ]);
 
   const paymentMethodResults = useQueries({
     queries:
@@ -193,8 +197,7 @@ export const useOrders = ({ address }: UseOrdersParams = {}) => {
     }),
   );
 
-  const isWeb2UserWithoutWallet =
-    !!privActiveAccount?.email && !buyerAddress;
+  const isWeb2UserWithoutWallet = !!privActiveAccount?.email && !buyerAddress;
 
   const isLoading =
     loading ||

@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
+import { creditSendAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -14,10 +15,13 @@ import {
   SendSuccessEvent,
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useWallet } from 'lib/wallet/wallet';
 
 import type { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
+import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { useDashboardContext } from '../../Dashboard.context';
 import { SEND_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
@@ -47,6 +51,14 @@ const useCreditSendSubmit = ({
 }: Props): Return => {
   const { _ } = useLingui();
   const { track } = useTracker();
+  const { wallet } = useWallet();
+  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
+    useDashboardContext();
+
+  const roleConfig = organizationRole
+    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
+    : undefined;
+
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditSendOpen].denom;
@@ -63,24 +75,54 @@ const useCreditSendSubmit = ({
       const { withRetire, recipient, amount, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
 
-      const { send } = regen.ecocredit.v1.MessageComposer.withTypeUrl;
-      const msgSend = send({
-        sender: accountAddress,
-        recipient,
-        credits: [
-          {
-            batchDenom,
-            tradableAmount: withRetire ? '' : amount.toString(),
-            retiredAmount: withRetire ? amount.toString() : '',
-            retirementJurisdiction: retirementJurisdiction || '',
-            retirementReason: note || '',
-          },
-        ],
-      });
+      // Build the message based on context (organization vs personal)
+      let finalMsg;
+
+      if (
+        isOrganizationDashboard &&
+        roleConfig &&
+        organizationRbamAddress &&
+        wallet?.address
+      ) {
+        // Organization context: wrap in RBAM execute_actions
+        const action = creditSendAction({
+          roleId: roleConfig.roleId,
+          authorizationId: roleConfig.authorizations.can_manage_credits!,
+          sender: accountAddress, // DAO address
+          recipient,
+          batchDenom: batchDenom!,
+          tradableAmount: withRetire ? '' : amount.toString(),
+          retiredAmount: withRetire ? amount.toString() : '',
+          retirementJurisdiction,
+          retirementReason: note,
+        });
+
+        finalMsg = wrapRbamActions({
+          walletAddress: wallet.address,
+          rbamAddress: organizationRbamAddress,
+          actions: [action],
+        });
+      } else {
+        // Personal context: use standard message
+        const { send } = regen.ecocredit.v1.MessageComposer.withTypeUrl;
+        finalMsg = send({
+          sender: accountAddress,
+          recipient,
+          credits: [
+            {
+              batchDenom,
+              tradableAmount: withRetire ? '' : amount.toString(),
+              retiredAmount: withRetire ? amount.toString() : '',
+              retirementJurisdiction: retirementJurisdiction || '',
+              retirementReason: note || '',
+            },
+          ],
+        });
+      }
 
       const tx = {
-        msgs: [msgSend],
-        fee: undefined,
+        msgs: [finalMsg],
+        fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
       };
 
       const batchInfo = credits[creditSendOpen];
@@ -149,12 +191,16 @@ const useCreditSendSubmit = ({
       creditSendOpen,
       creditSendTitle,
       credits,
+      isOrganizationDashboard,
+      organizationRbamAddress,
+      roleConfig,
       setCardItems,
       setCreditSendOpen,
       setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
       track,
+      wallet?.address,
     ],
   );
 

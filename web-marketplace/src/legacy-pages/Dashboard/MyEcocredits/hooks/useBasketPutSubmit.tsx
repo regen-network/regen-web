@@ -3,6 +3,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import type { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import { basketPutAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
 
 import type { FormValues as BasketPutFormValues } from 'web-components/src/components/form/BasketPutForm/BasketPutForm';
 
@@ -13,9 +14,12 @@ import {
   PutInBasketSuccessEvent,
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useWallet } from 'lib/wallet/wallet';
 
+import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { useDashboardContext } from '../../Dashboard.context';
 import { PUT_HEADER } from '../MyEcocredits.constants';
 import { OnTxSuccessfulProps } from '../MyEcocredits.types';
 
@@ -48,6 +52,13 @@ const useBasketPutSubmit = ({
 }: Props): Return => {
   const { _ } = useLingui();
   const { track } = useTracker();
+  const { wallet } = useWallet();
+  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
+    useDashboardContext();
+
+  const roleConfig = organizationRole
+    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
+    : undefined;
 
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
@@ -66,16 +77,43 @@ const useBasketPutSubmit = ({
         projectId: credit.projectId,
       });
 
-      const msgPut = regen.ecocredit.basket.v1.MessageComposer.withTypeUrl.put({
-        basketDenom: values.basketDenom,
-        owner: accountAddress,
-        credits: [
-          {
-            batchDenom: credit.denom,
-            amount,
-          },
-        ],
-      });
+      // Build the message based on context (organization vs personal)
+      let finalMsg;
+
+      if (
+        isOrganizationDashboard &&
+        roleConfig &&
+        organizationRbamAddress &&
+        wallet?.address
+      ) {
+        // Organization context: wrap in RBAM execute_actions
+        const action = basketPutAction({
+          roleId: roleConfig.roleId,
+          authorizationId: roleConfig.authorizations.can_manage_credits!,
+          owner: accountAddress, // DAO address
+          basketDenom: values.basketDenom,
+          batchDenom: credit.denom!,
+          amount,
+        });
+
+        finalMsg = wrapRbamActions({
+          walletAddress: wallet.address,
+          rbamAddress: organizationRbamAddress,
+          actions: [action],
+        });
+      } else {
+        // Personal context: use standard message
+        finalMsg = regen.ecocredit.basket.v1.MessageComposer.withTypeUrl.put({
+          basketDenom: values.basketDenom,
+          owner: accountAddress,
+          credits: [
+            {
+              batchDenom: credit.denom,
+              amount,
+            },
+          ],
+        });
+      }
 
       const onError = (err?: Error): void => {
         track<PutInBasketFailureEvent>('putInBasketFailure', {
@@ -130,10 +168,14 @@ const useBasketPutSubmit = ({
           });
         }
       };
-      await signAndBroadcast({ msgs: [msgPut] }, () => onBroadcast(), {
-        onError,
-        onSuccess,
-      });
+      await signAndBroadcast(
+        { msgs: [finalMsg], fee: isOrganizationDashboard ? 'auto' : undefined }, // RBAM transactions need auto gas estimation
+        () => onBroadcast(),
+        {
+          onError,
+          onSuccess,
+        },
+      );
     },
     [
       baskets,
@@ -143,6 +185,10 @@ const useBasketPutSubmit = ({
       credit.projectId,
       credit.projectName,
       accountAddress,
+      isOrganizationDashboard,
+      roleConfig,
+      organizationRbamAddress,
+      wallet?.address,
       signAndBroadcast,
       onErrorCallback,
       onTxSuccessful,

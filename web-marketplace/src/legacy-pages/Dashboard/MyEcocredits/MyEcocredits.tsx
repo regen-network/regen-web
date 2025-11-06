@@ -177,7 +177,12 @@ export const MyEcocredits = (): JSX.Element => {
   const onButtonClick = (): void => {
     handleTxModalClose();
     if (txButtonTitle === _(CREATE_SELL_ORDER_BUTTON) && !error) {
-      navigate('/dashboard/sell');
+      // Navigate to correct sell orders page based on context
+      navigate(
+        isOrganizationDashboard
+          ? '/dashboard/organization/sell-orders'
+          : '/dashboard/sell-orders',
+      );
     }
     if (txButtonTitle === _(RETIRE_SUCCESS_BUTTON) && !error) {
       setActivePortfolioTab(1);
@@ -644,7 +649,7 @@ export const MyEcocredits = (): JSX.Element => {
           <TxSuccessfulModal
             seeMoreText={_(SEE_MORE)}
             seeLessText={_(SEE_LESS)}
-            open={!error && (!!txModalTitle || !!deliverTxResponse)}
+            open={true}
             onClose={handleTxModalClose}
             txHash={txHash ?? ''}
             txHashUrl={txHashUrl}

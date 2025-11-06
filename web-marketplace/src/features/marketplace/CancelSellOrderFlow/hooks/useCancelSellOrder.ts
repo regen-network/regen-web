@@ -7,6 +7,7 @@ import { Item } from 'web-components/src/components/modal/TxModal';
 import { useWallet } from 'lib/wallet/wallet';
 
 import useCancelSellOrderSubmit from 'features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit';
+import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 import useMsgClient from 'hooks/useMsgClient';
 
@@ -52,7 +53,8 @@ export const useCancelSellOrder = ({
   const [txModalHeader, setTxModalHeader] = useState<string>('');
 
   const { wallet } = useWallet();
-  const accountAddress = wallet?.address;
+  const { selectedAccountAddress } = useDashboardContext();
+  const accountAddress = selectedAccountAddress ?? wallet?.address;
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {

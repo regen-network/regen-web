@@ -19,7 +19,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import useOrganizationProfile from 'hooks/useOrganizationProfile';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useUpdateOrganizationProfile } from 'hooks/useUpdateOrganizationProfile';
 
 import {
@@ -53,12 +53,8 @@ export const EditProfile = () => {
     organizationRbamAddress,
     organizationProfile: organizationProfileFromContext,
   } = useDashboardContext();
-  const {
-    organizationProfile: latestOrganizationProfile,
-    isLoadingOrganizationProfile,
-  } = useOrganizationProfile({
-    daoAddress: organizationDaoAddress,
-  });
+  const organizationDao = useDaoOrganization();
+  const latestOrganizationProfile = organizationDao?.organizationByDaoAddress;
   const updateOrganizationProfile = useUpdateOrganizationProfile();
   const organizationProfile =
     latestOrganizationProfile ?? organizationProfileFromContext ?? null;
@@ -68,10 +64,7 @@ export const EditProfile = () => {
     Boolean(organizationDaoAddress) && Boolean(organizationRbamAddress);
   const isOrgDashboard = hasOrgContext && (isOrganizationDashboard ?? true);
   const shouldBlockRender =
-    isOrgDashboard &&
-    (!hasOrgContext ||
-      (isLoadingOrganizationProfile && !organizationProfile) ||
-      !organizationProfile);
+    isOrgDashboard && (!hasOrgContext || !organizationProfile);
 
   const initialValues: EditProfileFormSchemaType = useMemo(() => {
     if (isOrgDashboard) {
@@ -174,7 +167,7 @@ export const EditProfile = () => {
             throw new Error('Organization context not found.');
           }
 
-          setProcessingModalAtom(atom => void (atom.open = true));
+          setProcessingModalAtom(atom => (atom.open = true));
           shouldCloseProcessingModal = true;
 
           await updateOrganizationProfile({
@@ -246,7 +239,7 @@ export const EditProfile = () => {
         fileNamesToDeleteRef.current = [];
       } finally {
         if (shouldCloseProcessingModal) {
-          setProcessingModalAtom(atom => void (atom.open = false));
+          setProcessingModalAtom(atom => (atom.open = false));
         }
       }
     },
@@ -318,15 +311,12 @@ export const EditProfile = () => {
 
   if (shouldBlockRender) return null;
 
-  if (isOrgDashboard && isLoadingOrganizationProfile) return null;
-
   return (
     <EditProfileForm
       key={editProfileFormKey}
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       onUpload={onUpload}
-      hideProfileType
       initialValues={initialValues}
       prefillValues={isOrgDashboard ? initialValues : undefined}
       isDirtyRef={isDirtyRef}

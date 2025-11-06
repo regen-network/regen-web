@@ -19,7 +19,6 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import useOrganizationProfile from 'hooks/useOrganizationProfile';
 
 import { getAddress } from '../RegistryLayout.utils';
 
@@ -46,19 +45,15 @@ export const useOrganizationMenuProfile = ({
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
 
-  const organization = useDaoOrganization();
-  const { organizationProfile } = useOrganizationProfile({
-    daoAddress: organization?.address,
-  });
+  const organizationDao = useDaoOrganization();
+  const organizationProfile = organizationDao?.organizationByDaoAddress;
 
   const menuOrganizationProfile = useMemo(() => {
-    const daoAddress = organization?.address;
-    if (!daoAddress) return undefined;
+    if (!organizationProfile || !organizationDao) return undefined;
 
+    const daoAddress = organizationDao.address;
     const organizationName =
-      organizationProfile?.name?.trim() ||
-      organization?.organizationByDaoAddress?.name?.trim() ||
-      _(DEFAULT_NAME);
+      organizationProfile.name?.trim() || _(DEFAULT_NAME);
 
     const rawImage = organizationProfile?.image?.trim() || '';
     const optimizedImage = rawImage
@@ -76,13 +71,7 @@ export const useOrganizationMenuProfile = ({
       profileLink: `/profiles/${daoAddress}`,
       dashboardLink: '/dashboard/organization',
     };
-  }, [
-    _,
-    organization?.address,
-    organization?.organizationByDaoAddress?.name,
-    organizationProfile?.name,
-    organizationProfile?.image,
-  ]);
+  }, [_, organizationDao, organizationProfile]);
 
   return {
     menuOrganizationProfile,

@@ -54,12 +54,10 @@ export const Profile = (): JSX.Element => {
   const location = useLocation();
   const { _ } = useLingui();
   const showOrgPopup = location.state?.showOrgPopup;
-  console.log('location.state', location.state);
   const [isOrgCreatedModalOpen, setIsOrgCreatedModalOpen] = useState(
     Boolean(showOrgPopup),
   );
 
-  console.log('isOrgCreatedModalOpen', isOrgCreatedModalOpen);
   const { address, account, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
   const { avatarImage, backgroundImage } = getUserImages({ account });

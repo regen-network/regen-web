@@ -14,7 +14,6 @@ import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganizat
 import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
-import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
@@ -43,12 +42,10 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
-  getRadioCardItems,
   LINKS_LABEL,
   PROFILE_AVATAR_FILE_NAME,
   PROFILE_BG_ASPECT_RATIO,
   PROFILE_BG_FILE_NAME,
-  PROFILE_TYPE,
   TWITTER_PLACEHOLDER,
   UPLOAD_IMAGE,
   WEBSITE_PLACEHOLDER,
@@ -58,7 +55,6 @@ import {
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
-import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
 
 export interface EditProfileFormProps extends Partial<FormStateSetter> {
   initialValues?: EditProfileFormSchemaType;
@@ -69,7 +65,6 @@ export interface EditProfileFormProps extends Partial<FormStateSetter> {
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
   // Optional enhancements for reuse in Create Organization flow
   formId?: string;
-  hideProfileType?: boolean;
   nameLabel?: string;
   // Allows parent steps (e.g. Create Organization) to inject partial values
   // after the form has mounted (e.g. from a transfer profile modal)
@@ -85,7 +80,6 @@ const EditProfileForm = ({
   onSuccess,
   onUpload,
   formId,
-  hideProfileType,
   nameLabel,
   prefillValues,
   validationMode = 'onBlur',
@@ -94,19 +88,14 @@ const EditProfileForm = ({
 }: EditProfileFormProps) => {
   const { _ } = useLingui();
   const formSchema = useMemo(
-    () =>
-      hideProfileType
-        ? createEditProfileFormSchema({ requireProfileType: false, _ })
-        : createEditProfileFormSchema({ requireProfileType: true, _ }),
-    [hideProfileType, _],
+    () => createEditProfileFormSchema({ requireProfileType: false }),
+    [],
   );
   const form = useZodForm({
     schema: formSchema,
     defaultValues: {
       ...initialValues,
-      profileType:
-        initialValues?.profileType ??
-        (hideProfileType ? AccountType.Organization : undefined),
+      profileType: initialValues?.profileType ?? AccountType.User,
     },
     mode: validationMode,
   });
@@ -117,14 +106,9 @@ const EditProfileForm = ({
     useFormState({
       control: form.control,
     });
-  const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
 
   /* Fields watch */
 
-  const profileType = useWatch({
-    control: form.control,
-    name: 'profileType',
-  });
   const watchedProfileImage = useWatch({
     control: form.control,
     name: 'profileImage',
@@ -163,24 +147,6 @@ const EditProfileForm = ({
     },
     [form],
   );
-  const handleDefaultAvatarUpdate = useCallback(
-    (value: string): void => {
-      form.setValue('profileImage', value, {
-        shouldDirty: false,
-        shouldValidate: true,
-      });
-    },
-    [form],
-  );
-
-  /* Effect */
-
-  useUpdateDefaultAvatar({
-    setProfileImage: handleDefaultAvatarUpdate,
-    profileType,
-    profileImage: watchedProfileImage,
-    enabled: !hideProfileType,
-  });
 
   useEffect(() => {
     if (isDirtyRef) {
@@ -253,14 +219,6 @@ const EditProfileForm = ({
         }
       }}
     >
-      {!hideProfileType && (
-        <RadioCard
-          label={_(PROFILE_TYPE)}
-          items={radioCardItems}
-          selectedValue={profileType ?? ''}
-          {...form.register('profileType')}
-        />
-      )}
       <TextField
         type="text"
         label={nameLabel ?? _(msg`Name`)}

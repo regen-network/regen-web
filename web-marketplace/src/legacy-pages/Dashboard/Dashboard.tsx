@@ -42,7 +42,6 @@ import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import useOrganizationProfile from 'hooks/useOrganizationProfile';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -160,11 +159,7 @@ export const Dashboard = () => {
   );
 
   const organizationAddress = organizationDao?.address ?? null;
-
-  const { organizationProfile, isLoadingOrganizationProfile } =
-    useOrganizationProfile({
-      daoAddress: organizationAddress,
-    });
+  const organizationProfile = organizationDao?.organizationByDaoAddress;
 
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
@@ -297,21 +292,10 @@ export const Dashboard = () => {
   }, [navigationAccounts, selectedAccountId]);
 
   useEffect(() => {
-    if (
-      isOrganizationDashboard &&
-      !organizationAccount &&
-      !loading &&
-      !isLoadingOrganizationProfile
-    ) {
+    if (isOrganizationDashboard && !organizationAccount && !loading) {
       navigate('/dashboard', { replace: true });
     }
-  }, [
-    isOrganizationDashboard,
-    organizationAccount,
-    loading,
-    navigate,
-    isLoadingOrganizationProfile,
-  ]);
+  }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
 
   const organizationRoleActual = useMemo(() => {
     if (!isOrganizationDashboard || selectedAccount?.type !== 'org')

@@ -40,7 +40,13 @@ query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
         daoRbamAddress
         cw4GroupAddress
         organizationByDaoAddress {
+          id
           name
+          description
+          image
+          bgImage
+          websiteLink
+          twitterLink
         }
         accountsByAssignmentDaoAddressAndAccountId(
           orderBy: $daoAccountsOrderBy

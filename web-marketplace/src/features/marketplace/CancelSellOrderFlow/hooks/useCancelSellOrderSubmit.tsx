@@ -3,6 +3,11 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { regen } from '@regen-network/api';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  cancelSellOrderAction,
+  wrapRbamActions,
+} from 'utils/dashboard.rbam.utils';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -14,9 +19,13 @@ import {
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { microToDenom } from 'lib/denom.utils';
+import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
+import { useWallet } from 'lib/wallet/wallet';
 
+import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
+import { orgRoles } from 'hooks/org-members/constants';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -52,6 +61,14 @@ const useCancelSellOrderSubmit = ({
 }: Props): Return => {
   const { _ } = useLingui();
   const { queryClient } = useLedger();
+  const { wallet } = useWallet();
+  const reactQueryClient = useQueryClient();
+  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
+    useDashboardContext();
+
+  const roleConfig = organizationRole
+    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
+    : undefined;
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -61,74 +78,113 @@ const useCancelSellOrderSubmit = ({
     setIsProcessingModalOpen(true);
     setSelectedSellOrder(null);
 
-    const msgCancelSellOrder =
-      regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.cancelSellOrder(
-        {
-          seller: accountAddress,
-          sellOrderId: BigInt(selectedSellOrder.id),
-        },
-      );
+    let finalMsg;
+
+    if (
+      isOrganizationDashboard &&
+      roleConfig &&
+      organizationRbamAddress &&
+      wallet?.address
+    ) {
+      const action = cancelSellOrderAction({
+        roleId: roleConfig.roleId,
+        authorizationId: roleConfig.authorizations.can_manage_sell_orders!,
+        seller: accountAddress, // DAO address
+        sellOrderId: BigInt(selectedSellOrder.id),
+      });
+
+      finalMsg = wrapRbamActions({
+        walletAddress: wallet.address,
+        rbamAddress: organizationRbamAddress,
+        actions: [action],
+      });
+    } else {
+      finalMsg =
+        regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.cancelSellOrder(
+          {
+            seller: accountAddress,
+            sellOrderId: BigInt(selectedSellOrder.id),
+          },
+        );
+    }
 
     const tx = {
-      msgs: [msgCancelSellOrder],
-      fee: undefined,
-      memo: undefined,
+      msgs: [finalMsg],
+      fee: isOrganizationDashboard ? ('auto' as const) : undefined,
     };
 
-    signAndBroadcast(tx, () => setSelectedSellOrder(null));
-    setIsProcessingModalOpen(false);
+    try {
+      const result = await signAndBroadcast(tx);
+      if (!result || typeof result === 'string') {
+        setIsProcessingModalOpen(false);
+        throw new Error(
+          typeof result === 'string'
+            ? result
+            : _(msg`Transaction signing failed`),
+        );
+      }
 
-    const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
+      setIsProcessingModalOpen(false);
 
-    const projectId =
-      selectedSellOrder.project?.id ??
-      batchDenom.substring(0, batchDenom.indexOf('-', 4));
+      reactQueryClient.invalidateQueries({
+        queryKey: [SELL_ORDERS_EXTENTED_KEY],
+      });
 
-    setCardItems([
-      {
-        label: _(msg`price per credit`),
-        value: {
-          name: formatNumber({
-            num: microToDenom(askAmount),
-            maximumFractionDigits: 2,
-            minimumFractionDigits: 2,
-          }),
-          icon: (
-            <Box
-              sx={{
-                mr: '4px',
-                display: 'inline-block',
-                verticalAlign: 'bottom',
-              }}
-            >
-              <DenomIcon
-                baseDenom={baseDenom}
-                bankDenom={askDenom}
-                sx={{ display: 'flex' }}
-              />
-            </Box>
-          ),
+      const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
+
+      const projectId =
+        selectedSellOrder.project?.id ??
+        batchDenom.substring(0, batchDenom.indexOf('-', 4));
+
+      setCardItems([
+        {
+          label: _(msg`price per credit`),
+          value: {
+            name: formatNumber({
+              num: microToDenom(askAmount),
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2,
+            }),
+            icon: (
+              <Box
+                sx={{
+                  mr: '4px',
+                  display: 'inline-block',
+                  verticalAlign: 'bottom',
+                }}
+              >
+                <DenomIcon
+                  baseDenom={baseDenom}
+                  bankDenom={askDenom}
+                  sx={{ display: 'flex' }}
+                />
+              </Box>
+            ),
+          },
         },
-      },
-      {
-        label: _(msg`project`),
-        value: {
-          name: selectedSellOrder.project?.name || projectId,
-          url: `/project/${projectId}`,
+        {
+          label: _(msg`project`),
+          value: {
+            name: selectedSellOrder.project?.name || projectId,
+            url: `/project/${projectId}`,
+          },
         },
-      },
-      {
-        label: _(msg`credit batch id`),
-        value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-      },
-      {
-        label: _(msg`amount`),
-        value: { name: getFormattedNumber(Number(amountAvailable)) },
-      },
-    ]);
-    setTxModalHeader(_(CANCEL_SELL_ORDER_HEADER));
-    setTxModalTitle(_(CANCEL_SELL_ORDER_TITLE) + id);
-    setTxButtonTitle(_(CANCEL_SELL_ORDER_BUTTON));
+        {
+          label: _(msg`credit batch id`),
+          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+        },
+        {
+          label: _(msg`amount`),
+          value: { name: getFormattedNumber(Number(amountAvailable)) },
+        },
+      ]);
+      setTxModalHeader(_(CANCEL_SELL_ORDER_HEADER));
+      setTxModalTitle(_(CANCEL_SELL_ORDER_TITLE) + id);
+      setTxButtonTitle(_(CANCEL_SELL_ORDER_BUTTON));
+    } catch (error) {
+      setIsProcessingModalOpen(false);
+      throw error;
+    }
   }, [
     accountAddress,
     selectedSellOrder,
@@ -141,6 +197,12 @@ const useCancelSellOrderSubmit = ({
     setTxModalHeader,
     setTxModalTitle,
     setTxButtonTitle,
+    queryClient,
+    isOrganizationDashboard,
+    roleConfig,
+    organizationRbamAddress,
+    wallet?.address,
+    reactQueryClient,
   ]);
 
   return cancelSellOrderSubmit;

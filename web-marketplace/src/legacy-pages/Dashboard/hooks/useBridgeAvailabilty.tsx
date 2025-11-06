@@ -1,10 +1,10 @@
 // hooks/useBridgeAvailability.ts
 import { useMemo } from 'react';
+
+import { useWallet } from 'lib/wallet/wallet';
 import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { useFetchBridgedEcocredits } from 'components/organisms/BridgedEcocreditsTable/hooks/useFetchBridgedEcocredits';
-
-import { useWallet } from 'lib/wallet/wallet';
 
 export const useBridgeAvailability = (addressOverride?: string) => {
   const { wallet } = useWallet();

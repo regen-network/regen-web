@@ -4,11 +4,8 @@ import { UserSellOrders } from 'components/organisms/UserSellOrders/UserSellOrde
 import { useDashboardContext } from '../Dashboard/Dashboard.context';
 
 const Sell = () => {
-  const {
-    isOrganizationDashboard,
-    isOrganizationOwner,
-    isOrganizationAdmin,
-  } = useDashboardContext();
+  const { isOrganizationDashboard, isOrganizationOwner, isOrganizationAdmin } =
+    useDashboardContext();
 
   const canManageSellOrders =
     !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;

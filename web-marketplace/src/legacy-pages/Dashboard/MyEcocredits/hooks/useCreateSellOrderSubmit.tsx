@@ -8,6 +8,7 @@ import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/eve
 import { MessageComposer } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx.registry';
 import { useQueryClient } from '@tanstack/react-query';
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
+import { sellOrderAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -25,12 +26,15 @@ import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-serve
 import { getProjectIdByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectIdByOnChainIdQuery/getProjectIdByOnChainIdQuery';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { CreateSellOrderFormSchemaType } from 'components/organisms/CreateSellOrderForm/CreateSellOrderForm.schema';
+import { orgRoles } from 'hooks/org-members/constants';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { useDashboardContext } from '../../Dashboard.context';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
@@ -64,6 +68,13 @@ const useCreateSellOrderSubmit = ({
   const [createSellOrder] = useCreateSellOrderMutation();
   const { activeAccountId } = useAuth();
   const graphqlClient = useApolloClient();
+  const { wallet } = useWallet();
+  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
+    useDashboardContext();
+
+  const roleConfig = organizationRole
+    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
+    : undefined;
 
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
@@ -74,24 +85,56 @@ const useCreateSellOrderSubmit = ({
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
-      const msgSell = MessageComposer.withTypeUrl.sell({
-        seller: accountAddress,
-        orders: [
-          {
-            batchDenom,
-            quantity: String(amount),
-            askPrice: {
-              denom: cryptoDenom,
-              amount: priceInMicro,
+
+      // Build the message based on context (organization vs personal)
+      let finalMsg;
+
+      if (
+        isOrganizationDashboard &&
+        roleConfig &&
+        organizationRbamAddress &&
+        wallet?.address
+      ) {
+        // Organization context: wrap in RBAM execute_actions
+        const action = sellOrderAction({
+          roleId: roleConfig.roleId,
+          authorizationId: roleConfig.authorizations.can_manage_sell_orders!,
+          seller: accountAddress, // DAO address
+          batchDenom,
+          quantity: String(amount),
+          askDenom: cryptoDenom,
+          askAmount: priceInMicro,
+          disableAutoRetire: !enableAutoRetire,
+        });
+
+        finalMsg = wrapRbamActions({
+          walletAddress: wallet.address,
+          rbamAddress: organizationRbamAddress,
+          actions: [action],
+        });
+      } else {
+        // Personal context: use standard message
+        finalMsg = MessageComposer.withTypeUrl.sell({
+          seller: accountAddress,
+          orders: [
+            {
+              batchDenom,
+              quantity: String(amount),
+              askPrice: {
+                denom: cryptoDenom,
+                amount: priceInMicro,
+              },
+              disableAutoRetire: !enableAutoRetire,
             },
-            disableAutoRetire: !enableAutoRetire,
-          },
-        ],
-      });
+          ],
+        });
+      }
 
       const tx = {
-        msgs: [msgSell],
-        fee: undefined,
+        msgs: [finalMsg],
+        fee: (isOrganizationDashboard ? 'auto' : undefined) as
+          | 'auto'
+          | undefined, // RBAM transactions need auto gas estimation
         memo: undefined,
       };
 
@@ -257,6 +300,10 @@ const useCreateSellOrderSubmit = ({
       _,
       setTxModalHeader,
       setTxButtonTitle,
+      isOrganizationDashboard,
+      roleConfig,
+      organizationRbamAddress,
+      wallet?.address,
     ],
   );
 

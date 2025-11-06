@@ -75,6 +75,10 @@ msgstr ""
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
 
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:21
+msgid "{0}, with all associated credits and sell orders, {1} migrated to your new organization account."
+msgstr ""
+
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:5
 #~ msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 #~ msgstr ""
@@ -113,6 +117,14 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:116
 msgid "{minimumDuration, plural, one {{minimumDuration} year minimum} other {{minimumDuration} years minimum}}"
+msgstr ""
+
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:22
+msgid "{numberOfMigratedProjects, plural, one {{numberOfMigratedProjects} project} other {{numberOfMigratedProjects} projects}}"
+msgstr ""
+
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:27
+msgid "{numberOfMigratedProjects, plural, one {was} other {were}}"
 msgstr ""
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:328
@@ -1471,7 +1483,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:110
+#: src/pages/Profile/Profile.tsx:117
 msgid "Credit Batches"
 msgstr ""
 
@@ -1546,7 +1558,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:182
-#: src/pages/Profile/Profile.tsx:104
+#: src/pages/Profile/Profile.tsx:111
 msgid "Credit Classes"
 msgstr ""
 
@@ -2504,6 +2516,10 @@ msgstr ""
 msgid "Impact"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:100
+msgid "important"
+msgstr ""
+
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:53
 msgid "in"
 msgstr ""
@@ -2849,11 +2865,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:155
+#: src/pages/Profile/Profile.tsx:162
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:150
+#: src/pages/Profile/Profile.tsx:157
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2865,7 +2881,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:140
+#: src/pages/Profile/Profile.tsx:147
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2881,7 +2897,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:145
+#: src/pages/Profile/Profile.tsx:152
 msgid "Manage Projects"
 msgstr ""
 
@@ -3337,6 +3353,10 @@ msgstr ""
 msgid "Organization dashboard"
 msgstr ""
 
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:17
+msgid "Organization has been created!"
+msgstr ""
+
 #: src/components/organisms/Collaborators/Collaborators.constants.tsx:4
 #~ msgid "organization member settings"
 #~ msgstr ""
@@ -3539,6 +3559,10 @@ msgstr ""
 msgid "Please enter valid JSON-LD"
 msgstr ""
 
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:36
+msgid "Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can <0>learn more about DAOs in our documentation</0>, including how they work and the ways you can participate."
+msgstr ""
+
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:215
 msgid "Please note: US dollar sell orders will be created in USDC on the ledger, so crypto buyers may purchase in USDC."
 msgstr ""
@@ -3573,7 +3597,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
-#: src/pages/Profile/Profile.tsx:88
+#: src/pages/Profile/Profile.tsx:95
 msgid "Portfolio"
 msgstr ""
 
@@ -3962,7 +3986,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:96
+#: src/pages/Profile/Profile.tsx:103
 msgid "Projects"
 msgstr ""
 
@@ -3983,7 +4007,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/pages/Profile/Profile.tsx:224
+#: src/pages/Profile/Profile.tsx:236
 msgid "public profile tabs"
 msgstr ""
 
@@ -4456,8 +4480,16 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:103
+msgid "Send {0} REGEN to fund your organization"
+msgstr ""
+
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:10
 msgid "Send additional retired credits"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:119
+msgid "Send tokens"
 msgstr ""
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:135
@@ -4589,7 +4621,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:169
+#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:145
 msgid "Something went wrong while creating the organization."
 msgstr ""
 
@@ -5426,6 +5458,10 @@ msgstr ""
 msgid "View On Personal Profile"
 msgstr ""
 
+#: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:47
+msgid "view org profile"
+msgstr ""
+
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
 msgid "view pending bridged credits"
 msgstr ""
@@ -5588,6 +5624,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7
 msgid "What your support enables"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:108
+msgid "When you send tokens to your organization’s account, <0>all members can perform on-chain actions on behalf of the organization without needing to hold tokens</0> in their personal wallets."
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:103

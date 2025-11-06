@@ -197,7 +197,6 @@ export const OrganizationProfileStep = ({
         formId={ORGANIZATION_PROFILE_FORM_ID}
         onSubmit={handleSubmit}
         initialValues={initialValues as EditProfileFormSchemaType}
-        hideProfileType
         nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
         onUpload={onUpload}
         prefillValues={initialValues as EditProfileFormSchemaType}

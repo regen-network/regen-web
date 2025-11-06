@@ -12,5 +12,6 @@ export const useDaoOrganization = () => {
     () => daos?.find(dao => !!dao?.organizationByDaoAddress),
     [daos],
   );
+  dao?.organizationByDaoAddress
   return dao;
 };

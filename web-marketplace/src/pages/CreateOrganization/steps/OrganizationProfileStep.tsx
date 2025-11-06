@@ -31,10 +31,6 @@ import type { OrganizationProfileStepProps } from './OrganizationProfileStep.typ
 export const OrganizationProfileStep = ({
   initialValues,
   hasUnfinishedOrganization,
-  daoAddress,
-  setDaoAddress,
-  organizationId,
-  setOrganizationId,
   onTransferProfile,
   setIsSubmitting,
   setIsValid,
@@ -116,26 +112,8 @@ export const OrganizationProfileStep = ({
 
   const handleSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
-      if (hasUnfinishedOrganization && daoAddress) {
-        setTransferHandled(true);
-        setShowTransferModal(false);
-        const payload: OrganizationMultiStepData = {
-          ...values,
-          dao: {
-            ...(data?.dao ?? {
-              daoAddress,
-              organizationId,
-            }),
-            walletAddress,
-          },
-        };
-        handleSaveNext(payload);
-        return;
-      }
-
       try {
-        const organizationIdValue = organizationId ?? uuidv4();
-        setOrganizationId(organizationIdValue);
+        const organizationIdValue = uuidv4();
 
         const daoResult = await createDao({
           name: values.name,
@@ -148,8 +126,6 @@ export const OrganizationProfileStep = ({
           type: 'organization',
         });
 
-        setDaoAddress(daoResult.daoAddress);
-        setOrganizationId(daoResult.organizationId);
         setTransferHandled(true);
         setShowTransferModal(false);
 
@@ -172,10 +148,6 @@ export const OrganizationProfileStep = ({
     },
     [
       hasUnfinishedOrganization,
-      daoAddress,
-      organizationId,
-      setDaoAddress,
-      setOrganizationId,
       data,
       handleSaveNext,
       createDao,

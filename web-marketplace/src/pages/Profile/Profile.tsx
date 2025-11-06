@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -46,13 +46,20 @@ import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClas
 
 import { useProfileData } from './hooks/useProfileData';
 import { ProfileNotFound } from './Profile.NotFound';
+import { OrganizationCreatedModal } from './Profile.OrganizationCreatedModal';
 
 export const Profile = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const { wallet } = useWallet();
   const location = useLocation();
   const { _ } = useLingui();
+  const showOrgPopup = location.state?.showOrgPopup;
+  console.log('location.state', location.state);
+  const [isOrgCreatedModalOpen, setIsOrgCreatedModalOpen] = useState(
+    Boolean(showOrgPopup),
+  );
 
+  console.log('isOrgCreatedModalOpen', isOrgCreatedModalOpen);
   const { address, account, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
   const { avatarImage, backgroundImage } = getUserImages({ account });
@@ -194,6 +201,11 @@ export const Profile = (): JSX.Element => {
       }}
     >
       <>
+        <OrganizationCreatedModal
+          open={isOrgCreatedModalOpen}
+          onClose={() => setIsOrgCreatedModalOpen(false)}
+          numberOfMigratedProjects={adminProjects?.length || 0}
+        />
         {isProfileNotFound && <ProfileNotFound sx={{ mt: 22.5, mb: 27.25 }} />}
         {!isProfileNotFound && (
           <>

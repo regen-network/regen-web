@@ -38,6 +38,7 @@ export const OrganizationProfileStep = ({
   onTransferProfile,
   setIsSubmitting,
   setIsValid,
+  formRef,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
   const { createDao } = useCreateDao();
@@ -209,6 +210,7 @@ export const OrganizationProfileStep = ({
       />
       <EditProfileForm
         formId={ORGANIZATION_PROFILE_FORM_ID}
+        formRef={formRef}
         onSubmit={handleSubmit}
         initialValues={initialValues as EditProfileFormSchemaType}
         hideProfileType

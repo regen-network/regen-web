@@ -35,7 +35,7 @@ import {
   UPDATE,
 } from 'lib/constants/shared.constants';
 
-import Form from 'components/molecules/Form/Form';
+import Form, { FormRef } from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
@@ -65,6 +65,7 @@ export interface EditProfileFormProps extends Partial<FormStateSetter> {
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
   // Optional enhancements for reuse in Create Organization flow
   formId?: string;
+  formRef?: FormRef;
   hideProfileType?: boolean;
   nameLabel?: string;
   // Allows parent steps (e.g. Create Organization) to inject partial values
@@ -81,6 +82,7 @@ const EditProfileForm = ({
   onSuccess,
   onUpload,
   formId,
+  formRef,
   hideProfileType,
   nameLabel,
   prefillValues,
@@ -208,6 +210,7 @@ const EditProfileForm = ({
       className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-300 mb-[120px] rounded-[10px]"
       form={form}
       id={formId}
+      formRef={formRef}
       onSubmit={async data => {
         const hasError = validateEditProfileForm({
           setError: form.setError,

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
@@ -16,6 +16,7 @@ import { SAVE_TEXT } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { FormRef } from 'components/molecules/Form/Form';
 import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 import {
@@ -67,11 +68,24 @@ function CreateOrganizationContent({
     handleActiveStep,
     activeStep,
     percentComplete,
-    handleSaveNext,
     isLastStep,
     data,
     handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
+
+  // Refs for each form step
+  const orgProfileFormRef: FormRef = useRef(undefined);
+  const migrateProjectsFormRef: FormRef = useRef(undefined);
+  const personalInfoFormRef: FormRef = useRef(undefined);
+  const inviteMembersFormRef: FormRef = useRef(undefined);
+
+  // Map form IDs to refs
+  const formRefs: Record<string, FormRef> = {
+    [ORGANIZATION_PROFILE_FORM_ID]: orgProfileFormRef,
+    [MIGRATE_PROJECTS_FORM_ID]: migrateProjectsFormRef,
+    [PERSONAL_INFO_FORM_ID]: personalInfoFormRef,
+    [INVITE_MEMBERS_FORM_ID]: inviteMembersFormRef,
+  };
 
   const {
     daoAddress,
@@ -90,11 +104,11 @@ function CreateOrganizationContent({
     data,
     handleActiveStep,
     handleBack,
-    handleSaveNext,
     handleResetData,
     resumeStep,
     walletAddress,
     steps,
+    formRefs,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -114,6 +128,7 @@ function CreateOrganizationContent({
           onTransferProfile={handleApplyTransferProfile}
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
+          formRef={orgProfileFormRef}
         />
       )}
       {steps[activeStep].id === MIGRATE_PROJECTS_FORM_ID && (
@@ -121,6 +136,7 @@ function CreateOrganizationContent({
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
           projects={projects}
+          formRef={migrateProjectsFormRef}
         />
       )}
       {steps[activeStep].id === PERSONAL_INFO_FORM_ID && (

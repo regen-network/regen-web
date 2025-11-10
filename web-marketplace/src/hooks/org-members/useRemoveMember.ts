@@ -98,6 +98,8 @@ export function useRemoveMember(params: MembersHookParams) {
                   roleId,
                   memberAddress,
                   memberRoleId,
+                  withFeegrant: true,
+                  daoAddress,
                 }),
               },
             },

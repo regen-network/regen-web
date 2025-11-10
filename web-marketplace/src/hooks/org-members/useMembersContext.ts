@@ -10,10 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
-import {
-  OrganizationProject,
-  useUpdateAssignmentMutation,
-} from 'generated/graphql';
+import { useUpdateAssignmentMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';

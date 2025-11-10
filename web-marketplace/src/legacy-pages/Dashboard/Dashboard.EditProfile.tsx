@@ -165,10 +165,13 @@ export const EditProfile = () => {
             !organizationRbamAddress ||
             !organizationIdentifier
           ) {
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             throw new Error('Organization context not found.');
           }
 
-          setProcessingModalAtom(atom => (atom.open = true));
+          setProcessingModalAtom(modal => {
+            modal.open = true;
+          });
           shouldCloseProcessingModal = true;
 
           await updateOrganizationProfile({
@@ -216,10 +219,11 @@ export const EditProfile = () => {
             backgroundImage &&
             (twitterLink || websiteLink)
           ) {
-            setProfileBannerCard({
-              ...profileBannerCard,
-              [activeAccount?.id ?? '']: true,
-            });
+            const targetId = activeAccount?.id ?? '';
+            setProfileBannerCard(prev => ({
+              ...prev,
+              [targetId]: true,
+            }));
           }
         }
 
@@ -240,7 +244,9 @@ export const EditProfile = () => {
         fileNamesToDeleteRef.current = [];
       } finally {
         if (shouldCloseProcessingModal) {
-          setProcessingModalAtom(atom => (atom.open = false));
+          setProcessingModalAtom(modal => {
+            modal.open = false;
+          });
         }
       }
     },
@@ -293,9 +299,8 @@ export const EditProfile = () => {
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
-    if (!isOrgDashboard) {
-      refreshProfileData();
-    } else {
+    void refreshProfileData();
+    if (isOrgDashboard) {
       void refreshOrganizationData(organizationDaoAddress);
     }
   }, [

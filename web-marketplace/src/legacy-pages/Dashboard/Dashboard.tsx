@@ -42,6 +42,7 @@ import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
+import { orgRoles, projectRoles } from 'hooks/org-members/constants';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -70,13 +71,35 @@ type DashboardNavAccount = AccountOption & {
   onChainRoleId?: string;
 };
 
-const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = {
-  '1': ROLE_OWNER,
-  '2': ROLE_ADMIN,
-  '3': ROLE_EDITOR,
-  '4': ROLE_AUTHOR,
-  '5': ROLE_VIEWER,
-};
+// Legacy IDs cover pre-RBAM assignments still stored in the indexer.
+const legacyRoleIdEntries: Array<[number, string]> = [
+  [1, ROLE_OWNER],
+  [2, ROLE_ADMIN],
+  [3, ROLE_EDITOR],
+  [4, ROLE_AUTHOR],
+  [5, ROLE_VIEWER],
+];
+
+// Current IDs are derived from the hardcoded RBAM role tables.
+const derivedRoleIdEntries: Array<[number, string]> = [
+  [orgRoles.owner.roleId, ROLE_OWNER],
+  [orgRoles.admin.roleId, ROLE_ADMIN],
+  [orgRoles.editor.roleId, ROLE_EDITOR],
+  [orgRoles.viewer.roleId, ROLE_VIEWER],
+  [projectRoles.owner.roleId, ROLE_OWNER],
+  [projectRoles.admin.roleId, ROLE_ADMIN],
+  [projectRoles.editor.roleId, ROLE_EDITOR],
+  [projectRoles.author.roleId, ROLE_AUTHOR],
+  [projectRoles.viewer.roleId, ROLE_VIEWER],
+];
+
+const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = [
+  ...legacyRoleIdEntries,
+  ...derivedRoleIdEntries,
+].reduce<Record<string, string>>((acc, [roleId, role]) => {
+  acc[String(roleId)] = role;
+  return acc;
+}, {});
 
 export const Dashboard = () => {
   const { _ } = useLingui();
@@ -150,11 +173,10 @@ export const Dashboard = () => {
     return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
-  const daos =
-    activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [];
+  const daos = activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes;
 
   const organizationDao = useMemo(
-    () => daos.find(dao => !!dao?.organizationByDaoAddress) ?? undefined,
+    () => daos?.find(dao => !!dao?.organizationByDaoAddress) ?? undefined,
     [daos],
   );
 

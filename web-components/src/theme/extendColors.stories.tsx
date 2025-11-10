@@ -118,7 +118,7 @@ function Alias() {
 }
 
 export const AliasColors = {
-  render: () => <Alias />
+  render: () => <Alias />,
 };
 
 export const SemanticColors = {

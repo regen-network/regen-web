@@ -13,7 +13,6 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
       width: '85%',
       maxWidth: '350px',
       height: `calc(100% - ${theme.spacing(15)})`,
-      
     },
     '& .MuiBackdrop-root, & .MuiDrawer-paper': {
       top: theme.spacing(15),

@@ -297,7 +297,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<GreenPinIcon />} label="GreenPinIcon" />
     <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
-    <LabeledIcon icon={<GlobeIcon/>} label="GlobeIcon" />
+    <LabeledIcon icon={<GlobeIcon />} label="GlobeIcon" />
     <LabeledIcon
       icon={<HyloIcon color="grey" className="w-40 h-40" />}
       label="HyloIcon"

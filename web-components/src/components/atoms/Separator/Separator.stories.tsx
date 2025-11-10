@@ -15,4 +15,3 @@ export const Default: Story = {
   },
   render: args => <Separator {...args} />,
 };
-

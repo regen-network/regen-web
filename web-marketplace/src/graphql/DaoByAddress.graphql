@@ -1,0 +1,7 @@
+query DaoByAddress($address: String!) {
+  daoByAddress(address: $address) {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+  }
+}

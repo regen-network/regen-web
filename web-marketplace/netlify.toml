@@ -20,44 +20,9 @@ NEXT_PUBLIC_PROPOSAL_SINGLE_CODE_ID = "32"
 NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "27"
 NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
 NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "35"
-NEXT_PUBLIC_ORGANIZATION_DISABLED= "true"
+NEXT_PUBLIC_ORGANIZATION_DISABLED = "true"
 
 [context.dev.environment]
-NEXT_PUBLIC_SANITY_TAG = "default"
-NEXT_PUBLIC_SANITY_DATASET = "staging"
-NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
-NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
-NEXT_PUBLIC_LEDGER_CHAIN_ID = "regen-upgrade"
-NEXT_PUBLIC_LEDGER_CHAIN_NAME = "Regen - Upgrade Testnet"
-NEXT_PUBLIC_BLOCK_EXPLORER = "https://explorer-regen-upgrade.vitwit.com"
-NEXT_PUBLIC_SENTRY_ENVIRONMENT = "development"
-NEXT_PUBLIC_TOUCAN_LINK = "https://test.app.toucan.earth/?chainId=137"
-NEXT_PUBLIC_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
-NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID = "C56"
-NEXT_PUBLIC_BRIDGE = "true"
-NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
-NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
-NEXT_PUBLIC_CW_ADMIN_FACTORY_ADDR = "regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39"
-NEXT_PUBLIC_DAODAO_CORE_CODE_ID = "6"
-NEXT_PUBLIC_FILTER_CODE_ID = "14"
-NEXT_PUBLIC_PROTOCOLBUF_REGISTRY_CODE_ID = "15"
-NEXT_PUBLIC_RBAM_CODE_ID = "16"
-NEXT_PUBLIC_PROPOSAL_SINGLE_CODE_ID = "13"
-NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "11"
-NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
-NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
-
-# Main build configuration
-[build]
-base = "web-marketplace"
-command = "bun run build"
-publish = ".next"
-
-[[plugins]]
-package = "@netlify/plugin-nextjs"
-
-
-[context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
@@ -80,8 +45,6 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-9ENS4JTCWY"
 NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL = "https://regen-registry.s3.amazonaws.com/"
 NEXT_PUBLIC_MAPBOX_TOKEN = "pk.eyJ1IjoibWFyaWVnYXV0aGllciIsImEiOiJjazZxbTQxdzgxc3doM2xycmF0ZG9oaDFkIn0.vIa-uF0if11ZOInxPdZW1Q"
 NEXT_PUBLIC_MARKETPLACE_APP_URL = "https://dev.app.regen.network"
-NEXT_PUBLIC_MARKETPLACE_CLIENT = "terrasos"
-NEXT_PUBLIC_SUPPORTED_LOCALES = "en,es"
 NEXT_PUBLIC_REGEN_WORKER_ADDRESS = "regen1qsc8tsmtgrzg9az6jl7g2uf2zyevanngrge4p5"
 NEXT_PUBLIC_SANITY_PROJECT_ID = "jm12rn9t"
 NEXT_PUBLIC_SANITY_TAG = "default"
@@ -98,7 +61,17 @@ NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "11"
 NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
 NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
 
-[context."feat-next-migration".environment]
+# Main build configuration
+[build]
+base = "web-marketplace"
+command = "bun run build"
+publish = ".next"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+
+[context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"

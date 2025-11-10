@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useLingui } from '@lingui/react';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { safeLazy } from 'utils/safeLazy';
 
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
@@ -8,7 +9,6 @@ import { Loading } from 'web-components/src/components/loading';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CANCEL_SELL_ORDER_ACTION } from 'features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants';
-import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import { useNormalizedSellOrders } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 
 import { CancelSellOrderFlow } from '../../../features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow';

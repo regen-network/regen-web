@@ -1,8 +1,8 @@
 // hooks/useBridgeAvailability.ts
 import { useMemo } from 'react';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { useWallet } from 'lib/wallet/wallet';
-import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { useFetchBridgedEcocredits } from 'components/organisms/BridgedEcocreditsTable/hooks/useFetchBridgedEcocredits';
 

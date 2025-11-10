@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { useWallet } from 'lib/wallet/wallet';
 
 import useCancelSellOrderSubmit from 'features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit';
-import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 import useMsgClient from 'hooks/useMsgClient';
 

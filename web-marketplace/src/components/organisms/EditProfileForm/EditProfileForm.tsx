@@ -90,8 +90,8 @@ const EditProfileForm = ({
 }: EditProfileFormProps) => {
   const { _ } = useLingui();
   const formSchema = useMemo(
-    () => createEditProfileFormSchema({ requireProfileType: false }),
-    [],
+    () => createEditProfileFormSchema({ requireProfileType: false, _ }),
+    [_],
   );
   const form = useZodForm({
     schema: formSchema,

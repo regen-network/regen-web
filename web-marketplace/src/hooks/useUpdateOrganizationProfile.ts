@@ -1,5 +1,11 @@
 import { useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { sanitizeDaoParams } from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
+import {
+  DEFAULT_PROFILE_BG,
+  PROFILE_S3_PATH,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import {
   getExecuteActionsWasm,
   getMsgExecuteContract,
@@ -11,12 +17,6 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
-import { sanitizeDaoParams } from 'pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
-import {
-  DEFAULT_PROFILE_BG,
-  PROFILE_S3_PATH,
-} from 'pages/Dashboard/Dashboard.constants';
-import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import { orgRoles } from 'hooks/org-members/constants';
 import useMsgClient from 'hooks/useMsgClient';
 

@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import {
   cancelSellOrderAction,
   wrapRbamActions,
@@ -22,7 +23,6 @@ import { microToDenom } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useDashboardContext } from 'pages/Dashboard/Dashboard.context';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 import { orgRoles } from 'hooks/org-members/constants';
@@ -197,7 +197,6 @@ const useCancelSellOrderSubmit = ({
     setTxModalHeader,
     setTxModalTitle,
     setTxButtonTitle,
-    queryClient,
     isOrganizationDashboard,
     roleConfig,
     organizationRbamAddress,

@@ -84,6 +84,8 @@ export function useAddMember(params: MembersHookParams) {
               roleId,
               memberAddress: addressOrEmail,
               roleIdToAdd,
+              withFeegrant: true,
+              daoAddress,
             }),
           },
         },

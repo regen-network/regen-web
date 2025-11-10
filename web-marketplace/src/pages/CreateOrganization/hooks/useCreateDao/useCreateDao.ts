@@ -30,6 +30,11 @@ import {
   predictAllAddresses,
   sanitizeDaoParams,
 } from './useCreateDao.utils';
+import {
+  feegrantGrantAllowanceAction,
+  getRoleAuthorizationIds,
+} from 'hooks/org-members/utils';
+import { orgRoles } from 'hooks/org-members/constants';
 
 export const useCreateDao = () => {
   const { wallet } = useWallet();
@@ -165,7 +170,7 @@ export const useCreateDao = () => {
           voting_module_instantiate_info: votingModule,
         };
 
-        const executeMsg = {
+        const instantiateMsg = {
           instantiate2_contract_with_self_admin: {
             code_id: CODE_IDS.daoCore,
             instantiate_msg: encodeJsonToBase64(instantiatePayload),
@@ -175,10 +180,30 @@ export const useCreateDao = () => {
           },
         };
 
-        const executeResult = await signingCosmWasmClient.execute(
+        const { roleId, authorizationId } = getRoleAuthorizationIds({
+          type: 'organization',
+          currentUserRole: 'owner',
+          authorizationName: 'can_manage_members',
+        });
+        const feegrantMsg = {
+          execute_actions: {
+            actions: [
+              feegrantGrantAllowanceAction({
+                daoAddress,
+                authorizationId: authorizationId as number,
+                roleId: roleId as number,
+                memberAddress: walletAddress,
+              }),
+            ],
+          },
+        };
+
+        const executeResult = await signingCosmWasmClient.executeMultiple(
           walletAddress,
-          cwAdminFactoryAddr,
-          executeMsg,
+          [
+            { contractAddress: cwAdminFactoryAddr, msg: instantiateMsg },
+            { contractAddress: rbamAddress, msg: feegrantMsg },
+          ],
           gasMultiplier,
         );
 

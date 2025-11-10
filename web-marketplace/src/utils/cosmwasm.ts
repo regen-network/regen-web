@@ -7,18 +7,19 @@ type StargateAction = {
   typeUrl: string;
   value: Uint8Array;
 };
+export const getStargateAction = (action: StargateAction) => ({
+  authorization_id: action.authorizationId,
+  role_id: action.roleId,
+  msg: {
+    stargate: {
+      type_url: action.typeUrl,
+      value: toBase64(action.value),
+    },
+  },
+});
 export const getExecuteActionsStargate = (actions: StargateAction[]) => ({
   execute_actions: {
-    actions: actions.map(action => ({
-      authorization_id: action.authorizationId,
-      role_id: action.roleId,
-      msg: {
-        stargate: {
-          type_url: action.typeUrl,
-          value: toBase64(action.value),
-        },
-      },
-    })),
+    actions: actions.map(action => getStargateAction(action)),
   },
 });
 

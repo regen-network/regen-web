@@ -27,8 +27,8 @@ export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
 export const DEFAULT_PROFILE_TYPE = AccountType.User;
 export const DEFAULT_NAME = msg`Unnamed`;
 export const DEFAULT_PROFILE_BG = defaultProfileBg.src;
-export const DEFAULT_PROFILE_USER_AVATAR = defaultProfileAvatar;
-export const DEFAULT_PROFILE_COMPANY_AVATAR = defaultProfileCompany;
+export const DEFAULT_PROFILE_USER_AVATAR = defaultProfileAvatar.src;
+export const DEFAULT_PROFILE_COMPANY_AVATAR = defaultProfileCompany.src;
 
 export const PROFILE_S3_PATH = 'profiles';
 

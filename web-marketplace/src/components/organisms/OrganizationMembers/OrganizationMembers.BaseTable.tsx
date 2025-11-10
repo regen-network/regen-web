@@ -7,6 +7,7 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import {
   AccountsOrderBy,
+  DaoByAddressQuery,
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
@@ -50,6 +51,7 @@ export type BaseProps = {
   setDebouncedValue: UseStateSetter<string>;
   onSaveProfile: (data: PersonalProfileSchemaType) => Promise<void>;
   onUpload: (imageFile: File) => Promise<{ url: string }>;
+  daoWithAddress?: DaoByAddressQuery['daoByAddress'];
 };
 
 type VariantConfig = {
@@ -108,6 +110,7 @@ export const OrganizationMembersBase = ({
   onSaveProfile,
   onUpload,
   config: overrideConfig = {},
+  daoWithAddress,
 }: OrganizationMembersBaseProps) => {
   const cfg: VariantConfig = { ...defaultConfig[variant], ...overrideConfig };
   const { _ } = useLingui();
@@ -263,6 +266,7 @@ export const OrganizationMembersBase = ({
           }}
           accounts={accounts}
           setDebouncedValue={setDebouncedValue}
+          daoWithAddress={daoWithAddress}
         />
       )}
       {cfg.enableRemoveModal && (

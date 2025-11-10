@@ -26,6 +26,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #~ msgid " Exit to homepage "
 #~ msgstr ""
 
@@ -41,11 +43,11 @@ msgstr ""
 msgid ". Please use a different email address."
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:193
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "(drag map to choose location)"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:177
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:176
 msgid "(file will be associated with the project location by default)"
 msgstr ""
 
@@ -57,7 +59,7 @@ msgstr ""
 msgid "(preferable)"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:183
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:181
 msgid "(required if you added a project story)"
 msgstr ""
 
@@ -113,30 +115,30 @@ msgstr ""
 msgid "{minimumDuration, plural, one {{minimumDuration} year minimum} other {{minimumDuration} years minimum}}"
 msgstr ""
 
-#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
+#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:328
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:303
-#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:180
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:116
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:300
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:178
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:167
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:168
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:188
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:147
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:146
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:271
+#: src/components/organisms/PostForm/PostForm.tsx:270
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
@@ -263,7 +265,7 @@ msgstr ""
 msgid "1 Ton of CO2e"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:298
+#: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
@@ -470,7 +472,7 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:477
+#: src/components/organisms/PostForm/PostForm.tsx:476
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr ""
 
@@ -604,7 +606,7 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
 msgid "Any posts they have created or signed will remain."
 msgstr ""
 
@@ -642,7 +644,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
 msgid "Are you sure you want to remove this member from your organization?"
 msgstr ""
 
@@ -706,7 +708,7 @@ msgstr ""
 msgid "back to projects"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:267
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:265
 msgid "Background image"
 msgstr ""
 
@@ -1052,7 +1054,7 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:57
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 msgid "Change"
 msgstr ""
 
@@ -1109,7 +1111,7 @@ msgstr ""
 msgid "Choose a role for this user"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:192
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:191
 msgid "Choose a specific location on the map"
 msgstr ""
 
@@ -1222,7 +1224,7 @@ msgstr ""
 msgid "coming soon"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:284
+#: src/components/organisms/PostForm/PostForm.tsx:283
 msgid "Comment"
 msgstr ""
 
@@ -1356,7 +1358,7 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/hooks/org-members/useMembersContext.ts:163
+#: src/hooks/org-members/useMembersContext.ts:164
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
@@ -1828,8 +1830,8 @@ msgid "description"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:291
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:289
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:59
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -1886,7 +1888,7 @@ msgstr ""
 msgid "Draft saved!"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:152
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:151
 msgid "Drag map to choose location"
 msgstr ""
 
@@ -2132,7 +2134,7 @@ msgstr ""
 msgid "Enter email or address"
 msgstr ""
 
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:177
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
 msgstr ""
 
@@ -2215,6 +2217,10 @@ msgstr ""
 msgid "Factor:"
 msgstr ""
 
+#: src/hooks/org-members/useMembersContext.ts:201
+msgid "Failed for projects:\\n{0}"
+msgstr ""
+
 #: src/pages/CreateOrganization/CreateOrganization.constants.ts:33
 msgid "Failed to initialize signing client"
 msgstr ""
@@ -2245,7 +2251,7 @@ msgstr ""
 msgid "File is uploading"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:449
+#: src/components/organisms/PostForm/PostForm.tsx:448
 msgid "File locations can still be shared privately via a secret link."
 msgstr ""
 
@@ -2257,7 +2263,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:295
+#: src/components/organisms/PostForm/PostForm.tsx:294
 msgid "Files"
 msgstr ""
 
@@ -2270,7 +2276,7 @@ msgstr ""
 msgid "Files available on request"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:484
+#: src/components/organisms/PostForm/PostForm.tsx:483
 msgid "Files can still be shared privately via secret link."
 msgstr ""
 
@@ -2306,7 +2312,7 @@ msgstr ""
 msgid "For Buyers"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:54
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr ""
 
@@ -2753,7 +2759,7 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:135
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:134
 #: src/lib/constants/shared.constants.tsx:53
 #: src/pages/ProjectLocation/ProjectLocation.tsx:44
 #: src/pages/ProjectReview/ProjectReview.tsx:214
@@ -2827,19 +2833,19 @@ msgstr ""
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:500
+#: src/components/organisms/PostForm/PostForm.tsx:499
 msgid "Make the entire post private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:414
+#: src/components/organisms/PostForm/PostForm.tsx:413
 msgid "Make the entire post public"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:466
+#: src/components/organisms/PostForm/PostForm.tsx:465
 msgid "Make the files and location data private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:431
+#: src/components/organisms/PostForm/PostForm.tsx:430
 msgid "Make the location data private"
 msgstr ""
 
@@ -2933,7 +2939,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:49
 msgid "Member has been removed from your organization."
 msgstr ""
 
@@ -3078,8 +3084,8 @@ msgstr ""
 #~ msgid "My prefinance projects"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:239
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:237
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:56
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -3194,7 +3200,7 @@ msgstr ""
 msgid "No sell orders found"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:175
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:174
 msgid "No specific location"
 msgstr ""
 
@@ -3222,7 +3228,7 @@ msgstr ""
 msgid "Note: all location data can be made private on the main create post form."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:547
+#: src/components/organisms/PostForm/PostForm.tsx:546
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
@@ -3256,7 +3262,7 @@ msgstr ""
 msgid "old project admin"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:442
+#: src/components/organisms/PostForm/PostForm.tsx:441
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
@@ -3343,7 +3349,7 @@ msgstr ""
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
-#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:123
+#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:131
 msgid "Organization members have permissions for all projects associated with an organization. You can also skip this step and invite members later."
 msgstr ""
 
@@ -3437,13 +3443,13 @@ msgstr ""
 msgid "Personal profile"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
 msgid "Personal Profile"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:127
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:126
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
-#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:340
+#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:339
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:209
 #: src/lib/constants/shared.constants.tsx:98
 msgid "Photo credit"
@@ -3579,7 +3585,7 @@ msgstr ""
 msgid "Position and size your image"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:436
+#: src/components/organisms/PostForm/PostForm.tsx:435
 msgid "Post and files are public"
 msgstr ""
 
@@ -3591,7 +3597,7 @@ msgstr ""
 msgid "Post is private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:471
+#: src/components/organisms/PostForm/PostForm.tsx:470
 msgid "Post is public"
 msgstr ""
 
@@ -3710,7 +3716,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:402
+#: src/components/organisms/PostForm/PostForm.tsx:401
 msgid "Privacy settings"
 msgstr ""
 
@@ -3731,12 +3737,12 @@ msgstr ""
 #~ msgid "profile banner"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:249
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:247
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:56
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:57
 msgid "Profile Image"
 msgstr ""
 
@@ -3850,7 +3856,7 @@ msgstr ""
 msgid "project end date"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:390
+#: src/components/organisms/PostForm/PostForm.tsx:389
 msgid "Project files cannot be downloaded"
 msgstr ""
 
@@ -4087,7 +4093,7 @@ msgstr ""
 msgid "Regen Network Development, PBC"
 msgstr ""
 
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:176
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:175
 msgid "REGEN wallet address"
 msgstr ""
 
@@ -4318,11 +4324,11 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:54
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 msgid "SAVE"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:541
+#: src/components/organisms/PostForm/PostForm.tsx:540
 msgid "save draft"
 msgstr ""
 
@@ -4857,11 +4863,11 @@ msgstr ""
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:506
+#: src/components/organisms/PostForm/PostForm.tsx:505
 msgid "The post and all of its contents will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:513
+#: src/components/organisms/PostForm/PostForm.tsx:512
 msgid "The post and files still can be shared privately via secret link."
 msgstr ""
 
@@ -5016,7 +5022,7 @@ msgstr ""
 msgid "This name will appear on the retirement certificate."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:419
+#: src/components/organisms/PostForm/PostForm.tsx:418
 msgid "This post and all of its files will be visible."
 msgstr ""
 
@@ -5052,7 +5058,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr ""
@@ -5255,7 +5261,7 @@ msgstr ""
 msgid "USD"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:160
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:159
 msgid "Use file geolocation"
 msgstr ""
 
@@ -5372,7 +5378,7 @@ msgstr ""
 #~ msgid "VIEW ALL SELL ORDERS"
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:304
+#: src/components/organisms/PostForm/PostForm.tsx:303
 msgid "View all supported file types»"
 msgstr ""
 
@@ -5608,7 +5614,7 @@ msgstr ""
 msgid "Wilmot, Carbon<0>Plus</0> Grasslands Credits"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:285
+#: src/components/organisms/PostForm/PostForm.tsx:284
 msgid "Write a short comment or longer project update."
 msgstr ""
 
@@ -5652,7 +5658,7 @@ msgstr ""
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
 msgid "Yes, Remove"
 msgstr ""
 
@@ -5832,7 +5838,7 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
 msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
 msgstr ""
 

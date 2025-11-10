@@ -11,6 +11,7 @@ import { truncate } from 'web-components/src/utils/truncate';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useDebounce } from 'hooks/useDebounce';
 
 import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
@@ -39,17 +40,19 @@ export const InviteMemberModal = ({
   onSubmit,
   accounts,
   setDebouncedValue,
+  daoWithAddress,
 }: InviteMemberModalProps) => {
   const { _ } = useLingui();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
+  const currentDaoOrganization = useDaoOrganization();
 
   const form = useZodForm({
     schema: getInviteSchema(_),
     defaultValues: { role: undefined, addressOrEmail: '', visible: true },
     mode: 'onChange',
   });
-  const { control, setValue, reset, watch, register } = form;
+  const { control, setValue, reset, watch, register, setError } = form;
   const { isSubmitting, errors, isValid } = useFormState({ control });
   const role = watch('role');
   const addressOrEmail = watch('addressOrEmail');
@@ -71,6 +74,38 @@ export const InviteMemberModal = ({
 
   const [addressOrEmailDisplayValue, setAddressOrEmailDisplayValue] =
     useState('');
+
+  useEffect(() => {
+    if (daoWithAddress) {
+      setError('addressOrEmail', {
+        message: _(`You cannot add a DAO to an organization`),
+      });
+    }
+  }, [daoWithAddress, setError, _]);
+
+  useEffect(() => {
+    const accs = accounts?.getAccountsByNameOrAddr?.nodes || [];
+    if (accs.length === 1) {
+      const acc = accs[0];
+      // Check only assignment within an organization
+      const dao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+        dao => !!dao?.organizationByDaoAddress,
+      );
+      if (dao && currentDaoOrganization) {
+        // provided address already belongs to the current organization
+        if (dao.address === currentDaoOrganization.address) {
+          setError('addressOrEmail', {
+            message: _(`This user is already a member of the organization`),
+          });
+        } else {
+          // provided address belongs to a different organization
+          setError('addressOrEmail', {
+            message: _(`This member already belongs to another organization.`),
+          });
+        }
+      }
+    }
+  }, [accounts, currentDaoOrganization, setError, _]);
 
   return (
     <Modal
@@ -177,6 +212,7 @@ export const InviteMemberModal = ({
                 }}
               />
               {isInputFocused &&
+                !errors.addressOrEmail &&
                 (addressOrEmail || '') &&
                 !addressOrEmail.includes('(') &&
                 accountSuggestions.length > 0 && (
@@ -256,7 +292,7 @@ export const InviteMemberModal = ({
             }}
             cancelLabel={_(CANCEL_LABEL)}
             label={_(INVITE_LABEL)}
-            disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting || !!errors.addressOrEmail}
             type="submit"
             className="h-[53px] w-[138px] text-[18px]"
           />

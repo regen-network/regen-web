@@ -1,25 +1,37 @@
-query OrganizationById($id: String!) {
+query OrganizationById($id: UUID!) {
   organizationById(id: $id) {
-    organizationProjectsByOrganizationId {
-      nodes {
-        projectByProjectId {
-          adminDaoAddress
-          daoByAdminDaoAddress {
-            daoRbamAddress
-            cw4GroupAddress
-            assignmentsByDaoAddress {
-              nodes {
-                accountId
-                accountByAccountId {
-                  addr
-                  privateAccountById {
-                    email
-                    googleEmail
-                  }
+    ...organizationFields
+  }
+}
+
+fragment organizationFields on Organization {
+  id
+  name
+  description
+  image
+  bgImage
+  websiteLink
+  twitterLink
+  daoAddress
+  organizationProjectsByOrganizationId {
+    nodes {
+      projectByProjectId {
+        adminDaoAddress
+        daoByAdminDaoAddress {
+          daoRbamAddress
+          cw4GroupAddress
+          assignmentsByDaoAddress {
+            nodes {
+              accountId
+              accountByAccountId {
+                addr
+                privateAccountById {
+                  email
+                  googleEmail
                 }
-                roleName
-                onChainRoleId
               }
+              roleName
+              onChainRoleId
             }
           }
         }

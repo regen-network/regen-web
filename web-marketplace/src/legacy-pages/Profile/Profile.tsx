@@ -88,9 +88,7 @@ export const Profile = (): JSX.Element => {
         label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: Boolean(
-          !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
-        ),
+        hidden: Boolean(!address),
       },
       {
         label: _(msg`Projects`),
@@ -115,8 +113,6 @@ export const Profile = (): JSX.Element => {
     ],
     [
       _,
-      account?.hideEcocredits,
-      account?.hideRetirements,
       accountAddressOrId,
       address,
       adminProjects.length,

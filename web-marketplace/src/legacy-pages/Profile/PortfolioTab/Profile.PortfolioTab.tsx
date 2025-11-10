@@ -14,27 +14,14 @@ export const PortfolioTab = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      (!address || (!!account?.hideEcocredits && !!account?.hideRetirements)) &&
-      !isLoading
-    ) {
+    if (!address && !isLoading) {
       navigate(`/profiles/${accountAddressOrId}/projects`, { replace: true });
     }
-  }, [
-    account?.hideEcocredits,
-    account?.hideRetirements,
-    accountAddressOrId,
-    address,
-    isLoading,
-    navigate,
-  ]);
-
-  const hideEcocredits = !!account?.hideEcocredits;
-  const hideRetirements = !!account?.hideRetirements;
+  }, [accountAddressOrId, address, isLoading, navigate]);
 
   // Ecocredits
   const { credits, paginationParams, setPaginationParams } = useFetchEcocredits(
-    { address, hideEcocredits },
+    { address },
   );
 
   // Retirement certificates
@@ -42,13 +29,12 @@ export const PortfolioTab = (): JSX.Element => {
     retirements,
     retirementsSetPaginationParams,
     retirementsPaginationParams,
-  } = useFetchRetirements({ address, hideRetirements });
+  } = useFetchRetirements({ address });
 
   // Basket tokens
   const { basketTokens } = useFetchBaskets({
     address,
     credits,
-    hideEcocredits,
   });
 
   return (
@@ -61,8 +47,6 @@ export const PortfolioTab = (): JSX.Element => {
       onRetirementTableChange={retirementsSetPaginationParams}
       initialPaginationParams={paginationParams}
       isIgnoreOffset
-      hideEcocredits={hideEcocredits}
-      hideRetirements={hideRetirements}
     />
   );
 };

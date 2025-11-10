@@ -11328,7 +11328,7 @@ export type AccountByAddrQuery = (
   { __typename?: 'Query' }
   & { accountByAddr?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'hideEcocredits' | 'hideRetirements'>
+    & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink'>
     & { accountTranslationsById: (
       { __typename?: 'AccountTranslationsConnection' }
       & { nodes: Array<Maybe<(
@@ -11362,7 +11362,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress' | 'stripeConnectedAccountId'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'custodialAddress' | 'stripeConnectedAccountId'>
     & { accountTranslationsById: (
       { __typename?: 'AccountTranslationsConnection' }
       & { nodes: Array<Maybe<(
@@ -11555,25 +11555,6 @@ export type CreditClassByOnChainIdQuery = (
   )> }
 );
 
-export type CreditClassByUriQueryVariables = Exact<{
-  uri: Scalars['String'];
-}>;
-
-
-export type CreditClassByUriQuery = (
-  { __typename?: 'Query' }
-  & { creditClassByUri?: Maybe<(
-    { __typename?: 'CreditClass' }
-    & { creditClassVersionsById: (
-      { __typename?: 'CreditClassVersionsConnection' }
-      & { nodes: Array<Maybe<(
-        { __typename?: 'CreditClassVersion' }
-        & Pick<CreditClassVersion, 'name' | 'metadata'>
-      )>> }
-    ) }
-  )> }
-);
-
 export type GetAccountsByNameOrAddrQueryVariables = Exact<{
   input?: Maybe<Scalars['String']>;
 }>;
@@ -11631,6 +11612,66 @@ export type MoreProjectsQuery = (
       & MoreProjectFieldsFragment
     )>> }
   )> }
+);
+
+export type OrganizationByDaoAddressQueryVariables = Exact<{
+  daoAddress: Scalars['String'];
+}>;
+
+
+export type OrganizationByDaoAddressQuery = (
+  { __typename?: 'Query' }
+  & { organizationByDaoAddress?: Maybe<(
+    { __typename?: 'Organization' }
+    & OrganizationFieldsFragment
+  )> }
+);
+
+export type OrganizationByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type OrganizationByIdQuery = (
+  { __typename?: 'Query' }
+  & { organizationById?: Maybe<(
+    { __typename?: 'Organization' }
+    & OrganizationFieldsFragment
+  )> }
+);
+
+export type OrganizationFieldsFragment = (
+  { __typename?: 'Organization' }
+  & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink' | 'daoAddress'>
+  & { organizationProjectsByOrganizationId: (
+    { __typename?: 'OrganizationProjectsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'OrganizationProject' }
+      & { projectByProjectId?: Maybe<(
+        { __typename?: 'Project' }
+        & Pick<Project, 'adminDaoAddress'>
+        & { daoByAdminDaoAddress?: Maybe<(
+          { __typename?: 'Dao' }
+          & Pick<Dao, 'daoRbamAddress' | 'cw4GroupAddress'>
+          & { assignmentsByDaoAddress: (
+            { __typename?: 'AssignmentsConnection' }
+            & { nodes: Array<Maybe<(
+              { __typename?: 'Assignment' }
+              & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId'>
+              & { accountByAccountId?: Maybe<(
+                { __typename?: 'Account' }
+                & Pick<Account, 'addr'>
+                & { privateAccountById?: Maybe<(
+                  { __typename?: 'PrivateAccount' }
+                  & Pick<PrivateAccount, 'email' | 'googleEmail'>
+                )> }
+              )> }
+            )>> }
+          ) }
+        )> }
+      )> }
+    )>> }
+  ) }
 );
 
 export type ProjectByIdQueryVariables = Exact<{
@@ -11850,6 +11891,43 @@ export const MoreProjectFieldsFragmentDoc = gql`
   }
 }
     `;
+export const OrganizationFieldsFragmentDoc = gql`
+    fragment organizationFields on Organization {
+  id
+  name
+  description
+  image
+  bgImage
+  websiteLink
+  twitterLink
+  daoAddress
+  organizationProjectsByOrganizationId {
+    nodes {
+      projectByProjectId {
+        adminDaoAddress
+        daoByAdminDaoAddress {
+          daoRbamAddress
+          cw4GroupAddress
+          assignmentsByDaoAddress {
+            nodes {
+              accountId
+              accountByAccountId {
+                addr
+                privateAccountById {
+                  email
+                  googleEmail
+                }
+              }
+              roleName
+              onChainRoleId
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const AccountFieldsFragmentDoc = gql`
     fragment accountFields on Account {
   id
@@ -11947,8 +12025,6 @@ export const AccountByAddrDocument = gql`
     description
     websiteLink
     twitterLink
-    hideEcocredits
-    hideRetirements
     accountTranslationsById {
       nodes {
         languageCode
@@ -12034,8 +12110,6 @@ export const AccountByIdDocument = gql`
     twitterLink
     addr
     nonce
-    hideEcocredits
-    hideRetirements
     custodialAddress
     stripeConnectedAccountId
     accountTranslationsById {
@@ -12423,46 +12497,6 @@ export function useCreditClassByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQuer
 export type CreditClassByOnChainIdQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdQuery>;
 export type CreditClassByOnChainIdLazyQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdLazyQuery>;
 export type CreditClassByOnChainIdQueryResult = Apollo.QueryResult<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>;
-export const CreditClassByUriDocument = gql`
-    query CreditClassByUri($uri: String!) {
-  creditClassByUri(uri: $uri) {
-    creditClassVersionsById(last: 1) {
-      nodes {
-        name
-        metadata
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useCreditClassByUriQuery__
- *
- * To run a query within a React component, call `useCreditClassByUriQuery` and pass it any options that fit your needs.
- * When your component renders, `useCreditClassByUriQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCreditClassByUriQuery({
- *   variables: {
- *      uri: // value for 'uri'
- *   },
- * });
- */
-export function useCreditClassByUriQuery(baseOptions: Apollo.QueryHookOptions<CreditClassByUriQuery, CreditClassByUriQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CreditClassByUriQuery, CreditClassByUriQueryVariables>(CreditClassByUriDocument, options);
-      }
-export function useCreditClassByUriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CreditClassByUriQuery, CreditClassByUriQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CreditClassByUriQuery, CreditClassByUriQueryVariables>(CreditClassByUriDocument, options);
-        }
-export type CreditClassByUriQueryHookResult = ReturnType<typeof useCreditClassByUriQuery>;
-export type CreditClassByUriLazyQueryHookResult = ReturnType<typeof useCreditClassByUriLazyQuery>;
-export type CreditClassByUriQueryResult = Apollo.QueryResult<CreditClassByUriQuery, CreditClassByUriQueryVariables>;
 export const GetAccountsByNameOrAddrDocument = gql`
     query GetAccountsByNameOrAddr($input: String) {
   getAccountsByNameOrAddr(input: $input) {
@@ -12581,6 +12615,76 @@ export function useMoreProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MoreProjectsQueryHookResult = ReturnType<typeof useMoreProjectsQuery>;
 export type MoreProjectsLazyQueryHookResult = ReturnType<typeof useMoreProjectsLazyQuery>;
 export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, MoreProjectsQueryVariables>;
+export const OrganizationByDaoAddressDocument = gql`
+    query OrganizationByDaoAddress($daoAddress: String!) {
+  organizationByDaoAddress(daoAddress: $daoAddress) {
+    ...organizationFields
+  }
+}
+    ${OrganizationFieldsFragmentDoc}`;
+
+/**
+ * __useOrganizationByDaoAddressQuery__
+ *
+ * To run a query within a React component, call `useOrganizationByDaoAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationByDaoAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationByDaoAddressQuery({
+ *   variables: {
+ *      daoAddress: // value for 'daoAddress'
+ *   },
+ * });
+ */
+export function useOrganizationByDaoAddressQuery(baseOptions: Apollo.QueryHookOptions<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>(OrganizationByDaoAddressDocument, options);
+      }
+export function useOrganizationByDaoAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>(OrganizationByDaoAddressDocument, options);
+        }
+export type OrganizationByDaoAddressQueryHookResult = ReturnType<typeof useOrganizationByDaoAddressQuery>;
+export type OrganizationByDaoAddressLazyQueryHookResult = ReturnType<typeof useOrganizationByDaoAddressLazyQuery>;
+export type OrganizationByDaoAddressQueryResult = Apollo.QueryResult<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>;
+export const OrganizationByIdDocument = gql`
+    query OrganizationById($id: UUID!) {
+  organizationById(id: $id) {
+    ...organizationFields
+  }
+}
+    ${OrganizationFieldsFragmentDoc}`;
+
+/**
+ * __useOrganizationByIdQuery__
+ *
+ * To run a query within a React component, call `useOrganizationByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrganizationByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useOrganizationByIdQuery(baseOptions: Apollo.QueryHookOptions<OrganizationByIdQuery, OrganizationByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<OrganizationByIdQuery, OrganizationByIdQueryVariables>(OrganizationByIdDocument, options);
+      }
+export function useOrganizationByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationByIdQuery, OrganizationByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<OrganizationByIdQuery, OrganizationByIdQueryVariables>(OrganizationByIdDocument, options);
+        }
+export type OrganizationByIdQueryHookResult = ReturnType<typeof useOrganizationByIdQuery>;
+export type OrganizationByIdLazyQueryHookResult = ReturnType<typeof useOrganizationByIdLazyQuery>;
+export type OrganizationByIdQueryResult = Apollo.QueryResult<OrganizationByIdQuery, OrganizationByIdQueryVariables>;
 export const ProjectByIdDocument = gql`
     query ProjectById($id: UUID!) {
   projectById(id: $id) {

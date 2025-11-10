@@ -13,6 +13,8 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
+import { getOrganizationByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByIdQuery/getOrganizationByIdQuery';
 
 export const useProfileData = () => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
@@ -24,6 +26,7 @@ export const useProfileData = () => {
   const { data: csrfData, isFetching: isLoadingCsrfToken } = useQuery(
     getCsrfTokenQuery({}),
   );
+  // Account
   const { data: accountByAddr, isFetching: isLoadingAccountByAddr } = useQuery(
     getAccountByAddrQuery({
       client: graphqlClient,
@@ -40,6 +43,25 @@ export const useProfileData = () => {
       enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
     }),
   );
+  // Or organization
+  const {
+    data: organizationByDaoAddress,
+    isFetching: isLoadingOrganizationByDaoAddress,
+  } = useQuery(
+    getOrganizationByDaoAddressQuery({
+      client: graphqlClient,
+      daoAddress: accountAddressOrId ?? '',
+      enabled: isValidRegenAddress && !!graphqlClient && !!csrfData,
+    }),
+  );
+  const { data: organizationById, isFetching: isLoadingOrganizationById } =
+    useQuery(
+      getOrganizationByIdQuery({
+        client: graphqlClient,
+        id: accountAddressOrId ?? '',
+        enabled: !isValidRegenAddress && !!graphqlClient && !!csrfData,
+      }),
+    );
 
   const account = accountByAddr?.accountByAddr ?? accountById?.accountById;
 

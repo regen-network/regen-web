@@ -34,8 +34,6 @@ export interface PortfolioProps {
   retirementsPaginationParams?: TablePaginationParams;
   activePortfolioTab?: number;
   isIgnoreOffset?: boolean;
-  hideEcocredits?: boolean;
-  hideRetirements?: boolean;
 }
 
 export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
@@ -50,8 +48,6 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   retirementsPaginationParams,
   activePortfolioTab = 0,
   isIgnoreOffset = false,
-  hideEcocredits,
-  hideRetirements,
 }) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
@@ -75,7 +71,6 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             noEcocredits={noEcocredits}
           />
         ),
-        hidden: hideEcocredits,
       },
       {
         label: _(msg`Retirement Certificates`),
@@ -93,7 +88,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             initialPaginationParams={retirementsPaginationParams}
           />
         ),
-        hidden: hideRetirements || !retirements?.length,
+        hidden: !retirements?.length,
       },
       {
         label: _(msg`Basket Tokens`),
@@ -103,7 +98,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             renderActionButtons={renderBasketActionButtons}
           />
         ),
-        hidden: hideEcocredits || basketTokens.length === 0,
+        hidden: basketTokens.length === 0,
       },
     ],
     [
@@ -114,11 +109,9 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       initialPaginationParams,
       isIgnoreOffset,
       noEcocredits,
-      hideEcocredits,
       retirements,
       onRetirementTableChange,
       retirementsPaginationParams,
-      hideRetirements,
       basketTokens,
       renderBasketActionButtons,
       navigate,

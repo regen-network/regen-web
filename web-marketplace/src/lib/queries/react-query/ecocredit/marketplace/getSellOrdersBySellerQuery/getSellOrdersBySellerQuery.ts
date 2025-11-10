@@ -4,6 +4,7 @@ import {
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import {
+  keepPreviousData,
   QueryClient as ReactQueryClient,
   QueryObserverOptions,
 } from '@tanstack/react-query';
@@ -137,7 +138,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
         };
       });
     },
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
     refetchOnMount: 'always' as const,
     enabled: queryConfig.enabled,
   };

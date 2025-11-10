@@ -8,6 +8,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';

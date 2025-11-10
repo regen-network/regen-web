@@ -167,7 +167,9 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
         if (result.status === 'rejected') {
           setErrorBannerText(
             _(
-              msg`Updating Offchain Project ${selectedProjectsWithAddresses[idx].offChainId} failed: ${result.reason}`,
+              msg`Updating Offchain Project ${
+                selectedProjectsWithAddresses[idx].offChainId as string
+              } failed: ${result.reason}`,
             ),
           );
         }

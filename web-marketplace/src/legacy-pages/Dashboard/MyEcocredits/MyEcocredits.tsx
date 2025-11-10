@@ -223,7 +223,6 @@ export const MyEcocredits = (): JSX.Element => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
-  const accountAddress = wallet?.address;
   const {
     credits,
     reloadBalances,
@@ -316,10 +315,12 @@ export const MyEcocredits = (): JSX.Element => {
     [credits],
   );
 
-  const renderCreditActionButtons = useMemo(() => {
+  const renderCreditActionButtons = useMemo<
+    ((index: number) => JSX.Element | undefined) | undefined
+  >(() => {
     if (!canManagePortfolioActions || !hasTradableCredits) return undefined;
 
-    return (i: number) => {
+    const RenderCreditActionButtons = (i: number) => {
       if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
         return undefined;
       }
@@ -394,6 +395,11 @@ export const MyEcocredits = (): JSX.Element => {
 
       return <TableActionButtons buttons={buttons} />;
     };
+
+    RenderCreditActionButtons.displayName =
+      TableActionButtons.displayName ?? TableActionButtons.name;
+
+    return RenderCreditActionButtons;
   }, [
     _,
     arrowSx,
@@ -409,10 +415,12 @@ export const MyEcocredits = (): JSX.Element => {
     track,
   ]);
 
-  const renderBasketActionButtons = useMemo(() => {
+  const renderBasketActionButtons = useMemo<
+    ((index: number) => JSX.Element) | undefined
+  >(() => {
     if (!canManagePortfolioActions) return undefined;
 
-    return (i: number) => (
+    const RenderBasketActionButtons = (i: number) => (
       <TableActionButtons
         buttons={[
           {
@@ -425,6 +433,11 @@ export const MyEcocredits = (): JSX.Element => {
         ]}
       />
     );
+
+    RenderBasketActionButtons.displayName =
+      TableActionButtons.displayName ?? TableActionButtons.name;
+
+    return RenderBasketActionButtons;
   }, [_, canManagePortfolioActions, openTakeModal]);
 
   const permittedBatchDenoms = useMemo(() => {

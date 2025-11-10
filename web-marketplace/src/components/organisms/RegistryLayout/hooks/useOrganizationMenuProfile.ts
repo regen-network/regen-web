@@ -13,12 +13,6 @@ import type { AccountByIdQuery } from 'generated/graphql';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import type { Wallet } from 'lib/wallet/wallet';
 
-import { useOrganizationProgress } from 'pages/CreateOrganization/hooks/useOrganizationProgress';
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { getAddress } from '../RegistryLayout.utils';

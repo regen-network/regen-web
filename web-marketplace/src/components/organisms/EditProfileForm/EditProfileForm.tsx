@@ -36,8 +36,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
-import { FormStateSetter } from 'pages/CreateOrganization/CreateOrganization.types';
-import { useSetFormState } from 'pages/CreateOrganization/hooks/useSetFormState';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -88,8 +86,8 @@ const EditProfileForm = ({
 }: EditProfileFormProps) => {
   const { _ } = useLingui();
   const formSchema = useMemo(
-    () => createEditProfileFormSchema({ requireProfileType: false }),
-    [],
+    () => createEditProfileFormSchema({ requireProfileType: false, _ }),
+    [_],
   );
   const form = useZodForm({
     schema: formSchema,

@@ -6,7 +6,7 @@ import { AccountByIdQuery, AccountByIdQueryVariables } from 'generated/graphql';
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
 export type ReactQueryGetAccountByIdQueryResponse =
-  QueryObserverOptions<AccountByIdQuery>;
+  QueryObserverOptions<AccountByIdQuery | null>;
 
 export type ReactQueryGetAccountByIdQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;

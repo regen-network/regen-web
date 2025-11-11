@@ -13,8 +13,10 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
 import { useAtom, useSetAtom } from 'jotai';
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 import { useAttestEvents } from 'legacy-pages/Post/hooks/useAttestEvents';
 import { useDelete } from 'legacy-pages/Post/hooks/useDelete';
 import { useSharePrivateLink } from 'legacy-pages/Post/hooks/useSharePrivateLink';
@@ -217,8 +219,7 @@ export const DataStreamPost = ({
               author={{
                 name: creatorAccount?.name || _(DEFAULT_NAME),
                 type: creatorAccount?.type ?? 'USER',
-                image:
-                  creatorAccount?.image || getDefaultAvatar(creatorAccount),
+                image: creatorAccount?.image || DEFAULT_PROFILE_USER_AVATAR,
                 link: `${LINK_PREFIX}/profiles/${creatorAccount?.id}`,
                 timestamp: post.createdAt,
                 tag: creatorIsAdmin ? _(ADMIN) : undefined,

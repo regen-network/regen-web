@@ -1,21 +1,23 @@
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { AccountFieldsFragment, Maybe } from '../../generated/graphql';
-import { DEFAULT_NAME } from '../Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from '../Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from '../Dashboard/Dashboard.constants';
 
 export const getProjectStakeholderInitialValues = (
   _: TranslatorType,
-  party?: Maybe<AccountFieldsFragment>,
+  account?: Maybe<AccountFieldsFragment>,
 ) => {
-  return party
+  return account
     ? {
-        id: party.id,
-        creatorId: party.creatorId,
-        name: party.name || _(DEFAULT_NAME),
-        profileImage: party?.image || getDefaultAvatar(party),
-        profileType: party.type,
-        address: party.addr,
+        id: account.id,
+        creatorId: account.creatorId,
+        name: account.name || _(DEFAULT_NAME),
+        profileImage: account?.image || DEFAULT_PROFILE_USER_AVATAR,
+        profileType: account.type,
+        address: account.addr,
       }
     : null;
 };

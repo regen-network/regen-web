@@ -64,15 +64,23 @@ export const useProfileData = () => {
     );
 
   const account = accountByAddr?.accountByAddr ?? accountById?.accountById;
+  const organization =
+    organizationByDaoAddress?.organizationByDaoAddress ??
+    organizationById?.organizationById;
 
   const address = isValidRegenAddress
     ? accountAddressOrId
-    : accountById?.accountById?.addr;
+    : accountById?.accountById?.addr ?? organization?.daoAddress;
 
   return {
     address,
     account,
+    organization,
     isLoading:
-      isLoadingCsrfToken || isLoadingAccountByAddr || isLoadingAccountById,
+      isLoadingCsrfToken ||
+      isLoadingAccountByAddr ||
+      isLoadingAccountById ||
+      isLoadingOrganizationByDaoAddress ||
+      isLoadingOrganizationById,
   };
 };

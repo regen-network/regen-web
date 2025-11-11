@@ -3,8 +3,10 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { useProfileData } from 'legacy-pages/Profile/hooks/useProfileData';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
@@ -13,6 +15,7 @@ import {
   NormalizeProject,
   normalizeProjectWithMetadata,
 } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -26,36 +29,68 @@ type Params = {
   keepUnpublished?: boolean;
   adminAddress?: string | null;
   adminAccountId?: string;
+  organization?: ReturnType<typeof useProfileData>['organization'];
+  isLoading?: boolean;
 };
 
 export const useFetchProjectByAdmin = ({
   keepUnpublished = false,
   adminAddress,
   adminAccountId,
+  organization,
+  isLoading,
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  // Off chain projects
+  // for account
   const { data: accountData, isFetching: isAccountLoading } = useQuery(
     getAccountProjectsByIdQuery({
       id: adminAccountId,
       client: graphqlClient,
-      enabled: adminAccountId !== undefined,
+      enabled: adminAccountId !== undefined && !organization && !isLoading,
       languageCode: selectedLanguage,
     }),
   );
+  // or for organization
+  const offChainProjects = organization
+    ? organization.organizationProjectsByOrganizationId.nodes.map(
+        node => node?.projectByProjectId,
+      )
+    : accountData?.data?.accountById?.projectsByAdminAccountId?.nodes;
 
+  // On chain projects
+  // for account
   const { data: projectsData, isFetching: isOnChainProjectsLoading } = useQuery(
     getProjectsByAdminQuery({
-      enabled: !!adminAddress && !!queryClient,
+      enabled: !!adminAddress && !!queryClient && !organization && !isLoading,
       client: queryClient,
       request: { admin: adminAddress as string },
     }),
   );
-  const offChainProjects =
-    accountData?.data?.accountById?.projectsByAdminAccountId?.nodes;
+  // or for organization
+  const orgProjectsRes = useQueries({
+    queries:
+      organization?.organizationProjectsByOrganizationId.nodes?.map(project =>
+        getProjectQuery({
+          enabled: !!project?.projectByProjectId?.onChainId && !!queryClient,
+          client: queryClient,
+          request: {
+            projectId: project?.projectByProjectId?.onChainId as string,
+          },
+        }),
+      ) || [],
+  });
+  const orgProjects = orgProjectsRes
+    .map(projectRes => {
+      return projectRes.data?.project;
+    })
+    .filter(Boolean) as ProjectInfo[];
+  const isLoadingProjectsRes = orgProjectsRes.some(res => res.isLoading);
 
   const { data: sanityCreditClassData } = useQuery(
     getAllSanityCreditClassesQuery({
@@ -71,19 +106,16 @@ export const useFetchProjectByAdmin = ({
     isProjectsMetadataLoading,
     isClassesMetadataLoading,
   } = useFetchProjectsWithOrders({
-    projects: projectsData?.projects,
+    projects: projectsData?.projects || orgProjects,
     offChainProjects,
     sanityCreditClassData,
   });
 
+
   // Get data for projects that are only off chain
-  const onlyOffChainProjects =
-    adminAccountId === accountData?.data?.accountById?.id
-      ? offChainProjects?.filter(
-          project =>
-            !project?.onChainId && (project?.published || keepUnpublished),
-        )
-      : undefined;
+  const onlyOffChainProjects = offChainProjects?.filter(
+    project => !project?.onChainId && (project?.published || keepUnpublished),
+  );
 
   // Sanity projects
   const sanityProjectsResults = useQueries({
@@ -143,6 +175,7 @@ export const useFetchProjectByAdmin = ({
       isOnChainProjectsLoading ||
       isProjectsMetadataLoading ||
       isClassesMetadataLoading ||
-      sanityProjectsLoading,
+      sanityProjectsLoading ||
+      isLoadingProjectsRes,
   };
 };

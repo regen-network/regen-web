@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -10,8 +10,6 @@ import { Body } from 'web-components/src/components/typography/Body';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
-
-import { AccountType } from 'generated/graphql';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { COPIED, UNNAMED } from './DashboardNavigation.constants';
@@ -36,15 +34,7 @@ export const DashboardNavHeader = ({
 }: Props) => {
   const { name, address, image, id } = activeAccount;
 
-  const avatarSrc =
-    image ||
-    getDefaultAvatar({
-      ...activeAccount,
-      type:
-        activeAccount.type === 'user'
-          ? AccountType.User
-          : AccountType.Organization,
-    });
+  const avatarSrc = image || DEFAULT_PROFILE_USER_AVATAR;
 
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
 

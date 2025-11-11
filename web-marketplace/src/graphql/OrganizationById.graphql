@@ -16,6 +16,7 @@ fragment organizationFields on Organization {
   organizationProjectsByOrganizationId {
     nodes {
       projectByProjectId {
+        ...projectFields
         adminDaoAddress
         daoByAdminDaoAddress {
           daoRbamAddress

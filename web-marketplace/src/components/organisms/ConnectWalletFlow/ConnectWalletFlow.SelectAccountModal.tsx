@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import Modal from 'web-components/src/components/modal';
@@ -64,7 +66,7 @@ export const SelectAccountModal = ({
             <UserAvatar
               size="small"
               alt={_(msg`default avatar`)}
-              src={account.image || getDefaultAvatar(account)}
+              src={account.image || DEFAULT_PROFILE_USER_AVATAR}
             />
             <div className="ml-15">
               <Body size="lg" className="font-bold text-grey-600">

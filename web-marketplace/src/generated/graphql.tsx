@@ -11669,6 +11669,7 @@ export type OrganizationFieldsFragment = (
             )>> }
           ) }
         )> }
+        & ProjectFieldsFragment
       )> }
     )>> }
   ) }
@@ -11891,43 +11892,6 @@ export const MoreProjectFieldsFragmentDoc = gql`
   }
 }
     `;
-export const OrganizationFieldsFragmentDoc = gql`
-    fragment organizationFields on Organization {
-  id
-  name
-  description
-  image
-  bgImage
-  websiteLink
-  twitterLink
-  daoAddress
-  organizationProjectsByOrganizationId {
-    nodes {
-      projectByProjectId {
-        adminDaoAddress
-        daoByAdminDaoAddress {
-          daoRbamAddress
-          cw4GroupAddress
-          assignmentsByDaoAddress {
-            nodes {
-              accountId
-              accountByAccountId {
-                addr
-                privateAccountById {
-                  email
-                  googleEmail
-                }
-              }
-              roleName
-              onChainRoleId
-            }
-          }
-        }
-      }
-    }
-  }
-}
-    `;
 export const AccountFieldsFragmentDoc = gql`
     fragment accountFields on Account {
   id
@@ -12013,6 +11977,44 @@ export const ProjectFieldsFragmentDoc = gql`
 }
     ${AccountFieldsFragmentDoc}
 ${ProjectSellOrdersFieldsFragmentDoc}`;
+export const OrganizationFieldsFragmentDoc = gql`
+    fragment organizationFields on Organization {
+  id
+  name
+  description
+  image
+  bgImage
+  websiteLink
+  twitterLink
+  daoAddress
+  organizationProjectsByOrganizationId {
+    nodes {
+      projectByProjectId {
+        ...projectFields
+        adminDaoAddress
+        daoByAdminDaoAddress {
+          daoRbamAddress
+          cw4GroupAddress
+          assignmentsByDaoAddress {
+            nodes {
+              accountId
+              accountByAccountId {
+                addr
+                privateAccountById {
+                  email
+                  googleEmail
+                }
+              }
+              roleName
+              onChainRoleId
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    ${ProjectFieldsFragmentDoc}`;
 export const AccountByAddrDocument = gql`
     query AccountByAddr($addr: String!) {
   accountByAddr(addr: $addr) {

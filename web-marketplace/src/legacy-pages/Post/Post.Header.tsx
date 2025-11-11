@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import Banner from 'web-components/src/components/banner';
 import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';
@@ -158,7 +160,7 @@ export const PostHeader = ({
             name: creatorAccount.name || _(DEFAULT_NAME),
             link: `/profiles/${creatorAccount.id}`,
             type: creatorAccount.type,
-            image: creatorAccount.image || getDefaultAvatar(creatorAccount),
+            image: creatorAccount.image || DEFAULT_PROFILE_USER_AVATAR,
             timestamp: createdAt,
             tag: creatorIsAdmin ? _(ADMIN) : undefined,
           }}

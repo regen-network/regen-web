@@ -178,6 +178,7 @@ export default function CreateOrganizationPage(): JSX.Element {
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccount?.id,
     adminAddress: activeAccount?.addr,
+    keepUnpublished: true,
   });
 
   const projects = useMemo(

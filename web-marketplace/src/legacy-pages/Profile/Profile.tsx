@@ -8,10 +8,9 @@ import {
   profileVariantMapping,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 import {
+  getProfileImages,
   getSocialsLinks,
-  getUserImages,
 } from 'legacy-pages/Dashboard/Dashboard.utils';
-import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -42,7 +41,8 @@ import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
+import { useShowCreditClasses } from 'hooks/useShowCreditClasses';
 
 import { useProfileData } from './hooks/useProfileData';
 import { ProfileNotFound } from './Profile.NotFound';
@@ -53,26 +53,36 @@ export const Profile = (): JSX.Element => {
   const location = useLocation();
   const { _ } = useLingui();
 
-  const { address, account, isLoading } = useProfileData();
+  const { address, account, organization, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
-  const { avatarImage, backgroundImage } = getUserImages({ account });
-  const isProfileNotFound = !address && !account;
+
+  const profile = useMemo(
+    () => account || organization,
+    [account, organization],
+  );
+
+  const { avatarImage, backgroundImage } = useMemo(
+    () =>
+      getProfileImages({
+        profile,
+      }),
+    [profile],
+  );
+  const isProfileNotFound = !address && !profile;
   const profileLink = accountAddressOrId
     ? getProfileLink(accountAddressOrId)
     : '';
-  const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: address,
+
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
+  const { showCreditClasses, creditClasses } = useShowCreditClasses({
+    activeAddress: address,
     userAddress: wallet?.address,
   });
-
-  const { isIssuer, showCreditClasses } = useProfileItems({
-    address,
-    accountId: account?.id,
-  });
-
   const { adminProjects } = useFetchProjectByAdmin({
+    organization,
     adminAccountId: account?.id,
     adminAddress: address,
+    isLoading,
   });
 
   const { batchesWithSupply } = useFetchPaginatedBatches({
@@ -80,7 +90,7 @@ export const Profile = (): JSX.Element => {
   });
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
-  const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
+  const socialsLinks = useMemo(() => getSocialsLinks({ profile }), [profile]);
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -181,7 +191,7 @@ export const Profile = (): JSX.Element => {
 
   return (
     <WithLoader
-      isLoading={isLoading}
+      isLoading={isLoading || isLoadingIsIssuer}
       sx={{
         py: 10,
         display: 'flex',

@@ -1,5 +1,7 @@
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { truncate } from 'web-components/src/utils/truncate';
 
@@ -35,7 +37,9 @@ export const getProfile = ({
     ? {
         id: account.id,
         name: account.name ? account.name : _(DEFAULT_NAME),
-        profileImage: account.image ? account.image : getDefaultAvatar(account),
+        profileImage: account.image
+          ? account.image
+          : DEFAULT_PROFILE_USER_AVATAR,
         truncatedAddress: getAddress({
           walletAddress: account.addr ?? address,
           email: privActiveAccount?.email,

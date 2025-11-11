@@ -1,13 +1,11 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import HamburgerIcon from 'web-components/src/components/icons/HamburgerIcon';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
-
-import { AccountType } from 'generated/graphql';
 
 import { UNNAMED } from './DashboardNavigation.constants';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
@@ -26,15 +24,7 @@ export const DashboardNavigationMobileHeader = ({
   const { _ } = useLingui();
   const { name, image } = activeAccount;
 
-  const avatarSrc =
-    image ||
-    getDefaultAvatar({
-      ...activeAccount,
-      type:
-        activeAccount.type === 'user'
-          ? AccountType.User
-          : AccountType.Organization,
-    });
+  const avatarSrc = image || DEFAULT_PROFILE_USER_AVATAR;
 
   return (
     <div

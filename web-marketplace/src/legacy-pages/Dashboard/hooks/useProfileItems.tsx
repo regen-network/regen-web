@@ -1,11 +1,9 @@
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
-import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIsClassAdmin } from 'hooks/useQueryIsClassAdmin';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';
+import { useShowCreditClasses } from 'hooks/useShowCreditClasses';
 
 type Props = {
   address?: string | null;
@@ -17,19 +15,20 @@ export const useProfileItems = ({ address, accountId }: Props) => {
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
-  const isCreditClassCreator = useQueryIfCreditClassCreator({ address });
-  const { isProjectAdmin } = useQueryIsProjectAdmin({ address, accountId });
-  const isCreditClassAdmin = useQueryIsClassAdmin({ address });
-  const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: activeAddress,
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
+    address,
+  });
+  const { isProjectAdmin } = useQueryIsProjectAdmin({
+    address,
+    accountId,
   });
 
   const activeAccountProfile = !!activeAccountId && !accountId && !address;
   const showProjects = isProjectAdmin || activeAccountProfile;
 
-  const showCreditClasses =
-    (isCreditClassCreator || isCreditClassAdmin) && creditClasses.length > 0;
+  const { isCreditClassCreator, showCreditClasses } = useShowCreditClasses({
+    activeAddress: activeAddress,
+  });
 
   return {
     showProjects,

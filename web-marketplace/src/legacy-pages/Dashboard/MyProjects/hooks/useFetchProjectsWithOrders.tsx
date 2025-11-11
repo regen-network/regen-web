@@ -24,7 +24,7 @@ interface Response {
 
 interface Props {
   projects?: ProjectInfo[];
-  offChainProjects?: Maybe<ProjectFieldsFragment>[];
+  offChainProjects?: Maybe<ProjectFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
 }
 

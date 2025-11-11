@@ -2,16 +2,14 @@ import { Link } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useTheme } from '@mui/material';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/src/components/empty-state';
 import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
 import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 
-import { useWallet } from 'lib/wallet/wallet';
-
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { orgRoles } from 'hooks/org-members/constants';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
@@ -39,15 +37,12 @@ export const MyCreditBatches = (): JSX.Element => {
     ? isOrganizationOwner || isOrganizationAdmin
     : isIssuer;
 
-  const normalizedRole = organizationRole?.toLowerCase();
-  const roleConfig =
-    normalizedRole === 'owner'
-      ? orgRoles.owner
-      : normalizedRole === 'admin'
-      ? orgRoles.admin
-      : undefined;
-  const authorizationId = roleConfig?.authorizations.can_manage_credit_issuance;
-  const roleId = roleConfig?.roleId;
+  const { roleId, authorizationId } = getRoleAuthorizationIds({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credit_issuance',
+  });
+
   const hasOrgExecutionContext = Boolean(
     isOrganizationDashboard &&
       organizationDaoAddress &&
@@ -58,14 +53,14 @@ export const MyCreditBatches = (): JSX.Element => {
 
   const createBatchState = hasOrgExecutionContext
     ? {
-        issuerAddress: accountAddress ?? undefined,
+        issuerAddress: selectedAccountAddress,
         organizationDaoAddress,
         organizationRbamAddress,
         authorizationId,
         roleId,
       }
-    : accountAddress
-    ? { issuerAddress: accountAddress }
+    : selectedAccountAddress
+    ? { issuerAddress: selectedAccountAddress }
     : undefined;
 
   return (

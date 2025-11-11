@@ -140,14 +140,13 @@ export const OrganizationProfileStep = ({
 
         // Check if images are still default values, and if so, use empty strings
         const profileImageToSave =
-          values.profileImage === DEFAULT_PROFILE_COMPANY_AVATAR ||
-          values.profileImage === DEFAULT_PROFILE_USER_AVATAR
-            ? ''
+          values.profileImage === DEFAULT_PROFILE_COMPANY_AVATAR
+            ? null
             : values.profileImage;
 
         const backgroundImageToSave =
           values.backgroundImage === DEFAULT_PROFILE_BG
-            ? ''
+            ? null
             : values.backgroundImage;
 
         const daoResult = await createDao({

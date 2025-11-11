@@ -618,8 +618,8 @@ export const encodeJsonToBase64 = (object: any) =>
 export type SanitizeDaoParamsInput = {
   name: string;
   description?: string;
-  profileImage?: string;
-  backgroundImage?: string;
+  profileImage?: string | null;
+  backgroundImage?: string | null;
   websiteLink?: string;
   twitterLink?: string;
   organizationId: string;
@@ -774,7 +774,7 @@ async function resolveCodeChecksum(
 }
 
 export const rewriteMediaUrl = (
-  value: string | undefined,
+  value: string | undefined | null,
   params: { currentAccountId: string; organizationId: string },
   basePath: string,
 ): string | null => {

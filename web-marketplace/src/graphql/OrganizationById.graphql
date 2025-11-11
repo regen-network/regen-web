@@ -13,6 +13,20 @@ fragment organizationFields on Organization {
   websiteLink
   twitterLink
   daoAddress
+  daoByDaoAddress {
+    assignmentsByDaoAddress(condition: { visible: true }) {
+      nodes {
+        roleName
+        accountByAccountId {
+          id
+          name
+          image
+          addr
+          title
+        }
+      }
+    }
+  }
   organizationProjectsByOrganizationId {
     nodes {
       projectByProjectId {

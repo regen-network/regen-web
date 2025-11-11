@@ -34,6 +34,7 @@ import Faucet from 'legacy-pages/Faucet';
 import { homeLoader } from 'legacy-pages/Home/Home.loader';
 import { CreditBatchesTab } from 'legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab';
 import { CreditClassTab } from 'legacy-pages/Profile/CreditClassTab/CreditClassTab';
+import { MembersTab } from 'legacy-pages/Profile/MembersTab/MembersTab';
 import { PortfolioTab } from 'legacy-pages/Profile/PortfolioTab/Profile.PortfolioTab';
 import ProjectsTab from 'legacy-pages/Profile/ProjectsTab';
 import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
@@ -237,6 +238,7 @@ export const getRegenRoutes = ({
             <Route index element={<Navigate to="portfolio" />} />
             <Route path="portfolio" element={<PortfolioTab />} />
             <Route path="projects" element={<ProjectsTab />} />
+            <Route path="members" element={<MembersTab />} />
             <Route path="credit-classes" element={<CreditClassTab />} />
             <Route path="credit-batches" element={<CreditBatchesTab />} />
           </Route>

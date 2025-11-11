@@ -46,6 +46,7 @@ import { useShowCreditClasses } from 'hooks/useShowCreditClasses';
 
 import { useProfileData } from './hooks/useProfileData';
 import { ProfileNotFound } from './Profile.NotFound';
+import { getDashboardRoute } from './Profile.utils';
 
 export const Profile = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
@@ -109,6 +110,12 @@ export const Profile = (): JSX.Element => {
         ),
       },
       {
+        label: _(msg`Members`),
+        icon: <ProjectPageIcon linearGradient />,
+        href: `/profiles/${accountAddressOrId}/members`,
+        hidden: !organization,
+      },
+      {
         label: _(msg`Credit Classes`),
         icon: <CreditClassIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
@@ -140,37 +147,61 @@ export const Profile = (): JSX.Element => {
       .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
   );
-
+  const dashboardRoute = useMemo(
+    () => getDashboardRoute(!!organization),
+    [organization],
+  );
   const manageButtonConfig = [
     {
       label: _(msg`Manage Portfolio`),
       show: location.pathname.includes('/portfolio'),
-      link: '/dashboard/portfolio',
+      link: `${dashboardRoute}/portfolio`,
     },
     {
       label: _(msg`Manage Projects`),
       show: location.pathname.includes('/projects'),
-      link: '/dashboard/projects',
+      link: `${dashboardRoute}/projects`,
+    },
+    {
+      label: _(msg`Manage Members`),
+      show: location.pathname.includes('/members'),
+      link: `${dashboardRoute}/members`,
     },
     {
       label: _(msg`Manage Credit Classes`),
       show: location.pathname.includes('/credit-classes'),
-      link: '/dashboard/credit-classes',
+      link: `${dashboardRoute}/credit-classes`,
     },
     {
       label: _(msg`Manage Credit Batches`),
       show: location.pathname.includes('/credit-batches'),
-      link: '/dashboard/credit-batches',
+      link: `${dashboardRoute}/credit-batches`,
     },
   ];
 
-  const isOwnProfile =
-    (wallet?.address &&
-      address &&
-      wallet.address.toLowerCase() === address.toLowerCase()) ||
-    (privActiveAccount?.id &&
-      account?.id &&
-      privActiveAccount.id === account.id);
+  const isOwnProfile = useMemo(
+    () =>
+      organization
+        ? organization.daoByDaoAddress?.assignmentsByDaoAddress?.nodes.find(
+            assignment =>
+              assignment?.accountByAccountId &&
+              privActiveAccount?.id &&
+              assignment.accountByAccountId.id === privActiveAccount.id,
+          ) != null
+        : (wallet?.address &&
+            address &&
+            wallet.address.toLowerCase() === address.toLowerCase()) ||
+          (privActiveAccount?.id &&
+            account?.id &&
+            privActiveAccount.id === account.id),
+    [
+      organization,
+      wallet?.address,
+      address,
+      privActiveAccount?.id,
+      account?.id,
+    ],
+  );
 
   const addressDisplay = address ? truncate(address) : '';
 

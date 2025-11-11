@@ -11643,7 +11643,20 @@ export type OrganizationByIdQuery = (
 export type OrganizationFieldsFragment = (
   { __typename?: 'Organization' }
   & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink' | 'daoAddress'>
-  & { organizationProjectsByOrganizationId: (
+  & { daoByDaoAddress?: Maybe<(
+    { __typename?: 'Dao' }
+    & { assignmentsByDaoAddress: (
+      { __typename?: 'AssignmentsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Assignment' }
+        & Pick<Assignment, 'roleName'>
+        & { accountByAccountId?: Maybe<(
+          { __typename?: 'Account' }
+          & Pick<Account, 'id' | 'name' | 'image' | 'addr' | 'title'>
+        )> }
+      )>> }
+    ) }
+  )>, organizationProjectsByOrganizationId: (
     { __typename?: 'OrganizationProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'OrganizationProject' }
@@ -11987,6 +12000,20 @@ export const OrganizationFieldsFragmentDoc = gql`
   websiteLink
   twitterLink
   daoAddress
+  daoByDaoAddress {
+    assignmentsByDaoAddress(condition: {visible: true}) {
+      nodes {
+        roleName
+        accountByAccountId {
+          id
+          name
+          image
+          addr
+          title
+        }
+      }
+    }
+  }
   organizationProjectsByOrganizationId {
     nodes {
       projectByProjectId {

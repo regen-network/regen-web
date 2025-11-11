@@ -101,6 +101,22 @@ const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = [
   return acc;
 }, {});
 
+// ============================================================================
+// 🧪 TESTING OVERRIDE - Change this to test different organization roles
+// ============================================================================
+// Set to one of: ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER, or null
+// When null, uses the actual role from the database
+//
+// Role Permissions Quick Reference:
+// - ROLE_OWNER:  Can manage members, credits, batches, classes, projects, edit org
+// - ROLE_ADMIN:  Can manage members (except owner), credits, batches, classes, projects, edit org
+// - ROLE_EDITOR: Can update class metadata, edit org profile only
+// - ROLE_VIEWER: Can only view, no edit permissions (Edit Org Profile menu is hidden)
+//
+// Example: const OVERRIDE_ORG_ROLE: string | null = ROLE_VIEWER;
+const OVERRIDE_ORG_ROLE: string | null = null;
+// ============================================================================
+
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -341,7 +357,8 @@ export const Dashboard = () => {
     selectedAccount?.onChainRoleId,
   ]);
 
-  const organizationRole = organizationRoleActual;
+  // 🧪 Apply testing override if set
+  const organizationRole = OVERRIDE_ORG_ROLE ?? organizationRoleActual;
 
   const isOrganizationOwner = organizationRole === ROLE_OWNER;
   const isOrganizationAdmin = organizationRole === ROLE_ADMIN;
@@ -577,6 +594,7 @@ export const Dashboard = () => {
               hasProjects={!!hasProjects && hasProjects.length > 0}
               hasOrders={!ordersLoading && hasOrders}
               hasCreditBatches={hasCreditBatches}
+              canEditOrg={!isOrganizationViewer}
               mobileMenuOpen={mobileMenuOpen}
               onLogout={handleLogout}
               onCloseMobile={() => setMobileMenuOpen(false)}
@@ -640,7 +658,6 @@ export const Dashboard = () => {
                             : _(PERSONAL_DASHBOARD)}
                         </span>
                       </div>
-
                       {/* Main title */}
                       <Title
                         variant="h1"

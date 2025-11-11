@@ -123,7 +123,12 @@ function CreateOrganizationContent({
           projects={projects}
         />
       )}
-      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && <PersonalInfoStep />}
+      {steps[activeStep].id === PERSONAL_INFO_FORM_ID && (
+        <PersonalInfoStep
+          setIsSubmitting={setIsSubmitting}
+          setIsValid={setIsValid}
+        />
+      )}
       {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
       <SaveFooter
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
@@ -139,7 +144,7 @@ function CreateOrganizationContent({
 export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
-  const { activeAccount } = useAuth();
+  const { activeAccount, privActiveAccount, loading: authLoading } = useAuth();
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
@@ -164,9 +169,18 @@ export default function CreateOrganizationPage(): JSX.Element {
     [adminProjects],
   );
 
+  const hasProjects = !isLoadingAdminProjects && projects.length > 0;
+
+  const shouldShowPersonalInfoStep = useMemo(() => {
+    if (authLoading) return false;
+    const initialHasName = Boolean(activeAccount?.name?.trim());
+    const initialHasEmail = Boolean(privActiveAccount?.email?.trim());
+    return !(initialHasName && initialHasEmail);
+  }, [activeAccount?.name, authLoading, privActiveAccount?.email]);
+
   const steps = useMemo(
-    () => getCreateOrgSteps(_, !isLoadingAdminProjects && projects.length > 0),
-    [_, isLoadingAdminProjects, projects],
+    () => getCreateOrgSteps(_, hasProjects, shouldShowPersonalInfoStep),
+    [_, hasProjects, shouldShowPersonalInfoStep],
   );
 
   const resumeStep = useMemo(() => {
@@ -221,30 +235,32 @@ export default function CreateOrganizationPage(): JSX.Element {
           />
         </div>
       </SadBeeModal>
-      {isLoadingAdminProjects ? (
-        <Loading className="min-h-[100vh]" />
-      ) : (
-        <MultiStepTemplate
-          formId={CREATE_ORGANIZATION_FORM_ID}
-          initialValues={CREATE_ORG_INITIAL_VALUES}
-          steps={steps}
-          withLocalStorage
-          forceStep={resumeStep}
-          onClose={handleRequestClose}
-          closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
-          classes={{
-            titleWrap: 'pb-40 max-w-[unset]',
-            formWrap: 'max-w-[800px]',
-          }}
-        >
-          <CreateOrganizationContent
-            resumeStep={resumeStep}
-            walletAddress={walletAddress}
+      <div className="bg-bc-neutral-100 min-h-[100vh]">
+        {authLoading || isLoadingAdminProjects ? (
+          <Loading className="min-h-[100vh]" />
+        ) : (
+          <MultiStepTemplate
+            formId={CREATE_ORGANIZATION_FORM_ID}
+            initialValues={CREATE_ORG_INITIAL_VALUES}
             steps={steps}
-            projects={projects}
-          />
-        </MultiStepTemplate>
-      )}
+            withLocalStorage
+            forceStep={resumeStep}
+            onClose={handleRequestClose}
+            closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
+            classes={{
+              titleWrap: 'pb-40 max-w-[unset]',
+              formWrap: 'max-w-[800px]',
+            }}
+          >
+            <CreateOrganizationContent
+              resumeStep={resumeStep}
+              walletAddress={walletAddress}
+              steps={steps}
+              projects={projects}
+            />
+          </MultiStepTemplate>
+        )}
+      </div>
     </>
   );
 }

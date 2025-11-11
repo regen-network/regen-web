@@ -20,49 +20,60 @@ export default function useStorage<T>(
   key: string,
   withLocalStorage: boolean,
   initialValue?: T,
-): StorageApi<T> {
+) {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, saveData] = useState<T | undefined>(() => {
-    // this way, as a fn, this initialization happens just once
+  const [data, setData] = useState<T | undefined>(() => {
     if (withLocalStorage) {
       try {
         const value = localStorage.getItem(key);
         return value ? JSON.parse(value) : initialValue;
-      } catch (err) {
+      } catch {
         return initialValue;
       }
-    } else return undefined;
+    }
+    return undefined;
   });
 
-  useEffect(() => {
-    setIsLoading(false);
-    if (withLocalStorage && data) {
-      const storedValue = localStorage.getItem(key);
-      const currentValue = storedValue ? JSON.parse(storedValue) : {};
-      if (!_.isEqual(data, currentValue)) {
-        try {
-          localStorage.setItem(key, JSON.stringify(data));
-          dispatchStorageEvent(key);
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.log(err);
-        }
+  const persist = (value: T | undefined) => {
+    if (!withLocalStorage) return;
+    try {
+      if (value === undefined) {
+        localStorage.removeItem(key);
+      } else {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+      dispatchStorageEvent(key);
+    } catch (err) {
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err);
       }
     }
-  }, [data, key, withLocalStorage]);
+  };
 
-  // TODO: Remove data (key/value)
+  const saveData = (value: T) => {
+    // persist first so it survives any immediate unmount
+    persist(value);
+    setData(value);
+  };
+
+  useEffect(() => {
+    // finish bootstrapping
+    setIsLoading(false);
+  }, []);
+
   const removeData = (): void => {
     try {
       if (withLocalStorage) {
         localStorage.removeItem(key);
         dispatchStorageEvent(key);
       }
-      // reset state to initial values
-      saveData(initialValue);
+      setData(initialValue);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
     }
   };
 

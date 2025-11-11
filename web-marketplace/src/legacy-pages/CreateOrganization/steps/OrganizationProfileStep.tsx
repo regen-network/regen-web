@@ -120,6 +120,7 @@ export const OrganizationProfileStep = ({
         setTransferHandled(true);
         setShowTransferModal(false);
         const payload: OrganizationMultiStepData = {
+          ...(data ?? {}),
           ...values,
           dao: {
             ...(data?.dao ?? {
@@ -154,6 +155,7 @@ export const OrganizationProfileStep = ({
         setShowTransferModal(false);
 
         const payload: OrganizationMultiStepData = {
+          ...(data ?? {}),
           ...values,
           dao: {
             ...daoResult,

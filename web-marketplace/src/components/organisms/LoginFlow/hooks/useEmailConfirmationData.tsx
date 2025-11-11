@@ -32,11 +32,15 @@ import {
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
   isConnectingRef?: React.MutableRefObject<boolean>;
+  onVerificationSuccess?: () => Promise<void> | void;
+  showSuccessBanner?: boolean;
 };
 
 export const useEmailConfirmationData = ({
   emailConfirmationText,
   isConnectingRef,
+  onVerificationSuccess,
+  showSuccessBanner = true,
 }: EmailConfirmationDataParams) => {
   const { _ } = useLingui();
   const reactQueryClient = useQueryClient();
@@ -92,7 +96,11 @@ export const useEmailConfirmationData = ({
           await reactQueryClient.invalidateQueries({
             queryKey: [GET_ACCOUNTS_QUERY_KEY],
           });
-          setBannerText(emailConfirmationText ?? _(EMAIL_CONFIRMATION_SUCCES));
+          if (showSuccessBanner) {
+            setBannerText(
+              emailConfirmationText ?? _(EMAIL_CONFIRMATION_SUCCES),
+            );
+          }
           onConfirmationModalClose();
           if (isConnectingRef) isConnectingRef.current = true;
           if (response?.user?.accountId)
@@ -100,6 +108,9 @@ export const useEmailConfirmationData = ({
               id: response.user.accountId,
               date: new Date().toUTCString(),
             });
+          if (onVerificationSuccess) {
+            await onVerificationSuccess();
+          }
         },
         setEmailModalErrorCode,
         track,

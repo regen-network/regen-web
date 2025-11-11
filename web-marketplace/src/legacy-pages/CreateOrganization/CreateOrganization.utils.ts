@@ -2,7 +2,10 @@ import type { AccountByIdQuery } from 'generated/graphql';
 import { AccountType } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { FormData } from 'components/templates/MultiStepTemplate/MultiStep.context';
+
 import {
+  CREATE_ORGANIZATION_FORM_ID,
   INVITE_MEMBERS,
   INVITE_MEMBERS_FORM_ID,
   MIGRATE_PROJECTS,
@@ -13,6 +16,7 @@ import {
   PERSONAL_INFO,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
+import { OrganizationMultiStepData } from './hooks/useOrganizationFlow';
 
 export const hasTransferableProfile = (
   account?: AccountByIdQuery['accountById'],
@@ -30,8 +34,25 @@ export const hasTransferableProfile = (
   );
 };
 
-export const getCreateOrgSteps = (_: TranslatorType, hasProjects: boolean) =>
-  (
+export const getCreateOrgSteps = (
+  _: TranslatorType,
+  hasProjects: boolean,
+  showPersonalInfoStep: boolean,
+) => {
+  let localStorageValue: FormData<OrganizationMultiStepData> | null = null;
+  try {
+    const value = localStorage.getItem(CREATE_ORGANIZATION_FORM_ID);
+    if (value) localStorageValue = JSON.parse(value);
+  } catch {}
+
+  const forceProjectsMigrationStep =
+    'selectedProjectIds' in (localStorageValue?.formValues ?? {});
+
+  const forceProfileInfoStep =
+    'contactName' in (localStorageValue?.formValues ?? {}) &&
+    'contactEmail' in (localStorageValue?.formValues ?? {});
+
+  return (
     [
       {
         id: ORGANIZATION_PROFILE_FORM_ID,
@@ -54,4 +75,13 @@ export const getCreateOrgSteps = (_: TranslatorType, hasProjects: boolean) =>
         title: _(INVITE_MEMBERS),
       },
     ] as const
-  ).filter(step => (step.id === MIGRATE_PROJECTS_FORM_ID ? hasProjects : true));
+  ).filter(step => {
+    if (step.id === MIGRATE_PROJECTS_FORM_ID) {
+      return forceProjectsMigrationStep || hasProjects;
+    }
+    if (step.id === PERSONAL_INFO_FORM_ID) {
+      return forceProfileInfoStep || showPersonalInfoStep;
+    }
+    return true;
+  });
+};

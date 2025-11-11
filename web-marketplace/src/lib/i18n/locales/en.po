@@ -18,9 +18,16 @@ msgstr ""
 msgid "/+Z5u4"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
-msgid " Exit to homepage "
-msgstr ""
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#~ msgid " Exit to homepage "
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:97
 msgid "- see less"
@@ -111,8 +118,8 @@ msgstr ""
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:121
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:299
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:117
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:303
 #: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:202
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
@@ -277,7 +284,7 @@ msgstr ""
 msgid "A brief description of your ecological impact project and the property on which it is implemented. This is your elevator pitch to credit buyers."
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:32
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:36
 msgid "A connected wallet is required to create an organization."
 msgstr ""
 
@@ -342,7 +349,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:34
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:38
 msgid "Active account is required to create an organization."
 msgstr ""
 
@@ -589,12 +596,12 @@ msgstr ""
 msgid "An ecosystem has insufficient data when there is <0>no adequate information to make a direct or indirect assessment</0> of its risk of collapse."
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:36
-msgid "An organization DAO address is required to migrate projects"
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:33
+msgid "An email is required to send you notifications related to your organization."
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:35
-msgid "An organization id is required to migrate projects"
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:39
+msgid "An organization is required to migrate projects"
 msgstr ""
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:78
@@ -642,8 +649,8 @@ msgstr ""
 msgid "Are you sure you want to delete this post?"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:18
-#: src/lib/constants/shared.constants.tsx:87
+#: src/lib/constants/shared.constants.tsx:86
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:18
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
@@ -711,11 +718,7 @@ msgstr ""
 msgid "back to projects"
 msgstr ""
 
-#: src/components/molecules/PlanStepper.tsx:30
-msgid "background"
-msgstr ""
-
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:265
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:267
 msgid "Background image"
 msgstr ""
 
@@ -1004,7 +1007,7 @@ msgid "Cancel"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:37
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:20
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:20
 msgid "CANCEL"
 msgstr ""
 
@@ -1196,7 +1199,7 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:16
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:16
 msgid "close create organization"
 msgstr ""
 
@@ -1332,7 +1335,11 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:170
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:34
+msgid "Contact name is required."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:169
 msgid "Contributes minimally"
 msgstr ""
 
@@ -1433,7 +1440,7 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
-#: src/components/layout/Layout.Header.tsx:109
+#: src/components/organisms/RegistryLayout/RegistryLayout.Header.tsx:104
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr ""
 
@@ -1793,7 +1800,7 @@ msgstr ""
 msgid "Data stream"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:24
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:24
 msgid "Data will be transferred from this profile:"
 msgstr ""
 
@@ -1836,8 +1843,8 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:108
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:287
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:104
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:291
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
@@ -2108,6 +2115,10 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:32
+msgid "Email address"
+msgstr ""
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:31
 msgid "Email or REGEN address"
 msgstr ""
@@ -2224,7 +2235,7 @@ msgstr ""
 msgid "Factor:"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:33
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:37
 msgid "Failed to initialize signing client"
 msgstr ""
 
@@ -2291,7 +2302,7 @@ msgstr ""
 msgid "find another credit card project"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:15
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:15
 msgid "Finish"
 msgstr ""
 
@@ -2479,7 +2490,7 @@ msgstr ""
 msgid "If you merge these accounts, you can log in with either your wallet address, email or google  to the same account."
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:19
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:19
 msgid "If you proceed, you will lose all the unsaved changes you made. This cannot be undone."
 msgstr ""
 
@@ -2499,11 +2510,11 @@ msgstr ""
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:28
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:28
 msgid "If you would like to migrate your personal account projects to your new organization, select the projects below. This is optional."
 msgstr ""
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:33
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:31
 msgid "If you’d prefer retired credits, please modify your choice on the <0>previous screen.</0>"
 msgstr ""
 
@@ -2589,12 +2600,12 @@ msgstr ""
 msgid "Invite Member"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:13
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:13
 msgid "Invite Members"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
-#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:11
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:35
+#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:11
 msgid "Invite teammates to collaborate on your organization."
 msgstr ""
 
@@ -2744,6 +2755,8 @@ msgstr ""
 
 #: src/pages/CreateOrganization/CreateOrganization.constants.ts:24
 #: src/pages/CreateOrganization/steps/MigrateProjectsStep.tsx:10
+#~ msgid "Link or migrate existing projects to your organization."
+#~ msgstr ""
 #~ msgid "Link or migrate existing projects to your organization."
 #~ msgstr ""
 
@@ -3009,15 +3022,15 @@ msgstr ""
 msgid "Migrate project"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:10
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:10
 msgid "Migrate Projects"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:11
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:11
 msgid "Migrate Projects from Personal Account"
 msgstr ""
 
-#: src/components/organisms/BasketOverview/BasketOverview.tsx:156
+#: src/components/organisms/BasketOverview/BasketOverview.tsx:147
 msgid "min start date"
 msgstr ""
 
@@ -3093,10 +3106,11 @@ msgstr ""
 #~ msgid "My prefinance projects"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:237
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:239
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:203
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:31
+#: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
 msgstr ""
 
@@ -3241,11 +3255,11 @@ msgstr ""
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:29
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:29
 msgid "Note: Migrating a project will also migrate all of its tradable credits and active sell orders."
 msgstr ""
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:83
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:82
 msgid "NOTE: Only project page creation and user profile creation available with email / social log in."
 msgstr ""
 
@@ -3358,7 +3372,8 @@ msgstr ""
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:27
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:27
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
 msgid "Organization Name"
 msgstr ""
 
@@ -3366,7 +3381,7 @@ msgstr ""
 msgid "Organization profile"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:9
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:9
 msgid "Organization Profile"
 msgstr ""
 
@@ -3439,7 +3454,7 @@ msgstr ""
 msgid "Personal Dashboard"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:12
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:12
 msgid "Personal Info"
 msgstr ""
 
@@ -3477,6 +3492,10 @@ msgstr ""
 
 #: src/legacy-pages/VerifyEmail/VerifyEmail.tsx:45
 msgid "Please confirm your email address"
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:40
+msgid "Please confirm your email to continue."
 msgstr ""
 
 #: src/config/contents.ts:3
@@ -3740,7 +3759,7 @@ msgstr ""
 #~ msgid "profile banner"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:247
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:249
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
@@ -3977,8 +3996,7 @@ msgstr ""
 msgid "projects tabs"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:30
-#: src/legacy-pages/CreateOrganization/steps/PersonalInfoStep.tsx:11
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:30
 msgid "Provide personal contact information for this organization."
 msgstr ""
 
@@ -4562,7 +4580,7 @@ msgstr ""
 msgid "Size in hectares or acres"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:25
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:25
 msgid "SKIP"
 msgstr ""
 
@@ -4595,7 +4613,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:169
+#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:171
 msgid "Something went wrong while creating the organization."
 msgstr ""
 
@@ -5176,7 +5194,7 @@ msgstr ""
 msgid "Traditional grazing"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:22
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:22
 msgid "Transfer organization profile data from your personal account to your new organization profile?"
 msgstr ""
 
@@ -5292,7 +5310,7 @@ msgstr ""
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:14
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:14
 msgid "User"
 msgstr ""
 
@@ -5650,7 +5668,7 @@ msgstr ""
 msgid "yes, discard"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:21
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:21
 msgid "YES, DISCARD"
 msgstr ""
 
@@ -5678,11 +5696,11 @@ msgstr ""
 msgid "yes, remove & connect"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:26
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:26
 msgid "YES, TRANSFER PROFILE"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:17
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:17
 msgid "You already belong to an organization. Please manage your existing organization from your dashboard."
 msgstr ""
 
@@ -5710,7 +5728,7 @@ msgstr ""
 msgid "You can customize the project page url below."
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:23
+#: src/pages/CreateOrganization/CreateOrganization.constants.ts:23
 msgid "You can edit this profile data on the next step."
 msgstr ""
 

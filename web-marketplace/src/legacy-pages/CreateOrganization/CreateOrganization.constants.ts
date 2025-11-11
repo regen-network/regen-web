@@ -28,12 +28,17 @@ export const CREATE_ORG_ORGANIZATION_NAME_LABEL = msg`Organization Name`;
 export const CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION = msg`If you would like to migrate your personal account projects to your new organization, select the projects below. This is optional.`;
 export const CREATE_ORG_MIGRATE_PROJECTS_NOTE = msg`Note: Migrating a project will also migrate all of its tradable credits and active sell orders.`;
 export const CREATE_ORG_PERSONAL_INFO_DESCRIPTION = msg`Provide personal contact information for this organization.`;
+export const CREATE_ORG_PERSONAL_INFO_NAME_LABEL = msg`Name`;
+export const CREATE_ORG_PERSONAL_INFO_EMAIL_LABEL = msg`Email address`;
+export const CREATE_ORG_PERSONAL_INFO_EMAIL_HELPER = msg`An email is required to send you notifications related to your organization.`;
+export const CREATE_ORG_PERSONAL_INFO_NAME_REQUIRED = msg`Contact name is required.`;
 export const CREATE_ORG_INVITE_MEMBERS_DESCRIPTION = msg`Invite teammates to collaborate on your organization.`;
 export const CREATE_ORG_WALLET_REQUIRED_ERROR = msg`A connected wallet is required to create an organization.`;
 export const CREATE_ORG_SIGNING_CLIENT_ERROR = msg`Failed to initialize signing client`;
 export const CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR = msg`Active account is required to create an organization.`;
 export const CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR = msg`An organization id is required to migrate projects`;
 export const CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR = msg`An organization DAO address is required to migrate projects`;
+export const CREATE_ORG_EMAIL_PENDING_MESSAGE = msg`Please confirm your email to continue.`;
 export const CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR = msg`CW Admin Factory address is not configured.`;
 
 export type CreateOrgInitialValues = {};

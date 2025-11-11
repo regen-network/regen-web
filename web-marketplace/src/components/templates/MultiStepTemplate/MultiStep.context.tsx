@@ -141,7 +141,6 @@ export function MultiStepProvider<T extends object>({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-
   const handleSave = (
     formValues: T | {},
     nextStep: number,

@@ -44,7 +44,10 @@ export default function useStorage<T>(
       }
       dispatchStorageEvent(key);
     } catch (err) {
-      console.log(err);
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
     }
   };
 
@@ -67,7 +70,10 @@ export default function useStorage<T>(
       }
       setData(initialValue);
     } catch (err) {
-      console.log(err);
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
     }
   };
 

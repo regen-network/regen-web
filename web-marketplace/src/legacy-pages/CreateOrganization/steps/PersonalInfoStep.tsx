@@ -59,6 +59,41 @@ export const PersonalInfoStep = ({
   const [pendingValues, setPendingValues] =
     useState<PersonalInfoFormValues | null>(null);
 
+  const accountName = activeAccount?.name?.trim() ?? '';
+  const accountEmail = privActiveAccount?.email?.trim() ?? '';
+
+  const defaultValues = useMemo<PersonalInfoFormValues>(
+    () => ({
+      name: (data?.contactName ?? accountName) || '',
+      email: accountEmail || data?.contactEmail || '',
+    }),
+    [accountName, accountEmail, data?.contactEmail, data?.contactName],
+  );
+
+  const { name: defaultName, email: defaultEmail } = defaultValues;
+  const hasAccountEmail = accountEmail.length > 0;
+
+  const form = useZodForm({
+    schema: getPersonalInfoSchema(_),
+    defaultValues,
+    mode: 'onChange',
+  });
+
+  const {
+    register,
+    reset,
+    trigger,
+    formState: {
+      errors,
+      isSubmitting: formIsSubmitting,
+      isValid: formIsValid,
+      dirtyFields,
+      submitCount,
+    },
+  } = form;
+
+  const getFormValues = form.getValues;
+
   const refreshProfileData = useCallback(async () => {
     if (wallet?.address) {
       await reactQueryClient.invalidateQueries({
@@ -96,7 +131,7 @@ export const PersonalInfoStep = ({
   const onVerificationSuccess = useCallback(async () => {
     if (pendingValues) {
       const currentName = (
-        (getValues('name') as string | undefined) ?? ''
+        (getFormValues('name') as string | undefined) ?? ''
       ).trim();
       const contactName =
         currentName.length > 0 ? currentName : pendingValues.name;
@@ -111,7 +146,7 @@ export const PersonalInfoStep = ({
       handleSaveNext(payload);
       setPendingValues(null);
     }
-  }, [data, handleSaveNext, pendingValues, updateProfileName]);
+  }, [data, getFormValues, handleSaveNext, pendingValues, updateProfileName]);
 
   const {
     email: modalEmail,
@@ -128,42 +163,8 @@ export const PersonalInfoStep = ({
     onVerificationSuccess,
   });
 
-  const accountName = activeAccount?.name?.trim() ?? '';
-  const accountEmail = privActiveAccount?.email?.trim() ?? '';
-
-  const defaultValues = useMemo<PersonalInfoFormValues>(
-    () => ({
-      name: (data?.contactName ?? accountName) || '',
-      email: accountEmail || data?.contactEmail || '',
-    }),
-    [accountName, accountEmail, data?.contactEmail, data?.contactName],
-  );
-
-  const { name: defaultName, email: defaultEmail } = defaultValues;
-  const hasAccountEmail = accountEmail.length > 0;
-
-  const form = useZodForm({
-    schema: getPersonalInfoSchema(_),
-    defaultValues,
-    mode: 'onChange',
-  });
-
-  const {
-    register,
-    reset,
-    trigger,
-    getValues,
-    formState: {
-      errors,
-      isSubmitting: formIsSubmitting,
-      isValid: formIsValid,
-      dirtyFields,
-      submitCount,
-    },
-  } = form;
-
   useEffect(() => {
-    const currentValues = getValues();
+    const currentValues = getFormValues();
     const nextValues = {
       name: currentValues.name || defaultName || '',
       email: defaultEmail,
@@ -173,7 +174,7 @@ export const PersonalInfoStep = ({
       reset(nextValues);
       void trigger();
     }
-  }, [defaultEmail, defaultName, getValues, reset, trigger, pendingValues]);
+  }, [defaultEmail, defaultName, getFormValues, reset, trigger, pendingValues]);
 
   useEffect(() => {
     setIsValid(formIsValid);

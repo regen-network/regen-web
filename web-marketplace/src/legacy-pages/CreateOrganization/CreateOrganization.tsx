@@ -144,7 +144,7 @@ function CreateOrganizationContent({
 export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
-  const { activeAccount, privActiveAccount } = useAuth();
+  const { activeAccount, privActiveAccount, loading: authLoading } = useAuth();
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
@@ -172,10 +172,11 @@ export default function CreateOrganizationPage(): JSX.Element {
   const hasProjects = !isLoadingAdminProjects && projects.length > 0;
 
   const shouldShowPersonalInfoStep = useMemo(() => {
+    if (authLoading) return false;
     const initialHasName = Boolean(activeAccount?.name?.trim());
     const initialHasEmail = Boolean(privActiveAccount?.email?.trim());
     return !(initialHasName && initialHasEmail);
-  }, [activeAccount?.name, privActiveAccount?.email]);
+  }, [activeAccount?.name, authLoading, privActiveAccount?.email]);
 
   const steps = useMemo(
     () => getCreateOrgSteps(_, hasProjects, shouldShowPersonalInfoStep),
@@ -235,7 +236,7 @@ export default function CreateOrganizationPage(): JSX.Element {
         </div>
       </SadBeeModal>
       <div className="bg-bc-neutral-100 min-h-[100vh]">
-        {isLoadingAdminProjects ? (
+        {authLoading || isLoadingAdminProjects ? (
           <Loading className="min-h-[100vh]" />
         ) : (
           <MultiStepTemplate

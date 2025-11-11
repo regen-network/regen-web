@@ -95,9 +95,9 @@ export const SendRegenModal = ({
   return (
     <>
       {!isLoadingCredit && amountToSend ? (
-        <Modal open={open} onClose={onClose}>
+        <Modal open={open}>
           <div className="text-lg font-muli text-grey-500 uppercase font-extrabold text-center">
-            <Trans>important</Trans>
+            <Trans>mandatory</Trans>
           </div>
           <Title variant="h4" className="text-center m-20">
             <Trans>

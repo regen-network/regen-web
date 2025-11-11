@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { regen } from '@regen-network/api';
 import { MsgCreateBatch } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/regen/ecocredit/v1/types';
+import {
+  getExecuteActionsStargate,
+  getMsgExecuteContract,
+} from 'utils/cosmwasm';
 
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
@@ -151,9 +156,19 @@ export default function useCreateBatchSubmit(): Return {
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
+  const location = useLocation();
 
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
+
+  // Check if organization context was passed via router state
+  const locationState = location.state as {
+    issuerAddress?: string;
+    organizationDaoAddress?: string;
+    organizationRbamAddress?: string;
+    authorizationId?: number;
+    roleId?: number;
+  } | null;
 
   function handleTxQueued(): void {
     setStatus('broadcast');
@@ -178,6 +193,14 @@ export default function useCreateBatchSubmit(): Return {
     if (!accountAddress) return Promise.reject();
     if (!data.startDate || !data.endDate) return Promise.reject();
 
+    // Determine the actual issuer - use org address if provided, otherwise wallet
+    const issuerAddress = locationState?.issuerAddress;
+    const actualIssuer = issuerAddress ?? accountAddress;
+    const organizationDaoAddress = locationState?.organizationDaoAddress;
+    const organizationRbamAddress = locationState?.organizationRbamAddress;
+    const organizationAuthorizationId = locationState?.authorizationId;
+    const organizationRoleId = locationState?.roleId;
+
     let message:
       | {
           typeUrl: string;
@@ -189,7 +212,7 @@ export default function useCreateBatchSubmit(): Return {
     if (status === 'idle' || status === 'message') {
       try {
         setStatus('message');
-        message = await prepareMsg(accountAddress, data);
+        message = await prepareMsg(actualIssuer, data);
       } catch (err) {
         setError(err as string);
       }
@@ -199,10 +222,63 @@ export default function useCreateBatchSubmit(): Return {
     try {
       setStatus('sign');
       const recipientNote = data.recipients.find(recipient => recipient.note);
-      await signAndBroadcast({
-        msgs: [message],
-        memo: recipientNote?.note,
-      });
+
+      // If creating batch from organization, wrap in RBAM execute
+      if (
+        organizationDaoAddress &&
+        organizationRbamAddress &&
+        organizationAuthorizationId &&
+        organizationRoleId
+      ) {
+        // Ensure all issuance fields have default values for protobuf encoding
+        const issuance = (message.value.issuance || []).map(item => ({
+          recipient: item.recipient || '',
+          tradableAmount: item.tradableAmount || '0',
+          retiredAmount: item.retiredAmount || '0',
+          retirementJurisdiction: item.retirementJurisdiction || '',
+          retirementReason: item.retirementReason || '',
+        }));
+
+        // Encode the batch message with DAO as issuer
+        const protoBytes = MsgCreateBatch.encode({
+          issuer: organizationDaoAddress,
+          projectId: message.value.projectId || '',
+          issuance,
+          metadata: message.value.metadata || '',
+          startDate: message.value.startDate,
+          endDate: message.value.endDate,
+          open: message.value.open ?? false,
+          classId: message.value.classId || '',
+        }).finish();
+
+        // Wrap in RBAM execute action
+        const executeActionsMsg = getExecuteActionsStargate([
+          {
+            authorizationId: organizationAuthorizationId,
+            roleId: organizationRoleId,
+            typeUrl: message.typeUrl,
+            value: protoBytes,
+          },
+        ]);
+
+        const executeMsg = getMsgExecuteContract({
+          walletAddress: accountAddress,
+          contract: organizationRbamAddress,
+          executeActionsMsg,
+        });
+
+        await signAndBroadcast({
+          msgs: [executeMsg],
+          memo: recipientNote?.note,
+          fee: 'auto',
+        });
+      } else {
+        // Regular batch creation from personal wallet
+        await signAndBroadcast({
+          msgs: [message],
+          memo: recipientNote?.note,
+        });
+      }
     } catch (err) {
       setError(err as string);
     }

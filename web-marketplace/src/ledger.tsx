@@ -50,13 +50,6 @@ const LedgerContext = React.createContext<ContextValue>({
   error: undefined,
 });
 
-type CosmWasmOfflineSigner = Parameters<
-  typeof SigningCosmWasmClient.connectWithSigner
->[1];
-type CosmWasmConnectOptions = Parameters<
-  typeof SigningCosmWasmClient.connectWithSigner
->[2];
-
 export const gasPrice = GasPrice.fromString('0.025uregen');
 
 export async function setupSigningClient(
@@ -86,7 +79,7 @@ export async function setupSigningClient(
 
     setLoading(true);
     try {
-      const options: CosmWasmConnectOptions = {
+      const options = {
         registry,
         aminoTypes,
         gasPrice,
@@ -94,7 +87,7 @@ export async function setupSigningClient(
       const signingCosmWasmClient =
         await SigningCosmWasmClient.connectWithSigner(
           ledgerRPCUri,
-          signer as unknown as CosmWasmOfflineSigner,
+          signer,
           options,
         );
       setSigningCosmWasmClient(signingCosmWasmClient);

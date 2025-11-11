@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -46,6 +46,7 @@ import { useShowCreditClasses } from 'hooks/useShowCreditClasses';
 
 import { useProfileData } from './hooks/useProfileData';
 import { ProfileNotFound } from './Profile.NotFound';
+import { OrganizationCreatedModal } from './Profile.OrganizationCreatedModal';
 import { getDashboardRoute } from './Profile.utils';
 
 export const Profile = (): JSX.Element => {
@@ -53,6 +54,10 @@ export const Profile = (): JSX.Element => {
   const { wallet } = useWallet();
   const location = useLocation();
   const { _ } = useLingui();
+  const showOrgPopup = location.state?.showOrgPopup;
+  const [isOrgCreatedModalOpen, setIsOrgCreatedModalOpen] = useState(
+    Boolean(showOrgPopup),
+  );
 
   const { address, account, organization, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
@@ -231,6 +236,11 @@ export const Profile = (): JSX.Element => {
       }}
     >
       <>
+        <OrganizationCreatedModal
+          open={isOrgCreatedModalOpen}
+          onClose={() => setIsOrgCreatedModalOpen(false)}
+          numberOfMigratedProjects={adminProjects?.length || 0}
+        />
         {isProfileNotFound && <ProfileNotFound sx={{ mt: 22.5, mb: 27.25 }} />}
         {!isProfileNotFound && (
           <>

@@ -5,7 +5,7 @@ type Variant = 'circular' | 'skeleton';
 
 type Props = {
   isLoading: boolean;
-  children: JSX.Element | null;
+  children: React.ReactNode;
   variant?: Variant;
   sx?: SxProps<Theme>;
   className?: string;

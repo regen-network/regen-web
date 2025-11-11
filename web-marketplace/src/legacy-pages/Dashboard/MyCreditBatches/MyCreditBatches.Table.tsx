@@ -20,6 +20,13 @@ type Props = {
   paginationParams: TablePaginationParams;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   useCreate?: boolean;
+  createBatchState?: {
+    issuerAddress?: string;
+    organizationDaoAddress?: string;
+    organizationRbamAddress?: string;
+    authorizationId?: number;
+    roleId?: number;
+  };
 };
 
 export const MyCreditBatchesTable = ({
@@ -28,6 +35,7 @@ export const MyCreditBatchesTable = ({
   paginationParams,
   setPaginationParams,
   useCreate,
+  createBatchState,
 }: Props) => {
   const theme = useTheme();
 
@@ -66,6 +74,7 @@ export const MyCreditBatchesTable = ({
               startIcon={<PlusIcon color={theme.palette.secondary.main} />}
               component={Link}
               to="/ecocredits/create-batch"
+              state={createBatchState}
             >
               <Trans>create credit batch</Trans>
             </OutlinedButton>

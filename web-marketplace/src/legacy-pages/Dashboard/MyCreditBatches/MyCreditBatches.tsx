@@ -11,6 +11,7 @@ import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
+import { orgRoles } from 'hooks/org-members/constants';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
@@ -25,6 +26,9 @@ export const MyCreditBatches = (): JSX.Element => {
     isOrganizationOwner,
     isOrganizationAdmin,
     isIssuer,
+    organizationDaoAddress,
+    organizationRbamAddress,
+    organizationRole,
   } = useDashboardContext();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({
@@ -35,6 +39,35 @@ export const MyCreditBatches = (): JSX.Element => {
     ? isOrganizationOwner || isOrganizationAdmin
     : isIssuer;
 
+  const normalizedRole = organizationRole?.toLowerCase();
+  const roleConfig =
+    normalizedRole === 'owner'
+      ? orgRoles.owner
+      : normalizedRole === 'admin'
+      ? orgRoles.admin
+      : undefined;
+  const authorizationId = roleConfig?.authorizations.can_manage_credit_issuance;
+  const roleId = roleConfig?.roleId;
+  const hasOrgExecutionContext = Boolean(
+    isOrganizationDashboard &&
+      organizationDaoAddress &&
+      organizationRbamAddress &&
+      authorizationId &&
+      roleId,
+  );
+
+  const createBatchState = hasOrgExecutionContext
+    ? {
+        issuerAddress: accountAddress ?? undefined,
+        organizationDaoAddress,
+        organizationRbamAddress,
+        authorizationId,
+        roleId,
+      }
+    : accountAddress
+    ? { issuerAddress: accountAddress }
+    : undefined;
+
   return (
     <div className="w-[100%]">
       <MyCreditBatchesTable
@@ -43,6 +76,7 @@ export const MyCreditBatches = (): JSX.Element => {
         setPaginationParams={setPaginationParams}
         batchesWithSupply={batchesWithSupply}
         useCreate={canManageCreditBatches}
+        createBatchState={createBatchState}
       />
       {hasNoBatches &&
         (canManageCreditBatches ? (
@@ -55,6 +89,7 @@ export const MyCreditBatches = (): JSX.Element => {
               startIcon={<PlusIcon color={theme.palette.secondary.main} />}
               component={Link}
               to="/ecocredits/create-batch"
+              state={createBatchState}
             >
               <Trans>create credit batch</Trans>
             </OutlinedButton>

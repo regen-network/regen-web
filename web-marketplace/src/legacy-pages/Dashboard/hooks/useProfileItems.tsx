@@ -1,5 +1,4 @@
 import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useQueryIsProjectAdmin } from 'hooks/useQueryIsProjectAdmin';

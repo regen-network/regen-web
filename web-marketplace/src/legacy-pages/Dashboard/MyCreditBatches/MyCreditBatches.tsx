@@ -25,6 +25,7 @@ export const MyCreditBatches = (): JSX.Element => {
     isOrganizationDashboard,
     isOrganizationOwner,
     isOrganizationAdmin,
+    isIssuer,
   } = useDashboardContext();
   const accountAddress = selectedAccountAddress ?? wallet?.address;
   const { batchesWithSupply, setPaginationParams, paginationParams } =
@@ -32,8 +33,9 @@ export const MyCreditBatches = (): JSX.Element => {
       address: accountAddress,
     });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
-  const canManageCreditBatches =
-    !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
+  const canManageCreditBatches = isOrganizationDashboard
+    ? isOrganizationOwner || isOrganizationAdmin
+    : isIssuer;
 
   return (
     <div className="w-[100%]">
@@ -44,21 +46,28 @@ export const MyCreditBatches = (): JSX.Element => {
         batchesWithSupply={batchesWithSupply}
         useCreate={canManageCreditBatches}
       />
-      {hasNoBatches && canManageCreditBatches && (
-        <EmptyState
-          message={_(NO_CREDIT_BATCHES_MESSAGE)}
-          icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
-          sx={{ backgroundColor: 'info.light' }}
-        >
-          <OutlinedButton
-            startIcon={<PlusIcon color={theme.palette.secondary.main} />}
-            component={Link}
-            to="/ecocredits/create-batch"
+      {hasNoBatches &&
+        (canManageCreditBatches ? (
+          <EmptyState
+            message={_(NO_CREDIT_BATCHES_MESSAGE)}
+            icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
+            sx={{ backgroundColor: 'info.light' }}
           >
-            <Trans>create credit batch</Trans>
-          </OutlinedButton>
-        </EmptyState>
-      )}
+            <OutlinedButton
+              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+              component={Link}
+              to="/ecocredits/create-batch"
+            >
+              <Trans>create credit batch</Trans>
+            </OutlinedButton>
+          </EmptyState>
+        ) : (
+          <EmptyState
+            message={_(NO_CREDIT_BATCHES_MESSAGE)}
+            icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
+            sx={{ backgroundColor: 'info.light' }}
+          />
+        ))}
     </div>
   );
 };

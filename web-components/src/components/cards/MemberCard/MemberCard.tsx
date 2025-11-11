@@ -6,7 +6,7 @@ import UserAvatar from '../../user/UserAvatar';
 type Props = {
   imageSrc: string;
   name: string;
-  description: string;
+  description?: string;
   isCurrentAccount: boolean;
   editLink: string;
   editText: string;

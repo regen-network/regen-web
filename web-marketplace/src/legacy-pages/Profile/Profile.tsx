@@ -235,7 +235,7 @@ export const Profile = (): JSX.Element => {
         {!isProfileNotFound && (
           <>
             <ProfileHeader
-              name={account?.name ? account?.name : _(DEFAULT_NAME)}
+              name={profile?.name ? profile?.name : _(DEFAULT_NAME)}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={infos}

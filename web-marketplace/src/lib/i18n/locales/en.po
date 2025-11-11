@@ -13,23 +13,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. js-lingui-explicit-id
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
+msgid "/+Z5u4"
 msgstr ""
 
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#~ msgid " Exit to homepage "
-#~ msgstr ""
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
+msgid " Exit to homepage "
+msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
@@ -71,10 +63,13 @@ msgstr ""
 msgid "(you)"
 msgstr ""
 
+#. placeholder {0}: allowedCreditClasses.length
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:136
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
 
+#. placeholder {0}: import { plural, Trans } from '@lingui/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="TODO" target="_blank" rel="noreferrer noopener"> learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
+#. placeholder {1}: import { plural, Trans } from '@lingui/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="TODO" target="_blank" rel="noreferrer noopener"> learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
 #: src/pages/Profile/Profile.OrganizationCreatedModal.tsx:21
 msgid "{0}, with all associated credits and sell orders, {1} migrated to your new organization account."
 msgstr ""
@@ -167,6 +162,7 @@ msgstr ""
 msgid "© 2024 Terrasos SAS | All rights reserved"
 msgstr ""
 
+#. placeholder {0}: count - MAX_METHODOLOGIES_LINKS
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:57
 msgid "+ {0} more"
 msgstr ""
@@ -217,6 +213,8 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
+#. placeholder {0}: cardDetails.brand
+#. placeholder {1}: cardDetails.last4
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:161
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
@@ -324,12 +322,12 @@ msgid "About Us"
 msgstr ""
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
-msgid "Account switch detected!"
-msgstr ""
+#~ msgid "Account switch detected!"
+#~ msgstr ""
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
-#~ msgid "Account switch detected! "
-#~ msgstr ""
+msgid "Account switch detected! "
+msgstr ""
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:197
 msgid "Acres"
@@ -689,12 +687,12 @@ msgid "Attach arbitrary JSON-LD metadata to the credit batch below. <0>Learn mor
 msgstr ""
 
 #: src/components/organisms/MetadataForm/MetadataForm.tsx:102
-msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
-msgstr ""
+#~ msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
+#~ msgstr ""
 
 #: src/components/organisms/MetadataForm/MetadataForm.tsx:102
-#~ msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
-#~ msgstr ""
+msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
+msgstr ""
 
 #: src/components/organisms/PostFlow/hooks/useSign.ts:116
 msgid "Attest"
@@ -955,12 +953,12 @@ msgid "Buying with crypto requires a <0>Keplr wallet</0>."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:9
-msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue."
-msgstr ""
+#~ msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue."
+#~ msgstr ""
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:9
-#~ msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue. "
-#~ msgstr ""
+msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue. "
+msgstr ""
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:117
 msgid "By connecting to Regen Marketplace, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>"
@@ -1298,12 +1296,12 @@ msgid "Connect <0>Capital</0> to <1>Ecological</1> Outcomes"
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:147
-msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
-msgstr ""
+#~ msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
+#~ msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:147
-#~ msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger. "
-#~ msgstr ""
+msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger. "
+msgstr ""
 
 #: src/components/organisms/CreditClassConnectSection.tsx:90
 msgid "Connect and Learn"
@@ -1370,7 +1368,7 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/hooks/org-members/useMembersContext.ts:164
+#: src/hooks/org-members/useMembersContext.ts:161
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
@@ -1469,6 +1467,7 @@ msgstr ""
 msgid "Credit Batch Id"
 msgstr ""
 
+#. placeholder {0}: batchesFromTake.length
 #: src/pages/Dashboard/MyEcocredits/hooks/useUpdateCardItemsTakeBasket.tsx:42
 msgid "credit batch id{0, plural, one {} other {(s)}}"
 msgstr ""
@@ -1483,7 +1482,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:117
+#: src/pages/Profile/Profile.tsx:115
 msgid "Credit Batches"
 msgstr ""
 
@@ -1558,7 +1557,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:182
-#: src/pages/Profile/Profile.tsx:111
+#: src/pages/Profile/Profile.tsx:109
 msgid "Credit Classes"
 msgstr ""
 
@@ -1825,12 +1824,12 @@ msgid "Delete project"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:9
-msgid "Delivery dates may vary widely as this project is still in the early stages of development."
-msgstr ""
+#~ msgid "Delivery dates may vary widely as this project is still in the early stages of development."
+#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:9
-#~ msgid "Delivery dates may vary widely as this project is still in the early stages of development. "
-#~ msgstr ""
+msgid "Delivery dates may vary widely as this project is still in the early stages of development. "
+msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
@@ -2181,8 +2180,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
-msgid "Exit to homepage"
-msgstr ""
+#~ msgid "Exit to homepage"
+#~ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:31
 msgid "Expand sidebar"
@@ -2229,9 +2228,16 @@ msgstr ""
 msgid "Factor:"
 msgstr ""
 
-#: src/hooks/org-members/useMembersContext.ts:201
-msgid "Failed for projects:\\n{0}"
+#. placeholder {0}: errors.join('\n')
+#: src/hooks/org-members/useMembersContext.ts:198
+msgid ""
+"Failed for projects:\n"
+"{0}"
 msgstr ""
+
+#: src/hooks/org-members/useMembersContext.ts:201
+#~ msgid "Failed for projects:\\n{0}"
+#~ msgstr ""
 
 #: src/pages/CreateOrganization/CreateOrganization.constants.ts:33
 msgid "Failed to initialize signing client"
@@ -2517,8 +2523,8 @@ msgid "Impact"
 msgstr ""
 
 #: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:100
-msgid "important"
-msgstr ""
+#~ msgid "important"
+#~ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:53
 msgid "in"
@@ -2690,11 +2696,13 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:5
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:23
-msgid "Learn how to"
-msgstr ""
-
-#~ msgid "Learn how to "
+#~ msgid "Learn how to"
 #~ msgstr ""
+
+#: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:5
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:23
+msgid "Learn how to "
+msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
@@ -2865,11 +2873,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:162
+#: src/pages/Profile/Profile.tsx:160
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:157
+#: src/pages/Profile/Profile.tsx:155
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2881,7 +2889,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:147
+#: src/pages/Profile/Profile.tsx:145
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2897,7 +2905,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:152
+#: src/pages/Profile/Profile.tsx:150
 msgid "Manage Projects"
 msgstr ""
 
@@ -2915,6 +2923,10 @@ msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:18
 msgid "Manages user access and has full control of projects, credits, and credit classes."
+msgstr ""
+
+#: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:100
+msgid "mandatory"
 msgstr ""
 
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
@@ -3369,7 +3381,7 @@ msgstr ""
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
-#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:131
+#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:133
 msgid "Organization members have permissions for all projects associated with an organization. You can also skip this step and invite members later."
 msgstr ""
 
@@ -3508,12 +3520,12 @@ msgid "Please contact the project admin to request access."
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
-#~ msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
-#~ msgstr ""
+msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
+msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
-msgid "Please contact us at <0>support@regen.network</0>to resolve this issue. Do not reinitiate the transaction."
-msgstr ""
+#~ msgid "Please contact us at <0>support@regen.network</0>to resolve this issue. Do not reinitiate the transaction."
+#~ msgstr ""
 
 #: src/components/organisms/Collaborators/Collaborators.constants.tsx:11
 #: src/components/organisms/Members/Members.constants.tsx:10
@@ -3597,7 +3609,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
-#: src/pages/Profile/Profile.tsx:95
+#: src/pages/Profile/Profile.tsx:93
 msgid "Portfolio"
 msgstr ""
 
@@ -3672,12 +3684,12 @@ msgid "prev"
 msgstr ""
 
 #: src/components/molecules/MetaDetail/MetaDetail.utils.ts:21
-msgid "Previous"
-msgstr ""
+#~ msgid "Previous"
+#~ msgstr ""
 
 #: src/components/molecules/MetaDetail/MetaDetail.utils.ts:21
-#~ msgid "Previous "
-#~ msgstr ""
+msgid "Previous "
+msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:180
 msgid "price"
@@ -3986,7 +3998,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:103
+#: src/pages/Profile/Profile.tsx:101
 msgid "Projects"
 msgstr ""
 
@@ -4007,7 +4019,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/pages/Profile/Profile.tsx:236
+#: src/pages/Profile/Profile.tsx:234
 msgid "public profile tabs"
 msgstr ""
 
@@ -4455,6 +4467,7 @@ msgstr ""
 msgid "Sell Order #"
 msgstr ""
 
+#. placeholder {0}: sellOrderId.replaceAll('"', '')
 #: src/pages/Dashboard/MyEcocredits/hooks/useUpdateTxModalTitle.tsx:39
 msgid "Sell Order #{0}"
 msgstr ""
@@ -4480,6 +4493,7 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#. placeholder {0}: amountToSend / 1000000
 #: src/pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:103
 msgid "Send {0} REGEN to fund your organization"
 msgstr ""
@@ -4866,14 +4880,14 @@ msgid "The creator of this basket has chosen that all credits must be retired up
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:19
-#~ msgid ""
-#~ "The current address is already linked to your account.\n"
-#~ "Please first switch wallet addresses in the Keplr app to be able to add another address to your account."
-#~ msgstr ""
+msgid ""
+"The current address is already linked to your account.\n"
+"Please first switch wallet addresses in the Keplr app to be able to add another address to your account."
+msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:19
-msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
-msgstr ""
+#~ msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
+#~ msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:230
 msgid "The dates should correspond to the batch monitoring period or vintage."
@@ -5297,17 +5311,18 @@ msgstr ""
 msgid "Use file geolocation"
 msgstr ""
 
+#. placeholder {0}: paymentMethod.card?.last4
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:66
 msgid "Use my credit card on file ending in {0}"
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:122
-msgid "Use your social account to log in to Regen Marketplace."
-msgstr ""
+#~ msgid "Use your social account to log in to Regen Marketplace."
+#~ msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:122
-#~ msgid "Use your social account to log in to Regen Marketplace. "
-#~ msgstr ""
+msgid "Use your social account to log in to Regen Marketplace. "
+msgstr ""
 
 #: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:228
 msgid "useMultiStep must be used within a MultiStepProvider"
@@ -5330,12 +5345,12 @@ msgid "user profile background image"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
-#~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
-#~ msgstr ""
+msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
+msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
-msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0>if more time has passed."
-msgstr ""
+#~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0>if more time has passed."
+#~ msgstr ""
 
 #: src/pages/ProjectReview/ProjectReview.VCSMetadata.tsx:53
 msgid "VCS methodology name"
@@ -5655,12 +5670,12 @@ msgid "Wilmot, Carbon<0>Plus</0> Grasslands Credits"
 msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:284
-msgid "Write a short comment or longer project update."
-msgstr ""
-
-#: src/components/organisms/PostForm/PostForm.tsx:279
-#~ msgid "Write a short comment or longer project update. "
+#~ msgid "Write a short comment or longer project update."
 #~ msgstr ""
+
+#: src/components/organisms/PostForm/PostForm.tsx:284
+msgid "Write a short comment or longer project update. "
+msgstr ""
 
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:56
 msgid "Yes"
@@ -5779,12 +5794,12 @@ msgid "You don't have enough basket tokens"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:33
-msgid "You entered:"
-msgstr ""
+#~ msgid "You entered:"
+#~ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:33
-#~ msgid "You entered: "
-#~ msgstr ""
+msgid "You entered: "
+msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:25
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
@@ -5835,12 +5850,12 @@ msgid "You must connect to Keplr in order to view this content."
 msgstr ""
 
 #: src/components/organisms/ProjectDenied/ProjectDenied.tsx:58
-msgid "You must have access to the following address:"
-msgstr ""
+#~ msgid "You must have access to the following address:"
+#~ msgstr ""
 
 #: src/components/organisms/ProjectDenied/ProjectDenied.tsx:58
-#~ msgid "You must have access to the following address: "
-#~ msgstr ""
+msgid "You must have access to the following address: "
+msgstr ""
 
 #: src/pages/Login/Login.constants.ts:3
 msgid "You must log in in order to view the content of this page."

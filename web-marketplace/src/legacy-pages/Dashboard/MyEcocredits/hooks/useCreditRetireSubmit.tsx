@@ -68,6 +68,7 @@ const useCreditRetireSubmit = ({
   const roleConfig = organizationRole
     ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
     : undefined;
+  const manageCreditsAuthId = roleConfig?.authorizations?.can_manage_credits;
 
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
@@ -89,16 +90,21 @@ const useCreditRetireSubmit = ({
       // Build the message based on context (organization vs personal)
       let finalMsg;
 
-      if (
-        isOrganizationDashboard &&
-        roleConfig &&
-        organizationRbamAddress &&
-        wallet?.address
-      ) {
+      if (isOrganizationDashboard) {
+        if (
+          !roleConfig ||
+          !organizationRbamAddress ||
+          !wallet?.address ||
+          !manageCreditsAuthId
+        ) {
+          throw new Error(
+            _(msg`You do not have permission to manage credits.`),
+          );
+        }
         // Organization context: wrap in RBAM execute_actions
         const action = creditRetireAction({
           roleId: roleConfig.roleId,
-          authorizationId: roleConfig.authorizations.can_manage_credits!,
+          authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           batchDenom: batchDenom!,
           amount,
@@ -202,6 +208,7 @@ const useCreditRetireSubmit = ({
       creditRetireTitle,
       setTxButtonTitle,
       reactQueryClient,
+      manageCreditsAuthId,
     ],
   );
 

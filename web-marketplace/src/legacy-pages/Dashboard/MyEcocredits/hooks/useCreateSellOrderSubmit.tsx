@@ -75,6 +75,8 @@ const useCreateSellOrderSubmit = ({
   const roleConfig = organizationRole
     ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
     : undefined;
+  const manageSellOrdersAuthId =
+    roleConfig?.authorizations?.can_manage_sell_orders;
 
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
@@ -89,16 +91,21 @@ const useCreateSellOrderSubmit = ({
       // Build the message based on context (organization vs personal)
       let finalMsg;
 
-      if (
-        isOrganizationDashboard &&
-        roleConfig &&
-        organizationRbamAddress &&
-        wallet?.address
-      ) {
+      if (isOrganizationDashboard) {
+        if (
+          !roleConfig ||
+          !organizationRbamAddress ||
+          !wallet?.address ||
+          !manageSellOrdersAuthId
+        ) {
+          throw new Error(
+            _(msg`You do not have permission to manage sell orders.`),
+          );
+        }
         // Organization context: wrap in RBAM execute_actions
         const action = sellOrderAction({
           roleId: roleConfig.roleId,
-          authorizationId: roleConfig.authorizations.can_manage_sell_orders!,
+          authorizationId: manageSellOrdersAuthId,
           seller: accountAddress, // DAO address
           batchDenom,
           quantity: String(amount),
@@ -304,6 +311,7 @@ const useCreateSellOrderSubmit = ({
       roleConfig,
       organizationRbamAddress,
       wallet?.address,
+      manageSellOrdersAuthId,
     ],
   );
 

@@ -58,6 +58,7 @@ const useBasketTakeSubmit = ({
   const roleConfig = organizationRole
     ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
     : undefined;
+  const manageCreditsAuthId = roleConfig?.authorizations?.can_manage_credits;
 
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {
@@ -77,16 +78,19 @@ const useBasketTakeSubmit = ({
       // Build the message based on context (organization vs personal)
       let finalMsg;
 
-      if (
-        isOrganizationDashboard &&
-        roleConfig &&
-        organizationRbamAddress &&
-        wallet?.address
-      ) {
+      if (isOrganizationDashboard) {
+        if (
+          !roleConfig ||
+          !organizationRbamAddress ||
+          !wallet?.address ||
+          !manageCreditsAuthId
+        ) {
+          throw new Error(_(TAKE_HEADER));
+        }
         // Organization context: wrap in RBAM execute_actions
         const action = basketTakeAction({
           roleId: roleConfig.roleId,
-          authorizationId: roleConfig.authorizations.can_manage_credits!,
+          authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
           amount,
@@ -167,6 +171,7 @@ const useBasketTakeSubmit = ({
       roleConfig,
       organizationRbamAddress,
       wallet?.address,
+      manageCreditsAuthId,
       signAndBroadcast,
       onErrorCallback,
       onTxSuccessful,

@@ -138,6 +138,7 @@ export const Profile = (): JSX.Element => {
       hasCreditBatches,
       privActiveAccount,
       showCreditClasses,
+      organization,
     ],
   );
 

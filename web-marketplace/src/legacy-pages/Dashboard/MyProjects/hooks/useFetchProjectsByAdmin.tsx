@@ -111,7 +111,6 @@ export const useFetchProjectByAdmin = ({
     sanityCreditClassData,
   });
 
-
   // Get data for projects that are only off chain
   const onlyOffChainProjects = offChainProjects?.filter(
     project => !project?.onChainId && (project?.published || keepUnpublished),

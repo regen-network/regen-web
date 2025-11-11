@@ -39,6 +39,7 @@ export const DashboardNavigation = ({
   hasCreditBatches,
   collapsed,
   onToggleCollapse,
+  canEditOrg,
 }: DashboardNavigationProps & {
   mobileMenuOpen?: boolean;
   hasWalletAddress?: boolean;
@@ -47,6 +48,7 @@ export const DashboardNavigation = ({
   collapsed: boolean;
   hasProjects?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
+  canEditOrg?: boolean;
 }) => {
   const { _ } = useLingui();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -78,6 +80,7 @@ export const DashboardNavigation = ({
         hasProjects ?? false,
         hasOrders ?? true,
         hasCreditBatches ?? false,
+        canEditOrg ?? true,
       ),
     [
       _,
@@ -90,6 +93,7 @@ export const DashboardNavigation = ({
       hasProjects,
       hasOrders,
       hasCreditBatches,
+      canEditOrg,
     ],
   );
 

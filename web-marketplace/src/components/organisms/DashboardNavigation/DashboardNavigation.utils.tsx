@@ -95,14 +95,19 @@ const getUserSections = (
 const getOrgSection = (
   _: TranslatorType,
   collapsed: boolean,
+  canEditOrg: boolean = true,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Org`) : _(msg`Manage organization`),
   items: [
-    {
-      label: _(msg`Edit org profile`),
-      icon: <OrgProfileIcon linearGradient />,
-      path: 'profile',
-    },
+    ...(canEditOrg
+      ? [
+          {
+            label: _(msg`Edit org profile`),
+            icon: <OrgProfileIcon linearGradient />,
+            path: 'profile',
+          },
+        ]
+      : []),
     {
       label: _(msg`Members`),
       icon: <MembersIcon linearGradient />,
@@ -171,6 +176,7 @@ export function getDashboardNavigationSections(
   hasProjects = false,
   hasOrders = true,
   hasCreditBatches = false,
+  canEditOrg = true,
 ): DashboardNavigationSection[] {
   const sections = [];
   if (hasWalletAddress) {
@@ -196,7 +202,7 @@ export function getDashboardNavigationSections(
   if (accountType === 'user') {
     sections.push(...getUserSections(_, loginDisabled));
   } else {
-    sections.push(getOrgSection(_, collapsed));
+    sections.push(getOrgSection(_, collapsed, canEditOrg));
   }
 
   sections.push(getLogoutSection(_));

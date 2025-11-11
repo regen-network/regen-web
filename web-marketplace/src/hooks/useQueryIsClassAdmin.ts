@@ -10,14 +10,12 @@ type Props = {
 
 export function useQueryIsClassAdmin({ address }: Props): boolean {
   const { queryClient } = useLedger();
-  const { wallet } = useWallet();
-  const activeAddress = wallet?.address ?? address;
 
   const { data: classesByAdmin } = useQuery(
     getClassesByAdminQuery({
-      enabled: !!activeAddress && !!queryClient,
+      enabled: !!address && !!queryClient,
       client: queryClient,
-      request: { admin: activeAddress as string },
+      request: { admin: address as string },
     }),
   );
 

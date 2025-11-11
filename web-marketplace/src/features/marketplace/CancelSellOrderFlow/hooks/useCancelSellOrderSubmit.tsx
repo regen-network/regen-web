@@ -69,6 +69,8 @@ const useCancelSellOrderSubmit = ({
   const roleConfig = organizationRole
     ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
     : undefined;
+  const manageSellOrdersAuthId =
+    roleConfig?.authorizations?.can_manage_sell_orders;
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -83,12 +85,13 @@ const useCancelSellOrderSubmit = ({
     if (
       isOrganizationDashboard &&
       roleConfig &&
+      manageSellOrdersAuthId &&
       organizationRbamAddress &&
       wallet?.address
     ) {
       const action = cancelSellOrderAction({
         roleId: roleConfig.roleId,
-        authorizationId: roleConfig.authorizations.can_manage_sell_orders!,
+        authorizationId: manageSellOrdersAuthId,
         seller: accountAddress, // DAO address
         sellOrderId: BigInt(selectedSellOrder.id),
       });
@@ -202,6 +205,7 @@ const useCancelSellOrderSubmit = ({
     organizationRbamAddress,
     wallet?.address,
     reactQueryClient,
+    manageSellOrdersAuthId,
   ]);
 
   return cancelSellOrderSubmit;

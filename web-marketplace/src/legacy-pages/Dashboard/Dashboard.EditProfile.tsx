@@ -19,7 +19,6 @@ import { useWallet } from 'lib/wallet/wallet';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useUpdateOrganizationProfile } from 'hooks/useUpdateOrganizationProfile';
 
 import {
@@ -53,11 +52,8 @@ export const EditProfile = () => {
     organizationRbamAddress,
     organizationProfile: organizationProfileFromContext,
   } = useDashboardContext();
-  const organizationDao = useDaoOrganization();
-  const latestOrganizationProfile = organizationDao?.organizationByDaoAddress;
   const updateOrganizationProfile = useUpdateOrganizationProfile();
-  const organizationProfile =
-    latestOrganizationProfile ?? organizationProfileFromContext ?? null;
+  const organizationProfile = organizationProfileFromContext ?? null;
   const organizationIdentifier =
     organizationProfile?.id ?? organizationDaoAddress ?? undefined;
   const hasOrgContext =

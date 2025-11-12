@@ -11662,26 +11662,6 @@ export type OrganizationFieldsFragment = (
       { __typename?: 'OrganizationProject' }
       & { projectByProjectId?: Maybe<(
         { __typename?: 'Project' }
-        & Pick<Project, 'adminDaoAddress'>
-        & { daoByAdminDaoAddress?: Maybe<(
-          { __typename?: 'Dao' }
-          & Pick<Dao, 'daoRbamAddress' | 'cw4GroupAddress'>
-          & { assignmentsByDaoAddress: (
-            { __typename?: 'AssignmentsConnection' }
-            & { nodes: Array<Maybe<(
-              { __typename?: 'Assignment' }
-              & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId'>
-              & { accountByAccountId?: Maybe<(
-                { __typename?: 'Account' }
-                & Pick<Account, 'addr'>
-                & { privateAccountById?: Maybe<(
-                  { __typename?: 'PrivateAccount' }
-                  & Pick<PrivateAccount, 'email' | 'googleEmail'>
-                )> }
-              )> }
-            )>> }
-          ) }
-        )> }
         & ProjectFieldsFragment
       )> }
     )>> }
@@ -12018,25 +11998,6 @@ export const OrganizationFieldsFragmentDoc = gql`
     nodes {
       projectByProjectId {
         ...projectFields
-        adminDaoAddress
-        daoByAdminDaoAddress {
-          daoRbamAddress
-          cw4GroupAddress
-          assignmentsByDaoAddress {
-            nodes {
-              accountId
-              accountByAccountId {
-                addr
-                privateAccountById {
-                  email
-                  googleEmail
-                }
-              }
-              roleName
-              onChainRoleId
-            }
-          }
-        }
       }
     }
   }

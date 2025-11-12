@@ -31,25 +31,6 @@ fragment organizationFields on Organization {
     nodes {
       projectByProjectId {
         ...projectFields
-        adminDaoAddress
-        daoByAdminDaoAddress {
-          daoRbamAddress
-          cw4GroupAddress
-          assignmentsByDaoAddress {
-            nodes {
-              accountId
-              accountByAccountId {
-                addr
-                privateAccountById {
-                  email
-                  googleEmail
-                }
-              }
-              roleName
-              onChainRoleId
-            }
-          }
-        }
       }
     }
   }

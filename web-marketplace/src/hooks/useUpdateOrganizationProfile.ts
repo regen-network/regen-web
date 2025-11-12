@@ -1,5 +1,13 @@
 import { useCallback } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { sanitizeDaoParams } from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 import {
   DEFAULT_PROFILE_BG,
@@ -11,10 +19,13 @@ import {
   getMsgExecuteContract,
   WasmExecuteAction,
 } from 'utils/cosmwasm';
+import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
 import { orgRoles } from 'hooks/org-members/constants';
@@ -57,7 +68,20 @@ export const useUpdateOrganizationProfile = () => {
   const { organizationRole } = useDashboardContext();
   const { wallet, signAndBroadcast } = useMsgClient();
   const { signingCosmWasmClient } = useLedger();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { activeAccountId, activeAccount } = useAuth();
+  const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  const { refetch } = useQuery(
+    getAccountByIdQuery({
+      client: graphqlClient as ApolloClient<NormalizedCacheObject>,
+      enabled: !!graphqlClient && !!activeAccountId,
+      id: activeAccountId ?? '',
+      languageCode: selectedLanguage,
+    }),
+  );
 
   return useCallback(
     async ({
@@ -68,7 +92,7 @@ export const useUpdateOrganizationProfile = () => {
       currentValues,
     }: UpdateOrganizationProfileParams) => {
       if (!wallet?.address) {
-        throw new Error('Wallet not connected.');
+        throw new Error(_(msg`Wallet not connected.`));
       }
 
       const normalizedRole = organizationRole?.toLowerCase();
@@ -79,8 +103,11 @@ export const useUpdateOrganizationProfile = () => {
       };
 
       if (!isValidOrgRole(normalizedRole)) {
+        const roleName = organizationRole ?? '';
         throw new Error(
-          `Invalid organization role: ${organizationRole}. Only Owner, Admin, Editor, and Viewer can edit organizations.`,
+          _(
+            msg`Invalid organization role: ${roleName}. Only Owner, Admin, Editor, and Viewer can edit organizations.`,
+          ),
         );
       }
 
@@ -90,7 +117,7 @@ export const useUpdateOrganizationProfile = () => {
 
       if (!authorizationId || !roleId) {
         throw new Error(
-          'You do not have permission to edit this organization.',
+          _(msg`You do not have permission to edit this organization.`),
         );
       }
 
@@ -128,7 +155,6 @@ export const useUpdateOrganizationProfile = () => {
       });
 
       const currentConfig = existingConfig?.config ?? {};
-
       const updateConfigAction = {
         authorizationId,
         roleId,
@@ -233,8 +259,57 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(result);
       }
 
-      // allow indexer to persist the latest RBAM metadata before refetching
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const maxAttempts = 15;
+      const pollInterval = 100;
+      let attempts = 0;
+      let indexerUpdated = false;
+
+      while (attempts < maxAttempts && !indexerUpdated) {
+        attempts++;
+        await timer(pollInterval);
+
+        try {
+          const { data } = await refetch();
+
+          const dao =
+            data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+              node =>
+                node?.address === daoAddress ||
+                node?.organizationByDaoAddress?.id === organizationIdentifier,
+            );
+
+          const organization = dao?.organizationByDaoAddress;
+
+          const nameMatches = organization?.name === sanitizedName;
+          console.log(organization?.name, sanitizedName);
+
+          const descriptionMatches =
+            organization?.description === sanitizedDescription;
+
+          const profileImageMatches =
+            organization?.image === sanitizedProfileImage;
+
+          const backgroundImageMatches =
+            organization?.bgImage === sanitizedBackgroundImage;
+
+          const websiteMatches = organization?.websiteLink === sanitizedWebsite;
+
+          const twitterMatches = organization?.twitterLink === sanitizedTwitter;
+          if (
+            nameMatches &&
+            descriptionMatches &&
+            profileImageMatches &&
+            backgroundImageMatches &&
+            websiteMatches &&
+            twitterMatches
+          ) {
+            indexerUpdated = true;
+          }
+        } catch (error) {
+          // Continue polling on error
+          continue;
+        }
+      }
 
       if (wallet?.address) {
         await queryClient.invalidateQueries({
@@ -260,6 +335,8 @@ export const useUpdateOrganizationProfile = () => {
       signingCosmWasmClient,
       activeAccountId,
       activeAccount?.id,
+      _,
+      refetch,
     ],
   );
 };

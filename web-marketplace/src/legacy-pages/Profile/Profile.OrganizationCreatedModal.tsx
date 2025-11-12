@@ -37,7 +37,11 @@ export const OrganizationCreatedModal = ({
       <Trans>
         Please note: this organization is represented on-chain by a DAO
         (Decentralized Autonomous Organization). You can{' '}
-        <a href="TODO" target="_blank" rel="noreferrer noopener">
+        <a
+          href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           learn more about DAOs in our documentation
         </a>
         , including how they work and the ways you can participate.

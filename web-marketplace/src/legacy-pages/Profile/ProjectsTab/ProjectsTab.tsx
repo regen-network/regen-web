@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
@@ -20,7 +20,7 @@ import { NoProjectsDisplay } from './NoProjectsDisplay';
 
 const ProjectsTab = (): JSX.Element => {
   const { _ } = useLingui();
-  const location = useLocation();
+  const pathname = usePathname();
   const router = useRouter();
   const { track } = useTracker();
   const { address, account, organization, isLoading } = useProfileData();
@@ -37,12 +37,12 @@ const ProjectsTab = (): JSX.Element => {
       buttons: getProjectCardButtonMapping(_),
       bodyTexts: getProjectCardBodyTextMapping(_),
       track,
-      pathname: location.pathname,
+      pathname,
       imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
       apiServerUrl: API_URI,
       purchaseInfo: undefined,
     }),
-    [_, location.pathname, track],
+    [_, pathname, track],
   );
 
   if (

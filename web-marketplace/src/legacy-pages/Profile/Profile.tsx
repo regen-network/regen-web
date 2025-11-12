@@ -183,12 +183,12 @@ export const Profile = (): JSX.Element => {
   const isOwnProfile = useMemo(
     () =>
       organization
-        ? organization.daoByDaoAddress?.assignmentsByDaoAddress?.nodes.find(
+        ? !!organization.daoByDaoAddress?.assignmentsByDaoAddress?.nodes.find(
             assignment =>
               assignment?.accountByAccountId &&
               privActiveAccount?.id &&
               assignment.accountByAccountId.id === privActiveAccount.id,
-          ) != null
+          )
         : (wallet?.address &&
             address &&
             wallet.address.toLowerCase() === address.toLowerCase()) ||

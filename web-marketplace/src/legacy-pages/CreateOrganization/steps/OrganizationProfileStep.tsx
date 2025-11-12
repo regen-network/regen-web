@@ -160,14 +160,7 @@ export const OrganizationProfileStep = ({
         );
       }
     },
-    [
-      hasUnfinishedOrganization,
-      data,
-      handleSaveNext,
-      createDao,
-      walletAddress,
-      _,
-    ],
+    [data, handleSaveNext, createDao, walletAddress, _],
   );
 
   return (

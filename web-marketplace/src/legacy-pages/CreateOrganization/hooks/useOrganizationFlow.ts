@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,

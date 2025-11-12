@@ -8,6 +8,10 @@ import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -18,10 +22,6 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
 import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';

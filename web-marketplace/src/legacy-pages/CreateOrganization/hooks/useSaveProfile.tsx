@@ -1,21 +1,22 @@
 import { useCallback, useRef } from 'react';
-
-import { deleteImage } from 'web-components/src/utils/s3';
-
-import { PersonalProfileSchemaType } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.schema';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   DEFAULT_PROFILE_AVATARS,
   PROFILE_S3_PATH,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
+
+import { deleteImage } from 'web-components/src/utils/s3';
+
 import {
   AccountsOrderBy,
   useUpdateAccountByIdMutation,
 } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
-import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
-import { useQueryClient } from '@tanstack/react-query';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+
+import { PersonalProfileSchemaType } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.schema';
 
 export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
@@ -65,7 +66,7 @@ export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
         }),
       });
     },
-    [activeAccountId, updateAccountById, daoAccountsOrderBy],
+    [activeAccountId, updateAccountById, daoAccountsOrderBy, reactQueryClient],
   );
 
   return { saveProfile, onUpload };

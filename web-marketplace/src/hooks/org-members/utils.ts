@@ -6,7 +6,12 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
+import { Any } from '@regen-network/api/google/protobuf/any';
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
+import {
+  adminMembersAuthorization,
+  encodeJsonToBase64,
+} from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 import { getStargateAction } from 'utils/cosmwasm';
 
 import {
@@ -15,17 +20,12 @@ import {
 } from 'generated/graphql';
 
 import {
-  adminMembersAuthorization,
-  encodeJsonToBase64,
-} from 'pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
-import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { orgRoles, projectRoles } from './constants';
-import { Any } from '@regen-network/api/google/protobuf/any';
 
 type UpdateAuthorizationActionParams = {
   /** the address of the dao-rbam contract */

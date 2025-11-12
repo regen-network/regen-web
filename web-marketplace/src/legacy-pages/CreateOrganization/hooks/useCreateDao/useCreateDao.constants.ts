@@ -5,6 +5,7 @@ const parseCodeId = (
   const parsed = Number(rawValue?.toString().trim());
 
   if (!Number.isInteger(parsed) || parsed < 0) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error(`Invalid ${envVarName} configuration`);
   }
 

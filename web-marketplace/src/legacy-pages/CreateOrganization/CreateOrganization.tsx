@@ -38,6 +38,7 @@ import {
   ORGANIZATION_PROFILE_FORM_ID,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
+import { SendRegenModal } from './CreateOrganization.SendRegenModal';
 import { getCreateOrgSteps } from './CreateOrganization.utils';
 import {
   OrganizationMultiStepData,
@@ -48,7 +49,6 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
-import { SendRegenModal } from './CreateOrganization.SendRegenModal';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;

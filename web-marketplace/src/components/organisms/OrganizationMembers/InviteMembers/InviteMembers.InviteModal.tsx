@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
@@ -78,7 +79,7 @@ export const InviteMemberModal = ({
   useEffect(() => {
     if (daoWithAddress) {
       setError('addressOrEmail', {
-        message: _(`You cannot add a DAO to an organization`),
+        message: _(msg`You cannot add a DAO to an organization`),
       });
     }
   }, [daoWithAddress, setError, _]);
@@ -95,12 +96,14 @@ export const InviteMemberModal = ({
         // provided address already belongs to the current organization
         if (dao.address === currentDaoOrganization.address) {
           setError('addressOrEmail', {
-            message: _(`This user is already a member of the organization`),
+            message: _(msg`This user is already a member of the organization`),
           });
         } else {
           // provided address belongs to a different organization
           setError('addressOrEmail', {
-            message: _(`This member already belongs to another organization.`),
+            message: _(
+              msg`This member already belongs to another organization.`,
+            ),
           });
         }
       }
@@ -242,11 +245,13 @@ export const InviteMemberModal = ({
                         }}
                         className="cursor-pointer hover:bg-bc-neutral-100 p-[20px] flex items-center gap-[10px] min-h-[84px]"
                       >
-                        <UserAvatar
-                          src={acc?.image}
-                          alt={acc?.name || acc?.addr || ''}
-                          size="medium"
-                        />
+                        {acc?.image && (
+                          <UserAvatar
+                            src={acc?.image}
+                            alt={acc?.name || acc?.addr || ''}
+                            size="medium"
+                          />
+                        )}
                         <div className="flex flex-col flex-1 min-w-0 gap-2">
                           <span className="text-md font-medium leading-tight">
                             {acc?.name || acc?.addr}

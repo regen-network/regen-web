@@ -11,6 +11,7 @@ import {
   getMsgExecuteContract,
   WasmExecuteAction,
 } from 'utils/cosmwasm';
+import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
@@ -58,6 +59,42 @@ export const useUpdateOrganizationProfile = () => {
   const { wallet, signAndBroadcast } = useMsgClient();
   const { signingCosmWasmClient } = useLedger();
   const { activeAccountId, activeAccount } = useAuth();
+
+  const pollDaoConfigUntilUpdated = useCallback(
+    async (daoAddress: string, expectedName: string) => {
+      if (!signingCosmWasmClient) {
+        return false;
+      }
+
+      let isUpdated = false;
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      // Poll for up to 10 seconds (10 attempts x 1 second)
+      while (!isUpdated && attempts < maxAttempts) {
+        try {
+          const config = (await signingCosmWasmClient.queryContractSmart(
+            daoAddress,
+            { config: {} },
+          )) as DaoConfigQuery;
+          
+          // Check if the DAO config has been updated with the expected name
+          if (config?.config?.name === expectedName) {
+            isUpdated = true;
+            break;
+          }
+        } catch (error) {
+          // Continue polling on error
+        }
+
+        attempts++;
+        await timer(1000);
+      }
+      
+      return isUpdated;
+    },
+    [signingCosmWasmClient],
+  );
 
   return useCallback(
     async ({
@@ -233,8 +270,8 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(result);
       }
 
-      // allow indexer to persist the latest RBAM metadata before refetching
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Poll the DAO contract to ensure the config has been updated
+      await pollDaoConfigUntilUpdated(daoAddress, values.name);
 
       if (wallet?.address) {
         await queryClient.invalidateQueries({
@@ -260,6 +297,7 @@ export const useUpdateOrganizationProfile = () => {
       signingCosmWasmClient,
       activeAccountId,
       activeAccount?.id,
+      pollDaoConfigUntilUpdated,
     ],
   );
 };

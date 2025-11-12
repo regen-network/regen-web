@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
 import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
@@ -16,11 +16,9 @@ import {
 
 export const CreditClassTab = () => {
   const navigate = useNavigate();
-  const { accountAddressOrId } = useParams();
   const { i18n } = useLingui();
 
-  const { creditClasses, programs, loading } =
-    useMergedCreditClasses(accountAddressOrId);
+  const { creditClasses, programs, loading } = useMergedCreditClasses();
 
   return (
     <WithLoader isLoading={loading}>

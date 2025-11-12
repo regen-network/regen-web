@@ -25,10 +25,27 @@ import { useAddDataToBatches } from './useAddDataToBatches';
 export const PAGINATED_BATCHES_ROWS_PER_PAGE = 10;
 
 type Props = {
+  /**
+   *  Optional address to filter batches by issuer
+   */
   address?: string | null;
+  /**
+   *  Optional projectId to filter batches by project
+   */
   projectId?: string;
+  /**
+   *  Optional withAllData to indicate whether to fetch additional related batch data (project and class metadata)
+   */
   withAllData?: boolean;
+  /**
+   *  Optional creditClassId to filter batches by credit class
+   */
   creditClassId?: string | null;
+  /**
+   * Indicates whether the address prop is still loading.
+   * Address can be fetched asynchronously (based on some account/organization uuid),
+   */
+  isAddressLoading?: boolean;
 };
 
 export const useFetchPaginatedBatches = ({
@@ -36,6 +53,7 @@ export const useFetchPaginatedBatches = ({
   address,
   creditClassId,
   withAllData = true,
+  isAddressLoading = false,
 }: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
@@ -79,7 +97,12 @@ export const useFetchPaginatedBatches = ({
         pagination: paginationRequest,
       },
       placeholderData: keepPreviousData,
-      enabled: !!queryClient && !projectId && !address && !creditClassId,
+      enabled:
+        !isAddressLoading &&
+        !!queryClient &&
+        !projectId &&
+        !address &&
+        !creditClassId,
     }),
   );
 
@@ -92,7 +115,7 @@ export const useFetchPaginatedBatches = ({
         issuer: address as string,
       },
       placeholderData: keepPreviousData,
-      enabled: !!queryClient && !!address,
+      enabled: !isAddressLoading && !!queryClient && !!address,
     }),
   );
 

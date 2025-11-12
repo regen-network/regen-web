@@ -1,6 +1,5 @@
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import { useQueryIsClassAdmin } from 'hooks/useQueryIsClassAdmin';
 
 export const useShowCreditClasses = ({
   activeAddress,
@@ -12,11 +11,11 @@ export const useShowCreditClasses = ({
   const isCreditClassCreator = useQueryIfCreditClassCreator({
     address: activeAddress,
   });
-  const isCreditClassAdmin = useQueryIsClassAdmin({ address: activeAddress });
   const { creditClasses } = useFetchCreditClassesWithOrder({
     admin: activeAddress,
     userAddress,
   });
+  const isCreditClassAdmin = (creditClasses?.length ?? 0) > 0;
   const showCreditClasses =
     (isCreditClassCreator || isCreditClassAdmin) && creditClasses.length > 0;
 

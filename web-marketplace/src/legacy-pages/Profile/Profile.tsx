@@ -57,10 +57,7 @@ export const Profile = (): JSX.Element => {
   const { address, account, organization, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
 
-  const profile = useMemo(
-    () => account || organization,
-    [account, organization],
-  );
+  const profile = account || organization;
 
   const { avatarImage, backgroundImage } = useMemo(
     () =>
@@ -79,6 +76,7 @@ export const Profile = (): JSX.Element => {
     activeAddress: address,
     userAddress: wallet?.address,
   });
+
   const { adminProjects } = useFetchProjectByAdmin({
     organization,
     adminAccountId: account?.id,
@@ -88,6 +86,7 @@ export const Profile = (): JSX.Element => {
 
   const { batchesWithSupply } = useFetchPaginatedBatches({
     address,
+    isAddressLoading: isLoading,
   });
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 

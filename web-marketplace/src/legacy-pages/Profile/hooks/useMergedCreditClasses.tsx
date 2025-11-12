@@ -3,6 +3,7 @@ import { useCreditClasses } from 'legacy-pages/Home/hooks/useCreditClasses';
 
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
+
 import { useProfileData } from './useProfileData';
 
 export const useMergedCreditClasses = () => {

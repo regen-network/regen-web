@@ -138,11 +138,22 @@ export const OrganizationProfileStep = ({
         const organizationIdValue = organizationId ?? uuidv4();
         setOrganizationId(organizationIdValue);
 
+        // Check if images are still default values, and if so, use empty strings
+        const profileImageToSave =
+          values.profileImage === DEFAULT_PROFILE_COMPANY_AVATAR
+            ? null
+            : values.profileImage;
+
+        const backgroundImageToSave =
+          values.backgroundImage === DEFAULT_PROFILE_BG
+            ? null
+            : values.backgroundImage;
+
         const daoResult = await createDao({
           name: values.name,
           description: values.description,
-          profileImage: values.profileImage,
-          backgroundImage: values.backgroundImage,
+          profileImage: profileImageToSave,
+          backgroundImage: backgroundImageToSave,
           websiteLink: values.websiteLink,
           twitterLink: values.twitterLink,
           organizationId: organizationIdValue,

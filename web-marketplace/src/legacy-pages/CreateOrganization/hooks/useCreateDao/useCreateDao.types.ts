@@ -1,8 +1,8 @@
 export type CreateDaoParams = {
   name: string;
   description?: string;
-  profileImage?: string;
-  backgroundImage?: string;
+  profileImage?: string | null;
+  backgroundImage?: string | null;
   websiteLink?: string;
   twitterLink?: string;
   organizationId: string;

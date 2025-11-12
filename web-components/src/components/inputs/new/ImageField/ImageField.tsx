@@ -142,7 +142,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
                     if (typeof image === 'string') {
                       const fileName = initialFileName ?? file.name;
                       const fileExtension =
-                        fileName.match(EXTENSION_REGEX)?.[1] ??
+                        file.name.match(EXTENSION_REGEX)?.[1] ??
                         DEFAULT_IMAGE_EXTENSION;
                       setInitialImage(image);
                       setFileType(file.type);

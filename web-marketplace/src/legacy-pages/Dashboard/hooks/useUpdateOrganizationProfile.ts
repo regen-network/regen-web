@@ -6,7 +6,7 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { sanitizeDaoParams } from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 import {
@@ -56,7 +56,7 @@ type DaoConfigQuery = {
 };
 
 export const useUpdateOrganizationProfile = () => {
-  const queryClient = useQueryClient();
+  const reactQueryClient = useQueryClient();
   const { organizationRole } = useDashboardContext();
   const { wallet, signAndBroadcast } = useMsgClient();
   const { signingCosmWasmClient } = useLedger();
@@ -65,15 +65,6 @@ export const useUpdateOrganizationProfile = () => {
   const { activeAccountId, activeAccount } = useAuth();
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-
-  const { refetch } = useQuery(
-    getAccountByIdQuery({
-      client: graphqlClient as ApolloClient<NormalizedCacheObject>,
-      enabled: !!graphqlClient && !!activeAccountId,
-      id: activeAccountId ?? '',
-      languageCode: selectedLanguage,
-    }),
-  );
 
   return useCallback(
     async ({
@@ -259,7 +250,14 @@ export const useUpdateOrganizationProfile = () => {
         await timer(pollInterval);
 
         try {
-          const { data } = await refetch();
+          const data = await reactQueryClient.fetchQuery(
+            getAccountByIdQuery({
+              client: graphqlClient as ApolloClient<NormalizedCacheObject>,
+              enabled: !!graphqlClient && !!activeAccountId,
+              id: activeAccountId ?? '',
+              languageCode: selectedLanguage,
+            }),
+          );
 
           const dao =
             data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
@@ -299,6 +297,15 @@ export const useUpdateOrganizationProfile = () => {
           continue;
         }
       }
+
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAccountByIdQuery({
+          client: graphqlClient,
+          enabled: !!graphqlClient && !!activeAccountId,
+          id: activeAccountId ?? '',
+          languageCode: selectedLanguage,
+        }).queryKey,
+      });
     },
     [
       organizationRole,
@@ -306,7 +313,10 @@ export const useUpdateOrganizationProfile = () => {
       wallet?.address,
       signingCosmWasmClient,
       _,
-      refetch,
+      reactQueryClient,
+      graphqlClient,
+      activeAccountId,
+      selectedLanguage,
     ],
   );
 };

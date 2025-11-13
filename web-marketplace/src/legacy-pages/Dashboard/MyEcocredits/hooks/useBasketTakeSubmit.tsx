@@ -4,7 +4,11 @@ import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/regen/ecocredit/basket/v1/tx';
-import { basketTakeAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
+import {
+  basketTakeAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
 import type { MsgTakeValues } from 'web-components/src/components/form/BasketTakeForm';
 
@@ -17,7 +21,6 @@ import {
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { useDashboardContext } from '../../Dashboard.context';
@@ -55,10 +58,12 @@ const useBasketTakeSubmit = ({
   const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
     useDashboardContext();
 
-  const roleConfig = organizationRole
-    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
-    : undefined;
-  const manageCreditsAuthId = roleConfig?.authorizations?.can_manage_credits;
+  const { roleId, authorizationId: manageCreditsAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_credits',
+    });
 
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {
@@ -80,7 +85,7 @@ const useBasketTakeSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleConfig ||
+          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -89,7 +94,7 @@ const useBasketTakeSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = basketTakeAction({
-          roleId: roleConfig.roleId,
+          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
@@ -169,7 +174,7 @@ const useBasketTakeSubmit = ({
       baskets,
       track,
       isOrganizationDashboard,
-      roleConfig,
+      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

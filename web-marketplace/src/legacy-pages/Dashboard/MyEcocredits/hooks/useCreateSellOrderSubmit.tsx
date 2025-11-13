@@ -8,8 +8,12 @@ import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/eve
 import { MessageComposer } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx.registry';
 import { useQueryClient } from '@tanstack/react-query';
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
-import { sellOrderAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
+import {
+  getRoleAuthorizationIds,
+  sellOrderAction,
+  wrapRbamActions,
+} from 'web-marketplace/src/utils/rbam.utils';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/src/utils/format';
@@ -31,7 +35,6 @@ import { useWallet } from 'lib/wallet/wallet';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { CreateSellOrderFormSchemaType } from 'components/organisms/CreateSellOrderForm/CreateSellOrderForm.schema';
-import { orgRoles } from 'hooks/org-members/constants';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { useDashboardContext } from '../../Dashboard.context';
@@ -72,11 +75,12 @@ const useCreateSellOrderSubmit = ({
   const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
     useDashboardContext();
 
-  const roleConfig = organizationRole
-    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
-    : undefined;
-  const manageSellOrdersAuthId =
-    roleConfig?.authorizations?.can_manage_sell_orders;
+  const { roleId, authorizationId: manageSellOrdersAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_sell_orders',
+    });
 
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
@@ -93,7 +97,7 @@ const useCreateSellOrderSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleConfig ||
+          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageSellOrdersAuthId
@@ -104,7 +108,7 @@ const useCreateSellOrderSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = sellOrderAction({
-          roleId: roleConfig.roleId,
+          roleId,
           authorizationId: manageSellOrdersAuthId,
           seller: accountAddress, // DAO address
           orders: [
@@ -314,7 +318,7 @@ const useCreateSellOrderSubmit = ({
       setTxModalHeader,
       setTxButtonTitle,
       isOrganizationDashboard,
-      roleConfig,
+      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageSellOrdersAuthId,

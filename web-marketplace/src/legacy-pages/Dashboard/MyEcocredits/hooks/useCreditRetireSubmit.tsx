@@ -5,8 +5,9 @@ import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   creditRetireAction,
+  getRoleAuthorizationIds,
   wrapRbamActions,
-} from 'utils/dashboard.rbam.utils';
+} from 'web-marketplace/src/utils/rbam.utils';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -22,7 +23,6 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CreditRetireFormSchemaType } from 'components/organisms/CreditRetireForm/CreditRetireForm.schema';
-import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { useDashboardContext } from '../../Dashboard.context';
@@ -65,10 +65,12 @@ const useCreditRetireSubmit = ({
   const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
     useDashboardContext();
 
-  const roleConfig = organizationRole
-    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
-    : undefined;
-  const manageCreditsAuthId = roleConfig?.authorizations?.can_manage_credits;
+  const { roleId, authorizationId: manageCreditsAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_credits',
+    });
 
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
@@ -92,7 +94,7 @@ const useCreditRetireSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleConfig ||
+          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -103,7 +105,7 @@ const useCreditRetireSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditRetireAction({
-          roleId: roleConfig.roleId,
+          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           credits: [
@@ -200,7 +202,7 @@ const useCreditRetireSubmit = ({
       track,
       accountAddress,
       isOrganizationDashboard,
-      roleConfig,
+      roleId,
       organizationRbamAddress,
       wallet?.address,
       signAndBroadcast,

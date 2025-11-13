@@ -9,6 +9,8 @@ import {
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import { MsgRetire, MsgSend } from '@regen-network/api/regen/ecocredit/v1/tx';
 
+import { orgRoles, projectRoles } from 'hooks/org-members/constants';
+
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
 
 /**
@@ -145,3 +147,30 @@ export const cancelSellOrderAction = ({
     value: protoBytes,
   });
 };
+
+type GetRoleAuthorizationIdsParams = {
+  type: 'organization' | 'project';
+  currentUserRole?: string;
+  authorizationName?: string;
+};
+
+export function getRoleAuthorizationIds({
+  type,
+  currentUserRole,
+  authorizationName,
+}: GetRoleAuthorizationIdsParams) {
+  const roles = type === 'organization' ? orgRoles : projectRoles;
+
+  const normalizedRole = currentUserRole?.toLowerCase() as keyof typeof roles;
+  const roleConfig = normalizedRole ? roles[normalizedRole] : undefined;
+
+  const roleId = roleConfig?.roleId;
+  const authorizationId =
+    roleConfig && authorizationName
+      ? roleConfig.authorizations[
+          authorizationName as keyof typeof roleConfig.authorizations
+        ]
+      : undefined;
+
+  return { roleId, authorizationId, roleConfig };
+}

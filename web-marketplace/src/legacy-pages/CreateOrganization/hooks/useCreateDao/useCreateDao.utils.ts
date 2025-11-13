@@ -340,67 +340,65 @@ export const adminMembersAuthorization = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,
-) => [
-  {
-    name: 'can_manage_members_except_owner',
-    metadata: 'Can manage members of the organization except the owner',
-    filter: {
-      $or: [
-        feegrantFilter,
-        feegrantRevokeFilter,
-        {
-          wasm: {
-            execute: {
-              contract_addr: cw4GroupAddress,
-              msg: {
-                '#base64': {
-                  update_members: {
-                    remove: {
-                      $not: { $contains: initialOwnerAddress },
-                    },
+) => ({
+  name: 'can_manage_members_except_owner',
+  metadata: 'Can manage members of the organization except the owner',
+  filter: {
+    $or: [
+      feegrantFilter,
+      feegrantRevokeFilter,
+      {
+        wasm: {
+          execute: {
+            contract_addr: cw4GroupAddress,
+            msg: {
+              '#base64': {
+                update_members: {
+                  remove: {
+                    $not: { $contains: initialOwnerAddress },
                   },
                 },
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-        {
-          wasm: {
-            execute: {
-              contract_addr: rbamAddress,
-              msg: {
-                '#base64': {
-                  assign: {},
-                },
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: rbamAddress,
+            msg: {
+              '#base64': {
+                assign: {},
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-        {
-          wasm: {
-            execute: {
-              contract_addr: rbamAddress,
-              msg: {
-                '#base64': {
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: rbamAddress,
+            msg: {
+              '#base64': {
+                revoke: {
                   revoke: {
-                    revoke: {
-                      $all: {
-                        addr: { $ne: initialOwnerAddress },
-                      },
+                    $all: {
+                      addr: { $ne: initialOwnerAddress },
                     },
                   },
                 },
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-      ],
-    },
+      },
+    ],
   },
-];
+});
 
 const dataAuthorization = {
   name: 'can_anchor_attest_data',

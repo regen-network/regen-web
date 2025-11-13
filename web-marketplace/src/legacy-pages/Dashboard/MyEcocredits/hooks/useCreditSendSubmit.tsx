@@ -2,7 +2,11 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
-import { creditSendAction, wrapRbamActions } from 'utils/dashboard.rbam.utils';
+import {
+  creditSendAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'web-marketplace/src/utils/rbam.utils';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -18,7 +22,6 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import type { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
-import { orgRoles } from 'hooks/org-members/constants';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import { useDashboardContext } from '../../Dashboard.context';
@@ -55,10 +58,12 @@ const useCreditSendSubmit = ({
   const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
     useDashboardContext();
 
-  const roleConfig = organizationRole
-    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
-    : undefined;
-  const manageCreditsAuthId = roleConfig?.authorizations?.can_manage_credits;
+  const { roleId, authorizationId: manageCreditsAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_credits',
+    });
 
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
@@ -81,7 +86,7 @@ const useCreditSendSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleConfig ||
+          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -92,7 +97,7 @@ const useCreditSendSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditSendAction({
-          roleId: roleConfig.roleId,
+          roleId,
           authorizationId: manageCreditsAuthId,
           sender: accountAddress, // DAO address
           recipient,
@@ -203,7 +208,7 @@ const useCreditSendSubmit = ({
       credits,
       isOrganizationDashboard,
       organizationRbamAddress,
-      roleConfig,
+      roleId,
       setCardItems,
       setCreditSendOpen,
       setTxModalHeader,

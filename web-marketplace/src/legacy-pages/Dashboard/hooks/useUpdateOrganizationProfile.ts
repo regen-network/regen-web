@@ -19,6 +19,7 @@ import {
   getMsgExecuteContract,
   WasmExecuteAction,
 } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
@@ -27,7 +28,6 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import { orgRoles } from 'hooks/org-members/constants';
 import useMsgClient from 'hooks/useMsgClient';
 
 type UpdateOrganizationProfileParams = {
@@ -78,25 +78,11 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(_(msg`Wallet not connected.`));
       }
 
-      const normalizedRole = organizationRole?.toLowerCase();
-      const isValidOrgRole = (
-        role: string | undefined,
-      ): role is keyof typeof orgRoles => {
-        return !!role && role in orgRoles;
-      };
-
-      if (!isValidOrgRole(normalizedRole)) {
-        const roleName = organizationRole ?? '';
-        throw new Error(
-          _(
-            msg`Invalid organization role: ${roleName}. Only Owner, Admin, Editor, and Viewer can edit organizations.`,
-          ),
-        );
-      }
-
-      const roleConfig = orgRoles[normalizedRole];
-      const authorizationId = roleConfig?.authorizations.can_edit_organization;
-      const roleId = roleConfig?.roleId;
+      const { roleId, authorizationId } = getRoleAuthorizationIds({
+        type: 'organization',
+        currentUserRole: organizationRole,
+        authorizationName: 'can_edit_organization',
+      });
 
       if (!authorizationId || !roleId) {
         throw new Error(

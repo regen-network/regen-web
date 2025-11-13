@@ -5,11 +5,12 @@ import { Box } from '@mui/material';
 import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
+import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 import {
   cancelSellOrderAction,
+  getRoleAuthorizationIds,
   wrapRbamActions,
-} from 'utils/dashboard.rbam.utils';
-import { getDenomtrace } from 'utils/ibc/getDenomTrace';
+} from 'web-marketplace/src/utils/rbam.utils';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 import {
@@ -25,7 +26,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
-import { orgRoles } from 'hooks/org-members/constants';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -66,11 +66,12 @@ const useCancelSellOrderSubmit = ({
   const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
     useDashboardContext();
 
-  const roleConfig = organizationRole
-    ? orgRoles[organizationRole.toLowerCase() as keyof typeof orgRoles]
-    : undefined;
-  const manageSellOrdersAuthId =
-    roleConfig?.authorizations?.can_manage_sell_orders;
+  const { roleId, authorizationId: manageSellOrdersAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_sell_orders',
+    });
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -84,13 +85,13 @@ const useCancelSellOrderSubmit = ({
 
     if (
       isOrganizationDashboard &&
-      roleConfig &&
+      roleId &&
       manageSellOrdersAuthId &&
       organizationRbamAddress &&
       wallet?.address
     ) {
       const action = cancelSellOrderAction({
-        roleId: roleConfig.roleId,
+        roleId,
         authorizationId: manageSellOrdersAuthId,
         seller: accountAddress, // DAO address
         sellOrderId: BigInt(selectedSellOrder.id),
@@ -201,7 +202,7 @@ const useCancelSellOrderSubmit = ({
     setTxModalTitle,
     setTxButtonTitle,
     isOrganizationDashboard,
-    roleConfig,
+    roleId,
     organizationRbamAddress,
     wallet?.address,
     reactQueryClient,

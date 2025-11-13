@@ -25,13 +25,16 @@ export const hasTransferableProfile = (
   if (!account) return false;
   if (account.type !== AccountType.Organization) return false;
 
-  return hasProjects && Boolean(
-    account.name?.trim() ||
-      account.description?.trim() ||
-      account.image?.trim() ||
-      account.bgImage?.trim() ||
-      account.websiteLink?.trim() ||
-      account.twitterLink?.trim(),
+  return (
+    hasProjects &&
+    Boolean(
+      account.name?.trim() ||
+        account.description?.trim() ||
+        account.image?.trim() ||
+        account.bgImage?.trim() ||
+        account.websiteLink?.trim() ||
+        account.twitterLink?.trim(),
+    )
   );
 };
 

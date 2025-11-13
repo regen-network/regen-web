@@ -5,23 +5,24 @@ import { useLingui } from '@lingui/react';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
-import { useWallet } from 'lib/wallet/wallet';
-
 import { Bridge } from 'components/organisms';
 
 import { useDashboardContext } from '../Dashboard.context';
 
 export const MyBridge = (): JSX.Element => {
   const { _ } = useLingui();
-  const { wallet } = useWallet();
   const { selectedAccountAddress } = useDashboardContext();
-  const accountAddress = selectedAccountAddress ?? wallet?.address;
 
   const MyBridgeOutlet = useCallback(
     (): JSX.Element => (
-      <Outlet context={{ accountAddress, privateAccess: true }} />
+      <Outlet
+        context={{
+          accountAddress: selectedAccountAddress,
+          privateAccess: true,
+        }}
+      />
     ),
-    [accountAddress],
+    [selectedAccountAddress],
   );
 
   const tabs: IconTabProps[] = useMemo(

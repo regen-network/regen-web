@@ -184,7 +184,7 @@ export const getRegenRoutes = ({
   address,
   languageCode,
 }: RouterParams): RouteObject[] => {
-  const renderDashboardChildren = () => (
+  const renderDashboardChildren = (isOrganization = false) => (
     <>
       <Route
         index
@@ -218,14 +218,18 @@ export const getRegenRoutes = ({
         path="profile"
         element={<KeplrOrAuthRoute component={EditProfile} />}
       />
-      <Route
-        path="settings"
-        element={<AuthRoute component={DashboardSettings} />}
-      />
-      <Route
-        path="my-orders"
-        element={<KeplrOrAuthRoute component={Orders} />}
-      />
+      {!isOrganization && (
+        <>
+          <Route
+            path="settings"
+            element={<AuthRoute component={DashboardSettings} />}
+          />
+          <Route
+            path="my-orders"
+            element={<KeplrOrAuthRoute component={Orders} />}
+          />
+        </>
+      )}
       <Route
         path="sell-orders"
         element={<KeplrOrAuthRoute component={Sell} />}
@@ -396,7 +400,7 @@ export const getRegenRoutes = ({
           element={<KeplrOrAuthRoute component={Dashboard} />}
           errorElement={<ErrorPage />}
         >
-          {renderDashboardChildren()}
+          {renderDashboardChildren(true)}
         </Route>
 
         <Route
@@ -404,7 +408,7 @@ export const getRegenRoutes = ({
           element={<KeplrOrAuthRoute component={Dashboard} />}
           errorElement={<ErrorPage />}
         >
-          {renderDashboardChildren()}
+          {renderDashboardChildren(false)}
         </Route>
 
         <Route path="connect-wallet" element={<ConnectWalletPage />} />

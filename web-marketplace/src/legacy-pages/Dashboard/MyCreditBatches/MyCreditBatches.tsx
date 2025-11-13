@@ -19,7 +19,6 @@ import { MyCreditBatchesTable } from './MyCreditBatches.Table';
 export const MyCreditBatches = (): JSX.Element => {
   const { _ } = useLingui();
   const theme = useTheme();
-  const { wallet } = useWallet();
   const {
     selectedAccountAddress,
     isOrganizationDashboard,
@@ -27,10 +26,9 @@ export const MyCreditBatches = (): JSX.Element => {
     isOrganizationAdmin,
     isIssuer,
   } = useDashboardContext();
-  const accountAddress = selectedAccountAddress ?? wallet?.address;
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({
-      address: accountAddress,
+      address: selectedAccountAddress,
     });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
   const canManageCreditBatches = isOrganizationDashboard

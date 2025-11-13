@@ -62,7 +62,7 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { signingClient, signingCosmWasmClient, queryClient } = useLedger();
+  const { signingCosmWasmClient, queryClient } = useLedger();
   const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
@@ -76,15 +76,14 @@ export default function useMsgClient(
 
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
-      const client = signingCosmWasmClient ?? signingClient;
-      if (!client || !wallet?.address) {
+      if (!signingCosmWasmClient || !wallet?.address) {
         return;
       }
       const { msgs, fee: txFee, memo } = tx;
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
-        const gasEstimation = await client.simulate(
+        const gasEstimation = await signingCosmWasmClient.simulate(
           wallet.address,
           msgs,
           memo || '',
@@ -116,13 +115,17 @@ export default function useMsgClient(
 
       setIsWaitingForSigning(true);
 
-      const txRaw = await client.sign(wallet.address, msgs, fee, memo || '');
+      const txRaw = await signingCosmWasmClient.sign(
+        wallet.address,
+        msgs,
+        fee,
+        memo || '',
+      );
       setIsWaitingForSigning(false);
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
     },
     [
-      signingClient,
       signingCosmWasmClient,
       wallet?.address,
       reactQueryClient,
@@ -134,12 +137,13 @@ export default function useMsgClient(
 
   const broadcast = useCallback(
     async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
-      const client = signingCosmWasmClient ?? signingClient;
-      if (!client || !txBytes) {
+      if (!signingCosmWasmClient || !txBytes) {
         return;
       }
       handleTxQueued && handleTxQueued();
-      const _deliverTxResponse = await client.broadcastTx(txBytes);
+      const _deliverTxResponse = await signingCosmWasmClient.broadcastTx(
+        txBytes,
+      );
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
@@ -154,7 +158,6 @@ export default function useMsgClient(
       }
     },
     [
-      signingClient,
       signingCosmWasmClient,
       handleTxQueued,
       handleTxDelivered,

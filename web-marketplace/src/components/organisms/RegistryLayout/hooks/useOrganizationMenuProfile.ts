@@ -6,10 +6,7 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 
-import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
-
 import type { AccountByIdQuery } from 'generated/graphql';
-import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import type { Wallet } from 'lib/wallet/wallet';
 
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
@@ -49,12 +46,8 @@ export const useOrganizationMenuProfile = ({
     const organizationName =
       organizationProfile.name?.trim() || _(DEFAULT_NAME);
 
-    const rawImage = organizationProfile?.image?.trim() || '';
-    const optimizedImage = rawImage
-      ? getOptimizedImageSrc(rawImage, IMAGE_STORAGE_BASE_URL, API_URI)
-      : '';
     const organizationImage =
-      optimizedImage || rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
+      organizationProfile?.image?.trim() || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
       id: daoAddress,

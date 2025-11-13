@@ -140,12 +140,7 @@ export const LayoutHeader = () => {
           address: wallet?.address,
         }),
         orgEnabled: ORG_ENABLED,
-        organizationProfile: menuOrganizationProfile
-          ? {
-              ...menuOrganizationProfile,
-              dashboardLink: '/dashboard/organization',
-            }
-          : undefined,
+        organizationProfile: menuOrganizationProfile,
         createOrganization:
           !menuOrganizationProfile && !unfinalizedOrgCreation
             ? createOrganization

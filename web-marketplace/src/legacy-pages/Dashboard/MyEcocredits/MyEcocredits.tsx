@@ -123,14 +123,13 @@ export const MyEcocredits = (): JSX.Element => {
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
   const { privActiveAccount, activeAccount } = useAuth();
-  const { loginDisabled, wallet: connectedWallet } = useWallet();
+  const { loginDisabled } = useWallet();
   const {
     selectedAccountAddress,
     isOrganizationDashboard,
     isOrganizationOwner,
     isOrganizationAdmin,
   } = useDashboardContext();
-  const accountAddress = selectedAccountAddress ?? connectedWallet?.address;
   const canManagePortfolioActions =
     !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
 
@@ -146,7 +145,7 @@ export const MyEcocredits = (): JSX.Element => {
     retirementsSetPaginationParams,
     retirementsPaginationParams,
     reloadRetirements,
-  } = useFetchRetirements({ address: accountAddress });
+  } = useFetchRetirements({ address: selectedAccountAddress });
 
   const onCloseBasketPutModal = (): void => setBasketPutOpen(-1);
   const onTxSuccessful = ({
@@ -229,7 +228,7 @@ export const MyEcocredits = (): JSX.Element => {
     isLoadingCredits,
     paginationParams,
     setPaginationParams,
-  } = useFetchEcocredits({ address: accountAddress });
+  } = useFetchEcocredits({ address: selectedAccountAddress });
 
   const {
     basketTokens,
@@ -237,7 +236,7 @@ export const MyEcocredits = (): JSX.Element => {
     basketsWithClasses,
     creditBaskets,
     reloadBasketsBalance,
-  } = useFetchBaskets({ credits, address: accountAddress });
+  } = useFetchBaskets({ credits, address: selectedAccountAddress });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
 
@@ -248,7 +247,7 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const basketTakeSubmit = useBasketTakeSubmit({
-    accountAddress,
+    accountAddress: selectedAccountAddress,
     basketTakeTitle: _(BASKET_TAKE_TITLE),
     baskets: baskets?.basketsInfo,
     signAndBroadcast,
@@ -257,7 +256,7 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const creditSendSubmit = useCreditSendSubmit({
-    accountAddress,
+    accountAddress: selectedAccountAddress,
     creditSendOpen,
     creditSendTitle: _(CREDIT_SEND_TITLE),
     credits,
@@ -269,7 +268,7 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const basketPutSubmit = useBasketPutSubmit({
-    accountAddress,
+    accountAddress: selectedAccountAddress,
     baskets: baskets?.basketsInfo,
     basketPutTitle: _(BASKET_PUT_TITLE),
     credit: credits[basketPutOpen] ?? {},
@@ -279,7 +278,7 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const creditRetireSubmit = useCreditRetireSubmit({
-    accountAddress,
+    accountAddress: selectedAccountAddress,
     creditRetireOpen,
     creditRetireTitle: _(CREDIT_RETIRE_TITLE),
     credits,
@@ -292,7 +291,7 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
-    accountAddress,
+    accountAddress: selectedAccountAddress,
     credits,
     signAndBroadcast,
     setCardItems,
@@ -527,21 +526,23 @@ export const MyEcocredits = (): JSX.Element => {
           renderBasketActionButtons={renderBasketActionButtons}
         />
       </WithLoader>
-      {canManagePortfolioActions && creditSendOpen > -1 && !!accountAddress && (
-        <CreditSendModal
-          title={_(CREDIT_SEND_TITLE)}
-          sender={accountAddress}
-          batchDenom={credits[creditSendOpen].denom}
-          availableTradableAmount={Number(
-            credits[creditSendOpen].balance?.tradableAmount,
-          )}
-          mapboxToken={mapboxToken}
-          open={creditSendOpen > -1}
-          onClose={() => setCreditSendOpen(-1)}
-          onSubmit={creditSendSubmit}
-          addressPrefix={addressPrefix}
-        />
-      )}
+      {canManagePortfolioActions &&
+        creditSendOpen > -1 &&
+        !!selectedAccountAddress && (
+          <CreditSendModal
+            title={_(CREDIT_SEND_TITLE)}
+            sender={selectedAccountAddress}
+            batchDenom={credits[creditSendOpen].denom}
+            availableTradableAmount={Number(
+              credits[creditSendOpen].balance?.tradableAmount,
+            )}
+            mapboxToken={mapboxToken}
+            open={creditSendOpen > -1}
+            onClose={() => setCreditSendOpen(-1)}
+            onSubmit={creditSendSubmit}
+            addressPrefix={addressPrefix}
+          />
+        )}
       {canManagePortfolioActions && basketPutOpen > -1 && (
         <BasketPutModal
           basketOptions={
@@ -576,7 +577,7 @@ export const MyEcocredits = (): JSX.Element => {
       )}
       {canManagePortfolioActions &&
         creditRetireOpen > -1 &&
-        !!accountAddress && (
+        !!selectedAccountAddress && (
           <CreditRetireModal
             batchDenom={credits[creditRetireOpen].denom}
             availableTradableAmount={Number(
@@ -591,12 +592,12 @@ export const MyEcocredits = (): JSX.Element => {
         )}
       {canManagePortfolioActions &&
         !!basketTakeTokens?.basket &&
-        !!accountAddress && (
+        !!selectedAccountAddress && (
           <BasketTakeModal
             title={_(BASKET_TAKE_TITLE)}
             subtitle={_(BASKET_TAKE_SUBTITLE)}
             open={true}
-            accountAddress={accountAddress}
+            accountAddress={selectedAccountAddress}
             basket={basketTakeTokens?.basket}
             basketDisplayDenom={
               basketTakeTokens?.metadata?.metadata?.display || ''
@@ -628,7 +629,7 @@ export const MyEcocredits = (): JSX.Element => {
         )}
       {canManagePortfolioActions &&
         sellOrderCreateOpen > -1 &&
-        !!accountAddress &&
+        !!selectedAccountAddress &&
         sellOrderBatchOptions.length > 0 && (
           <CreateSellOrderModal
             batchDenoms={sellOrderBatchOptions}

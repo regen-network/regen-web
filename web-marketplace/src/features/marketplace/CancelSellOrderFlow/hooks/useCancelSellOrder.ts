@@ -52,9 +52,7 @@ export const useCancelSellOrder = ({
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
 
-  const { wallet } = useWallet();
   const { selectedAccountAddress } = useDashboardContext();
-  const accountAddress = selectedAccountAddress ?? wallet?.address;
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
@@ -95,7 +93,7 @@ export const useCancelSellOrder = ({
     setTxModalTitle,
     setIsProcessingModalOpen,
     signAndBroadcast,
-    accountAddress,
+    accountAddress: selectedAccountAddress,
   });
 
   const openCancelModal = (sellOrderIndex: number) => {

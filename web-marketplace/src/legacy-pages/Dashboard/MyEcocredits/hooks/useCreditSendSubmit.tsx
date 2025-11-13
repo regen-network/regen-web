@@ -96,11 +96,15 @@ const useCreditSendSubmit = ({
           authorizationId: manageCreditsAuthId,
           sender: accountAddress, // DAO address
           recipient,
-          batchDenom: batchDenom!,
-          tradableAmount: withRetire ? '' : amount.toString(),
-          retiredAmount: withRetire ? amount.toString() : '',
-          retirementJurisdiction,
-          retirementReason: note,
+          credits: [
+            {
+              batchDenom: batchDenom!,
+              tradableAmount: withRetire ? '' : amount.toString(),
+              retiredAmount: withRetire ? amount.toString() : '',
+              retirementJurisdiction: retirementJurisdiction || '',
+              retirementReason: note || '',
+            },
+          ],
         });
 
         finalMsg = wrapRbamActions({

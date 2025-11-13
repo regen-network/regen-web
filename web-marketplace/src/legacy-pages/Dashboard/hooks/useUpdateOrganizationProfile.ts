@@ -24,10 +24,9 @@ import { timer } from 'utils/timer';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
+import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 import { orgRoles } from 'hooks/org-members/constants';
 import useMsgClient from 'hooks/useMsgClient';
 
@@ -35,14 +34,7 @@ type UpdateOrganizationProfileParams = {
   daoAddress: string;
   rbamAddress: string;
   organizationId?: string;
-  values: {
-    name: string;
-    description?: string;
-    profileImage?: string;
-    backgroundImage?: string;
-    websiteLink?: string;
-    twitterLink?: string;
-  };
+  values: EditProfileFormSchemaType;
   currentValues?: {
     description?: string | null;
     profileImage?: string | null;
@@ -121,8 +113,6 @@ export const useUpdateOrganizationProfile = () => {
         );
       }
 
-      const organizationIdentifier = organizationId ?? daoAddress;
-
       let existingConfig: DaoConfigQuery | undefined;
       if (signingCosmWasmClient) {
         try {
@@ -149,8 +139,8 @@ export const useUpdateOrganizationProfile = () => {
         backgroundImage: values.backgroundImage,
         websiteLink: values.websiteLink,
         twitterLink: values.twitterLink,
-        organizationId: organizationIdentifier,
-        currentAccountId: organizationIdentifier ?? activeAccountId ?? '',
+        organizationId: daoAddress,
+        currentAccountId: daoAddress,
         profileBasePath: PROFILE_S3_PATH,
       });
 
@@ -260,7 +250,7 @@ export const useUpdateOrganizationProfile = () => {
       }
 
       const maxAttempts = 15;
-      const pollInterval = 100;
+      const pollInterval = 500;
       let attempts = 0;
       let indexerUpdated = false;
 
@@ -275,13 +265,13 @@ export const useUpdateOrganizationProfile = () => {
             data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
               node =>
                 node?.address === daoAddress ||
-                node?.organizationByDaoAddress?.id === organizationIdentifier,
+                (organizationId &&
+                  node?.organizationByDaoAddress?.id === organizationId),
             );
 
           const organization = dao?.organizationByDaoAddress;
 
           const nameMatches = organization?.name === sanitizedName;
-          console.log(organization?.name, sanitizedName);
 
           const descriptionMatches =
             organization?.description === sanitizedDescription;
@@ -306,35 +296,15 @@ export const useUpdateOrganizationProfile = () => {
             indexerUpdated = true;
           }
         } catch (error) {
-          // Continue polling on error
           continue;
         }
       }
-
-      if (wallet?.address) {
-        await queryClient.invalidateQueries({
-          queryKey: getAccountByAddrQueryKey({ addr: wallet.address }),
-        });
-      }
-
-      if (activeAccount?.id) {
-        await queryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
-        });
-      }
-
-      await queryClient.invalidateQueries({
-        queryKey: ['dao-config', daoAddress],
-      });
     },
     [
       organizationRole,
-      queryClient,
       signAndBroadcast,
       wallet?.address,
       signingCosmWasmClient,
-      activeAccountId,
-      activeAccount?.id,
       _,
       refetch,
     ],

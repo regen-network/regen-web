@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -47,16 +47,6 @@ export const UserSellOrdersToolbar = ({
   const hasTradableCredits = tradableCredits.length > 0;
   const canStartSellFlow = canManageSellOrders && hasTradableCredits;
 
-  useEffect(() => {
-    if ((!canManageSellOrders || !hasTradableCredits) && isSellFlowStarted) {
-      setIsSellFlowStarted(false);
-    }
-  }, [canManageSellOrders, hasTradableCredits, isSellFlowStarted]);
-
-  const tooltipText = !canManageSellOrders
-    ? _(msg`You do not have permission to create sell orders.`)
-    : _(msg`You have no tradable credits that can be sold.`);
-
   return (
     <>
       <div
@@ -68,25 +58,31 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Open sell orders</Trans>
         </Subtitle>
-        <div className="flex sm:flex-row flex-col sm:items-center items-end">
-          <div className="sm:order-2 order-1">
-            {canStartSellFlow ? (
-              <CreateButton
-                hasTradableCredits={true}
-                setIsSellFlowStarted={setIsSellFlowStarted}
-              />
-            ) : (
-              <InfoTooltip arrow placement="top" title={tooltipText}>
-                <div>
-                  <CreateButton
-                    hasTradableCredits={false}
-                    setIsSellFlowStarted={setIsSellFlowStarted}
-                  />
-                </div>
-              </InfoTooltip>
-            )}
+        {canManageSellOrders && (
+          <div className="flex sm:flex-row flex-col sm:items-center items-end">
+            <div className="sm:order-2 order-1">
+              {hasTradableCredits ? (
+                <CreateButton
+                  hasTradableCredits={true}
+                  setIsSellFlowStarted={setIsSellFlowStarted}
+                />
+              ) : (
+                <InfoTooltip
+                  arrow
+                  placement="top"
+                  title={_(msg`You have no tradable credits that can be sold.`)}
+                >
+                  <div>
+                    <CreateButton
+                      hasTradableCredits={false}
+                      setIsSellFlowStarted={setIsSellFlowStarted}
+                    />
+                  </div>
+                </InfoTooltip>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {canStartSellFlow && isSellFlowStarted && (
         <Suspense fallback={null}>

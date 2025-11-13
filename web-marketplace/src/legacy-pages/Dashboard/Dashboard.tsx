@@ -33,7 +33,6 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import {
   ROLE_ADMIN,
-  ROLE_AUTHOR,
   ROLE_EDITOR,
   ROLE_OWNER,
   ROLE_VIEWER,
@@ -42,7 +41,7 @@ import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { orgRoles, projectRoles } from 'hooks/org-members/constants';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -68,66 +67,13 @@ type DashboardNavAccount = AccountOption & {
   source: 'auth' | 'dao';
   roleAccountId?: string;
   roleName?: string;
-  onChainRoleId?: string;
 };
-
-// Legacy IDs cover pre-RBAM assignments still stored in the indexer.
-const legacyRoleIdEntries: Array<[number, string]> = [
-  [1, ROLE_OWNER],
-  [2, ROLE_ADMIN],
-  [3, ROLE_EDITOR],
-  [4, ROLE_AUTHOR],
-  [5, ROLE_VIEWER],
-];
-
-// Current IDs are derived from the hardcoded RBAM role tables.
-const derivedRoleIdEntries: Array<[number, string]> = [
-  [orgRoles.owner.roleId, ROLE_OWNER],
-  [orgRoles.admin.roleId, ROLE_ADMIN],
-  [orgRoles.editor.roleId, ROLE_EDITOR],
-  [orgRoles.viewer.roleId, ROLE_VIEWER],
-  [projectRoles.owner.roleId, ROLE_OWNER],
-  [projectRoles.admin.roleId, ROLE_ADMIN],
-  [projectRoles.editor.roleId, ROLE_EDITOR],
-  [projectRoles.author.roleId, ROLE_AUTHOR],
-  [projectRoles.viewer.roleId, ROLE_VIEWER],
-];
-
-const ON_CHAIN_ROLE_ID_TO_ROLE: Record<string, string> = [
-  ...legacyRoleIdEntries,
-  ...derivedRoleIdEntries,
-].reduce<Record<string, string>>((acc, [roleId, role]) => {
-  acc[String(roleId)] = role;
-  return acc;
-}, {});
-
-// ============================================================================
-// 🧪 TESTING OVERRIDE - Change this to test different organization roles
-// ============================================================================
-// Set to one of: ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER, or null
-// When null, uses the actual role from the database
-//
-// Role Permissions Quick Reference:
-// - ROLE_OWNER:  Can manage members, credits, batches, classes, projects, edit org
-// - ROLE_ADMIN:  Can manage members (except owner), credits, batches, classes, projects, edit org
-// - ROLE_EDITOR: Can update class metadata, edit org profile only
-// - ROLE_VIEWER: Can only view, no edit permissions (Edit Org Profile menu is hidden)
-//
-// Example: const OVERRIDE_ORG_ROLE: string | null = ROLE_VIEWER;
-const OVERRIDE_ORG_ROLE: string | null = null;
-// ============================================================================
-
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { accountChanging, disconnect, loginDisabled, wallet } = useWallet();
-  const {
-    loading,
-    activeAccount,
-    activeAccountId,
-    authenticatedAccounts,
-    privActiveAccount,
-  } = useAuth();
+  const { loading, activeAccount, activeAccountId, privActiveAccount } =
+    useAuth();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -189,27 +135,18 @@ export const Dashboard = () => {
     return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
-  const daos = activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes;
-
-  const organizationDao = useMemo(
-    () => daos?.find(dao => !!dao?.organizationByDaoAddress) ?? undefined,
-    [daos],
-  );
-
+  const organizationDao = useDaoOrganization();
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
 
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment =
-      organizationDao.assignmentsByDaoAddress?.nodes?.find(
-        node => node?.accountId === activeAccountId,
-      ) ?? organizationDao.assignmentsByDaoAddress?.nodes?.[0];
+    const assignment = organizationDao.assignmentsByDaoAddress?.nodes?.find(
+      node => node?.accountId === activeAccountId,
+    );
 
-    const organizationName =
-      organizationProfile?.name?.trim() ||
-      organizationDao.organizationByDaoAddress?.name?.trim();
+    const organizationName = organizationProfile?.name?.trim();
 
     const rawImage = organizationProfile?.image?.trim() || '';
     const optimizedImage = rawImage
@@ -227,9 +164,6 @@ export const Dashboard = () => {
       source: 'dao',
       roleAccountId: assignment?.accountId ?? undefined,
       roleName: assignment?.roleName ?? undefined,
-      onChainRoleId: assignment?.onChainRoleId
-        ? String(assignment.onChainRoleId)
-        : undefined,
     };
   }, [
     organizationAddress,
@@ -239,86 +173,34 @@ export const Dashboard = () => {
     organizationProfile?.image,
   ]);
 
-  const authAccounts = useMemo<DashboardNavAccount[]>(() => {
-    const mapped =
-      authenticatedAccounts?.map(account => ({
-        id: account?.id ?? account?.addr ?? undefined,
-        name: account?.name || '',
-        address: account?.addr || privActiveAccount?.email || undefined,
-        type:
-          account?.type === 'ORGANIZATION'
-            ? ('org' as const)
-            : ('user' as const),
-        image: account?.image ?? undefined,
-        source: 'auth' as const,
-      })) ?? [];
-
-    const filtered = mapped.filter(account => account.id || account.address);
-
-    if (activeAccount) {
-      const personalId =
-        activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress ?? '';
-      const exists = filtered.some(account => account.id === personalId);
-
-      if (!exists) {
-        filtered.unshift({
-          id: personalId,
-          name: activeAccount.name || '',
-          address: personalResolvedAddress,
-          type:
-            activeAccount.type === 'ORGANIZATION'
-              ? ('org' as const)
-              : ('user' as const),
-          image: activeAccount.image ?? undefined,
-          source: 'auth',
-        });
-      }
-    } else if (filtered.length === 0 && personalResolvedAddress) {
-      filtered.unshift({
-        id: personalResolvedAddress,
-        name: '',
-        address: personalResolvedAddress,
-        type: 'user' as const,
-        image: undefined,
-        source: 'auth',
-      });
-    }
-
-    return filtered;
-  }, [
-    authenticatedAccounts,
-    activeAccount,
-    personalResolvedAddress,
-    privActiveAccount?.email,
-  ]);
-
-  const personalAccountId = useMemo(() => {
-    if (activeAccount?.id) return activeAccount.id;
-    if (activeAccount?.addr) return activeAccount.addr;
-    if (personalResolvedAddress) return personalResolvedAddress;
-    const firstAuth = authAccounts.find(account => account.source === 'auth');
-    return firstAuth?.id ?? '';
-  }, [
-    activeAccount?.id,
-    activeAccount?.addr,
-    personalResolvedAddress,
-    authAccounts,
-  ]);
+  const personalAccountId = activeAccountId ?? '';
 
   const selectedAccountId = isOrganizationDashboard
     ? organizationAccount?.id ?? ''
     : personalAccountId;
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
-    const list: DashboardNavAccount[] = [...authAccounts];
-    if (organizationAccount) {
-      const exists = list.some(
-        account => account.id === organizationAccount.id,
-      );
-      if (!exists) list.push(organizationAccount);
+    const accounts: DashboardNavAccount[] = [];
+
+    // Add personal account if it exists
+    if (activeAccount) {
+      accounts.push({
+        id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
+        name: activeAccount.name || '',
+        address: personalResolvedAddress,
+        type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+        image: activeAccount.image ?? undefined,
+        source: 'auth',
+      });
     }
-    return list;
-  }, [authAccounts, organizationAccount]);
+
+    // Add organization account if it exists
+    if (organizationAccount) {
+      accounts.push(organizationAccount);
+    }
+
+    return accounts;
+  }, [activeAccount, organizationAccount, personalResolvedAddress]);
 
   const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!selectedAccountId) return navigationAccounts[0];
@@ -335,35 +217,20 @@ export const Dashboard = () => {
     }
   }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
 
-  const organizationRoleActual = useMemo(() => {
+  const organizationRole = useMemo(() => {
     if (!isOrganizationDashboard || selectedAccount?.type !== 'org')
       return undefined;
 
-    if (selectedAccount.roleName) {
-      return selectedAccount.roleName;
-    }
-
-    if (selectedAccount.onChainRoleId) {
-      const mappedRole =
-        ON_CHAIN_ROLE_ID_TO_ROLE[selectedAccount.onChainRoleId];
-      if (mappedRole) return mappedRole;
-    }
-
-    return undefined;
+    return selectedAccount?.roleName;
   }, [
     isOrganizationDashboard,
     selectedAccount?.type,
     selectedAccount?.roleName,
-    selectedAccount?.onChainRoleId,
   ]);
-
-  // 🧪 Apply testing override if set
-  const organizationRole = OVERRIDE_ORG_ROLE ?? organizationRoleActual;
 
   const isOrganizationOwner = organizationRole === ROLE_OWNER;
   const isOrganizationAdmin = organizationRole === ROLE_ADMIN;
   const isOrganizationEditor = organizationRole === ROLE_EDITOR;
-  const isOrganizationAuthor = organizationRole === ROLE_AUTHOR;
   const isOrganizationViewer = organizationRole === ROLE_VIEWER;
 
   const dashboardAccountAddress = isOrganizationDashboard
@@ -437,18 +304,15 @@ export const Dashboard = () => {
         : undefined,
       isOrganizationDashboard,
       selectedAccountRoleName: selectedAccount?.roleName,
-      selectedAccountOnChainRoleId: selectedAccount?.onChainRoleId,
-      selectedAccountAddress: selectedAccount?.address,
+      selectedAccountAddress: selectedAccount?.address ?? wallet?.address,
       selectedAccountRoleAccountId: selectedAccount?.roleAccountId,
       organizationRole,
-      organizationRoleActual,
       organizationDaoAddress: organizationAccount?.address ?? undefined,
       organizationRbamAddress: organizationDao?.daoRbamAddress ?? undefined,
       organizationProfile: organizationProfile ?? null,
       isOrganizationOwner,
       isOrganizationAdmin,
       isOrganizationEditor,
-      isOrganizationAuthor,
       isOrganizationViewer,
     }),
     [
@@ -463,12 +327,11 @@ export const Dashboard = () => {
       organizationDao?.daoRbamAddress,
       organizationProfile,
       organizationRole,
-      organizationRoleActual,
       isOrganizationOwner,
       isOrganizationAdmin,
       isOrganizationEditor,
-      isOrganizationAuthor,
       isOrganizationViewer,
+      wallet?.address,
     ],
   );
 
@@ -490,30 +353,6 @@ export const Dashboard = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
-
-  const mobileActiveAccount: AccountOption = selectedAccount
-    ? {
-        id: selectedAccount.id,
-        name: selectedAccount.name,
-        address: selectedAccount.address,
-        type: selectedAccount.type,
-        image: selectedAccount.image,
-      }
-    : activeAccount
-    ? {
-        id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
-        name: activeAccount.name || '',
-        address: resolvedAddress || personalResolvedAddress,
-        type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
-        image: activeAccount.image ?? undefined,
-      }
-    : {
-        id: personalResolvedAddress,
-        name: '',
-        address: resolvedAddress || personalResolvedAddress,
-        type: 'user',
-        image: undefined,
-      };
 
   const viewProfileAccount = useMemo<Pick<
     Account,
@@ -560,13 +399,31 @@ export const Dashboard = () => {
       ? !!selectedAccount?.address
       : hasWalletAddress;
 
+  const headerActiveAccount: AccountOption =
+    selectedAccount ??
+    (activeAccount
+      ? {
+          id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
+          name: activeAccount.name || '',
+          address: resolvedAddress || personalResolvedAddress,
+          type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+          image: activeAccount.image ?? undefined,
+        }
+      : {
+          id: personalResolvedAddress,
+          name: '',
+          address: resolvedAddress || personalResolvedAddress,
+          type: 'user',
+          image: undefined,
+        });
+
   return (
     <NavigationProvider collapsed={collapsed}>
       <div className="bg-grey-100 min-h-screen">
         <div className="relative md:flex md:min-h-screen">
           {/* Mobile Header */}
           <DashboardNavigationMobileHeader
-            activeAccount={mobileActiveAccount}
+            activeAccount={headerActiveAccount}
             onMenuClick={() => setMobileMenuOpen(true)}
             mobileMenuOpen={mobileMenuOpen}
           />
@@ -604,7 +461,7 @@ export const Dashboard = () => {
                 setMobileMenuOpen(false);
               }}
               header={{
-                activeAccount: mobileActiveAccount,
+                activeAccount: headerActiveAccount,
                 accounts: navigationAccounts,
                 onAccountSelect: (id: string) => {
                   setIsWarningModalOpen(undefined);

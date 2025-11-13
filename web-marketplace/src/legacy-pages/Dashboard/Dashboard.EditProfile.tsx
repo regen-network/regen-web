@@ -14,12 +14,10 @@ import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import { useUpdateOrganizationProfile } from 'hooks/useUpdateOrganizationProfile';
 
 import {
   DEFAULT_NAME,
@@ -32,12 +30,12 @@ import {
 } from './Dashboard.constants';
 import { useDashboardContext } from './Dashboard.context';
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
+import { useUpdateOrganizationProfile } from './hooks/useUpdateOrganizationProfile';
 
 export const EditProfile = () => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
-  const { wallet } = useWallet();
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
@@ -47,6 +45,7 @@ export const EditProfile = () => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const {
+    selectedAccountAddress,
     isOrganizationDashboard,
     organizationDaoAddress,
     organizationRbamAddress,
@@ -54,8 +53,7 @@ export const EditProfile = () => {
   } = useDashboardContext();
   const updateOrganizationProfile = useUpdateOrganizationProfile();
   const organizationProfile = organizationProfileFromContext ?? null;
-  const organizationIdentifier =
-    organizationProfile?.id ?? organizationDaoAddress ?? undefined;
+  const organizationIdentifier = organizationProfile?.id;
   const hasOrgContext =
     Boolean(organizationDaoAddress) && Boolean(organizationRbamAddress);
   const isOrgDashboard = hasOrgContext && (isOrganizationDashboard ?? true);
@@ -176,8 +174,8 @@ export const EditProfile = () => {
             values: {
               name,
               description,
-              profileImage: isDefaultAvatar ? undefined : profileImage,
-              backgroundImage: isDefaultBg ? undefined : backgroundImage,
+              profileImage: isDefaultAvatar ? '' : profileImage,
+              backgroundImage: isDefaultBg ? '' : backgroundImage,
               twitterLink,
               websiteLink,
             },
@@ -265,9 +263,9 @@ export const EditProfile = () => {
   );
 
   const refreshProfileData = useCallback(async () => {
-    if (wallet?.address) {
+    if (selectedAccountAddress) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
+        queryKey: getAccountByAddrQueryKey({ addr: selectedAccountAddress }),
       });
     }
     if (activeAccount) {
@@ -275,39 +273,15 @@ export const EditProfile = () => {
         queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
       });
     }
-  }, [activeAccount, reactQueryClient, wallet?.address]);
-
-  const refreshOrganizationData = useCallback(
-    async (daoAddr?: string) => {
-      if (!daoAddr) return;
-      await Promise.all([
-        reactQueryClient.invalidateQueries({
-          queryKey: ['dao-config', daoAddr],
-        }),
-        reactQueryClient.invalidateQueries({
-          queryKey: ['organization-profile', daoAddr],
-        }),
-      ]);
-    },
-    [reactQueryClient],
-  );
+  }, [activeAccount, reactQueryClient, selectedAccountAddress]);
 
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
     void refreshProfileData();
-    if (isOrgDashboard) {
-      void refreshOrganizationData(organizationDaoAddress);
-    }
-  }, [
-    setBannerTextAtom,
-    _,
-    refreshProfileData,
-    isOrgDashboard,
-    refreshOrganizationData,
-    organizationDaoAddress,
-  ]);
+  }, [setBannerTextAtom, _, refreshProfileData]);
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
+    accountId: isOrgDashboard ? organizationIdentifier : undefined,
   });
 
   if (shouldBlockRender) return null;

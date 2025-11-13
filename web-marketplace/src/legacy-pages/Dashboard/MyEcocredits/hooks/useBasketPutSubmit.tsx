@@ -98,8 +98,12 @@ const useBasketPutSubmit = ({
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
-          batchDenom: credit.denom!,
-          amount,
+          credits: [
+            {
+              batchDenom: credit.denom!,
+              amount,
+            },
+          ],
         });
 
         finalMsg = wrapRbamActions({

@@ -95,8 +95,9 @@ const useBasketTakeSubmit = ({
           basketDenom: values.basketDenom,
           amount,
           retireOnTake: values.retireOnTake || false,
-          retirementJurisdiction: values.retirementJurisdiction,
-          retirementReason: values?.retirementReason,
+          retirementJurisdiction: values.retirementJurisdiction || '',
+          retirementReason: values?.retirementReason || '',
+          retirementLocation: '',
         });
 
         finalMsg = wrapRbamActions({

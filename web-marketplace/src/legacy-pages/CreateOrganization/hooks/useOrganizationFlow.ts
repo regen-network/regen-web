@@ -6,6 +6,7 @@ import {
 
 import { AccountType } from 'generated/graphql';
 
+import { FormRef } from 'components/molecules/Form/Form';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import { getCreateOrgSteps } from '../CreateOrganization.utils';
@@ -26,11 +27,11 @@ type UseOrganizationFlowParams = {
   data: OrganizationMultiStepData | undefined;
   handleActiveStep: (step: number) => void;
   handleBack: () => void;
-  handleSaveNext: (payload: OrganizationMultiStepData) => void;
   handleResetData: () => void;
   resumeStep: number;
   walletAddress?: string;
   steps: ReturnType<typeof getCreateOrgSteps>;
+  formRefs: Record<string, FormRef>;
 };
 
 type ApplyTransferPayload = {
@@ -73,11 +74,11 @@ export const useOrganizationFlow = ({
   data,
   handleActiveStep,
   handleBack,
-  handleSaveNext,
   handleResetData,
   resumeStep,
   walletAddress,
   steps,
+  formRefs,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
   const [organizationId, setOrganizationId] = useState<string | undefined>(
@@ -159,22 +160,11 @@ export const useOrganizationFlow = ({
 
   const handleNextClick = useCallback(async () => {
     const formId = steps[activeStep].id;
-    const form = document.getElementById(formId) as HTMLFormElement | undefined;
+    const currentFormRef = formRefs[formId];
 
-    if (!form) return;
-
-    const isValid = form.checkValidity();
-    if (!isValid) {
-      form.reportValidity?.();
-      return;
-    }
-
-    if (typeof form.requestSubmit === 'function') {
-      form.requestSubmit();
-    } else {
-      form.dispatchEvent(
-        new Event('submit', { bubbles: true, cancelable: true }),
-      );
+    if (currentFormRef?.current) {
+      // Trigger current step's form submission
+      await currentFormRef.current.submitForm();
     }
 
     if (hasUnfinishedOrganization && daoAddress && isLastStep) {
@@ -190,6 +180,7 @@ export const useOrganizationFlow = ({
     isLastStep,
     activeStep,
     steps,
+    formRefs,
   ]);
 
   const handleApplyTransferProfile = useCallback(

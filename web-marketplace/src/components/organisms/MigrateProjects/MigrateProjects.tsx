@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Controller, useForm, useFormState } from 'react-hook-form';
 import { MIGRATE_PROJECTS_FORM_ID } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
 import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
@@ -15,6 +14,7 @@ export const MigrateProjects = ({
   formAriaLabel = 'migrate projects form',
   setIsSubmitting,
   setIsValid,
+  formRef,
 }: MigrateProjectsProps) => {
   const form = useForm<FormValues>({
     defaultValues: { selectedProjectIds: [] },
@@ -30,6 +30,7 @@ export const MigrateProjects = ({
         form={form}
         onSubmit={onSubmit}
         aria-label={formAriaLabel}
+        formRef={formRef}
       >
         <Controller
           control={form.control}

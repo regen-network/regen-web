@@ -38,6 +38,7 @@ export const OrganizationProfileStep = ({
   onTransferProfile,
   setIsSubmitting,
   setIsValid,
+  formRef,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
   const { createDao } = useCreateDao();
@@ -159,21 +160,22 @@ export const OrganizationProfileStep = ({
           organizationId: organizationIdValue,
           type: 'organization',
         });
+        if (daoResult) {
+          setDaoAddress(daoResult.daoAddress);
+          setOrganizationId(daoResult.organizationId);
+          setTransferHandled(true);
+          setShowTransferModal(false);
 
-        setDaoAddress(daoResult.daoAddress);
-        setOrganizationId(daoResult.organizationId);
-        setTransferHandled(true);
-        setShowTransferModal(false);
-
-        const payload: OrganizationMultiStepData = {
-          ...(data ?? {}),
-          ...values,
-          dao: {
-            ...daoResult,
-            walletAddress,
-          },
-        };
-        handleSaveNext(payload);
+          const payload: OrganizationMultiStepData = {
+            ...(data ?? {}),
+            ...values,
+            dao: {
+              ...daoResult,
+              walletAddress,
+            },
+          };
+          handleSaveNext(payload);
+        }
       } catch (error) {
         if (error instanceof Error) {
           throw error;
@@ -208,6 +210,7 @@ export const OrganizationProfileStep = ({
       />
       <EditProfileForm
         formId={ORGANIZATION_PROFILE_FORM_ID}
+        formRef={formRef}
         onSubmit={handleSubmit}
         initialValues={initialValues as EditProfileFormSchemaType}
         hideProfileType

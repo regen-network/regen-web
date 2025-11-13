@@ -5074,6 +5074,10 @@ msgstr ""
 msgid "Threat Category of Ecosystem"
 msgstr ""
 
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:145
+msgid "Timed out waiting for project DAOs to be indexed."
+msgstr ""
+
 #: src/legacy-pages/Post/Post.constants.ts:10
 msgid "Timeline"
 msgstr ""
@@ -5271,6 +5275,14 @@ msgstr ""
 
 #: src/legacy-pages/ProjectEdit/ProjectEdit.constants.ts:4
 msgid "Update project metadata"
+msgstr ""
+
+#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:206
+msgid "Updating Card Order {0} failed: {1}"
+msgstr ""
+
+#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:169
+msgid "Updating Offchain Project {0} failed: {1}"
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
@@ -130,7 +130,7 @@ export function MultiStepProvider<T extends object>({
     goBack,
   } = useSteps(steps.length, maxAllowedStep);
 
-  const [resultStatus, setResultStatus] = React.useState<ResultStatus>();
+  const [resultStatus, setResultStatus] = useState<ResultStatus>();
 
   const handleNext = (): void => {
     goNext();

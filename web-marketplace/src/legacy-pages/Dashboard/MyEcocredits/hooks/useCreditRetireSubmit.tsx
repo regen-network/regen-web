@@ -106,10 +106,14 @@ const useCreditRetireSubmit = ({
           roleId: roleConfig.roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
-          batchDenom: batchDenom!,
-          amount,
+          credits: [
+            {
+              batchDenom: batchDenom!,
+              amount,
+            },
+          ],
           jurisdiction: retirementJurisdiction || '',
-          reason: note,
+          reason: note || '',
         });
 
         finalMsg = wrapRbamActions({

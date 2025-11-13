@@ -107,11 +107,17 @@ const useCreateSellOrderSubmit = ({
           roleId: roleConfig.roleId,
           authorizationId: manageSellOrdersAuthId,
           seller: accountAddress, // DAO address
-          batchDenom,
-          quantity: String(amount),
-          askDenom: cryptoDenom,
-          askAmount: priceInMicro,
-          disableAutoRetire: !enableAutoRetire,
+          orders: [
+            {
+              batchDenom: batchDenom,
+              quantity: String(amount),
+              askPrice: {
+                denom: cryptoDenom,
+                amount: priceInMicro,
+              },
+              disableAutoRetire: !enableAutoRetire,
+            },
+          ],
         });
 
         finalMsg = wrapRbamActions({

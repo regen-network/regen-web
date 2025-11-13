@@ -13,7 +13,7 @@ const Sell = () => {
   return (
     <section className="overflow-hidden">
       {canManageSellOrders && <SellerSetupAccount />}
-      <UserSellOrders canManageActions={canManageSellOrders} />
+      <UserSellOrders canManageSellOrders={canManageSellOrders} />
     </section>
   );
 };

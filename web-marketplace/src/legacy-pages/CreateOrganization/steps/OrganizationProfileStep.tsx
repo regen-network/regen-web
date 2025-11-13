@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { useQueryClient } from '@tanstack/react-query';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_BG,

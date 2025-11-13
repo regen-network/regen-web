@@ -19,12 +19,13 @@ import {
 import { OrganizationMultiStepData } from './hooks/useOrganizationFlow';
 
 export const hasTransferableProfile = (
+  hasProjects: boolean,
   account?: AccountByIdQuery['accountById'],
 ): boolean => {
   if (!account) return false;
   if (account.type !== AccountType.Organization) return false;
 
-  return Boolean(
+  return hasProjects && Boolean(
     account.name?.trim() ||
       account.description?.trim() ||
       account.image?.trim() ||

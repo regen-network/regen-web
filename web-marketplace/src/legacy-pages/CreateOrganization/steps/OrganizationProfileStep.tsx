@@ -35,6 +35,7 @@ export const OrganizationProfileStep = ({
   setIsSubmitting,
   setIsValid,
   formRef,
+  hasProjects,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
   const { createDao } = useCreateDao();
@@ -53,8 +54,8 @@ export const OrganizationProfileStep = ({
   );
 
   const canOfferTransfer = useMemo(
-    () => hasTransferableProfile(activeAccount),
-    [activeAccount],
+    () => hasTransferableProfile(hasProjects, activeAccount),
+    [activeAccount, hasProjects],
   );
 
   useEffect(() => {

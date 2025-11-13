@@ -58,9 +58,8 @@ export const useFetchSellOrders = (
     reactQueryClient,
   ]);
 
-  const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery<
-    SellOrderInfoExtented[] | undefined
-  >(sellOrdersQuery);
+  const { data: sellOrders, isLoading: isLoadingSellOrders } =
+    useQuery(sellOrdersQuery);
 
   const refetchSellOrders = useCallback(async (): Promise<
     SellOrderInfoExtented[] | undefined

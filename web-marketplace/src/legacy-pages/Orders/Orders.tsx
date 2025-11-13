@@ -17,10 +17,7 @@ export const Orders = () => {
   const location = useLocation();
 
   const { queryClient } = useLedger();
-  const { selectedAccountAddress } = useDashboardContext();
-  const { orders, isLoading } = useOrders({
-    address: selectedAccountAddress,
-  });
+  const { isLoading, orders } = useOrders();
   const { loginDisabled } = useWallet();
 
   const { data: allowedDenomsData } = useQuery(

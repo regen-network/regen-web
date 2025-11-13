@@ -20,16 +20,14 @@ const SellOrdersTable = safeLazy(
 );
 
 type UserSellOrdersProps = {
-  canManageActions?: boolean;
+  canManageSellOrders?: boolean;
 };
 
 export const UserSellOrders = ({
-  canManageActions = true,
+  canManageSellOrders = true,
 }: UserSellOrdersProps) => {
-  const { wallet } = useWallet();
   const { _ } = useLingui();
   const { selectedAccountAddress } = useDashboardContext();
-  const accountAddress = selectedAccountAddress ?? wallet?.address;
   const openCancelModalRef = useRef<((index: number) => void) | null>(null);
 
   const {
@@ -40,10 +38,10 @@ export const UserSellOrders = ({
     sortCallbacks,
     totalSellOrders,
     paginationParams,
-  } = useNormalizedSellOrders({ sellerAddress: accountAddress });
+  } = useNormalizedSellOrders({ sellerAddress: selectedAccountAddress });
 
   const userSellOrders = normalizedSellOrders?.filter(
-    (sellOrder: any) => sellOrder.seller === accountAddress,
+    (sellOrder: any) => sellOrder.seller === selectedAccountAddress,
   );
 
   // Callback to store the openCancelModal function from the child component
@@ -61,8 +59,8 @@ export const UserSellOrders = ({
     return (
       <NoUserSellOrdersCard
         refetchSellOrders={refetchSellOrders}
-        canManageSellOrders={canManageActions}
-        accountAddress={accountAddress}
+        canManageSellOrders={canManageSellOrders}
+        accountAddress={selectedAccountAddress}
       />
     );
   }
@@ -74,7 +72,7 @@ export const UserSellOrders = ({
         sortCallbacks={sortCallbacks}
         onTableChange={setPaginationParams}
         renderActionButtonsFunc={
-          canManageActions
+          canManageSellOrders
             ? (i: number) => (
                 <TableActionButtons
                   buttons={[
@@ -95,14 +93,14 @@ export const UserSellOrders = ({
         renderToolbarContentFunc={() => (
           <UserSellOrdersToolbar
             refetchSellOrders={refetchSellOrders}
-            canManageSellOrders={canManageActions}
-            accountAddress={accountAddress}
+            canManageSellOrders={canManageSellOrders}
+            accountAddress={selectedAccountAddress}
           />
         )}
         totalSellOrders={totalSellOrders}
         paginationParams={paginationParams}
       />
-      {canManageActions && (
+      {canManageSellOrders && (
         <CancelSellOrderFlow
           normalizedSellOrders={userSellOrders || []}
           refetchSellOrders={refetchSellOrders}

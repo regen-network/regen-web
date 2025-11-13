@@ -13,7 +13,6 @@ import { CreditClassGridCard } from 'web-components/src/components/molecules/Cre
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { Link as LinkComponent } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -28,12 +27,10 @@ import {
 export const MyCreditClasses = (): JSX.Element => {
   const { _ } = useLingui();
   //const theme = useTheme();
-  const { wallet } = useWallet();
   const { selectedAccountAddress } = useDashboardContext();
-  const adminAddress = selectedAccountAddress ?? wallet?.address;
   const { creditClasses, isLoadingCreditClasses } =
     useFetchCreditClassesWithOrder({
-      admin: adminAddress,
+      admin: selectedAccountAddress,
     });
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const hasNoCreditClasses = creditClasses && creditClasses.length === 0;

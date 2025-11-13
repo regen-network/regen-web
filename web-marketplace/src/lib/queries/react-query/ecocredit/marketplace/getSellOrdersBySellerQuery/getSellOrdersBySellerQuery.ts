@@ -32,7 +32,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
   // cases where we need sorting functionality we fetch all sell orders.
   serverPagination?: boolean;
   enabled: boolean;
-}): QueryObserverOptions<SellOrderInfoExtented[] | undefined> {
+}) {
   const {
     client,
     reactQueryClient,

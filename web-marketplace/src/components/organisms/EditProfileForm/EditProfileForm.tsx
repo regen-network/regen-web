@@ -5,7 +5,7 @@ import React, {
   useMemo,
 } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -23,9 +23,7 @@ import { ImageFieldBackground } from 'web-components/src/components/inputs/new/I
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
 
-import { AccountType } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
@@ -34,7 +32,6 @@ import {
   TITLE_IGNORE_CROP,
   UPDATE,
 } from 'lib/constants/shared.constants';
-import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import Form, { FormRef } from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -95,10 +92,7 @@ const EditProfileForm = ({
   );
   const form = useZodForm({
     schema: formSchema,
-    defaultValues: {
-      ...initialValues,
-      profileType: initialValues?.profileType ?? AccountType.User,
-    },
+    defaultValues: initialValues,
     mode: validationMode,
   });
 
@@ -181,25 +175,6 @@ const EditProfileForm = ({
   const resolvedBackgroundImage =
     watchedBackgroundImage || initialValues?.backgroundImage || '';
 
-  const displayProfileImage = useMemo(
-    () =>
-      getOptimizedImageSrc(
-        resolvedProfileImage,
-        IMAGE_STORAGE_BASE_URL,
-        API_URI,
-      ),
-    [resolvedProfileImage],
-  );
-  const displayBackgroundImage = useMemo(
-    () =>
-      getOptimizedImageSrc(
-        resolvedBackgroundImage,
-        IMAGE_STORAGE_BASE_URL,
-        API_URI,
-      ),
-    [resolvedBackgroundImage],
-  );
-
   return (
     <Form
       className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-300 mb-[120px] rounded-[10px]"
@@ -250,8 +225,8 @@ const EditProfileForm = ({
         value={resolvedProfileImage}
       >
         <ImageFieldAvatar
-          key={displayProfileImage || 'profile-image-placeholder'}
-          value={displayProfileImage}
+          key={resolvedProfileImage || 'profile-image-placeholder'}
+          value={resolvedProfileImage}
         />
       </ImageField>
       <ImageField
@@ -274,8 +249,8 @@ const EditProfileForm = ({
         value={resolvedBackgroundImage}
       >
         <ImageFieldBackground
-          key={displayBackgroundImage || 'background-image-placeholder'}
-          value={displayBackgroundImage}
+          key={resolvedBackgroundImage || 'background-image-placeholder'}
+          value={resolvedBackgroundImage}
         />
       </ImageField>
       <TextAreaField

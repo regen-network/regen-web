@@ -4,19 +4,21 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { timer } from 'utils/timer';
 
+import { AccountType, useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { ledgerRPCUri } from 'lib/ledger';
+import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -57,6 +59,7 @@ export const useCreateDao = () => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const [updateAccountById] = useUpdateAccountByIdMutation();
 
   const { refetch } = useQuery(
     getAccountByIdQuery({
@@ -256,6 +259,31 @@ export const useCreateDao = () => {
           gasMultiplier,
         );
 
+        // If user profile has been transferred to organization, empty out user profile fields
+        if (params.transferHandled) {
+          await updateAccountById({
+            variables: {
+              input: {
+                id: activeAccountId,
+                accountPatch: {
+                  name: '',
+                  description: null,
+                  image: '',
+                  bgImage: null,
+                  type: AccountType.User,
+                  twitterLink: null,
+                  websiteLink: null,
+                },
+              },
+            },
+          });
+          if (wallet?.address) {
+            await queryClient.invalidateQueries({
+              queryKey: getAccountByAddrQueryKey({ addr: wallet?.address }),
+            });
+          }
+        }
+
         const hasDaoOrganization = await refetchAccount(daoAddress);
         if (!hasDaoOrganization) {
           setProcessingModalAtom(atom => void (atom.open = false));
@@ -290,6 +318,7 @@ export const useCreateDao = () => {
       queryClient,
       setErrorBannerText,
       refetchAccount,
+      updateAccountById,
     ],
   );
 

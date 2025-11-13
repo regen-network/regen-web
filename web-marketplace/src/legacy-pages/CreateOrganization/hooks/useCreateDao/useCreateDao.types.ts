@@ -8,4 +8,5 @@ export type CreateDaoParams = {
   organizationId: string;
   type: 'organization' | 'project';
   projectId?: string;
+  transferHandled: boolean;
 };

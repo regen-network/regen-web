@@ -23,6 +23,8 @@ export const getOrganizationByIdQuery = ({
 
       return data;
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
       return null;
     }
   },

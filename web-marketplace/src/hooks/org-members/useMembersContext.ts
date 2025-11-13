@@ -152,7 +152,7 @@ export function useMembersContext(params: MembersHookParams) {
           }
         }
         i++;
-        await timer(1000);
+        await timer(500);
       }
       if (!stop) {
         setProcessingModal(atom => void (atom.open = false));

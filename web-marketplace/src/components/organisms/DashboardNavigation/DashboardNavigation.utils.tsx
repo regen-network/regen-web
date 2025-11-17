@@ -174,7 +174,7 @@ export function getDashboardNavigationSections(
   showCreditClasses = false,
   hasWalletAddress = true,
   hasProjects = false,
-  hasOrders = true,
+  hasOrders = false,
   hasCreditBatches = false,
   canEditOrg = true,
 ): DashboardNavigationSection[] {

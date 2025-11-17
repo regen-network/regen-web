@@ -251,14 +251,6 @@ export const useUpdateOrganizationProfile = () => {
           continue;
         }
       }
-
-      if (!indexerUpdated) {
-        throw new Error(
-          _(
-            msg`The organization profile was updated on-chain but the indexer hasn't caught up yet. Please reload this page in a minute to see the latest changes.`,
-          ),
-        );
-      }
     },
     [
       organizationRole,

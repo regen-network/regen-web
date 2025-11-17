@@ -148,11 +148,7 @@ export const Dashboard = () => {
     const organizationName = organizationProfile?.name?.trim();
 
     const rawImage = organizationProfile?.image?.trim() || '';
-    const optimizedImage = rawImage
-      ? getOptimizedImageSrc(rawImage, IMAGE_STORAGE_BASE_URL, API_URI)
-      : '';
-    const organizationImage =
-      optimizedImage || rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
+    const organizationImage = rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
       name: organizationName,
@@ -441,7 +437,9 @@ export const Dashboard = () => {
               hasWalletAddress={headerHasWalletAddress}
               wallet={headerWallet}
               hasProjects={!!hasProjects && hasProjects.length > 0}
-              hasOrders={!ordersLoading && hasOrders}
+              hasOrders={
+                !isOrganizationDashboard && !ordersLoading && hasOrders
+              }
               hasCreditBatches={hasCreditBatches}
               canEditOrg={!isOrganizationViewer}
               mobileMenuOpen={mobileMenuOpen}

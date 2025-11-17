@@ -1,3 +1,4 @@
+import { WasmExecuteAction } from 'utils/cosmwasm';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
@@ -151,4 +152,67 @@ export const getActivePortfolioTab = (
     }),
     0,
   );
+};
+
+type MetadataKey = 'banner' | 'website_link' | 'twitter_link';
+
+type GetMetadataActionParams = {
+  key: MetadataKey;
+  nextValue?: string | null;
+  previousValue?: string | null;
+  authorizationId: number;
+  roleId: number;
+  daoAddress: string;
+};
+
+export const getMetadataAction = ({
+  key,
+  nextValue,
+  previousValue,
+  authorizationId,
+  roleId,
+  daoAddress,
+}: GetMetadataActionParams): WasmExecuteAction | undefined => {
+  const normalizedNext = nextValue ?? null;
+  let normalizedPrevious = previousValue ?? null;
+
+  if (key === 'banner') {
+    if (normalizedNext === DEFAULT_PROFILE_BG) {
+      normalizedPrevious = DEFAULT_PROFILE_BG;
+    }
+    if (normalizedPrevious === DEFAULT_PROFILE_BG) {
+      normalizedPrevious = null;
+    }
+  }
+
+  if (normalizedNext === normalizedPrevious) return undefined;
+
+  if (normalizedNext) {
+    return {
+      authorizationId,
+      roleId,
+      contract: daoAddress,
+      msg: {
+        set_item: {
+          key,
+          value: normalizedNext,
+        },
+      },
+    };
+  }
+
+  if (normalizedPrevious) {
+    return {
+      authorizationId,
+      roleId,
+      contract: daoAddress,
+      msg: {
+        remove_item: {
+          key,
+        },
+      },
+    };
+  }
+
+  return undefined;
 };

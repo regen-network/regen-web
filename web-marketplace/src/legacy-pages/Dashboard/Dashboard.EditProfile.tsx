@@ -175,8 +175,8 @@ export const EditProfile = () => {
             values: {
               name,
               description,
-              profileImage: isDefaultAvatar ? '' : profileImage,
-              backgroundImage: isDefaultBg ? '' : backgroundImage,
+              profileImage: isDefaultAvatar ? null : profileImage,
+              backgroundImage: isDefaultBg ? null : backgroundImage,
               twitterLink,
               websiteLink,
             },
@@ -225,7 +225,7 @@ export const EditProfile = () => {
         await Promise.all(
           fileNamesToDeleteRef?.current.map(async fileName => {
             const targetId = isOrgDashboard
-              ? organizationIdentifier ?? ''
+              ? organizationDaoAddress ?? ''
               : activeAccount?.id ?? '';
             await deleteImage(
               PROFILE_S3_PATH,
@@ -282,7 +282,7 @@ export const EditProfile = () => {
   }, [setBannerTextAtom, _, refreshProfileData]);
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
-    accountId: isOrgDashboard ? organizationIdentifier : undefined,
+    accountId: isOrgDashboard ? organizationDaoAddress : undefined,
   });
 
   if (shouldBlockRender) return null;

@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -156,7 +155,6 @@ export const Dashboard = () => {
       optimizedImage || rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
-      id: organizationAddress,
       name: organizationName,
       address: organizationAddress,
       type: 'org' as const,
@@ -172,12 +170,6 @@ export const Dashboard = () => {
     organizationProfile?.name,
     organizationProfile?.image,
   ]);
-
-  const personalAccountId = activeAccountId ?? '';
-
-  const selectedAccountId = isOrganizationDashboard
-    ? organizationAccount?.id ?? ''
-    : personalAccountId;
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
     const accounts: DashboardNavAccount[] = [];
@@ -203,13 +195,19 @@ export const Dashboard = () => {
   }, [activeAccount, organizationAccount, personalResolvedAddress]);
 
   const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {
-    if (!selectedAccountId) return navigationAccounts[0];
+    if (isOrganizationDashboard) {
+      return (
+        organizationAccount ??
+        navigationAccounts.find(account => account.source === 'auth') ??
+        navigationAccounts[0]
+      );
+    }
+
     return (
-      navigationAccounts.find(account => account.id === selectedAccountId) ??
       navigationAccounts.find(account => account.source === 'auth') ??
       navigationAccounts[0]
     );
-  }, [navigationAccounts, selectedAccountId]);
+  }, [isOrganizationDashboard, navigationAccounts, organizationAccount]);
 
   useEffect(() => {
     if (isOrganizationDashboard && !organizationAccount && !loading) {
@@ -263,7 +261,7 @@ export const Dashboard = () => {
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const onAccountSelect = (id: string) => {
-    const target = navigationAccounts.find(account => account.id === id);
+    const target = navigationAccounts.find(account => account.address === id);
     if (!target) return;
 
     if (target.type === 'org') {
@@ -292,7 +290,6 @@ export const Dashboard = () => {
       isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
-      selectedAccountId,
       selectedAccount: selectedAccount
         ? {
             id: selectedAccount.id,
@@ -303,9 +300,7 @@ export const Dashboard = () => {
           }
         : undefined,
       isOrganizationDashboard,
-      selectedAccountRoleName: selectedAccount?.roleName,
       selectedAccountAddress: selectedAccount?.address ?? wallet?.address,
-      selectedAccountRoleAccountId: selectedAccount?.roleAccountId,
       organizationRole,
       organizationDaoAddress: organizationAccount?.address ?? undefined,
       organizationRbamAddress: organizationDao?.daoRbamAddress ?? undefined,
@@ -320,7 +315,6 @@ export const Dashboard = () => {
       isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
-      selectedAccountId,
       selectedAccount,
       isOrganizationDashboard,
       organizationAccount?.address,
@@ -379,9 +373,7 @@ export const Dashboard = () => {
     return null;
   }, [selectedAccount, activeAccount]);
 
-  const { orders, isLoading: ordersLoading } = useOrders({
-    address: dashboardAccountAddress ?? wallet?.address,
-  });
+  const { orders, isLoading: ordersLoading } = useOrders();
   const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =

@@ -10,13 +10,9 @@ type DashboardContextType = {
   isCreditClassAdmin?: boolean;
   isProjectAdmin: boolean;
   sanityProfilePageData?: AllProfilePageQuery;
-  selectedAccountId?: string;
   selectedAccount?: AccountOption;
   isOrganizationDashboard?: boolean;
-  selectedAccountRoleName?: string;
-  selectedAccountOnChainRoleId?: string;
   selectedAccountAddress?: string;
-  selectedAccountRoleAccountId?: string;
   organizationRole?: string;
   organizationDaoAddress?: string;
   organizationRbamAddress?: string;

@@ -300,6 +300,7 @@ export const EditProfile = () => {
     ],
   );
 
+
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
     accountId: isOrgDashboard ? organizationId : undefined,

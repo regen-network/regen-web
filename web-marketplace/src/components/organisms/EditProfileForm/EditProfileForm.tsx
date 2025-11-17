@@ -61,7 +61,6 @@ export interface EditProfileFormProps extends Partial<FormStateSetter> {
   // Optional enhancements for reuse in Create Organization flow
   formId?: string;
   formRef?: FormRef;
-  hideProfileType?: boolean;
   nameLabel?: string;
   // Allows parent steps (e.g. Create Organization) to inject partial values
   // after the form has mounted (e.g. from a transfer profile modal)
@@ -78,7 +77,6 @@ const EditProfileForm = ({
   onUpload,
   formId,
   formRef,
-  hideProfileType,
   nameLabel,
   prefillValues,
   validationMode = 'onBlur',
@@ -86,10 +84,7 @@ const EditProfileForm = ({
   setIsValid,
 }: EditProfileFormProps) => {
   const { _ } = useLingui();
-  const formSchema = useMemo(
-    () => createEditProfileFormSchema({ requireProfileType: false, _ }),
-    [_],
-  );
+  const formSchema = useMemo(() => createEditProfileFormSchema({ _ }), [_]);
   const form = useZodForm({
     schema: formSchema,
     defaultValues: initialValues,

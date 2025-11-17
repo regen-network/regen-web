@@ -9,11 +9,9 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { sanitizeDaoParams } from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
-import {
-  DEFAULT_PROFILE_BG,
-  PROFILE_S3_PATH,
-} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
+import { getMetadataAction } from 'legacy-pages/Dashboard/Dashboard.utils';
 import {
   getExecuteActionsWasm,
   getMsgExecuteContract,
@@ -146,69 +144,38 @@ export const useUpdateOrganizationProfile = () => {
 
       const actions: WasmExecuteAction[] = [updateConfigAction];
 
-      const maybeAddMetadataAction = (
-        key: 'banner' | 'website_link' | 'twitter_link',
-        nextValue: string | null,
-        previousValue?: string | null,
-      ) => {
-        const normalizedNext = nextValue ?? null;
-        let normalizedPrevious = previousValue ?? null;
+      const metadataUpdates = [
+        {
+          key: 'banner' as const,
+          nextValue: sanitizedBackgroundImage,
+          previousValue: currentValues?.backgroundImage ?? null,
+        },
+        {
+          key: 'website_link' as const,
+          nextValue: sanitizedWebsite,
+          previousValue: currentValues?.websiteLink ?? null,
+        },
+        {
+          key: 'twitter_link' as const,
+          nextValue: sanitizedTwitter,
+          previousValue: currentValues?.twitterLink ?? null,
+        },
+      ];
 
-        if (key === 'banner') {
-          if (normalizedNext === DEFAULT_PROFILE_BG) {
-            normalizedPrevious = DEFAULT_PROFILE_BG;
-          }
-          if (normalizedPrevious === DEFAULT_PROFILE_BG) {
-            normalizedPrevious = null;
-          }
+      metadataUpdates.forEach(({ key, nextValue, previousValue }) => {
+        const metadataAction = getMetadataAction({
+          key,
+          nextValue,
+          previousValue,
+          authorizationId,
+          roleId,
+          daoAddress,
+        });
+
+        if (metadataAction) {
+          actions.push(metadataAction);
         }
-
-        if (normalizedNext === normalizedPrevious) return;
-
-        if (normalizedNext) {
-          actions.push({
-            authorizationId,
-            roleId,
-            contract: daoAddress,
-            msg: {
-              set_item: {
-                key,
-                value: normalizedNext,
-              },
-            },
-          });
-          return;
-        }
-
-        if (normalizedPrevious) {
-          actions.push({
-            authorizationId,
-            roleId,
-            contract: daoAddress,
-            msg: {
-              remove_item: {
-                key,
-              },
-            },
-          });
-        }
-      };
-
-      maybeAddMetadataAction(
-        'banner',
-        sanitizedBackgroundImage,
-        currentValues?.backgroundImage ?? null,
-      );
-      maybeAddMetadataAction(
-        'website_link',
-        sanitizedWebsite,
-        currentValues?.websiteLink ?? null,
-      );
-      maybeAddMetadataAction(
-        'twitter_link',
-        sanitizedTwitter,
-        currentValues?.twitterLink ?? null,
-      );
+      });
 
       const executeActionsMsg = getExecuteActionsWasm(actions);
       const executeMsg = getMsgExecuteContract({
@@ -237,6 +204,7 @@ export const useUpdateOrganizationProfile = () => {
 
         try {
           const data = await reactQueryClient.fetchQuery(
+            // Using fetchQuery here instead of refetch to avoid reloading the page on every attempt
             getAccountByIdQuery({
               client: graphqlClient as ApolloClient<NormalizedCacheObject>,
               enabled: !!graphqlClient && !!activeAccountId,
@@ -284,14 +252,13 @@ export const useUpdateOrganizationProfile = () => {
         }
       }
 
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQuery({
-          client: graphqlClient,
-          enabled: !!graphqlClient && !!activeAccountId,
-          id: activeAccountId ?? '',
-          languageCode: selectedLanguage,
-        }).queryKey,
-      });
+      if (!indexerUpdated) {
+        throw new Error(
+          _(
+            msg`The organization profile was updated on-chain but the indexer hasn't caught up yet. Please reload this page in a minute to see the latest changes.`,
+          ),
+        );
+      }
     },
     [
       organizationRole,

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 
 import { useLedger } from 'ledger';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -17,7 +16,7 @@ export const Orders = () => {
   const location = useLocation();
 
   const { queryClient } = useLedger();
-  const { isLoading, orders } = useOrders();
+  const { orders, isLoading } = useOrders();
   const { loginDisabled } = useWallet();
 
   const { data: allowedDenomsData } = useQuery(

@@ -16,7 +16,7 @@ import { getStargateAction } from 'utils/cosmwasm';
 
 import {
   AccountByIdQuery,
-  OrganizationByDaoAddressQuery,
+  OrganizationProjectsByDaoAddressQuery,
 } from 'generated/graphql';
 
 import {
@@ -589,7 +589,7 @@ export function getAuthorizationName(currentUserRole?: string) {
 }
 
 type GetProjectsCurrentUserCanManageMembers = {
-  orgData?: OrganizationByDaoAddressQuery | null;
+  orgData?: OrganizationProjectsByDaoAddressQuery | null;
   activeAccountId?: string;
 };
 export function getProjectsCurrentUserCanManageMembers({

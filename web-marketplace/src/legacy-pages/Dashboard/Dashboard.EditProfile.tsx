@@ -225,7 +225,7 @@ export const EditProfile = () => {
         await Promise.all(
           fileNamesToDeleteRef?.current.map(async fileName => {
             const targetId = isOrgDashboard
-              ? organizationDaoAddress ?? ''
+              ? organizationIdentifier ?? ''
               : activeAccount?.id ?? '';
             await deleteImage(
               PROFILE_S3_PATH,
@@ -282,7 +282,7 @@ export const EditProfile = () => {
   }, [setBannerTextAtom, _, refreshProfileData]);
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
-    accountId: isOrgDashboard ? organizationDaoAddress : undefined,
+    accountId: isOrgDashboard ? organizationIdentifier : undefined,
   });
 
   if (shouldBlockRender) return null;

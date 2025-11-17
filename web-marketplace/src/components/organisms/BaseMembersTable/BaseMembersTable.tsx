@@ -80,10 +80,12 @@ export const BaseMembersTable = <T extends BaseUser>({
       {!hideHeader && (
         <div className="flex justify-between items-center mb-10">
           <Title variant="h4">
-            {title}{' '}
-            <span className="text-bc-neutral-400 font-normal">
-              ({users.length})
-            </span>
+            {title}
+            {users.length > 0 && (
+              <span className="text-bc-neutral-400 font-normal">
+                &nbsp;({users.length})
+              </span>
+            )}
           </Title>
 
           {/* desktop / tablet invite */}
@@ -188,7 +190,7 @@ export const BaseMembersTable = <T extends BaseUser>({
 
       {/* Rows */}
       <div className="flex flex-col">
-        {users.map((user, index) => (
+        {users.map(user => (
           <div
             key={user.id}
             className={`flex flex-col ${rowBreakpoint} justify-between py-20 gap-8 border-0 border-t border-solid border-sc-surface-stroke ${

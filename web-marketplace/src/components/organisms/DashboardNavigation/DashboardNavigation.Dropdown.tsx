@@ -30,7 +30,7 @@ export const AccountSwitcherDropdown = ({
       aria-label={_(msg`Account switcher`)}
     >
       {accounts.map((account, index) => {
-        const accountId = account.id;
+        const accountId = account.address;
         const isSelected = accountId === activeId;
         const avatarSrc =
           account.image ||

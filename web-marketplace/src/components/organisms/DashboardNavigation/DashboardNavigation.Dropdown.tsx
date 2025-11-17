@@ -29,7 +29,7 @@ export const AccountSwitcherDropdown = ({
       role="listbox"
       aria-label={_(msg`Account switcher`)}
     >
-      {accounts.map((account, index) => {
+      {accounts.map(account => {
         const accountId = account.address;
         const isSelected = accountId === activeId;
         const avatarSrc =

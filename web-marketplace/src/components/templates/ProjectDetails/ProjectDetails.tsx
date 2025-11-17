@@ -18,8 +18,6 @@ import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIc
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
-import { Project } from 'generated/graphql';
-import { Maybe } from 'graphql/jsutils/Maybe';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
@@ -191,7 +189,7 @@ function ProjectDetails(): JSX.Element {
     creditClass,
     // creditClassName,
     creditClassVersion,
-  } = parseOffChainProject(offChainProject as Maybe<Project>);
+  } = parseOffChainProject(offChainProject);
 
   const { sortCallbacksDocuments, sortedDocuments } = useSortedDocuments({
     projectDocs,

@@ -124,9 +124,15 @@ const Orders = safeLazy(() => import('../../legacy-pages/Orders'));
 const CreateOrganization = safeLazy(
   () => import('../../legacy-pages/CreateOrganization'),
 );
-// const ManageProject = safeLazy(
-//   () => import('../../legacy-pages/Dashboard/MyProjects/ManageProject'),
-// );
+const ManageProject = safeLazy(
+  () => import('../../legacy-pages/Dashboard/MyProjects/ManageProject'),
+);
+const Collaborators = safeLazy(
+  () =>
+    import(
+      '../../legacy-pages/Dashboard/MyProjects/ManageProject.Collaborators'
+    ),
+);
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -206,6 +212,13 @@ export const getRegenRoutes = ({
         path="projects"
         element={<KeplrOrAuthRoute component={MyProjects} />}
       />
+      <Route
+        path="projects/:projectId/manage"
+        element={<KeplrOrAuthRoute component={ManageProject} />}
+      >
+        <Route index element={<Navigate to="collaborators" />} />
+        <Route path="collaborators" element={<Collaborators />} />
+      </Route>
       <Route
         path="credit-classes"
         element={<KeplrRoute component={MyCreditClasses} />}

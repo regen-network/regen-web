@@ -19,7 +19,7 @@ import {
   CreditClass,
   Document,
   Maybe,
-  Project,
+  ProjectFieldsFragment,
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
@@ -62,20 +62,9 @@ export const getIsUuid = (str?: string): boolean =>
   !!str &&
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
-type ParseOffChainProjectReturn = {
-  offChainProjectMetadata?: ProjectMetadataLD;
-  managementActions?: NameImageDescription[];
-  projectDocs?: Maybe<Document>[];
-  creditClass?: Maybe<CreditClass>;
-  creditClassVersion?: any;
-  creditClassName?: string;
-  coBenefitsIris?: string[];
-  primaryImpactIRI?: string;
-};
-
 export const parseOffChainProject = (
-  project?: Maybe<Project>,
-): ParseOffChainProjectReturn => {
+  project?: Maybe<ProjectFieldsFragment>,
+) => {
   const offChainProjectMetadata = project?.metadata;
   const managementActions =
     offChainProjectMetadata?.['regen:landManagementActions'];

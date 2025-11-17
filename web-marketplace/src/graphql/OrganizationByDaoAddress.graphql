@@ -1,4 +1,4 @@
-query OrganizationByDaoAddress($daoAddress: String!) {
+query OrganizationProjectsByDaoAddress($daoAddress: String!) {
   organizationByDaoAddress(daoAddress: $daoAddress) {
     ...organizationFields
   }

@@ -11657,12 +11657,12 @@ export type MoreProjectsQuery = (
   )> }
 );
 
-export type OrganizationByDaoAddressQueryVariables = Exact<{
+export type OrganizationProjectsByDaoAddressQueryVariables = Exact<{
   daoAddress: Scalars['String'];
 }>;
 
 
-export type OrganizationByDaoAddressQuery = (
+export type OrganizationProjectsByDaoAddressQuery = (
   { __typename?: 'Query' }
   & { organizationByDaoAddress?: Maybe<(
     { __typename?: 'Organization' }
@@ -12756,8 +12756,8 @@ export function useMoreProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MoreProjectsQueryHookResult = ReturnType<typeof useMoreProjectsQuery>;
 export type MoreProjectsLazyQueryHookResult = ReturnType<typeof useMoreProjectsLazyQuery>;
 export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, MoreProjectsQueryVariables>;
-export const OrganizationByDaoAddressDocument = gql`
-    query OrganizationByDaoAddress($daoAddress: String!) {
+export const OrganizationProjectsByDaoAddressDocument = gql`
+    query OrganizationProjectsByDaoAddress($daoAddress: String!) {
   organizationByDaoAddress(daoAddress: $daoAddress) {
     ...organizationFields
   }
@@ -12765,32 +12765,32 @@ export const OrganizationByDaoAddressDocument = gql`
     ${OrganizationFieldsFragmentDoc}`;
 
 /**
- * __useOrganizationByDaoAddressQuery__
+ * __useOrganizationProjectsByDaoAddressQuery__
  *
- * To run a query within a React component, call `useOrganizationByDaoAddressQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrganizationByDaoAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useOrganizationProjectsByDaoAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrganizationProjectsByDaoAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useOrganizationByDaoAddressQuery({
+ * const { data, loading, error } = useOrganizationProjectsByDaoAddressQuery({
  *   variables: {
  *      daoAddress: // value for 'daoAddress'
  *   },
  * });
  */
-export function useOrganizationByDaoAddressQuery(baseOptions: Apollo.QueryHookOptions<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>) {
+export function useOrganizationProjectsByDaoAddressQuery(baseOptions: Apollo.QueryHookOptions<OrganizationProjectsByDaoAddressQuery, OrganizationProjectsByDaoAddressQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>(OrganizationByDaoAddressDocument, options);
+        return Apollo.useQuery<OrganizationProjectsByDaoAddressQuery, OrganizationProjectsByDaoAddressQueryVariables>(OrganizationProjectsByDaoAddressDocument, options);
       }
-export function useOrganizationByDaoAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>) {
+export function useOrganizationProjectsByDaoAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizationProjectsByDaoAddressQuery, OrganizationProjectsByDaoAddressQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>(OrganizationByDaoAddressDocument, options);
+          return Apollo.useLazyQuery<OrganizationProjectsByDaoAddressQuery, OrganizationProjectsByDaoAddressQueryVariables>(OrganizationProjectsByDaoAddressDocument, options);
         }
-export type OrganizationByDaoAddressQueryHookResult = ReturnType<typeof useOrganizationByDaoAddressQuery>;
-export type OrganizationByDaoAddressLazyQueryHookResult = ReturnType<typeof useOrganizationByDaoAddressLazyQuery>;
-export type OrganizationByDaoAddressQueryResult = Apollo.QueryResult<OrganizationByDaoAddressQuery, OrganizationByDaoAddressQueryVariables>;
+export type OrganizationProjectsByDaoAddressQueryHookResult = ReturnType<typeof useOrganizationProjectsByDaoAddressQuery>;
+export type OrganizationProjectsByDaoAddressLazyQueryHookResult = ReturnType<typeof useOrganizationProjectsByDaoAddressLazyQuery>;
+export type OrganizationProjectsByDaoAddressQueryResult = Apollo.QueryResult<OrganizationProjectsByDaoAddressQuery, OrganizationProjectsByDaoAddressQueryVariables>;
 export const OrganizationByIdDocument = gql`
     query OrganizationById($id: UUID!) {
   organizationById(id: $id) {

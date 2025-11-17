@@ -18,7 +18,7 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
+import { getOrganizationProjectsByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { MISSING_REQUIRED_PARAMS } from './constants';
@@ -43,7 +43,7 @@ export function useMembersContext(params: MembersHookParams) {
 
   // Data needed for computed values
   const { data: orgData } = useQuery(
-    getOrganizationByDaoAddressQuery({
+    getOrganizationProjectsByDaoAddressQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!daoAddress,
       daoAddress: daoAddress as string,

@@ -1,10 +1,12 @@
 import { z } from 'zod';
 
+import { AccountType } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { REQUIRED } from './EditProfileForm.constants';
 
 const baseSchema = z.object({
+  profileType: z.nativeEnum(AccountType).optional(),
   name: z.string(),
   profileImage: z.union([z.string(), z.null()]),
   backgroundImage: z.union([z.string(), z.null()]),

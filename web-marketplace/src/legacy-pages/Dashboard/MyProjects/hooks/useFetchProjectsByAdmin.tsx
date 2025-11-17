@@ -47,6 +47,7 @@ export const useFetchProjectByAdmin = ({
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const dao = useDaoOrganization();
 
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);

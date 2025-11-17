@@ -4000,6 +4000,16 @@ export type DeleteOrganizationProjectByOrganizationIdAndProjectIdInput = {
   projectId: Scalars['UUID'];
 };
 
+/** All input for the `deleteOrganizationProjectByProjectId` mutation. */
+export type DeleteOrganizationProjectByProjectIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  projectId: Scalars['UUID'];
+};
+
 /** All input for the `deleteOrganizationProject` mutation. */
 export type DeleteOrganizationProjectInput = {
   /**
@@ -5493,6 +5503,8 @@ export type Mutation = {
   updateOrganizationProject?: Maybe<UpdateOrganizationProjectPayload>;
   /** Updates a single `OrganizationProject` using a unique key and a patch. */
   updateOrganizationProjectByOrganizationIdAndProjectId?: Maybe<UpdateOrganizationProjectPayload>;
+  /** Updates a single `OrganizationProject` using a unique key and a patch. */
+  updateOrganizationProjectByProjectId?: Maybe<UpdateOrganizationProjectPayload>;
   /** Updates a single `Post` using its globally unique id and a patch. */
   updatePost?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
@@ -5629,6 +5641,8 @@ export type Mutation = {
   deleteOrganizationProject?: Maybe<DeleteOrganizationProjectPayload>;
   /** Deletes a single `OrganizationProject` using a unique key. */
   deleteOrganizationProjectByOrganizationIdAndProjectId?: Maybe<DeleteOrganizationProjectPayload>;
+  /** Deletes a single `OrganizationProject` using a unique key. */
+  deleteOrganizationProjectByProjectId?: Maybe<DeleteOrganizationProjectPayload>;
   /** Deletes a single `Post` using its globally unique id. */
   deletePost?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
@@ -6086,6 +6100,12 @@ export type MutationUpdateOrganizationProjectByOrganizationIdAndProjectIdArgs = 
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrganizationProjectByProjectIdArgs = {
+  input: UpdateOrganizationProjectByProjectIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
@@ -6494,6 +6514,12 @@ export type MutationDeleteOrganizationProjectByOrganizationIdAndProjectIdArgs = 
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrganizationProjectByProjectIdArgs = {
+  input: DeleteOrganizationProjectByProjectIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeletePostArgs = {
   input: DeletePostInput;
 };
@@ -6758,8 +6784,6 @@ export type Organization = Node & {
   daoByDaoAddress?: Maybe<Dao>;
   /** Reads and enables pagination through a set of `OrganizationProject`. */
   organizationProjectsByOrganizationId: OrganizationProjectsConnection;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByOrganizationProjectOrganizationIdAndProjectId: OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection;
 };
 
 
@@ -6771,18 +6795,6 @@ export type OrganizationOrganizationProjectsByOrganizationIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
   condition?: Maybe<OrganizationProjectCondition>;
-};
-
-
-export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-  filter?: Maybe<ProjectFilter>;
 };
 
 /**
@@ -6886,29 +6898,6 @@ export type OrganizationProjectPatch = {
   createdAt?: Maybe<Scalars['Datetime']>;
   organizationId?: Maybe<Scalars['UUID']>;
   projectId?: Maybe<Scalars['UUID']>;
-};
-
-/** A connection to a list of `Project` values, with data from `OrganizationProject`. */
-export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection = {
-  __typename?: 'OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyConnection';
-  /** A list of `Project` objects. */
-  nodes: Array<Maybe<Project>>;
-  /** A list of edges which contains the `Project`, info from the `OrganizationProject`, and the cursor to aid in pagination. */
-  edges: Array<OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Project` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Project` edge in the connection, with data from `OrganizationProject`. */
-export type OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge = {
-  __typename?: 'OrganizationProjectsByOrganizationProjectOrganizationIdAndProjectIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Project` at the end of the edge. */
-  node?: Maybe<Project>;
-  createdAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** A connection to a list of `OrganizationProject` values. */
@@ -7579,7 +7568,12 @@ export type Project = Node & {
   projectTranslationsById: ProjectTranslationsConnection;
   /** Reads and enables pagination through a set of `SellOrder`. */
   sellOrdersByProjectId: SellOrdersConnection;
-  /** Reads and enables pagination through a set of `OrganizationProject`. */
+  /** Reads a single `OrganizationProject` that is related to this `Project`. */
+  organizationProjectByProjectId?: Maybe<OrganizationProject>;
+  /**
+   * Reads and enables pagination through a set of `OrganizationProject`.
+   * @deprecated Please use organizationProjectByProjectId instead
+   */
   organizationProjectsByProjectId: OrganizationProjectsConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByUploadProjectIdAndAccountId: ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection;
@@ -7591,8 +7585,6 @@ export type Project = Node & {
   accountsBySellOrderProjectIdAndSellerAccountId: ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Dao`. */
   daosBySellOrderProjectIdAndSellerDaoAddress: ProjectDaosBySellOrderProjectIdAndSellerDaoAddressManyToManyConnection;
-  /** Reads and enables pagination through a set of `Organization`. */
-  organizationsByOrganizationProjectProjectIdAndOrganizationId: ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection;
 };
 
 
@@ -7739,17 +7731,6 @@ export type ProjectDaosBySellOrderProjectIdAndSellerDaoAddressArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<DaosOrderBy>>;
   condition?: Maybe<DaoCondition>;
-};
-
-
-export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<OrganizationsOrderBy>>;
-  condition?: Maybe<OrganizationCondition>;
 };
 
 /** A connection to a list of `Account` values, with data from `Post`. */
@@ -7976,29 +7957,6 @@ export type ProjectInput = {
   published?: Maybe<Scalars['Boolean']>;
   adminAccountId?: Maybe<Scalars['UUID']>;
   adminDaoAddress?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of `Organization` values, with data from `OrganizationProject`. */
-export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection = {
-  __typename?: 'ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyConnection';
-  /** A list of `Organization` objects. */
-  nodes: Array<Maybe<Organization>>;
-  /** A list of edges which contains the `Organization`, info from the `OrganizationProject`, and the cursor to aid in pagination. */
-  edges: Array<ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Organization` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Organization` edge in the connection, with data from `OrganizationProject`. */
-export type ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge = {
-  __typename?: 'ProjectOrganizationsByOrganizationProjectProjectIdAndOrganizationIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Organization` at the end of the edge. */
-  node?: Maybe<Organization>;
-  createdAt?: Maybe<Scalars['Datetime']>;
 };
 
 export type ProjectPartner = Node & {
@@ -8322,6 +8280,7 @@ export type Query = Node & {
   organizationById?: Maybe<Organization>;
   organizationByDaoAddress?: Maybe<Organization>;
   organizationProjectByOrganizationIdAndProjectId?: Maybe<OrganizationProject>;
+  organizationProjectByProjectId?: Maybe<OrganizationProject>;
   postByIri?: Maybe<Post>;
   postTranslationByIriAndLanguageCode?: Maybe<PostTranslation>;
   projectById?: Maybe<Project>;
@@ -8885,6 +8844,12 @@ export type QueryOrganizationByDaoAddressArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryOrganizationProjectByOrganizationIdAndProjectIdArgs = {
   organizationId: Scalars['UUID'];
+  projectId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryOrganizationProjectByProjectIdArgs = {
   projectId: Scalars['UUID'];
 };
 
@@ -10437,6 +10402,18 @@ export type UpdateOrganizationProjectByOrganizationIdAndProjectIdInput = {
   projectId: Scalars['UUID'];
 };
 
+/** All input for the `updateOrganizationProjectByProjectId` mutation. */
+export type UpdateOrganizationProjectByProjectIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `OrganizationProject` being updated. */
+  organizationProjectPatch: OrganizationProjectPatch;
+  projectId: Scalars['UUID'];
+};
+
 /** All input for the `updateOrganizationProject` mutation. */
 export type UpdateOrganizationProjectInput = {
   /**
@@ -11482,6 +11459,37 @@ export type AllProjectsQuery = (
   )> }
 );
 
+export type AssignmentsWithProjectsByAccountIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type AssignmentsWithProjectsByAccountIdQuery = (
+  { __typename?: 'Query' }
+  & { accountById?: Maybe<(
+    { __typename?: 'Account' }
+    & { assignmentsByAccountId: (
+      { __typename?: 'AssignmentsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Assignment' }
+        & Pick<Assignment, 'roleName' | 'onChainRoleId'>
+        & { daoByDaoAddress?: Maybe<(
+          { __typename?: 'Dao' }
+          & Pick<Dao, 'address'>
+          & { projectByAdminDaoAddress?: Maybe<(
+            { __typename?: 'Project' }
+            & { organizationProjectByProjectId?: Maybe<(
+              { __typename?: 'OrganizationProject' }
+              & Pick<OrganizationProject, 'organizationId'>
+            )> }
+            & ProjectFieldsFragment
+          )> }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type CreateAccountMutationVariables = Exact<{
   input: CreateAccountInput;
 }>;
@@ -12441,6 +12449,55 @@ export function useAllProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllProjectsQueryHookResult = ReturnType<typeof useAllProjectsQuery>;
 export type AllProjectsLazyQueryHookResult = ReturnType<typeof useAllProjectsLazyQuery>;
 export type AllProjectsQueryResult = Apollo.QueryResult<AllProjectsQuery, AllProjectsQueryVariables>;
+export const AssignmentsWithProjectsByAccountIdDocument = gql`
+    query AssignmentsWithProjectsByAccountId($id: UUID!) {
+  accountById(id: $id) {
+    assignmentsByAccountId {
+      nodes {
+        roleName
+        onChainRoleId
+        daoByDaoAddress {
+          address
+          projectByAdminDaoAddress {
+            ...projectFields
+            organizationProjectByProjectId {
+              organizationId
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    ${ProjectFieldsFragmentDoc}`;
+
+/**
+ * __useAssignmentsWithProjectsByAccountIdQuery__
+ *
+ * To run a query within a React component, call `useAssignmentsWithProjectsByAccountIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAssignmentsWithProjectsByAccountIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAssignmentsWithProjectsByAccountIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAssignmentsWithProjectsByAccountIdQuery(baseOptions: Apollo.QueryHookOptions<AssignmentsWithProjectsByAccountIdQuery, AssignmentsWithProjectsByAccountIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AssignmentsWithProjectsByAccountIdQuery, AssignmentsWithProjectsByAccountIdQueryVariables>(AssignmentsWithProjectsByAccountIdDocument, options);
+      }
+export function useAssignmentsWithProjectsByAccountIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AssignmentsWithProjectsByAccountIdQuery, AssignmentsWithProjectsByAccountIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AssignmentsWithProjectsByAccountIdQuery, AssignmentsWithProjectsByAccountIdQueryVariables>(AssignmentsWithProjectsByAccountIdDocument, options);
+        }
+export type AssignmentsWithProjectsByAccountIdQueryHookResult = ReturnType<typeof useAssignmentsWithProjectsByAccountIdQuery>;
+export type AssignmentsWithProjectsByAccountIdLazyQueryHookResult = ReturnType<typeof useAssignmentsWithProjectsByAccountIdLazyQuery>;
+export type AssignmentsWithProjectsByAccountIdQueryResult = Apollo.QueryResult<AssignmentsWithProjectsByAccountIdQuery, AssignmentsWithProjectsByAccountIdQueryVariables>;
 export const CreateAccountDocument = gql`
     mutation CreateAccount($input: CreateAccountInput!) {
   createAccount(input: $input) {

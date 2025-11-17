@@ -145,6 +145,7 @@ export const normalizeProjectWithMetadata = ({
     metadata: classMetadata,
     sanityClass,
   });
+
   const program = getDisplayAccount(
     classMetadata?.['regen:sourceRegistry'],
     programAccount,
@@ -195,8 +196,8 @@ export const normalizeProjectWithMetadata = ({
     imgSrc:
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
-      projectWithOrderData?.imgSrc ||
-      creditClassImage,
+      creditClassImage ||
+      projectWithOrderData?.imgSrc,
     location: projectMetadata?.['schema:location'],
     place:
       projectMetadata?.['schema:location']?.place_name ||

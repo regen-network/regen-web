@@ -7,34 +7,36 @@ import useClickOutside from 'utils/hooks/useClickOutside';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
-import ClipboardIcon from 'web-components/src/components/icons/ClipboardIcon';
-import { DraftDocumentIcon } from 'web-components/src/components/icons/DraftDocumentIcon';
+// import ClipboardIcon from 'web-components/src/components/icons/ClipboardIcon';
+// import { DraftDocumentIcon } from 'web-components/src/components/icons/DraftDocumentIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
-import TrashIcon from 'web-components/src/components/icons/TrashIcon';
+// import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
-import { Title } from 'web-components/src/components/typography';
+import { Title } from 'web-components/src/components/typography/Title';
 
 import { OptimizedImage } from 'components/atoms/OptimizedImage';
 
 import {
   BACKGROUND_IMAGE_ALT,
-  CONVERT_TO_DRAFT,
-  DELETE_PROJECT,
+  // CONVERT_TO_DRAFT,
+  // DELETE_PROJECT,
   DESKTOP_GRADIENT,
   EDIT,
   MAX_ADDRESS_LENGTH_DESKTOP,
   MAX_ADDRESS_LENGTH_MOBILE,
   MIGRATE_PROJECT,
   MOBILE_GRADIENT,
-  REGISTER_WITH_PROTOCOL,
+  // REGISTER_WITH_PROTOCOL,
   TOGGLE_PROJECT_OPTIONS,
   UNTITLED_PROJECT,
   VIEW,
 } from './ProjectDashboardBanner.constants';
 import { ProjectBannerProps } from './ProjectDashboardBanner.types';
 import { truncateEnd } from './ProjectDashboardBanner.utils';
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
+import { getAbbreviation } from 'web-components/src/components/cards/ProjectCard/ProjectCard.utils';
 
 const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   project,
@@ -56,30 +58,34 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   });
 
   const menuItems = [
-    {
-      label: _(REGISTER_WITH_PROTOCOL),
-      color: 'text-bc-neutral-700',
-      icon: <ClipboardIcon />,
-      action: () => setIsMenuOpen(false),
-    },
-    {
-      label: _(CONVERT_TO_DRAFT),
-      color: 'text-bc-neutral-700',
-      icon: <DraftDocumentIcon className="w-6 h-6" hasGradient />,
-      action: () => setIsMenuOpen(false),
-    },
+    // Commented items are fully not implemented yet
+    // {
+    //   label: _(REGISTER_WITH_PROTOCOL),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <ClipboardIcon />,
+    //   action: () => setIsMenuOpen(false),
+    // },
+    // {
+    //   label: _(CONVERT_TO_DRAFT),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <DraftDocumentIcon className="w-6 h-6" hasGradient />,
+    //   action: () => setIsMenuOpen(false),
+    // },
     {
       label: _(MIGRATE_PROJECT),
       color: 'text-bc-neutral-700',
       icon: <ArrowDownIcon direction="next" fontSize="medium" hasGradient />,
-      action: () => setIsMenuOpen(false),
+      action: () => {
+        setIsMenuOpen(false);
+        navigate('/organizations/create');
+      },
     },
-    {
-      label: _(DELETE_PROJECT),
-      color: 'text-bc-neutral-700',
-      icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
-      action: () => setIsMenuOpen(false),
-    },
+    // {
+    //   label: _(DELETE_PROJECT),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
+    //   action: () => setIsMenuOpen(false),
+    // },
   ];
 
   const projectName = project.name || _(UNTITLED_PROJECT);
@@ -144,7 +150,10 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
 
           {/* Project info and buttons */}
           <div className="flex flex-col justify-end max-w-[70%]">
-            <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]">
+            <Title
+              variant="h3"
+              className="text-bc-neutral-0 mb-2 line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]"
+            >
               {projectName}
             </Title>
 
@@ -153,7 +162,9 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               <ProjectPlaceInfo
                 place={truncatedPlace}
                 area={project.area}
-                areaUnit={project.areaUnit}
+                areaUnit={getAbbreviation(
+                  getAreaUnit(_, project.areaUnit as qudtUnit, project.area),
+                )}
                 smFontSize="0.8125rem"
                 fontSize="14px"
                 color="white"

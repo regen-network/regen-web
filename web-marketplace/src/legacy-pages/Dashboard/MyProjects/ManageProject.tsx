@@ -1,92 +1,83 @@
-import { useMemo } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { useMemo, useState } from 'react';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { useAtom } from 'jotai';
+import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
-import { Title } from 'web-components/src/components/typography';
 
 //import { useAuth } from 'lib/auth/auth';
 //import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
+import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
+import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 
-// import { ProjectCollaborators } from '../../../components/organisms/ProjectCollaborators/ProjectCollaborators';
-//import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
+import { useFetchProject } from './hooks/useFetchProject';
 
 const ManageProject = (): JSX.Element => {
   const { projectId } = useParams<{ projectId: string }>();
   const { _ } = useLingui();
   const location = useLocation();
+  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
+  const { project, isLoading } = useFetchProject();
+  console.log('project in ManageProject', project);
   // Ucomment code when project banner is being implemented
   // const { activeAccountId, activeAccount } = useAuth();
   // const { wallet, loginDisabled } = useWallet();
+  const canEditProject = true; // TODO
 
-  // const { adminProjects } = useFetchProjectByAdmin({
-  //   adminAccountId: activeAccountId,
-  //   adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
-  //   keepUnpublished: true,
-  // });
-
-  // const project = adminProjects?.find(p => p.id === projectId);
-
-  // const canEditProject = true; // Replace with actual admin/editor check logic
+  const [postProjectId, setPostProjectId] = useState<string | undefined>();
+  const [postOffChainProjectId, setPostOffChainProjectId] = useState<
+    string | undefined
+  >();
+  const [postProjectName, setPostProjectName] = useState<string | undefined>();
+  const [postProjectSlug, setPostProjectSlug] = useState<string | undefined>();
 
   const tabs = useMemo(
     () => [
+      // Data posts, credit issuance and manage credits tabs are hidden until implemented
       {
         label: _(msg`Data Posts`),
-        href: `/dashboard/projects/${projectId}/manage/posts`,
-        disabled: true,
+        href: `/dashboard/projects/${projectId}/manage/data-posts`,
+        hidden: true,
+      },
+      {
+        label: _(msg`Credit Issuance`),
+        href: `/dashboard/projects/${projectId}/manage/credit-issuance`,
+        hidden: true,
+      },
+      {
+        label: _(msg`Manage Credits`),
+        href: `/dashboard/projects/${projectId}/manage/manage-credits`,
+        hidden: true,
       },
       {
         label: _(msg`Collaborators`),
         href: `/dashboard/projects/${projectId}/manage/collaborators`,
       },
-      {
-        label: _(msg`Project Portfolio`),
-        href: `/dashboard/projects/${projectId}/manage/portfolio`,
-        disabled: true,
-      },
     ],
     [_, projectId],
   );
 
-  const activeTab = useMemo(() => {
-    const index = tabs.findIndex(tab => location.pathname.includes(tab.href));
-    return Math.max(index, 0);
-  }, [tabs, location.pathname]);
-
-  const getCurrentTabContent = () => {
-    if (location.pathname.includes('/posts')) return 0;
-    if (location.pathname.includes('/collaborators')) return 1;
-    if (location.pathname.includes('/portfolio')) return 2;
-    return 0;
-  };
-
-  const currentTab = getCurrentTabContent();
-
-  const renderDataPostsContent = () => (
-    <div>
-      <Title variant="h4" className="mb-20">
-        {_(msg`Data Posts`)}
-      </Title>
-    </div>
-  );
-
-  const renderCollaboratorsContent = () => null; // <ProjectCollaborators />;
-
-  const renderPortfolioContent = () => (
-    <div>
-      <Title variant="h4" className="mb-20">
-        {_(msg`Project Portfolio`)}
-      </Title>
-    </div>
+  const activeTab = useMemo(
+    () =>
+      Math.max(
+        tabs
+          .filter(tab => !tab.hidden)
+          .findIndex(tab => location.pathname.includes(tab.href ?? '')),
+        0,
+      ),
+    [tabs, location.pathname],
   );
 
   return (
     <>
-      {/* {project && <ProjectBanner project={project} canEdit={canEditProject} />} */}
+      {project && (
+        <ProjectDashboardBanner project={project} canEdit={canEditProject} />
+      )}
 
       {/* Tabs section */}
       <div className="w-full py-30 md:mb-8 lg:mb-0">
@@ -101,10 +92,32 @@ const ManageProject = (): JSX.Element => {
 
       {/* Content section */}
       <div className="p-30 border border-bc-neutral-300 border-solid rounded-lg bg-bc-neutral-0">
-        {currentTab === 0 && renderDataPostsContent()}
-        {currentTab === 1 && renderCollaboratorsContent()}
-        {currentTab === 2 && renderPortfolioContent()}
+        <Outlet />
       </div>
+
+      {postProjectId && (
+        <PostFlow
+          onModalClose={() => {
+            setPostProjectId(undefined);
+            setPostOffChainProjectId(undefined);
+            setPostProjectName(undefined);
+            setPostProjectSlug(undefined);
+          }}
+          projectLocation={project?.location as GeocodeFeature}
+          projectId={postProjectId}
+          offChainProjectId={postOffChainProjectId}
+          projectName={postProjectName}
+          projectSlug={postProjectSlug}
+          initialValues={{
+            title: '',
+            comment: '',
+            files: [],
+            privacyType: 'public',
+            published: true,
+          }}
+          disableScrollLock={true}
+        />
+      )}
     </>
   );
 };

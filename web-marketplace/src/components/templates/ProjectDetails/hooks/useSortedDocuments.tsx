@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Order } from 'web-components/src/components/table/Table.utils';
 
-import { Document, Maybe } from 'generated/graphql';
+import { Document, Maybe, ProjectFieldsFragment } from 'generated/graphql';
 
 import { DOCUMENTATION_MAPPING } from '../tables/documentation/ProjectDetails.Documentation.constants';
 import {
@@ -11,7 +11,9 @@ import {
 } from '../tables/documentation/ProjectDetails.documentation.sort';
 
 type Params = {
-  projectDocs?: Maybe<Document>[];
+  projectDocs?: Maybe<
+    ProjectFieldsFragment['documentsByProjectId']['nodes'][0]
+  >[];
 };
 
 export const useSortedDocuments = ({ projectDocs = [] }: Params) => {

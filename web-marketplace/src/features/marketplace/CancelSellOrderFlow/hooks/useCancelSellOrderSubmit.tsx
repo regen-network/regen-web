@@ -63,8 +63,12 @@ const useCancelSellOrderSubmit = ({
   const { queryClient } = useLedger();
   const { wallet } = useWallet();
   const reactQueryClient = useQueryClient();
-  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
-    useDashboardContext();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
 
   const { roleId, authorizationId: manageSellOrdersAuthId } =
     getRoleAuthorizationIds({
@@ -115,6 +119,7 @@ const useCancelSellOrderSubmit = ({
     const tx = {
       msgs: [finalMsg],
       fee: isOrganizationDashboard ? ('auto' as const) : undefined,
+      feeGranter: isOrganizationDashboard ? organizationDaoAddress : undefined,
     };
 
     try {
@@ -194,19 +199,20 @@ const useCancelSellOrderSubmit = ({
     selectedSellOrder,
     setIsProcessingModalOpen,
     setSelectedSellOrder,
+    isOrganizationDashboard,
+    roleId,
+    manageSellOrdersAuthId,
+    organizationRbamAddress,
+    wallet?.address,
+    organizationDaoAddress,
     signAndBroadcast,
+    reactQueryClient,
     queryClient,
     setCardItems,
     _,
     setTxModalHeader,
     setTxModalTitle,
     setTxButtonTitle,
-    isOrganizationDashboard,
-    roleId,
-    organizationRbamAddress,
-    wallet?.address,
-    reactQueryClient,
-    manageSellOrdersAuthId,
   ]);
 
   return cancelSellOrderSubmit;

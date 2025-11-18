@@ -72,8 +72,12 @@ const useCreateSellOrderSubmit = ({
   const { activeAccountId } = useAuth();
   const graphqlClient = useApolloClient();
   const { wallet } = useWallet();
-  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
-    useDashboardContext();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
 
   const { roleId, authorizationId: manageSellOrdersAuthId } =
     getRoleAuthorizationIds({
@@ -153,6 +157,9 @@ const useCreateSellOrderSubmit = ({
           | 'auto'
           | undefined, // RBAM transactions need auto gas estimation
         memo: undefined,
+        feeGranter: isOrganizationDashboard
+          ? organizationDaoAddress
+          : undefined,
       };
 
       const batchInfo = credits?.find(batch => batch.denom === batchDenom);
@@ -304,9 +311,16 @@ const useCreateSellOrderSubmit = ({
     },
     [
       accountAddress,
+      isOrganizationDashboard,
+      organizationDaoAddress,
       credits,
       signAndBroadcast,
       onTxBroadcast,
+      roleId,
+      organizationRbamAddress,
+      wallet?.address,
+      manageSellOrdersAuthId,
+      _,
       track,
       activeAccountId,
       reactQueryClient,
@@ -314,14 +328,8 @@ const useCreateSellOrderSubmit = ({
       createSellOrder,
       queryClient,
       setCardItems,
-      _,
       setTxModalHeader,
       setTxButtonTitle,
-      isOrganizationDashboard,
-      roleId,
-      organizationRbamAddress,
-      wallet?.address,
-      manageSellOrdersAuthId,
     ],
   );
 

@@ -187,6 +187,7 @@ export const useUpdateOrganizationProfile = () => {
       const result = await signAndBroadcast({
         msgs: [executeMsg],
         fee: 'auto',
+        feeGranter: daoAddress,
       });
 
       if (typeof result === 'string') {

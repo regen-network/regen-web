@@ -56,8 +56,12 @@ const useBasketPutSubmit = ({
   const { _ } = useLingui();
   const { track } = useTracker();
   const { wallet } = useWallet();
-  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
-    useDashboardContext();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
     getRoleAuthorizationIds({
@@ -184,7 +188,13 @@ const useBasketPutSubmit = ({
         }
       };
       await signAndBroadcast(
-        { msgs: [finalMsg], fee: isOrganizationDashboard ? 'auto' : undefined }, // RBAM transactions need auto gas estimation
+        {
+          msgs: [finalMsg],
+          fee: isOrganizationDashboard ? 'auto' : undefined, // RBAM transactions need auto gas estimation
+          feeGranter: isOrganizationDashboard
+            ? organizationDaoAddress
+            : undefined,
+        },
         () => onBroadcast(),
         {
           onError,
@@ -203,6 +213,7 @@ const useBasketPutSubmit = ({
       isOrganizationDashboard,
       roleId,
       organizationRbamAddress,
+      organizationDaoAddress,
       wallet?.address,
       manageCreditsAuthId,
       signAndBroadcast,

@@ -14,6 +14,10 @@ import {
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
+import { Wallet } from 'lib/wallet/wallet';
+import { useAuth } from 'lib/auth/auth';
+import { useFetchProject } from './hooks/useFetchProject';
+import { ROLE_ADMIN } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 export const getDefaultProject = (
   disabled: boolean,
@@ -68,4 +72,47 @@ export const handleProjectsDraftStatus = (
   });
 
   return newState;
+};
+
+export type CanAccessManageProjectWithRoleParams = {
+  onChainProject: ReturnType<typeof useFetchProject>['onChainProject'];
+  offChainProject: ReturnType<typeof useFetchProject>['offChainProject'];
+  activeAccountId: string | undefined;
+  activeAccount: ReturnType<typeof useAuth>['activeAccount'];
+  wallet: Wallet | undefined;
+};
+export const canAccessManageProjectWithRole = ({
+  onChainProject,
+  offChainProject,
+  activeAccountId,
+  activeAccount,
+  wallet,
+}: CanAccessManageProjectWithRoleParams) => {
+  const isAccountAdmin = !(
+    (onChainProject?.admin && wallet?.address !== onChainProject.admin) ||
+    (offChainProject?.adminAccountId &&
+      activeAccountId !== offChainProject?.adminAccountId)
+  );
+  const projectDaoFromActiveAccount =
+    activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes.find(
+      dao =>
+        dao?.projectByAdminDaoAddress?.id &&
+        dao.projectByAdminDaoAddress.id === offChainProject?.id,
+    );
+
+  const activeAccountRole =
+    projectDaoFromActiveAccount?.assignmentsByDaoAddress?.nodes.find(
+      assignment => assignment?.accountId === activeAccount?.id,
+    )?.roleName;
+
+  const isProjectCollaborator = Boolean(projectDaoFromActiveAccount);
+
+  return {
+    canAccessManageProject: isAccountAdmin || isProjectCollaborator,
+    role: isProjectCollaborator
+      ? activeAccountRole
+      : isAccountAdmin
+      ? ROLE_ADMIN
+      : undefined,
+  };
 };

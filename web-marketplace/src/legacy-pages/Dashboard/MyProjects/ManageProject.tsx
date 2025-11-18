@@ -3,9 +3,9 @@ import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { useAtom } from 'jotai';
 import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
-import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
+import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 
@@ -15,15 +15,17 @@ import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/
 
 import { useFetchProject } from './hooks/useFetchProject';
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
+import { canAccessManageProjectWithRole } from './MyProjects.utils';
 
-const ManageProject = (): JSX.Element => {
+const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const { _ } = useLingui();
   const location = useLocation();
-  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-  const { activeAccountId } = useAuth();
-  const { project, isLoading } = useFetchProject();
-
+  const { activeAccountId, activeAccount } = useAuth();
+  const { project, offChainProject, onChainProject, isLoading } =
+    useFetchProject();
+  const { loginDisabled, wallet } = useWallet();
   const canEditProject = true; // TODO
   const canCreatePost = true; // TODO
   const createPostDisabled =
@@ -81,6 +83,27 @@ const ManageProject = (): JSX.Element => {
     });
   }, [migrateProjects, project.id]);
 
+  const { canAccessManageProject } = useMemo(
+    () =>
+      canAccessManageProjectWithRole({
+        onChainProject,
+        offChainProject,
+        activeAccountId,
+        activeAccount,
+        wallet,
+      }),
+    [
+      activeAccountId,
+      activeAccount,
+      isLoading,
+      offChainProject,
+      onChainProject,
+      wallet,
+    ],
+  );
+
+  if (!isLoading && !canAccessManageProject) return null; // TODO show 403 page (design?) or navigate back to My Projects
+
   return (
     <>
       {project && (
@@ -94,6 +117,7 @@ const ManageProject = (): JSX.Element => {
             setPostProjectName(project.name);
             setPostProjectSlug(project.slug);
           }}
+          createPostDisabled={createPostDisabled}
           createPostTooltipText={
             loginDisabled
               ? _(NOT_SUPPORTED_TOOLTIP_TEXT)

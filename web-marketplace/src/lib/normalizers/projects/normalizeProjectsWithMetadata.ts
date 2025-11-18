@@ -9,9 +9,8 @@ import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 import {
   AccountFieldsFragment,
   Maybe,
-  Project,
+  ProjectFieldsFragment,
   ProjectSellOrdersFieldsFragment,
-  SellOrder,
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
@@ -82,7 +81,10 @@ export const normalizeProjectsWithMetadata = ({
 };
 
 type OffChainProjectToNormalize = Maybe<
-  Pick<Project, 'id' | 'slug' | 'published' | 'adminDaoAddress'> &
+  Pick<
+    ProjectFieldsFragment,
+    'id' | 'slug' | 'published' | 'daoByAdminDaoAddress'
+  > &
     ProjectSellOrdersFieldsFragment
 >;
 
@@ -130,6 +132,8 @@ export type NormalizeProject = ProjectWithOrderData & {
   };
   ecosystemType?: string[];
   adminDaoAddress?: Maybe<string>;
+  adminDaoRbamAddress?: Maybe<string>;
+  adminDaoCw4GroupAddress?: Maybe<string>;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -232,7 +236,10 @@ export const normalizeProjectWithMetadata = ({
       creditsRetired: 0,
       creditsRegistered: 0,
     },
-    adminDaoAddress: offChainProject?.adminDaoAddress,
+    adminDaoAddress: offChainProject?.daoByAdminDaoAddress?.address,
+    adminDaoRbamAddress: offChainProject?.daoByAdminDaoAddress?.daoRbamAddress,
+    adminDaoCw4GroupAddress:
+      offChainProject?.daoByAdminDaoAddress?.cw4GroupAddress,
   } as NormalizeProject;
 };
 

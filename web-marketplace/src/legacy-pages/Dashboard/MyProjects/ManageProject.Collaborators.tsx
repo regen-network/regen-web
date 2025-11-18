@@ -62,7 +62,7 @@ const Collaborators = (): JSX.Element => {
     );
   }, [project, activeAccount]);
 
-  // TODO if not project DAO, create org or migrate to org APP-796
+  // TODO if not project DAO, show create org or migrate to org APP-796
 
   const collaborators = useMemo(
     () =>

@@ -2,10 +2,11 @@ import {
   canAccessManageProjectWithRole,
   CanAccessManageProjectWithRoleParams,
 } from 'legacy-pages/Dashboard/MyProjects/MyProjects.utils';
+
 import {
   ROLE_ADMIN,
-  ROLE_OWNER,
   ROLE_EDITOR,
+  ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 type GetCanEditProjectParams = CanAccessManageProjectWithRoleParams & {

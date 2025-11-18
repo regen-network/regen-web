@@ -24,10 +24,8 @@ export const getAssignmentsWithProjectsByAccountIdQuery = ({
 
       return data;
     } catch (error) {
-      console.error(
-        'Error fetching assignments with projects by account ID:',
-        error,
-      );
+      // eslint-disable-next-line no-console
+      console.error(error);
       throw error;
     }
   },

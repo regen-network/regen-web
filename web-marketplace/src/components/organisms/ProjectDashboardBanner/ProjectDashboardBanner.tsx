@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { useAtom } from 'jotai';
 import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -16,8 +18,8 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
 // import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
-import { Title } from 'web-components/src/components/typography/Title';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { Title } from 'web-components/src/components/typography/Title';
 
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -40,10 +42,8 @@ import {
 } from './ProjectDashboardBanner.constants';
 import { ProjectBannerProps } from './ProjectDashboardBanner.types';
 import { truncateEnd } from './ProjectDashboardBanner.utils';
-import { useAtom } from 'jotai';
-import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
-const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
+const ProjectDashboardBanner = ({
   project,
   canEdit,
   canCreatePost,
@@ -51,7 +51,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   migrateProject,
   createPostDisabled,
   createPostTooltipText,
-}) => {
+}: ProjectBannerProps) => {
   const { _ } = useLingui();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

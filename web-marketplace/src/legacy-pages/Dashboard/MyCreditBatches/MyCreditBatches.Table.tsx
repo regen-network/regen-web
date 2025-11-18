@@ -8,6 +8,7 @@ import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { Subtitle } from 'web-components/src/components/typography';
 
+import { CreateBatchOrganizationContext } from 'types/ledger/batch';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 
@@ -20,13 +21,7 @@ type Props = {
   paginationParams: TablePaginationParams;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   useCreate?: boolean;
-  createBatchState?: {
-    issuerAddress?: string;
-    organizationDaoAddress?: string;
-    organizationRbamAddress?: string;
-    authorizationId?: number;
-    roleId?: number;
-  };
+  createBatchState?: CreateBatchOrganizationContext;
 };
 
 export const MyCreditBatchesTable = ({

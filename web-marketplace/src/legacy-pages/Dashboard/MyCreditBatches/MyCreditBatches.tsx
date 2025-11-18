@@ -59,8 +59,6 @@ export const MyCreditBatches = (): JSX.Element => {
         authorizationId,
         roleId,
       }
-    : selectedAccountAddress
-    ? { issuerAddress: selectedAccountAddress }
     : undefined;
 
   return (

@@ -9,6 +9,7 @@ import {
   getMsgExecuteContract,
 } from 'utils/cosmwasm';
 
+import { CreateBatchOrganizationContext } from 'types/ledger/batch';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
   CFCBatchMetadataLD,
@@ -162,13 +163,7 @@ export default function useCreateBatchSubmit(): Return {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
 
   // Check if organization context was passed via router state
-  const locationState = location.state as {
-    issuerAddress?: string;
-    organizationDaoAddress?: string;
-    organizationRbamAddress?: string;
-    authorizationId?: number;
-    roleId?: number;
-  } | null;
+  const locationState = location.state as CreateBatchOrganizationContext | null;
 
   function handleTxQueued(): void {
     setStatus('broadcast');
@@ -232,7 +227,7 @@ export default function useCreateBatchSubmit(): Return {
       ) {
         // Ensure all issuance fields have default values for protobuf encoding
         const issuance = (message.value.issuance || []).map(item => ({
-          recipient: item.recipient || '',
+          recipient: item.recipient,
           tradableAmount: item.tradableAmount || '0',
           retiredAmount: item.retiredAmount || '0',
           retirementJurisdiction: item.retirementJurisdiction || '',
@@ -242,13 +237,13 @@ export default function useCreateBatchSubmit(): Return {
         // Encode the batch message with DAO as issuer
         const protoBytes = MsgCreateBatch.encode({
           issuer: organizationDaoAddress,
-          projectId: message.value.projectId || '',
+          projectId: message.value.projectId,
           issuance,
           metadata: message.value.metadata || '',
           startDate: message.value.startDate,
           endDate: message.value.endDate,
           open: message.value.open ?? false,
-          classId: message.value.classId || '',
+          classId: message.value.classId,
         }).finish();
 
         // Wrap in RBAM execute action
@@ -271,6 +266,7 @@ export default function useCreateBatchSubmit(): Return {
           msgs: [executeMsg],
           memo: recipientNote?.note,
           fee: 'auto',
+          feeGranter: organizationDaoAddress,
         });
       } else {
         // Regular batch creation from personal wallet

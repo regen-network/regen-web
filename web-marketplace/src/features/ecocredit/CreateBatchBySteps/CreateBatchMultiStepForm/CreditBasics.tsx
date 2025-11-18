@@ -171,7 +171,7 @@ export default function CreditBasics({
   } | null;
   const issuerAddress =
     locationState?.issuerAddress ?? activeAccount?.addr ?? wallet?.address;
-  const projects = useQueryProjectsByIssuer(issuerAddress ?? undefined);
+  const projects = useQueryProjectsByIssuer(issuerAddress);
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;

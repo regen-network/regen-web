@@ -11809,10 +11809,13 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'adminAccountId' | 'adminDaoAddress' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
+  & Pick<Project, 'id' | 'adminAccountId' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { accountByAdminAccountId?: Maybe<(
     { __typename?: 'Account' }
     & AccountFieldsFragment
+  )>, daoByAdminDaoAddress?: Maybe<(
+    { __typename?: 'Dao' }
+    & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
   )>, creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'onChainId'>
@@ -12026,7 +12029,11 @@ export const ProjectFieldsFragmentDoc = gql`
   accountByAdminAccountId {
     ...accountFields
   }
-  adminDaoAddress
+  daoByAdminDaoAddress {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+  }
   onChainId
   metadata
   approved

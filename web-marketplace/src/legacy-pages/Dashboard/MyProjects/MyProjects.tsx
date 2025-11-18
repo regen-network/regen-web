@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { projectsDraftState } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
-import { useRouter } from 'next/navigation';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -31,7 +30,7 @@ import {
 
 const MyProjects = (): JSX.Element => {
   const { _ } = useLingui();
-  const router = useRouter();
+  const navigate = useNavigate();
   const location = useLocation();
   const { isIssuer, isProjectAdmin, sanityProfilePageData } =
     useDashboardContext();
@@ -65,9 +64,9 @@ const MyProjects = (): JSX.Element => {
             isFirstProject={isFirstProject}
             onClick={() => {
               if (isIssuer) {
-                router.push(`/project-pages/${DRAFT_ID}/choose-credit-class`);
+                navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
               } else {
-                router.push(`/project-pages/${DRAFT_ID}/basic-info`);
+                navigate(`/project-pages/${DRAFT_ID}/basic-info`);
               }
             }}
             sx={{ height: { xs: '100%' } }}
@@ -95,56 +94,11 @@ const MyProjects = (): JSX.Element => {
                   }}
                   onButtonClick={() => {
                     // Navigate to new manage project page
-                    router.push(`/dashboard/projects/${project.id}/manage`);
+                    navigate(`/dashboard/projects/${project.id}/manage`);
                   }}
                   track={track}
                   pathname={location.pathname}
                 />
-                {/* <ProjectCard
-                    asAdmin
-                    adminPrompt={
-                      sanityProfilePageData?.allProfilePage?.[0]
-                        ?.projectCardPromptRaw
-                    }
-                    {...getDefaultProject(!activeAccountId, _)}
-                    {...project}
-                    button={{
-                      text: _(CREATE_POST),
-                      disabled:
-                        !activeAccountId || project.draft || !project.location,
-                    }}
-                    onButtonClick={() => {
-                      setPostProjectId(project.id);
-                      setPostOffChainProjectId(project.offChainId);
-                      setPostProjectName(project.name);
-                      setPostProjectSlug(project.slug);
-                    }}
-                    onContainedButtonClick={() => {
-                      if (
-                        !project.offChain ||
-                        (project.offChain && project.published)
-                      ) {
-                        navigate(
-                          `/project-pages/${project.id}/edit/basic-info`,
-                        );
-                      } else {
-                        const currentStep = projectsCurrentStep[project?.id];
-                        navigate(
-                          `/project-pages/${project?.id}/${
-                            currentStep || 'basic-info'
-                          }`,
-                        );
-                      }
-                    }}
-                    track={track}
-                    pathname={location.pathname}
-                    createPostTooltipText={
-                      loginDisabled
-                        ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
-                        : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
-                    }
-                    editProjectTooltipText={_(NOT_SUPPORTED_TOOLTIP_TEXT)}
-                  /> */}
               </WithLoader>
             </Grid>
           );

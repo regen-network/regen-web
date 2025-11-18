@@ -63,8 +63,6 @@ export interface ProjectCardProps extends MediaCardProps {
   offChain?: boolean;
   asAdmin?: boolean;
   adminPrompt?: SanityBlockContent;
-  createPostTooltipText?: string;
-  editProjectTooltipText?: string;
   bodyTexts?: ProjectCardBodyTextsMapping;
   purchaseDetailsTitles?: ProjectCardTitlesMapping;
   buttons?: ProjectCardButtonsMapping;
@@ -103,8 +101,6 @@ export function ProjectCard({
   offChain,
   asAdmin,
   adminPrompt,
-  createPostTooltipText,
-  editProjectTooltipText,
   bodyTexts,
   purchaseDetailsTitles,
   buttons,
@@ -307,70 +303,21 @@ export function ProjectCard({
                     showTwoButons ? 'grid-cols-2' : 'grid-cols-1'
                   }`}
                 >
-                  {containedButton &&
-                    onContainedButtonClick &&
-                    (containedButton.disabled && editProjectTooltipText ? (
-                      <InfoTooltip
-                        arrow
-                        title={editProjectTooltipText}
-                        placement="top"
-                      >
-                        <div>
-                          <ContainedButton
-                            size="small"
-                            startIcon={containedButton.startIcon}
-                            disabled={containedButton.disabled}
-                            sx={{ width: '100%' }}
-                            className={containedButton.className}
-                            onClick={onContainedButtonClick}
-                          >
-                            {containedButton.text}
-                          </ContainedButton>
-                        </div>
-                      </InfoTooltip>
-                    ) : (
-                      <ContainedButton
-                        size="small"
-                        startIcon={containedButton.startIcon}
-                        disabled={containedButton.disabled}
-                        sx={{ width: '100%' }}
-                        className={containedButton.className}
-                        onClick={onContainedButtonClick}
-                      >
-                        {containedButton.text}
-                      </ContainedButton>
-                    ))}
+                  {containedButton && onContainedButtonClick && (
+                    <ContainedButton
+                      size="small"
+                      startIcon={containedButton.startIcon}
+                      disabled={containedButton.disabled}
+                      sx={{ width: '100%' }}
+                      className={containedButton.className}
+                      onClick={onContainedButtonClick}
+                    >
+                      {containedButton.text}
+                    </ContainedButton>
+                  )}
                   {(hasButton || isPrefinanceProject || offChain) &&
                     buttonText &&
-                    useProjectCardButton &&
-                    (isButtonDisabled && createPostTooltipText ? (
-                      <InfoTooltip
-                        arrow
-                        title={createPostTooltipText}
-                        placement="top"
-                      >
-                        <div>
-                          <ProjectCardButton
-                            id={id}
-                            name={name}
-                            creditClassId={creditClassId}
-                            onClick={onClick}
-                            onButtonClick={onButtonClick}
-                            track={track}
-                            pathname={pathname}
-                            projectPrefinancing={projectPrefinancing}
-                            offChain={offChain}
-                            asAdmin={asAdmin}
-                            isPrefinanceProject={isPrefinanceProject}
-                            buttonText={buttonText}
-                            buttonStartIcon={buttonStartIcon}
-                            buttonClassName={cn(buttonClassName, 'h-full')}
-                            isButtonDisabled={isButtonDisabled}
-                            isSoldOut={isSoldOut}
-                          />
-                        </div>
-                      </InfoTooltip>
-                    ) : (
+                    useProjectCardButton && (
                       <ProjectCardButton
                         id={id}
                         name={name}
@@ -389,7 +336,7 @@ export function ProjectCard({
                         isButtonDisabled={isButtonDisabled}
                         isSoldOut={isSoldOut}
                       />
-                    ))}
+                    )}
                 </div>
               </>
             </div>

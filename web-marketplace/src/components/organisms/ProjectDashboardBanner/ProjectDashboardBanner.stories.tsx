@@ -42,4 +42,6 @@ Default.args = {
   canCreatePost: true,
   onCreatePost: action('Create Post Clicked'),
   migrateProject: action('Migrate Project Clicked'),
+  createPostTooltipText: 'Create post disabled tooltip',
+  createPostDisabled: false,
 };

@@ -117,5 +117,5 @@ export const useFetchProject = () => {
     isFetchingProjectByOnChainId ||
     isFetchingSanityCreditClasses;
 
-  return { project, isLoading };
+  return { project, onChainProject, offChainProject, isLoading };
 };

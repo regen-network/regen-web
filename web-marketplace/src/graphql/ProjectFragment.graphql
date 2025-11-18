@@ -4,7 +4,11 @@ fragment projectFields on Project {
   accountByAdminAccountId {
     ...accountFields
   }
-  adminDaoAddress
+  daoByAdminDaoAddress {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+  }
   onChainId
   metadata
   approved

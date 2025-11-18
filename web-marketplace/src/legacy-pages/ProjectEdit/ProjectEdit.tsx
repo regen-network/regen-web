@@ -2,6 +2,7 @@ import {
   createContext,
   MutableRefObject,
   useContext,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -43,6 +44,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -50,6 +52,7 @@ import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
@@ -87,7 +90,7 @@ function ProjectEdit(): JSX.Element {
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { wallet } = useWallet();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const section = usePathSection();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
@@ -151,15 +154,44 @@ function ProjectEdit(): JSX.Element {
         id: projectId,
       }),
     );
+  const {
+    data: projectByOnChainIdRes,
+    isFetching: isFetchingProjectByOnChainId,
+  } = useQuery(
+    getProjectByOnChainIdQuery({
+      client: graphqlClient,
+      languageCode: selectedLanguage,
+      enabled: !!projectId && isOnChainId,
+      onChainId: projectId as string,
+    }),
+  );
 
-  const offChainProject = projectByOffChainIdRes?.data?.projectById;
-  const isLoading = isFetchingProject || isFetchingProjectById;
+  const offChainProject =
+    projectByOffChainIdRes?.data?.projectById ??
+    projectByOnChainIdRes?.data?.projectByOnChainId;
+  const isLoading =
+    isFetchingProject || isFetchingProjectById || isFetchingProjectByOnChainId;
 
-  const isNotAdmin =
-    ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||
-      (offChainProject?.adminAccountId &&
-        activeAccountId !== offChainProject?.adminAccountId)) &&
-    !isLoading;
+  const canEdit = useMemo(
+    () =>
+      getCanEditProject({
+        onChainProject,
+        offChainProject,
+        activeAccountId,
+        activeAccount,
+        wallet,
+        isLoading,
+      }),
+    [
+      activeAccountId,
+      activeAccount,
+      isLoading,
+      offChainProject,
+      onChainProject,
+      wallet,
+    ],
+  );
+
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;
 
@@ -183,7 +215,7 @@ function ProjectEdit(): JSX.Element {
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
 
-  if (isNotAdmin) {
+  if (!canEdit) {
     return (
       <ProjectDenied
         isEdit

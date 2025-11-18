@@ -17,6 +17,7 @@ import { HorizontalDotsIcon } from 'web-components/src/components/icons/Horizont
 // import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { Title } from 'web-components/src/components/typography/Title';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -39,6 +40,8 @@ import {
 } from './ProjectDashboardBanner.constants';
 import { ProjectBannerProps } from './ProjectDashboardBanner.types';
 import { truncateEnd } from './ProjectDashboardBanner.utils';
+import { useAtom } from 'jotai';
+import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
 const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   project,
@@ -47,11 +50,13 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   onCreatePost,
   migrateProject,
   createPostDisabled,
+  createPostTooltipText,
 }) => {
   const { _ } = useLingui();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
   const truncatedPlace = truncateEnd(
     project.place ?? '',
@@ -194,9 +199,25 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               {canEdit && (
                 <ContainedButton
                   startIcon={<EditIcon sx={{ color: 'white' }} />}
-                  onClick={() =>
-                    navigate(`/project-pages/${project.id}/edit/basic-info`)
-                  }
+                  onClick={() => {
+                    if (
+                      !project.offChain ||
+                      (project.offChain && project.published)
+                    ) {
+                      navigate(`/project-pages/${project.id}/edit/basic-info`);
+                    } else {
+                      // TODO project is a draft, it goes to the create flow
+                      // so we should adjust here the org based project creation flow
+                      // to pass state info
+                      // https://regennetwork.atlassian.net/browse/APP-793
+                      const currentStep = projectsCurrentStep[project?.id];
+                      navigate(
+                        `/project-pages/${project?.id}/${
+                          currentStep || 'basic-info'
+                        }`,
+                      );
+                    }
+                  }}
                 >
                   {_(EDIT)}
                 </ContainedButton>

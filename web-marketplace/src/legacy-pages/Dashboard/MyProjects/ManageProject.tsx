@@ -17,6 +17,12 @@ import { useFetchProject } from './hooks/useFetchProject';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 import { canAccessManageProjectWithRole } from './MyProjects.utils';
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_OWNER,
+  ROLE_EDITOR,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -26,8 +32,7 @@ const ManageProject = () => {
   const { project, offChainProject, onChainProject, isLoading } =
     useFetchProject();
   const { loginDisabled, wallet } = useWallet();
-  const canEditProject = true; // TODO
-  const canCreatePost = true; // TODO
+
   const createPostDisabled =
     !activeAccountId || project.draft || !project.location;
 
@@ -83,7 +88,7 @@ const ManageProject = () => {
     });
   }, [migrateProjects, project.id]);
 
-  const { canAccessManageProject } = useMemo(
+  const { canAccessManageProject, role } = useMemo(
     () =>
       canAccessManageProjectWithRole({
         onChainProject,
@@ -101,6 +106,10 @@ const ManageProject = () => {
       wallet,
     ],
   );
+
+  const canEditProject =
+    role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR;
+  const canCreatePost = canEditProject || role === ROLE_AUTHOR;
 
   if (!isLoading && !canAccessManageProject) return null; // TODO show 403 page (design?) or navigate back to My Projects
 
@@ -144,7 +153,7 @@ const ManageProject = () => {
         <Outlet context={{ project, isLoading }} />
       </div>
 
-      {postProjectId && (
+      {canCreatePost && postProjectId && (
         <PostFlow
           onModalClose={() => {
             setPostProjectId(undefined);

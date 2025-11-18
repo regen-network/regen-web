@@ -1,9 +1,11 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { profileBannerCardAtom } from 'legacy-pages/Dashboard/Dashboard.store';
+import { ERROR_BUTTON_EDIT_ORGANIZATION } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants';
 
+import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 import { deleteImage } from 'web-components/src/utils/s3';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
@@ -11,10 +13,18 @@ import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { getHashUrl } from 'lib/block-explorer';
+import {
+  BLOCKCHAIN_RECORD,
+  SEE_LESS,
+  SEE_MORE,
+  TX_ERROR_MODAL_TITLE,
+} from 'lib/constants/shared.constants';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
+import { Link } from 'components/atoms';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
@@ -45,6 +55,7 @@ export const EditProfile = () => {
   );
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const [error, setError] = useState<string | undefined>();
   const {
     selectedAccountAddress,
     isOrganizationDashboard,
@@ -151,6 +162,7 @@ export const EditProfile = () => {
       const isDefaultBg = DEFAULT_PROFILE_BG === backgroundImage;
 
       let shouldCloseProcessingModal = false;
+      setError(undefined); // Clear any previous errors
 
       try {
         if (isOrgDashboard) {
@@ -236,6 +248,26 @@ export const EditProfile = () => {
           }),
         );
         fileNamesToDeleteRef.current = [];
+
+        // Only show success banner if everything succeeded
+        setBannerTextAtom(_(PROFILE_SAVED));
+
+        // Refresh profile data
+        if (selectedAccountAddress) {
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountByAddrQueryKey({
+              addr: selectedAccountAddress,
+            }),
+          });
+        }
+        if (activeAccount) {
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
+          });
+        }
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        setError(errorMessage);
       } finally {
         if (shouldCloseProcessingModal) {
           setProcessingModalAtom(modal => {
@@ -245,7 +277,8 @@ export const EditProfile = () => {
       }
     },
     [
-      activeAccount?.id,
+      _,
+      activeAccount,
       isOrgDashboard,
       organizationDaoAddress,
       organizationIdentifier,
@@ -257,47 +290,56 @@ export const EditProfile = () => {
       organizationRbamAddress,
       setProfileBannerCard,
       setProcessingModalAtom,
+      setError,
+      setBannerTextAtom,
+      selectedAccountAddress,
+      reactQueryClient,
       profileBannerCard,
       updateAccountById,
       updateOrganizationProfile,
     ],
   );
 
-  const refreshProfileData = useCallback(async () => {
-    if (selectedAccountAddress) {
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByAddrQueryKey({ addr: selectedAccountAddress }),
-      });
-    }
-    if (activeAccount) {
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
-      });
-    }
-  }, [activeAccount, reactQueryClient, selectedAccountAddress]);
-
-  const onSuccess = useCallback(() => {
-    setBannerTextAtom(_(PROFILE_SAVED));
-    void refreshProfileData();
-  }, [setBannerTextAtom, _, refreshProfileData]);
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
     accountId: isOrgDashboard ? organizationIdentifier : undefined,
   });
 
+  const handleErrorClose = useCallback(() => {
+    setError(undefined);
+  }, []);
+
   if (shouldBlockRender) return null;
 
+  const txHashUrl = getHashUrl('');
+
   return (
-    <EditProfileForm
-      key={editProfileFormKey}
-      onSubmit={onSubmit}
-      onSuccess={onSuccess}
-      onUpload={onUpload}
-      initialValues={initialValues}
-      prefillValues={isOrgDashboard ? initialValues : undefined}
-      isDirtyRef={isDirtyRef}
-    >
-      <EditProfileFormActionBar />
-    </EditProfileForm>
+    <>
+      <EditProfileForm
+        key={editProfileFormKey}
+        onSubmit={onSubmit}
+        onUpload={onUpload}
+        initialValues={initialValues}
+        prefillValues={isOrgDashboard ? initialValues : undefined}
+        isDirtyRef={isDirtyRef}
+      >
+        <EditProfileFormActionBar />
+      </EditProfileForm>
+      <TxErrorModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
+        error={error ?? ''}
+        open={!!error}
+        onClose={handleErrorClose}
+        txHash=""
+        txHashUrl={txHashUrl}
+        cardTitle=""
+        buttonTitle={_(ERROR_BUTTON_EDIT_ORGANIZATION)}
+        linkComponent={Link}
+        onButtonClick={handleErrorClose}
+        title={_(TX_ERROR_MODAL_TITLE)}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
+      />
+    </>
   );
 };

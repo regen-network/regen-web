@@ -64,7 +64,7 @@ export const EditProfile = () => {
   } = useDashboardContext();
   const updateOrganizationProfile = useUpdateOrganizationProfile();
   const organizationProfile = organizationProfileFromContext ?? null;
-  const organizationIdentifier = organizationProfile?.id;
+  const organizationId = organizationProfile?.id;
   const hasOrgContext =
     Boolean(organizationDaoAddress) && Boolean(organizationRbamAddress);
   const isOrgDashboard = hasOrgContext && (isOrganizationDashboard ?? true);
@@ -124,7 +124,7 @@ export const EditProfile = () => {
     if (isOrgDashboard) {
       return [
         'org',
-        organizationIdentifier ?? '',
+        organizationId ?? '',
         organizationProfile?.image ?? '',
         organizationProfile?.bgImage ?? '',
       ].join('|');
@@ -141,7 +141,7 @@ export const EditProfile = () => {
     activeAccount?.id,
     activeAccount?.image,
     isOrgDashboard,
-    organizationIdentifier,
+    organizationId,
     organizationProfile?.bgImage,
     organizationProfile?.image,
   ]);
@@ -168,7 +168,7 @@ export const EditProfile = () => {
           if (
             !organizationDaoAddress ||
             !organizationRbamAddress ||
-            !organizationIdentifier
+            !organizationId
           ) {
             // eslint-disable-next-line lingui/no-unlocalized-strings
             throw new Error('Organization context not found.');
@@ -182,7 +182,7 @@ export const EditProfile = () => {
           await updateOrganizationProfile({
             daoAddress: organizationDaoAddress,
             rbamAddress: organizationRbamAddress,
-            organizationId: organizationIdentifier,
+            organizationId: organizationId,
             values: {
               name,
               description,
@@ -236,7 +236,7 @@ export const EditProfile = () => {
         await Promise.all(
           fileNamesToDeleteRef?.current.map(async fileName => {
             const targetId = isOrgDashboard
-              ? organizationIdentifier ?? ''
+              ? organizationId ?? ''
               : activeAccount?.id ?? '';
             await deleteImage(
               PROFILE_S3_PATH,
@@ -280,7 +280,7 @@ export const EditProfile = () => {
       activeAccount,
       isOrgDashboard,
       organizationDaoAddress,
-      organizationIdentifier,
+      organizationId,
       organizationProfile?.bgImage,
       organizationProfile?.description,
       organizationProfile?.image,
@@ -301,7 +301,7 @@ export const EditProfile = () => {
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
-    accountId: isOrgDashboard ? organizationIdentifier : undefined,
+    accountId: isOrgDashboard ? organizationId : undefined,
   });
 
   const handleErrorClose = useCallback(() => {

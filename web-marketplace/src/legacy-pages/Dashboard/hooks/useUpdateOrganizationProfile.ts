@@ -60,7 +60,7 @@ export const useUpdateOrganizationProfile = () => {
   const { signingCosmWasmClient } = useLedger();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { activeAccountId, activeAccount } = useAuth();
+  const { activeAccountId } = useAuth();
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -204,19 +204,29 @@ export const useUpdateOrganizationProfile = () => {
         await timer(pollInterval);
 
         try {
-          const data = await reactQueryClient.fetchQuery(
-            // Using fetchQuery here instead of refetch to avoid reloading the page on every attempt
-            getAccountByIdQuery({
-              client: graphqlClient as ApolloClient<NormalizedCacheObject>,
-              enabled: !!graphqlClient && !!activeAccountId,
-              id: activeAccountId ?? '',
-              languageCode: selectedLanguage,
-            }),
-          );
+          // Query GraphQL directly to avoid triggering React Query cache/refetch
+          const { data } = await graphqlClient.query({
+            query: (await import('generated/graphql')).AccountByIdDocument,
+            variables: { id: activeAccountId },
+            fetchPolicy: 'network-only', // Always fetch from network, skip cache
+          });
+
+          const localizedDescription =
+            data?.accountById?.accountTranslationsById.nodes.find(
+              (node: any) => node?.languageCode === selectedLanguage,
+            )?.description ?? data?.accountById?.description;
+
+          const accountData = {
+            ...data,
+            accountById: {
+              ...data.accountById,
+              description: localizedDescription,
+            },
+          };
 
           const dao =
-            data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-              node =>
+            accountData?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+              (node: any) =>
                 node?.address === daoAddress ||
                 (organizationId &&
                   node?.organizationByDaoAddress?.id === organizationId),
@@ -238,6 +248,7 @@ export const useUpdateOrganizationProfile = () => {
           const websiteMatches = organization?.websiteLink === sanitizedWebsite;
 
           const twitterMatches = organization?.twitterLink === sanitizedTwitter;
+
           if (
             nameMatches &&
             descriptionMatches &&
@@ -252,6 +263,14 @@ export const useUpdateOrganizationProfile = () => {
           continue;
         }
       }
+
+      if (!indexerUpdated) {
+        throw new Error(
+          _(
+            msg`The organization profile has been updated on-chain but hasn't been indexed yet. Please reload the page in a few moments to see the changes.`,
+          ),
+        );
+      }
     },
     [
       organizationRole,
@@ -259,7 +278,6 @@ export const useUpdateOrganizationProfile = () => {
       wallet?.address,
       signingCosmWasmClient,
       _,
-      reactQueryClient,
       graphqlClient,
       activeAccountId,
       selectedLanguage,

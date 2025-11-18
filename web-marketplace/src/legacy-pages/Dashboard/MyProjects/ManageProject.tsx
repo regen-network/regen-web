@@ -4,25 +4,28 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
-import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
-import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import {
+  CREATE_POST_DISABLED_TOOLTIP_TEXT,
+  NOT_SUPPORTED_TOOLTIP_TEXT,
+} from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 
+import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
+
 import { Link } from 'components/atoms';
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 
 import { useFetchProject } from './hooks/useFetchProject';
-import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
 import { canAccessManageProjectWithRole } from './MyProjects.utils';
-import {
-  ROLE_ADMIN,
-  ROLE_AUTHOR,
-  ROLE_OWNER,
-  ROLE_EDITOR,
-} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -97,14 +100,7 @@ const ManageProject = () => {
         activeAccount,
         wallet,
       }),
-    [
-      activeAccountId,
-      activeAccount,
-      isLoading,
-      offChainProject,
-      onChainProject,
-      wallet,
-    ],
+    [activeAccountId, activeAccount, offChainProject, onChainProject, wallet],
   );
 
   const canEditProject =

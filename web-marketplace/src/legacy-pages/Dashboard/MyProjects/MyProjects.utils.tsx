@@ -5,6 +5,7 @@ import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProje
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 
+import { useAuth } from 'lib/auth/auth';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,
@@ -12,12 +13,12 @@ import {
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
+import { Wallet } from 'lib/wallet/wallet';
+
+import { ROLE_ADMIN } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
-import { Wallet } from 'lib/wallet/wallet';
-import { useAuth } from 'lib/auth/auth';
 import { useFetchProject } from './hooks/useFetchProject';
-import { ROLE_ADMIN } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 export const getDefaultProject = (
   disabled: boolean,

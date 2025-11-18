@@ -49,6 +49,7 @@ type PersonalInfoStepProps = FormStateSetter;
 export const PersonalInfoStep = ({
   setIsSubmitting,
   setIsValid,
+  formRef,
 }: PersonalInfoStepProps) => {
   const { _ } = useLingui();
   const { activeAccount, privActiveAccount } = useAuth();
@@ -232,7 +233,12 @@ export const PersonalInfoStep = ({
 
   return (
     <div className="max-w-[560px] mx-auto border border-solid border-bc-neutral-300 rounded-xl p-50 bg-bc-neutral-0">
-      <Form id={PERSONAL_INFO_FORM_ID} form={form} onSubmit={onSubmit}>
+      <Form
+        id={PERSONAL_INFO_FORM_ID}
+        form={form}
+        onSubmit={onSubmit}
+        formRef={formRef}
+      >
         <div className="flex flex-col gap-50">
           <TextField
             label={_(CREATE_ORG_PERSONAL_INFO_NAME_LABEL)}

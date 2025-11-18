@@ -9,5 +9,4 @@ export type OrganizationProfileStepProps = {
   onTransferProfile: (payload: {
     nextValues: Partial<EditProfileFormSchemaType>;
   }) => void;
-  formRef?: FormRef;
 } & FormStateSetter;

@@ -135,6 +135,7 @@ function CreateOrganizationContent({
         <PersonalInfoStep
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
+          formRef={personalInfoFormRef}
         />
       )}
       {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}

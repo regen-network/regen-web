@@ -19,32 +19,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#. js-lingui-explicit-id
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:66
+msgid "/+Z5u4"
+msgstr "/+Z5u4"
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -138,8 +117,8 @@ msgstr "{minimumDuration, plural, one {{minimumDuration} año mínimo} other {{m
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} carácter} other {{remainingCaptionCharacters} caracteres}}"
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:303
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:121
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:256
 #: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:202
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
@@ -191,7 +170,7 @@ msgstr "+ agregar otro emisor"
 #~ msgid "+ add another issuer'"
 #~ msgstr "+ añadir otro emisor'"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:311
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:316
 msgid "+ add certification"
 msgstr "+ añadir certificación"
 
@@ -304,7 +283,7 @@ msgstr "Un <0>programa</0> implica las reglas de elegibilidad, monitoreo y certi
 msgid "A brief description of your ecological impact project and the property on which it is implemented. This is your elevator pitch to credit buyers."
 msgstr "Una breve descripción de su proyecto de impacto ecológico y de la propiedad en la que se implementará. Este es su discurso de presentación para los compradores de crédito."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:36
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:36
 msgid "A connected wallet is required to create an organization."
 msgstr "Se requiere una billetera conectada para crear una organización."
 
@@ -345,7 +324,7 @@ msgstr "Nosotros"
 msgid "Account switch detected! "
 msgstr "¡Cambio de cuenta detectado!"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:25
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:30
 msgid "Account switcher"
 msgstr "selector de cuentas"
 
@@ -369,7 +348,7 @@ msgstr "comportamiento"
 msgid "Actions"
 msgstr "Comportamiento"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:38
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:38
 msgid "Active account is required to create an organization."
 msgstr "Se requiere una cuenta activa para crear una organización."
 
@@ -437,7 +416,7 @@ msgstr "URL de certificación adicional"
 msgid "additional certifications"
 msgstr "certificaciones adicionales"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:267
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:272
 msgid "Additional Certifications"
 msgstr "Certificaciones adicionales"
 
@@ -511,8 +490,8 @@ msgid "Amazon"
 msgstr "Amazonas"
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:125
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:121
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:186
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:178
 msgid "amount"
 msgstr "cantidad"
 
@@ -559,7 +538,7 @@ msgstr "Cantidad ahora disponible en"
 msgid "amount now available in usd"
 msgstr "Cantidad ahora disponible en USD"
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:237
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:304
 msgid "amount of credits"
 msgstr "cantidad de créditos"
 
@@ -570,7 +549,7 @@ msgstr "Cantidad de créditos"
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
 #: src/legacy-pages/BuyCredits/BuyCredits.constants.ts:23
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:308
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:197
 msgid "amount retired"
 msgstr "cantidad retirada"
 
@@ -585,7 +564,7 @@ msgstr "Monto retirado"
 msgid "Amount Retired"
 msgstr "Monto retirado"
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:133
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:197
 msgid "amount sent"
 msgstr "cantidad enviada"
 
@@ -616,13 +595,21 @@ msgstr "Un ecosistema que se considera que enfrenta un <0>alto riesgo de colapso
 msgid "An ecosystem has insufficient data when there is <0>no adequate information to make a direct or indirect assessment</0> of its risk of collapse."
 msgstr "Un ecosistema tiene datos insuficientes cuando <0>no hay información adecuada para hacer una evaluación directa o indirecta</0> de su riesgo de colapso."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:33
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:33
 msgid "An email is required to send you notifications related to your organization."
 msgstr "Se requiere un correo electrónico para enviarle notificaciones relacionadas con su organización."
 
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:40
+msgid "An organization DAO address is required to migrate projects"
+msgstr "Se requiere una dirección DAO de la organización para migrar proyectos."
+
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:39
+msgid "An organization id is required to migrate projects"
+msgstr "Se requiere un ID de organización para migrar proyectos."
+
 #: src/pages/CreateOrganization/CreateOrganization.constants.ts:39
-msgid "An organization is required to migrate projects"
-msgstr "Se requiere que una organización migre proyectos."
+#~ msgid "An organization is required to migrate projects"
+#~ msgstr "Se requiere que una organización migre proyectos."
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:78
 msgid "Anchoring in progress"
@@ -669,8 +656,8 @@ msgstr "¿Está seguro de que desea cambiar este administrador del proyecto?"
 msgid "Are you sure you want to delete this post?"
 msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 
-#: src/lib/constants/shared.constants.tsx:86
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:18
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:18
+#: src/lib/constants/shared.constants.tsx:87
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
 
@@ -738,7 +725,11 @@ msgstr "precio promedio por crédito"
 msgid "back to projects"
 msgstr "volver a proyectos"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:267
+#: src/components/molecules/PlanStepper.tsx:30
+msgid "background"
+msgstr "fondo"
+
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:219
 msgid "Background image"
 msgstr "Imagen de fondo"
 
@@ -751,7 +742,7 @@ msgstr "Información básica"
 msgid "Basic Info"
 msgstr "Información básica"
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:103
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:160
 msgid "basket"
 msgstr "cesta"
 
@@ -865,7 +856,7 @@ msgstr "Las acciones basadas en blockchain, como las compras, solo son posibles 
 msgid "book a call"
 msgstr "Reservar una llamada"
 
-#: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:28
+#: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:31
 msgid "Bridgable ecocredits"
 msgstr "Ecocréditos puenteables"
 
@@ -883,7 +874,7 @@ msgstr "Puente"
 msgid "Bridge Ecocredits to Polygon"
 msgstr "Puente de los ecocréditos al polígono"
 
-#: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:33
+#: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:36
 msgid "Bridged ecocredits"
 msgstr "Ecocréditos puente"
 
@@ -930,7 +921,7 @@ msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:109
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:113
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:115
 msgid "Buy Credits Error"
 msgstr "Error al comprar créditos"
 
@@ -1027,7 +1018,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:37
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:20
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:20
 msgid "CANCEL"
 msgstr "CANCELAR"
 
@@ -1214,17 +1205,17 @@ msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:236
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:237
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:381
 msgid "close"
 msgstr "cerca"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:16
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:16
 msgid "close create organization"
 msgstr "cerrar crear organización"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:30
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:24
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Close menu"
 msgstr "Cerrar menú"
 
@@ -1355,11 +1346,11 @@ msgstr "La conectividad permite el flujo de especies y procesos ecológicos que 
 msgid "Contact"
 msgstr "Contacto"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:34
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:34
 msgid "Contact name is required."
 msgstr "El nombre del contacto es obligatorio."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:169
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:170
 msgid "Contributes minimally"
 msgstr "Contribuye mínimamente"
 
@@ -1395,6 +1386,10 @@ msgstr "Copiar enlace al perfil"
 msgid "Copy link to project page"
 msgstr "Copiar enlace a la página del proyecto"
 
+#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:238
+msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
+msgstr "No se pudo encontrar la organización asociada con la DAO creada. Intente actualizar la página más tarde."
+
 #: src/lib/constants/shared.constants.tsx:59
 #: src/lib/constants/shared.constants.tsx:161
 msgid "Country"
@@ -1408,8 +1403,8 @@ msgstr "País"
 msgid "Create a project without a credit class"
 msgstr "Crear un proyecto sin una clase de crédito"
 
-#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:70
-#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:48
+#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:76
+#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:87
 msgid "create credit batch"
 msgstr "crear lote de credito"
 
@@ -1460,7 +1455,7 @@ msgstr "Crear orden de venta"
 msgid "Created by"
 msgstr "Creado por"
 
-#: src/components/layout/Layout.Header.tsx:110
+#: src/components/layout/Layout.Header.tsx:111
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr "Para crear una organización es necesario firmar una transacción en blockchain. Obtén más información sobre las billeteras en nuestra <0>guía del usuario</0>."
 
@@ -1477,11 +1472,11 @@ msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:121
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:233
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:182
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:171
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:300
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:193
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:193
 msgid "credit batch id"
 msgstr "Identificación del lote de crédito"
 
@@ -1574,7 +1569,7 @@ msgstr "Cronología de clases de créditos"
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito."
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:142
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:147
 msgid "Credit classes"
 msgstr "Clases de crédito"
 
@@ -1588,7 +1583,7 @@ msgstr "Clases de crédito"
 #~ msgid "Credit Details"
 #~ msgstr "Detalles de crédito"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:134
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
 msgid "Credit issuance"
 msgstr "Emisión de crédito"
 
@@ -1798,12 +1793,12 @@ msgstr "URL personalizada"
 msgid "Customer info"
 msgstr "Información del cliente"
 
-#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:37
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:42
 msgid "CW Admin Factory address is not configured."
 msgstr "La dirección de fábrica de administración de CW no está configurada."
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:29
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:25
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:26
 msgid "Dashboard side navigation"
 msgstr "Navegación lateral del panel"
 
@@ -1824,7 +1819,7 @@ msgstr "Publicaciones de datos"
 msgid "Data stream"
 msgstr "Flujo de datos"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:24
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:24
 msgid "Data will be transferred from this profile:"
 msgstr "Los datos se transferirán de este perfil:"
 
@@ -1867,8 +1862,8 @@ msgstr "departamento"
 msgid "description"
 msgstr "descripción"
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:291
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:108
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:244
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
@@ -2068,9 +2063,13 @@ msgstr "Editar mi perfil"
 #~ msgid "Edit my user profile"
 #~ msgstr "Editar mi perfil de usuario"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:102
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:105
 msgid "Edit org profile"
 msgstr "Editar el perfil de la organización"
+
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:15
+msgid "EDIT ORGANIZATION PROFILE"
+msgstr "EDITAR PERFIL DE LA ORGANIZACIÓN"
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:28
 msgid "Edit organization role"
@@ -2139,7 +2138,7 @@ msgstr "Los proyectos elegibles implementan actividades de conservación y/o res
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:32
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:32
 msgid "Email address"
 msgstr "Dirección de correo electrónico"
 
@@ -2155,8 +2154,8 @@ msgstr "¡Correo electrónico reenviado! Por favor, revise su bandeja de entrada
 msgid "end date"
 msgstr "Fecha de finalización"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:221
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:225
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:226
 msgid "End Date"
 msgstr "Fecha de finalización"
 
@@ -2259,7 +2258,7 @@ msgstr "factor"
 msgid "Factor:"
 msgstr "Factor:"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:37
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:37
 msgid "Failed to initialize signing client"
 msgstr "No se pudo inicializar el cliente de firma"
 
@@ -2272,7 +2271,7 @@ msgstr "No se pudo solicitar fondos"
 msgid "Failed to resend passcode"
 msgstr "No se pudo reenviar la contraseña"
 
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:45
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Failed to validate token"
 msgstr "No se pudo validar el token"
 
@@ -2326,7 +2325,7 @@ msgstr "Filtros"
 msgid "find another credit card project"
 msgstr "Encuentra otro proyecto de tarjeta de crédito"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:15
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:15
 msgid "Finish"
 msgstr "Finalizar"
 
@@ -2374,8 +2373,8 @@ msgid "Frequently Asked Questions"
 msgstr "Preguntas frecuentes"
 
 #: src/legacy-pages/Dashboard/Dashboard.tsx:127
-msgid "Function not implemented."
-msgstr "Función no implementada."
+#~ msgid "Function not implemented."
+#~ msgstr "Función no implementada."
 
 #: src/legacy-pages/Faucet/hook/useRequestFunds.tsx:32
 msgid "Funds successfully requested!"
@@ -2477,7 +2476,7 @@ msgstr "Estoy de acuerdo con el"
 #~ msgid "I am interested in buying carbon credits on behalf of:"
 #~ msgstr "Estoy interesado en comprar créditos de carbono en nombre de:"
 
-#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:20
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:21
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
 msgstr "Acabo de compensar mi huella de carbono en #RegenMarketplace con @regen_network. ¡Únete a mí para hacer nuestra parte por la regeneración planetaria!"
 
@@ -2514,7 +2513,7 @@ msgstr "Si no tienes un video para este proyecto, puedes agregar una foto para m
 msgid "If you merge these accounts, you can log in with either your wallet address, email or google  to the same account."
 msgstr "Si fusiona estas cuentas, podrá iniciar sesión con su dirección de billetera, correo electrónico o Google en la misma cuenta."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:19
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:19
 msgid "If you proceed, you will lose all the unsaved changes you made. This cannot be undone."
 msgstr "Si continúa, perderá todos los cambios no guardados. Esta acción no se puede deshacer."
 
@@ -2534,11 +2533,11 @@ msgstr "Si selecciona una de las siguientes opciones, aún podrá compartir la p
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr "Si desmarca esta opción, los compradores podrán optar por mantener los créditos negociables."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:28
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:28
 msgid "If you would like to migrate your personal account projects to your new organization, select the projects below. This is optional."
 msgstr "Si desea migrar los proyectos de su cuenta personal a su nueva organización, seleccione los proyectos a continuación. Esto es opcional."
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:31
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:33
 msgid "If you’d prefer retired credits, please modify your choice on the <0>previous screen.</0>"
 msgstr "Si prefiere créditos retirados, modifique su elección en la <0>pantalla anterior</0>."
 
@@ -2607,7 +2606,7 @@ msgstr "Dirección de polígono no válida"
 msgid "Invalid regen address"
 msgstr "Dirección de regeneración no válida"
 
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:47
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Invalid token"
 msgstr "Token no válido"
 
@@ -2624,12 +2623,12 @@ msgstr "Invitar a colaboradores"
 msgid "Invite Member"
 msgstr "Invitar a un miembro"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:13
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:13
 msgid "Invite Members"
 msgstr "Invitar a miembros"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:35
-#: src/pages/CreateOrganization/steps/InviteMembersStep.tsx:11
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:35
+#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:11
 msgid "Invite teammates to collaborate on your organization."
 msgstr "Invita a tus compañeros de equipo a colaborar en tu organización."
 
@@ -2637,7 +2636,7 @@ msgstr "Invita a tus compañeros de equipo a colaborar en tu organización."
 msgid "Is this member visible on the organization page?"
 msgstr "¿Este miembro es visible en la página de la organización?"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:134
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
 msgid "Issuance"
 msgstr "Emisión"
 
@@ -2649,7 +2648,7 @@ msgstr "Emisión"
 msgid "Issued"
 msgstr "Emitido"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:137
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:142
 msgid "Issued credit batches"
 msgstr "Lotes de créditos emitidos"
 
@@ -2777,10 +2776,6 @@ msgstr "Enlace copiado al portapapeles"
 msgid "Link copied!"
 msgstr "¡Enlace copiado!"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:24
-#: src/pages/CreateOrganization/steps/MigrateProjectsStep.tsx:10
-#~ msgid "Link or migrate existing projects to your organization."
-#~ msgstr "Vincula o migra proyectos existentes a tu organización."
 #~ msgid "Link or migrate existing projects to your organization."
 #~ msgstr "Vincula o migra proyectos existentes a tu organización."
 
@@ -2835,7 +2830,7 @@ msgstr "acceso"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:36
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:50
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:51
 msgid "Log in email successfully added"
 msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
 
@@ -2847,7 +2842,7 @@ msgstr "Inicie sesión para realizar un pago más rápido"
 #~ msgid "Log in with keplr wallet on desktop to setup account"
 #~ msgstr "Inicie sesión con la billetera keplr en el escritorio para configurar la cuenta"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:119
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:124
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr "Finalizar la sesión"
@@ -2998,7 +2993,7 @@ msgstr "El miembro ha sido eliminado de su organización."
 msgid "member not found"
 msgstr "miembro no encontrado"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:107
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:112
 #: src/legacy-pages/Profile/Profile.tsx:113
 msgid "Members"
 msgstr "Miembros"
@@ -3051,15 +3046,15 @@ msgstr "metodología"
 msgid "Migrate project"
 msgstr "Proyecto de migración"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:10
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:10
 msgid "Migrate Projects"
 msgstr "Migrar proyectos"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:11
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:11
 msgid "Migrate Projects from Personal Account"
 msgstr "Migrar proyectos desde la cuenta personal"
 
-#: src/components/organisms/BasketOverview/BasketOverview.tsx:147
+#: src/components/organisms/BasketOverview/BasketOverview.tsx:156
 msgid "min start date"
 msgstr "fecha de inicio mínima"
 
@@ -3135,11 +3130,11 @@ msgstr "Debe tener destinatarios"
 #~ msgid "My prefinance projects"
 #~ msgstr "Mis proyectos de prefinanciamiento"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:239
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:188
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:31
-#: src/pages/ProjectReview/ProjectReview.tsx:202
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:203
 msgid "Name"
 msgstr "Nombre"
 
@@ -3232,7 +3227,7 @@ msgstr "No hay ecocréditos para mostrar"
 msgid "No matching results found"
 msgstr "No se encontraron resultados coincidentes"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:22
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:30
 msgid "No open sell orders"
 msgstr "No hay órdenes de venta abiertas"
 
@@ -3284,11 +3279,11 @@ msgstr "Nota: todos los datos de ubicación pueden hacerse privados en el formul
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr "NOTA: Como las publicaciones están ancladas a la cadena de bloques, no se pueden editar una vez publicadas."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:29
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:29
 msgid "Note: Migrating a project will also migrate all of its tradable credits and active sell orders."
 msgstr "Nota: Al migrar un proyecto, también se migrarán todos sus créditos negociables y órdenes de venta activas."
 
-#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:82
+#: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:83
 msgid "NOTE: Only project page creation and user profile creation available with email / social log in."
 msgstr "NOTA: Solo la creación de páginas de proyecto y la creación de perfiles de usuario están disponibles con inicio de sesión por correo electrónico o red social."
 
@@ -3330,12 +3325,12 @@ msgid "Oops! Page not found."
 msgstr "¡Ups! Página no encontrada."
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader.tsx:41
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:23
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:24
 msgid "Open menu"
 msgstr "Abrir menú"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:50
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
 msgid "Open sell orders"
 msgstr "Órdenes de venta abiertas"
 
@@ -3367,13 +3362,13 @@ msgstr "Resumen del pedido"
 #~ msgid "orders"
 #~ msgstr "órdenes"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:153
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:153
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:156
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:161
 msgid "Orders"
 msgstr "Pedidos"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:99
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
 msgid "Org"
 msgstr "Organización"
 
@@ -3389,6 +3384,10 @@ msgstr "Organización"
 msgid "Organization dashboard"
 msgstr "Panel de control de la organización"
 
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:21
+msgid "Organization Dashboard"
+msgstr "Panel de control de la organización"
+
 #: src/components/organisms/Collaborators/Collaborators.constants.tsx:4
 #~ msgid "organization member settings"
 #~ msgstr "configuración de miembros de la organización"
@@ -3401,8 +3400,7 @@ msgstr "Miembros de la organización"
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr "Los miembros de la organización tienen permisos para todos los proyectos asociados con una organización."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:27
-#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:27
 msgid "Organization Name"
 msgstr "Nombre de la organización"
 
@@ -3410,7 +3408,7 @@ msgstr "Nombre de la organización"
 msgid "Organization profile"
 msgstr "Perfil de la organización"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:9
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:9
 msgid "Organization Profile"
 msgstr "Perfil de la organización"
 
@@ -3483,7 +3481,7 @@ msgstr "Panel de control personal"
 msgid "Personal Dashboard"
 msgstr "Panel personal"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:12
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:12
 msgid "Personal Info"
 msgstr "Información personal"
 
@@ -3523,7 +3521,7 @@ msgstr "Por favor seleccione un estado"
 msgid "Please confirm your email address"
 msgstr "Por favor, confirme su dirección de correo electrónico"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:40
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:41
 msgid "Please confirm your email to continue."
 msgstr "Confirma tu correo electrónico para continuar."
 
@@ -3628,7 +3626,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 msgid "Portfolio"
 msgstr "Cartera"
 
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:22
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:23
 msgid "Portfolio tabs"
 msgstr "Pestañas de cartera"
 
@@ -3730,8 +3728,8 @@ msgstr "PRECIO (USD)"
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen términos específicos, haga clic en el proyecto para obtener más información."
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:89
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:150
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:255
 msgid "price per credit"
 msgstr "precio por crédito"
 
@@ -3788,7 +3786,7 @@ msgstr "Perfil"
 #~ msgid "profile banner"
 #~ msgstr "Banner de perfil"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:249
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:198
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr "Imagen de perfil"
@@ -3821,12 +3819,12 @@ msgstr "Guía del programa"
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:114
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:175
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:300
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:226
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:164
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:293
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:184
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:184
 msgid "project"
 msgstr "proyecto"
 
@@ -3837,7 +3835,7 @@ msgstr "proyecto"
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:133
 #: src/components/organisms/EcocreditsTable.tsx:83
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:194
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:87
 #: src/legacy-pages/Certificate/Certificate.constants.ts:14
 #: src/legacy-pages/Certificate/Certificate.utils.ts:37
@@ -4024,7 +4022,7 @@ msgstr "Los proyectos deben tener una duración de al menos 20 años para garant
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:30
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:30
 msgid "Provide personal contact information for this organization."
 msgstr "Proporcione información de contacto personal para esta organización."
 
@@ -4053,7 +4051,7 @@ msgid "PURCHASE OPTIONS"
 msgstr "OPCIONES DE COMPRA"
 
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:3
-#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:15
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:16
 #: src/lib/constants/shared.constants.tsx:32
 msgid "Put in basket"
 msgstr "Poner en la cesta"
@@ -4504,7 +4502,7 @@ msgid "SELLER"
 msgstr "VENDEDOR"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:219
-#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:19
 msgid "Send"
 msgstr "Enviar"
 
@@ -4608,7 +4606,7 @@ msgstr "Tamaño"
 msgid "Size in hectares or acres"
 msgstr "Tamaño en hectáreas o acres"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:25
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:25
 msgid "SKIP"
 msgstr "SALTAR"
 
@@ -4641,7 +4639,7 @@ msgstr "Índice social y cultural"
 msgid "Sold Out"
 msgstr "Agotado"
 
-#: src/pages/CreateOrganization/steps/OrganizationProfileStep.tsx:171
+#: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:184
 msgid "Something went wrong while creating the organization."
 msgstr "Algo salió mal al crear la organización."
 
@@ -4695,8 +4693,8 @@ msgstr "Fecha de inicio y de fin"
 msgid "start date"
 msgstr "Fecha de inicio"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:210
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:211
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:215
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:216
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
@@ -4782,7 +4780,7 @@ msgstr "Suscríbete al boletín de Regen Network, que incluye actualizaciones de
 #~ msgid "Successfully copied!"
 #~ msgstr "¡Copiado exitosamente!"
 
-#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:62
+#: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:67
 msgid "Successfully issued credit batches"
 msgstr "Lotes de créditos emitidos con éxito"
 
@@ -4803,7 +4801,7 @@ msgid "take from basket"
 msgstr "tomar de la cesta"
 
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:5
-#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:16
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:17
 msgid "Take from basket"
 msgstr "Tomar de la cesta"
 
@@ -4895,7 +4893,7 @@ msgstr "La dirección actual ya está vinculada a tu cuenta. Primero, cambia la 
 #~ msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 #~ msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:231
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:236
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr "Las fechas deben corresponder al período de seguimiento del lote o añada."
 
@@ -4910,6 +4908,10 @@ msgstr "La persona u organización que está a cargo de administrar el proyecto 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:194
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
+
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:259
+msgid "The organization profile has been updated on-chain but hasn't been indexed yet. Please reload the page in a few moments to see the changes."
+msgstr "El perfil de la organización se ha actualizado en la cadena de bloques, pero aún no se ha indexado. Recargue la página en unos instantes para ver los cambios."
 
 #: src/lib/constants/shared.constants.tsx:110
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
@@ -5102,7 +5104,7 @@ msgstr "Esta dirección de billetera ya está en uso en otra cuenta. ¿Quieres f
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:145
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:146
 msgid "Timed out waiting for project DAOs to be indexed."
 msgstr "Se agotó el tiempo de espera para que se indexaran los DAO del proyecto."
 
@@ -5127,7 +5129,7 @@ msgstr "Título"
 msgid "Toggle project options"
 msgstr "Alternar opciones del proyecto"
 
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:48
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:49
 msgid "Token expired"
 msgstr "Token caducado"
 
@@ -5226,7 +5228,11 @@ msgstr "Comercio"
 msgid "Traditional grazing"
 msgstr "Pastoreo tradicional"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:22
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:132
+msgid "Transaction signing failed"
+msgstr "Falló la firma de la transacción."
+
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:22
 msgid "Transfer organization profile data from your personal account to your new organization profile?"
 msgstr "¿Transferir datos del perfil de la organización desde su cuenta personal a su nuevo perfil de la organización?"
 
@@ -5272,7 +5278,7 @@ msgstr "Escriba una dirección o coordenadas de latitud y longitud en formato de
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:70
-#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:28
+#: src/legacy-pages/Dashboard/Dashboard.constants.tsx:29
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -5305,11 +5311,15 @@ msgstr "Actualizar detalles de la imagen"
 msgid "Update project metadata"
 msgstr "Actualizar metadatos del proyecto"
 
-#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:206
+#. placeholder {0}: selectedCardSellOrders[idx].id
+#. placeholder {1}: result.reason
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:209
 msgid "Updating Card Order {0} failed: {1}"
 msgstr "Error al actualizar el pedido de la tarjeta {0}: {1}"
 
-#: src/pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:169
+#. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
+#. placeholder {1}: result.reason
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:170
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr "Error al actualizar el proyecto fuera de la cadena {0}: {1}"
 
@@ -5350,7 +5360,7 @@ msgstr "Utilice su cuenta social para iniciar sesión en Regen Marketplace."
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr "useMultiStep debe usarse dentro de un MultiStepProvider"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:14
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:14
 msgid "User"
 msgstr "Usuario"
 
@@ -5402,7 +5412,7 @@ msgstr "tipo de proyecto vcs"
 msgid "vcs retirement serial number"
 msgstr "Número de serie de retiro de VCS"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:239
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:244
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:94
 msgid "VCS retirement serial number"
 msgstr "Número de serie de retiro de VCS"
@@ -5515,7 +5525,7 @@ msgstr "ver publicación"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:108
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:123
 msgid "View public profile"
 msgstr "Ver perfil público"
 
@@ -5613,6 +5623,10 @@ msgstr "Vulnerable"
 msgid "Wallet integration"
 msgstr "Integración de billetera"
 
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:76
+msgid "Wallet not connected."
+msgstr "Monedero no conectado."
+
 #: src/components/organisms/MediaSection.tsx:36
 msgid "watch video"
 msgstr "ver video"
@@ -5708,7 +5722,7 @@ msgstr "Sí, eliminar"
 msgid "yes, discard"
 msgstr "Sí, descartar"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:21
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:21
 msgid "YES, DISCARD"
 msgstr "SÍ, DESECHAR"
 
@@ -5736,11 +5750,11 @@ msgstr "Sí, eliminar"
 msgid "yes, remove & connect"
 msgstr "Sí, quitar y conectar"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:26
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:26
 msgid "YES, TRANSFER PROFILE"
 msgstr "SÍ, TRANSFERIR PERFIL"
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:17
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:17
 msgid "You already belong to an organization. Please manage your existing organization from your dashboard."
 msgstr "Ya perteneces a una organización. Gestiona tu organización actual desde tu panel de control."
 
@@ -5768,7 +5782,7 @@ msgstr "Puede agregar aquí el nombre de la organización o persona en cuyo nomb
 msgid "You can customize the project page url below."
 msgstr "Puede personalizar la URL de la página del proyecto a continuación."
 
-#: src/pages/CreateOrganization/CreateOrganization.constants.ts:23
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:23
 msgid "You can edit this profile data on the next step."
 msgstr "Puede editar estos datos de perfil en el siguiente paso."
 
@@ -5800,6 +5814,20 @@ msgstr "No tienes ninguna ficha de canasta NCT."
 msgid "You do not have any tradable credits to sell from this project."
 msgstr "No tienes créditos comercializables para vender de este proyecto."
 
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:87
+msgid "You do not have permission to edit this organization."
+msgstr "No tienes permiso para editar esta organización."
+
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:101
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:107
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:99
+msgid "You do not have permission to manage credits."
+msgstr "No tienes permiso para gestionar créditos."
+
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:110
+msgid "You do not have permission to manage sell orders."
+msgstr "No tienes permiso para gestionar órdenes de venta."
+
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:7
 msgid "You don’t have enough"
 msgstr "No tienes suficiente"
@@ -5820,7 +5848,7 @@ msgstr "Ingresaste:"
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:63
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:73
 msgid "You have no tradable credits that can be sold."
 msgstr "No tienes créditos negociables que se puedan vender."
 
@@ -5888,7 +5916,7 @@ msgstr "Cambió de cuenta en Keplr, por lo que su cuenta en Regen Marketplace ta
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
 msgstr "No podrás emitir créditos con esta opción a menos que posteriormente registres este proyecto con una clase de crédito."
 
-#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:17
+#: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
 msgid "You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
 msgstr "Recibirás un ecocrédito por cada ficha de cesta que canjees. Los lotes más antiguos se retirarán primero."
 

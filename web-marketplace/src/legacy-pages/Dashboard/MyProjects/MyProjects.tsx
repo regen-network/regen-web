@@ -10,7 +10,6 @@ import { Grid } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { projectsDraftState } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
-import { useRouter } from 'next/navigation';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -38,7 +37,7 @@ import {
 
 const MyProjects = (): JSX.Element => {
   const { _ } = useLingui();
-  const router = useRouter();
+  const navigate = useNavigate();
   const location = useLocation();
   const {
     isIssuer,
@@ -96,9 +95,9 @@ const MyProjects = (): JSX.Element => {
             isFirstProject={isFirstProject}
             onClick={() => {
               if (isIssuer) {
-                router.push(`/project-pages/${DRAFT_ID}/choose-credit-class`);
+                navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
               } else {
-                router.push(`/project-pages/${DRAFT_ID}/basic-info`);
+                navigate(`/project-pages/${DRAFT_ID}/basic-info`);
               }
             }}
             sx={{ height: { xs: '100%' } }}

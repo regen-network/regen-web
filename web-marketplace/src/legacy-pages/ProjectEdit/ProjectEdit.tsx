@@ -2,6 +2,7 @@ import {
   createContext,
   MutableRefObject,
   useContext,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -92,7 +93,7 @@ function ProjectEdit(): JSX.Element {
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { wallet } = useWallet();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const section = usePathSection();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<

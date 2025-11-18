@@ -9,7 +9,7 @@ import {
   getMsgExecuteContract,
 } from 'utils/cosmwasm';
 
-import { CreateBatchOrganizationContext } from 'types/ledger/batch';
+import { CreateBatchOrganizationContext } from 'types/ledger/ecocredit';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
   CFCBatchMetadataLD,

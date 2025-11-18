@@ -18,8 +18,8 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
 // import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
-import { Title } from 'web-components/src/components/typography/Title';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { Title } from 'web-components/src/components/typography/Title';
 
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 

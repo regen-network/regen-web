@@ -1,10 +1,12 @@
 import { useLingui } from '@lingui/react';
+import { OrganizationMultiStepData } from 'legacy-pages/CreateOrganization/hooks/useOrganizationFlow';
 
 import { Body } from 'web-components/src/components/typography';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
   CREATE_ORG_MIGRATE_PROJECTS_DESCRIPTION,
@@ -24,8 +26,13 @@ export const MigrateProjectsStep = ({
   formRef,
 }: MigrateStepsStepProps) => {
   const { _ } = useLingui();
+  const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
 
-  const { migrateProjects } = useMigrateProjects(projects);
+  const { migrateProjects } = useMigrateProjects(
+    projects,
+    handleSaveNext,
+    data,
+  );
 
   return (
     <div>

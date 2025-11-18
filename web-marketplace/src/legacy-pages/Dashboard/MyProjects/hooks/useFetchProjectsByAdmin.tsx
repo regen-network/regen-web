@@ -8,6 +8,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useProfileData } from 'legacy-pages/Profile/hooks/useProfileData';
 
+import { ProjectFieldsFragment } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
@@ -18,15 +19,14 @@ import {
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
+import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQueryByAccountId.ts/getAssignmentsWithProjectQueryByAccountId';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
-import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQueryByAccountId.ts/getAssignmentsWithProjectQueryByAccountId';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { ProjectFieldsFragment } from 'generated/graphql';
 
 type Params = {
   keepUnpublished?: boolean;

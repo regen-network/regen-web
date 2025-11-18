@@ -1,33 +1,33 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { useAtom } from 'jotai';
+import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 
-//import { useAuth } from 'lib/auth/auth';
-//import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 
 import { useFetchProject } from './hooks/useFetchProject';
+import { useAuth } from 'lib/auth/auth';
 
 const ManageProject = (): JSX.Element => {
   const { projectId } = useParams<{ projectId: string }>();
   const { _ } = useLingui();
   const location = useLocation();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-
+  const { activeAccountId } = useAuth();
   const { project, isLoading } = useFetchProject();
-  console.log('project in ManageProject', project);
-  // Ucomment code when project banner is being implemented
-  // const { activeAccountId, activeAccount } = useAuth();
-  // const { wallet, loginDisabled } = useWallet();
+
   const canEditProject = true; // TODO
+  const canCreatePost = true; // TODO
+  const createPostDisabled =
+    !activeAccountId || project.draft || !project.location;
 
   const [postProjectId, setPostProjectId] = useState<string | undefined>();
   const [postOffChainProjectId, setPostOffChainProjectId] = useState<
@@ -73,10 +73,35 @@ const ManageProject = (): JSX.Element => {
     [tabs, location.pathname],
   );
 
+  const { migrateProjects } = useMigrateProjects([project]);
+
+  const migrateProject = useCallback(async () => {
+    await migrateProjects({
+      selectedProjectIds: [project.id],
+    });
+  }, [migrateProjects, project.id]);
+
   return (
     <>
       {project && (
-        <ProjectDashboardBanner project={project} canEdit={canEditProject} />
+        <ProjectDashboardBanner
+          project={project}
+          canEdit={canEditProject}
+          canCreatePost={canCreatePost}
+          onCreatePost={() => {
+            setPostProjectId(project.id);
+            setPostOffChainProjectId(project.offChainId);
+            setPostProjectName(project.name);
+            setPostProjectSlug(project.slug);
+          }}
+          createPostTooltipText={
+            loginDisabled
+              ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
+              : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
+          }
+          // We need an offchain ID to migrate
+          migrateProject={project.offChainId ? migrateProject : undefined}
+        />
       )}
 
       {/* Tabs section */}
@@ -92,7 +117,7 @@ const ManageProject = (): JSX.Element => {
 
       {/* Content section */}
       <div className="p-30 border border-bc-neutral-300 border-solid rounded-lg bg-bc-neutral-0">
-        <Outlet />
+        <Outlet context={{ project, isLoading }} />
       </div>
 
       {postProjectId && (

@@ -9,7 +9,6 @@ import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
-import { useSetAtom } from 'jotai';
 import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
 import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
@@ -24,7 +23,6 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
   REQUIRED_MESSAGE,
@@ -90,8 +88,6 @@ const EditProfileForm = ({
     defaultValues: initialValues,
     mode: validationMode,
   });
-
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const { isSubmitting, errors, isDirty, isValid, touchedFields, isSubmitted } =
     useFormState({
@@ -183,12 +179,7 @@ const EditProfileForm = ({
           requiredMessage: _(REQUIRED_MESSAGE),
         });
         if (!hasError) {
-          try {
-            await onSubmit(data);
-            onSuccess && onSuccess();
-          } catch (e) {
-            setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
-          }
+          await onSubmit(data);
         }
       }}
     >

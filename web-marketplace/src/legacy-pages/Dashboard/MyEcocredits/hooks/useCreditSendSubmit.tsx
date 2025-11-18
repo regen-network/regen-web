@@ -55,8 +55,12 @@ const useCreditSendSubmit = ({
   const { _ } = useLingui();
   const { track } = useTracker();
   const { wallet } = useWallet();
-  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
-    useDashboardContext();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
     getRoleAuthorizationIds({
@@ -138,6 +142,9 @@ const useCreditSendSubmit = ({
       const tx = {
         msgs: [finalMsg],
         fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
+        feeGranter: isOrganizationDashboard
+          ? organizationDaoAddress
+          : undefined,
       };
 
       const batchInfo = credits[creditSendOpen];
@@ -201,22 +208,23 @@ const useCreditSendSubmit = ({
       }
     },
     [
-      _,
-      accountAddress,
-      creditSendOpen,
-      creditSendTitle,
       credits,
-      isOrganizationDashboard,
-      organizationRbamAddress,
-      roleId,
-      setCardItems,
-      setCreditSendOpen,
-      setTxModalHeader,
-      setTxModalTitle,
-      signAndBroadcast,
+      creditSendOpen,
       track,
+      accountAddress,
+      isOrganizationDashboard,
+      organizationDaoAddress,
+      signAndBroadcast,
+      roleId,
+      organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,
+      _,
+      setCreditSendOpen,
+      setCardItems,
+      setTxModalHeader,
+      setTxModalTitle,
+      creditSendTitle,
     ],
   );
 

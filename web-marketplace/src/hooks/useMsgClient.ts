@@ -35,6 +35,7 @@ interface TxData {
   msgs: readonly EncodeObject[];
   fee?: StdFee | 'auto' | number;
   memo?: string;
+  feeGranter?: string;
 }
 
 interface OptionalCallbacks {
@@ -79,7 +80,7 @@ export default function useMsgClient(
       if (!signingCosmWasmClient || !wallet?.address) {
         return;
       }
-      const { msgs, fee: txFee, memo } = tx;
+      const { msgs, fee: txFee, memo, feeGranter } = tx;
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
@@ -95,22 +96,31 @@ export default function useMsgClient(
         fee = txFee ?? defaultFee;
       }
 
-      const userRegenBalanceRes = await getFromCacheOrFetch({
-        query: getBalanceQuery({
-          request: { address: wallet?.address as string, denom: REGEN_DENOM },
-          client: queryClient,
-          enabled: !!queryClient && !!wallet?.address,
-        }),
-        reactQueryClient: reactQueryClient,
-      });
-      const userRegenBalance = userRegenBalanceRes?.balance;
+      // If feeGranter is provided, add it to the fee structure
+      if (feeGranter) {
+        fee = { ...fee, granter: feeGranter };
+      }
 
-      if (
-        userRegenBalance === undefined ||
-        Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
-      ) {
-        setErrorCodeAtom(ERRORS.NOT_ENOUGH_REGEN_FEES);
-        return;
+      // Only check user balance if no fee granter is provided
+      // When a granter is provided, the granter (DAO) pays the fees instead of the user
+      if (!feeGranter) {
+        const userRegenBalanceRes = await getFromCacheOrFetch({
+          query: getBalanceQuery({
+            request: { address: wallet?.address as string, denom: REGEN_DENOM },
+            client: queryClient,
+            enabled: !!queryClient && !!wallet?.address,
+          }),
+          reactQueryClient: reactQueryClient,
+        });
+        const userRegenBalance = userRegenBalanceRes?.balance;
+
+        if (
+          userRegenBalance === undefined ||
+          Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
+        ) {
+          setErrorCodeAtom(ERRORS.NOT_ENOUGH_REGEN_FEES);
+          return;
+        }
       }
 
       setIsWaitingForSigning(true);

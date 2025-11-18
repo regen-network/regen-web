@@ -62,8 +62,12 @@ const useCreditRetireSubmit = ({
   const { track } = useTracker();
   const { wallet } = useWallet();
   const reactQueryClient = useQueryClient();
-  const { isOrganizationDashboard, organizationRole, organizationRbamAddress } =
-    useDashboardContext();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
     getRoleAuthorizationIds({
@@ -141,6 +145,9 @@ const useCreditRetireSubmit = ({
       const tx = {
         msgs: [finalMsg],
         fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
+        feeGranter: isOrganizationDashboard
+          ? organizationDaoAddress
+          : undefined,
       };
 
       const onError = (err?: Error): void => {
@@ -202,19 +209,20 @@ const useCreditRetireSubmit = ({
       track,
       accountAddress,
       isOrganizationDashboard,
+      organizationDaoAddress,
+      signAndBroadcast,
       roleId,
       organizationRbamAddress,
       wallet?.address,
-      signAndBroadcast,
+      manageCreditsAuthId,
+      _,
+      reactQueryClient,
       setCreditRetireOpen,
       setCardItems,
-      _,
       setTxModalHeader,
       setTxModalTitle,
       creditRetireTitle,
       setTxButtonTitle,
-      reactQueryClient,
-      manageCreditsAuthId,
     ],
   );
 

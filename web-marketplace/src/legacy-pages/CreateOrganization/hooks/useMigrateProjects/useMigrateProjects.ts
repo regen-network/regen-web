@@ -50,7 +50,6 @@ import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry
 import { useWallet } from 'lib/wallet/wallet';
 
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { orgRoles } from 'hooks/org-members/constants';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient from 'hooks/useMsgClient';
@@ -68,12 +67,15 @@ import {
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
 import { getSelectedCardSellOrdersWithNewIds } from './useMigrateProjects.utils';
 
-export const useMigrateProjects = (projects: NormalizeProject[]) => {
+export const useMigrateProjects = (
+  projects: NormalizeProject[],
+  handleSaveNext?: (formValues: OrganizationMultiStepData) => void,
+  data?: OrganizationMultiStepData,
+) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { queryClient, signingCosmWasmClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
@@ -256,7 +258,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
         setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
         return;
       }
-      const organizationId = data.dao?.organizationId;
+      const organizationId = dao?.organizationByDaoAddress?.id;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
         return;
@@ -504,7 +506,8 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
               }
 
               await reloadData();
-              handleSaveNext({ ...data, ...values });
+              if (handleSaveNext && data)
+                handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
             },
             onError: error => {
@@ -514,7 +517,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           },
         );
-      } else handleSaveNext({ ...data, ...values });
+      } else if (handleSaveNext && data) handleSaveNext({ ...data, ...values });
     },
     [
       projects,

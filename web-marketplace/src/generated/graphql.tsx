@@ -6773,12 +6773,12 @@ export type Organization = Node & {
   updatedAt: Scalars['Datetime'];
   legalName: Scalars['String'];
   daoAddress: Scalars['String'];
-  name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   linkedinLink?: Maybe<Scalars['String']>;
   /** Reads a single `Dao` that is related to this `Organization`. */
   daoByDaoAddress?: Maybe<Dao>;
@@ -6812,8 +6812,6 @@ export type OrganizationCondition = {
   legalName?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `daoAddress` field. */
   daoAddress?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
@@ -6824,6 +6822,8 @@ export type OrganizationCondition = {
   twitterLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `websiteLink` field. */
   websiteLink?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `linkedinLink` field. */
   linkedinLink?: Maybe<Scalars['String']>;
 };
@@ -6835,12 +6835,12 @@ export type OrganizationInput = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   legalName?: Maybe<Scalars['String']>;
   daoAddress: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   linkedinLink?: Maybe<Scalars['String']>;
 };
 
@@ -6851,12 +6851,12 @@ export type OrganizationPatch = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   legalName?: Maybe<Scalars['String']>;
   daoAddress?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   linkedinLink?: Maybe<Scalars['String']>;
 };
 
@@ -6970,8 +6970,6 @@ export enum OrganizationsOrderBy {
   LegalNameDesc = 'LEGAL_NAME_DESC',
   DaoAddressAsc = 'DAO_ADDRESS_ASC',
   DaoAddressDesc = 'DAO_ADDRESS_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
@@ -6982,6 +6980,8 @@ export enum OrganizationsOrderBy {
   TwitterLinkDesc = 'TWITTER_LINK_DESC',
   WebsiteLinkAsc = 'WEBSITE_LINK_ASC',
   WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
   LinkedinLinkAsc = 'LINKEDIN_LINK_ASC',
   LinkedinLinkDesc = 'LINKEDIN_LINK_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -11360,6 +11360,9 @@ export type AccountByIdQuery = (
         & { organizationByDaoAddress?: Maybe<(
           { __typename?: 'Organization' }
           & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
+        )>, projectByAdminDaoAddress?: Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id'>
         )>, accountsByAssignmentDaoAddressAndAccountId: (
           { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
           & { nodes: Array<Maybe<(
@@ -11806,7 +11809,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'adminAccountId' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
+  & Pick<Project, 'id' | 'adminAccountId' | 'adminDaoAddress' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { accountByAdminAccountId?: Maybe<(
     { __typename?: 'Account' }
     & AccountFieldsFragment
@@ -12023,6 +12026,7 @@ export const ProjectFieldsFragmentDoc = gql`
   accountByAdminAccountId {
     ...accountFields
   }
+  adminDaoAddress
   onChainId
   metadata
   approved
@@ -12243,6 +12247,9 @@ export const AccountByIdDocument = gql`
           bgImage
           websiteLink
           twitterLink
+        }
+        projectByAdminDaoAddress {
+          id
         }
         accountsByAssignmentDaoAddressAndAccountId(orderBy: $daoAccountsOrderBy) {
           nodes {

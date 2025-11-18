@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { projectsDraftState } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
+import { useRouter } from 'next/navigation';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
-
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
+
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -19,9 +20,9 @@ import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 import {
   DRAFT_ID,
+  MANAGE_PROJECT_BUTTON_TEXT,
   MY_PROJECTS_BUTTON_TEXT,
   MY_PROJECTS_EMPTY_TITLE,
-  MANAGE_PROJECT_BUTTON_TEXT,
 } from './MyProjects.constants';
 import {
   getDefaultProject,
@@ -30,7 +31,7 @@ import {
 
 const MyProjects = (): JSX.Element => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
+  const router = useRouter();
   const location = useLocation();
   const { isIssuer, isProjectAdmin, sanityProfilePageData } =
     useDashboardContext();
@@ -64,9 +65,9 @@ const MyProjects = (): JSX.Element => {
             isFirstProject={isFirstProject}
             onClick={() => {
               if (isIssuer) {
-                navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
+                router.push(`/project-pages/${DRAFT_ID}/choose-credit-class`);
               } else {
-                navigate(`/project-pages/${DRAFT_ID}/basic-info`);
+                router.push(`/project-pages/${DRAFT_ID}/basic-info`);
               }
             }}
             sx={{ height: { xs: '100%' } }}
@@ -94,7 +95,7 @@ const MyProjects = (): JSX.Element => {
                   }}
                   onButtonClick={() => {
                     // Navigate to new manage project page
-                    navigate(`/dashboard/projects/${project.id}/manage`);
+                    router.push(`/dashboard/projects/${project.id}/manage`);
                   }}
                   track={track}
                   pathname={location.pathname}

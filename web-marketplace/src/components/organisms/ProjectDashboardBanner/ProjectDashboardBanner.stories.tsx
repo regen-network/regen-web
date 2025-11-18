@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
 import ProjectDashboardBanner from './ProjectDashboardBanner';
@@ -38,4 +39,7 @@ export const Default = (args: ProjectBannerProps) => (
 Default.args = {
   project: exampleProject,
   canEdit: true,
+  canCreatePost: true,
+  onCreatePost: action('Create Post Clicked'),
+  migrateProject: action('Migrate Project Clicked'),
 };

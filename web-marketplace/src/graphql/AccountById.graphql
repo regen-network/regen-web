@@ -46,6 +46,9 @@ query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
           websiteLink
           twitterLink
         }
+        projectByAdminDaoAddress {
+          id
+        }
         accountsByAssignmentDaoAddressAndAccountId(
           orderBy: $daoAccountsOrderBy
         ) {

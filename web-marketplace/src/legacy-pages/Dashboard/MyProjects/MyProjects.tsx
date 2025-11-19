@@ -43,6 +43,8 @@ const MyProjects = (): JSX.Element => {
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
     keepUnpublished: true,
   });
+  console.log('adminProjects', adminProjects);
+  console.log('isLoadingAdminProjects', isLoadingAdminProjects);
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
 

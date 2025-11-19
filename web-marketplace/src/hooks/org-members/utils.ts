@@ -530,7 +530,7 @@ const revokeAction = ({
 });
 
 type FindNewAssignmentParams = {
-  data?: AccountByIdQuery;
+  data?: AccountByIdQuery | null;
   daoAddress?: string;
   accountId: string;
   roleName: string;

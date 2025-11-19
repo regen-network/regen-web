@@ -28,13 +28,13 @@ import { Member } from 'components/organisms/OrganizationMembers/OrganizationMem
 import { useUpdateMembers } from 'hooks/org-members';
 
 import { useSaveProfile } from '../hooks/useSaveProfile';
-
+import { useLedger } from 'ledger';
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
-
+  const { signingCosmWasmClient } = useLedger();
   const { activeAccountId } = useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;

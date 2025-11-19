@@ -23,14 +23,11 @@ import {
   ROLE_VIEWER_LABEL,
 } from './OrganizationMembers.constants';
 
-export const getRoleItems = (_: TranslatorType) =>
-  [
-    {
-      key: ROLE_OWNER,
-      label: _(ROLE_OWNER_LABEL),
-      Icon: OwnerIcon,
-      description: _(ROLE_OWNER_DESCRIPTION),
-    },
+export const getRoleItems = (
+  _: TranslatorType,
+  hideOwnerOption: boolean = false,
+) => {
+  const items = [
     {
       key: ROLE_ADMIN,
       label: _(ROLE_ADMIN_LABEL),
@@ -50,3 +47,13 @@ export const getRoleItems = (_: TranslatorType) =>
       description: _(ROLE_VIEWER_DESCRIPTION),
     },
   ] as RoleOption[];
+  if (!hideOwnerOption) {
+    items.unshift({
+      key: ROLE_OWNER,
+      label: _(ROLE_OWNER_LABEL),
+      Icon: OwnerIcon,
+      description: _(ROLE_OWNER_DESCRIPTION),
+    });
+  }
+  return items;
+};

@@ -123,10 +123,11 @@ export function useRemoveMember(params: MembersHookParams) {
               query: getAssignedQuery({
                 client: signingCosmWasmClient,
                 addr: memberAddress,
-                roleId: assignment.onChainRoleId,
-                daoRbamAddress,
+                roleId: parseInt(assignment.onChainRoleId),
+                daoRbamAddress: projectDao.daoRbamAddress,
               }),
             });
+
             const assigned = assignedRes?.assigned;
             if (!assigned && project.projectByProjectId?.adminDaoAddress) {
               offchainProjectAssignmentsToDelete.push({
@@ -161,6 +162,7 @@ export function useRemoveMember(params: MembersHookParams) {
           orgExecuteInstruction,
           ...projectExecuteInstructions,
         ].filter(Boolean) as ExecuteInstruction[];
+
         if (executions.length > 0) {
           await signingCosmWasmClient.executeMultiple(
             wallet.address,

@@ -1,4 +1,4 @@
-import { BANK_BALANCE_KEY } from './getBalanceQuery.constants';
+import { getBalanceQueryKey } from './getBalanceQuery.utils';
 import {
   ReactQueryBalanceProps,
   ReactQueryBalanceResponse,
@@ -9,7 +9,7 @@ export const getBalanceQuery = ({
   request,
   ...params
 }: ReactQueryBalanceProps): ReactQueryBalanceResponse => ({
-  queryKey: [BANK_BALANCE_KEY, request.address, request.denom],
+  queryKey: getBalanceQueryKey(request),
   queryFn: async () => {
     if (!client || !request.address || !request.denom) return null;
     return await client.cosmos.bank.v1beta1.balance(request);

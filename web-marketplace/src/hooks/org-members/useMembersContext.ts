@@ -7,6 +7,7 @@ import {
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom, useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
@@ -15,11 +16,15 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { getBalanceQueryKey } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.utils';
+import { GET_ASSIGNED_KEY } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getOrganizationProjectsByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams, RefetchMembersParams } from './types';
@@ -40,6 +45,7 @@ export function useMembersContext(params: MembersHookParams) {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const { wallet } = useWallet();
 
   // Data needed for computed values
   const { data: orgData } = useQuery(
@@ -102,7 +108,7 @@ export function useMembersContext(params: MembersHookParams) {
       let stop = false;
       let i = 0;
       // wait for the assignment change(s) to be indexed in the db
-      while (!stop && i < 10) {
+      while (!stop && i < 15) {
         if (!accountId) {
           // fetch new member account
           const accRes = await getFromCacheOrFetch({
@@ -161,6 +167,23 @@ export function useMembersContext(params: MembersHookParams) {
             msg`Could not refetch assignments, you might need to reload the page later`,
           ),
         );
+      } else {
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+            daoAddress,
+          }),
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: [GET_ASSIGNED_KEY, address],
+        });
+        if (wallet?.address)
+          // Invalidate balance query for SendRegenModal
+          await reactQueryClient.invalidateQueries({
+            queryKey: getBalanceQueryKey({
+              address: wallet?.address,
+              denom: REGEN_DENOM,
+            }),
+          });
       }
     },
     [
@@ -175,6 +198,7 @@ export function useMembersContext(params: MembersHookParams) {
       setErrorBannerText,
       activeAccountId,
       params.daoAccountsOrderBy,
+      wallet?.address,
     ],
   );
 

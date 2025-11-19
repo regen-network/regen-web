@@ -231,8 +231,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
               query: getAssignedQuery({
                 client: signingCosmWasmClient,
                 addr: memberAddress,
-                roleId: oldRoleId,
-                daoRbamAddress,
+                roleId: parseInt(oldAssignment.onChainRoleId),
+                daoRbamAddress: projectDao.daoRbamAddress,
               }),
             });
             const assigned = assignedRes?.assigned;

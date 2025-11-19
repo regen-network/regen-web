@@ -20,7 +20,6 @@ export type Member = {
   visible: boolean;
   isCurrentUser?: boolean;
   hasWalletAddress: boolean;
-  invited?: boolean;
 };
 
 export interface InviteMemberModalProps {

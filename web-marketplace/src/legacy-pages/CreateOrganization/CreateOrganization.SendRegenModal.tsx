@@ -1,5 +1,8 @@
-import { useCallback, useMemo } from 'react';
-import { Trans } from '@lingui/macro';
+import { useCallback, useMemo, useState } from 'react';
+import { StdFee } from '@cosmjs/stargate';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { cosmos } from '@regen-network/api';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
@@ -16,7 +19,9 @@ import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQ
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import useMsgClient from 'hooks/useMsgClient';
+import useMsgClient, { defaultFee } from 'hooks/useMsgClient';
+
+import { CAP_AMOUNT_TO_SEND } from './CreateOrganization.constants';
 
 type SendRegenModalProps = RegenModalProps & {
   completeCreation: () => void;
@@ -26,6 +31,7 @@ export const SendRegenModal = ({
   onClose,
   completeCreation,
 }: SendRegenModalProps) => {
+  const { _ } = useLingui();
   const { queryClient } = useLedger();
   const { wallet } = useWallet();
   const { signAndBroadcast } = useMsgClient();
@@ -33,7 +39,7 @@ export const SendRegenModal = ({
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const dao = useDaoOrganization();
 
-  const { data: balanceData, isLoading: isLoadingCredit } = useQuery(
+  const { data: balanceData, isLoading: isLoadingBalance } = useQuery(
     getBalanceQuery({
       request: { address: wallet?.address as string, denom: REGEN_DENOM },
       client: queryClient,
@@ -41,16 +47,33 @@ export const SendRegenModal = ({
     }),
   );
 
-  const amountToSend = useMemo(
-    () =>
-      balanceData?.balance?.amount
-        ? Math.min(Number(balanceData?.balance?.amount), 100000000)
-        : undefined,
-    [balanceData],
-  );
+  const amountToSend = useMemo(() => {
+    const balStr = balanceData?.balance?.amount;
+    if (!balStr) return undefined;
+
+    const balance = BigInt(balStr);
+    // Use a fixed fee (Keplr-style). MsgSend gas is predictable and this keeps
+    // max-send logic simple without needing async gas simulation.
+    const fixedFee = BigInt(defaultFee.amount[0].amount);
+
+    // not enough to even pay the fee
+    if (balance <= fixedFee) return 0n;
+
+    const maxToSend = balance - fixedFee;
+    return maxToSend < CAP_AMOUNT_TO_SEND ? maxToSend : CAP_AMOUNT_TO_SEND;
+  }, [balanceData?.balance?.amount]);
 
   const sendRegen = useCallback(async () => {
-    if (!amountToSend || !wallet?.address || !dao?.address) return;
+    if (
+      !amountToSend ||
+      amountToSend <= 0n ||
+      !wallet?.address ||
+      !dao?.address
+    ) {
+      setErrorBannerText(_(msg`Missing required parameters`));
+      return;
+    }
+
     await signAndBroadcast(
       {
         msgs: [
@@ -90,37 +113,43 @@ export const SendRegenModal = ({
     setErrorBannerText,
     onClose,
     completeCreation,
+    _,
   ]);
 
+  const canSendRegen = !isLoadingBalance && amountToSend && amountToSend > 0n;
+
   return (
-    <>
-      {!isLoadingCredit && amountToSend ? (
-        <Modal open={open}>
-          <div className="text-lg font-muli text-grey-500 uppercase font-extrabold text-center">
-            <Trans>mandatory</Trans>
-          </div>
-          <Title variant="h4" className="text-center m-20">
-            <Trans>
-              Send {amountToSend / 1000000} REGEN to fund your organization
-            </Trans>
-          </Title>
-          <Body size="lg" className="text-center">
-            <Trans>
-              When you send tokens to your organization’s account,{' '}
-              <b>
-                all members can perform on-chain actions on behalf of the
-                organization without needing to hold tokens
-              </b>{' '}
-              in their personal wallets.
-            </Trans>
-          </Body>
-          <div className="pt-50 flex justify-end">
-            <ContainedButton onClick={sendRegen}>
-              <Trans>Send tokens</Trans>
-            </ContainedButton>
-          </div>
-        </Modal>
-      ) : null}
-    </>
+    <Modal open={open}>
+      <div className="text-lg font-muli text-grey-500 uppercase font-extrabold text-center">
+        <Trans>mandatory</Trans>
+      </div>
+      <Title variant="h4" className="text-center m-20">
+        {canSendRegen ? (
+          <Trans>
+            Send {amountToSend / 1000000n} REGEN to fund your organization
+          </Trans>
+        ) : (
+          <Trans>
+            You do not have enough REGEN to fund your organization. Please, top
+            up your wallet to continue and reload.
+          </Trans>
+        )}
+      </Title>
+      <Body size="lg" className="text-center">
+        <Trans>
+          When you send tokens to your organization’s account,{' '}
+          <b>
+            all members can perform on-chain actions on behalf of the
+            organization without needing to hold tokens
+          </b>{' '}
+          in their personal wallets.
+        </Trans>
+      </Body>
+      <div className="pt-50 flex justify-end">
+        <ContainedButton onClick={sendRegen} disabled={!canSendRegen}>
+          <Trans>Send tokens</Trans>
+        </ContainedButton>
+      </div>
+    </Modal>
   );
 };

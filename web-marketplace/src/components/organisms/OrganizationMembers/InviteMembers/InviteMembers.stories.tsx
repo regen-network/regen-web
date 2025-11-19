@@ -132,7 +132,6 @@ export const Default = (args: {
       role: data.role,
       onChainRoleId: 1,
       visible: data.visible,
-      invited: true,
       isCurrentUser: false,
       hasWalletAddress: true,
       title: foundAccount?.description || '',

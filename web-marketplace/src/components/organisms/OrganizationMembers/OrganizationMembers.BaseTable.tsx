@@ -64,6 +64,7 @@ type VariantConfig = {
   enableProfileEdit: boolean;
   limitActionsToInvited: boolean;
   showActionsColumnWhenInvited: boolean;
+  hideOwnerOption?: boolean;
 };
 
 export type OrganizationMembersBaseProps = BaseProps & {
@@ -82,6 +83,7 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     enableProfileEdit: false,
     limitActionsToInvited: false,
     showActionsColumnWhenInvited: false,
+    hideOwnerOption: false,
   },
   invite: {
     showHeader: false,
@@ -91,8 +93,9 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     enableInviteModal: true,
     enableRemoveModal: true,
     enableProfileEdit: true,
-    limitActionsToInvited: false,
-    showActionsColumnWhenInvited: false,
+    limitActionsToInvited: true,
+    showActionsColumnWhenInvited: true,
+    hideOwnerOption: true,
   },
 };
 
@@ -124,7 +127,7 @@ export const OrganizationMembersBase = ({
     useState(false);
   const [bannerText, setBannerText] = useAtom(bannerTextAtom);
 
-  const hasInvited = members.some(m => m.invited && !m.isCurrentUser);
+  const hasInvited = members.some(m => !m.isCurrentUser);
   const showActionsColumn = cfg.showActionsColumnWhenInvited
     ? hasInvited
     : true;
@@ -176,8 +179,7 @@ export const OrganizationMembersBase = ({
                 }
               }}
             >
-              {(!cfg.limitActionsToInvited ||
-                (member.invited && !member.isCurrentUser)) && (
+              {(!cfg.limitActionsToInvited || !member.isCurrentUser) && (
                 <ActionsDropdown
                   role={member.role}
                   currentUserRole={currentUserRole}
@@ -203,6 +205,7 @@ export const OrganizationMembersBase = ({
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
+                hideOwnerOption={cfg.hideOwnerOption}
               />
               <VisibilitySwitch
                 checked={member.visible}
@@ -220,10 +223,11 @@ export const OrganizationMembersBase = ({
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
+                hideOwnerOption={cfg.hideOwnerOption}
               />
             </div>
             {/* Desktop visibility */}
-            <div className="hidden xl:flex w-[150px] items-center">
+            <div className="hidden xl:flex w-[150px] justify-end items-center">
               <VisibilitySwitch
                 checked={member.visible}
                 disabled={!canAdmin}
@@ -234,8 +238,7 @@ export const OrganizationMembersBase = ({
             {/* Desktop actions */}
             {showActionsColumn && (
               <div className="hidden xl:flex w-[60px] h-[74px] justify-center items-center">
-                {(!cfg.limitActionsToInvited ||
-                  (member.invited && !member.isCurrentUser)) && (
+                {(!cfg.limitActionsToInvited || !member.isCurrentUser) && (
                   <ActionsDropdown
                     role={member.role}
                     currentUserRole={currentUserRole}

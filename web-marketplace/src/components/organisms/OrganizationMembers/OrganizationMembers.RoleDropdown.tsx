@@ -1,12 +1,14 @@
 import { useLingui } from '@lingui/react';
 
+import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import { getRoleItems } from './OrganizationMembers.utils';
 
-export const MemberRoleDropdown: React.FC<
-  Omit<BaseRoleDropdownProps, 'roleOptions'>
-> = ({
+type MemberRoleDropdownProps = Omit<BaseRoleDropdownProps, 'roleOptions'> & {
+  hideOwnerOption?: boolean;
+};
+export const MemberRoleDropdown = ({
   role,
   disabled = false,
   onChange,
@@ -15,7 +17,8 @@ export const MemberRoleDropdown: React.FC<
   placeholder,
   height,
   fullWidth,
-}) => {
+  hideOwnerOption,
+}: MemberRoleDropdownProps) => {
   const { _ } = useLingui();
   return (
     <BaseRoleDropdown
@@ -27,7 +30,7 @@ export const MemberRoleDropdown: React.FC<
       placeholder={placeholder}
       height={height}
       fullWidth={fullWidth}
-      roleOptions={getRoleItems(_)}
+      roleOptions={getRoleItems(_, hideOwnerOption && role !== ROLE_OWNER)}
     />
   );
 };

@@ -74,6 +74,8 @@ const MyProjects = (): JSX.Element => {
       : undefined,
     isLoading: isLoadingOrganizationByDaoAddress,
   });
+  console.log('adminProjects', adminProjects);
+  console.log('isLoadingAdminProjects', isLoadingAdminProjects);
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
 

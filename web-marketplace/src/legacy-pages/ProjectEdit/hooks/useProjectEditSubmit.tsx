@@ -19,7 +19,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-
+import { ProjectFieldsFragment } from 'generated/graphql';
 import {
   PROJECT_UPDATE_METADATA_LABEL,
   PROJECT_UPDATED_METADATA_HEADER,

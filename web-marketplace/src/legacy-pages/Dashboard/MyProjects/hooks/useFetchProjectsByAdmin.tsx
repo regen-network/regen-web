@@ -20,12 +20,10 @@ import {
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
-import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQueryByAccountId.ts/getAssignmentsWithProjectQueryByAccountId';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
 import { useMembersProjects } from './useMembersProjects';
@@ -49,7 +47,6 @@ export const useFetchProjectByAdmin = ({
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const dao = useDaoOrganization();
 
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);

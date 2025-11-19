@@ -14,7 +14,7 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-
+import { ProjectFieldsFragment } from 'generated/graphql';
 import {
   PROJECT_UPDATE_METADATA_LABEL,
   PROJECT_UPDATED_METADATA_HEADER,
@@ -32,6 +32,7 @@ type Props = {
     title,
     cardTitle,
   }: OnTxSuccessfulProps) => void;
+  adminDao?: ProjectFieldsFragment['daoByAdminDaoAddress'];
 };
 
 export type UseProjectEditSubmitParams = (
@@ -45,6 +46,7 @@ const useProjectEditSubmit = ({
   projectId,
   admin,
   creditClassId,
+  adminDao,
   signAndBroadcast,
   onBroadcast,
   onTxSuccessful,

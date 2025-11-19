@@ -198,6 +198,7 @@ function ProjectEdit(): JSX.Element {
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
     admin: onChainProject?.admin,
+    adminDao: offChainProject?.daoByAdminDaoAddress,
     creditClassId: onChainProject?.classId,
     signAndBroadcast,
     onBroadcast,

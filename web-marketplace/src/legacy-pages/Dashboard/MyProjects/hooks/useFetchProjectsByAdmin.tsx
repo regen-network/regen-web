@@ -19,14 +19,13 @@ import {
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
-import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQueryByAccountId.ts/getAssignmentsWithProjectQueryByAccountId';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
+import { useMembersProjects } from './useMembersProjects';
 
 type Params = {
   keepUnpublished?: boolean;
@@ -45,7 +44,6 @@ export const useFetchProjectByAdmin = ({
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const dao = useDaoOrganization();
 
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -60,27 +58,10 @@ export const useFetchProjectByAdmin = ({
       languageCode: selectedLanguage,
     }),
   );
-  // Compute projects current user is an external member of
-  // (ie member is part of project DAO but not part the organization project)
-  const { data: assignmentsData, isFetching: isAssignmentsLoading } = useQuery(
-    getAssignmentsWithProjectsByAccountIdQuery({
-      id: adminAccountId,
-      client: graphqlClient,
-      enabled: adminAccountId !== undefined,
-    }),
-  );
-  const allMemberProjects =
-    assignmentsData?.accountById?.assignmentsByAccountId?.nodes
-      ?.map(assignment => assignment?.daoByDaoAddress?.projectByAdminDaoAddress)
-      .filter(Boolean);
-  const externalMemberProjects = dao?.organizationByDaoAddress?.id
-    ? // If user is part of an organization, filter out projects that belong to that organization on its user dashboard/profile
-      allMemberProjects?.filter(
-        project =>
-          project?.organizationProjectByProjectId?.organizationId !==
-          dao?.organizationByDaoAddress?.id,
-      )
-    : allMemberProjects;
+
+  // Get projects current user is an external member of
+  const { externalMemberProjects, isAssignmentsLoading } =
+    useMembersProjects(adminAccountId);
 
   // or for organization
   const orgOffChainProjects = organization
@@ -166,7 +147,7 @@ export const useFetchProjectByAdmin = ({
     isProjectsMetadataLoading,
     isClassesMetadataLoading,
   } = useFetchProjectsWithOrders({
-    projects: onChainProjects || orgProjects,
+    projects: organization ? orgProjects : onChainProjects,
     offChainProjects,
     sanityCreditClassData,
   });

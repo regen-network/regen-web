@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
+import { usePathname, useRouter } from 'next/navigation';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
@@ -13,22 +14,22 @@ import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import WithLoader from 'components/atoms/WithLoader';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 import { useProfileData } from '../hooks/useProfileData';
 import { NoProjectsDisplay } from './NoProjectsDisplay';
 
 const ProjectsTab = (): JSX.Element => {
   const { _ } = useLingui();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
   const { track } = useTracker();
-  const { address, account } = useProfileData();
+  const { address, account, organization, isLoading } = useProfileData();
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: account?.id,
+    organization,
     adminAddress: address,
-    keepUnpublished: true,
+    isLoading,
   });
 
   const cardProps = useMemo(
@@ -36,12 +37,12 @@ const ProjectsTab = (): JSX.Element => {
       buttons: getProjectCardButtonMapping(_),
       bodyTexts: getProjectCardBodyTextMapping(_),
       track,
-      pathname: location.pathname,
+      pathname,
       imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
       apiServerUrl: API_URI,
       purchaseInfo: undefined,
     }),
-    [_, location.pathname, track],
+    [_, pathname, track],
   );
 
   if (
@@ -59,7 +60,7 @@ const ProjectsTab = (): JSX.Element => {
             <ProjectCard
               {...project}
               {...cardProps}
-              onClick={() => project.href && navigate(project.href)}
+              onClick={() => project.href && router.push(project.href)}
             />
           </WithLoader>
         </div>

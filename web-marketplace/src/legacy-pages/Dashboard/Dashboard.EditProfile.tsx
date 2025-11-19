@@ -24,10 +24,10 @@ import {
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_TYPE,
+  DEFAULT_PROFILE_USER_AVATAR,
   PROFILE_S3_PATH,
   PROFILE_SAVED,
 } from './Dashboard.constants';
-import { getDefaultAvatar } from './Dashboard.utils';
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 
 export const EditProfile = () => {
@@ -38,7 +38,6 @@ export const EditProfile = () => {
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
-  const defaultAvatar = getDefaultAvatar(activeAccount);
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
   );
@@ -58,13 +57,13 @@ export const EditProfile = () => {
     return {
       name: name ? name : _(DEFAULT_NAME),
       description: description?.trimEnd() ?? '',
-      profileImage: image ? image : defaultAvatar,
+      profileImage: image ? image : DEFAULT_PROFILE_USER_AVATAR,
       backgroundImage: bgImage ? bgImage : DEFAULT_PROFILE_BG,
       profileType: type ?? DEFAULT_PROFILE_TYPE,
       twitterLink: twitterLink ?? '',
       websiteLink: websiteLink ?? '',
     };
-  }, [_, activeAccount, defaultAvatar]);
+  }, [_, activeAccount]);
 
   /* callbacks */
   const onSubmit = useCallback(

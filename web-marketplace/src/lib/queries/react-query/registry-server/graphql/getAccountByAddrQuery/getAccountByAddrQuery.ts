@@ -19,19 +19,22 @@ export const getAccountByAddrQuery = ({
         variables: { ...params },
       });
 
-      const localizedDescription =
-        data?.accountByAddr?.accountTranslationsById.nodes.find(
-          node => node?.languageCode === languageCode,
-        )?.description ?? data?.accountByAddr?.description;
+      if (data.accountByAddr) {
+        const localizedDescription =
+          data.accountByAddr.accountTranslationsById.nodes.find(
+            node => node?.languageCode === languageCode,
+          )?.description ?? data.accountByAddr.description;
 
-      const localizedData = Object.assign({}, data, {
-        accountByAddr: {
-          ...data.accountByAddr,
-          description: localizedDescription,
-        },
-      });
+        const localizedData = Object.assign({}, data, {
+          accountByAddr: {
+            ...data.accountByAddr,
+            description: localizedDescription,
+          },
+        });
 
-      return localizedData;
+        return localizedData;
+      }
+      return null;
     } catch (e) {
       return null;
     }

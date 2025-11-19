@@ -33,7 +33,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { Link } from 'components/atoms';
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';

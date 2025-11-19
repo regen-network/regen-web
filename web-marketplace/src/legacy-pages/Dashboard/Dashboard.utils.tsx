@@ -12,6 +12,7 @@ import {
   AccountByIdQuery,
   AccountType,
   Maybe,
+  Organization,
 } from 'generated/graphql';
 import { Wallet } from 'lib/wallet/wallet';
 
@@ -24,29 +25,19 @@ import {
 /* getSocialsLinks */
 
 type GetSocialsLinksParams = {
-  account?: Pick<
-    Account,
-    | 'id'
-    | 'name'
-    | 'type'
-    | 'image'
-    | 'bgImage'
-    | 'description'
-    | 'websiteLink'
-    | 'twitterLink'
-  > | null;
+  profile?: Pick<Account | Organization, 'websiteLink' | 'twitterLink'> | null;
 };
 
 export const getSocialsLinks = ({
-  account,
+  profile,
 }: GetSocialsLinksParams): SocialLink[] => {
   return [
     {
-      href: account?.twitterLink,
+      href: profile?.twitterLink,
       icon: <TwitterIcon />,
     },
     {
-      href: account?.websiteLink,
+      href: profile?.websiteLink,
       icon: <WebsiteLinkIcon />,
     },
   ].filter((link): link is SocialLink => {
@@ -56,24 +47,22 @@ export const getSocialsLinks = ({
 
 /* getSocialsLinks */
 
-type GetUserImagesParams = {
-  account?: Pick<Account, 'type' | 'image' | 'bgImage'> | null;
+type GetProfileImagesParams = {
+  profile?: Pick<Account | Organization, 'image' | 'bgImage'> | null;
 };
 
-export const getUserImages = ({ account }: GetUserImagesParams) => {
-  const backgroundImage = account?.bgImage
+export const getProfileImages = ({ profile }: GetProfileImagesParams) => {
+  const fetchedBgImage = profile?.bgImage;
+  const fetchedAvatarImage = profile?.image;
+  const backgroundImage = fetchedBgImage
     ? getResizedImageUrl({
-        url: account?.bgImage,
+        url: fetchedBgImage,
         width: 1400,
       })
     : DEFAULT_PROFILE_BG;
 
-  const avatarImage = account?.image
-    ? getResizedImageUrl({
-        url: account?.image,
-        width: 190,
-      })
-    : getDefaultAvatar(account);
+  // Avatar image next/image optimized so no need to use getResizedImageUrl
+  const avatarImage = fetchedAvatarImage || DEFAULT_PROFILE_USER_AVATAR;
 
   return { backgroundImage, avatarImage };
 };

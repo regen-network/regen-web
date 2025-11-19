@@ -5,7 +5,7 @@ type Variant = 'circular' | 'skeleton';
 
 type Props = {
   isLoading: boolean;
-  children: JSX.Element;
+  children: React.ReactNode;
   variant?: Variant;
   sx?: SxProps<Theme>;
   className?: string;
@@ -21,7 +21,7 @@ const WithLoader = ({
   variant = 'circular',
   sx,
   className,
-}: Props): JSX.Element => {
+}: Props) => {
   const isCircular = variant === 'circular';
   const isSkeleton = variant === 'skeleton';
 

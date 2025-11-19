@@ -4,11 +4,14 @@ import { useCreditClasses } from 'legacy-pages/Home/hooks/useCreditClasses';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
-export const useMergedCreditClasses = (adminId?: string) => {
+import { useProfileData } from './useProfileData';
+
+export const useMergedCreditClasses = () => {
+  const { address } = useProfileData();
   const {
     creditClasses: adminClasses,
     isLoadingCreditClasses: adminClassesLoading,
-  } = useFetchCreditClassesWithOrder({ admin: adminId });
+  } = useFetchCreditClassesWithOrder({ admin: address });
 
   const {
     creditClasses: sanityCreditClasses,

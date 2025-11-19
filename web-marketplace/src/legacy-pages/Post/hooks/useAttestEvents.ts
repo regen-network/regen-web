@@ -18,8 +18,10 @@ import {
 } from '@regen-network/api/regen/data/v2/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 import { StaticImageData } from 'next/image';
 
 import { User } from 'web-components/src/components/user/UserInfo';
@@ -178,7 +180,7 @@ export const useAttestEvents = ({
         name: creatorAccount.name || _(DEFAULT_NAME),
         link: `/profiles/${creatorAccount.id}`,
         type: creatorAccount.type,
-        image: creatorAccount.image || getDefaultAvatar(creatorAccount),
+        image: creatorAccount.image || DEFAULT_PROFILE_USER_AVATAR,
         tag: creatorIsAdmin ? _(ADMIN) : undefined,
       },
       timestamp:
@@ -222,7 +224,7 @@ export const useAttestEvents = ({
             ? `/profiles/${attestorAccount?.id}`
             : undefined,
           type: attestorAccount?.type ?? 'USER',
-          image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
+          image: attestorAccount?.image || DEFAULT_PROFILE_USER_AVATAR,
           tag: attestorIsAdmin
             ? _(ADMIN)
             : attestorIsRegistry

@@ -10,8 +10,8 @@ import {
 } from 'generated/sanity-graphql';
 
 import { Link } from 'components/atoms';
-import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection.legacy';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
+import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 

@@ -5,7 +5,6 @@ import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import type { AccountByIdQuery } from 'generated/graphql';
 import type { Wallet } from 'lib/wallet/wallet';
@@ -57,10 +56,7 @@ export const useOrganizationMenuProfile = ({
     };
   }, [_, organization]);
 
-  const defaultAvatar = getDefaultAvatar(activeAccount);
-
   return {
-    defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
   };

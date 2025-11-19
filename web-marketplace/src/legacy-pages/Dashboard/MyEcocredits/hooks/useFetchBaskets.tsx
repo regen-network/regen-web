@@ -18,7 +18,6 @@ import { useWallet } from 'lib/wallet/wallet';
 interface Params {
   credits: BatchInfoWithBalance[];
   address?: string | null;
-  hideEcocredits?: boolean;
 }
 
 interface Response {
@@ -29,11 +28,7 @@ interface Response {
   reloadBasketsBalance: () => Promise<void>;
 }
 
-export const useFetchBaskets = ({
-  credits,
-  address,
-  hideEcocredits,
-}: Params): Response => {
+export const useFetchBaskets = ({ credits, address }: Params): Response => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -41,7 +36,7 @@ export const useFetchBaskets = ({
   // Baskets
   const { data: basketsData } = useQuery(
     getBasketsQuery({
-      enabled: !!queryClient && !hideEcocredits,
+      enabled: !!queryClient,
       client: queryClient,
       request: {},
     }),

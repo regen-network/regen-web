@@ -8,10 +8,9 @@ import {
   profileVariantMapping,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 import {
+  getProfileImages,
   getSocialsLinks,
-  getUserImages,
 } from 'legacy-pages/Dashboard/Dashboard.utils';
-import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -42,10 +41,12 @@ import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
+import { useShowCreditClasses } from 'hooks/useShowCreditClasses';
 
 import { useProfileData } from './hooks/useProfileData';
 import { ProfileNotFound } from './Profile.NotFound';
+import { getDashboardRoute } from './Profile.utils';
 
 export const Profile = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
@@ -53,34 +54,43 @@ export const Profile = (): JSX.Element => {
   const location = useLocation();
   const { _ } = useLingui();
 
-  const { address, account, isLoading } = useProfileData();
+  const { address, account, organization, isLoading } = useProfileData();
   const { privActiveAccount } = useAuth();
-  const { avatarImage, backgroundImage } = getUserImages({ account });
-  const isProfileNotFound = !address && !account;
+
+  const profile = account || organization;
+
+  const { avatarImage, backgroundImage } = useMemo(
+    () =>
+      getProfileImages({
+        profile,
+      }),
+    [profile],
+  );
+  const isProfileNotFound = !address && !profile;
   const profileLink = accountAddressOrId
     ? getProfileLink(accountAddressOrId)
     : '';
-  const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: address,
+
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
+  const { showCreditClasses, creditClasses } = useShowCreditClasses({
+    activeAddress: address,
     userAddress: wallet?.address,
   });
 
-  const { isIssuer, showCreditClasses } = useProfileItems({
-    address,
-    accountId: account?.id,
-  });
-
   const { adminProjects } = useFetchProjectByAdmin({
+    organization,
     adminAccountId: account?.id,
     adminAddress: address,
+    isLoading,
   });
 
   const { batchesWithSupply } = useFetchPaginatedBatches({
     address,
+    isAddressLoading: isLoading,
   });
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
-  const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
+  const socialsLinks = useMemo(() => getSocialsLinks({ profile }), [profile]);
 
   const tabs: IconTabProps[] = useMemo(
     () => [
@@ -88,9 +98,7 @@ export const Profile = (): JSX.Element => {
         label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: Boolean(
-          !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
-        ),
+        hidden: Boolean(!address),
       },
       {
         label: _(msg`Projects`),
@@ -99,6 +107,12 @@ export const Profile = (): JSX.Element => {
         hidden: Boolean(
           address && adminProjects.length === 0 && !privActiveAccount?.email,
         ),
+      },
+      {
+        label: _(msg`Members`),
+        icon: <ProjectPageIcon linearGradient />,
+        href: `/profiles/${accountAddressOrId}/members`,
+        hidden: !organization,
       },
       {
         label: _(msg`Credit Classes`),
@@ -115,8 +129,6 @@ export const Profile = (): JSX.Element => {
     ],
     [
       _,
-      account?.hideEcocredits,
-      account?.hideRetirements,
       accountAddressOrId,
       address,
       adminProjects.length,
@@ -125,6 +137,7 @@ export const Profile = (): JSX.Element => {
       hasCreditBatches,
       privActiveAccount,
       showCreditClasses,
+      organization,
     ],
   );
 
@@ -134,37 +147,61 @@ export const Profile = (): JSX.Element => {
       .findIndex(tab => location.pathname.includes(tab.href ?? '')),
     0,
   );
-
+  const dashboardRoute = useMemo(
+    () => getDashboardRoute(!!organization),
+    [organization],
+  );
   const manageButtonConfig = [
     {
       label: _(msg`Manage Portfolio`),
       show: location.pathname.includes('/portfolio'),
-      link: '/dashboard/portfolio',
+      link: `${dashboardRoute}/portfolio`,
     },
     {
       label: _(msg`Manage Projects`),
       show: location.pathname.includes('/projects'),
-      link: '/dashboard/projects',
+      link: `${dashboardRoute}/projects`,
+    },
+    {
+      label: _(msg`Manage Members`),
+      show: location.pathname.includes('/members'),
+      link: `${dashboardRoute}/members`,
     },
     {
       label: _(msg`Manage Credit Classes`),
       show: location.pathname.includes('/credit-classes'),
-      link: '/dashboard/credit-classes',
+      link: `${dashboardRoute}/credit-classes`,
     },
     {
       label: _(msg`Manage Credit Batches`),
       show: location.pathname.includes('/credit-batches'),
-      link: '/dashboard/credit-batches',
+      link: `${dashboardRoute}/credit-batches`,
     },
   ];
 
-  const isOwnProfile =
-    (wallet?.address &&
-      address &&
-      wallet.address.toLowerCase() === address.toLowerCase()) ||
-    (privActiveAccount?.id &&
-      account?.id &&
-      privActiveAccount.id === account.id);
+  const isOwnProfile = useMemo(
+    () =>
+      organization
+        ? !!organization.daoByDaoAddress?.assignmentsByDaoAddress?.nodes.find(
+            assignment =>
+              assignment?.accountByAccountId &&
+              privActiveAccount?.id &&
+              assignment.accountByAccountId.id === privActiveAccount.id,
+          )
+        : (wallet?.address &&
+            address &&
+            wallet.address.toLowerCase() === address.toLowerCase()) ||
+          (privActiveAccount?.id &&
+            account?.id &&
+            privActiveAccount.id === account.id),
+    [
+      organization,
+      wallet?.address,
+      address,
+      privActiveAccount?.id,
+      account?.id,
+    ],
+  );
 
   const addressDisplay = address ? truncate(address) : '';
 
@@ -185,7 +222,7 @@ export const Profile = (): JSX.Element => {
 
   return (
     <WithLoader
-      isLoading={isLoading}
+      isLoading={isLoading || isLoadingIsIssuer}
       sx={{
         py: 10,
         display: 'flex',
@@ -198,7 +235,7 @@ export const Profile = (): JSX.Element => {
         {!isProfileNotFound && (
           <>
             <ProfileHeader
-              name={account?.name ? account?.name : _(DEFAULT_NAME)}
+              name={profile?.name ? profile?.name : _(DEFAULT_NAME)}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={infos}

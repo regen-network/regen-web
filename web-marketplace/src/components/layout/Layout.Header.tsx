@@ -6,6 +6,7 @@ import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getWalletAddress } from 'legacy-pages/Dashboard/Dashboard.utils';
 import { usePathname } from 'next/navigation';
 
@@ -91,7 +92,6 @@ export const LayoutHeader = () => {
     walletsUiConfig,
     createOrganization,
     finishOrgCreation,
-    defaultAvatar,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     isConnectWalletModalOpen,
@@ -215,7 +215,9 @@ export const LayoutHeader = () => {
                   })
                 }
                 avatar={
-                  activeAccount?.image ? activeAccount?.image : defaultAvatar
+                  activeAccount?.image
+                    ? activeAccount?.image
+                    : DEFAULT_PROFILE_USER_AVATAR
                 }
                 disconnect={disconnect}
                 pathname={pathname}

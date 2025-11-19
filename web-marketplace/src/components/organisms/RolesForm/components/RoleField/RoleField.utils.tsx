@@ -1,7 +1,9 @@
 import { isValidElement } from 'react';
 import { msg } from '@lingui/core/macro';
-import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -34,7 +36,7 @@ export const getAccounts = (
     id: account?.id as string,
     name: account?.name || _(DEFAULT_NAME),
     profileType: account?.type as AccountType,
-    profileImage: account?.image || getDefaultAvatar(account),
+    profileImage: account?.image || DEFAULT_PROFILE_USER_AVATAR,
     description: account?.description || undefined,
     address: account?.addr || undefined,
   })) || [];

@@ -1,0 +1,37 @@
+query OrganizationById($id: UUID!) {
+  organizationById(id: $id) {
+    ...organizationFields
+  }
+}
+
+fragment organizationFields on Organization {
+  id
+  name
+  description
+  image
+  bgImage
+  websiteLink
+  twitterLink
+  daoAddress
+  daoByDaoAddress {
+    assignmentsByDaoAddress(condition: { visible: true }) {
+      nodes {
+        roleName
+        accountByAccountId {
+          id
+          name
+          image
+          addr
+          title
+        }
+      }
+    }
+  }
+  organizationProjectsByOrganizationId {
+    nodes {
+      projectByProjectId {
+        ...projectFields
+      }
+    }
+  }
+}

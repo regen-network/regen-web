@@ -5,7 +5,6 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
@@ -125,21 +124,12 @@ export function getAccount(
   if (!account) {
     return undefined;
   }
-  // TODO: make use of getDefaultAvatar from ProfileEdit.utils.ts
-  let image: string;
-  if (!!account.image) {
-    image = account.image;
-  } else if (!account.image && account.type === 'USER') {
-    image = DEFAULT_PROFILE_USER_AVATAR;
-  } else {
-    image = DEFAULT_PROFILE_COMPANY_AVATAR;
-  }
 
   return {
     name: account.name || i18n._(DEFAULT_NAME),
     description: account.description,
     type: account.type,
-    image: image,
+    image: account.image || DEFAULT_PROFILE_USER_AVATAR,
     address: account.addr || '',
     link: account?.websiteLink || `/profiles/${account.id}`,
     id: account.id,
@@ -235,5 +225,5 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   }`;
 
 export const getAccountInfo = (account?: AccountFieldsFragment | null) => {
-  return { account, defaultAvatar: getDefaultAvatar(account) };
+  return { account, defaultAvatar: DEFAULT_PROFILE_USER_AVATAR };
 };

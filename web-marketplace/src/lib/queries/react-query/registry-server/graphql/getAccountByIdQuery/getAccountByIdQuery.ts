@@ -18,19 +18,22 @@ export const getAccountByIdQuery = ({
       variables: { ...params },
     });
 
-    const localizedDescription =
-      data?.accountById?.accountTranslationsById.nodes.find(
-        node => node?.languageCode === languageCode,
-      )?.description ?? data?.accountById?.description;
+    if (data.accountById) {
+      const localizedDescription =
+        data?.accountById?.accountTranslationsById.nodes.find(
+          node => node?.languageCode === languageCode,
+        )?.description ?? data?.accountById?.description;
 
-    const localizedData = Object.assign({}, data, {
-      accountById: {
-        ...data.accountById,
-        description: localizedDescription,
-      },
-    });
+      const localizedData = Object.assign({}, data, {
+        accountById: {
+          ...data.accountById,
+          description: localizedDescription,
+        },
+      });
 
-    return localizedData;
+      return localizedData;
+    }
+    return null;
   },
   ...params,
 });

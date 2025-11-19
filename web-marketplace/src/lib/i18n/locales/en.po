@@ -739,7 +739,7 @@ msgstr ""
 msgid "basket ecocredits table"
 msgstr ""
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:99
+#: src/components/organisms/Portfolio/Portfolio.tsx:94
 msgid "Basket Tokens"
 msgstr ""
 
@@ -1436,11 +1436,11 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:176
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
 msgid "Created by"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Header.tsx:104
+#: src/components/layout/Layout.Header.tsx:110
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr ""
 
@@ -1485,7 +1485,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:110
+#: src/legacy-pages/Profile/Profile.tsx:125
 msgid "Credit Batches"
 msgstr ""
 
@@ -1560,7 +1560,7 @@ msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:178
-#: src/legacy-pages/Profile/Profile.tsx:104
+#: src/legacy-pages/Profile/Profile.tsx:119
 msgid "Credit Classes"
 msgstr ""
 
@@ -1778,6 +1778,10 @@ msgstr ""
 msgid "Customer info"
 msgstr ""
 
+#: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:37
+msgid "CW Admin Factory address is not configured."
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:29
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Dashboard side navigation"
@@ -1813,7 +1817,7 @@ msgstr ""
 #~ msgid "Date of upload"
 #~ msgstr ""
 
-#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:66
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:68
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
 msgid "default avatar"
 msgstr ""
@@ -1937,7 +1941,7 @@ msgstr ""
 msgid "Ecocredit Sales Agreement"
 msgstr ""
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:67
+#: src/components/organisms/Portfolio/Portfolio.tsx:63
 #: src/legacy-pages/BasketDetails/BasketDetails.SectionLayout.tsx:14
 msgid "Ecocredits"
 msgstr ""
@@ -2872,11 +2876,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:155
+#: src/legacy-pages/Profile/Profile.tsx:176
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:150
+#: src/legacy-pages/Profile/Profile.tsx:171
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2884,11 +2888,15 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
+#: src/legacy-pages/Profile/Profile.tsx:166
+msgid "Manage Members"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:99
 msgid "Manage organization"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:140
+#: src/legacy-pages/Profile/Profile.tsx:156
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2904,7 +2912,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:145
+#: src/legacy-pages/Profile/Profile.tsx:161
 msgid "Manage Projects"
 msgstr ""
 
@@ -2971,6 +2979,7 @@ msgid "member not found"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:107
+#: src/legacy-pages/Profile/Profile.tsx:113
 msgid "Members"
 msgstr ""
 
@@ -3300,7 +3309,7 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader.tsx:51
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader.tsx:41
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:23
 msgid "Open menu"
 msgstr ""
@@ -3595,7 +3604,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:88
+#: src/legacy-pages/Profile/Profile.tsx:99
 msgid "Portfolio"
 msgstr ""
 
@@ -3980,11 +3989,10 @@ msgstr ""
 #: src/components/layout/Layout.Footer.tsx:29
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:60
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.legacy.tsx:84
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:96
+#: src/legacy-pages/Profile/Profile.tsx:105
 msgid "Projects"
 msgstr ""
 
@@ -4004,7 +4012,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:224
+#: src/legacy-pages/Profile/Profile.tsx:261
 msgid "public profile tabs"
 msgstr ""
 
@@ -4253,7 +4261,7 @@ msgstr ""
 msgid "Retirement Certificate"
 msgstr ""
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:81
+#: src/components/organisms/Portfolio/Portfolio.tsx:76
 msgid "Retirement Certificates"
 msgstr ""
 
@@ -4555,7 +4563,7 @@ msgstr ""
 msgid "signature"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:212
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:214
 msgid "Signed by"
 msgstr ""
 
@@ -5243,7 +5251,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
-#: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:68
+#: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:70
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:28
 msgid "Unnamed"
 msgstr ""
@@ -5487,7 +5495,7 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:118
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:108
 msgid "View public profile"
 msgstr ""
 

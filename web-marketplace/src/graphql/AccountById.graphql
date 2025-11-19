@@ -10,8 +10,6 @@ query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
     twitterLink
     addr
     nonce
-    hideEcocredits
-    hideRetirements
     custodialAddress
     stripeConnectedAccountId
     accountTranslationsById {

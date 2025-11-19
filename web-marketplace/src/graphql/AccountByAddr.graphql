@@ -9,8 +9,6 @@ query AccountByAddr($addr: String!) {
     description
     websiteLink
     twitterLink
-    hideEcocredits
-    hideRetirements
     accountTranslationsById {
       nodes {
         languageCode

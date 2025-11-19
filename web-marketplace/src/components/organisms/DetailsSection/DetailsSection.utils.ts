@@ -1,4 +1,4 @@
-import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 import { truncate } from 'web-components/src/utils/truncate';
@@ -12,7 +12,7 @@ export const getDisplayAccountOrAddress = (
   customerName?: string | null,
 ): Account | undefined => {
   if (!address) return;
-  const defaultAvatar = getDefaultAvatar(account);
+  const defaultAvatar = DEFAULT_PROFILE_USER_AVATAR;
   if (!!account) {
     const name = account.name;
     const type = account.type;

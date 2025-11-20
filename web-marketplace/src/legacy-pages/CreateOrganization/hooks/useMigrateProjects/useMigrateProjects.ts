@@ -57,6 +57,9 @@ import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-q
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';

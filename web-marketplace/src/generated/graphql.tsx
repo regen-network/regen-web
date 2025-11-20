@@ -11481,10 +11481,6 @@ export type AssignmentsWithProjectsByAccountIdQuery = (
           & Pick<Dao, 'address'>
           & { projectByAdminDaoAddress?: Maybe<(
             { __typename?: 'Project' }
-            & { organizationProjectByProjectId?: Maybe<(
-              { __typename?: 'OrganizationProject' }
-              & Pick<OrganizationProject, 'organizationId'>
-            )> }
             & ProjectFieldsFragment
           )> }
         )> }
@@ -11816,6 +11812,9 @@ export type ProjectFieldsFragment = (
   )>, daoByAdminDaoAddress?: Maybe<(
     { __typename?: 'Dao' }
     & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
+  )>, organizationProjectByProjectId?: Maybe<(
+    { __typename?: 'OrganizationProject' }
+    & Pick<OrganizationProject, 'organizationId'>
   )>, creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'onChainId'>
@@ -12039,6 +12038,9 @@ export const ProjectFieldsFragmentDoc = gql`
   approved
   published
   slug
+  organizationProjectByProjectId {
+    organizationId
+  }
   creditClassByCreditClassId {
     onChainId
     accountByRegistryId {
@@ -12474,9 +12476,6 @@ export const AssignmentsWithProjectsByAccountIdDocument = gql`
           address
           projectByAdminDaoAddress {
             ...projectFields
-            organizationProjectByProjectId {
-              organizationId
-            }
           }
         }
       }

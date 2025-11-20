@@ -10,7 +10,7 @@ import {
   cancelSellOrderAction,
   getRoleAuthorizationIds,
   wrapRbamActions,
-} from 'web-marketplace/src/utils/rbam.utils';
+} from 'utils/rbam.utils';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 import {

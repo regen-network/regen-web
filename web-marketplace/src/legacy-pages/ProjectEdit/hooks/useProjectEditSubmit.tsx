@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
@@ -7,7 +7,6 @@ import {
   MsgUpdateProjectMetadata,
 } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
-import { useMembersProjects } from 'legacy-pages/Dashboard/MyProjects/hooks/useMembersProjects';
 
 import { ProjectFieldsFragment } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
@@ -22,6 +21,7 @@ import {
   PROJECT_UPDATE_METADATA_LABEL,
   PROJECT_UPDATED_METADATA_HEADER,
 } from '../ProjectEdit.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 type Props = {
   projectId?: string;
@@ -36,6 +36,8 @@ type Props = {
     cardTitle,
   }: OnTxSuccessfulProps) => void;
   adminDao?: ProjectFieldsFragment['daoByAdminDaoAddress'];
+  role?: ProjectRole;
+  feeGranter?: string;
 };
 
 export type UseProjectEditSubmitParams = (
@@ -50,33 +52,14 @@ const useProjectEditSubmit = ({
   admin,
   creditClassId,
   adminDao,
+  role,
+  feeGranter,
   signAndBroadcast,
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
 }: Props): UseProjectEditSubmitParams => {
   const { _ } = useLingui();
-  const { activeAccountId } = useAuth();
-
-  const { organizationMemberProjects, organizationDaoAddress } =
-    useMembersProjects(activeAccountId, !adminDao);
-
-  // If user is external project collaborator (not part of org, only project)
-  // he needs to pay for tx fees
-  // Else if user part of organization, fees are handled by organization throught feegrant
-  const feeGranter = useMemo(
-    () =>
-      adminDao
-        ? organizationMemberProjects?.find(
-            project =>
-              project?.daoByAdminDaoAddress?.address === adminDao?.address,
-          )
-          ? organizationDaoAddress
-          : undefined
-        : undefined,
-    [adminDao, organizationMemberProjects, organizationDaoAddress],
-  );
-  console.log('feeGranter', feeGranter);
 
   const projectEditSubmit = useCallback(
     async (

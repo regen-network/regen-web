@@ -93,7 +93,7 @@ export const canAccessManageProjectWithRole = ({
   const isAccountAdmin =
     (onChainProject?.admin && wallet?.address === onChainProject.admin) ||
     (offChainProject?.adminAccountId &&
-      activeAccountId !== offChainProject?.adminAccountId);
+      activeAccountId === offChainProject?.adminAccountId);
 
   const projectDaoFromActiveAccount =
     activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes.find(

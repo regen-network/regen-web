@@ -30,6 +30,7 @@ type DashboardContextType = {
   isOrganizationEditor: boolean;
   isOrganizationAuthor: boolean;
   isOrganizationViewer: boolean;
+  feeGranter?: string;
 };
 
 export const useDashboardContext = (): DashboardContextType => {

@@ -61,6 +61,7 @@ const useBasketPutSubmit = ({
     organizationRole,
     organizationRbamAddress,
     organizationDaoAddress,
+    feeGranter,
   } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
@@ -191,9 +192,7 @@ const useBasketPutSubmit = ({
         {
           msgs: [finalMsg],
           fee: isOrganizationDashboard ? 'auto' : undefined, // RBAM transactions need auto gas estimation
-          feeGranter: isOrganizationDashboard
-            ? organizationDaoAddress
-            : undefined,
+          feeGranter,
         },
         () => onBroadcast(),
         {
@@ -213,7 +212,7 @@ const useBasketPutSubmit = ({
       isOrganizationDashboard,
       roleId,
       organizationRbamAddress,
-      organizationDaoAddress,
+      feeGranter,
       wallet?.address,
       manageCreditsAuthId,
       signAndBroadcast,

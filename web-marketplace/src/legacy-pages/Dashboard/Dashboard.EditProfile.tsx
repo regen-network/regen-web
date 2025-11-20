@@ -60,10 +60,10 @@ export const EditProfile = () => {
     isOrganizationDashboard,
     organizationDaoAddress,
     organizationRbamAddress,
-    organizationProfile: organizationProfileFromContext,
+    organizationProfile,
   } = useDashboardContext();
+
   const updateOrganizationProfile = useUpdateOrganizationProfile();
-  const organizationProfile = organizationProfileFromContext ?? null;
   const organizationId = organizationProfile?.id;
   const hasOrgContext =
     Boolean(organizationDaoAddress) && Boolean(organizationRbamAddress);
@@ -179,6 +179,30 @@ export const EditProfile = () => {
           });
           shouldCloseProcessingModal = true;
 
+          // Capture current organization images before update for deletion
+          const currentProfileImage =
+            organizationProfile?.image?.trim() || null;
+          const currentBackgroundImage =
+            organizationProfile?.bgImage?.trim() || null;
+
+          // Add current images to deletion queue if they're being replaced with new profile images
+          if (
+            currentProfileImage &&
+            !isDefaultAvatar &&
+            profileImage !== currentProfileImage &&
+            !fileNamesToDeleteRef.current.includes(currentProfileImage)
+          ) {
+            fileNamesToDeleteRef.current.push(currentProfileImage);
+          }
+          if (
+            currentBackgroundImage &&
+            !isDefaultBg &&
+            backgroundImage !== currentBackgroundImage &&
+            !fileNamesToDeleteRef.current.includes(currentBackgroundImage)
+          ) {
+            fileNamesToDeleteRef.current.push(currentBackgroundImage);
+          }
+
           await updateOrganizationProfile({
             daoAddress: organizationDaoAddress,
             rbamAddress: organizationRbamAddress,
@@ -234,7 +258,7 @@ export const EditProfile = () => {
 
         // Delete old avatar and/or bg image
         await Promise.all(
-          fileNamesToDeleteRef?.current.map(async fileName => {
+          fileNamesToDeleteRef.current.map(async fileName => {
             const targetId = isOrgDashboard
               ? organizationId ?? ''
               : activeAccount?.id ?? '';

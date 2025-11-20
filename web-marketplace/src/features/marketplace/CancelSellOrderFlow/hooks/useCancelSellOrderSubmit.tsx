@@ -68,6 +68,7 @@ const useCancelSellOrderSubmit = ({
     organizationRole,
     organizationRbamAddress,
     organizationDaoAddress,
+    feeGranter,
   } = useDashboardContext();
 
   const { roleId, authorizationId: manageSellOrdersAuthId } =
@@ -119,7 +120,7 @@ const useCancelSellOrderSubmit = ({
     const tx = {
       msgs: [finalMsg],
       fee: isOrganizationDashboard ? ('auto' as const) : undefined,
-      feeGranter: isOrganizationDashboard ? organizationDaoAddress : undefined,
+      feeGranter,
     };
 
     try {
@@ -204,7 +205,7 @@ const useCancelSellOrderSubmit = ({
     manageSellOrdersAuthId,
     organizationRbamAddress,
     wallet?.address,
-    organizationDaoAddress,
+    feeGranter,
     signAndBroadcast,
     reactQueryClient,
     queryClient,

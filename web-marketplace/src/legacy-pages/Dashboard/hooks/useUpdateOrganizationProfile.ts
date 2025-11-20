@@ -6,7 +6,6 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { sanitizeDaoParams } from 'legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
@@ -23,7 +22,6 @@ import { timer } from 'utils/timer';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 import useMsgClient from 'hooks/useMsgClient';
@@ -53,8 +51,18 @@ type DaoConfigQuery = {
   };
 };
 
+type RefetchAccountParams = {
+  daoAddress: string;
+  organizationId?: string;
+  sanitizedName: string;
+  sanitizedDescription: string | null;
+  sanitizedProfileImage: string | null;
+  sanitizedBackgroundImage: string | null;
+  sanitizedWebsite: string | null;
+  sanitizedTwitter: string | null;
+};
+
 export const useUpdateOrganizationProfile = () => {
-  const reactQueryClient = useQueryClient();
   const { organizationRole } = useDashboardContext();
   const { wallet, signAndBroadcast } = useMsgClient();
   const { signingCosmWasmClient } = useLedger();
@@ -63,6 +71,95 @@ export const useUpdateOrganizationProfile = () => {
   const { activeAccountId } = useAuth();
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  // TODO: This manual Apollo client querying approach is a temporary workaround for stale cache issues.
+  // The core problem is that we fetch organization profile data via AccountById in Dashboard and drill
+  // it down to EditProfile. This causes the entire dashboard to reload when refetching.
+  // Related tech debt tracked in follow-up task.
+  const refetchAccount = useCallback(
+    async ({
+      daoAddress,
+      organizationId,
+      sanitizedName,
+      sanitizedDescription,
+      sanitizedProfileImage,
+      sanitizedBackgroundImage,
+      sanitizedWebsite,
+      sanitizedTwitter,
+    }: RefetchAccountParams) => {
+      const { AccountByIdDocument } = await import('generated/graphql');
+
+      const maxAttempts = 15;
+      const pollInterval = 500;
+
+      for (let attempts = 0; attempts < maxAttempts; attempts++) {
+        await timer(pollInterval);
+
+        try {
+          // Query GraphQL directly to avoid triggering React Query cache/refetch
+          const { data } = await graphqlClient.query({
+            query: AccountByIdDocument,
+            variables: { id: activeAccountId },
+            fetchPolicy: 'network-only', // Always fetch from network, skip cache
+          });
+
+          const localizedDescription =
+            data?.accountById?.accountTranslationsById.nodes.find(
+              (node: any) => node?.languageCode === selectedLanguage,
+            )?.description ?? data?.accountById?.description;
+
+          const accountData = {
+            ...data,
+            accountById: {
+              ...data.accountById,
+              description: localizedDescription,
+            },
+          };
+
+          const dao =
+            accountData?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+              (node: any) =>
+                node?.address === daoAddress ||
+                (organizationId &&
+                  node?.organizationByDaoAddress?.id === organizationId),
+            );
+
+          const organization = dao?.organizationByDaoAddress;
+
+          const nameMatches = organization?.name === sanitizedName;
+
+          const descriptionMatches =
+            organization?.description === sanitizedDescription;
+
+          const profileImageMatches =
+            organization?.image === sanitizedProfileImage;
+
+          const backgroundImageMatches =
+            organization?.bgImage === sanitizedBackgroundImage;
+
+          const websiteMatches = organization?.websiteLink === sanitizedWebsite;
+
+          const twitterMatches = organization?.twitterLink === sanitizedTwitter;
+
+          if (
+            nameMatches &&
+            descriptionMatches &&
+            profileImageMatches &&
+            backgroundImageMatches &&
+            websiteMatches &&
+            twitterMatches
+          ) {
+            return true;
+          }
+        } catch (error) {
+          continue;
+        }
+      }
+
+      return false;
+    },
+    [graphqlClient, activeAccountId, selectedLanguage],
+  );
 
   return useCallback(
     async ({
@@ -194,75 +291,16 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(result);
       }
 
-      const maxAttempts = 15;
-      const pollInterval = 500;
-      let attempts = 0;
-      let indexerUpdated = false;
-
-      while (attempts < maxAttempts && !indexerUpdated) {
-        attempts++;
-        await timer(pollInterval);
-
-        try {
-          // Query GraphQL directly to avoid triggering React Query cache/refetch
-          const { data } = await graphqlClient.query({
-            query: (await import('generated/graphql')).AccountByIdDocument,
-            variables: { id: activeAccountId },
-            fetchPolicy: 'network-only', // Always fetch from network, skip cache
-          });
-
-          const localizedDescription =
-            data?.accountById?.accountTranslationsById.nodes.find(
-              (node: any) => node?.languageCode === selectedLanguage,
-            )?.description ?? data?.accountById?.description;
-
-          const accountData = {
-            ...data,
-            accountById: {
-              ...data.accountById,
-              description: localizedDescription,
-            },
-          };
-
-          const dao =
-            accountData?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-              (node: any) =>
-                node?.address === daoAddress ||
-                (organizationId &&
-                  node?.organizationByDaoAddress?.id === organizationId),
-            );
-
-          const organization = dao?.organizationByDaoAddress;
-
-          const nameMatches = organization?.name === sanitizedName;
-
-          const descriptionMatches =
-            organization?.description === sanitizedDescription;
-
-          const profileImageMatches =
-            organization?.image === sanitizedProfileImage;
-
-          const backgroundImageMatches =
-            organization?.bgImage === sanitizedBackgroundImage;
-
-          const websiteMatches = organization?.websiteLink === sanitizedWebsite;
-
-          const twitterMatches = organization?.twitterLink === sanitizedTwitter;
-
-          if (
-            nameMatches &&
-            descriptionMatches &&
-            profileImageMatches &&
-            backgroundImageMatches &&
-            websiteMatches &&
-            twitterMatches
-          ) {
-            indexerUpdated = true;
-          }
-        } catch (error) {
-          continue;
-        }
-      }
+      const indexerUpdated = await refetchAccount({
+        daoAddress,
+        organizationId,
+        sanitizedName,
+        sanitizedDescription,
+        sanitizedProfileImage,
+        sanitizedBackgroundImage,
+        sanitizedWebsite,
+        sanitizedTwitter,
+      });
 
       if (!indexerUpdated) {
         throw new Error(
@@ -278,9 +316,7 @@ export const useUpdateOrganizationProfile = () => {
       wallet?.address,
       signingCosmWasmClient,
       _,
-      graphqlClient,
-      activeAccountId,
-      selectedLanguage,
+      refetchAccount,
     ],
   );
 };

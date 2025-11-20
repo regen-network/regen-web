@@ -8,7 +8,6 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { ERRORS, errorsMapping } from 'config/errors';
 import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
 import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
@@ -71,7 +70,6 @@ const EditProfileForm = ({
   initialValues,
   isDirtyRef,
   onSubmit,
-  onSuccess,
   onUpload,
   formId,
   formRef,
@@ -161,11 +159,6 @@ const EditProfileForm = ({
     }
   }, [prefillValues, form]);
 
-  const resolvedProfileImage =
-    watchedProfileImage || initialValues?.profileImage || '';
-  const resolvedBackgroundImage =
-    watchedBackgroundImage || initialValues?.backgroundImage || '';
-
   return (
     <Form
       className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-300 mb-[120px] rounded-[10px]"
@@ -208,11 +201,11 @@ const EditProfileForm = ({
         titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         circularCrop
         onUpload={onUpload}
-        value={resolvedProfileImage}
+        value={watchedProfileImage ?? undefined}
       >
         <ImageFieldAvatar
-          key={resolvedProfileImage || 'profile-image-placeholder'}
-          value={resolvedProfileImage}
+          key={watchedProfileImage || 'profile-image-placeholder'}
+          value={watchedProfileImage ?? ''}
         />
       </ImageField>
       <ImageField
@@ -232,11 +225,11 @@ const EditProfileForm = ({
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}
-        value={resolvedBackgroundImage}
+        value={watchedBackgroundImage ?? undefined}
       >
         <ImageFieldBackground
-          key={resolvedBackgroundImage || 'background-image-placeholder'}
-          value={resolvedBackgroundImage}
+          key={watchedBackgroundImage || 'background-image-placeholder'}
+          value={watchedBackgroundImage ?? ''}
         />
       </ImageField>
       <TextAreaField

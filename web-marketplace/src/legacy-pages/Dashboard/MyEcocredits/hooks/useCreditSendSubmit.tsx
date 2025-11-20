@@ -60,6 +60,7 @@ const useCreditSendSubmit = ({
     organizationRole,
     organizationRbamAddress,
     organizationDaoAddress,
+    feeGranter,
   } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
@@ -142,9 +143,7 @@ const useCreditSendSubmit = ({
       const tx = {
         msgs: [finalMsg],
         fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
-        feeGranter: isOrganizationDashboard
-          ? organizationDaoAddress
-          : undefined,
+        feeGranter,
       };
 
       const batchInfo = credits[creditSendOpen];
@@ -213,7 +212,7 @@ const useCreditSendSubmit = ({
       track,
       accountAddress,
       isOrganizationDashboard,
-      organizationDaoAddress,
+      feeGranter,
       signAndBroadcast,
       roleId,
       organizationRbamAddress,

@@ -60,6 +60,7 @@ const useBasketTakeSubmit = ({
     organizationRole,
     organizationRbamAddress,
     organizationDaoAddress,
+    feeGranter,
   } = useDashboardContext();
 
   const { roleId, authorizationId: manageCreditsAuthId } =
@@ -129,9 +130,7 @@ const useBasketTakeSubmit = ({
       const tx = {
         msgs: [finalMsg],
         fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
-        feeGranter: isOrganizationDashboard
-          ? organizationDaoAddress
-          : undefined,
+        feeGranter,
       };
 
       const onError = (err?: Error): void => {
@@ -181,7 +180,7 @@ const useBasketTakeSubmit = ({
       baskets,
       track,
       isOrganizationDashboard,
-      organizationDaoAddress,
+      feeGranter,
       signAndBroadcast,
       roleId,
       organizationRbamAddress,

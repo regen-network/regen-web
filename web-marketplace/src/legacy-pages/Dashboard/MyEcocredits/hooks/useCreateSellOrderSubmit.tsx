@@ -77,6 +77,7 @@ const useCreateSellOrderSubmit = ({
     organizationRole,
     organizationRbamAddress,
     organizationDaoAddress,
+    feeGranter,
   } = useDashboardContext();
 
   const { roleId, authorizationId: manageSellOrdersAuthId } =
@@ -157,9 +158,7 @@ const useCreateSellOrderSubmit = ({
           | 'auto'
           | undefined, // RBAM transactions need auto gas estimation
         memo: undefined,
-        feeGranter: isOrganizationDashboard
-          ? organizationDaoAddress
-          : undefined,
+        feeGranter,
       };
 
       const batchInfo = credits?.find(batch => batch.denom === batchDenom);
@@ -312,7 +311,7 @@ const useCreateSellOrderSubmit = ({
     [
       accountAddress,
       isOrganizationDashboard,
-      organizationDaoAddress,
+      feeGranter,
       credits,
       signAndBroadcast,
       onTxBroadcast,

@@ -305,6 +305,9 @@ export const Dashboard = () => {
       isOrganizationAdmin,
       isOrganizationEditor,
       isOrganizationViewer,
+      feeGranter: isOrganizationDashboard
+        ? organizationAccount?.address ?? undefined
+        : undefined,
     }),
     [
       isCreditClassCreator,

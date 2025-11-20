@@ -2,10 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
-import {
-  MsgUpdateProjectAdmin,
-  MsgUpdateProjectMetadata,
-} from '@regen-network/api/regen/ecocredit/v1/tx';
+
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import {
   getRoleAuthorizationIds,

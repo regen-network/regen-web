@@ -151,6 +151,7 @@ export const useOrganizationFlow = ({
       // Trigger current step's form submission
       await currentFormRef.current.submitForm();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStep, steps, setSendRegenModalOpen]);
 
   const completeCreation = useCallback(() => {

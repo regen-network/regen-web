@@ -30,7 +30,6 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   height = 'h-50',
   fullWidth = false,
 }) => {
-  console.log('roleOptions', roleOptions);
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => {

@@ -1,8 +1,8 @@
-import { getBalanceQueryKey } from './getBalanceQuery.utils';
 import {
   ReactQueryBalanceProps,
   ReactQueryBalanceResponse,
 } from './getBalanceQuery.types';
+import { getBalanceQueryKey } from './getBalanceQuery.utils';
 
 export const getBalanceQuery = ({
   client,

@@ -16,6 +16,7 @@ import {
 import { Body } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
+import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
@@ -28,7 +29,7 @@ import { Member } from 'components/organisms/OrganizationMembers/OrganizationMem
 import { useUpdateMembers } from 'hooks/org-members';
 
 import { useSaveProfile } from '../hooks/useSaveProfile';
-import { useLedger } from 'ledger';
+
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<

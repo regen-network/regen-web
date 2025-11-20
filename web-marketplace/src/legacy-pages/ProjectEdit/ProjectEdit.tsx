@@ -2,7 +2,6 @@ import {
   createContext,
   MutableRefObject,
   useContext,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -55,7 +54,7 @@ import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { getCanEditProjectWithRole } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
@@ -93,7 +92,7 @@ function ProjectEdit(): JSX.Element {
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { wallet } = useWallet();
-  const { activeAccountId, activeAccount } = useAuth();
+  const { activeAccountId } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const section = usePathSection();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<

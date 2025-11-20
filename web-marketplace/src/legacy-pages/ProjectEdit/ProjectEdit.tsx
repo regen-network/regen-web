@@ -214,7 +214,7 @@ function ProjectEdit(): JSX.Element {
     projectId,
     admin: onChainProject?.admin,
     adminDao: offChainProject?.daoByAdminDaoAddress,
-    role,
+    currentUserRole: role,
     feeGranter,
     creditClassId: onChainProject?.classId,
     signAndBroadcast,

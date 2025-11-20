@@ -54,6 +54,7 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getCanEditProjectWithRole } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
 import useProjectEditSubmit, {
@@ -62,7 +63,6 @@ import useProjectEditSubmit, {
 import { EDIT_PROJECT } from './ProjectEdit.constants';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 type ContextType = {
   confirmSave?: () => void;

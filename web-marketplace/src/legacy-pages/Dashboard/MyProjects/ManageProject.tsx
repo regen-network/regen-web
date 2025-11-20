@@ -9,6 +9,7 @@ import {
   NOT_SUPPORTED_TOOLTIP_TEXT,
 } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
+import { Loading } from 'web-components/src/components/loading';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 
 import { useAuth } from 'lib/auth/auth';
@@ -26,7 +27,6 @@ import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/
 
 import { useFetchProject } from './hooks/useFetchProject';
 import { canAccessManageProjectWithRole } from './MyProjects.utils';
-import { Loading } from 'web-components/src/components/loading';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();

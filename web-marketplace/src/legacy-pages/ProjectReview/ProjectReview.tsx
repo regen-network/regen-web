@@ -115,8 +115,6 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   ): Promise<void> => {
     setDeliverTxResponse(_deliverTxResponse);
     const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
-    console.log('projectOnChainId', projectOnChainId);
-    console.log('_deliverTxResponse', _deliverTxResponse);
 
     if (projectId) {
       await updateProject({

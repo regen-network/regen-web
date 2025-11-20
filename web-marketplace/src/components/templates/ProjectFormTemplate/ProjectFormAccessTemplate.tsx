@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';

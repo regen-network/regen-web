@@ -7,6 +7,12 @@ import {
   MsgUpdateProjectMetadata,
 } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import {
+  getRoleAuthorizationIds,
+  updateProjectAdminAction,
+  updateProjectMetadataAction,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
 import { ProjectFieldsFragment } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
@@ -14,21 +20,15 @@ import { useAuth } from 'lib/auth/auth';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
+import { useWallet } from 'lib/wallet/wallet';
 
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
   PROJECT_UPDATE_METADATA_LABEL,
   PROJECT_UPDATED_METADATA_HEADER,
 } from '../ProjectEdit.constants';
-import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import {
-  getRoleAuthorizationIds,
-  updateProjectMetadataAction,
-  updateProjectAdminAction,
-  wrapRbamActions,
-} from 'utils/rbam.utils';
-import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
   projectId?: string;
@@ -199,6 +199,9 @@ const useProjectEditSubmit = ({
       authorizationId,
       roleId,
       adminDao?.address,
+      feeGranter,
+      wallet?.address,
+      adminDao?.daoRbamAddress,
     ],
   );
 

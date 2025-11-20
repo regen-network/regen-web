@@ -166,11 +166,7 @@ export const useMigrateProjects = (
           });
         }),
       );
-      console.log(
-        'updateOffChainAdminRes',
-        selectedProjectsWithAddresses,
-        updateOffChainAdminRes,
-      );
+
       updateOffChainAdminRes.forEach((result, idx) => {
         if (result.status === 'rejected') {
           setErrorBannerText(

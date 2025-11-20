@@ -49,6 +49,9 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { orgRoles } from 'hooks/org-members/constants';
@@ -67,6 +70,7 @@ import {
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
 import { getSelectedCardSellOrdersWithNewIds } from './useMigrateProjects.utils';
+import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 export const useMigrateProjects = (
   projects: NormalizeProject[],
@@ -221,12 +225,25 @@ export const useMigrateProjects = (
 
   const reloadData = useCallback(
     async (selectedProjects: NormalizeProject[]) => {
-      // TODO refetch offchain/onchain selectedProjects
+      selectedProjects.forEach(async project => {
+        if (project.offChainId)
+          await reactQueryClient.invalidateQueries({
+            queryKey: getProjectByIdKey(project.offChainId),
+            refetchType: 'all',
+          });
+        const isOnChainId = getIsOnChainId(project.id);
+        if (isOnChainId) {
+          await reactQueryClient.invalidateQueries({
+            queryKey: getProjectByOnChainIdKey(project.id),
+            refetchType: 'all',
+          });
+          await reactQueryClient.invalidateQueries({
+            queryKey: getProjectKey(project.id),
+            refetchType: 'all',
+          });
+        }
+      });
       if (wallet?.address) {
-        await reactQueryClient.invalidateQueries({
-          queryKey: [GET_ACCOUNTS_QUERY_KEY],
-          refetchType: 'all',
-        });
         await reactQueryClient.invalidateQueries({
           queryKey: getSellOrdersBySellerKey(wallet?.address),
           refetchType: 'all',
@@ -237,20 +254,26 @@ export const useMigrateProjects = (
           }),
           refetchType: 'all',
         });
-        await reactQueryClient.invalidateQueries({
-          queryKey: getAccountProjectsByIdQueryKey({
-            id: activeAccountId,
-          }),
-          refetchType: 'all',
-        });
-        await reactQueryClient.invalidateQueries({
-          queryKey: getAssignmentsWithProjectsQueryKey({
-            id: activeAccountId,
-          }),
-          refetchType: 'all',
-        });
-        reloadBalances();
       }
+
+      await reactQueryClient.invalidateQueries({
+        queryKey: [GET_ACCOUNTS_QUERY_KEY],
+        refetchType: 'all',
+      });
+
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAccountProjectsByIdQueryKey({
+          id: activeAccountId,
+        }),
+        refetchType: 'all',
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAssignmentsWithProjectsQueryKey({
+          id: activeAccountId,
+        }),
+        refetchType: 'all',
+      });
+      reloadBalances();
     },
     [reactQueryClient, wallet?.address, activeAccountId, reloadBalances],
   );

@@ -166,6 +166,11 @@ export const useMigrateProjects = (
           });
         }),
       );
+      console.log(
+        'updateOffChainAdminRes',
+        selectedProjectsWithAddresses,
+        updateOffChainAdminRes,
+      );
       updateOffChainAdminRes.forEach((result, idx) => {
         if (result.status === 'rejected') {
           setErrorBannerText(
@@ -218,37 +223,41 @@ export const useMigrateProjects = (
     [setErrorBannerText, updateSellOrder, _],
   );
 
-  const reloadData = useCallback(async () => {
-    if (wallet?.address) {
-      await reactQueryClient.invalidateQueries({
-        queryKey: [GET_ACCOUNTS_QUERY_KEY],
-        refetchType: 'all',
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getSellOrdersBySellerKey(wallet?.address),
-        refetchType: 'all',
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getProjectsByAdminKey({
-          admin: wallet?.address,
-        }),
-        refetchType: 'all',
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountProjectsByIdQueryKey({
-          id: activeAccountId,
-        }),
-        refetchType: 'all',
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAssignmentsWithProjectsQueryKey({
-          id: activeAccountId,
-        }),
-        refetchType: 'all',
-      });
-      reloadBalances();
-    }
-  }, [reactQueryClient, wallet?.address, activeAccountId, reloadBalances]);
+  const reloadData = useCallback(
+    async (selectedProjects: NormalizeProject[]) => {
+      // TODO refetch offchain/onchain selectedProjects
+      if (wallet?.address) {
+        await reactQueryClient.invalidateQueries({
+          queryKey: [GET_ACCOUNTS_QUERY_KEY],
+          refetchType: 'all',
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getSellOrdersBySellerKey(wallet?.address),
+          refetchType: 'all',
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getProjectsByAdminKey({
+            admin: wallet?.address,
+          }),
+          refetchType: 'all',
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAccountProjectsByIdQueryKey({
+            id: activeAccountId,
+          }),
+          refetchType: 'all',
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAssignmentsWithProjectsQueryKey({
+            id: activeAccountId,
+          }),
+          refetchType: 'all',
+        });
+        reloadBalances();
+      }
+    },
+    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances],
+  );
 
   const migrateProjects = useCallback(
     async (values: FormValues) => {
@@ -512,7 +521,7 @@ export const useMigrateProjects = (
                 }
               }
 
-              await reloadData();
+              await reloadData(selectedProjects);
               if (handleSaveNext && data)
                 handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));

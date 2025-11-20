@@ -57,7 +57,7 @@ const ProjectDashboardBanner = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-  console.log('project', project);
+
   const truncatedPlace = truncateEnd(
     project.place ?? '',
     isMobile ? MAX_ADDRESS_LENGTH_MOBILE : MAX_ADDRESS_LENGTH_DESKTOP,

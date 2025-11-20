@@ -26,6 +26,7 @@ import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/
 
 import { useFetchProject } from './hooks/useFetchProject';
 import { canAccessManageProjectWithRole } from './MyProjects.utils';
+import { Loading } from 'web-components/src/components/loading';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -106,6 +107,8 @@ const ManageProject = () => {
   const canEditProject =
     role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR;
   const canCreatePost = canEditProject || role === ROLE_AUTHOR;
+
+  if (isLoading) return <Loading />;
 
   if (!isLoading && !canAccessManageProject) return null; // TODO show 403 page (design?) or navigate back to My Projects
 

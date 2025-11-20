@@ -191,7 +191,8 @@ export const normalizeProjectWithMetadata = ({
       (projectWithOrderData as NormalizeProject)?.ecosystemType,
     offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
-    draft: !projectWithOrderData && !offChainProject?.published,
+    draft:
+      !projectWithOrderData && offChainProject && !offChainProject.published,
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||
@@ -236,7 +237,7 @@ export const normalizeProjectWithMetadata = ({
       creditsRetired: 0,
       creditsRegistered: 0,
     },
-    offChain: !offChainProject?.onChainId,
+    offChain: offChainProject && !offChainProject?.onChainId,
     adminDaoAddress: offChainProject?.daoByAdminDaoAddress?.address,
     adminDaoRbamAddress: offChainProject?.daoByAdminDaoAddress?.daoRbamAddress,
     adminDaoCw4GroupAddress:

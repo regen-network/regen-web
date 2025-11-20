@@ -33,9 +33,6 @@ const ListProject = () => {
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({ createProject: true, isConnectingRef });
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
-    address: activeAccount?.addr,
-  });
   const { queryClient } = useLedger();
 
   // Populate cache with user balance once connected
@@ -49,26 +46,19 @@ const ListProject = () => {
 
   return (
     <>
-      {!isLoadingIsIssuer && (
-        <Body
-          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer mb-3 pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] text-right"
-          sx={{
-            textFillColor: 'transparent',
-          }}
-          onClick={
-            activeAccountId
-              ? () =>
-                  navigate(
-                    `/project-pages/${DRAFT_ID}/${
-                      isIssuer ? 'choose-credit-class' : 'basic-info'
-                    }`,
-                  )
-              : onButtonClick
-          }
-        >
-          {_(CREATE_PROJECT)}
-        </Body>
-      )}
+      <Body
+        className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer mb-3 pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] text-right"
+        sx={{
+          textFillColor: 'transparent',
+        }}
+        onClick={
+          activeAccountId
+            ? () => navigate(`/project-pages/${DRAFT_ID}/account`)
+            : onButtonClick
+        }
+      >
+        {_(CREATE_PROJECT)}
+      </Body>
       <LoginFlow
         isConnectingRef={isConnectingRef}
         isModalOpen={isModalOpen}

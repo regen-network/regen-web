@@ -74,6 +74,9 @@ const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
 const ChooseCreditClassPage = safeLazy(
   () => import('../../legacy-pages/ChooseCreditClass'),
 );
+const ProjectAccountPage = safeLazy(
+  () => import('../../legacy-pages/ProjectAccount'),
+);
 const CreateCreditClass = safeLazy(
   () => import('../../legacy-pages/CreateCreditClass'),
 );
@@ -338,6 +341,10 @@ export const getRegenRoutes = ({
           />
           <Route path="project-pages">
             <Route path=":projectId" element={<ProjectCreate />}>
+              <Route
+                path="account"
+                element={<AuthRoute component={ProjectAccountPage} />}
+              />
               <Route
                 path="choose-credit-class"
                 element={<KeplrRoute component={ChooseCreditClassPage} />}

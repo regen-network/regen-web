@@ -8,7 +8,6 @@ import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
-import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { getWalletsUiConfig } from '../LoginButton.utils';
 import { useConnectToWallet } from './useConnectToWallet';
@@ -28,10 +27,7 @@ export const useLoginData = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalState, setModalState] = useState<LoginModalState>('select');
 
-  const { activeAccountId, activeAccount } = useAuth();
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
-    address: activeAccount?.addr,
-  });
+  const { activeAccountId } = useAuth();
   const navigate = useNavigate();
 
   const onButtonClick = useCallback(
@@ -64,23 +60,11 @@ export const useLoginData = ({
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });
 
   useEffect(() => {
-    if (!isLoadingIsIssuer && isConnectingRef?.current && activeAccountId) {
-      if (createProject)
-        navigate(
-          `/project-pages/${DRAFT_ID}/${
-            isIssuer ? 'choose-credit-class' : 'basic-info'
-          }`,
-        );
+    if (isConnectingRef?.current && activeAccountId) {
+      if (createProject) navigate(`/project-pages/${DRAFT_ID}/account`);
       isConnectingRef.current = false;
     }
-  }, [
-    activeAccountId,
-    createProject,
-    isConnectingRef,
-    isIssuer,
-    isLoadingIsIssuer,
-    navigate,
-  ]);
+  }, [activeAccountId, createProject, isConnectingRef, navigate]);
 
   return {
     isModalOpen,

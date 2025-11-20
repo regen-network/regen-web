@@ -86,24 +86,25 @@ const MyProjects = (): JSX.Element => {
   }, [adminProjects, setProjectsDraftState]);
 
   return (
-    <Grid container spacing={8}>
-      {activeAccountId && (
-        <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            buttonText={MY_PROJECTS_BUTTON_TEXT}
-            emptyTitle={MY_PROJECTS_EMPTY_TITLE}
-            isFirstProject={isFirstProject}
-            onClick={() => {
-              if (isIssuer) {
-                navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
-              } else {
-                navigate(`/project-pages/${DRAFT_ID}/basic-info`);
-              }
-            }}
-            sx={{ height: { xs: '100%' } }}
-          />
-        </Grid>
-      )}
+    <>
+      <Grid container spacing={8}>
+        {activeAccountId && (
+          <Grid item xs={12} md={6} lg={4}>
+            <CreateProjectCard
+              buttonText={MY_PROJECTS_BUTTON_TEXT}
+              emptyTitle={MY_PROJECTS_EMPTY_TITLE}
+              isFirstProject={isFirstProject}
+              onClick={() => {
+                if (isIssuer) {
+                  navigate(`/project-pages/${DRAFT_ID}/account`);
+                } else {
+                  navigate(`/project-pages/${DRAFT_ID}/basic-info`);
+                }
+              }}
+              sx={{ height: { xs: '100%' } }}
+            />
+          </Grid>
+        )}
 
       {adminProjects &&
         adminProjects.length > 0 &&

@@ -10,6 +10,9 @@ type Props = {
   title: string;
   activeStep: number;
   loading?: boolean;
+  classes?: {
+    formWrap?: string;
+  };
 };
 
 const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
@@ -17,7 +20,11 @@ const OnboardingFormTemplate: React.FC<React.PropsWithChildren<Props>> =
     return (
       <Box sx={{ bgcolor: 'grey.50' }}>
         <PlanStepper activeStep={props.activeStep} />
-        <OnBoardingSection title={props.title} formContainer>
+        <OnBoardingSection
+          title={props.title}
+          formContainer
+          classes={props.classes}
+        >
           {props.loading ? (
             <Loading />
           ) : (

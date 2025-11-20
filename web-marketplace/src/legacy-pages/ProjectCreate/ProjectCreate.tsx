@@ -1,7 +1,22 @@
-import { createContext, MutableRefObject, useRef, useState } from 'react';
-import { Outlet, useOutletContext, useParams } from 'react-router-dom';
+import {
+  createContext,
+  MutableRefObject,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
+import {
+  Outlet,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
+
+import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
@@ -19,6 +34,10 @@ type ContextType = {
   isDraftRef?: MutableRefObject<boolean>;
   hasModalBeenViewed?: boolean;
   setHasModalBeenViewed: (state: boolean) => void;
+  projectCreatorAddress?: string;
+  setProjectCreatorAddress: (address?: string) => void;
+  isOrganizationAccount?: boolean;
+  setIsOrganizationAccount: (isOrg: boolean) => void;
 };
 
 const defaultProjectCreateContext = createContext<ContextType>({
@@ -33,9 +52,17 @@ const defaultProjectCreateContext = createContext<ContextType>({
   isDraftRef: undefined,
   hasModalBeenViewed: false,
   setHasModalBeenViewed: () => {},
+  projectCreatorAddress: undefined,
+  setProjectCreatorAddress: () => void 0,
+  isOrganizationAccount: false,
+  setIsOrganizationAccount: () => void 0,
 });
 
 export const ProjectCreate = (): JSX.Element => {
+  const { _ } = useLingui();
+  const navigate = useNavigate();
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
+
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
@@ -43,6 +70,9 @@ export const ProjectCreate = (): JSX.Element => {
   const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
+  const [projectCreatorAddress, setProjectCreatorAddress] = useState<string>();
+  const [isOrganizationAccount, setIsOrganizationAccount] =
+    useState<boolean>(false);
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
     projectsState?.find(project => project.id === projectId)?.draft,
   );
@@ -50,22 +80,42 @@ export const ProjectCreate = (): JSX.Element => {
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
 
+  const handleRequestClose = useCallback(() => {
+    setShowDiscardModal(false);
+    navigate('/dashboard', { replace: true });
+  }, [navigate]);
   return (
-    <Outlet
-      context={{
-        deliverTxResponse,
-        setDeliverTxResponse,
-        creditClassId,
-        setCreditClassId,
-        creditClassOnChainId,
-        setCreditClassOnChainId,
-        formRef,
-        shouldNavigateRef,
-        isDraftRef,
-        hasModalBeenViewed,
-        setHasModalBeenViewed,
-      }}
-    />
+    <>
+      <div className="bg-bc-neutral-100 min-h-[100vh] relative">
+        <button
+          type="button"
+          aria-label={_(msg`Close project creation`)}
+          onClick={handleRequestClose}
+          className="absolute top-0 right-0 mt-10 mr-10 z-50 p-8 rounded-full border-none bg-transparent hover:bg-bc-neutral-200 transition-colors cursor-pointer"
+        >
+          <CloseIcon className="w-24 h-24 text-bc-neutral-600" />
+        </button>
+        <Outlet
+          context={{
+            deliverTxResponse,
+            setDeliverTxResponse,
+            creditClassId,
+            setCreditClassId,
+            creditClassOnChainId,
+            setCreditClassOnChainId,
+            formRef,
+            shouldNavigateRef,
+            isDraftRef,
+            hasModalBeenViewed,
+            setHasModalBeenViewed,
+            projectCreatorAddress,
+            setProjectCreatorAddress,
+            isOrganizationAccount,
+            setIsOrganizationAccount,
+          }}
+        />
+      </div>
+    </>
   );
 };
 

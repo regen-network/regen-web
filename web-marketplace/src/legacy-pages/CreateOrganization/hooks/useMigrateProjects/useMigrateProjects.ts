@@ -47,8 +47,9 @@ import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
-import { useWallet } from 'lib/wallet/wallet';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
+import { useWallet } from 'lib/wallet/wallet';
+
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { orgRoles } from 'hooks/org-members/constants';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';

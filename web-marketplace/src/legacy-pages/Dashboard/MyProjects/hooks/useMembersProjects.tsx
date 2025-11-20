@@ -47,27 +47,9 @@ export const useMembersProjects = (accountId?: string, disabled = false) => {
     [allMemberProjects, dao],
   );
 
-  const organizationMemberProjects = useMemo(() => {
-    if (!allMemberProjects) return allMemberProjects;
-    if (!externalMemberProjects?.length) return allMemberProjects;
-
-    const externalIds = new Set(
-      externalMemberProjects.map(project => project?.id).filter(id => !!id),
-    );
-
-    if (!externalIds.size) return allMemberProjects;
-
-    return allMemberProjects.filter(project => {
-      const projectId = project?.id;
-      return projectId ? !externalIds.has(projectId) : true;
-    });
-  }, [allMemberProjects, externalMemberProjects]);
-
   return {
     allMemberProjects,
     externalMemberProjects,
-    organizationMemberProjects,
     isAssignmentsLoading,
-    organizationDaoAddress: dao?.address,
   };
 };

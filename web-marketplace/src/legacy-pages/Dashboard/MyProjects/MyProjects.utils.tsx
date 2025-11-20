@@ -16,6 +16,7 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import { Wallet } from 'lib/wallet/wallet';
 
 import { ROLE_ADMIN } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
 import { useFetchProject } from './hooks/useFetchProject';
@@ -110,10 +111,10 @@ export const canAccessManageProjectWithRole = ({
 
   return {
     canAccessManageProject: isAccountAdmin || isProjectCollaborator,
-    role: isProjectCollaborator
+    role: (isProjectCollaborator
       ? activeAccountRole
       : isAccountAdmin
       ? ROLE_ADMIN
-      : undefined,
+      : undefined) as ProjectRole | undefined,
   };
 };

@@ -62,6 +62,7 @@ import useProjectEditSubmit, {
 import { EDIT_PROJECT } from './ProjectEdit.constants';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 type ContextType = {
   confirmSave?: () => void;
@@ -99,6 +100,7 @@ function ProjectEdit(): JSX.Element {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
   const { queryClient } = useLedger();
+  const dao = useDaoOrganization();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -195,10 +197,25 @@ function ProjectEdit(): JSX.Element {
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;
 
+  // If user is external project collaborator (not part of org, only project)
+  // he needs to pay for tx fees
+  // Else if user part of organization, fees are handled by organization throught feegrant
+  const adminDao = offChainProject?.daoByAdminDaoAddress;
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+  const feeGranter =
+    adminDao?.address &&
+    projectOrgId &&
+    dao?.organizationByDaoAddress?.id === projectOrgId
+      ? dao?.address
+      : undefined;
+
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
     admin: onChainProject?.admin,
     adminDao: offChainProject?.daoByAdminDaoAddress,
+    role,
+    feeGranter,
     creditClassId: onChainProject?.classId,
     signAndBroadcast,
     onBroadcast,

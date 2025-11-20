@@ -1,4 +1,3 @@
-import { regen } from '@regen-network/api';
 import {
   MsgPut,
   MsgTake,

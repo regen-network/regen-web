@@ -13,7 +13,7 @@ type GetCanEditProjectParams = CanAccessManageProjectWithRoleParams & {
   isLoading: boolean;
 };
 
-export const getCanEditProject = ({
+export const getCanEditProjectWithRole = ({
   onChainProject,
   offChainProject,
   activeAccountId,
@@ -28,10 +28,12 @@ export const getCanEditProject = ({
     activeAccount,
     wallet,
   });
-  return (
-    role === ROLE_OWNER ||
-    role === ROLE_ADMIN ||
-    role === ROLE_EDITOR ||
-    isLoading
-  );
+  return {
+    canEdit:
+      role === ROLE_OWNER ||
+      role === ROLE_ADMIN ||
+      role === ROLE_EDITOR ||
+      isLoading,
+    role,
+  };
 };

@@ -6,20 +6,20 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 
-import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQueryByAccountId.ts/getAssignmentsWithProjectQueryByAccountId';
+import { getAssignmentsWithProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery';
 
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-export const useMembersProjects = (accountId?: string) => {
+export const useMembersProjects = (accountId?: string, disabled = false) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const dao = useDaoOrganization();
 
   const { data: assignmentsData, isFetching: isAssignmentsLoading } = useQuery(
-    getAssignmentsWithProjectsByAccountIdQuery({
+    getAssignmentsWithProjectsQuery({
       id: accountId,
       client: graphqlClient,
-      enabled: accountId !== undefined,
+      enabled: accountId !== undefined && !disabled,
     }),
   );
   const allMemberProjects = useMemo(
@@ -47,9 +47,27 @@ export const useMembersProjects = (accountId?: string) => {
     [allMemberProjects, dao],
   );
 
+  const organizationMemberProjects = useMemo(() => {
+    if (!allMemberProjects) return allMemberProjects;
+    if (!externalMemberProjects?.length) return allMemberProjects;
+
+    const externalIds = new Set(
+      externalMemberProjects.map(project => project?.id).filter(id => !!id),
+    );
+
+    if (!externalIds.size) return allMemberProjects;
+
+    return allMemberProjects.filter(project => {
+      const projectId = project?.id;
+      return projectId ? !externalIds.has(projectId) : true;
+    });
+  }, [allMemberProjects, externalMemberProjects]);
+
   return {
     allMemberProjects,
     externalMemberProjects,
+    organizationMemberProjects,
     isAssignmentsLoading,
+    organizationDaoAddress: dao?.address,
   };
 };

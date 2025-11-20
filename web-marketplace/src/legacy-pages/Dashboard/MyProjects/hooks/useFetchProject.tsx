@@ -95,7 +95,7 @@ export const useFetchProject = () => {
   const project = {
     ...normalizeProjectWithMetadata({
       offChainProject,
-      projectMetadata: anchoredMetadata as
+      projectMetadata: (anchoredMetadata || offChainProject?.metadata) as
         | AnchoredProjectMetadataLD
         | undefined,
       projectPageMetadata: offChainProject?.metadata,

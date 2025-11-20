@@ -8,10 +8,10 @@ import {
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
-export type ReactQueryGetAssignmentsWithProjectsByAccountIdQueryResponse =
+export type ReactQueryGetAssignmentsWithProjectsQueryResponse =
   QueryObserverOptions<AssignmentsWithProjectsByAccountIdQuery>;
 
-export type ReactQueryGetAssignmentsWithProjectsByAccountIdQueryParams = {
+export type ReactQueryGetAssignmentsWithProjectsQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;
 } & AssignmentsWithProjectsByAccountIdQueryVariables &
-  ReactQueryBuilderResponse<ReactQueryGetAssignmentsWithProjectsByAccountIdQueryResponse>;
+  ReactQueryBuilderResponse<ReactQueryGetAssignmentsWithProjectsQueryResponse>;

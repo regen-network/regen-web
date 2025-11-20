@@ -52,7 +52,7 @@ import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import { getCanEditProjectWithRole } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
@@ -172,9 +172,9 @@ function ProjectEdit(): JSX.Element {
   const isLoading =
     isFetchingProject || isFetchingProjectById || isFetchingProjectByOnChainId;
 
-  const canEdit = useMemo(
+  const { canEdit, role } = useMemo(
     () =>
-      getCanEditProject({
+      getCanEditProjectWithRole({
         onChainProject,
         offChainProject,
         activeAccountId,

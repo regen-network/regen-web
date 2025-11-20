@@ -7,7 +7,7 @@ import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import { getCanEditProjectWithRole } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
@@ -32,9 +32,9 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   const { wallet } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
 
-  const canEdit = useMemo(
+  const { canEdit } = useMemo(
     () =>
-      getCanEditProject({
+      getCanEditProjectWithRole({
         onChainProject,
         offChainProject,
         activeAccountId,

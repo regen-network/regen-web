@@ -48,7 +48,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
-
+import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { orgRoles } from 'hooks/org-members/constants';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
@@ -235,6 +235,12 @@ export const useMigrateProjects = (
       });
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountProjectsByIdQueryKey({
+          id: activeAccountId,
+        }),
+        refetchType: 'all',
+      });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAssignmentsWithProjectsQueryKey({
           id: activeAccountId,
         }),
         refetchType: 'all',

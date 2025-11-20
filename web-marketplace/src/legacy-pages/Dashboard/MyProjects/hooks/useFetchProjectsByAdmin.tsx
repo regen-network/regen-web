@@ -181,25 +181,21 @@ export const useFetchProjectByAdmin = ({
     onlyOffChainProjects?.map((project, index) => {
       const sanityProject = sanityProjects?.[index];
 
-      return {
-        offChain: true,
-        published: !!project?.published,
-        ...normalizeProjectWithMetadata({
-          offChainProject: project,
-          projectMetadata: project?.metadata,
-          projectPageMetadata: project?.metadata,
-          programAccount:
-            project?.creditClassByCreditClassId?.accountByRegistryId,
-          sanityClass: findSanityCreditClass({
-            sanityCreditClassData,
-            creditClassIdOrUrl:
-              project?.creditClassByCreditClassId?.onChainId ??
-              project?.metadata?.['regen:creditClassId'] ??
-              '',
-          }),
-          sanityProject,
+      return normalizeProjectWithMetadata({
+        offChainProject: project,
+        projectMetadata: project?.metadata,
+        projectPageMetadata: project?.metadata,
+        programAccount:
+          project?.creditClassByCreditClassId?.accountByRegistryId,
+        sanityClass: findSanityCreditClass({
+          sanityCreditClassData,
+          creditClassIdOrUrl:
+            project?.creditClassByCreditClassId?.onChainId ??
+            project?.metadata?.['regen:creditClassId'] ??
+            '',
         }),
-      };
+        sanityProject,
+      });
     }) ?? [];
 
   const projects = [

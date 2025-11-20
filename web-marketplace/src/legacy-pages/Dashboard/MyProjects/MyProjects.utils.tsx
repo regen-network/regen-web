@@ -61,13 +61,13 @@ export const handleProjectsDraftStatus = (
       // Project does not exist, add it
       newState.push({
         id: project.id,
-        draft: project.offChain && !project.published,
+        draft: project.offChain && project.draft,
       });
     } else {
       // Project exists, update its 'draft' status
       newState[projectIndex] = {
         ...newState[projectIndex],
-        draft: project.offChain && !project.published,
+        draft: project.offChain && project.draft,
       };
     }
   });

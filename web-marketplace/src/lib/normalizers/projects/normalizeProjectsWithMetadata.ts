@@ -83,7 +83,7 @@ export const normalizeProjectsWithMetadata = ({
 type OffChainProjectToNormalize = Maybe<
   Pick<
     ProjectFieldsFragment,
-    'id' | 'slug' | 'published' | 'daoByAdminDaoAddress'
+    'id' | 'slug' | 'published' | 'daoByAdminDaoAddress' | 'onChainId'
   > &
     ProjectSellOrdersFieldsFragment
 >;
@@ -236,6 +236,7 @@ export const normalizeProjectWithMetadata = ({
       creditsRetired: 0,
       creditsRegistered: 0,
     },
+    offChain: !offChainProject?.onChainId,
     adminDaoAddress: offChainProject?.daoByAdminDaoAddress?.address,
     adminDaoRbamAddress: offChainProject?.daoByAdminDaoAddress?.daoRbamAddress,
     adminDaoCw4GroupAddress:

@@ -10,16 +10,16 @@ import { getAssignmentsWithProjectsByAccountIdQuery } from 'lib/queries/react-qu
 
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-export const useMembersProjects = (adminAccountId?: string) => {
+export const useMembersProjects = (accountId?: string) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const dao = useDaoOrganization();
 
   const { data: assignmentsData, isFetching: isAssignmentsLoading } = useQuery(
     getAssignmentsWithProjectsByAccountIdQuery({
-      id: adminAccountId,
+      id: accountId,
       client: graphqlClient,
-      enabled: adminAccountId !== undefined,
+      enabled: accountId !== undefined,
     }),
   );
   const allMemberProjects = useMemo(

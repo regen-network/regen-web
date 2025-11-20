@@ -202,7 +202,7 @@ const ProjectDashboardBanner = ({
                   onClick={() => {
                     if (
                       !project.offChain ||
-                      (project.offChain && project.published)
+                      (project.offChain && !project.draft)
                     ) {
                       navigate(`/project-pages/${project.id}/edit/basic-info`);
                     } else {

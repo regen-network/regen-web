@@ -11,7 +11,7 @@ export interface ProjectBannerProps {
     | 'imgSrc'
     | 'slug'
     | 'adminDaoAddress'
-    | 'published'
+    | 'draft'
     | 'offChain'
   >;
   canEdit?: boolean;

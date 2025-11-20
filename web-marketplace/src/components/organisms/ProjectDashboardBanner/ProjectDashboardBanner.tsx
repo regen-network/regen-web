@@ -99,6 +99,8 @@ const ProjectDashboardBanner = ({
 
   const projectName = project.name || _(UNTITLED_PROJECT);
 
+  const defaultImagePosition = project.imgSrc ? '' : 'object-[0%_20%]';
+
   return (
     <div className="relative w-full mt-20 ">
       <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
@@ -106,7 +108,7 @@ const ProjectDashboardBanner = ({
           <OptimizedImage
             src={project.imgSrc || '/default-project-image.jpg'}
             alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${defaultImagePosition}`}
           />
         </div>
         <div
@@ -119,7 +121,7 @@ const ProjectDashboardBanner = ({
           <OptimizedImage
             src={project.imgSrc || '/default-project-image.jpg'}
             alt=""
-            className="w-full h-full object-cover scale-110 blur-sm"
+            className={`w-full h-full object-cover scale-110 blur-sm ${defaultImagePosition}`}
           />
         </div>
 
@@ -206,10 +208,6 @@ const ProjectDashboardBanner = ({
                     ) {
                       navigate(`/project-pages/${project.id}/edit/basic-info`);
                     } else {
-                      // TODO project is a draft, it goes to the create flow
-                      // so we should adjust here the org based project creation flow
-                      // to pass state info
-                      // https://regennetwork.atlassian.net/browse/APP-793
                       const currentStep = projectsCurrentStep[project?.id];
                       navigate(
                         `/project-pages/${project?.id}/${

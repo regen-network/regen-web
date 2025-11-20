@@ -165,7 +165,7 @@ const ProjectDashboardBanner = ({
           )}
 
           {/* Project info and buttons */}
-          <div className="flex flex-col justify-end max-w-[70%]">
+          <div className="flex flex-col justify-end xl:max-w-[70%]">
             <Title
               variant="h3"
               className="text-bc-neutral-0 mb-2 line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]"

@@ -43,7 +43,8 @@ const useStripeAccount = () => {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
 
   const setupAccount = useCallback(async () => {
-    if (activeAccount?.addr && token) {
+    const grantee = process.env.NEXT_PUBLIC_REGEN_WORKER_ADDRESS;
+    if (activeAccount?.addr && token && grantee) {
       const msgTypes = [
         MsgCancelSellOrder.typeUrl,
         MsgUpdateSellOrders.typeUrl,
@@ -53,7 +54,7 @@ const useStripeAccount = () => {
       const grants = msgTypes.map(typeUrl =>
         cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
           granter: activeAccount?.addr as string,
-          grantee: import.meta.env.VITE_REGEN_WORKER_ADDRESS,
+          grantee,
           grant: {
             authorization: GenericAuthorization.toProtoMsg({ msg: typeUrl }),
           },

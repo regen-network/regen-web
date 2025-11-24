@@ -1,7 +1,9 @@
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
@@ -108,14 +110,27 @@ export const ProjectCollaborators = ({
               </Trans>
             </Body>
           )}
-          {partOfOrganization ? (
-            <OutlinedButton
-              disabled={!canMigrate}
-              onClick={canMigrate ? migrateProject : undefined}
-              className="mt-25"
-            >
-              {_(MIGRATE_PROJECT)}
-            </OutlinedButton>
+          {partOfOrganization && migrateProject ? (
+            canMigrate ? (
+              <OutlinedButton
+                onClick={canMigrate ? migrateProject : undefined}
+                className="mt-25"
+              >
+                {_(MIGRATE_PROJECT)}
+              </OutlinedButton>
+            ) : (
+              <InfoTooltip
+                arrow
+                placement="top"
+                title={_(
+                  msg`You must be an Owner, Admin or Editor of your organization to migrate a project.`,
+                )}
+              >
+                <OutlinedButton disabled className="mt-25">
+                  {_(MIGRATE_PROJECT)}
+                </OutlinedButton>
+              </InfoTooltip>
+            )
           ) : (
             <OutlinedButton onClick={createOrganization} className="mt-25">
               <Trans>create an organization</Trans>

@@ -1,29 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import type { AccountByIdQuery } from 'generated/graphql';
-import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
-import type { Wallet } from 'lib/wallet/wallet';
+import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { useLoginData } from '../../LoginButton/hooks/useLoginData';
 import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
 
-type UseOrganizationActionsParams = {
-  activeAccount: AccountByIdQuery['accountById'];
-  privActiveAccount: PrivateAccount | undefined;
-  wallet?: Wallet | null;
-  connect?: (...args: any[]) => void;
-  isConnected: boolean;
-};
-
-export const useOrganizationActions = ({
-  activeAccount,
-  privActiveAccount,
-  wallet,
-  connect,
-  isConnected,
-}: UseOrganizationActionsParams) => {
+export const useOrganizationActions = () => {
+  const { activeAccount, privActiveAccount } = useAuth();
+  const { wallet, connect, isConnected } = useWallet();
   const { modalState, onButtonClick, onModalClose, walletsUiConfig } =
     useLoginData({});
 

@@ -75,8 +75,7 @@ export const LayoutHeader = () => {
   const { _ } = useLingui();
   const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
-  const { wallet, disconnect, accountByAddr, connect, isConnected } =
-    useWallet();
+  const { wallet, disconnect, accountByAddr } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -99,13 +98,7 @@ export const LayoutHeader = () => {
     handleConnectWalletModalClose,
     handleWalletConnect,
     setError,
-  } = useOrganizationActions({
-    activeAccount,
-    privActiveAccount,
-    wallet,
-    connect,
-    isConnected,
-  });
+  } = useOrganizationActions();
 
   const connectWalletDescription = (
     <Trans>

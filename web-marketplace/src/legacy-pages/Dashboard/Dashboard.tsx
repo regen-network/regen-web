@@ -23,7 +23,6 @@ import {
   DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
 } from 'lib/constants/shared.constants';
-import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 

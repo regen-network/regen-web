@@ -291,6 +291,14 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(result);
       }
 
+      if (!result) {
+        throw new Error(
+          _(
+            msg`The transaction was canceled before it could be signed or a blockchain error occurred. Please reconnect your wallet and try again.`,
+          ),
+        );
+      }
+
       const indexerUpdated = await refetchAccount({
         daoAddress,
         organizationId,

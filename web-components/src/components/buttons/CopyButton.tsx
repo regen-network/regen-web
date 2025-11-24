@@ -1,4 +1,5 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import copyTextToClipboard from '../../utils/copy';
 import { cn } from '../../utils/styles/cn';
@@ -40,6 +41,20 @@ export const CopyButton = ({
   children,
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(typeof window !== 'undefined');
+  }, []);
+
+  const banner = (
+    <Banner
+      text={toastText}
+      duration={1000}
+      onClose={() => setCopied(false)}
+    />
+  );
+
   return (
     <button
       onClick={() => {
@@ -56,13 +71,10 @@ export const CopyButton = ({
           className={cn('cursor-pointer hover:stroke-grey-400', iconClassName)}
         />
       </InfoTooltip>
-      {copied && (
-        <Banner
-          text={toastText}
-          duration={1000}
-          onClose={() => setCopied(false)}
-        />
-      )}
+      {copied &&
+        (isClient && typeof document !== 'undefined'
+          ? createPortal(banner, document.body)
+          : banner)}
     </button>
   );
 };

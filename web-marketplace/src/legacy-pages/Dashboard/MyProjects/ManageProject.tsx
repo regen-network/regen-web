@@ -103,7 +103,6 @@ const ManageProject = () => {
       }),
     [activeAccountId, activeAccount, offChainProject, onChainProject, wallet],
   );
-  console.log('canAccessManageProject', canAccessManageProject);
 
   const canEditProject =
     role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR;

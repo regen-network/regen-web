@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -51,8 +52,7 @@ export const useCancelSellOrder = ({
   const [txButtonTitle, setTxButtonTitle] = useState<string>('');
   const [txModalHeader, setTxModalHeader] = useState<string>('');
 
-  const { wallet } = useWallet();
-  const accountAddress = wallet?.address;
+  const { selectedAccountAddress } = useDashboardContext();
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
@@ -93,7 +93,7 @@ export const useCancelSellOrder = ({
     setTxModalTitle,
     setIsProcessingModalOpen,
     signAndBroadcast,
-    accountAddress,
+    accountAddress: selectedAccountAddress,
   });
 
   const openCancelModal = (sellOrderIndex: number) => {

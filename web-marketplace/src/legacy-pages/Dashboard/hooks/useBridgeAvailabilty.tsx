@@ -6,9 +6,9 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchBridgedEcocredits } from 'components/organisms/BridgedEcocreditsTable/hooks/useFetchBridgedEcocredits';
 
-export const useBridgeAvailability = () => {
+export const useBridgeAvailability = (addressOverride?: string) => {
   const { wallet } = useWallet();
-  const accountAddress = wallet?.address;
+  const accountAddress = addressOverride ?? wallet?.address;
 
   // Fetch bridgable credits (same as BridgableEcocreditsTable)
   const { credits: bridgableCredits, isLoadingCredits: isLoadingBridgable } =

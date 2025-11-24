@@ -184,6 +184,59 @@ export const getRegenRoutes = ({
   address,
   languageCode,
 }: RouterParams): RouteObject[] => {
+  const renderDashboardChildren = (isOrganization = false) => (
+    <>
+      <Route
+        index
+        element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+      />
+      <Route
+        path="portfolio"
+        element={<KeplrRoute component={MyEcocredits} />}
+      />
+      <Route
+        path="portfolio/bridge"
+        element={<KeplrRoute component={MyBridge} />}
+      >
+        <Route index element={<MyBridgableEcocreditsTable />} />
+        <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
+        <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+      </Route>
+      <Route
+        path="projects"
+        element={<KeplrOrAuthRoute component={MyProjects} />}
+      />
+      <Route
+        path="credit-classes"
+        element={<KeplrRoute component={MyCreditClasses} />}
+      />
+      <Route
+        path="credit-batches"
+        element={<KeplrRoute component={MyCreditBatches} />}
+      />
+      <Route
+        path="profile"
+        element={<KeplrOrAuthRoute component={EditProfile} />}
+      />
+      {!isOrganization && (
+        <>
+          <Route
+            path="settings"
+            element={<AuthRoute component={DashboardSettings} />}
+          />
+          <Route
+            path="my-orders"
+            element={<KeplrOrAuthRoute component={Orders} />}
+          />
+        </>
+      )}
+      <Route
+        path="sell-orders"
+        element={<KeplrOrAuthRoute component={Sell} />}
+      />
+    </>
+  );
+
   return createRoutesFromElements(
     <>
       {/* Main routes WITH header/footer */}
@@ -343,67 +396,19 @@ export const getRegenRoutes = ({
         </Route>
 
         <Route
+          path="dashboard/organization"
+          element={<KeplrOrAuthRoute component={Dashboard} />}
+          errorElement={<ErrorPage />}
+        >
+          {renderDashboardChildren(true)}
+        </Route>
+
+        <Route
           path="dashboard"
           element={<KeplrOrAuthRoute component={Dashboard} />}
           errorElement={<ErrorPage />}
         >
-          <Route
-            index
-            element={<Navigate to={address ? 'portfolio' : 'projects'} />}
-          />
-          <Route
-            path="portfolio"
-            element={<KeplrRoute component={MyEcocredits} />}
-          />
-          <Route
-            path="portfolio/bridge"
-            element={<KeplrRoute component={MyBridge} />}
-          >
-            <Route index element={<MyBridgableEcocreditsTable />} />
-            <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-            <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
-          </Route>
-          <Route
-            path="projects"
-            element={<KeplrOrAuthRoute component={MyProjects} />}
-          />
-          {/* <Route
-            path="projects/:projectId/manage"
-            element={<KeplrOrAuthRoute component={ManageProject} />}
-          >
-            <Route index element={<Navigate to="posts" replace />} />
-            <Route path="posts" element={<ManageProject />} />
-            <Route path="collaborators" element={<ManageProject />} />
-            <Route path="portfolio" element={<ManageProject />} />
-          </Route> */}
-          <Route
-            path="credit-classes"
-            element={<KeplrRoute component={MyCreditClasses} />}
-          />
-          <Route
-            path="credit-batches"
-            element={<KeplrRoute component={MyCreditBatches} />}
-          />
-          <Route
-            path="profile"
-            element={<KeplrOrAuthRoute component={EditProfile} />}
-          />
-          <Route
-            path="settings"
-            element={<AuthRoute component={DashboardSettings} />}
-          />
-          <Route
-            path="my-orders"
-            element={<KeplrOrAuthRoute component={Orders} />}
-          />
-          {/* <Route
-            path="members"
-            element={<KeplrOrAuthRoute component={Members} />}
-          /> */}
-          <Route
-            path="sell-orders"
-            element={<KeplrOrAuthRoute component={Sell} />}
-          />
+          {renderDashboardChildren(false)}
         </Route>
 
         <Route path="connect-wallet" element={<ConnectWalletPage />} />

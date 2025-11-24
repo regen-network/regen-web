@@ -1,11 +1,15 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import { Body } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { AccountType } from 'generated/graphql';
+
+import { UNNAMED } from './DashboardNavigation.constants';
 import { AccountSwitcherDropdownProps } from './DashboardNavigation.types';
 
 export const AccountSwitcherDropdown = ({
@@ -14,6 +18,7 @@ export const AccountSwitcherDropdown = ({
   onSelect,
 }: AccountSwitcherDropdownProps) => {
   const { _ } = useLingui();
+
   return (
     <ul
       className={cn(
@@ -25,13 +30,22 @@ export const AccountSwitcherDropdown = ({
       aria-label={_(msg`Account switcher`)}
     >
       {accounts.map(account => {
-        const isSelected = account.id === activeId;
+        const accountId = account.address;
+        const isSelected = accountId === activeId;
+        const avatarSrc =
+          account.image ||
+          getDefaultAvatar({
+            type:
+              account.type === 'org'
+                ? AccountType.Organization
+                : AccountType.User,
+          });
 
         return (
-          <li key={account.id} role="option" aria-selected={isSelected}>
+          <li key={accountId} role="option" aria-selected={isSelected}>
             <button
               type="button"
-              onClick={() => onSelect(account.id)}
+              onClick={() => accountId && onSelect(accountId)}
               className={cn(
                 'flex w-full items-center gap-10 px-10 h-[55px]',
                 'hover:cursor-pointer border-none',
@@ -40,12 +54,12 @@ export const AccountSwitcherDropdown = ({
                   : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',
               )}
             >
-              <UserAvatar src={account.image} size="small" alt={account.name} />
+              <UserAvatar src={avatarSrc} size="small" alt={account.name} />
               <Body
                 size="sm"
                 className="ml-3 mr-auto truncate text-left text-bc-neutral-700 font-bold"
               >
-                {account.name}
+                {account.name || _(UNNAMED)}
               </Body>
               {isSelected && (
                 <CheckIcon

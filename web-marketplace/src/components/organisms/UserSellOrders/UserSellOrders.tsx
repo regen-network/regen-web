@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useLingui } from '@lingui/react';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { safeLazy } from 'utils/safeLazy';
 
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
@@ -18,9 +19,15 @@ const SellOrdersTable = safeLazy(
   () => import('components/organisms/SellOrdersTable/SellOrdersTable'),
 );
 
-export const UserSellOrders = () => {
-  const { wallet } = useWallet();
+type UserSellOrdersProps = {
+  canManageSellOrders?: boolean;
+};
+
+export const UserSellOrders = ({
+  canManageSellOrders = true,
+}: UserSellOrdersProps) => {
   const { _ } = useLingui();
+  const { selectedAccountAddress } = useDashboardContext();
   const openCancelModalRef = useRef<((index: number) => void) | null>(null);
 
   const {
@@ -31,10 +38,10 @@ export const UserSellOrders = () => {
     sortCallbacks,
     totalSellOrders,
     paginationParams,
-  } = useNormalizedSellOrders({ sellerAddress: wallet?.address });
+  } = useNormalizedSellOrders({ sellerAddress: selectedAccountAddress });
 
   const userSellOrders = normalizedSellOrders?.filter(
-    (sellOrder: any) => sellOrder.seller === wallet?.address,
+    (sellOrder: any) => sellOrder.seller === selectedAccountAddress,
   );
 
   // Callback to store the openCancelModal function from the child component
@@ -49,7 +56,13 @@ export const UserSellOrders = () => {
   }
 
   if (!userSellOrders?.length) {
-    return <NoUserSellOrdersCard refetchSellOrders={refetchSellOrders} />;
+    return (
+      <NoUserSellOrdersCard
+        refetchSellOrders={refetchSellOrders}
+        canManageSellOrders={canManageSellOrders}
+        accountAddress={selectedAccountAddress}
+      />
+    );
   }
 
   return (
@@ -58,32 +71,42 @@ export const UserSellOrders = () => {
         sellOrders={userSellOrders}
         sortCallbacks={sortCallbacks}
         onTableChange={setPaginationParams}
-        renderActionButtonsFunc={(i: number) => (
-          <TableActionButtons
-            buttons={[
-              {
-                label: _(CANCEL_SELL_ORDER_ACTION),
-                onClick: () => {
-                  if (openCancelModalRef.current) {
-                    openCancelModalRef.current(i);
-                  }
-                },
-              },
-            ]}
-            sx={{ width: '100%' }}
-          />
-        )}
+        renderActionButtonsFunc={
+          canManageSellOrders
+            ? (i: number) => (
+                <TableActionButtons
+                  buttons={[
+                    {
+                      label: _(CANCEL_SELL_ORDER_ACTION),
+                      onClick: () => {
+                        if (openCancelModalRef.current) {
+                          openCancelModalRef.current(i);
+                        }
+                      },
+                    },
+                  ]}
+                  sx={{ width: '100%' }}
+                />
+              )
+            : undefined
+        }
         renderToolbarContentFunc={() => (
-          <UserSellOrdersToolbar refetchSellOrders={refetchSellOrders} />
+          <UserSellOrdersToolbar
+            refetchSellOrders={refetchSellOrders}
+            canManageSellOrders={canManageSellOrders}
+            accountAddress={selectedAccountAddress}
+          />
         )}
         totalSellOrders={totalSellOrders}
         paginationParams={paginationParams}
       />
-      <CancelSellOrderFlow
-        normalizedSellOrders={userSellOrders || []}
-        refetchSellOrders={refetchSellOrders}
-        onOpenCancelModal={handleOpenCancelModal}
-      />
+      {canManageSellOrders && (
+        <CancelSellOrderFlow
+          normalizedSellOrders={userSellOrders || []}
+          refetchSellOrders={refetchSellOrders}
+          onOpenCancelModal={handleOpenCancelModal}
+        />
+      )}
     </section>
   );
 };

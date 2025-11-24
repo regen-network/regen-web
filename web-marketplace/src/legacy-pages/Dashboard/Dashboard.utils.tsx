@@ -1,3 +1,4 @@
+import { WasmExecuteAction } from 'utils/cosmwasm';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
@@ -98,20 +99,22 @@ export const getProfileUrl = (account: {
 type GetPortfolioTabsParams = {
   portfolioLabel: string;
   bridgeLabel: string;
+  basePath: string;
 };
 
 export const getPortfolioTabs = ({
   portfolioLabel,
   bridgeLabel,
+  basePath,
 }: GetPortfolioTabsParams): IconTabProps[] => [
   {
     label: portfolioLabel,
-    href: '/dashboard/portfolio',
+    href: `${basePath}/portfolio`,
     icon: <CreditsIcon fontSize="small" linearGradient />,
   },
   {
     label: bridgeLabel,
-    href: '/dashboard/portfolio/bridge',
+    href: `${basePath}/portfolio/bridge`,
     icon: <BridgeIcon linearGradient />,
   },
 ];
@@ -120,16 +123,85 @@ export const getActivePortfolioTab = (
   tabs: IconTabProps[],
   pathname: string,
 ): number => {
+  const normalizedPath = pathname.endsWith('/')
+    ? pathname.slice(0, -1)
+    : pathname;
+
   return Math.max(
     tabs.findIndex(tab => {
-      if (tab.href === '/dashboard/portfolio/bridge') {
-        return pathname.includes('/dashboard/portfolio/bridge');
+      const normalizedHref = tab.href?.endsWith('/')
+        ? tab.href.slice(0, -1)
+        : tab.href;
+
+      if (normalizedHref?.endsWith('/bridge')) {
+        return normalizedPath.startsWith(normalizedHref);
       }
-      if (tab.href === '/dashboard/portfolio') {
-        return pathname === '/dashboard/portfolio';
-      }
-      return false;
+
+      return normalizedPath === normalizedHref;
     }),
     0,
   );
+};
+
+type MetadataKey = 'banner' | 'website_link' | 'twitter_link';
+
+type GetMetadataActionParams = {
+  key: MetadataKey;
+  nextValue?: string | null;
+  previousValue?: string | null;
+  authorizationId: number;
+  roleId: number;
+  daoAddress: string;
+};
+
+export const getMetadataAction = ({
+  key,
+  nextValue,
+  previousValue,
+  authorizationId,
+  roleId,
+  daoAddress,
+}: GetMetadataActionParams): WasmExecuteAction | undefined => {
+  const normalizedNext = nextValue ?? null;
+  let normalizedPrevious = previousValue ?? null;
+
+  if (key === 'banner') {
+    if (normalizedNext === DEFAULT_PROFILE_BG) {
+      normalizedPrevious = DEFAULT_PROFILE_BG;
+    }
+    if (normalizedPrevious === DEFAULT_PROFILE_BG) {
+      normalizedPrevious = null;
+    }
+  }
+
+  if (normalizedNext === normalizedPrevious) return undefined;
+
+  if (normalizedNext) {
+    return {
+      authorizationId,
+      roleId,
+      contract: daoAddress,
+      msg: {
+        set_item: {
+          key,
+          value: normalizedNext,
+        },
+      },
+    };
+  }
+
+  if (normalizedPrevious) {
+    return {
+      authorizationId,
+      roleId,
+      contract: daoAddress,
+      msg: {
+        remove_item: {
+          key,
+        },
+      },
+    };
+  }
+
+  return undefined;
 };

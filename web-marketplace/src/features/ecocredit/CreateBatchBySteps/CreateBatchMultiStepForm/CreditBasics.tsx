@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -164,9 +165,13 @@ export default function CreditBasics({
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
-  const projects = useQueryProjectsByIssuer(
-    activeAccount?.addr ?? wallet?.address,
-  );
+  const location = useLocation();
+  const locationState = location.state as {
+    issuerAddress?: string;
+  } | null;
+  const issuerAddress =
+    locationState?.issuerAddress ?? activeAccount?.addr ?? wallet?.address;
+  const projects = useQueryProjectsByIssuer(issuerAddress);
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;

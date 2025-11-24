@@ -246,7 +246,7 @@ const PostFilesPublic = ({
                 }}
                 setSelectedUrl={setSelectedUrl}
                 selectedUrl={selectedUrl}
-                  canDownloadFiles={canDownloadFiles}
+                canDownloadFiles={canDownloadFiles}
               />
             </Popup>
           )}
@@ -288,7 +288,7 @@ const PostFilesPublic = ({
             setAnimateMarker={setAnimateMarker}
             filesPreviews={filesPreviews}
             readMoreText={readMoreText}
-              canDownloadFiles={canDownloadFiles}
+            canDownloadFiles={canDownloadFiles}
           />
         )}
         {isAdmin && (privateLocations || privateFiles) && (

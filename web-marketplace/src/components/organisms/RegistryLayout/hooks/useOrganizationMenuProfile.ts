@@ -36,25 +36,29 @@ export const useOrganizationMenuProfile = ({
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
 
-  const organization = useDaoOrganization();
+  const organizationDao = useDaoOrganization();
+  const organizationProfile = organizationDao?.organizationByDaoAddress;
 
   const menuOrganizationProfile = useMemo(() => {
-    const daoAddress = organization?.address;
-    if (!daoAddress) return undefined;
+    if (!organizationProfile || !organizationDao) return undefined;
 
+    const daoAddress = organizationDao.address;
     const organizationName =
-      organization?.organizationByDaoAddress?.name ?? _(DEFAULT_NAME);
+      organizationProfile.name?.trim() || _(DEFAULT_NAME);
+
+    const organizationImage =
+      organizationProfile?.image?.trim() || DEFAULT_PROFILE_COMPANY_AVATAR;
 
     return {
       id: daoAddress,
       name: organizationName,
-      profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
+      profileImage: organizationImage,
       truncatedAddress: getAddress({ walletAddress: daoAddress }),
       address: daoAddress,
       profileLink: `/profiles/${daoAddress}`,
-      dashboardLink: '/dashboard',
+      dashboardLink: '/dashboard/organization',
     };
-  }, [_, organization]);
+  }, [_, organizationDao, organizationProfile]);
 
   return {
     menuOrganizationProfile,

@@ -12,6 +12,7 @@ export const CREATE_SELL_ORDER_SHORT = msg`Sell`;
 export const CREATE_SELL_ORDER_BUTTON = msg`manage sell orders`;
 export const RETIRE_SUCCESS_BUTTON = msg`view retirement certificates`;
 export const ERROR_BUTTON = msg`VIEW YOUR PORTFOLIO`;
+export const ERROR_BUTTON_EDIT_ORGANIZATION = msg`EDIT ORGANIZATION PROFILE`;
 export const BASKET_PUT_TITLE = msg`Put in basket`;
 export const BASKET_TAKE_TITLE = msg`Take from basket`;
 export const BASKET_TAKE_SUBTITLE = msg`You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first.`;

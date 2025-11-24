@@ -3,7 +3,11 @@ import {
   QuerySellOrdersResponse,
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
-import { QueryClient as ReactQueryClient } from '@tanstack/react-query'; // adjust import to your actual type
+import {
+  keepPreviousData,
+  QueryClient as ReactQueryClient,
+  QueryObserverOptions,
+} from '@tanstack/react-query';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
@@ -134,8 +138,8 @@ export function getSellOrdersBySellerQuery(queryConfig: {
         };
       });
     },
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
+    refetchOnMount: 'always' as const,
     enabled: queryConfig.enabled,
-    initialData: undefined,
   };
 }

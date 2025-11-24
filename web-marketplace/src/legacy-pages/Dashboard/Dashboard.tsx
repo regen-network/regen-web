@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -13,6 +12,8 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import type { Account } from 'generated/graphql';
+import { AccountType } from 'generated/graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -27,13 +28,23 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
+import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
   BRIDGE,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  ORGANIZATION_DASHBOARD,
   PERSONAL_ACCOUNT,
   PERSONAL_DASHBOARD,
   PORTFOLIO,
@@ -49,17 +60,17 @@ import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
+type DashboardNavAccount = AccountOption & {
+  source: 'auth' | 'dao';
+  roleAccountId?: string;
+  roleName?: string;
+};
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { accountChanging, disconnect, loginDisabled, wallet } = useWallet();
-  const {
-    loading,
-    activeAccount,
-    activeAccountId,
-    authenticatedAccounts,
-    privActiveAccount,
-  } = useAuth();
+  const { loading, activeAccount, activeAccountId, privActiveAccount } =
+    useAuth();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -69,23 +80,15 @@ export const Dashboard = () => {
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
+  const isOrganizationDashboard = pathname.startsWith(
+    '/dashboard/organization',
+  );
+  const dashboardBasePath = isOrganizationDashboard
+    ? '/dashboard/organization'
+    : '/dashboard';
   const section = usePathSection();
-
-  const { isCreditClassCreator, isProjectAdmin, isIssuer, showCreditClasses } =
-    useProfileItems({});
-  const projects = useFetchProjectByAdmin({
-    adminAccountId: activeAccountId,
-    adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
-    keepUnpublished: true,
-  });
-
-  const hasProjects = projects?.adminProjects;
-
-  const { batchesWithSupply } = useFetchPaginatedBatches({
-    address: wallet?.address,
-  });
-  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
@@ -113,19 +116,167 @@ export const Dashboard = () => {
 
   const onNavClick = (sectionName: string): void => {
     const isFormDirty = isDirtyRef.current;
-    const path = `/dashboard/${sectionName.replace(' ', '-')}`;
+    const path = sectionName
+      ? `${dashboardBasePath}/${sectionName.replace(' ', '-')}`
+      : dashboardBasePath;
     if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {
       navigate(path);
     }
   };
-  // Placeholder function for account selection logic
-  // This should be replaced with actual logic to handle
-  // account selection when Org functionality is implemented
+
+  const personalResolvedAddress = useMemo(() => {
+    const walletAddress = getWalletAddress({ activeAccount, wallet });
+    if (walletAddress) return walletAddress;
+    return privActiveAccount?.email || '';
+  }, [activeAccount, wallet, privActiveAccount?.email]);
+
+  const organizationDao = useDaoOrganization();
+  const organizationAddress = organizationDao?.address ?? null;
+  const organizationProfile = organizationDao?.organizationByDaoAddress;
+
+  const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
+    if (!organizationAddress || !organizationDao) return undefined;
+
+    const assignment = organizationDao.assignmentsByDaoAddress?.nodes?.find(
+      node => node?.accountId === activeAccountId,
+    );
+
+    const organizationName = organizationProfile?.name?.trim();
+
+    const rawImage = organizationProfile?.image?.trim() || '';
+    const organizationImage = rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
+
+    return {
+      name: organizationName,
+      address: organizationAddress,
+      type: 'org' as const,
+      image: organizationImage,
+      source: 'dao',
+      roleAccountId: assignment?.accountId ?? undefined,
+      roleName: assignment?.roleName ?? undefined,
+    };
+  }, [
+    organizationAddress,
+    organizationDao,
+    activeAccountId,
+    organizationProfile?.name,
+    organizationProfile?.image,
+  ]);
+
+  const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
+    const accounts: DashboardNavAccount[] = [];
+
+    // Add personal account if it exists
+    if (activeAccount) {
+      accounts.push({
+        id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
+        name: activeAccount.name || '',
+        address: personalResolvedAddress,
+        type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+        image: activeAccount.image ?? undefined,
+        source: 'auth',
+      });
+    }
+
+    // Add organization account if it exists
+    if (organizationAccount) {
+      accounts.push(organizationAccount);
+    }
+
+    return accounts;
+  }, [activeAccount, organizationAccount, personalResolvedAddress]);
+
+  const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {
+    if (isOrganizationDashboard) {
+      return (
+        organizationAccount ??
+        navigationAccounts.find(account => account.source === 'auth') ??
+        navigationAccounts[0]
+      );
+    }
+
+    return (
+      navigationAccounts.find(account => account.source === 'auth') ??
+      navigationAccounts[0]
+    );
+  }, [isOrganizationDashboard, navigationAccounts, organizationAccount]);
+
+  useEffect(() => {
+    if (isOrganizationDashboard && !organizationAccount && !loading) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
+
+  const organizationRole = useMemo(() => {
+    if (!isOrganizationDashboard || selectedAccount?.type !== 'org')
+      return undefined;
+
+    return selectedAccount?.roleName;
+  }, [
+    isOrganizationDashboard,
+    selectedAccount?.type,
+    selectedAccount?.roleName,
+  ]);
+
+  const isOrganizationOwner = organizationRole === ROLE_OWNER;
+  const isOrganizationAdmin = organizationRole === ROLE_ADMIN;
+  const isOrganizationEditor = organizationRole === ROLE_EDITOR;
+  const isOrganizationViewer = organizationRole === ROLE_VIEWER;
+
+  const dashboardAccountAddress = isOrganizationDashboard
+    ? organizationAccount?.address ?? selectedAccount?.address
+    : loginDisabled
+    ? wallet?.address
+    : activeAccount?.addr;
+
+  const dashboardAccountId = isOrganizationDashboard
+    ? undefined
+    : activeAccountId ?? undefined;
+
+  const { isCreditClassCreator, isProjectAdmin, isIssuer, showCreditClasses } =
+    useProfileItems({
+      address: dashboardAccountAddress,
+      accountId: dashboardAccountId,
+    });
+
+  const projects = useFetchProjectByAdmin({
+    adminAccountId: dashboardAccountId,
+    adminAddress: dashboardAccountAddress,
+    keepUnpublished: true,
+  });
+
+  const hasProjects = projects?.adminProjects;
+
+  const { batchesWithSupply } = useFetchPaginatedBatches({
+    address: dashboardAccountAddress ?? wallet?.address,
+  });
+  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
+
   const onAccountSelect = (id: string) => {
-    throw new Error(_(msg`Function not implemented.`));
+    const target = navigationAccounts.find(account => account.address === id);
+    if (!target) return;
+
+    if (target.type === 'org') {
+      if (!isOrganizationDashboard) {
+        navigate('/dashboard/organization');
+      }
+    } else {
+      if (isOrganizationDashboard) {
+        navigate('/dashboard');
+      }
+    }
+
+    setMobileMenuOpen(false);
   };
+
+  const resolvedAddress = useMemo(() => {
+    if (selectedAccount?.address) {
+      return selectedAccount.address;
+    }
+    return personalResolvedAddress;
+  }, [personalResolvedAddress, selectedAccount]);
 
   const dashboardContextValue = useMemo(
     () => ({
@@ -133,8 +284,46 @@ export const Dashboard = () => {
       isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
+      selectedAccount: selectedAccount
+        ? {
+            id: selectedAccount.id,
+            name: selectedAccount.name,
+            address: selectedAccount.address,
+            type: selectedAccount.type,
+            image: selectedAccount.image,
+          }
+        : undefined,
+      isOrganizationDashboard,
+      selectedAccountAddress: selectedAccount?.address ?? wallet?.address,
+      organizationRole,
+      organizationDaoAddress: organizationAccount?.address ?? undefined,
+      organizationRbamAddress: organizationDao?.daoRbamAddress ?? undefined,
+      organizationProfile: organizationProfile ?? null,
+      isOrganizationOwner,
+      isOrganizationAdmin,
+      isOrganizationEditor,
+      isOrganizationViewer,
+      feeGranter: isOrganizationDashboard
+        ? organizationAccount?.address
+        : undefined,
     }),
-    [isCreditClassCreator, isProjectAdmin, isIssuer, sanityProfilePageData],
+    [
+      isCreditClassCreator,
+      isProjectAdmin,
+      isIssuer,
+      sanityProfilePageData,
+      selectedAccount,
+      isOrganizationDashboard,
+      organizationAccount?.address,
+      organizationDao?.daoRbamAddress,
+      organizationProfile,
+      organizationRole,
+      isOrganizationOwner,
+      isOrganizationAdmin,
+      isOrganizationEditor,
+      isOrganizationViewer,
+      wallet?.address,
+    ],
   );
 
   const portfolioTabs = useMemo(
@@ -142,8 +331,9 @@ export const Dashboard = () => {
       getPortfolioTabs({
         portfolioLabel: _(PORTFOLIO),
         bridgeLabel: _(BRIDGE),
+        basePath: dashboardBasePath,
       }),
-    [_],
+    [_, dashboardBasePath],
   );
 
   const activePortfolioTab = useMemo(
@@ -155,22 +345,66 @@ export const Dashboard = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
-  const resolvedAddress = useMemo(() => {
-    const walletAddress = getWalletAddress({ activeAccount, wallet });
-    if (walletAddress) return walletAddress;
-
-    return privActiveAccount?.email || '';
-  }, [activeAccount, wallet, privActiveAccount?.email]);
+  const viewProfileAccount = useMemo<Pick<
+    Account,
+    'addr' | 'id' | 'name' | 'type' | 'image'
+  > | null>(() => {
+    if (selectedAccount?.type === 'org') {
+      return {
+        id: selectedAccount.roleAccountId ?? selectedAccount.id,
+        addr: selectedAccount.address ?? '',
+        name: selectedAccount.name || '',
+        type: AccountType.Organization,
+        image: selectedAccount.image,
+      };
+    }
+    if (activeAccount) {
+      return {
+        id: activeAccount.id,
+        addr: activeAccount.addr,
+        name: activeAccount.name,
+        type: activeAccount.type,
+        image: activeAccount.image,
+      };
+    }
+    return null;
+  }, [selectedAccount, activeAccount]);
 
   const { orders, isLoading: ordersLoading } = useOrders();
   const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
-    useBridgeAvailability();
+    useBridgeAvailability(dashboardAccountAddress ?? wallet?.address);
 
   if (!activeAccount && !wallet?.address && !privActiveAccount) return null;
 
   const hasWalletAddress = !!wallet?.address;
+
+  const headerWallet =
+    selectedAccount?.type === 'org' ? selectedAccount.address : wallet?.address;
+
+  const headerHasWalletAddress =
+    selectedAccount?.type === 'org'
+      ? !!selectedAccount?.address
+      : hasWalletAddress;
+
+  const headerActiveAccount: AccountOption =
+    selectedAccount ??
+    (activeAccount
+      ? {
+          id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
+          name: activeAccount.name || '',
+          address: resolvedAddress || personalResolvedAddress,
+          type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+          image: activeAccount.image ?? undefined,
+        }
+      : {
+          id: personalResolvedAddress,
+          name: '',
+          address: resolvedAddress || personalResolvedAddress,
+          type: 'user',
+          image: undefined,
+        });
 
   return (
     <NavigationProvider collapsed={collapsed}>
@@ -178,14 +412,7 @@ export const Dashboard = () => {
         <div className="relative md:flex md:min-h-screen">
           {/* Mobile Header */}
           <DashboardNavigationMobileHeader
-            activeAccount={{
-              ...activeAccount,
-              id: activeAccount?.id ?? '',
-              name: activeAccount?.name || '',
-              address: resolvedAddress || '',
-              type: activeAccount?.type === 'USER' ? 'user' : 'org',
-              image: activeAccount?.image || '',
-            }}
+            activeAccount={headerActiveAccount}
             onMenuClick={() => setMobileMenuOpen(true)}
             mobileMenuOpen={mobileMenuOpen}
           />
@@ -208,11 +435,14 @@ export const Dashboard = () => {
               isIssuer={isIssuer}
               showCreditClasses={showCreditClasses}
               loginDisabled={loginDisabled}
-              hasWalletAddress={hasWalletAddress}
-              wallet={wallet?.address}
+              hasWalletAddress={headerHasWalletAddress}
+              wallet={headerWallet}
               hasProjects={!!hasProjects && hasProjects.length > 0}
-              hasOrders={!ordersLoading && hasOrders}
+              hasOrders={
+                !isOrganizationDashboard && !ordersLoading && hasOrders
+              }
               hasCreditBatches={hasCreditBatches}
+              canEditOrg={!isOrganizationViewer}
               mobileMenuOpen={mobileMenuOpen}
               onLogout={handleLogout}
               onCloseMobile={() => setMobileMenuOpen(false)}
@@ -222,20 +452,8 @@ export const Dashboard = () => {
                 setMobileMenuOpen(false);
               }}
               header={{
-                activeAccount: {
-                  id: activeAccount?.id ?? '',
-                  name: activeAccount?.name || '',
-                  address: resolvedAddress,
-                  type: activeAccount?.type === 'ORGANIZATION' ? 'org' : 'user',
-                  image: activeAccount?.image || '',
-                },
-                accounts: (authenticatedAccounts || []).map(account => ({
-                  id: account?.id ?? '',
-                  name: account?.name || '',
-                  address: account?.addr || privActiveAccount?.email || '',
-                  type: account?.type === 'ORGANIZATION' ? 'org' : 'user',
-                  image: account?.image || '',
-                })),
+                activeAccount: headerActiveAccount,
+                accounts: navigationAccounts,
                 onAccountSelect: (id: string) => {
                   setIsWarningModalOpen(undefined);
                   onAccountSelect(id);
@@ -281,12 +499,13 @@ export const Dashboard = () => {
                       {/* Mobile-only subtitle */}
                       <div className="block md:hidden mb-2">
                         <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
-                          {section === 'settings'
+                          {isOrganizationDashboard
+                            ? _(ORGANIZATION_DASHBOARD)
+                            : section === 'settings'
                             ? _(PERSONAL_ACCOUNT)
                             : _(PERSONAL_DASHBOARD)}
                         </span>
                       </div>
-
                       {/* Main title */}
                       <Title
                         variant="h1"
@@ -307,7 +526,7 @@ export const Dashboard = () => {
                       <ViewProfileButton
                         setIsWarningModalOpen={setIsWarningModalOpen}
                         section={section}
-                        activeAccount={activeAccount}
+                        activeAccount={viewProfileAccount}
                         hasProjects={hasProjects}
                         hasCreditClasses={showCreditClasses}
                         hasCreditBatches={hasCreditBatches}

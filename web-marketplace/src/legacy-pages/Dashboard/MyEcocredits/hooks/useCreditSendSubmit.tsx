@@ -2,6 +2,11 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
+import {
+  creditSendAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'web-marketplace/src/utils/rbam.utils';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -14,10 +19,12 @@ import {
   SendSuccessEvent,
 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useWallet } from 'lib/wallet/wallet';
 
 import type { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { useDashboardContext } from '../../Dashboard.context';
 import { SEND_HEADER } from '../MyEcocredits.constants';
 
 type Props = {
@@ -47,6 +54,22 @@ const useCreditSendSubmit = ({
 }: Props): Return => {
   const { _ } = useLingui();
   const { track } = useTracker();
+  const { wallet } = useWallet();
+  const {
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+    feeGranter,
+  } = useDashboardContext();
+
+  const { roleId, authorizationId: manageCreditsAuthId } =
+    getRoleAuthorizationIds({
+      type: 'organization',
+      currentUserRole: organizationRole,
+      authorizationName: 'can_manage_credits',
+    });
+
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
       const batchDenom = credits[creditSendOpen].denom;
@@ -63,24 +86,64 @@ const useCreditSendSubmit = ({
       const { withRetire, recipient, amount, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
 
-      const { send } = regen.ecocredit.v1.MessageComposer.withTypeUrl;
-      const msgSend = send({
-        sender: accountAddress,
-        recipient,
-        credits: [
-          {
-            batchDenom,
-            tradableAmount: withRetire ? '' : amount.toString(),
-            retiredAmount: withRetire ? amount.toString() : '',
-            retirementJurisdiction: retirementJurisdiction || '',
-            retirementReason: note || '',
-          },
-        ],
-      });
+      // Build the message based on context (organization vs personal)
+      let finalMsg;
+
+      if (isOrganizationDashboard) {
+        if (
+          !roleId ||
+          !organizationRbamAddress ||
+          !wallet?.address ||
+          !manageCreditsAuthId
+        ) {
+          throw new Error(
+            _(msg`You do not have permission to manage credits.`),
+          );
+        }
+        // Organization context: wrap in RBAM execute_actions
+        const action = creditSendAction({
+          roleId,
+          authorizationId: manageCreditsAuthId,
+          sender: accountAddress, // DAO address
+          recipient,
+          credits: [
+            {
+              batchDenom: batchDenom!,
+              tradableAmount: withRetire ? '' : amount.toString(),
+              retiredAmount: withRetire ? amount.toString() : '',
+              retirementJurisdiction: retirementJurisdiction || '',
+              retirementReason: note || '',
+            },
+          ],
+        });
+
+        finalMsg = wrapRbamActions({
+          walletAddress: wallet.address,
+          rbamAddress: organizationRbamAddress,
+          actions: [action],
+        });
+      } else {
+        // Personal context: use standard message
+        const { send } = regen.ecocredit.v1.MessageComposer.withTypeUrl;
+        finalMsg = send({
+          sender: accountAddress,
+          recipient,
+          credits: [
+            {
+              batchDenom,
+              tradableAmount: withRetire ? '' : amount.toString(),
+              retiredAmount: withRetire ? amount.toString() : '',
+              retirementJurisdiction: retirementJurisdiction || '',
+              retirementReason: note || '',
+            },
+          ],
+        });
+      }
 
       const tx = {
-        msgs: [msgSend],
-        fee: undefined,
+        msgs: [finalMsg],
+        fee: isOrganizationDashboard ? ('auto' as const) : undefined, // RBAM transactions need auto gas estimation
+        feeGranter,
       };
 
       const batchInfo = credits[creditSendOpen];
@@ -144,17 +207,23 @@ const useCreditSendSubmit = ({
       }
     },
     [
-      _,
-      accountAddress,
-      creditSendOpen,
-      creditSendTitle,
       credits,
-      setCardItems,
+      creditSendOpen,
+      track,
+      accountAddress,
+      isOrganizationDashboard,
+      feeGranter,
+      signAndBroadcast,
+      roleId,
+      organizationRbamAddress,
+      wallet?.address,
+      manageCreditsAuthId,
+      _,
       setCreditSendOpen,
+      setCardItems,
       setTxModalHeader,
       setTxModalTitle,
-      signAndBroadcast,
-      track,
+      creditSendTitle,
     ],
   );
 

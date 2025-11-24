@@ -8,7 +8,10 @@ import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { Subtitle } from 'web-components/src/components/typography';
 
-import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import {
+  BatchInfoWithSupply,
+  CreateBatchOrganizationContext,
+} from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -20,6 +23,7 @@ type Props = {
   paginationParams: TablePaginationParams;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   useCreate?: boolean;
+  createBatchState?: CreateBatchOrganizationContext;
 };
 
 export const MyCreditBatchesTable = ({
@@ -28,6 +32,7 @@ export const MyCreditBatchesTable = ({
   paginationParams,
   setPaginationParams,
   useCreate,
+  createBatchState,
 }: Props) => {
   const theme = useTheme();
 
@@ -66,6 +71,7 @@ export const MyCreditBatchesTable = ({
               startIcon={<PlusIcon color={theme.palette.secondary.main} />}
               component={Link}
               to="/ecocredits/create-batch"
+              state={createBatchState}
             >
               <Trans>create credit batch</Trans>
             </OutlinedButton>

@@ -8,13 +8,10 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { ERRORS, errorsMapping } from 'config/errors';
-import { useSetAtom } from 'jotai';
 import { FormStateSetter } from 'legacy-pages/CreateOrganization/CreateOrganization.types';
 import { useSetFormState } from 'legacy-pages/CreateOrganization/hooks/useSetFormState';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
-import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
@@ -25,8 +22,6 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { AccountType } from 'generated/graphql';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
   REQUIRED_MESSAGE,
@@ -39,12 +34,10 @@ import Form, { FormRef } from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
-  getRadioCardItems,
   LINKS_LABEL,
   PROFILE_AVATAR_FILE_NAME,
   PROFILE_BG_ASPECT_RATIO,
   PROFILE_BG_FILE_NAME,
-  PROFILE_TYPE,
   TWITTER_PLACEHOLDER,
   UPLOAD_IMAGE,
   WEBSITE_PLACEHOLDER,
@@ -54,19 +47,16 @@ import {
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
 import { validateEditProfileForm } from './EditProfileForm.utils';
-import { useUpdateDefaultAvatar } from './hooks/useUpdateDefaultAvatar';
 
 export interface EditProfileFormProps extends Partial<FormStateSetter> {
   initialValues?: EditProfileFormSchemaType;
   children?: React.ReactNode;
   isDirtyRef?: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
-  onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
   // Optional enhancements for reuse in Create Organization flow
   formId?: string;
   formRef?: FormRef;
-  hideProfileType?: boolean;
   nameLabel?: string;
   // Allows parent steps (e.g. Create Organization) to inject partial values
   // after the form has mounted (e.g. from a transfer profile modal)
@@ -79,11 +69,9 @@ const EditProfileForm = ({
   initialValues,
   isDirtyRef,
   onSubmit,
-  onSuccess,
   onUpload,
   formId,
   formRef,
-  hideProfileType,
   nameLabel,
   prefillValues,
   validationMode = 'onBlur',
@@ -91,38 +79,20 @@ const EditProfileForm = ({
   setIsValid,
 }: EditProfileFormProps) => {
   const { _ } = useLingui();
-  const formSchema = useMemo(
-    () =>
-      hideProfileType
-        ? createEditProfileFormSchema({ requireProfileType: false, _ })
-        : createEditProfileFormSchema({ requireProfileType: true, _ }),
-    [hideProfileType, _],
-  );
+  const formSchema = useMemo(() => createEditProfileFormSchema({ _ }), [_]);
   const form = useZodForm({
     schema: formSchema,
-    defaultValues: {
-      ...initialValues,
-      profileType:
-        initialValues?.profileType ??
-        (hideProfileType ? AccountType.Organization : undefined),
-    },
+    defaultValues: initialValues,
     mode: validationMode,
   });
-
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const { isSubmitting, errors, isDirty, isValid, touchedFields, isSubmitted } =
     useFormState({
       control: form.control,
     });
-  const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
 
   /* Fields watch */
 
-  const profileType = useWatch({
-    control: form.control,
-    name: 'profileType',
-  });
   const profileImage = useWatch({
     control: form.control,
     name: 'profileImage',
@@ -161,23 +131,6 @@ const EditProfileForm = ({
     },
     [form],
   );
-  const handleDefaultAvatarUpdate = useCallback(
-    (value: string): void => {
-      form.setValue('profileImage', value, {
-        shouldDirty: false,
-        shouldValidate: true,
-      });
-    },
-    [form],
-  );
-
-  /* Effect */
-
-  useUpdateDefaultAvatar({
-    setProfileImage: handleDefaultAvatarUpdate,
-    profileType,
-    profileImage,
-  });
 
   useEffect(() => {
     if (isDirtyRef) {
@@ -218,23 +171,10 @@ const EditProfileForm = ({
           requiredMessage: _(REQUIRED_MESSAGE),
         });
         if (!hasError) {
-          try {
-            await onSubmit(data);
-            onSuccess && onSuccess();
-          } catch (e) {
-            setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
-          }
+          await onSubmit(data);
         }
       }}
     >
-      {!hideProfileType && (
-        <RadioCard
-          label={_(PROFILE_TYPE)}
-          items={radioCardItems}
-          selectedValue={profileType ?? ''}
-          {...form.register('profileType')}
-        />
-      )}
       <TextField
         type="text"
         label={nameLabel ?? _(msg`Name`)}
@@ -260,9 +200,12 @@ const EditProfileForm = ({
         titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         circularCrop
         onUpload={onUpload}
-        value={profileImage}
+        value={profileImage ?? undefined}
       >
-        <ImageFieldAvatar value={profileImage} />
+        <ImageFieldAvatar
+          key={profileImage || 'profile-image-placeholder'}
+          value={profileImage ?? ''}
+        />
       </ImageField>
       <ImageField
         label={_(msg`Background image`)}
@@ -281,9 +224,12 @@ const EditProfileForm = ({
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}
-        value={backgroundImage}
+        value={backgroundImage ?? undefined}
       >
-        <ImageFieldBackground value={backgroundImage} />
+        <ImageFieldBackground
+          key={backgroundImage || 'background-image-placeholder'}
+          value={backgroundImage ?? ''}
+        />
       </ImageField>
       <TextAreaField
         type="text"

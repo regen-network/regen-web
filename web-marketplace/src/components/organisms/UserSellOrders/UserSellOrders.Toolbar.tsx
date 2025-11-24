@@ -22,21 +22,30 @@ const CreateSellOrderFlow = lazy(async () => ({
 interface UserSellOrdersToolbarProps {
   wrapperClassName?: string;
   refetchSellOrders: () => void;
+  canManageSellOrders?: boolean;
+  accountAddress?: string;
 }
 
 export const UserSellOrdersToolbar = ({
   wrapperClassName,
   refetchSellOrders,
+  canManageSellOrders = true,
+  accountAddress,
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
-  const { loginDisabled } = useWallet();
+  const { loginDisabled, wallet } = useWallet();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
+  const sellerAddress = accountAddress ?? wallet?.address;
+  const { credits } = useFetchEcocredits({
+    address: sellerAddress,
+    isPaginatedQuery: false,
+  });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
   const hasTradableCredits = tradableCredits.length > 0;
+  const canStartSellFlow = canManageSellOrders && hasTradableCredits;
 
   return (
     <>
@@ -49,31 +58,33 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Open sell orders</Trans>
         </Subtitle>
-        <div className="flex sm:flex-row flex-col sm:items-center items-end">
-          <div className="sm:order-2 order-1">
-            {hasTradableCredits ? (
-              <CreateButton
-                hasTradableCredits={hasTradableCredits}
-                setIsSellFlowStarted={setIsSellFlowStarted}
-              />
-            ) : (
-              <InfoTooltip
-                arrow
-                placement="top"
-                title={_(msg`You have no tradable credits that can be sold.`)}
-              >
-                <div>
-                  <CreateButton
-                    hasTradableCredits={hasTradableCredits}
-                    setIsSellFlowStarted={setIsSellFlowStarted}
-                  />
-                </div>
-              </InfoTooltip>
-            )}
+        {canManageSellOrders && (
+          <div className="flex sm:flex-row flex-col sm:items-center items-end">
+            <div className="sm:order-2 order-1">
+              {hasTradableCredits ? (
+                <CreateButton
+                  hasTradableCredits={true}
+                  setIsSellFlowStarted={setIsSellFlowStarted}
+                />
+              ) : (
+                <InfoTooltip
+                  arrow
+                  placement="top"
+                  title={_(msg`You have no tradable credits that can be sold.`)}
+                >
+                  <div>
+                    <CreateButton
+                      hasTradableCredits={false}
+                      setIsSellFlowStarted={setIsSellFlowStarted}
+                    />
+                  </div>
+                </InfoTooltip>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
-      {hasTradableCredits && isSellFlowStarted && (
+      {canStartSellFlow && isSellFlowStarted && (
         <Suspense fallback={null}>
           <CreateSellOrderFlow
             isFlowStarted={isSellFlowStarted}
@@ -86,6 +97,7 @@ export const UserSellOrdersToolbar = ({
               !!activeAccount?.stripeConnectedAccountId &&
               !loginDisabled
             }
+            accountAddress={sellerAddress}
           />
         </Suspense>
       )}

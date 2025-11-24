@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -10,6 +11,8 @@ import { Body } from 'web-components/src/components/typography/Body';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
+
+import { AccountType } from 'generated/graphql';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { COPIED, UNNAMED } from './DashboardNavigation.constants';
@@ -32,11 +35,20 @@ export const DashboardNavHeader = ({
   hasWalletAddress = true,
   wallet,
 }: Props) => {
-  const { name, address, image, id } = activeAccount;
+  const { name = '', address, image, id } = activeAccount;
 
-  const avatarSrc = image || DEFAULT_PROFILE_USER_AVATAR;
+  const avatarSrc =
+    image ||
+    getDefaultAvatar({
+      ...activeAccount,
+      type:
+        activeAccount.type === 'user'
+          ? AccountType.User
+          : AccountType.Organization,
+    });
 
-  const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
+  const short = address ? `${address.slice(0, 9)}…${address.slice(-6)}` : '';
+  const copyAddress = address ?? '';
 
   const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
@@ -77,10 +89,10 @@ export const DashboardNavHeader = ({
           </button>
 
           <div className="group flex items-center gap-3">
-            {hasWalletAddress ? (
+            {hasWalletAddress && address ? (
               <CopyButton
                 className="group/copy flex items-center gap-3"
-                content={short}
+                content={copyAddress}
                 toastText={_(COPIED)}
                 iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
                 tooltipText={''}
@@ -94,7 +106,7 @@ export const DashboardNavHeader = ({
               </CopyButton>
             ) : (
               <Body size="xs" className="text-sc-text-sub-header">
-                {address.length > 21 ? short : address}
+                {address ? (address.length > 21 ? short : address) : ''}
               </Body>
             )}
           </div>
@@ -102,7 +114,11 @@ export const DashboardNavHeader = ({
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.('/profiles/' + (wallet || id))}
+            onClick={() =>
+              onViewProfileClick?.(
+                '/profiles/' + (wallet || address || id || ''),
+              )
+            }
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>

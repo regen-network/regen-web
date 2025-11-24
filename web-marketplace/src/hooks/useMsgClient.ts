@@ -35,6 +35,7 @@ interface TxData {
   msgs: readonly EncodeObject[];
   fee?: StdFee | 'auto' | number;
   memo?: string;
+  feeGranter?: string;
 }
 
 interface OptionalCallbacks {
@@ -46,7 +47,7 @@ export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
   callbacks?: OptionalCallbacks,
-) => Promise<void | string>;
+) => Promise<DeliverTxResponse | string | undefined>;
 
 type MsgClientType = {
   signAndBroadcast: SignAndBroadcastType;
@@ -62,7 +63,7 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { signingClient, queryClient } = useLedger();
+  const { signingCosmWasmClient, queryClient } = useLedger();
   const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
@@ -76,12 +77,14 @@ export default function useMsgClient(
 
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
-      if (!signingClient || !wallet?.address) return;
-      const { msgs, fee: txFee, memo } = tx;
+      if (!signingCosmWasmClient || !wallet?.address) {
+        return;
+      }
+      const { msgs, fee: txFee, memo, feeGranter } = tx;
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
-        const gasEstimation = await signingClient.simulate(
+        const gasEstimation = await signingCosmWasmClient.simulate(
           wallet.address,
           msgs,
           memo || '',
@@ -93,27 +96,36 @@ export default function useMsgClient(
         fee = txFee ?? defaultFee;
       }
 
-      const userRegenBalanceRes = await getFromCacheOrFetch({
-        query: getBalanceQuery({
-          request: { address: wallet?.address as string, denom: REGEN_DENOM },
-          client: queryClient,
-          enabled: !!queryClient && !!wallet?.address,
-        }),
-        reactQueryClient: reactQueryClient,
-      });
-      const userRegenBalance = userRegenBalanceRes?.balance;
+      // If feeGranter is provided, add it to the fee structure
+      if (feeGranter) {
+        fee = { ...fee, granter: feeGranter };
+      }
 
-      if (
-        userRegenBalance === undefined ||
-        Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
-      ) {
-        setErrorCodeAtom(ERRORS.NOT_ENOUGH_REGEN_FEES);
-        return;
+      // Only check user balance if no fee granter is provided
+      // When a granter is provided, the granter (DAO) pays the fees instead of the user
+      if (!feeGranter) {
+        const userRegenBalanceRes = await getFromCacheOrFetch({
+          query: getBalanceQuery({
+            request: { address: wallet?.address as string, denom: REGEN_DENOM },
+            client: queryClient,
+            enabled: !!queryClient && !!wallet?.address,
+          }),
+          reactQueryClient: reactQueryClient,
+        });
+        const userRegenBalance = userRegenBalanceRes?.balance;
+
+        if (
+          userRegenBalance === undefined ||
+          Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
+        ) {
+          setErrorCodeAtom(ERRORS.NOT_ENOUGH_REGEN_FEES);
+          return;
+        }
       }
 
       setIsWaitingForSigning(true);
 
-      const txRaw = await signingClient.sign(
+      const txRaw = await signingCosmWasmClient.sign(
         wallet.address,
         msgs,
         fee,
@@ -124,7 +136,7 @@ export default function useMsgClient(
       return txBytes;
     },
     [
-      signingClient,
+      signingCosmWasmClient,
       wallet?.address,
       reactQueryClient,
       setIsWaitingForSigning,
@@ -135,9 +147,13 @@ export default function useMsgClient(
 
   const broadcast = useCallback(
     async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
-      if (!signingClient || !txBytes) return;
+      if (!signingCosmWasmClient || !txBytes) {
+        return;
+      }
       handleTxQueued && handleTxQueued();
-      const _deliverTxResponse = await signingClient.broadcastTx(txBytes);
+      const _deliverTxResponse = await signingCosmWasmClient.broadcastTx(
+        txBytes,
+      );
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
@@ -152,7 +168,7 @@ export default function useMsgClient(
       }
     },
     [
-      signingClient,
+      signingCosmWasmClient,
       handleTxQueued,
       handleTxDelivered,
       setTxSuccessfulModalAtom,
@@ -171,6 +187,7 @@ export default function useMsgClient(
           if (closeForm) closeForm();
           const deliverTxResponse = await broadcast(txBytes);
           if (onSuccess) onSuccess(deliverTxResponse);
+          return deliverTxResponse;
         }
       } catch (err) {
         if (closeForm) closeForm();

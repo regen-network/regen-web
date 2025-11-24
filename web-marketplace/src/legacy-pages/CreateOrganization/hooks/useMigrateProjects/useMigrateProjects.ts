@@ -40,6 +40,7 @@ import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { ledgerRPCUri } from 'lib/ledger';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
 import { getSellOrdersBySellerKey } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery.utils';
@@ -48,12 +49,12 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
-import { useWallet } from 'lib/wallet/wallet';
-import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
-import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
+import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { orgRoles } from 'hooks/org-members/constants';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient from 'hooks/useMsgClient';
@@ -70,7 +71,6 @@ import {
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
 import { getSelectedCardSellOrdersWithNewIds } from './useMigrateProjects.utils';
-import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 export const useMigrateProjects = (
   projects: NormalizeProject[],

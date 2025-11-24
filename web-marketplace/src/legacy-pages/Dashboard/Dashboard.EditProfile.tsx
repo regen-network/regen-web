@@ -110,7 +110,6 @@ export const EditProfile = () => {
   }, [
     _,
     activeAccount,
-    defaultAvatar,
     isOrgDashboard,
     organizationProfile?.bgImage,
     organizationProfile?.description,

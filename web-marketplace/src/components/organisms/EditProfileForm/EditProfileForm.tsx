@@ -53,7 +53,6 @@ export interface EditProfileFormProps extends Partial<FormStateSetter> {
   children?: React.ReactNode;
   isDirtyRef?: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
-  onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
   // Optional enhancements for reuse in Create Organization flow
   formId?: string;
@@ -94,11 +93,11 @@ const EditProfileForm = ({
 
   /* Fields watch */
 
-  const watchedProfileImage = useWatch({
+  const profileImage = useWatch({
     control: form.control,
     name: 'profileImage',
   });
-  const watchedBackgroundImage = useWatch({
+  const backgroundImage = useWatch({
     control: form.control,
     name: 'backgroundImage',
   });
@@ -201,11 +200,11 @@ const EditProfileForm = ({
         titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         circularCrop
         onUpload={onUpload}
-        value={watchedProfileImage ?? undefined}
+        value={profileImage ?? undefined}
       >
         <ImageFieldAvatar
-          key={watchedProfileImage || 'profile-image-placeholder'}
-          value={watchedProfileImage ?? ''}
+          key={profileImage || 'profile-image-placeholder'}
+          value={profileImage ?? ''}
         />
       </ImageField>
       <ImageField
@@ -225,11 +224,11 @@ const EditProfileForm = ({
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}
-        value={watchedBackgroundImage ?? undefined}
+        value={backgroundImage ?? undefined}
       >
         <ImageFieldBackground
-          key={watchedBackgroundImage || 'background-image-placeholder'}
-          value={watchedBackgroundImage ?? ''}
+          key={backgroundImage || 'background-image-placeholder'}
+          value={backgroundImage ?? ''}
         />
       </ImageField>
       <TextAreaField

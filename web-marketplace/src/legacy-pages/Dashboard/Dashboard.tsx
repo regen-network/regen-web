@@ -10,7 +10,6 @@ import { startCase } from 'lodash';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
-import { getOptimizedImageSrc } from 'web-components/src/utils/optimizedImageSrc';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import type { Account } from 'generated/graphql';
@@ -306,7 +305,7 @@ export const Dashboard = () => {
       isOrganizationEditor,
       isOrganizationViewer,
       feeGranter: isOrganizationDashboard
-        ? organizationAccount?.address ?? undefined
+        ? organizationAccount?.address
         : undefined,
     }),
     [

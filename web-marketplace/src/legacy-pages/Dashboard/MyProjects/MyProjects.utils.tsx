@@ -5,7 +5,7 @@ import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProje
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 
-import { useAuth } from 'lib/auth/auth';
+import { Assignment } from 'generated/graphql';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,
@@ -13,13 +13,12 @@ import {
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-import { Wallet } from 'lib/wallet/wallet';
 
 import { ROLE_ADMIN } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
-import { useFetchProject } from './hooks/useFetchProject';
+import { UseCanAccessManageProjectWithRoleParams } from './hooks/useCanAccessManageProjectWithRole';
 
 export const getDefaultProject = (
   disabled: boolean,
@@ -76,42 +75,31 @@ export const handleProjectsDraftStatus = (
   return newState;
 };
 
-export type CanAccessManageProjectWithRoleParams = {
-  onChainProject: ReturnType<typeof useFetchProject>['onChainProject'];
-  offChainProject: ReturnType<typeof useFetchProject>['offChainProject'];
-  activeAccountId: string | undefined;
-  activeAccount: ReturnType<typeof useAuth>['activeAccount'];
-  wallet: Wallet | undefined;
-};
+export type CanAccessManageProjectWithRoleParams =
+  UseCanAccessManageProjectWithRoleParams & {
+    assignments?: (Pick<Assignment, 'accountId' | 'roleName'> | null)[] | null;
+  };
 export const canAccessManageProjectWithRole = ({
   onChainProject,
   offChainProject,
   activeAccountId,
-  activeAccount,
   wallet,
+  assignments,
 }: CanAccessManageProjectWithRoleParams) => {
   const isAccountAdmin =
     (onChainProject?.admin && wallet?.address === onChainProject.admin) ||
     (offChainProject?.adminAccountId &&
       activeAccountId === offChainProject?.adminAccountId);
 
-  const projectDaoFromActiveAccount =
-    activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes.find(
-      dao =>
-        dao?.projectByAdminDaoAddress?.id &&
-        dao.projectByAdminDaoAddress.id === offChainProject?.id,
-    );
+  const activeAccountRole = assignments?.find(
+    assignment => assignment?.accountId === activeAccountId,
+  )?.roleName;
 
-  const activeAccountRole =
-    projectDaoFromActiveAccount?.assignmentsByDaoAddress?.nodes.find(
-      assignment => assignment?.accountId === activeAccount?.id,
-    )?.roleName;
-
-  const isProjectCollaborator = Boolean(projectDaoFromActiveAccount);
+  const isProjectCollaborator = Boolean(activeAccountRole);
 
   return {
     canAccessManageProject: isAccountAdmin || isProjectCollaborator,
-    role: (isProjectCollaborator
+    role: (offChainProject?.daoByAdminDaoAddress
       ? activeAccountRole
       : isAccountAdmin
       ? ROLE_ADMIN

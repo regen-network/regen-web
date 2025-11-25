@@ -1,33 +1,19 @@
 import {
-  canAccessManageProjectWithRole,
-  CanAccessManageProjectWithRoleParams,
-} from 'legacy-pages/Dashboard/MyProjects/MyProjects.utils';
-
-import {
   ROLE_ADMIN,
   ROLE_EDITOR,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
-type GetCanEditProjectParams = CanAccessManageProjectWithRoleParams & {
+type GetCanEditProjectParams = {
+  role?: ProjectRole;
   isLoading: boolean;
 };
 
 export const getCanEditProjectWithRole = ({
-  onChainProject,
-  offChainProject,
-  activeAccountId,
-  activeAccount,
-  wallet,
+  role,
   isLoading,
 }: GetCanEditProjectParams) => {
-  const { role } = canAccessManageProjectWithRole({
-    onChainProject,
-    offChainProject,
-    activeAccountId,
-    activeAccount,
-    wallet,
-  });
   return {
     canEdit:
       role === ROLE_OWNER ||

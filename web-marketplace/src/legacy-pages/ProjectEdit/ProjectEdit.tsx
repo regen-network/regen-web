@@ -18,6 +18,7 @@ import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 import { usePathSection } from 'legacy-pages/Dashboard/hooks/usePathSection';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { startCase } from 'lodash';
 
@@ -174,24 +175,19 @@ function ProjectEdit(): JSX.Element {
   const isLoading =
     isFetchingProject || isFetchingProjectById || isFetchingProjectByOnChainId;
 
-  const { canEdit, role } = useMemo(
+  const { role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId,
+    wallet,
+  });
+  const { canEdit } = useMemo(
     () =>
       getCanEditProjectWithRole({
-        onChainProject,
-        offChainProject,
-        activeAccountId,
-        activeAccount,
-        wallet,
+        role,
         isLoading,
       }),
-    [
-      activeAccountId,
-      activeAccount,
-      isLoading,
-      offChainProject,
-      onChainProject,
-      wallet,
-    ],
+    [role, isLoading],
   );
 
   const hasProject = !!onChainProject || !!offChainProject;

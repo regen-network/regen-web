@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const ORGANIZATION_MEMBERS = msg`Organization Members`;
 export const INVITE_MEMBERS = msg`Invite Member`;
@@ -36,10 +36,9 @@ export const VISIBLE_QUESTION = msg`Is this member visible on the organization p
 export const VISIBLE_DESCRIPTION = msg`If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name.`;
 export const CANCEL_LABEL = msg`CANCEL`;
 export const INVITE_LABEL = msg`Invite`;
-export const REGEN_ADDRESS_REQUIRED_ERROR =
-  'Enter a REGEN address in order to add this user as an Admin or Editor.';
-export const INVALID_EMAIL_ERROR = 'Invalid email';
-export const INVALID_REGEN_ADDRESS_ERROR = 'Invalid REGEN address';
+export const REGEN_ADDRESS_REQUIRED_ERROR = msg`Enter a REGEN address in order to add this user as an Owner, Admin or Editor.`;
+export const INVALID_EMAIL_OR_REGEN_ADDRESS_ERROR = msg`Invalid email or REGEN address`;
+export const INVALID_REGEN_ADDRESS_ERROR = msg`Invalid REGEN address`;
 
 // Remove Member Modal
 export const REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this member from your organization?`;

@@ -4,7 +4,6 @@ import { Body } from 'web-components/src/components/typography';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import { FormRef } from 'components/molecules/Form/Form';
 import { MigrateProjects } from 'components/organisms/MigrateProjects/MigrateProjects';
 
 import {
@@ -16,7 +15,6 @@ import { useMigrateProjects } from '../hooks/useMigrateProjects/useMigrateProjec
 
 type MigrateStepsStepProps = {
   projects: NormalizeProject[];
-  formRef?: FormRef;
 } & FormStateSetter;
 
 export const MigrateProjectsStep = ({

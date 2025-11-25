@@ -56,6 +56,10 @@ query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
             image
             addr
             title
+            privateAccountById {
+              email
+              googleEmail
+            }
           }
         }
         assignmentsByDaoAddress {

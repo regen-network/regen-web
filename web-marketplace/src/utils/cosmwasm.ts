@@ -77,16 +77,7 @@ export const getStargateAction = ({
  */
 export const getExecuteActionsStargate = (actions: StargateAction[]) => ({
   execute_actions: {
-    actions: actions.map(action => ({
-      authorization_id: action.authorizationId,
-      role_id: action.roleId,
-      msg: {
-        stargate: {
-          type_url: action.typeUrl,
-          value: toBase64(action.value),
-        },
-      },
-    })),
+    actions: actions.map(action => getStargateAction(action)),
   },
 });
 

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
+
+import { AccountsOrderBy } from 'generated/graphql';
 
 import {
   ROLE_ADMIN,
@@ -8,39 +10,73 @@ import {
 } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembers } from './OrganizationMembers';
-import { mockMembers } from './OrganizationMembers.mock';
+import { mockAccounts, mockMembers } from './OrganizationMembers.mock';
 import { Member } from './OrganizationMembers.types';
 
 const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',
   component: OrganizationMembers,
   argTypes: {
-    onInvite: {
-      action: 'invite-clicked',
-      description: 'Called when invite button is clicked',
+    onSaveProfile: {
+      action: 'save-profile',
+    },
+    onUpload: {
+      action: 'upload',
     },
   },
 };
 
 export default meta;
 
-export const Default = (args: { onInvite: () => void }) => {
+export const Default = (args: {
+  onSaveProfile: () => Promise<void>;
+  onUpload: () => Promise<{ url: string }>;
+}) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
+  const [sortDir, setSortDir] = useState<
+    AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
+  >(AccountsOrderBy.NameAsc);
+  const [debouncedValue, setDebouncedValue] = useState('');
+  const [accounts, setAccounts] = useState<any>(null);
+
+  useEffect(() => {
+    if (debouncedValue.trim()) {
+      const filteredAccounts = mockAccounts.filter(account => {
+        const nameMatch = account.name
+          ?.toLowerCase()
+          .includes(debouncedValue.toLowerCase());
+        const addrMatch = account.addr
+          ?.toLowerCase()
+          .includes(debouncedValue.toLowerCase());
+        return nameMatch || addrMatch;
+      });
+
+      setAccounts({
+        getAccountsByNameOrAddr: {
+          nodes: filteredAccounts,
+        },
+      });
+    } else {
+      setAccounts(null);
+    }
+  }, [debouncedValue]);
 
   const toggleSort = () => {
-    const dir = sortDir === 'asc' ? 'desc' : 'asc';
+    const dir =
+      sortDir === AccountsOrderBy.NameAsc
+        ? AccountsOrderBy.NameDesc
+        : AccountsOrderBy.NameAsc;
     setSortDir(dir);
     setMembers(prev =>
       [...prev].sort((a, b) =>
-        dir === 'asc'
+        dir === AccountsOrderBy.NameAsc
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name),
       ),
     );
   };
 
-  const updateRole = (id: string, role: BaseMemberRole) =>
+  const updateRole = async (id: string, role: BaseMemberRole) =>
     setMembers(prev =>
       prev.map(member => {
         if (role === ROLE_OWNER) {
@@ -55,26 +91,62 @@ export const Default = (args: { onInvite: () => void }) => {
       }),
     );
 
-  const updateVisibility = (id: string, visible: boolean) =>
+  const updateVisibility = async (id: string, visible: boolean) =>
     setMembers(prev =>
       prev.map(member => (member.id === id ? { ...member, visible } : member)),
     );
 
-  const handleRemove = (id: string) =>
+  const handleRemove = async (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
+
+  const addMember = async (data: {
+    role: BaseMemberRole | undefined;
+    addressOrEmail: string;
+    visible: boolean;
+  }) => {
+    if (!data.role) return;
+
+    const foundAccount = mockAccounts.find(
+      acc =>
+        acc.addr === data.addressOrEmail || acc.name === data.addressOrEmail,
+    );
+
+    const newMember: Member = {
+      id: `member-${Date.now()}`,
+      name: foundAccount?.name || data.addressOrEmail,
+      email: foundAccount?.addr || data.addressOrEmail,
+      avatar: foundAccount?.image || undefined,
+      role: data.role,
+      onChainRoleId: 1,
+      visible: data.visible,
+      isCurrentUser: false,
+      hasWalletAddress: true,
+      title: foundAccount?.description || '',
+      organization:
+        foundAccount?.type === 'organization' ? foundAccount.name || '' : '',
+    };
+
+    setMembers(prev => [...prev, newMember]);
+  };
 
   return (
     <OrganizationMembers
-      {...args}
       members={members}
       onToggleSort={toggleSort}
       onUpdateRole={updateRole}
       onUpdateVisibility={updateVisibility}
       onRemove={handleRemove}
+      setDebouncedValue={setDebouncedValue}
+      onAddMember={addMember}
+      accounts={accounts}
+      onSaveProfile={args.onSaveProfile}
+      onUpload={args.onUpload}
+      sortDir={sortDir}
     />
   );
 };
 
 Default.args = {
-  onInvite: action('invite-clicked'),
+  onSaveProfile: action('save profile'),
+  onUpload: action('upload'),
 };

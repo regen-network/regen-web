@@ -1,5 +1,3 @@
-import { MessageDescriptor } from '@lingui/core';
-
 import AuthorIcon from 'web-components/src/components/icons/AuthorIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
@@ -15,10 +13,7 @@ import {
   ROLE_OWNER,
   ROLE_VIEWER,
 } from '../ActionDropdown/ActionDropdown.constants';
-import {
-  ProjectRole,
-  RoleOption,
-} from '../BaseMembersTable/BaseMembersTable.types';
+import { RoleOption } from '../BaseMembersTable/BaseMembersTable.types';
 import {
   ROLE_OWNER_DESCRIPTION,
   ROLE_OWNER_LABEL,

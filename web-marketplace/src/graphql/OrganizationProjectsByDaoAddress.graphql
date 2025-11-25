@@ -1,0 +1,29 @@
+query OrganizationProjectsByDaoAddress($daoAddress: String!) {
+  organizationByDaoAddress(daoAddress: $daoAddress) {
+    organizationProjectsByOrganizationId {
+      nodes {
+        projectByProjectId {
+          adminDaoAddress
+          daoByAdminDaoAddress {
+            daoRbamAddress
+            cw4GroupAddress
+            assignmentsByDaoAddress {
+              nodes {
+                accountId
+                accountByAccountId {
+                  addr
+                  privateAccountById {
+                    email
+                    googleEmail
+                  }
+                }
+                roleName
+                onChainRoleId
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

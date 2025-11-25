@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,
@@ -9,6 +10,7 @@ import { AccountType } from 'generated/graphql';
 import { FormRef } from 'components/molecules/Form/Form';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
+import { INVITE_MEMBERS_FORM_ID } from '../CreateOrganization.constants';
 import { getCreateOrgSteps } from '../CreateOrganization.utils';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
@@ -23,10 +25,8 @@ export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
 
 type UseOrganizationFlowParams = {
   activeStep: number;
-  isLastStep: boolean;
   data: OrganizationMultiStepData | undefined;
   handleActiveStep: (step: number) => void;
-  handleBack: () => void;
   handleResetData: () => void;
   resumeStep: number;
   walletAddress?: string;
@@ -70,20 +70,14 @@ const mapInitialValues = (
 
 export const useOrganizationFlow = ({
   activeStep,
-  isLastStep,
   data,
   handleActiveStep,
-  handleBack,
   handleResetData,
   resumeStep,
   walletAddress,
   steps,
   formRefs,
 }: UseOrganizationFlowParams) => {
-  const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
-  const [organizationId, setOrganizationId] = useState<string | undefined>(
-    undefined,
-  );
   const [hasUnfinishedOrganization, setHasUnfinishedOrganization] =
     useState(false);
   const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<
@@ -95,6 +89,8 @@ export const useOrganizationFlow = ({
   });
   const [orgProfileInitialValuesVersion, setOrgProfileInitialValuesVersion] =
     useState(0);
+  const [sendRegenModalOpen, setSendRegenModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const storedWalletAddress = (data as Record<string, any>)?.dao
     ?.walletAddress as string | undefined;
@@ -114,29 +110,15 @@ export const useOrganizationFlow = ({
   useEffect(() => {
     if (!matchesStoredWallet) {
       setHasUnfinishedOrganization(false);
-      setDaoAddress(undefined);
-      setOrganizationId(undefined);
       return;
     }
 
-    const storedDaoAddress = (data as Record<string, any>)?.dao?.daoAddress as
-      | string
-      | undefined;
-    const storedOrganizationId = (data as Record<string, any>)?.dao
-      ?.organizationId as string | undefined;
-
+    const storedDaoAddress = data?.dao?.daoAddress;
     if (storedDaoAddress) {
-      setDaoAddress(storedDaoAddress);
-      if (storedOrganizationId) {
-        setOrganizationId(storedOrganizationId);
-      }
       setHasUnfinishedOrganization(true);
-      return;
+    } else {
+      setHasUnfinishedOrganization(false);
     }
-
-    setHasUnfinishedOrganization(false);
-    setDaoAddress(undefined);
-    setOrganizationId(undefined);
   }, [data, matchesStoredWallet]);
 
   useEffect(() => {
@@ -153,35 +135,32 @@ export const useOrganizationFlow = ({
     }
   }, [resumeStep, activeStep, handleActiveStep]);
 
-  const handlePrevClick = useCallback(() => {
-    if (activeStep === 0) return;
-    handleBack();
-  }, [activeStep, handleBack]);
-
   const handleNextClick = useCallback(async () => {
     const formId = steps[activeStep].id;
+
+    // Nothing to submit on invite members step (last step)
+    // We display a modal to send REGEN to the org DAO address
+    if (formId === INVITE_MEMBERS_FORM_ID) {
+      setSendRegenModalOpen(true);
+      return;
+    }
+
     const currentFormRef = formRefs[formId];
 
     if (currentFormRef?.current) {
       // Trigger current step's form submission
       await currentFormRef.current.submitForm();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStep, steps, setSendRegenModalOpen]);
 
-    if (hasUnfinishedOrganization && daoAddress && isLastStep) {
-      handleResetData();
-      setDaoAddress(undefined);
-      setOrganizationId(undefined);
-      setHasUnfinishedOrganization(false);
-    }
-  }, [
-    daoAddress,
-    handleResetData,
-    hasUnfinishedOrganization,
-    isLastStep,
-    activeStep,
-    steps,
-    formRefs,
-  ]);
+  const completeCreation = useCallback(() => {
+    handleResetData();
+    setHasUnfinishedOrganization(false);
+    navigate(`/profiles/${data?.dao?.daoAddress}`, {
+      state: { showOrgPopup: true },
+    });
+  }, [handleResetData, navigate, data]);
 
   const handleApplyTransferProfile = useCallback(
     ({ nextValues }: ApplyTransferPayload) => {
@@ -192,16 +171,14 @@ export const useOrganizationFlow = ({
   );
 
   return {
-    daoAddress,
-    setDaoAddress,
-    organizationId,
-    setOrganizationId,
     hasUnfinishedOrganization,
     orgProfileInitialValues,
     orgProfileInitialValuesVersion,
     resumeStep,
-    handlePrevClick,
     handleNextClick,
     handleApplyTransferProfile,
+    sendRegenModalOpen,
+    setSendRegenModalOpen,
+    completeCreation,
   };
 };

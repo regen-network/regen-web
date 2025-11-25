@@ -11,19 +11,6 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { CODE_IDS, lookupContractChecksum } from './useCreateDao.constants';
 
-export function parseCodeId(
-  envVarName: string,
-  rawValue: string | undefined,
-): number {
-  const parsed = Number(rawValue?.toString().trim());
-
-  if (!Number.isInteger(parsed) || parsed < 0) {
-    throw new Error(`Invalid ${envVarName} configuration`);
-  }
-
-  return parsed;
-}
-
 // Roles and authorizations definitions
 const creditClassesAuthorization = {
   name: 'can_manage_credit_classes',
@@ -349,71 +336,69 @@ const ownerMembersAuthorizations = (
   },
 ];
 
-const adminMembersAuthorizations = (
+export const adminMembersAuthorization = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,
-) => [
-  {
-    name: 'can_manage_members_except_owner',
-    metadata: 'Can manage members of the organization except the owner',
-    filter: {
-      $or: [
-        feegrantFilter,
-        feegrantRevokeFilter,
-        {
-          wasm: {
-            execute: {
-              contract_addr: cw4GroupAddress,
-              msg: {
-                '#base64': {
-                  update_members: {
-                    remove: {
-                      $not: { $contains: initialOwnerAddress },
-                    },
+) => ({
+  name: 'can_manage_members_except_owner',
+  metadata: 'Can manage members of the organization except the owner',
+  filter: {
+    $or: [
+      feegrantFilter,
+      feegrantRevokeFilter,
+      {
+        wasm: {
+          execute: {
+            contract_addr: cw4GroupAddress,
+            msg: {
+              '#base64': {
+                update_members: {
+                  remove: {
+                    $not: { $contains: initialOwnerAddress },
                   },
                 },
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-        {
-          wasm: {
-            execute: {
-              contract_addr: rbamAddress,
-              msg: {
-                '#base64': {
-                  assign: {},
-                },
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: rbamAddress,
+            msg: {
+              '#base64': {
+                assign: {},
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-        {
-          wasm: {
-            execute: {
-              contract_addr: rbamAddress,
-              msg: {
-                '#base64': {
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: rbamAddress,
+            msg: {
+              '#base64': {
+                revoke: {
                   revoke: {
-                    revoke: {
-                      $all: {
-                        addr: { $ne: initialOwnerAddress },
-                      },
+                    $all: {
+                      addr: { $ne: initialOwnerAddress },
                     },
                   },
                 },
               },
-              funds: [],
             },
+            funds: [],
           },
         },
-      ],
-    },
+      },
+    ],
   },
-];
+});
 
 const dataAuthorization = {
   name: 'can_anchor_attest_data',
@@ -454,7 +439,7 @@ export const organizationRoles = (
     metadata:
       'Manages user access and has full control of projects, credits, and credit classes.',
     authorizations: [
-      ...adminMembersAuthorizations(
+      adminMembersAuthorization(
         initialOwnerAddress,
         cw4GroupAddress,
         rbamAddress,
@@ -533,7 +518,7 @@ export const projectRoles = (
     metadata:
       'Manages user access and can edit all project info and project credits.',
     authorizations: [
-      ...adminMembersAuthorizations(
+      adminMembersAuthorization(
         initialOwnerAddress,
         cw4GroupAddress,
         rbamAddress,

@@ -1,3 +1,5 @@
+import { AccountsOrderBy } from 'generated/graphql';
+
 import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 
 export interface Collaborator {
@@ -15,7 +17,7 @@ export interface Collaborator {
 export interface ProjectCollaboratorsProps {
   collaborators: Collaborator[];
   onInvite: () => void;
-  sortDir?: 'asc' | 'desc';
+  sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
   onToggleSort: () => void;
   onUpdateRole: (id: string, role: ProjectRole) => void;
   onRemove: (id: string) => void;

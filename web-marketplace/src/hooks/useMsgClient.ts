@@ -17,7 +17,7 @@ import { gasPrice, useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
 import { useWallet, Wallet } from '../lib/wallet/wallet';
 
-const defaultFee = {
+export const defaultFee = {
   amount: [
     {
       denom: 'uregen',
@@ -56,6 +56,7 @@ type MsgClientType = {
   setError: (error: string | undefined) => void;
   error?: string;
   wallet?: Wallet;
+  simulate: (tx: TxData) => Promise<StdFee>;
 };
 
 export default function useMsgClient(
@@ -75,6 +76,23 @@ export default function useMsgClient(
   >();
   const reactQueryClient = useQueryClient();
 
+  const simulate = useCallback(
+    async (tx: TxData) => {
+      if (!signingCosmWasmClient || !wallet?.address) return defaultFee;
+      const { msgs, fee: txFee, memo } = tx;
+
+      const gasEstimation = await signingCosmWasmClient.simulate(
+        wallet.address,
+        msgs,
+        memo || '',
+      );
+      const multiplier =
+        typeof txFee === 'number' ? txFee : defaultGasMultiplier;
+      return calculateFee(Math.round(gasEstimation * multiplier), gasPrice);
+    },
+    [signingCosmWasmClient, wallet?.address],
+  );
+
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
       if (!signingCosmWasmClient || !wallet?.address) {
@@ -84,14 +102,7 @@ export default function useMsgClient(
 
       let fee: StdFee;
       if (txFee === 'auto' || typeof txFee === 'number') {
-        const gasEstimation = await signingCosmWasmClient.simulate(
-          wallet.address,
-          msgs,
-          memo || '',
-        );
-        const multiplier =
-          typeof txFee === 'number' ? txFee : defaultGasMultiplier;
-        fee = calculateFee(Math.round(gasEstimation * multiplier), gasPrice);
+        fee = await simulate(tx);
       } else {
         fee = txFee ?? defaultFee;
       }
@@ -131,6 +142,7 @@ export default function useMsgClient(
         fee,
         memo || '',
       );
+
       setIsWaitingForSigning(false);
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
@@ -206,6 +218,7 @@ export default function useMsgClient(
 
   return {
     signAndBroadcast,
+    simulate,
     setDeliverTxResponse,
     deliverTxResponse,
     setError,

@@ -14,6 +14,14 @@ query GetAccountsByNameOrAddr($input: String) {
           description
         }
       }
+      daosByAssignmentAccountIdAndDaoAddress {
+        nodes {
+          address
+          organizationByDaoAddress {
+            name
+          }
+        }
+      }
     }
   }
 }

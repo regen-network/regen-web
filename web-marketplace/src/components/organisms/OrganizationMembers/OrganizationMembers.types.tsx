@@ -1,19 +1,25 @@
-import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
+
+import {
+  DaoByAddressQuery,
+  GetAccountsByNameOrAddrQuery,
+} from 'generated/graphql';
 
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 
 export type Member = {
   id: string;
   name: string;
-  email: string;
-  title: string;
+  email?: string | null;
+  address?: string | null;
+  title?: string | null;
   organization: string;
   role: BaseMemberRole;
+  onChainRoleId: number;
   avatar?: string;
   visible: boolean;
   isCurrentUser?: boolean;
   hasWalletAddress: boolean;
-  invited?: boolean;
 };
 
 export interface InviteMemberModalProps {
@@ -25,7 +31,8 @@ export interface InviteMemberModalProps {
     visible: boolean;
   }) => void;
   accounts?: GetAccountsByNameOrAddrQuery | null;
-  setDebouncedValue?: (value: string) => void;
+  setDebouncedValue: UseStateSetter<string>;
+  daoWithAddress?: DaoByAddressQuery['daoByAddress'];
 }
 
 export type VisibilitySwitchProps = {

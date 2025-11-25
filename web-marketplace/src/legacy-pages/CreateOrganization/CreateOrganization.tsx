@@ -38,6 +38,7 @@ import {
   ORGANIZATION_PROFILE_FORM_ID,
   PERSONAL_INFO_FORM_ID,
 } from './CreateOrganization.constants';
+import { SendRegenModal } from './CreateOrganization.SendRegenModal';
 import { getCreateOrgSteps } from './CreateOrganization.utils';
 import {
   OrganizationMultiStepData,
@@ -64,13 +65,12 @@ function CreateOrganizationContent({
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
-    handleBack,
     handleActiveStep,
     activeStep,
     percentComplete,
-    isLastStep,
     data,
     handleResetData,
+    isLastStep,
   } = useMultiStep<OrganizationMultiStepData>();
 
   // Refs for each form step
@@ -88,22 +88,18 @@ function CreateOrganizationContent({
   };
 
   const {
-    daoAddress,
-    setDaoAddress,
-    organizationId,
-    setOrganizationId,
     hasUnfinishedOrganization,
     orgProfileInitialValues,
     orgProfileInitialValuesVersion,
-    handlePrevClick,
     handleNextClick,
     handleApplyTransferProfile,
+    sendRegenModalOpen,
+    setSendRegenModalOpen,
+    completeCreation,
   } = useOrganizationFlow({
     activeStep,
-    isLastStep,
     data,
     handleActiveStep,
-    handleBack,
     handleResetData,
     resumeStep,
     walletAddress,
@@ -121,10 +117,6 @@ function CreateOrganizationContent({
           key={`org-profile-${orgProfileInitialValuesVersion}`}
           initialValues={orgProfileInitialValues}
           hasUnfinishedOrganization={hasUnfinishedOrganization}
-          daoAddress={daoAddress}
-          setDaoAddress={setDaoAddress}
-          organizationId={organizationId}
-          setOrganizationId={setOrganizationId}
           onTransferProfile={handleApplyTransferProfile}
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
@@ -143,16 +135,27 @@ function CreateOrganizationContent({
         <PersonalInfoStep
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
+          formRef={personalInfoFormRef}
         />
       )}
       {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && <InviteMembersStep />}
       <SaveFooter
-        onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={!isValid || isSubmitting}
+        saveDisabled={
+          steps[activeStep].id !== INVITE_MEMBERS_FORM_ID
+            ? !isValid || isSubmitting
+            : false
+        }
         percentComplete={percentComplete}
       />
+      {steps[activeStep].id === INVITE_MEMBERS_FORM_ID && (
+        <SendRegenModal
+          open={sendRegenModalOpen}
+          onClose={() => setSendRegenModalOpen(false)}
+          completeCreation={completeCreation}
+        />
+      )}
     </>
   );
 }

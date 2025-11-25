@@ -1,15 +1,19 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDebounce } from 'hooks/useDebounce';
 
 import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
 import {
@@ -20,11 +24,8 @@ import {
   CHOOSE_ROLE_HELP,
   EMAIL_OR_ADDRESS_LABEL,
   ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER,
-  INVALID_EMAIL_ERROR,
-  INVALID_REGEN_ADDRESS_ERROR,
   INVITE_LABEL,
   REGEN_ADDRESS_LABEL,
-  REGEN_ADDRESS_REQUIRED_ERROR,
   ROLE_LABEL,
   VISIBLE_DESCRIPTION,
   VISIBLE_QUESTION,
@@ -32,12 +33,7 @@ import {
 import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
 import { InviteMemberModalProps } from '../OrganizationMembers.types';
 import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
-import { inviteSchema } from './InviteMembers.schema';
-import {
-  getDisplayValue,
-  getValidationError,
-  isValidAddressOrEmail,
-} from './InviteMembers.utils';
+import { getInviteSchema } from './InviteMembers.schema';
 
 export const InviteMemberModal = ({
   open,
@@ -45,18 +41,20 @@ export const InviteMemberModal = ({
   onSubmit,
   accounts,
   setDebouncedValue,
+  daoWithAddress,
 }: InviteMemberModalProps) => {
   const { _ } = useLingui();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
+  const currentDaoOrganization = useDaoOrganization();
 
-  const form = useZodForm<typeof inviteSchema, typeof inviteSchema>({
-    schema: inviteSchema,
+  const form = useZodForm({
+    schema: getInviteSchema(_),
     defaultValues: { role: undefined, addressOrEmail: '', visible: true },
     mode: 'onChange',
   });
-  const { control, setValue, reset, watch } = form;
-  const { errors } = useFormState({ control });
+  const { control, setValue, reset, watch, register, setError } = form;
+  const { isSubmitting, errors, isValid } = useFormState({ control });
   const role = watch('role');
   const addressOrEmail = watch('addressOrEmail');
   const visible = watch('visible');
@@ -69,61 +67,78 @@ export const InviteMemberModal = ({
     setIsInputFocused(false);
   };
 
-  if (!open) return null;
-
-  const disabledInvite =
-    !role ||
-    !(addressOrEmail || '').trim() ||
-    !isValidAddressOrEmail(addressOrEmail || '', role);
-
-  const validationError = getValidationError(
-    addressOrEmail || '',
-    role,
-    REGEN_ADDRESS_REQUIRED_ERROR,
-    INVALID_EMAIL_ERROR,
-    INVALID_REGEN_ADDRESS_ERROR,
+  const addressOrEmailDebouncedValue = useDebounce(addressOrEmail);
+  useEffect(
+    () => setDebouncedValue(addressOrEmailDebouncedValue),
+    [addressOrEmailDebouncedValue, setDebouncedValue],
   );
 
+  const [addressOrEmailDisplayValue, setAddressOrEmailDisplayValue] =
+    useState('');
+
+  useEffect(() => {
+    if (daoWithAddress) {
+      setError('addressOrEmail', {
+        message: _(msg`You cannot add a DAO to an organization`),
+      });
+    }
+  }, [daoWithAddress, setError, _]);
+
+  useEffect(() => {
+    const accs = accounts?.getAccountsByNameOrAddr?.nodes || [];
+    if (accs.length === 1) {
+      const acc = accs[0];
+      // Check only assignment within an organization
+      const dao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+        dao => !!dao?.organizationByDaoAddress,
+      );
+      if (dao && currentDaoOrganization) {
+        // provided address already belongs to the current organization
+        if (dao.address === currentDaoOrganization.address) {
+          setError('addressOrEmail', {
+            message: _(msg`This user is already a member of the organization`),
+          });
+        } else {
+          // provided address belongs to a different organization
+          setError('addressOrEmail', {
+            message: _(
+              msg`This member already belongs to another organization.`,
+            ),
+          });
+        }
+      }
+    }
+  }, [accounts, currentDaoOrganization, setError, _]);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm"
-        onMouseDown={() => {
+    <Modal
+      open={open}
+      onClose={() => {
+        resetFields();
+        onClose();
+      }}
+    >
+      <Form
+        form={form}
+        className="flex flex-col"
+        onSubmit={v => {
+          onSubmit({
+            role: v.role as BaseMemberRole | undefined,
+            addressOrEmail: v.addressOrEmail,
+            visible: v.visible,
+          });
           resetFields();
           onClose();
         }}
-      />
-      <div className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md shadow-bc-neutral-700/10">
-        <Form
-          form={form}
-          className="flex flex-col"
-          onSubmit={v => {
-            onSubmit({
-              role: v.role as BaseMemberRole | undefined,
-              addressOrEmail: v.addressOrEmail,
-              visible: v.visible,
-            });
-            resetFields();
-            onClose();
-          }}
-        >
-          <button
-            onClick={() => {
-              resetFields();
-              onClose();
-            }}
-            aria-label="close"
-            className="absolute top-10 right-5 p-8 bg-transparent border-none cursor-pointer"
-            type="button"
-          >
-            <CloseIcon className="w-6 h-6 text-bc-neutral-500" />
-          </button>
+      >
+        <header>
           <Title variant="h4" className="mb-30 md:mb-45 text-center">
             {_(ADD_MEMBER_LABEL)}
           </Title>
+        </header>
 
-          {/* Role Section */}
+        {/* Role Section */}
+        <section>
           <div className="flex flex-col mb-45">
             <span className="font-bold text-md md:text-lg mb-6">
               {_(ROLE_LABEL)}
@@ -135,7 +150,9 @@ export const InviteMemberModal = ({
               role={role as BaseMemberRole}
               disabled={false}
               hasWalletAddress={true}
-              onChange={r => setValue('role', r, { shouldDirty: true })}
+              onChange={r =>
+                setValue('role', r, { shouldDirty: true, shouldValidate: true })
+              }
               currentUserRole={role as BaseMemberRole}
               placeholder={_(CHOOSE_ROLE_HELP)}
               height="h-[50px] md:h-[60px]"
@@ -147,6 +164,9 @@ export const InviteMemberModal = ({
           <div className="flex flex-col mb-0">
             {/* Reserve 45px below the field so helper text sits within that space, avoiding layout jump */}
             <div className="relative pb-[45px]">
+              {/* Hidden real value that will be submitted */}
+              <input type="hidden" {...register('addressOrEmail')} />
+
               <TextField
                 type="text"
                 label={_(
@@ -156,31 +176,16 @@ export const InviteMemberModal = ({
                 )}
                 description={_(ADMIN_EDITOR_RULE)}
                 labelClassName="font-bold text-md md:text-lg"
-                value={getDisplayValue(addressOrEmail || '')}
+                value={addressOrEmailDisplayValue}
                 placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
-                helperText={
-                  validationError ||
-                  (errors.addressOrEmail?.message as string | undefined)
-                }
-                error={!!validationError}
+                helperText={errors.addressOrEmail?.message}
+                error={!!errors.addressOrEmail}
                 onFocus={() => {
                   if (blurTimeoutRef.current)
                     window.clearTimeout(blurTimeoutRef.current);
                   setIsInputFocused(true);
                 }}
-                onBlur={() => {
-                  blurTimeoutRef.current = window.setTimeout(
-                    () => setIsInputFocused(false),
-                    120,
-                  );
-                }}
-                onChange={e => {
-                  setValue('addressOrEmail', e.target.value, {
-                    shouldDirty: true,
-                  });
-                  if (setDebouncedValue) setDebouncedValue(e.target.value);
-                }}
-                InputProps={{ className: 'h-[50px] md:h-[60px]' }}
+                InputProps={{ className: 'h-50 md:h-60' }}
                 sx={{
                   position: 'relative',
                   '& .MuiFormHelperText-root': {
@@ -192,8 +197,25 @@ export const InviteMemberModal = ({
                     whiteSpace: 'normal',
                   },
                 }}
+                onChange={e => {
+                  setAddressOrEmailDisplayValue(e.target.value);
+                  // keep the hidden form value in sync when user types manually
+                  setValue('addressOrEmail', e.target.value, {
+                    shouldDirty: true,
+                    shouldValidate: true,
+                  });
+                }}
+                onBlur={e => {
+                  register('addressOrEmail').onBlur(e);
+
+                  blurTimeoutRef.current = window.setTimeout(
+                    () => setIsInputFocused(false),
+                    120,
+                  );
+                }}
               />
               {isInputFocused &&
+                !errors.addressOrEmail &&
                 (addressOrEmail || '') &&
                 !addressOrEmail.includes('(') &&
                 accountSuggestions.length > 0 && (
@@ -203,27 +225,33 @@ export const InviteMemberModal = ({
                         key={acc?.id}
                         onMouseDown={() => {
                           if (acc?.addr && acc?.name) {
-                            setValue(
-                              'addressOrEmail',
-                              `${acc.name} (${acc.addr})`,
-                              {
-                                shouldDirty: true,
-                              },
+                            // store raw addr/email
+                            setValue('addressOrEmail', acc.addr, {
+                              shouldDirty: true,
+                              shouldValidate: true,
+                            });
+                            // display truncated
+                            setAddressOrEmailDisplayValue(
+                              `${acc?.name} (${truncate(acc?.addr)})`,
                             );
                           } else if (acc?.addr) {
                             setValue('addressOrEmail', acc.addr, {
                               shouldDirty: true,
+                              shouldValidate: true,
                             });
+                            setAddressOrEmailDisplayValue(acc.addr);
                           }
                           setIsInputFocused(false);
                         }}
                         className="cursor-pointer hover:bg-bc-neutral-100 p-[20px] flex items-center gap-[10px] min-h-[84px]"
                       >
-                        <UserAvatar
-                          src={acc?.image ?? undefined}
-                          alt={acc?.name || acc?.addr || ''}
-                          size="medium"
-                        />
+                        {acc?.image && (
+                          <UserAvatar
+                            src={acc?.image}
+                            alt={acc?.name || acc?.addr || ''}
+                            size="medium"
+                          />
+                        )}
                         <div className="flex flex-col flex-1 min-w-0 gap-2">
                           <span className="text-md font-medium leading-tight">
                             {acc?.name || acc?.addr}
@@ -258,23 +286,23 @@ export const InviteMemberModal = ({
               />
             </div>
           </div>
+        </section>
 
-          {/* Footer */}
-          <div className="mt-0">
-            <CancelButtonFooter
-              onCancel={() => {
-                resetFields();
-                onClose();
-              }}
-              cancelLabel={_(CANCEL_LABEL)}
-              label={_(INVITE_LABEL)}
-              disabled={disabledInvite}
-              type="submit"
-              className="h-[53px] w-[138px] text-[18px]"
-            />
-          </div>
-        </Form>
-      </div>
-    </div>
+        {/* Footer */}
+        <footer className="mt-0">
+          <CancelButtonFooter
+            onCancel={() => {
+              resetFields();
+              onClose();
+            }}
+            cancelLabel={_(CANCEL_LABEL)}
+            label={_(INVITE_LABEL)}
+            disabled={!isValid || isSubmitting || !!errors.addressOrEmail}
+            type="submit"
+            className="h-[53px] w-[138px] text-[18px]"
+          />
+        </footer>
+      </Form>
+    </Modal>
   );
 };

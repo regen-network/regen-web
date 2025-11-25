@@ -1,27 +1,10 @@
-import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
-import { OrganizationMembersBase } from '../OrganizationMembers.BaseTable';
-import { Member } from '../OrganizationMembers.types';
-
-type Props = {
-  members: Member[];
-  onInvite: () => void;
-  sortDir?: 'asc' | 'desc';
-  onToggleSort: () => void;
-  onUpdateRole: (id: string, role: BaseMemberRole) => void;
-  onUpdateVisibility: (id: string, visible: boolean) => void;
-  onRemove: (id: string) => void;
-  onAddMember?: (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => void;
-  accounts?: any;
-  setDebouncedValue?: (value: string) => void;
-};
+import {
+  BaseProps,
+  OrganizationMembersBase,
+} from '../OrganizationMembers.BaseTable';
 
 export const OrganizationMembersInviteTable = ({
   members,
-  onInvite,
   sortDir,
   onToggleSort,
   onUpdateRole,
@@ -30,12 +13,14 @@ export const OrganizationMembersInviteTable = ({
   onAddMember,
   accounts,
   setDebouncedValue,
-}: Props): JSX.Element => {
+  onSaveProfile,
+  onUpload,
+  daoWithAddress,
+}: BaseProps): JSX.Element => {
   return (
     <OrganizationMembersBase
       variant="invite"
       members={members}
-      onInvite={onInvite}
       sortDir={sortDir}
       onToggleSort={onToggleSort}
       onUpdateRole={onUpdateRole}
@@ -44,6 +29,9 @@ export const OrganizationMembersInviteTable = ({
       onAddMember={onAddMember}
       accounts={accounts}
       setDebouncedValue={setDebouncedValue}
+      onSaveProfile={onSaveProfile}
+      onUpload={onUpload}
+      daoWithAddress={daoWithAddress}
     />
   );
 };

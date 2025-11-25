@@ -1,0 +1,9 @@
+mutation UpdateAssignment($input: UpdateAssignmentByAccountIdAndDaoAddressAndRoleNameInput!) {
+  updateAssignmentByAccountIdAndDaoAddressAndRoleName(input: $input) {
+    assignment {
+      daoAddress
+      roleName
+      accountId
+    }
+  }
+}

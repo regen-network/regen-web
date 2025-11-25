@@ -34,11 +34,11 @@ msgstr ""
 msgid ". Please use a different email address."
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:197
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:196
 msgid "(drag map to choose location)"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:181
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:180
 msgid "(file will be associated with the project location by default)"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "(preferable)"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:183
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:181
 msgid "(required if you added a project story)"
 msgstr ""
 
@@ -65,6 +65,12 @@ msgstr ""
 #. placeholder {0}: allowedCreditClasses.length
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:145
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
+msgstr ""
+
+#. placeholder {0}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
+#. placeholder {1}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:22
+msgid "{0}, with all associated credits and sell orders, {1} migrated to your new organization account."
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:5
@@ -107,30 +113,38 @@ msgstr ""
 msgid "{minimumDuration, plural, one {{minimumDuration} year minimum} other {{minimumDuration} years minimum}}"
 msgstr ""
 
-#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:23
+msgid "{numberOfMigratedProjects, plural, one {{numberOfMigratedProjects} project} other {{numberOfMigratedProjects} projects}}"
+msgstr ""
+
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:28
+msgid "{numberOfMigratedProjects, plural, one {was} other {were}}"
+msgstr ""
+
+#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:328
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:121
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:256
-#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:202
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:120
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:247
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:178
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:167
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:168
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:188
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:147
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:146
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:271
+#: src/components/organisms/PostForm/PostForm.tsx:270
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
@@ -264,7 +278,7 @@ msgstr ""
 #~ msgid "1 Ton of CO2e"
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:298
+#: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
@@ -475,7 +489,7 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:477
+#: src/components/organisms/PostForm/PostForm.tsx:476
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr ""
 
@@ -484,8 +498,8 @@ msgid "Amazon"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:186
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:178
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:187
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:179
 msgid "amount"
 msgstr ""
 
@@ -532,7 +546,7 @@ msgstr ""
 msgid "amount now available in usd"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:304
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:303
 msgid "amount of credits"
 msgstr ""
 
@@ -543,7 +557,7 @@ msgstr ""
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
 #: src/legacy-pages/BuyCredits/BuyCredits.constants.ts:23
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:308
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:197
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:196
 msgid "amount retired"
 msgstr ""
 
@@ -558,7 +572,7 @@ msgstr ""
 msgid "Amount Retired"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:197
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:196
 msgid "amount sent"
 msgstr ""
 
@@ -617,7 +631,7 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
 msgid "Any posts they have created or signed will remain."
 msgstr ""
 
@@ -655,7 +669,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:44
 msgid "Are you sure you want to remove this member from your organization?"
 msgstr ""
 
@@ -723,7 +737,7 @@ msgstr ""
 msgid "background"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:219
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:211
 msgid "Background image"
 msgstr ""
 
@@ -736,7 +750,7 @@ msgstr ""
 msgid "Basic Info"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:160
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:161
 msgid "basket"
 msgstr ""
 
@@ -1072,7 +1086,7 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:57
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:56
 msgid "Change"
 msgstr ""
 
@@ -1129,7 +1143,7 @@ msgstr ""
 msgid "Choose a role for this user"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:196
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:195
 msgid "Choose a specific location on the map"
 msgstr ""
 
@@ -1243,7 +1257,7 @@ msgstr ""
 msgid "coming soon"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:284
+#: src/components/organisms/PostForm/PostForm.tsx:283
 msgid "Comment"
 msgstr ""
 
@@ -1380,8 +1394,12 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:238
+#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:264
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
+msgstr ""
+
+#: src/hooks/org-members/useMembersContext.ts:167
+msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:59
@@ -1466,11 +1484,11 @@ msgid "Credit Batch Details"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:182
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:171
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:300
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:193
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:193
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:183
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:172
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:299
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:192
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:192
 msgid "credit batch id"
 msgstr ""
 
@@ -1494,7 +1512,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:125
+#: src/legacy-pages/Profile/Profile.tsx:129
 msgid "Credit Batches"
 msgstr ""
 
@@ -1569,7 +1587,7 @@ msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:178
-#: src/legacy-pages/Profile/Profile.tsx:119
+#: src/legacy-pages/Profile/Profile.tsx:123
 msgid "Credit Classes"
 msgstr ""
 
@@ -1857,8 +1875,8 @@ msgid "description"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:108
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:244
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:236
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:57
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:226
@@ -1915,7 +1933,7 @@ msgstr ""
 msgid "Draft saved!"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:156
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:155
 msgid "Drag map to choose location"
 msgstr ""
 
@@ -2165,11 +2183,15 @@ msgstr ""
 msgid "Enter a new credit card"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:39
+msgid "Enter a REGEN address in order to add this user as an Owner, Admin or Editor."
+msgstr ""
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:34
 msgid "Enter email or address"
 msgstr ""
 
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:177
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
 msgstr ""
 
@@ -2252,6 +2274,13 @@ msgstr ""
 msgid "Factor:"
 msgstr ""
 
+#. placeholder {0}: errors.join('\n')
+#: src/hooks/org-members/useMembersContext.ts:222
+msgid ""
+"Failed for projects:\n"
+"{0}"
+msgstr ""
+
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:37
 msgid "Failed to initialize signing client"
 msgstr ""
@@ -2281,7 +2310,7 @@ msgstr ""
 msgid "File is uploading"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:449
+#: src/components/organisms/PostForm/PostForm.tsx:448
 msgid "File locations can still be shared privately via a secret link."
 msgstr ""
 
@@ -2293,7 +2322,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:295
+#: src/components/organisms/PostForm/PostForm.tsx:294
 msgid "Files"
 msgstr ""
 
@@ -2306,7 +2335,7 @@ msgstr ""
 msgid "Files available on request"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:484
+#: src/components/organisms/PostForm/PostForm.tsx:483
 msgid "Files can still be shared privately via secret link."
 msgstr ""
 
@@ -2342,7 +2371,7 @@ msgstr ""
 #~ msgid "For Buyers"
 #~ msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr ""
 
@@ -2592,12 +2621,20 @@ msgstr ""
 msgid "Invalid date"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:40
+msgid "Invalid email or REGEN address"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:79
 msgid "Invalid Polygon address"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:78
 msgid "Invalid regen address"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:41
+msgid "Invalid REGEN address"
 msgstr ""
 
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:48
@@ -2622,7 +2659,6 @@ msgid "Invite Members"
 msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:35
-#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:11
 msgid "Invite teammates to collaborate on your organization."
 msgstr ""
 
@@ -2794,7 +2830,7 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:139
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:138
 #: src/legacy-pages/ProjectLocation/ProjectLocation.tsx:44
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:216
 #: src/lib/constants/shared.constants.tsx:54
@@ -2869,27 +2905,27 @@ msgstr ""
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:500
+#: src/components/organisms/PostForm/PostForm.tsx:499
 msgid "Make the entire post private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:414
+#: src/components/organisms/PostForm/PostForm.tsx:413
 msgid "Make the entire post public"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:466
+#: src/components/organisms/PostForm/PostForm.tsx:465
 msgid "Make the files and location data private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:431
+#: src/components/organisms/PostForm/PostForm.tsx:430
 msgid "Make the location data private"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:176
+#: src/legacy-pages/Profile/Profile.tsx:181
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:171
+#: src/legacy-pages/Profile/Profile.tsx:176
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2897,15 +2933,15 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:166
+#: src/legacy-pages/Profile/Profile.tsx:171
 msgid "Manage Members"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:99
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
 msgid "Manage organization"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:156
+#: src/legacy-pages/Profile/Profile.tsx:161
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2921,7 +2957,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:161
+#: src/legacy-pages/Profile/Profile.tsx:166
 msgid "Manage Projects"
 msgstr ""
 
@@ -2939,6 +2975,10 @@ msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:18
 msgid "Manages user access and has full control of projects, credits, and credit classes."
+msgstr ""
+
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:124
+msgid "mandatory"
 msgstr ""
 
 #: src/legacy-pages/Projects/hooks/useClientFilters.tsx:146
@@ -2979,7 +3019,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
 msgid "Member has been removed from your organization."
 msgstr ""
 
@@ -2988,7 +3028,7 @@ msgid "member not found"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:112
-#: src/legacy-pages/Profile/Profile.tsx:113
+#: src/legacy-pages/Profile/Profile.tsx:117
 msgid "Members"
 msgstr ""
 
@@ -3060,6 +3100,10 @@ msgstr ""
 msgid "missing required parameters"
 msgstr ""
 
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:73
+msgid "Missing required parameters"
+msgstr ""
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:163
 msgid "Moderate"
 msgstr ""
@@ -3124,8 +3168,8 @@ msgstr ""
 #~ msgid "My prefinance projects"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:188
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:180
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:54
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:203
@@ -3241,7 +3285,7 @@ msgstr ""
 msgid "No sell orders found"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:179
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:178
 msgid "No specific location"
 msgstr ""
 
@@ -3269,7 +3313,7 @@ msgstr ""
 msgid "Note: all location data can be made private on the main create post form."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:547
+#: src/components/organisms/PostForm/PostForm.tsx:546
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
@@ -3302,7 +3346,7 @@ msgstr ""
 msgid "old project admin"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:442
+#: src/components/organisms/PostForm/PostForm.tsx:441
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
@@ -3382,6 +3426,10 @@ msgstr ""
 msgid "Organization Dashboard"
 msgstr ""
 
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:18
+msgid "Organization has been created!"
+msgstr ""
+
 #: src/components/organisms/Collaborators/Collaborators.constants.tsx:4
 #~ msgid "organization member settings"
 #~ msgstr ""
@@ -3392,6 +3440,10 @@ msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:5
 msgid "Organization members have permissions for all projects associated with an organization"
+msgstr ""
+
+#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:134
+msgid "Organization members have permissions for all projects associated with an organization. You can also skip this step and invite members later."
 msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:27
@@ -3483,13 +3535,13 @@ msgstr ""
 msgid "Personal profile"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:49
 msgid "Personal Profile"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:131
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:130
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
-#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:340
+#: src/components/organisms/MediaForm/MediaFormPhotos.tsx:339
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:208
 #: src/lib/constants/shared.constants.tsx:99
 msgid "Photo credit"
@@ -3582,6 +3634,10 @@ msgstr ""
 msgid "Please enter valid JSON-LD"
 msgstr ""
 
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:37
+msgid "Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can <0>learn more about DAOs in our documentation</0>, including how they work and the ways you can participate."
+msgstr ""
+
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:216
 msgid "Please note: US dollar sell orders will be created in USDC on the ledger, so crypto buyers may purchase in USDC."
 msgstr ""
@@ -3616,7 +3672,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:99
+#: src/legacy-pages/Profile/Profile.tsx:103
 msgid "Portfolio"
 msgstr ""
 
@@ -3628,7 +3684,7 @@ msgstr ""
 msgid "Position and size your image"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:436
+#: src/components/organisms/PostForm/PostForm.tsx:435
 msgid "Post and files are public"
 msgstr ""
 
@@ -3640,7 +3696,7 @@ msgstr ""
 msgid "Post is private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:471
+#: src/components/organisms/PostForm/PostForm.tsx:470
 msgid "Post is public"
 msgstr ""
 
@@ -3722,8 +3778,8 @@ msgstr ""
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:150
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:255
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:151
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:254
 msgid "price per credit"
 msgstr ""
 
@@ -3759,7 +3815,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:402
+#: src/components/organisms/PostForm/PostForm.tsx:401
 msgid "Privacy settings"
 msgstr ""
 
@@ -3780,12 +3836,12 @@ msgstr ""
 #~ msgid "profile banner"
 #~ msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:198
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:190
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:56
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 msgid "Profile Image"
 msgstr ""
 
@@ -3813,12 +3869,12 @@ msgstr ""
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:175
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:176
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:300
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:164
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:293
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:184
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:184
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:165
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:292
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:183
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:183
 msgid "project"
 msgstr ""
 
@@ -3898,7 +3954,7 @@ msgstr ""
 msgid "project end date"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:390
+#: src/components/organisms/PostForm/PostForm.tsx:389
 msgid "Project files cannot be downloaded"
 msgstr ""
 
@@ -4004,7 +4060,7 @@ msgstr ""
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:105
+#: src/legacy-pages/Profile/Profile.tsx:109
 msgid "Projects"
 msgstr ""
 
@@ -4024,7 +4080,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:261
+#: src/legacy-pages/Profile/Profile.tsx:271
 msgid "public profile tabs"
 msgstr ""
 
@@ -4134,7 +4190,7 @@ msgstr ""
 #~ msgid "Regen Network Development, PBC"
 #~ msgstr ""
 
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:176
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:175
 msgid "REGEN wallet address"
 msgstr ""
 
@@ -4367,11 +4423,11 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:54
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
 msgid "SAVE"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:541
+#: src/components/organisms/PostForm/PostForm.tsx:540
 msgid "save draft"
 msgstr ""
 
@@ -4500,8 +4556,17 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#. placeholder {0}: amountToSend / 1000000n
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:128
+msgid "Send {0} REGEN to fund your organization"
+msgstr ""
+
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:10
 msgid "Send additional retired credits"
+msgstr ""
+
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:150
+msgid "Send tokens"
 msgstr ""
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:136
@@ -4633,7 +4698,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:184
+#: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:159
 msgid "Something went wrong while creating the organization."
 msgstr ""
 
@@ -4903,7 +4968,7 @@ msgstr ""
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr ""
 
-#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:259
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:316
 msgid "The organization profile has been updated on-chain but hasn't been indexed yet. Please reload the page in a few moments to see the changes."
 msgstr ""
 
@@ -4911,11 +4976,11 @@ msgstr ""
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:506
+#: src/components/organisms/PostForm/PostForm.tsx:505
 msgid "The post and all of its contents will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:513
+#: src/components/organisms/PostForm/PostForm.tsx:512
 msgid "The post and files still can be shared privately via secret link."
 msgstr ""
 
@@ -4947,6 +5012,10 @@ msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "The total amount of credits that were registered to this project."
+msgstr ""
+
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:297
+msgid "The transaction was canceled before it could be signed or a blockchain error occurred. Please reconnect your wallet and try again."
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
@@ -5062,6 +5131,10 @@ msgstr ""
 msgid "This may take up to 15 seconds."
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.InviteModal.tsx:105
+msgid "This member already belongs to another organization."
+msgstr ""
+
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:65
 msgid "This name will appear on the retirement certificate, and is your user account name."
 msgstr ""
@@ -5070,7 +5143,7 @@ msgstr ""
 msgid "This name will appear on the retirement certificate."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:419
+#: src/components/organisms/PostForm/PostForm.tsx:418
 msgid "This post and all of its files will be visible."
 msgstr ""
 
@@ -5084,6 +5157,10 @@ msgstr ""
 
 #: src/components/organisms/SettingsForm/SettingsForm.constants.ts:4
 msgid "This unique url is already taken"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.InviteModal.tsx:99
+msgid "This user is already a member of the organization"
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:5
@@ -5110,7 +5187,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr ""
@@ -5222,7 +5299,7 @@ msgstr ""
 msgid "Traditional grazing"
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:132
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:133
 msgid "Transaction signing failed"
 msgstr ""
 
@@ -5333,7 +5410,7 @@ msgstr ""
 #~ msgid "USD"
 #~ msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:164
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:163
 msgid "Use file geolocation"
 msgstr ""
 
@@ -5451,7 +5528,7 @@ msgstr ""
 #~ msgid "VIEW ALL SELL ORDERS"
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:304
+#: src/components/organisms/PostForm/PostForm.tsx:303
 msgid "View all supported file types»"
 msgstr ""
 
@@ -5499,6 +5576,10 @@ msgstr ""
 msgid "View On Personal Profile"
 msgstr ""
 
+#: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:52
+msgid "view org profile"
+msgstr ""
+
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
 msgid "view pending bridged credits"
 msgstr ""
@@ -5519,7 +5600,7 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:123
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:124
 msgid "View public profile"
 msgstr ""
 
@@ -5617,7 +5698,7 @@ msgstr ""
 msgid "Wallet integration"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:76
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:173
 msgid "Wallet not connected."
 msgstr ""
 
@@ -5668,6 +5749,10 @@ msgstr ""
 msgid "What your support enables"
 msgstr ""
 
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:139
+msgid "When you send tokens to your organization’s account, <0>all members can perform on-chain actions on behalf of the organization without needing to hold tokens</0> in their personal wallets."
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:104
 msgid "Which regenerative practices have you been applying and for how long?"
 msgstr ""
@@ -5696,7 +5781,7 @@ msgstr ""
 #~ msgid "Write a short comment or longer project update."
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:285
+#: src/components/organisms/PostForm/PostForm.tsx:284
 msgid "Write a short comment or longer project update. "
 msgstr ""
 
@@ -5736,7 +5821,7 @@ msgstr ""
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
 msgid "Yes, Remove"
 msgstr ""
 
@@ -5784,6 +5869,10 @@ msgstr ""
 msgid "You can only keep the profile info from one of these accounts, which includes your avatar image, background photo, social links, and description. All projects and project info will be retained."
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.InviteModal.tsx:82
+msgid "You cannot add a DAO to an organization"
+msgstr ""
+
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:8
 msgid "You cannot connect your account to this wallet address. This wallet address is already associated with another email address."
 msgstr ""
@@ -5808,17 +5897,21 @@ msgstr ""
 msgid "You do not have any tradable credits to sell from this project."
 msgstr ""
 
-#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:87
+#: src/legacy-pages/CreateOrganization/CreateOrganization.SendRegenModal.tsx:132
+msgid "You do not have enough REGEN to fund your organization. Please, top up your wallet to continue and reload."
+msgstr ""
+
+#: src/legacy-pages/Dashboard/hooks/useUpdateOrganizationProfile.ts:184
 msgid "You do not have permission to edit this organization."
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:101
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:107
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:99
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:102
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:108
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:100
 msgid "You do not have permission to manage credits."
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:110
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:111
 msgid "You do not have permission to manage sell orders."
 msgstr ""
 
@@ -5930,7 +6023,7 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
 msgstr ""
 

@@ -43,3 +43,4 @@ export const CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR = msg`CW Admin Factory ad
 
 export type CreateOrgInitialValues = {};
 export const CREATE_ORG_INITIAL_VALUES: CreateOrgInitialValues = {};
+export const CAP_AMOUNT_TO_SEND = 100000000n; // 100 REGEN

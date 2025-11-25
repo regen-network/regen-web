@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import {
   DEFAULT_NAME,
@@ -31,10 +31,6 @@ import type { OrganizationProfileStepProps } from './OrganizationProfileStep.typ
 export const OrganizationProfileStep = ({
   initialValues,
   hasUnfinishedOrganization,
-  daoAddress,
-  setDaoAddress,
-  organizationId,
-  setOrganizationId,
   onTransferProfile,
   setIsSubmitting,
   setIsValid,
@@ -117,27 +113,8 @@ export const OrganizationProfileStep = ({
 
   const handleSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
-      if (hasUnfinishedOrganization && daoAddress) {
-        setTransferHandled(true);
-        setShowTransferModal(false);
-        const payload: OrganizationMultiStepData = {
-          ...(data ?? {}),
-          ...values,
-          dao: {
-            ...(data?.dao ?? {
-              daoAddress,
-              organizationId,
-            }),
-            walletAddress,
-          },
-        };
-        handleSaveNext(payload);
-        return;
-      }
-
       try {
-        const organizationIdValue = organizationId ?? uuidv4();
-        setOrganizationId(organizationIdValue);
+        const organizationIdValue = uuidv4();
 
         // Check if images are still default values, and if so, use empty strings
         const profileImageToSave =
@@ -161,8 +138,6 @@ export const OrganizationProfileStep = ({
           type: 'organization',
         });
         if (daoResult) {
-          setDaoAddress(daoResult.daoAddress);
-          setOrganizationId(daoResult.organizationId);
           setTransferHandled(true);
           setShowTransferModal(false);
 
@@ -185,18 +160,7 @@ export const OrganizationProfileStep = ({
         );
       }
     },
-    [
-      hasUnfinishedOrganization,
-      daoAddress,
-      organizationId,
-      setDaoAddress,
-      setOrganizationId,
-      data,
-      handleSaveNext,
-      createDao,
-      walletAddress,
-      _,
-    ],
+    [data, handleSaveNext, createDao, walletAddress, _],
   );
 
   return (

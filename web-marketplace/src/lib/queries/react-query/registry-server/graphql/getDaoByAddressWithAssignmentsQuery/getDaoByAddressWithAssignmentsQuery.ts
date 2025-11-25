@@ -1,4 +1,5 @@
 import {
+  AccountsOrderBy,
   DaoByAddressWithAssignmentsDocument,
   DaoByAddressWithAssignmentsQuery,
 } from 'generated/graphql';
@@ -11,14 +12,18 @@ import { getDaoByAddressWithAssignmentsQueryKey } from './getDaoByAddressWithAss
 
 export const getDaoByAddressWithAssignmentsQuery = ({
   client,
+  daoAccountsOrderBy = AccountsOrderBy.NameAsc,
   ...params
 }: ReactQueryGetDaoByAddressWithAssignmentsQueryParams): ReactQueryGetDaoByAddressWithAssignmentsQueryResponse => ({
-  queryKey: getDaoByAddressWithAssignmentsQueryKey(params),
+  queryKey: getDaoByAddressWithAssignmentsQueryKey({
+    address: params.address,
+    daoAccountsOrderBy,
+  }),
   queryFn: async () => {
     try {
       const { data } = await client.query<DaoByAddressWithAssignmentsQuery>({
         query: DaoByAddressWithAssignmentsDocument,
-        variables: { ...params },
+        variables: { ...params, daoAccountsOrderBy },
       });
 
       return data;

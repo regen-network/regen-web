@@ -15,7 +15,7 @@ import {
 import { getStargateAction } from 'utils/cosmwasm';
 
 import {
-  AccountByIdQuery,
+  DaoByAddressWithAssignmentsQuery,
   OrganizationProjectsByDaoAddressQuery,
 } from 'generated/graphql';
 
@@ -530,7 +530,7 @@ const revokeAction = ({
 });
 
 type FindNewAssignmentParams = {
-  data?: AccountByIdQuery | null;
+  data?: DaoByAddressWithAssignmentsQuery | null;
   daoAddress?: string;
   accountId: string;
   roleName: string;
@@ -543,10 +543,7 @@ export function findAssignment({
   roleName,
 }: FindNewAssignmentParams) {
   if (!daoAddress) return;
-  const assignments =
-    data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-      node => node?.address === daoAddress,
-    )?.assignmentsByDaoAddress?.nodes;
+  const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
   return assignments?.find(
     assig => assig?.accountId === accountId && assig?.roleName === roleName,
   );

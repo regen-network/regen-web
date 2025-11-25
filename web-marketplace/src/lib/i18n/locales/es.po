@@ -121,11 +121,11 @@ msgstr "{minimumDuration, plural, one {{minimumDuration} año mínimo} other {{m
 
 #: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:23
 msgid "{numberOfMigratedProjects, plural, one {{numberOfMigratedProjects} project} other {{numberOfMigratedProjects} projects}}"
-msgstr "{numberOfMigratedProjects, plural, un {{numberOfMigratedProjects} proyecto} otros {{numberOfMigratedProjects} proyectos}}"
+msgstr "{numberOfMigratedProjects, plural, one {{numberOfMigratedProjects} proyecto} other {{numberOfMigratedProjects} proyectos}}"
 
 #: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:28
 msgid "{numberOfMigratedProjects, plural, one {was} other {were}}"
-msgstr "{numberOfMigratedProjects, plural, uno {era} otro {eran}}"
+msgstr "{numberOfMigratedProjects, plural, one {era} other {eran}}"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:328
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"

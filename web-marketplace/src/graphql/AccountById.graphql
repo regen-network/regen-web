@@ -1,4 +1,4 @@
-query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
+query AccountById($id: UUID!) {
   accountById(id: $id) {
     id
     name
@@ -48,30 +48,6 @@ query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
         }
         projectByAdminDaoAddress {
           id
-        }
-        accountsByAssignmentDaoAddressAndAccountId(
-          orderBy: $daoAccountsOrderBy
-        ) {
-          nodes {
-            id
-            name
-            type
-            image
-            addr
-            title
-            privateAccountById {
-              email
-              googleEmail
-            }
-          }
-        }
-        assignmentsByDaoAddress {
-          nodes {
-            roleName
-            onChainRoleId
-            visible
-            accountId
-          }
         }
       }
     }

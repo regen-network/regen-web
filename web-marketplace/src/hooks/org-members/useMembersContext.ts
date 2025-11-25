@@ -19,8 +19,8 @@ import { useAuth } from 'lib/auth/auth';
 import { getBalanceQueryKey } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.utils';
 import { GET_ASSIGNED_KEY } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
-import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 import { getOrganizationProjectsByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -57,12 +57,11 @@ export function useMembersContext(params: MembersHookParams) {
   );
 
   const { refetch } = useQuery(
-    getAccountByIdQuery({
+    getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
-      enabled: !!graphqlClient && !!activeAccountId,
-      id: activeAccountId,
+      enabled: !!graphqlClient && !!daoAddress,
+      address: daoAddress as string,
       daoAccountsOrderBy: params.daoAccountsOrderBy,
-      languageCode: selectedLanguage,
     }),
   );
 
@@ -149,9 +148,8 @@ export function useMembersContext(params: MembersHookParams) {
                 },
               });
               await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({
-                  id: activeAccountId,
-                  daoAccountsOrderBy: params.daoAccountsOrderBy,
+                queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                  address: daoAddress,
                 }),
               });
             }
@@ -196,8 +194,6 @@ export function useMembersContext(params: MembersHookParams) {
       setProcessingModal,
       updateAssignment,
       setErrorBannerText,
-      activeAccountId,
-      params.daoAccountsOrderBy,
       wallet?.address,
     ],
   );

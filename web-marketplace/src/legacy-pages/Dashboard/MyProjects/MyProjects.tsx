@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { projectsDraftState } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
@@ -10,6 +16,7 @@ import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 
 import { useAuth } from 'lib/auth/auth';
+import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -32,16 +39,39 @@ const MyProjects = (): JSX.Element => {
   const { _ } = useLingui();
   const navigate = useNavigate();
   const location = useLocation();
-  const { isIssuer, isProjectAdmin, sanityProfilePageData } =
-    useDashboardContext();
+  const {
+    isIssuer,
+    isProjectAdmin,
+    sanityProfilePageData,
+    isOrganizationDashboard,
+    organizationDaoAddress,
+  } = useDashboardContext();
   const { track } = useTracker();
   const { wallet, loginDisabled } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  const {
+    data: organizationData,
+    isFetching: isLoadingOrganizationByDaoAddress,
+  } = useQuery(
+    getOrganizationByDaoAddressQuery({
+      client: graphqlClient,
+      daoAddress: organizationDaoAddress as string,
+      enabled:
+        !!isOrganizationDashboard &&
+        !!organizationDaoAddress &&
+        !!graphqlClient,
+    }),
+  );
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
     keepUnpublished: true,
+    organization: organizationData?.organizationByDaoAddress,
+    isLoading: isLoadingOrganizationByDaoAddress,
   });
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;

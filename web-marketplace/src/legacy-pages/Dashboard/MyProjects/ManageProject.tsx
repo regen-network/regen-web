@@ -1,5 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
@@ -25,8 +30,8 @@ import {
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 
+import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
 import { useFetchProject } from './hooks/useFetchProject';
-import { canAccessManageProjectWithRole } from './MyProjects.utils';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -36,6 +41,8 @@ const ManageProject = () => {
   const { project, offChainProject, onChainProject, isLoading } =
     useFetchProject();
   const { loginDisabled, wallet } = useWallet();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const createPostDisabled =
     !activeAccountId || project.draft || !project.location;
@@ -92,17 +99,12 @@ const ManageProject = () => {
     });
   }, [migrateProjects, project.id]);
 
-  const { canAccessManageProject, role } = useMemo(
-    () =>
-      canAccessManageProjectWithRole({
-        onChainProject,
-        offChainProject,
-        activeAccountId,
-        activeAccount,
-        wallet,
-      }),
-    [activeAccountId, activeAccount, offChainProject, onChainProject, wallet],
-  );
+  const { canAccessManageProject, role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId,
+    wallet,
+  });
 
   const canEditProject =
     role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR;

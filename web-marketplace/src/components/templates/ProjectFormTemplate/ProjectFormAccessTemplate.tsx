@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
+import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
 
@@ -30,26 +31,20 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const { projectId } = useParams();
   const { wallet } = useWallet();
-  const { activeAccountId, activeAccount } = useAuth();
-
+  const { activeAccountId } = useAuth();
+  const { role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId,
+    wallet,
+  });
   const { canEdit } = useMemo(
     () =>
       getCanEditProjectWithRole({
-        onChainProject,
-        offChainProject,
-        activeAccountId,
-        activeAccount,
-        wallet,
+        role,
         isLoading: loading,
       }),
-    [
-      activeAccountId,
-      activeAccount,
-      loading,
-      offChainProject,
-      onChainProject,
-      wallet,
-    ],
+    [role, loading],
   );
   const hasProject = !!onChainProject || !!offChainProject;
   const isDraft = !isEdit && !hasProject && projectId === DRAFT_ID;

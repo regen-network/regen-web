@@ -1,8 +1,4 @@
-import {
-  AccountByIdDocument,
-  AccountByIdQuery,
-  AccountsOrderBy,
-} from 'generated/graphql';
+import { AccountByIdDocument, AccountByIdQuery } from 'generated/graphql';
 
 import {
   ReactQueryGetAccountByIdQueryParams,

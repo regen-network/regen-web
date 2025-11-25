@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -23,6 +28,7 @@ import {
   DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
 } from 'lib/constants/shared.constants';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -89,6 +95,8 @@ export const Dashboard = () => {
     ? '/dashboard/organization'
     : '/dashboard';
   const section = usePathSection();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
@@ -136,11 +144,20 @@ export const Dashboard = () => {
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
 
+  const { data } = useQuery(
+    getDaoByAddressWithAssignmentsQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!organizationAddress,
+      address: organizationAddress as string,
+    }),
+  );
+  const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
+
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment = organizationDao.assignmentsByDaoAddress?.nodes?.find(
-      node => node?.accountId === activeAccountId,
+    const assignment = assignments?.find(
+      assignment => assignment?.accountId === activeAccountId,
     );
 
     const organizationName = organizationProfile?.name?.trim();
@@ -163,6 +180,7 @@ export const Dashboard = () => {
     activeAccountId,
     organizationProfile?.name,
     organizationProfile?.image,
+    assignments,
   ]);
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {

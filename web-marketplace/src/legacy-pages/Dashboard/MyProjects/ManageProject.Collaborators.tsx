@@ -21,19 +21,19 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 
-import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
-import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { useMigrateProject } from './hooks/useMigrateProject';
-
-import { useFetchProject } from './hooks/useFetchProject';
 import {
   ROLE_ADMIN,
   ROLE_EDITOR,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
+import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
+import { useFetchProject } from './hooks/useFetchProject';
+import { useMigrateProject } from './hooks/useMigrateProject';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();

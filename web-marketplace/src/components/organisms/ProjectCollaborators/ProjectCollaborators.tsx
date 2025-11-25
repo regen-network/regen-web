@@ -1,11 +1,15 @@
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { Body, Title } from 'web-components/src/components/typography';
+
 import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
+import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import {
   COLLABORATORS_DESCRIPTION,
   INVITE_COLLABORATORS,
@@ -13,9 +17,6 @@ import {
 } from './ProjectCollaborators.constants';
 import { RoleDropdown } from './ProjectCollaborators.RoleDropdown';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
-import { Title, Body } from 'web-components/src/components/typography';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
-import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 
 export const ProjectCollaborators = ({
   collaborators,

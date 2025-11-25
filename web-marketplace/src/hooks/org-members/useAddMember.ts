@@ -14,7 +14,7 @@ import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -182,8 +182,8 @@ export function useAddMember(params: MembersHookParams) {
           retryCsrfRequest,
           onSuccess: async () => {
             await reactQueryClient.invalidateQueries({
-              queryKey: getAccountByIdQueryKey({
-                id: activeAccountId,
+              queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                address: daoAddress,
                 daoAccountsOrderBy: params.daoAccountsOrderBy,
               }),
             });
@@ -229,6 +229,12 @@ export function useAddMember(params: MembersHookParams) {
                       daoAddress,
                     }),
                   });
+                  if (project?.projectByProjectId?.adminDaoAddress)
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                        address: project?.projectByProjectId?.adminDaoAddress,
+                      }),
+                    });
                 },
               }),
           ),
@@ -242,7 +248,6 @@ export function useAddMember(params: MembersHookParams) {
       setErrorBannerText,
       _,
       reactQueryClient,
-      activeAccountId,
       params.daoAccountsOrderBy,
       projectsCurrentUserCanManageMembers,
       retryCsrfRequest,

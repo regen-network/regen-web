@@ -11331,7 +11331,6 @@ export type AccountByCustodialAddressQuery = (
 
 export type AccountByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
-  daoAccountsOrderBy?: Maybe<Array<AccountsOrderBy> | AccountsOrderBy>;
 }>;
 
 
@@ -11363,23 +11362,7 @@ export type AccountByIdQuery = (
         )>, projectByAdminDaoAddress?: Maybe<(
           { __typename?: 'Project' }
           & Pick<Project, 'id'>
-        )>, accountsByAssignmentDaoAddressAndAccountId: (
-          { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'Account' }
-            & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
-            & { privateAccountById?: Maybe<(
-              { __typename?: 'PrivateAccount' }
-              & Pick<PrivateAccount, 'email' | 'googleEmail'>
-            )> }
-          )>> }
-        ), assignmentsByDaoAddress: (
-          { __typename?: 'AssignmentsConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'Assignment' }
-            & Pick<Assignment, 'roleName' | 'onChainRoleId' | 'visible' | 'accountId'>
-          )>> }
-        ) }
+        )> }
       )>> }
     ) }
   )> }
@@ -11576,6 +11559,37 @@ export type DaoByAddressQuery = (
   & { daoByAddress?: Maybe<(
     { __typename?: 'Dao' }
     & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
+  )> }
+);
+
+export type DaoByAddressWithAssignmentsQueryVariables = Exact<{
+  address: Scalars['String'];
+  daoAccountsOrderBy?: Maybe<Array<AccountsOrderBy> | AccountsOrderBy>;
+}>;
+
+
+export type DaoByAddressWithAssignmentsQuery = (
+  { __typename?: 'Query' }
+  & { daoByAddress?: Maybe<(
+    { __typename?: 'Dao' }
+    & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
+    & { accountsByAssignmentDaoAddressAndAccountId: (
+      { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Account' }
+        & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
+        & { privateAccountById?: Maybe<(
+          { __typename?: 'PrivateAccount' }
+          & Pick<PrivateAccount, 'email' | 'googleEmail'>
+        )> }
+      )>> }
+    ), assignmentsByDaoAddress: (
+      { __typename?: 'AssignmentsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Assignment' }
+        & Pick<Assignment, 'roleName' | 'onChainRoleId' | 'visible' | 'accountId'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -12209,7 +12223,7 @@ export type AccountByCustodialAddressQueryHookResult = ReturnType<typeof useAcco
 export type AccountByCustodialAddressLazyQueryHookResult = ReturnType<typeof useAccountByCustodialAddressLazyQuery>;
 export type AccountByCustodialAddressQueryResult = Apollo.QueryResult<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>;
 export const AccountByIdDocument = gql`
-    query AccountById($id: UUID!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
+    query AccountById($id: UUID!) {
   accountById(id: $id) {
     id
     name
@@ -12260,28 +12274,6 @@ export const AccountByIdDocument = gql`
         projectByAdminDaoAddress {
           id
         }
-        accountsByAssignmentDaoAddressAndAccountId(orderBy: $daoAccountsOrderBy) {
-          nodes {
-            id
-            name
-            type
-            image
-            addr
-            title
-            privateAccountById {
-              email
-              googleEmail
-            }
-          }
-        }
-        assignmentsByDaoAddress {
-          nodes {
-            roleName
-            onChainRoleId
-            visible
-            accountId
-          }
-        }
       }
     }
   }
@@ -12301,7 +12293,6 @@ export const AccountByIdDocument = gql`
  * const { data, loading, error } = useAccountByIdQuery({
  *   variables: {
  *      id: // value for 'id'
- *      daoAccountsOrderBy: // value for 'daoAccountsOrderBy'
  *   },
  * });
  */
@@ -12704,6 +12695,66 @@ export function useDaoByAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type DaoByAddressQueryHookResult = ReturnType<typeof useDaoByAddressQuery>;
 export type DaoByAddressLazyQueryHookResult = ReturnType<typeof useDaoByAddressLazyQuery>;
 export type DaoByAddressQueryResult = Apollo.QueryResult<DaoByAddressQuery, DaoByAddressQueryVariables>;
+export const DaoByAddressWithAssignmentsDocument = gql`
+    query DaoByAddressWithAssignments($address: String!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
+  daoByAddress(address: $address) {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+    accountsByAssignmentDaoAddressAndAccountId(orderBy: $daoAccountsOrderBy) {
+      nodes {
+        id
+        name
+        type
+        image
+        addr
+        title
+        privateAccountById {
+          email
+          googleEmail
+        }
+      }
+    }
+    assignmentsByDaoAddress {
+      nodes {
+        roleName
+        onChainRoleId
+        visible
+        accountId
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useDaoByAddressWithAssignmentsQuery__
+ *
+ * To run a query within a React component, call `useDaoByAddressWithAssignmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDaoByAddressWithAssignmentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDaoByAddressWithAssignmentsQuery({
+ *   variables: {
+ *      address: // value for 'address'
+ *      daoAccountsOrderBy: // value for 'daoAccountsOrderBy'
+ *   },
+ * });
+ */
+export function useDaoByAddressWithAssignmentsQuery(baseOptions: Apollo.QueryHookOptions<DaoByAddressWithAssignmentsQuery, DaoByAddressWithAssignmentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DaoByAddressWithAssignmentsQuery, DaoByAddressWithAssignmentsQueryVariables>(DaoByAddressWithAssignmentsDocument, options);
+      }
+export function useDaoByAddressWithAssignmentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DaoByAddressWithAssignmentsQuery, DaoByAddressWithAssignmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DaoByAddressWithAssignmentsQuery, DaoByAddressWithAssignmentsQueryVariables>(DaoByAddressWithAssignmentsDocument, options);
+        }
+export type DaoByAddressWithAssignmentsQueryHookResult = ReturnType<typeof useDaoByAddressWithAssignmentsQuery>;
+export type DaoByAddressWithAssignmentsLazyQueryHookResult = ReturnType<typeof useDaoByAddressWithAssignmentsLazyQuery>;
+export type DaoByAddressWithAssignmentsQueryResult = Apollo.QueryResult<DaoByAddressWithAssignmentsQuery, DaoByAddressWithAssignmentsQueryVariables>;
 export const DeleteAssignmentDocument = gql`
     mutation DeleteAssignment($input: DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput!) {
   deleteAssignmentByAccountIdAndDaoAddressAndRoleName(input: $input) {

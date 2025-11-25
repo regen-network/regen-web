@@ -5,8 +5,7 @@ import { useSetAtom } from 'jotai';
 
 import { useUpdateAssignmentMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { useAuth } from 'lib/auth/auth';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 
 import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';
@@ -19,7 +18,6 @@ export function useUpdateMemberVisibility(
 ) {
   const { daoAddress, members } = params;
   const { _ } = useLingui();
-  const { activeAccountId } = useAuth();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const [updateAssignment] = useUpdateAssignmentMutation();
@@ -48,9 +46,8 @@ export function useUpdateMemberVisibility(
           },
         });
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({
-            id: activeAccountId,
-            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          queryKey: getDaoByAddressWithAssignmentsQueryKey({
+            address: daoAddress,
           }),
         });
       } catch (e) {
@@ -64,8 +61,6 @@ export function useUpdateMemberVisibility(
       members,
       updateAssignment,
       reactQueryClient,
-      activeAccountId,
-      params.daoAccountsOrderBy,
     ],
   );
 

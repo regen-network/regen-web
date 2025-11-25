@@ -15,10 +15,14 @@ import {
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 
 import { PersonalProfileSchemaType } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.schema';
 
-export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
+export const useSaveProfile = (
+  daoAccountsOrderBy: AccountsOrderBy,
+  daoOrganizationAddress?: string,
+) => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const { activeAccountId } = useAuth();
   const fileNamesToDeleteRef = useRef<string[]>([]);
@@ -62,11 +66,23 @@ export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountByIdQueryKey({
           id: activeAccountId,
-          daoAccountsOrderBy,
         }),
       });
+      if (daoOrganizationAddress)
+        await reactQueryClient.invalidateQueries({
+          queryKey: getDaoByAddressWithAssignmentsQueryKey({
+            address: daoOrganizationAddress,
+            daoAccountsOrderBy,
+          }),
+        });
     },
-    [activeAccountId, updateAccountById, daoAccountsOrderBy, reactQueryClient],
+    [
+      activeAccountId,
+      updateAccountById,
+      daoAccountsOrderBy,
+      daoOrganizationAddress,
+      reactQueryClient,
+    ],
   );
 
   return { saveProfile, onUpload };

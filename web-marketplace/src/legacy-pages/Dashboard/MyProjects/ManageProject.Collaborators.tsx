@@ -153,8 +153,13 @@ const Collaborators = (): JSX.Element => {
       migrateProject={project.offChainId ? migrateProject : undefined}
       createOrganization={createOrganization}
       collaborators={collaborators}
-      // TODO after merging https://github.com/regen-network/regen-web/pull/2741
-      onToggleSort={function (): void {}}
+      onToggleSort={() =>
+        setDaoAccountsOrderBy(prev =>
+          prev === AccountsOrderBy.NameAsc
+            ? AccountsOrderBy.NameDesc
+            : AccountsOrderBy.NameAsc,
+        )
+      }
       // TODO APP-791
       onInvite={function (): void {}}
       onUpdateRole={function (id: string, role: ProjectRole): void {}}

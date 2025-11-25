@@ -65,7 +65,7 @@ const MyProjects = (): JSX.Element => {
         !!graphqlClient,
     }),
   );
-
+  console.log('isOrganizationDashboard', isOrganizationDashboard);
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
@@ -124,7 +124,11 @@ const MyProjects = (): JSX.Element => {
                   }}
                   onButtonClick={() => {
                     // Navigate to new manage project page
-                    navigate(`/dashboard/projects/${project.id}/manage`);
+                    navigate(
+                      isOrganizationDashboard
+                        ? `/dashboard/organization/projects/${project.id}/manage`
+                        : `/dashboard/projects/${project.id}/manage`,
+                    );
                   }}
                   track={track}
                   pathname={location.pathname}

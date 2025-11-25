@@ -10,7 +10,6 @@ import {
 import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
 import { v4 as uuidv4 } from 'uuid';
 
-import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -35,6 +34,7 @@ export const OrganizationProfileStep = ({
   setIsSubmitting,
   setIsValid,
   formRef,
+  hasProjects,
 }: OrganizationProfileStepProps) => {
   const { _ } = useLingui();
   const { createDao } = useCreateDao();
@@ -53,8 +53,8 @@ export const OrganizationProfileStep = ({
   );
 
   const canOfferTransfer = useMemo(
-    () => hasTransferableProfile(activeAccount),
-    [activeAccount],
+    () => hasTransferableProfile(hasProjects, activeAccount),
+    [activeAccount, hasProjects],
   );
 
   useEffect(() => {
@@ -82,7 +82,6 @@ export const OrganizationProfileStep = ({
   }, [initialValues?.name]);
 
   const handleCloseTransferModal = useCallback(() => {
-    setTransferHandled(true);
     setShowTransferModal(false);
   }, []);
 
@@ -100,10 +99,6 @@ export const OrganizationProfileStep = ({
       backgroundImage: activeAccount.bgImage || DEFAULT_PROFILE_BG,
       websiteLink: activeAccount.websiteLink?.trim() ?? '',
       twitterLink: activeAccount.twitterLink?.trim() ?? '',
-      profileType:
-        activeAccount.type === AccountType.Organization
-          ? AccountType.Organization
-          : undefined,
     };
 
     onTransferProfile({ nextValues });
@@ -136,9 +131,9 @@ export const OrganizationProfileStep = ({
           twitterLink: values.twitterLink,
           organizationId: organizationIdValue,
           type: 'organization',
+          transferHandled,
         });
         if (daoResult) {
-          setTransferHandled(true);
           setShowTransferModal(false);
 
           const payload: OrganizationMultiStepData = {
@@ -160,7 +155,7 @@ export const OrganizationProfileStep = ({
         );
       }
     },
-    [data, handleSaveNext, createDao, walletAddress, _],
+    [data, handleSaveNext, createDao, walletAddress, _, transferHandled],
   );
 
   return (

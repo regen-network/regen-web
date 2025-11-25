@@ -121,6 +121,7 @@ function CreateOrganizationContent({
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
           formRef={orgProfileFormRef}
+          hasProjects={projects.length > 0}
         />
       )}
       {steps[activeStep].id === MIGRATE_PROJECTS_FORM_ID && (

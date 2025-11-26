@@ -202,18 +202,16 @@ const ProjectDashboardBanner = ({
                 <ContainedButton
                   startIcon={<EditIcon sx={{ color: 'white' }} />}
                   onClick={() => {
-                    if (
-                      !project.offChain ||
-                      (project.offChain && !project.draft)
-                    ) {
-                      navigate(`/project-pages/${project.id}/edit/basic-info`);
+                    const id = project?.id;
+                    if (!id) return;
+
+                    const isDraft = project.offChain && project.draft;
+                    if (isDraft) {
+                      const currentStep =
+                        projectsCurrentStep[id] || 'basic-info';
+                      navigate(`/project-pages/${id}/${currentStep}`);
                     } else {
-                      const currentStep = projectsCurrentStep[project?.id];
-                      navigate(
-                        `/project-pages/${project?.id}/${
-                          currentStep || 'basic-info'
-                        }`,
-                      );
+                      navigate(`/project-pages/${id}/edit/basic-info`);
                     }
                   }}
                 >

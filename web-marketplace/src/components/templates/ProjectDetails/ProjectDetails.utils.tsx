@@ -16,8 +16,6 @@ import { formatDate } from 'web-components/src/utils/format';
 
 import {
   AccountFieldsFragment,
-  CreditClass,
-  Document,
   Maybe,
   ProjectFieldsFragment,
 } from 'generated/graphql';
@@ -30,8 +28,6 @@ import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
-  NameImageDescription,
-  ProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';

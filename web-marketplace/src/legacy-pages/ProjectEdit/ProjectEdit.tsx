@@ -24,6 +24,7 @@ import { startCase } from 'lodash';
 
 import Banner from 'web-components/src/components/banner';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { Loading } from 'web-components/src/components/loading';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
@@ -53,7 +54,7 @@ import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { getCanEditProjectWithRole } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
@@ -181,15 +182,9 @@ function ProjectEdit(): JSX.Element {
     activeAccountId,
     wallet,
   });
-  const { canEdit } = useMemo(
-    () =>
-      getCanEditProjectWithRole({
-        role,
-        isLoading,
-      }),
-    [role, isLoading],
-  );
-
+  const { canEdit } = getCanEditProject({
+    role,
+  });
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;
 
@@ -228,6 +223,10 @@ function ProjectEdit(): JSX.Element {
 
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   if (!canEdit) {
     return (

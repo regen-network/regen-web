@@ -82,8 +82,8 @@ export const BaseMembersTable = <T extends BaseUser>({
           <Title variant="h4">
             {title}
             {users.length > 0 && (
-              <span className="text-bc-neutral-400 font-normal">
-                &nbsp;({users.length})
+              <span className="pl-2 text-bc-neutral-400 font-normal">
+                ({users.length})
               </span>
             )}
           </Title>

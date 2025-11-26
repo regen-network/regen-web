@@ -253,11 +253,11 @@ export const Dashboard = () => {
     ? undefined
     : activeAccountId ?? undefined;
 
-  const { isCreditClassCreator, isProjectAdmin, isIssuer, showCreditClasses } =
-    useProfileItems({
+  const { isCreditClassCreator, isIssuer, showCreditClasses } = useProfileItems(
+    {
       address: dashboardAccountAddress,
-      accountId: dashboardAccountId,
-    });
+    },
+  );
 
   const projects = useFetchProjectByAdmin({
     adminAccountId: dashboardAccountId,
@@ -299,7 +299,6 @@ export const Dashboard = () => {
   const dashboardContextValue = useMemo(
     () => ({
       isCreditClassCreator,
-      isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
       selectedAccount: selectedAccount
@@ -327,7 +326,6 @@ export const Dashboard = () => {
     }),
     [
       isCreditClassCreator,
-      isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
       selectedAccount,

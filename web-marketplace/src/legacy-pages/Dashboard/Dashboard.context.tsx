@@ -8,7 +8,6 @@ type DashboardContextType = {
   isIssuer: boolean;
   isCreditClassCreator: boolean;
   isCreditClassAdmin?: boolean;
-  isProjectAdmin: boolean;
   sanityProfilePageData?: AllProfilePageQuery;
   selectedAccount?: AccountOption;
   isOrganizationDashboard?: boolean;

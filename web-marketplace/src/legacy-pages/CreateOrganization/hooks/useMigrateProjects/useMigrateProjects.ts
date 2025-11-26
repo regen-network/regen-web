@@ -225,24 +225,26 @@ export const useMigrateProjects = (
 
   const reloadData = useCallback(
     async (selectedProjects: NormalizeProject[]) => {
-      selectedProjects.forEach(async project => {
-        if (project.offChainId)
-          await reactQueryClient.invalidateQueries({
-            queryKey: getProjectByIdKey(project.offChainId),
-            refetchType: 'all',
-          });
-        const isOnChainId = getIsOnChainId(project.id);
-        if (isOnChainId) {
-          await reactQueryClient.invalidateQueries({
-            queryKey: getProjectByOnChainIdKey(project.id),
-            refetchType: 'all',
-          });
-          await reactQueryClient.invalidateQueries({
-            queryKey: getProjectKey(project.id),
-            refetchType: 'all',
-          });
-        }
-      });
+      await Promise.all(
+        selectedProjects.map(async project => {
+          if (project.offChainId)
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectByIdKey(project.offChainId),
+              refetchType: 'all',
+            });
+          const isOnChainId = getIsOnChainId(project.id);
+          if (isOnChainId) {
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectByOnChainIdKey(project.id),
+              refetchType: 'all',
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectKey(project.id),
+              refetchType: 'all',
+            });
+          }
+        }),
+      );
       if (wallet?.address) {
         await reactQueryClient.invalidateQueries({
           queryKey: getSellOrdersBySellerKey(wallet?.address),

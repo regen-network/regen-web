@@ -1,8 +1,8 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 
-import { Member } from '../BaseMembersTable/BaseMembersTable.types';
+import { Collaborator } from './ProjectCollaborators.types';
 
-export const mockCollaborators: Member[] = [
+export const mockCollaborators: Collaborator[] = [
   {
     id: '1',
     name: 'Jane Smith',
@@ -15,6 +15,7 @@ export const mockCollaborators: Member[] = [
     hasWalletAddress: true,
     onChainRoleId: 2,
     visible: true,
+    canEditOrgRole: true,
   },
   {
     id: '2',

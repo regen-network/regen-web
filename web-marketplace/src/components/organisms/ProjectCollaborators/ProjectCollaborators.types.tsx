@@ -6,7 +6,7 @@ import {
   ProjectRole,
 } from '../BaseMembersTable/BaseMembersTable.types';
 
-export type Collaborator = Member & { canEditOrgRole: boolean };
+export type Collaborator = Member & { canEditOrgRole?: boolean };
 export interface ProjectCollaboratorsProps {
   collaborators: Collaborator[];
   onAddMember: (data: MemberData<ProjectRole>) => Promise<void>;

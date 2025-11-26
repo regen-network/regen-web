@@ -307,12 +307,12 @@ export function useRemoveMember(params: MembersHookParams) {
       if (memberAddress) {
         await removeMemberWithWalletAddress(
           id,
-          role,
+          role: role as BaseMemberRole,
           memberRoleId,
           memberAddress,
         );
       } else {
-        await removeMemberOffChain(id, role);
+        await removeMemberOffChain(id, role as BaseMemberRole);
       }
     },
     [

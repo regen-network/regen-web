@@ -22,4 +22,9 @@ export interface ProjectCollaboratorsProps {
   onUpdateRole: (id: string, role: ProjectRole) => void;
   onRemove: (id: string) => void;
   onEditOrgRole: () => void;
+  isProjectDao: boolean;
+  canMigrate: boolean;
+  partOfOrganization: boolean;
+  migrateProject?: () => Promise<void>;
+  createOrganization: () => void;
 }

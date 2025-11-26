@@ -9,6 +9,7 @@ import {
 import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from './ProjectCollaborators';
 import { mockCollaborators } from './ProjectCollaborators.mock';
+import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 
 const meta: Meta<typeof ProjectCollaborators> = {
   title: 'Marketplace/Organisms/ProjectCollaborators',
@@ -35,12 +36,20 @@ const meta: Meta<typeof ProjectCollaborators> = {
 
 export default meta;
 
-export const Default = (args: {
-  onInvite: () => void;
-  onUpdateRole: (id: string, role: ProjectRole) => void;
-  onRemove?: (id: string) => void;
-  onEditOrgRole: () => void;
-}) => {
+export const Default = (
+  args: Pick<
+    ProjectCollaboratorsProps,
+    | 'onInvite'
+    | 'onUpdateRole'
+    | 'onRemove'
+    | 'onEditOrgRole'
+    | 'isProjectDao'
+    | 'canMigrate'
+    | 'partOfOrganization'
+    | 'createOrganization'
+    | 'migrateProject'
+  >,
+) => {
   const [collaborators, setCollaborators] = useState(mockCollaborators || []);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
@@ -100,4 +109,9 @@ Default.args = {
   onUpdateRole: action('role-changed'),
   onRemove: action('collaborator-removed'),
   onEditOrgRole: action('edit-org-role'),
+  isProjectDao: true,
+  canMigrate: true,
+  partOfOrganization: true,
+  createOrganization: action('create-organization'),
+  migrateProject: action('migrate-project'),
 };

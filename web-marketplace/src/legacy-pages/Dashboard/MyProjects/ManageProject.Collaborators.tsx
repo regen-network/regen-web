@@ -21,12 +21,19 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
 import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
+import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useFetchProject } from './hooks/useFetchProject';
+import { useMigrateProject } from './hooks/useMigrateProject';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();
@@ -41,9 +48,9 @@ const Collaborators = (): JSX.Element => {
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
 
-  const dao = useDaoOrganization();
+  const daoOrganization = useDaoOrganization();
 
-  const { data, isLoading: isLoadingAssignments } = useQuery(
+  const { data: projectDaoData, isLoading: isLoadingAssignments } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!project?.adminDaoAddress,
@@ -51,8 +58,22 @@ const Collaborators = (): JSX.Element => {
       daoAccountsOrderBy,
     }),
   );
+  const { data: organizationDaoData } = useQuery(
+    getDaoByAddressWithAssignmentsQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!daoOrganization?.address,
+      address: daoOrganization?.address as string,
+    }),
+  );
 
-  const projectDao = data?.daoByAddress;
+  const projectDao = projectDaoData?.daoByAddress;
+  const activeAccountOrgAssignment = useMemo(
+    () =>
+      organizationDaoData?.daoByAddress?.assignmentsByDaoAddress?.nodes?.find(
+        assignment => assignment?.accountId === activeAccountId,
+      ),
+    [organizationDaoData, activeAccountId],
+  );
 
   const accountsResults = useQueries({
     queries:
@@ -70,8 +91,6 @@ const Collaborators = (): JSX.Element => {
   const accountsLoading = accountsResults.some(
     queryResult => queryResult.isLoading,
   );
-
-  // TODO if not project DAO, show create org or migrate to org APP-796
 
   const collaborators = useMemo(
     () =>
@@ -113,23 +132,35 @@ const Collaborators = (): JSX.Element => {
     [projectDao, activeAccountId, _, accounts],
   );
 
-  if (isLoading || isLoadingAssignments || accountsLoading) {
+  const { migrateProject } = useMigrateProject(project);
+
+  const { createOrganization } = useOrganizationActions();
+
+  const canMigrate =
+    activeAccountOrgAssignment?.roleName === ROLE_OWNER ||
+    activeAccountOrgAssignment?.roleName === ROLE_ADMIN ||
+    activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
+
+  if (isLoading || accountsLoading) {
     return <Loading />;
   }
 
   return (
-    <>
-      <ProjectCollaborators
-        collaborators={collaborators}
-        // TODO after merging https://github.com/regen-network/regen-web/pull/2741
-        onToggleSort={function (): void {}}
-        // TODO APP-791
-        onInvite={function (): void {}}
-        onUpdateRole={function (id: string, role: ProjectRole): void {}}
-        onRemove={function (id: string): void {}}
-        onEditOrgRole={function (): void {}}
-      />
-    </>
+    <ProjectCollaborators
+      canMigrate={canMigrate}
+      isProjectDao={!!projectDao}
+      partOfOrganization={!!daoOrganization}
+      migrateProject={project.offChainId ? migrateProject : undefined}
+      createOrganization={createOrganization}
+      collaborators={collaborators}
+      // TODO after merging https://github.com/regen-network/regen-web/pull/2741
+      onToggleSort={function (): void {}}
+      // TODO APP-791
+      onInvite={function (): void {}}
+      onUpdateRole={function (id: string, role: ProjectRole): void {}}
+      onRemove={function (id: string): void {}}
+      onEditOrgRole={function (): void {}}
+    />
   );
 };
 

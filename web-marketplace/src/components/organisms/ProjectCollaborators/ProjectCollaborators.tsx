@@ -92,6 +92,7 @@ export const ProjectCollaborators = ({
                   isCurrentUser={col.isCurrentUser}
                   onRemove={() => onRemove(col.id)}
                   onEditOrgRole={onEditOrgRole}
+                  canEditOrgRole={col.canEditOrgRole}
                 />
               </UserInfo>
 
@@ -115,6 +116,7 @@ export const ProjectCollaborators = ({
                   isCurrentUser={col.isCurrentUser}
                   onRemove={() => onRemove(col.id)}
                   onEditOrgRole={onEditOrgRole}
+                  canEditOrgRole={col.canEditOrgRole}
                 />
               </div>
             </>

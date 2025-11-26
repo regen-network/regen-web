@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -44,14 +44,17 @@ const Collaborators = (): JSX.Element => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const navigate = useNavigate();
+  const daoOrganization = useDaoOrganization();
 
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
 
-  const daoOrganization = useDaoOrganization();
-
-  const { data: projectDaoData, isLoading: isLoadingAssignments } = useQuery(
+  const {
+    data: projectAssignmentsData,
+    isLoading: isLoadingProjectsAssignments,
+  } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!project?.adminDaoAddress,
@@ -59,23 +62,27 @@ const Collaborators = (): JSX.Element => {
       daoAccountsOrderBy,
     }),
   );
-  const { data: organizationDaoData } = useQuery(
-    getDaoByAddressWithAssignmentsQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !!daoOrganization?.address,
-      address: daoOrganization?.address as string,
-    }),
-  );
+  const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
+    useQuery(
+      getDaoByAddressWithAssignmentsQuery({
+        client: graphqlClient,
+        enabled: !!graphqlClient && !!daoOrganization?.address,
+        address: daoOrganization?.address as string,
+      }),
+    );
 
-  const projectDao = projectDaoData?.daoByAddress;
+  const orgDao = orgAssignmentsData?.daoByAddress;
+
+  const projectDao = projectAssignmentsData?.daoByAddress;
   const activeAccountOrgAssignment = useMemo(
     () =>
-      organizationDaoData?.daoByAddress?.assignmentsByDaoAddress?.nodes?.find(
+      orgDao?.assignmentsByDaoAddress?.nodes?.find(
         assignment => assignment?.accountId === activeAccountId,
       ),
-    [organizationDaoData, activeAccountId],
+    [orgDao, activeAccountId],
   );
 
+  // Getting the organization that each collaborators belongs to
   const accountsResults = useQueries({
     queries:
       projectDao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(
@@ -93,6 +100,10 @@ const Collaborators = (): JSX.Element => {
     queryResult => queryResult.isLoading,
   );
 
+  const isOrgOwnerAdmin =
+    activeAccountOrgAssignment?.roleName === ROLE_OWNER ||
+    activeAccountOrgAssignment?.roleName === ROLE_ADMIN;
+
   const collaborators = useMemo(
     () =>
       (
@@ -105,7 +116,7 @@ const Collaborators = (): JSX.Element => {
             const daos =
               accounts[i]?.accountById?.daosByAssignmentAccountIdAndDaoAddress
                 ?.nodes;
-            const daoOrganization = daos?.find(
+            const accDaoOrganization = daos?.find(
               dao => !!dao?.organizationByDaoAddress,
             );
 
@@ -120,17 +131,31 @@ const Collaborators = (): JSX.Element => {
                   address: acc?.addr,
                   hasWalletAddress: !!acc?.addr,
                   isCurrentUser: acc?.id === activeAccountId,
-                  organization: daoOrganization?.organizationByDaoAddress?.name,
+                  organization:
+                    accDaoOrganization?.organizationByDaoAddress?.name,
                   email:
                     acc?.privateAccountById?.email ||
                     acc?.privateAccountById?.googleEmail,
                   onChainRoleId: parseInt(assignment?.onChainRoleId),
+                  // current user has to be an owner or admin of the collaborator organization
+                  canEditOrgRole:
+                    !!accDaoOrganization &&
+                    !!daoOrganization &&
+                    daoOrganization.address === accDaoOrganization.address &&
+                    isOrgOwnerAdmin,
                 }
               : null;
           },
         ) ?? []
       ).filter(Boolean) as Collaborator[],
-    [projectDao, activeAccountId, _, accounts],
+    [
+      projectDao,
+      activeAccountId,
+      _,
+      accounts,
+      daoOrganization,
+      isOrgOwnerAdmin,
+    ],
   );
 
   const { migrateProject } = useMigrateProject(project);
@@ -138,9 +163,7 @@ const Collaborators = (): JSX.Element => {
   const { createOrganization } = useOrganizationActions();
 
   const canMigrate =
-    activeAccountOrgAssignment?.roleName === ROLE_OWNER ||
-    activeAccountOrgAssignment?.roleName === ROLE_ADMIN ||
-    activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
+    isOrgOwnerAdmin || activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
 
   const currentUserRole = useMemo(
     () =>
@@ -160,7 +183,12 @@ const Collaborators = (): JSX.Element => {
       daoAccountsOrderBy,
     });
 
-  if (isLoading || isLoadingAssignments || accountsLoading) {
+  if (
+    isLoading ||
+    isLoadingProjectsAssignments ||
+    isLoadingOrgAssignments ||
+    accountsLoading
+  ) {
     return <Loading />;
   }
 
@@ -172,6 +200,7 @@ const Collaborators = (): JSX.Element => {
       migrateProject={project.offChainId ? migrateProject : undefined}
       createOrganization={createOrganization}
       collaborators={collaborators}
+      sortDir={daoAccountsOrderBy}
       onToggleSort={() =>
         setDaoAccountsOrderBy(prev =>
           prev === AccountsOrderBy.NameAsc
@@ -182,7 +211,7 @@ const Collaborators = (): JSX.Element => {
       onAddMember={addCollaborator}
       onUpdateRole={updateCollaboratorRole}
       onRemove={removeCollaborator}
-      onEditOrgRole={function (): void {}}
+      onEditOrgRole={() => navigate(`/dashboard/organization/members`)}
     />
   );
 };

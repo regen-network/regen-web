@@ -17,4 +17,5 @@ export interface GetActionItemsParams {
   onEditOrgRole?: () => void;
   navigate: (path: string) => void;
   _: TranslatorType;
+  canEditOrgRole?: boolean;
 }

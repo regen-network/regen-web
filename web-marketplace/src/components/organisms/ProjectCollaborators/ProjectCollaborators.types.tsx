@@ -6,8 +6,9 @@ import {
   ProjectRole,
 } from '../BaseMembersTable/BaseMembersTable.types';
 
+export type Collaborator = Member & { canEditOrgRole: boolean };
 export interface ProjectCollaboratorsProps {
-  collaborators: Member[];
+  collaborators: Collaborator[];
   onAddMember: (data: MemberData<ProjectRole>) => Promise<void>;
   sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
   onToggleSort: () => void;

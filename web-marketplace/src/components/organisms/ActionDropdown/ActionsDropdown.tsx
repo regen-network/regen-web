@@ -24,6 +24,7 @@ export interface ActionsDropdownProps {
   onRemove: () => void;
   onEditOrgRole?: () => void;
   context?: Context;
+  canEditOrgRole?: boolean;
 }
 
 export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
@@ -33,6 +34,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   onRemove,
   onEditOrgRole,
   context = PROJECT_CONTEXT,
+  canEditOrgRole = false,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -68,6 +70,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     onRemove,
     onEditOrgRole,
     navigate,
+    canEditOrgRole,
     _,
   });
 

@@ -64,7 +64,7 @@ const MyProjects = (): JSX.Element => {
         !!graphqlClient,
     }),
   );
-  console.log('isOrganizationDashboard', isOrganizationDashboard);
+
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,

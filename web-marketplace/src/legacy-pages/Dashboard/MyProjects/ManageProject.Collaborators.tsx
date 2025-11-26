@@ -136,17 +136,18 @@ const Collaborators = (): JSX.Element => {
 
   const { createOrganization } = useOrganizationActions();
 
+  const canMigrate =
+    activeAccountOrgAssignment?.roleName === ROLE_OWNER ||
+    activeAccountOrgAssignment?.roleName === ROLE_ADMIN ||
+    activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
+
   if (isLoading || accountsLoading) {
     return <Loading />;
   }
 
   return (
     <ProjectCollaborators
-      canMigrate={
-        activeAccountOrgAssignment?.roleName === ROLE_OWNER ||
-        activeAccountOrgAssignment?.roleName === ROLE_ADMIN ||
-        activeAccountOrgAssignment?.roleName === ROLE_EDITOR
-      }
+      canMigrate={canMigrate}
       isProjectDao={!!projectDao}
       partOfOrganization={!!daoOrganization}
       migrateProject={project.offChainId ? migrateProject : undefined}

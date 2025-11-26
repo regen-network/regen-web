@@ -112,10 +112,7 @@ export const ProjectCollaborators = ({
           )}
           {partOfOrganization && migrateProject ? (
             canMigrate ? (
-              <OutlinedButton
-                onClick={canMigrate ? migrateProject : undefined}
-                className="mt-25"
-              >
+              <OutlinedButton onClick={migrateProject} className="mt-25">
                 {_(MIGRATE_PROJECT)}
               </OutlinedButton>
             ) : (

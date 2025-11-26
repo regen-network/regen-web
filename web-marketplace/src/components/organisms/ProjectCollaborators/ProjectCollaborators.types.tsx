@@ -1,26 +1,18 @@
 import { AccountsOrderBy } from 'generated/graphql';
 
-import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
-
-export interface Collaborator {
-  id: string;
-  name: string;
-  email: string;
-  description?: string;
-  organization?: string;
-  role: ProjectRole;
-  avatar?: string;
-  isCurrentUser?: boolean;
-  hasWalletAddress: boolean;
-}
+import {
+  Member,
+  MemberData,
+  ProjectRole,
+} from '../BaseMembersTable/BaseMembersTable.types';
 
 export interface ProjectCollaboratorsProps {
-  collaborators: Collaborator[];
-  onInvite: () => void;
+  collaborators: Member[];
+  onAddMember: (data: MemberData<ProjectRole>) => Promise<void>;
   sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
   onToggleSort: () => void;
   onUpdateRole: (id: string, role: ProjectRole) => void;
-  onRemove: (id: string) => void;
+  onRemove: (id: string) => Promise<void>;
   onEditOrgRole: () => void;
   isProjectDao: boolean;
   canMigrate: boolean;

@@ -9,20 +9,6 @@ export interface BaseUser {
   isCurrentUser?: boolean;
 }
 
-export interface BaseTableProps<T extends BaseUser> {
-  users: T[];
-  currentUserRole: string;
-  onInvite?: () => void;
-  onRoleChange?: (userId: string, newRole: ProjectRole) => void;
-  onRemove?: (userId: string) => void;
-  onVisibilityChange?: (userId: string, visible: boolean) => void;
-  title: string;
-  description: string;
-  inviteButtonText: string;
-  canAdmin: boolean;
-  context: Context;
-}
-
 export interface BaseRoleDropdownProps {
   role: string;
   onChange: (newRole: any) => void;
@@ -43,3 +29,24 @@ export interface RoleOption {
 }
 
 export type Context = 'organization' | 'project';
+
+export type Member = {
+  id: string;
+  name: string;
+  email?: string | null;
+  address?: string | null;
+  title?: string | null;
+  organization: string;
+  role: BaseMemberRole;
+  onChainRoleId: number;
+  avatar?: string;
+  visible: boolean;
+  isCurrentUser?: boolean;
+  hasWalletAddress: boolean;
+};
+
+export type MemberData<T> = {
+  role: T | undefined;
+  addressOrEmail: string;
+  visible?: boolean;
+};

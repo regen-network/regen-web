@@ -9,13 +9,22 @@ import { CancelButtonFooter } from 'web-components/src/components/organisms/Canc
 import { Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { truncate } from 'web-components/src/utils/truncate';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import {
+  DaoByAddressQuery,
+  GetAccountsByNameOrAddrQuery,
+} from 'generated/graphql';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useDebounce } from 'hooks/useDebounce';
 
-import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  MemberData,
+  RoleOption,
+} from '../BaseMembersTable.types';
 import {
   ADD_MEMBER_LABEL,
   ADMIN_EDITOR_RULE,
@@ -29,27 +38,39 @@ import {
   ROLE_LABEL,
   VISIBLE_DESCRIPTION,
   VISIBLE_QUESTION,
-} from '../OrganizationMembers.constants';
-import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
-import { InviteMemberModalProps } from '../OrganizationMembers.types';
-import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
-import { getInviteSchema } from './InviteMembers.schema';
+} from './constants';
+import { getInviteSchema } from './modals.schema';
+import { VisibilitySwitch } from 'components/organisms/OrganizationMembers/OrganizationMembers.VisibilitySwitch';
+import { BaseRoleDropdown } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown';
 
-export const InviteMemberModal = ({
+interface InviteMemberModalProps<T> {
+  open: boolean;
+  onClose: () => void;
+  onSubmit: (data: MemberData<T>) => void;
+  accounts?: GetAccountsByNameOrAddrQuery | null;
+  setDebouncedValue: UseStateSetter<string>;
+  daoWithAddress?: DaoByAddressQuery['daoByAddress'];
+  isOrg?: boolean;
+  roleOptions: RoleOption[];
+}
+
+export const InviteMemberModal = <T extends BaseMemberRole>({
   open,
   onClose,
   onSubmit,
   accounts,
   setDebouncedValue,
   daoWithAddress,
-}: InviteMemberModalProps) => {
+  isOrg = true,
+  roleOptions,
+}: InviteMemberModalProps<T>) => {
   const { _ } = useLingui();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
   const currentDaoOrganization = useDaoOrganization();
 
   const form = useZodForm({
-    schema: getInviteSchema(_),
+    schema: getInviteSchema(_, isOrg),
     defaultValues: { role: undefined, addressOrEmail: '', visible: true },
     mode: 'onChange',
   });
@@ -123,7 +144,7 @@ export const InviteMemberModal = ({
         className="flex flex-col"
         onSubmit={v => {
           onSubmit({
-            role: v.role as BaseMemberRole | undefined,
+            role: v.role,
             addressOrEmail: v.addressOrEmail,
             visible: v.visible,
           });
@@ -146,7 +167,7 @@ export const InviteMemberModal = ({
             <span className="text-sm md:text-md text-bc-neutral-500 mb-5">
               {_(CHOOSE_A_ROLE_FOR_THIS_USER)}
             </span>
-            <MemberRoleDropdown
+            <BaseRoleDropdown
               role={role as BaseMemberRole}
               disabled={false}
               hasWalletAddress={true}
@@ -157,6 +178,7 @@ export const InviteMemberModal = ({
               placeholder={_(CHOOSE_ROLE_HELP)}
               height="h-[50px] md:h-[60px]"
               fullWidth={true}
+              roleOptions={roleOptions}
             />
           </div>
 
@@ -270,22 +292,24 @@ export const InviteMemberModal = ({
           </div>
 
           {/* Visibility */}
-          <div className="flex flex-col mb-45">
-            <span className="font-bold text-md md:text-lg mb-6">
-              {_(VISIBLE_QUESTION)}
-            </span>
-            <span className="text-sm text-bc-neutral-500 mb-10">
-              {_(VISIBLE_DESCRIPTION)}
-            </span>
-            <div className="flex items-center gap-12">
-              <VisibilitySwitch
-                checked={visible}
-                onChange={(v: boolean) =>
-                  setValue('visible', v, { shouldDirty: true })
-                }
-              />
+          {isOrg && (
+            <div className="flex flex-col mb-45">
+              <span className="font-bold text-md md:text-lg mb-6">
+                {_(VISIBLE_QUESTION)}
+              </span>
+              <span className="text-sm text-bc-neutral-500 mb-10">
+                {_(VISIBLE_DESCRIPTION)}
+              </span>
+              <div className="flex items-center gap-12">
+                <VisibilitySwitch
+                  checked={visible}
+                  onChange={(v: boolean) =>
+                    setValue('visible', v, { shouldDirty: true })
+                  }
+                />
+              </div>
             </div>
-          </div>
+          )}
         </section>
 
         {/* Footer */}

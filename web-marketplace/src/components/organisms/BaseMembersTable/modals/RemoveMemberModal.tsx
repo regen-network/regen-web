@@ -9,7 +9,7 @@ import {
   REMOVE_CONFIRM_LABEL,
   REMOVE_MEMBER_DESCRIPTION,
   REMOVE_MEMBER_TITLE,
-} from './OrganizationMembers.constants';
+} from './constants';
 
 interface RemoveMemberModalProps {
   open: boolean;

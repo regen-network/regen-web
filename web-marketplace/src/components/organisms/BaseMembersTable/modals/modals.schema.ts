@@ -6,6 +6,7 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   ROLE_ADMIN,
+  ROLE_AUTHOR,
   ROLE_EDITOR,
   ROLE_OWNER,
   ROLE_VIEWER,
@@ -15,12 +16,20 @@ import {
   INVALID_EMAIL_OR_REGEN_ADDRESS_ERROR,
   INVALID_REGEN_ADDRESS_ERROR,
   REGEN_ADDRESS_REQUIRED_ERROR,
-} from '../OrganizationMembers.constants';
+} from './constants';
 
-export const getInviteSchema = (_: TranslatorType) =>
+export const getInviteSchema = (_: TranslatorType, isOrg: boolean) =>
   z
     .object({
-      role: z.enum([ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER]),
+      role: isOrg
+        ? z.enum([ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER])
+        : z.enum([
+            ROLE_OWNER,
+            ROLE_ADMIN,
+            ROLE_EDITOR,
+            ROLE_AUTHOR,
+            ROLE_VIEWER,
+          ]),
       addressOrEmail: z.string().trim().min(1),
       visible: z.boolean().default(true),
     })

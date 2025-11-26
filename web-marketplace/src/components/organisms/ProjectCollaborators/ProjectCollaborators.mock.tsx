@@ -1,8 +1,8 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 
-import { Collaborator } from './ProjectCollaborators.types';
+import { Member } from '../BaseMembersTable/BaseMembersTable.types';
 
-export const mockCollaborators: Collaborator[] = [
+export const mockCollaborators: Member[] = [
   {
     id: '1',
     name: 'Jane Smith',
@@ -13,6 +13,8 @@ export const mockCollaborators: Collaborator[] = [
     avatar: 'https://i.pravatar.cc/299',
     isCurrentUser: true,
     hasWalletAddress: true,
+    onChainRoleId: 2,
+    
   },
   {
     id: '2',

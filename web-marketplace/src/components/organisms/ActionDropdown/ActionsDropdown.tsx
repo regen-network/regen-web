@@ -19,7 +19,7 @@ import { getActionItems } from './ActionDropdown.utils';
 
 export interface ActionsDropdownProps {
   role: ProjectRole;
-  currentUserRole: ProjectRole;
+  currentUserRole?: ProjectRole;
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;

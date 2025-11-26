@@ -8,25 +8,20 @@ import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCal
 
 import { deleteImage } from 'web-components/src/utils/s3';
 
-import {
-  AccountsOrderBy,
-  useUpdateAccountByIdMutation,
-} from 'generated/graphql';
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
+import { PersonalProfileSchemaType } from 'components/organisms/BaseMembersTable/modals/modals.schema';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-import { PersonalProfileSchemaType } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.schema';
-
-export const useSaveProfile = (
-  daoAccountsOrderBy: AccountsOrderBy,
-  daoOrganizationAddress?: string,
-) => {
+export const useSaveProfile = () => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const { activeAccountId } = useAuth();
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const reactQueryClient = useQueryClient();
+  const daoOrganization = useDaoOrganization();
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
@@ -68,19 +63,17 @@ export const useSaveProfile = (
           id: activeAccountId,
         }),
       });
-      if (daoOrganizationAddress)
+      if (daoOrganization?.address)
         await reactQueryClient.invalidateQueries({
           queryKey: getDaoByAddressWithAssignmentsQueryKey({
-            address: daoOrganizationAddress,
-            daoAccountsOrderBy,
+            address: daoOrganization.address,
           }),
         });
     },
     [
       activeAccountId,
       updateAccountById,
-      daoAccountsOrderBy,
-      daoOrganizationAddress,
+      daoOrganization?.address,
       reactQueryClient,
     ],
   );

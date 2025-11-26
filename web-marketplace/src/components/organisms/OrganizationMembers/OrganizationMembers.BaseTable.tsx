@@ -1,8 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLingui } from '@lingui/react';
-import { useAtom } from 'jotai';
 
-import Banner from 'web-components/src/components/banner';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import {
@@ -10,34 +8,28 @@ import {
   DaoByAddressQuery,
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
-import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 
-import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { ORGANIZATION_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
-import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  Member,
+  MemberData,
+} from '../BaseMembersTable/BaseMembersTable.types';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
-import { InviteMemberModal } from './InviteMembers/InviteMembers.InviteModal';
-import { PersonalProfileModal } from './InviteMembers/InviteMembers.ProfileModal';
-import { PersonalProfileSchemaType } from './InviteMembers/InviteMembers.schema';
 import {
   INVITE_MEMBERS,
-  MEMBER_REMOVED_BANNER,
   ORGANIZATION_MEMBERS,
   ORGANIZATION_MEMBERS_DESCRIPTION,
   VISIBILITY_ON_PROFILE,
 } from './OrganizationMembers.constants';
-import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
-import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
-import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-
-export type MemberData = {
-  role: BaseMemberRole | undefined;
-  addressOrEmail: string;
-  visible: boolean;
-};
+import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
+import { PersonalProfileSchemaType } from '../BaseMembersTable/modals/modals.schema';
+import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
+import { getRoleItems } from './OrganizationMembers.utils';
+import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 
 export type BaseProps = {
   members: Member[];
@@ -46,7 +38,7 @@ export type BaseProps = {
   onUpdateRole: (id: string, role: BaseMemberRole) => Promise<void>;
   onUpdateVisibility: (id: string, visible: boolean) => Promise<void>;
   onRemove: (id: string) => Promise<void>;
-  onAddMember: (data: MemberData) => Promise<void>;
+  onAddMember: (data: MemberData<BaseMemberRole>) => Promise<void>;
   accounts?: GetAccountsByNameOrAddrQuery | null;
   setDebouncedValue: UseStateSetter<string>;
   onSaveProfile: (data: PersonalProfileSchemaType) => Promise<void>;
@@ -59,9 +51,6 @@ type VariantConfig = {
   showDescription: boolean;
   showHelpDocs: boolean;
   showMobileInvite: boolean;
-  enableInviteModal: boolean;
-  enableRemoveModal: boolean;
-  enableProfileEdit: boolean;
   limitActionsToInvited: boolean;
   showActionsColumnWhenInvited: boolean;
   hideOwnerOption?: boolean;
@@ -78,9 +67,6 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     showDescription: true,
     showHelpDocs: true,
     showMobileInvite: true,
-    enableInviteModal: true,
-    enableRemoveModal: true,
-    enableProfileEdit: false,
     limitActionsToInvited: false,
     showActionsColumnWhenInvited: false,
     hideOwnerOption: false,
@@ -90,9 +76,6 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     showDescription: false,
     showHelpDocs: false,
     showMobileInvite: false,
-    enableInviteModal: true,
-    enableRemoveModal: true,
-    enableProfileEdit: true,
     limitActionsToInvited: true,
     showActionsColumnWhenInvited: true,
     hideOwnerOption: true,
@@ -117,30 +100,30 @@ export const OrganizationMembersBase = ({
 }: OrganizationMembersBaseProps) => {
   const cfg: VariantConfig = { ...defaultConfig[variant], ...overrideConfig };
   const { _ } = useLingui();
-  const currentUserRole: BaseMemberRole =
-    members.find(member => member.isCurrentUser)?.role ?? ROLE_VIEWER;
+  const currentMember = useMemo(
+    () => members.find(m => m.isCurrentUser),
+    [members],
+  );
+  const currentUserRole = currentMember?.role;
 
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
   const [showPersonalProfileModal, setShowPersonalProfileModal] =
     useState(false);
-  const [bannerText, setBannerText] = useAtom(bannerTextAtom);
 
   const hasInvited = members.some(m => !m.isCurrentUser);
   const showActionsColumn = cfg.showActionsColumnWhenInvited
     ? hasInvited
     : true;
 
+  const roleOptions = getRoleItems(
+    _,
+    cfg.hideOwnerOption && currentUserRole !== ROLE_OWNER,
+  );
+
   return (
     <>
-      {bannerText && cfg.enableRemoveModal && (
-        <Banner
-          text={bannerText}
-          className="bg-bc-red-400"
-          onClose={() => setBannerText('')}
-        />
-      )}
       <BaseMembersTable
         users={members}
         title={cfg.showHeader ? _(ORGANIZATION_MEMBERS) : ''}
@@ -150,7 +133,7 @@ export const OrganizationMembersBase = ({
         inviteButtonText={_(INVITE_MEMBERS)}
         currentUserRole={currentUserRole}
         onInvite={() => {
-          if (cfg.enableInviteModal) setShowInviteModal(true);
+          setShowInviteModal(true);
         }}
         onSort={onToggleSort}
         sortDir={sortDir}
@@ -170,11 +153,7 @@ export const OrganizationMembersBase = ({
               description={member.title}
               organization={member.organization}
               onEditPersonalProfile={() => {
-                if (
-                  cfg.enableProfileEdit &&
-                  member.isCurrentUser &&
-                  cfg.enableInviteModal
-                ) {
+                if (member.isCurrentUser) {
                   setShowPersonalProfileModal(true);
                 }
               }}
@@ -185,12 +164,8 @@ export const OrganizationMembersBase = ({
                   currentUserRole={currentUserRole}
                   isCurrentUser={!!member.isCurrentUser}
                   onRemove={() => {
-                    if (cfg.enableRemoveModal) {
-                      setMemberToRemove(member.id);
-                      setShowRemoveModal(true);
-                    } else {
-                      onRemove(member.id);
-                    }
+                    setMemberToRemove(member.id);
+                    setShowRemoveModal(true);
                   }}
                   context={ORGANIZATION_CONTEXT}
                 />
@@ -199,13 +174,13 @@ export const OrganizationMembersBase = ({
 
             {/* Mobile controls */}
             <div className="flex gap-20 xl:hidden w-full px-6 justify-between items-center">
-              <MemberRoleDropdown
+              <BaseRoleDropdown
                 role={member.role}
                 disabled={!canAdmin}
-                hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
-                hideOwnerOption={cfg.hideOwnerOption}
+                hasWalletAddress={member.hasWalletAddress}
+                roleOptions={roleOptions}
               />
               <VisibilitySwitch
                 checked={member.visible}
@@ -217,13 +192,13 @@ export const OrganizationMembersBase = ({
 
             {/* Desktop role */}
             <div className="hidden xl:flex w-[170px] items-center">
-              <MemberRoleDropdown
+              <BaseRoleDropdown
                 role={member.role}
                 disabled={!canAdmin}
-                hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
-                hideOwnerOption={cfg.hideOwnerOption}
+                hasWalletAddress={member.hasWalletAddress}
+                roleOptions={roleOptions}
               />
             </div>
             {/* Desktop visibility */}
@@ -244,12 +219,8 @@ export const OrganizationMembersBase = ({
                     currentUserRole={currentUserRole}
                     isCurrentUser={!!member.isCurrentUser}
                     onRemove={() => {
-                      if (cfg.enableRemoveModal) {
-                        setMemberToRemove(member.id);
-                        setShowRemoveModal(true);
-                      } else {
-                        onRemove(member.id);
-                      }
+                      setMemberToRemove(member.id);
+                      setShowRemoveModal(true);
                     }}
                     context={ORGANIZATION_CONTEXT}
                   />
@@ -259,49 +230,25 @@ export const OrganizationMembersBase = ({
           </>
         )}
       </BaseMembersTable>
-      {cfg.enableInviteModal && (
-        <InviteMemberModal
-          open={showInviteModal}
-          onClose={() => setShowInviteModal(false)}
-          onSubmit={data => {
-            if (onAddMember) onAddMember(data);
-            setShowInviteModal(false);
-          }}
+      {currentMember && (
+        <Modals
+          showInviteModal={showInviteModal}
+          setShowInviteModal={setShowInviteModal}
+          showRemoveModal={showRemoveModal}
+          setShowRemoveModal={setShowRemoveModal}
+          showPersonalProfileModal={showPersonalProfileModal}
+          setShowPersonalProfileModal={setShowPersonalProfileModal}
+          memberToRemove={memberToRemove}
+          setMemberToRemove={setMemberToRemove}
+          onAddMember={onAddMember}
+          onRemove={onRemove}
+          onSaveProfile={onSaveProfile}
+          onUpload={onUpload}
           accounts={accounts}
           setDebouncedValue={setDebouncedValue}
           daoWithAddress={daoWithAddress}
-        />
-      )}
-      {cfg.enableRemoveModal && (
-        <RemoveMemberModal
-          open={showRemoveModal}
-          onClose={() => {
-            setShowRemoveModal(false);
-            setMemberToRemove(null);
-          }}
-          onConfirm={async () => {
-            if (memberToRemove) {
-              await onRemove(memberToRemove);
-              setBannerText(_(MEMBER_REMOVED_BANNER));
-            }
-            setShowRemoveModal(false);
-            setMemberToRemove(null);
-          }}
-        />
-      )}
-      {cfg.enableProfileEdit && cfg.enableInviteModal && (
-        <PersonalProfileModal
-          open={showPersonalProfileModal}
-          onClose={() => setShowPersonalProfileModal(false)}
-          initialName={members.find(m => m.isCurrentUser)?.name || ''}
-          initialAvatar={members.find(m => m.isCurrentUser)?.avatar}
-          initialDescription={undefined}
-          initialTitle={members.find(m => m.isCurrentUser)?.title}
-          onSave={async data => {
-            await onSaveProfile(data);
-            setShowPersonalProfileModal(false);
-          }}
-          onUploadAvatar={onUpload}
+          currentMember={currentMember}
+          roleOptions={roleOptions}
         />
       )}
     </>

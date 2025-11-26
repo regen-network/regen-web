@@ -7,7 +7,6 @@ import {
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_USER_AVATAR,
@@ -16,19 +15,18 @@ import {
 import { Body } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
-import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  Member,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
-import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-import { useSaveProfile } from '../hooks/useSaveProfile';
+import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
@@ -38,7 +36,6 @@ export const InviteMembersStep = () => {
   const { activeAccountId } = useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const daoOrganization = useDaoOrganization();
 
@@ -103,27 +100,8 @@ export const InviteMembersStep = () => {
       daoAccountsOrderBy,
     });
 
-  const [debouncedValue, setDebouncedValue] = useState('');
-  const { data: accounts } = useQuery(
-    getAccountsByNameOrAddrQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedValue,
-      input: debouncedValue,
-      languageCode: selectedLanguage,
-    }),
-  );
-  const { data: daoData } = useQuery(
-    getDaoByAddressQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedValue,
-      address: debouncedValue,
-    }),
-  );
-
-  const { saveProfile, onUpload } = useSaveProfile(
-    daoAccountsOrderBy,
-    daoOrganization?.address,
-  );
+  const { setDebouncedValue, accounts, daoData, saveProfile, onUpload } =
+    useInviteMember();
 
   return (
     <div className="text-center">

@@ -212,3 +212,23 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
 export const getAccountInfo = (account?: AccountFieldsFragment | null) => {
   return { account, defaultAvatar: DEFAULT_PROFILE_USER_AVATAR };
 };
+
+type Organization = {
+  id: string;
+  name?: string | null;
+  image?: string | null;
+  daoAddress?: string | null;
+};
+
+/**
+ * Transforms organization data into an Account object for display as project admin
+ */
+export const getOrganizationAsAdmin = (
+  organization: Organization,
+): Account => ({
+  name: organization.name || '',
+  image: organization.image || DEFAULT_PROFILE_COMPANY_AVATAR,
+  link: `/profiles/${organization.daoAddress}`,
+  address: organization.daoAddress || '',
+  type: 'ORGANIZATION' as const,
+});

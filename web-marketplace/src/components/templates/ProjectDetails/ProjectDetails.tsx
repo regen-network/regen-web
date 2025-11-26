@@ -1,12 +1,18 @@
 'use client';
 
 import { useCallback, useMemo, useState } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import { Box, CircularProgress, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
 import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
@@ -30,18 +36,24 @@ import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getOrganizationByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByIdQuery/getOrganizationByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { getTerrasosBookCallQuery } from 'lib/queries/react-query/sanity/getTerrasosBookCallQuery/getTerrasosBookCallQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { ROLE_VIEWER } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
+import {
+  getCanCreatePost,
+  getCanEditProject,
+} from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
@@ -61,6 +73,7 @@ import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
 import {
   findSanityCreditClass,
   formatOtcCardData,
+  getOrganizationAsAdmin,
   getProjectGalleryPhotos,
   parseOffChainProject,
 } from './ProjectDetails.utils';
@@ -93,6 +106,8 @@ function ProjectDetails(): JSX.Element {
   const { id: projectId } = useParams<{ id: string }>();
   const { queryClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { activeAccount } = useAuth();
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
@@ -204,7 +219,7 @@ function ProjectDetails(): JSX.Element {
     projectDeveloper,
     projectVerifier,
     program,
-    admin,
+    admin: originalAdmin,
     partners,
     projectOwner,
     projectOperator,
@@ -302,16 +317,6 @@ function ProjectDetails(): JSX.Element {
     projectId,
   });
 
-  const isAdmin =
-    (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
-    (!!activeAccount?.id &&
-      offChainProject?.adminAccountId === activeAccount?.id) ||
-    !!(
-      loginDisabled &&
-      wallet?.address &&
-      wallet?.address === onChainProject?.admin
-    );
-
   const isProjectPublished = onChainProjectId
     ? !!onChainProjectId
     : offchainProjectByIdData?.data?.projectById?.published ||
@@ -319,6 +324,36 @@ function ProjectDetails(): JSX.Element {
   const projectLocation = projectMetadata?.['schema:location'];
 
   const isTerrasos = normalizedProject.type === 'TerrasosProjectInfo';
+  const { role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId: activeAccount?.id,
+    wallet,
+  });
+
+  // Check if user has access to manage project based on role
+  const hasManageAccess = role !== undefined && role !== ROLE_VIEWER;
+  const { canEdit: canEditProject } = getCanEditProject({
+    role,
+  });
+  const { canCreatePost } = getCanCreatePost({ role });
+
+  // Fetch organization data if project belongs to an organization
+  const organizationId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+  const { data: organizationData } = useQuery(
+    getOrganizationByIdQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!organizationId,
+      id: organizationId as string,
+    }),
+  );
+  const organization = organizationData?.organizationById;
+
+  // Use organization as admin if it exists, otherwise use the original admin
+  const admin = organization
+    ? getOrganizationAsAdmin(organization)
+    : originalAdmin;
 
   if (noProjectFound) return <NotFoundPage />;
 
@@ -343,12 +378,13 @@ function ProjectDetails(): JSX.Element {
       {(onChainProjectId ||
         isPrefinanceProject ||
         isTerrasos ||
-        (isAdmin && !loginDisabled)) && (
+        (hasManageAccess && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
-          isAdmin={isAdmin}
+          canEditProject={canEditProject}
+          canCreatePost={canCreatePost}
           onBuyButtonClick={() => {
             onBuyButtonClick({
               projectId,
@@ -379,7 +415,7 @@ function ProjectDetails(): JSX.Element {
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
           isTerrasos={isTerrasos}
         >
-          {!isAdmin &&
+          {!canEditProject &&
             isPrefinanceProject &&
             projectPrefinancing?.stripePaymentLink && (
               <InfoTooltip

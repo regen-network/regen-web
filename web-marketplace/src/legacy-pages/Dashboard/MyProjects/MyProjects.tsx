@@ -41,7 +41,6 @@ const MyProjects = (): JSX.Element => {
   const location = useLocation();
   const {
     isIssuer,
-    isProjectAdmin,
     sanityProfilePageData,
     isOrganizationDashboard,
     organizationDaoAddress,
@@ -65,7 +64,7 @@ const MyProjects = (): JSX.Element => {
         !!graphqlClient,
     }),
   );
-  console.log('isOrganizationDashboard', isOrganizationDashboard);
+
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
@@ -104,8 +103,9 @@ const MyProjects = (): JSX.Element => {
         </Grid>
       )}
 
-      {isProjectAdmin &&
-        adminProjects?.map((project, i) => {
+      {adminProjects &&
+        adminProjects.length > 0 &&
+        adminProjects.map((project, i) => {
           return (
             <Grid key={i} item xs={12} md={6} lg={4}>
               <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">

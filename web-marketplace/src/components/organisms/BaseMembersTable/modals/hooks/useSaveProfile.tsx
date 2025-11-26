@@ -13,15 +13,14 @@ import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
+
 import { PersonalProfileSchemaType } from 'components/organisms/BaseMembersTable/modals/modals.schema';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 export const useSaveProfile = () => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const reactQueryClient = useQueryClient();
-  const daoOrganization = useDaoOrganization();
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,
@@ -63,17 +62,25 @@ export const useSaveProfile = () => {
           id: activeAccountId,
         }),
       });
-      if (daoOrganization?.address)
-        await reactQueryClient.invalidateQueries({
-          queryKey: getDaoByAddressWithAssignmentsQueryKey({
-            address: daoOrganization.address,
-          }),
-        });
+
+      await Promise.all(
+        activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.map(
+          async dao => {
+            if (dao)
+              await reactQueryClient.invalidateQueries({
+                queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                  address: dao.address,
+                }),
+                refetchType: 'all',
+              });
+          },
+        ) || [],
+      );
     },
     [
       activeAccountId,
       updateAccountById,
-      daoOrganization?.address,
+      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes,
       reactQueryClient,
     ],
   );

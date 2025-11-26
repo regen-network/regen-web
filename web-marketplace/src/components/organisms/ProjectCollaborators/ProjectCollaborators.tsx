@@ -14,13 +14,14 @@ import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { useInviteMember } from '../BaseMembersTable/modals/hooks/useInviteMember';
 import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
+import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   COLLABORATORS_DESCRIPTION,
   INVITE_COLLABORATORS,
   PROJECT_COLLABORATORS,
 } from './ProjectCollaborators.constants';
-import { RoleDropdown } from './ProjectCollaborators.RoleDropdown';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
+import { getRoleItems } from './ProjectCollaborators.utils';
 
 export const ProjectCollaborators = ({
   collaborators,
@@ -41,7 +42,6 @@ export const ProjectCollaborators = ({
     () => collaborators.find(m => m.isCurrentUser),
     [collaborators],
   );
-  console.log('collaborators', collaborators);
   const currentUserRole = currentMember?.role;
 
   const [showInviteModal, setShowInviteModal] = useState(false);
@@ -52,6 +52,8 @@ export const ProjectCollaborators = ({
 
   const { setDebouncedValue, accounts, daoData, saveProfile, onUpload } =
     useInviteMember();
+
+  const roleOptions = getRoleItems(_);
 
   return (
     <>
@@ -78,6 +80,11 @@ export const ProjectCollaborators = ({
                 context={PROJECT_CONTEXT}
                 description={col.title}
                 organization={col.organization}
+                onEditPersonalProfile={() => {
+                  if (col.isCurrentUser) {
+                    setShowPersonalProfileModal(true);
+                  }
+                }}
               >
                 <ActionsDropdown
                   role={col.role}
@@ -90,12 +97,13 @@ export const ProjectCollaborators = ({
 
               {/* Role dropdown – full width on mobile */}
               <div className="flex items-center order-10 lg:order-none w-full lg:w-[170px] px-6">
-                <RoleDropdown
+                <BaseRoleDropdown
                   onChange={r => onUpdateRole(col.id, r)}
                   role={col.role}
                   currentUserRole={currentUserRole}
                   hasWalletAddress={col.hasWalletAddress}
                   disabled={!canAdmin}
+                  roleOptions={roleOptions}
                 />
               </div>
 
@@ -171,6 +179,8 @@ export const ProjectCollaborators = ({
           setDebouncedValue={setDebouncedValue}
           daoWithAddress={daoData?.daoByAddress}
           currentMember={currentMember}
+          roleOptions={roleOptions}
+          isOrg={false}
         />
       )}
     </>

@@ -8,15 +8,18 @@ import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
-import { truncate } from 'web-components/src/utils/truncate';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import {
   DaoByAddressQuery,
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
+
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { BaseRoleDropdown } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown';
+import { VisibilitySwitch } from 'components/organisms/OrganizationMembers/OrganizationMembers.VisibilitySwitch';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useDebounce } from 'hooks/useDebounce';
 
@@ -40,8 +43,6 @@ import {
   VISIBLE_QUESTION,
 } from './constants';
 import { getInviteSchema } from './modals.schema';
-import { VisibilitySwitch } from 'components/organisms/OrganizationMembers/OrganizationMembers.VisibilitySwitch';
-import { BaseRoleDropdown } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown';
 
 interface InviteMemberModalProps<T> {
   open: boolean;
@@ -168,13 +169,13 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
               {_(CHOOSE_A_ROLE_FOR_THIS_USER)}
             </span>
             <BaseRoleDropdown
-              role={role as BaseMemberRole}
+              role={role}
               disabled={false}
               hasWalletAddress={true}
               onChange={r =>
                 setValue('role', r, { shouldDirty: true, shouldValidate: true })
               }
-              currentUserRole={role as BaseMemberRole}
+              currentUserRole={role}
               placeholder={_(CHOOSE_ROLE_HELP)}
               height="h-[50px] md:h-[60px]"
               fullWidth={true}

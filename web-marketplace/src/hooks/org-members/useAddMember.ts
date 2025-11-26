@@ -17,14 +17,19 @@ import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { MISSING_REQUIRED_PARAMS } from './constants';
-import { MembersHookParams } from './types';
-import { useMembersContext } from './useMembersContext';
-import { addMemberActions, getNewRoleId } from './utils';
 import {
   BaseMemberRole,
   MemberData,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+
+import { MISSING_REQUIRED_PARAMS } from './constants';
+import { MembersHookParams } from './types';
+import { useMembersContext } from './useMembersContext';
+import {
+  addMemberActions,
+  getNewOrgRoleId,
+  getNewProjectRoleId,
+} from './utils';
 
 export function useAddMember(params: MembersHookParams) {
   const { daoAddress, daoRbamAddress, cw4GroupAddress, currentUserRole } =
@@ -157,7 +162,7 @@ export function useAddMember(params: MembersHookParams) {
 
   const addMemberOffChain = useCallback(
     async (
-      data: MemberData,
+      data: MemberData<BaseMemberRole>,
       roleIdToAdd: number,
       projectRoleIdToAdd: number,
     ) => {
@@ -256,7 +261,7 @@ export function useAddMember(params: MembersHookParams) {
   );
 
   const addMember = useCallback(
-    async (data: MemberData) => {
+    async (data: MemberData<BaseMemberRole>) => {
       const { role, addressOrEmail } = data;
       const isWalletAddr = isValidAddress(addressOrEmail);
 
@@ -265,8 +270,8 @@ export function useAddMember(params: MembersHookParams) {
         return;
       }
 
-      const roleIdToAdd = getNewRoleId({ type: 'organization', role });
-      const projectRoleIdToAdd = getNewRoleId({ type: 'project', role });
+      const roleIdToAdd = getNewOrgRoleId(role);
+      const projectRoleIdToAdd = getNewProjectRoleId(role);
 
       if (isWalletAddr) {
         await addMemberWithWalletAddress(data, roleIdToAdd, projectRoleIdToAdd);

@@ -34,6 +34,8 @@ import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useFetchProject } from './hooks/useFetchProject';
 import { useMigrateProject } from './hooks/useMigrateProject';
+import { useUpdateCollaborators } from './hooks/collaborators';
+import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();
@@ -141,7 +143,24 @@ const Collaborators = (): JSX.Element => {
     activeAccountOrgAssignment?.roleName === ROLE_ADMIN ||
     activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
 
-  if (isLoading || accountsLoading) {
+  const currentUserRole = useMemo(
+    () =>
+      projectDao?.assignmentsByDaoAddress?.nodes?.find(
+        assignment => assignment?.accountId === activeAccountId,
+      )?.roleName,
+    [projectDao, activeAccountId],
+  ) as ProjectRole | undefined;
+
+  const { addCollaborator } = useUpdateCollaborators({
+    currentUserRole,
+    daoAddress: projectDao?.address,
+    daoRbamAddress: projectDao?.daoRbamAddress,
+    cw4GroupAddress: projectDao?.cw4GroupAddress,
+    collaborators,
+    daoAccountsOrderBy,
+  });
+
+  if (isLoading || isLoadingAssignments || accountsLoading) {
     return <Loading />;
   }
 
@@ -160,10 +179,9 @@ const Collaborators = (): JSX.Element => {
             : AccountsOrderBy.NameAsc,
         )
       }
-      // TODO APP-791
-      onInvite={function (): void {}}
+      onAddMember={addCollaborator}
       onUpdateRole={function (id: string, role: ProjectRole): void {}}
-      onRemove={function (id: string): void {}}
+      onRemove={async function (id: string): Promise<void> {}}
       onEditOrgRole={function (): void {}}
     />
   );

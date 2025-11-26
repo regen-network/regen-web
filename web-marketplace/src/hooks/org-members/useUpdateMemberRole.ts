@@ -34,9 +34,10 @@ import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
-  getNewRoleId,
+  getNewOrgRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
+  getNewProjectRoleId,
 } from './utils';
 
 export function useUpdateMemberRole(params: MembersHookParams) {
@@ -93,8 +94,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         return;
       }
 
-      const newRoleId = getNewRoleId({ type: 'organization', role });
-      const projectNewRoleId = getNewRoleId({ type: 'project', role });
+      const newRoleId = getNewOrgRoleId(role);
+      const projectNewRoleId = getNewProjectRoleId(role);
 
       // If we assign member the owner role,
       // it means we need to downgrade current user to admin
@@ -107,14 +108,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 authorizationId,
                 roleId,
                 memberAddress: wallet.address,
-                newRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_ADMIN,
-                }),
-                oldRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_OWNER,
-                }),
+                newRoleId: getNewOrgRoleId(ROLE_ADMIN),
+                oldRoleId: getNewOrgRoleId(ROLE_OWNER),
               }),
               updateAuthorizationAction({
                 daoRbamAddress,
@@ -204,14 +199,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                       authorizationId: projectAuthorizationId!,
                       roleId: projectRoleId,
                       memberAddress: wallet.address,
-                      newRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_ADMIN,
-                      }),
-                      oldRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_OWNER,
-                      }),
+                      newRoleId: getNewProjectRoleId(ROLE_ADMIN),
+                      oldRoleId: getNewProjectRoleId(ROLE_OWNER),
                     }),
                     updateAuthorizationAction({
                       daoRbamAddress: projectDao.daoRbamAddress,

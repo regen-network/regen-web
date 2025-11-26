@@ -36,8 +36,8 @@ export type Member = {
   email?: string | null;
   address?: string | null;
   title?: string | null;
-  organization: string;
-  role: BaseMemberRole;
+  organization?: string;
+  role: BaseMemberRole | ProjectRole;
   onChainRoleId: number;
   avatar?: string;
   visible: boolean;
@@ -48,5 +48,5 @@ export type Member = {
 export type MemberData<T> = {
   role: T | undefined;
   addressOrEmail: string;
-  visible?: boolean;
+  visible: boolean;
 };

@@ -4,13 +4,13 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useAtom } from 'jotai';
+
 import { useSaveProfile } from 'components/organisms/BaseMembersTable/modals/hooks/useSaveProfile';
 
 export const useInviteMember = () => {

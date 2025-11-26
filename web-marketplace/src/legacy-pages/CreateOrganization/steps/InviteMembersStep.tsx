@@ -22,11 +22,10 @@ import {
   BaseMemberRole,
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-
-import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
@@ -9,27 +9,27 @@ import {
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 
+import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { ORGANIZATION_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
+import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import {
   BaseMemberRole,
   Member,
   MemberData,
 } from '../BaseMembersTable/BaseMembersTable.types';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
+import { PersonalProfileSchemaType } from '../BaseMembersTable/modals/modals.schema';
+import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   INVITE_MEMBERS,
   ORGANIZATION_MEMBERS,
   ORGANIZATION_MEMBERS_DESCRIPTION,
   VISIBILITY_ON_PROFILE,
 } from './OrganizationMembers.constants';
-import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
-import { PersonalProfileSchemaType } from '../BaseMembersTable/modals/modals.schema';
-import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { getRoleItems } from './OrganizationMembers.utils';
-import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
+import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 
 export type BaseProps = {
   members: Member[];

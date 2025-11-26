@@ -23,9 +23,13 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  ProjectRole,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { orgRoles, projectRoles } from './constants';
+import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
 
 type UpdateAuthorizationActionParams = {
   /** the address of the dao-rbam contract */
@@ -569,13 +573,12 @@ export function getRoleAuthorizationIds({
   return { roleId, authorizationId };
 }
 
-type GetProjectIdsParams = {
-  type: 'organization' | 'project';
-  role: BaseMemberRole;
-};
-export function getNewRoleId({ type, role }: GetProjectIdsParams) {
-  const roles = type === 'organization' ? orgRoles : projectRoles;
-  return roles[role].roleId;
+export function getNewOrgRoleId(role: BaseMemberRole) {
+  return orgRoles[role]?.roleId;
+}
+
+export function getNewProjectRoleId(role: ProjectRole) {
+  return projectRoles[role]?.roleId;
 }
 
 export function getAuthorizationName(currentUserRole?: string) {

@@ -32,9 +32,9 @@ import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectC
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-import { useMigrateProject } from './hooks/useMigrateProject';
 import { useUpdateCollaborators } from './hooks/collaborators';
 import { useFetchProject } from './hooks/useFetchProject';
+import { useMigrateProject } from './hooks/useMigrateProject';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();

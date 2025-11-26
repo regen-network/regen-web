@@ -13,8 +13,8 @@ import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants'
 import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { useInviteMember } from '../BaseMembersTable/modals/hooks/useInviteMember';
-import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
+import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import {
   COLLABORATORS_DESCRIPTION,
   INVITE_COLLABORATORS,

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import {
   ApolloClient,
@@ -8,7 +8,6 @@ import {
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
 import {
   CREATE_POST_DISABLED_TOOLTIP_TEXT,
   NOT_SUPPORTED_TOOLTIP_TEXT,
@@ -32,6 +31,7 @@ import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
 import { useFetchProject } from './hooks/useFetchProject';
+import { useMigrateProject } from './hooks/useMigrateProject';
 
 const ManageProject = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -91,13 +91,7 @@ const ManageProject = () => {
     [tabs, location.pathname],
   );
 
-  const { migrateProjects } = useMigrateProjects([project]);
-
-  const migrateProject = useCallback(async () => {
-    await migrateProjects({
-      selectedProjectIds: [project.id],
-    });
-  }, [migrateProjects, project.id]);
+  const { migrateProject } = useMigrateProject(project);
 
   const { canAccessManageProject, role } = useCanAccessManageProjectWithRole({
     onChainProject,

@@ -28,6 +28,7 @@ import {
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
+import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
 import { useFetchProject } from './hooks/useFetchProject';
@@ -100,8 +101,9 @@ const ManageProject = () => {
     wallet,
   });
 
-  const canEditProject =
-    role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR;
+  const { canEdit: canEditProject } = getCanEditProject({
+    role,
+  });
   const canCreatePost = canEditProject || role === ROLE_AUTHOR;
 
   if (isLoading) return <Loading />;

@@ -5,7 +5,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { EncodeObject } from '@cosmjs/proto-signing';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
@@ -49,6 +49,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
@@ -275,9 +276,15 @@ export const useMigrateProjects = (
         }),
         refetchType: 'all',
       });
+      if (dao)
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+            daoAddress: dao.address,
+          }),
+        });
       reloadBalances();
     },
-    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances],
+    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances, dao],
   );
 
   const migrateProjects = useCallback(

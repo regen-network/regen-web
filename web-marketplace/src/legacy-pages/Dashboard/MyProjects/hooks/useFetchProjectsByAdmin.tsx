@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -123,9 +124,8 @@ export const useFetchProjectByAdmin = ({
   const offChainProjects = organization
     ? orgOffChainProjects
     : ([
-        ...(accountData?.data?.accountById?.projectsByAdminAccountId?.nodes
-          ? accountData?.data?.accountById?.projectsByAdminAccountId?.nodes
-          : []),
+        ...(accountData?.data?.accountById?.projectsByAdminAccountId?.nodes ??
+          []),
         ...(externalMemberProjects ? externalMemberProjects : []),
       ] as ProjectFieldsFragment[]);
 
@@ -177,26 +177,29 @@ export const useFetchProjectByAdmin = ({
     res => res.isLoading,
   );
 
-  const onlyOffChainProjectsWithData =
-    onlyOffChainProjects?.map((project, index) => {
-      const sanityProject = sanityProjects?.[index];
+  const onlyOffChainProjectsWithData = useMemo(() => {
+    return (
+      onlyOffChainProjects?.map((project, index) => {
+        const sanityProject = sanityProjects?.[index];
 
-      return normalizeProjectWithMetadata({
-        offChainProject: project,
-        projectMetadata: project?.metadata,
-        projectPageMetadata: project?.metadata,
-        programAccount:
-          project?.creditClassByCreditClassId?.accountByRegistryId,
-        sanityClass: findSanityCreditClass({
-          sanityCreditClassData,
-          creditClassIdOrUrl:
-            project?.creditClassByCreditClassId?.onChainId ??
-            project?.metadata?.['regen:creditClassId'] ??
-            '',
-        }),
-        sanityProject,
-      });
-    }) ?? [];
+        return normalizeProjectWithMetadata({
+          offChainProject: project,
+          projectMetadata: project?.metadata,
+          projectPageMetadata: project?.metadata,
+          programAccount:
+            project?.creditClassByCreditClassId?.accountByRegistryId,
+          sanityClass: findSanityCreditClass({
+            sanityCreditClassData,
+            creditClassIdOrUrl:
+              project?.creditClassByCreditClassId?.onChainId ??
+              project?.metadata?.['regen:creditClassId'] ??
+              '',
+          }),
+          sanityProject,
+        });
+      }) ?? []
+    );
+  }, [onlyOffChainProjects, sanityProjects, sanityCreditClassData]);
 
   const projects = [
     ...onChainProjectsWithData,

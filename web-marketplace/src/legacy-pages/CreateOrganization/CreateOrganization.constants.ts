@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CREATE_ORGANIZATION_FORM_ID = 'create-organization';
 export const ORGANIZATION_PROFILE_FORM_ID = 'organization-profile';

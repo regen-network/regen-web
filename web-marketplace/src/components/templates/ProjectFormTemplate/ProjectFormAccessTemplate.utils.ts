@@ -7,19 +7,10 @@ import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTa
 
 type GetCanEditProjectParams = {
   role?: ProjectRole;
-  isLoading: boolean;
 };
 
-export const getCanEditProjectWithRole = ({
-  role,
-  isLoading,
-}: GetCanEditProjectParams) => {
+export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   return {
-    canEdit:
-      role === ROLE_OWNER ||
-      role === ROLE_ADMIN ||
-      role === ROLE_EDITOR ||
-      isLoading,
-    role,
+    canEdit: role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR,
   };
 };

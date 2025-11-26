@@ -14,17 +14,18 @@ import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
   MemberData,
   ProjectRole,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-
-import { useCollaboratorsContext } from './useCollaboratorsContext';
-import { addMemberActions, getNewProjectRoleId } from 'hooks/org-members/utils';
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
+import { addMemberActions, getNewProjectRoleId } from 'hooks/org-members/utils';
+
 import { CollaboratorsHookParams } from './types';
+import { useCollaboratorsContext } from './useCollaboratorsContext';
 
 export function useAddCollaborator(params: CollaboratorsHookParams) {
   const { daoAddress, daoRbamAddress, cw4GroupAddress, currentUserRole } =
@@ -38,12 +39,16 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
 
-  const { projectRoleId, projectAuthorizationId, refetchMembers } =
-    useCollaboratorsContext(params);
+  const {
+    projectRoleId,
+    projectAuthorizationId,
+    refetchCollaborators,
+    orgDaoAddress,
+  } = useCollaboratorsContext(params);
 
   const addCollaboratorWithWalletAddress = useCallback(
     async (data: MemberData<ProjectRole>, projectRoleIdToAdd: number) => {
-      const { role, addressOrEmail, visible } = data;
+      const { role, addressOrEmail } = data;
 
       if (
         !wallet?.address ||
@@ -81,7 +86,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
           },
           2,
         );
-        await refetchMembers({ address: addressOrEmail, role, visible });
+        await refetchCollaborators({ address: addressOrEmail, role });
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -98,7 +103,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       projectRoleId,
       setErrorBannerText,
       _,
-      refetchMembers,
+      refetchCollaborators,
       setProcessingModal,
     ],
   );
@@ -110,7 +115,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
         return;
       }
 
-      const { role, addressOrEmail, visible } = data;
+      const { role, addressOrEmail } = data;
       try {
         await postData({
           url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
@@ -119,7 +124,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
             email: addressOrEmail,
             roleName: role,
             daoAddress,
-            visible,
+            visible: true,
             onChainRoleId: projectRoleIdToAdd,
           },
           token,
@@ -131,6 +136,12 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
                 daoAccountsOrderBy: params.daoAccountsOrderBy,
               }),
             });
+            if (orgDaoAddress)
+              await reactQueryClient.invalidateQueries({
+                queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+                  daoAddress: orgDaoAddress,
+                }),
+              });
           },
         });
       } catch (e) {
@@ -145,6 +156,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       reactQueryClient,
       params.daoAccountsOrderBy,
       retryCsrfRequest,
+      orgDaoAddress,
     ],
   );
 

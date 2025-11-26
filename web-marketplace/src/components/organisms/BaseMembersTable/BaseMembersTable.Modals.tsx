@@ -1,18 +1,24 @@
-import { UseStateSetter } from 'types/react/use-state';
-import { InviteMemberModal } from './modals/InviteMemberModal';
-import RemoveMemberModal from './modals/RemoveMemberModal';
-import PersonalProfileModal from './modals/ProfileModal';
-import { MemberData, RoleOption } from './BaseMembersTable.types';
-import { MEMBER_REMOVED_BANNER } from './modals/constants';
-import { useSetAtom } from 'jotai';
-import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { useLingui } from '@lingui/react';
-import { PersonalProfileSchemaType } from './modals/modals.schema';
+import { useSetAtom } from 'jotai';
+
 import {
-  GetAccountsByNameOrAddrQuery,
   DaoByAddressQuery,
+  GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
-import { BaseMemberRole, Member } from './BaseMembersTable.types';
+import { UseStateSetter } from 'types/react/use-state';
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+
+import {
+  BaseMemberRole,
+  Member,
+  MemberData,
+  RoleOption,
+} from './BaseMembersTable.types';
+import { MEMBER_REMOVED_BANNER } from './modals/constants';
+import { InviteMemberModal } from './modals/InviteMemberModal';
+import { PersonalProfileSchemaType } from './modals/modals.schema';
+import PersonalProfileModal from './modals/ProfileModal';
+import RemoveMemberModal from './modals/RemoveMemberModal';
 
 type ModalsProps<T> = {
   showInviteModal: boolean;

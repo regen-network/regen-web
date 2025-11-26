@@ -9,6 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { AccountType, useUpdateAccountByIdMutation } from 'generated/graphql';
@@ -22,11 +23,7 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { orgRoles } from 'hooks/org-members/constants';
-import {
-  feegrantGrantAllowanceAction,
-  getRoleAuthorizationIds,
-} from 'hooks/org-members/utils';
+import { feegrantGrantAllowanceAction } from 'hooks/org-members/utils';
 
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,

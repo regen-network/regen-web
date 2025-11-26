@@ -35,9 +35,9 @@ import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
   getNewOrgRoleId,
+  getNewProjectRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
-  getNewProjectRoleId,
 } from './utils';
 
 export function useUpdateMemberRole(params: MembersHookParams) {

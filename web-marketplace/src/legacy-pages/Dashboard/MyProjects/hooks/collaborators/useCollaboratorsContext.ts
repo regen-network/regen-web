@@ -8,6 +8,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -18,15 +19,11 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
-import {
-  findAssignment,
-  getAuthorizationName,
-  getRoleAuthorizationIds,
-} from 'hooks/org-members/utils';
+import { findAssignment, getAuthorizationName } from 'hooks/org-members/utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
 import { CollaboratorsHookParams, RefetchCollaboratorsParams } from './types';
 
 export function useCollaboratorsContext(params: CollaboratorsHookParams) {
@@ -38,7 +35,6 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
-  const { wallet } = useWallet();
   const daoOrganization = useDaoOrganization();
   const orgDaoAddress = daoOrganization?.address;
 
@@ -64,7 +60,7 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
       [currentUserRole, authorizationName],
     );
 
-  const refetchMembers = useCallback(
+  const refetchCollaborators = useCallback(
     async ({
       address,
       role,
@@ -92,7 +88,6 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
         if (accountId) {
           // refetch assignments
           const res = await refetch();
-          console.log('refetch members', res);
           const assignment = findAssignment({
             data: res.data,
             daoAddress,
@@ -135,7 +130,6 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
       refetch,
       setProcessingModal,
       setErrorBannerText,
-      wallet?.address,
       orgDaoAddress,
     ],
   );
@@ -144,7 +138,8 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
     // computed
     projectRoleId,
     projectAuthorizationId,
+    orgDaoAddress,
     // helpers
-    refetchMembers,
+    refetchCollaborators,
   };
 }

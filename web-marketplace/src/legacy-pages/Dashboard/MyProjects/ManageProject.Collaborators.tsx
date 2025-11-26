@@ -32,10 +32,9 @@ import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectC
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
-import { useFetchProject } from './hooks/useFetchProject';
 import { useMigrateProject } from './hooks/useMigrateProject';
 import { useUpdateCollaborators } from './hooks/collaborators';
-import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
+import { useFetchProject } from './hooks/useFetchProject';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();
@@ -151,14 +150,15 @@ const Collaborators = (): JSX.Element => {
     [projectDao, activeAccountId],
   ) as ProjectRole | undefined;
 
-  const { addCollaborator } = useUpdateCollaborators({
-    currentUserRole,
-    daoAddress: projectDao?.address,
-    daoRbamAddress: projectDao?.daoRbamAddress,
-    cw4GroupAddress: projectDao?.cw4GroupAddress,
-    collaborators,
-    daoAccountsOrderBy,
-  });
+  const { addCollaborator, removeCollaborator, updateCollaboratorRole } =
+    useUpdateCollaborators({
+      currentUserRole,
+      daoAddress: projectDao?.address,
+      daoRbamAddress: projectDao?.daoRbamAddress,
+      cw4GroupAddress: projectDao?.cw4GroupAddress,
+      collaborators,
+      daoAccountsOrderBy,
+    });
 
   if (isLoading || isLoadingAssignments || accountsLoading) {
     return <Loading />;
@@ -180,8 +180,8 @@ const Collaborators = (): JSX.Element => {
         )
       }
       onAddMember={addCollaborator}
-      onUpdateRole={function (id: string, role: ProjectRole): void {}}
-      onRemove={async function (id: string): Promise<void> {}}
+      onUpdateRole={updateCollaboratorRole}
+      onRemove={removeCollaborator}
       onEditOrgRole={function (): void {}}
     />
   );

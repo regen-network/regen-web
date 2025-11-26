@@ -9,6 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom, useSetAtom } from 'jotai';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { useUpdateAssignmentMutation } from 'generated/graphql';
@@ -32,7 +33,6 @@ import {
   findAssignment,
   getAuthorizationName,
   getProjectsCurrentUserCanManageMembers,
-  getRoleAuthorizationIds,
 } from './utils';
 
 export function useMembersContext(params: MembersHookParams) {

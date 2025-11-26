@@ -246,6 +246,9 @@ function ProjectEdit(): JSX.Element {
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
+        : feeGranter
+        ? // if there's a feeGranter, user is part of organization
+          '/dashboard/organization/projects'
         : '/dashboard/projects';
       if (isFormDirty) {
         setIsWarningModalOpen(path);

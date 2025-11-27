@@ -65,7 +65,7 @@ const ListProject = () => {
         onModalClose={onModalClose}
         wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
         modalState={modalState}
-        redirectRoute="project-pages/draft/basic-info"
+        redirectRoute="project-pages/draft/account"
       />
     </>
   );

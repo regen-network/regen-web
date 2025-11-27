@@ -20,7 +20,11 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
-import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
+import {
+  projectsCurrentStepAtom,
+  projectsDraftState,
+  ProjectsDraftStatus,
+} from './ProjectCreate.store';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
@@ -70,9 +74,12 @@ export const ProjectCreate = (): JSX.Element => {
   const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
-  const [projectCreatorAddress, setProjectCreatorAddress] = useState<string>();
-  const [isOrganizationAccount, setIsOrganizationAccount] =
-    useState<boolean>(false);
+
+  const [projectCreatorAddress, setProjectCreatorAddress] = useState<
+    string | undefined
+  >();
+  const [isOrganizationAccount, setIsOrganizationAccount] = useState(false);
+
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
     projectsState?.find(project => project.id === projectId)?.draft,
   );

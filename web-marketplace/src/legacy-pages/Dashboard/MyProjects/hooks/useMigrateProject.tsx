@@ -1,27 +1,21 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-export const useMigrateProject = (
-  project: NormalizeProject,
-  navigateToOrg: boolean = false,
-) => {
-  const navigate = useNavigate();
+export const useMigrateProject = (project?: NormalizeProject) => {
+  const { migrateProjects } = useMigrateProjects(project ? [project] : []);
 
-  const { migrateProjects } = useMigrateProjects({
-    projects: [project],
-    onSuccess: navigateToOrg
-      ? () => navigate(`/dashboard/organization/projects/${project.id}/manage`)
-      : undefined,
-  });
-
-  const migrateProject = useCallback(async () => {
-    await migrateProjects({
-      selectedProjectIds: [project.id],
-    });
-  }, [migrateProjects, project.id]);
+  const migrateProject = useCallback(
+    async (projectId?: string) => {
+      const id = projectId || project?.id;
+      if (!id) return;
+      await migrateProjects({
+        selectedProjectIds: [id],
+      });
+    },
+    [migrateProjects, project?.id],
+  );
 
   return { migrateProject };
 };

@@ -6,6 +6,7 @@ import {
 } from '@apollo/client';
 import { EncodeObject } from '@cosmjs/proto-signing';
 import { msg } from '@lingui/core/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
@@ -383,20 +384,21 @@ export const useMigrateProjects = ({
       const walletAddress = wallet?.address;
       if (!walletAddress) {
         setErrorBannerText(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
-        return;
+        throw new Error(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
       }
       if (!signingCosmWasmClient) {
         setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
-        return;
+        throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
+      const organizationId = dao?.organizationByDaoAddress?.id;
       const organizationId = dao?.organizationByDaoAddress?.id;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
-        return;
+        throw new Error(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
       }
       if (!dao) {
         setErrorBannerText(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
-        return;
+        throw new Error(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
       }
       if (!cwAdminFactoryAddr) {
         throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));
@@ -405,9 +407,31 @@ export const useMigrateProjects = ({
       const projectIds = values.selectedProjectIds;
       if (projectIds.length > 0) {
         setProcessingModalAtom(atom => void (atom.open = true));
-        const selectedProjects = projects.filter(project =>
-          projectIds.includes(project.id),
+        let selectedProjects = projects.filter(
+          project =>
+            projectIds.includes(project.id) ||
+            (project.offChainId && projectIds.includes(project.offChainId)),
         );
+
+        // If no projects found in array but we have IDs, create minimal project objects
+        // This handles the case of newly created off-chain projects in create project flow
+        if (selectedProjects.length === 0 && projectIds.length > 0) {
+          selectedProjects = projectIds.map(id => ({
+            id,
+            offChainId: id,
+            offChain: true,
+            name: '',
+            imgSrc: '',
+            place: '',
+            draftText: '',
+            complianceCredits: {
+              creditsAvailable: 0,
+              creditsRetired: 0,
+              creditsRegistered: 0,
+            },
+            sellOrders: [],
+          })) as NormalizeProject[];
+        }
 
         const onChainProjectIds = projects
           .filter(
@@ -605,7 +629,7 @@ export const useMigrateProjects = ({
           sellExecuteMsg,
         ].filter(Boolean) as EncodeObject[];
 
-        await signAndBroadcast(
+        const txResult = await signAndBroadcast(
           {
             msgs,
             fee: 2,
@@ -663,7 +687,17 @@ export const useMigrateProjects = ({
             },
           },
         );
-      } else if (handleSaveNext && data) handleSaveNext({ ...data, ...values });
+
+        if (!txResult || typeof txResult === 'string') {
+          throw new Error(
+            typeof txResult === 'string'
+              ? txResult
+              : _(
+                  msg`The transaction was canceled before it could be signed or a blockchain error occurred. Please reconnect your wallet and try again.`,
+                ),
+          );
+        }
+      } else handleSaveNext({ ...data, ...values });
     },
     [
       projects,

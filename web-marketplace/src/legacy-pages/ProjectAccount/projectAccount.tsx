@@ -7,6 +7,7 @@ import { useNavigateNext } from 'web-marketplace/src/legacy-pages/ProjectCreate/
 import { z } from 'zod';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import { Loading } from 'web-components/src/components/loading';
 
 import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
@@ -27,13 +28,6 @@ export const ProjectAccount = (): JSX.Element | null => {
   const { projectId } = useParams();
   const { activeAccount } = useAuth();
   const dao = useDaoOrganization();
-  const { isIssuer } = useQueryIsIssuer({
-    address: activeAccount?.addr,
-  });
-  const { navigateNext } = useNavigateNext({
-    step: isIssuer ? 'choose-credit-class' : 'basic-info',
-    projectId,
-  });
   const {
     projectCreatorAddress,
     setProjectCreatorAddress,
@@ -42,6 +36,69 @@ export const ProjectAccount = (): JSX.Element | null => {
     isDraftRef,
   } = useCreateProjectContext();
 
+  // Build the two account options: personal and organization
+  const personalAccount = useMemo(
+    (): AccountOption | null =>
+      activeAccount
+        ? {
+            name: activeAccount.name || '',
+            address: activeAccount.addr || '',
+            type: 'user' as const,
+            image:
+              activeAccount.image ||
+              getDefaultAvatar({
+                ...activeAccount,
+                type: activeAccount.type ?? AccountType.User,
+              }),
+            displayName: _(msg`Personal`),
+          }
+        : null,
+    [activeAccount, _],
+  );
+
+  const organizationAccount = useMemo(
+    (): AccountOption | null =>
+      dao
+        ? {
+            name: dao.organizationByDaoAddress?.name || '',
+            address: dao.address ?? '',
+            type: 'org' as const,
+            image: getDefaultAvatar({
+              type: AccountType.Organization,
+            }),
+            displayName: _(msg`Organization`),
+          }
+        : null,
+    [dao, _],
+  );
+
+  // Get the user's role and check if they have permission to create projects for the org
+  const organizationRole = dao?.assignmentsByDaoAddress?.nodes?.find(
+    node => node?.accountId === activeAccount?.id,
+  )?.roleName;
+
+  // Determine if user should skip this step (no DAO or insufficient permissions)
+  const shouldSkip =
+    !dao ||
+    !activeAccount ||
+    !personalAccount ||
+    !organizationAccount ||
+    !(organizationRole === 'owner' || organizationRole === 'admin');
+
+  // Determine which address to use for issuer check
+  const addressToCheck = projectCreatorAddress || activeAccount?.addr;
+
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
+    address: addressToCheck,
+  });
+
+  const step = isIssuer ? 'choose-credit-class' : 'basic-info';
+
+  const { navigateNext } = useNavigateNext({
+    step,
+    projectId,
+  });
+
   const form = useZodForm({
     schema: z.object({}),
     defaultValues: {},
@@ -49,44 +106,37 @@ export const ProjectAccount = (): JSX.Element | null => {
     mode: 'onBlur',
   });
 
-  // Get the user's role and check if they have permission to create projects for the org
-  const organizationRole = dao?.assignmentsByDaoAddress?.nodes?.find(
-    node => node?.accountId === activeAccount?.id,
-  )?.roleName;
+  // Initialize context with default values on mount
+  useEffect(() => {
+    if (!projectCreatorAddress && organizationAccount?.address) {
+      setProjectCreatorAddress(organizationAccount.address);
+      setIsOrganizationAccount(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // Skip this step if user doesn't have a DAO organization or is not admin or owner for the org
-  if (
-    !dao ||
-    !activeAccount ||
-    !(organizationRole === 'owner' || organizationRole === 'admin')
-  ) {
-    navigateNext();
-    return null;
+  // Navigate away if user should skip this step, but only after issuer check completes
+  useEffect(() => {
+    if (shouldSkip && !isLoadingIsIssuer) {
+      navigateNext();
+    }
+  }, [shouldSkip, isLoadingIsIssuer, navigateNext]);
+
+  if (isLoadingIsIssuer) {
+    return (
+      <OnboardingFormTemplate activeStep={0} title={''}>
+        <Loading />
+      </OnboardingFormTemplate>
+    );
   }
 
-  // Build the two account options: personal and organization
-  const personalAccount: AccountOption = {
-    name: activeAccount.name || '',
-    address: activeAccount.addr || '',
-    type: 'user' as const,
-    image:
-      activeAccount.image ||
-      getDefaultAvatar({
-        ...activeAccount,
-        type: activeAccount.type ?? AccountType.User,
-      }),
-    displayName: _(msg`Personal`),
-  };
-
-  const organizationAccount: AccountOption = {
-    name: dao.organizationByDaoAddress?.name || '',
-    address: dao.address ?? '',
-    type: 'org' as const,
-    image: getDefaultAvatar({
-      type: AccountType.Organization,
-    }),
-    displayName: _(msg`Organization`),
-  };
+  if (shouldSkip) {
+    return (
+      <OnboardingFormTemplate activeStep={0} title={''}>
+        <Loading />
+      </OnboardingFormTemplate>
+    );
+  }
 
   const accounts: [AccountOption, AccountOption] = [
     personalAccount,
@@ -95,7 +145,7 @@ export const ProjectAccount = (): JSX.Element | null => {
 
   // Set default selected account to organization on first render
   const defaultSelectedAddress =
-    projectCreatorAddress || organizationAccount.address;
+    projectCreatorAddress || organizationAccount.address || '';
 
   const handleAccountSelect = (address: string) => {
     const selected = accounts.find(opt => opt.address === address);

@@ -31,6 +31,13 @@ export const ProjectAccountSelector = ({
     if (open) setOpen(false);
   });
 
+  const handleSelect = (address?: string) => {
+    if (!address) return;
+    onSelect(address);
+  };
+
+  const unnamedLabel = _(msg`Unnamed`);
+  const getName = (name?: string) => name?.trim() || unnamedLabel;
   const selectedAccount = accounts.find(acc => acc.address === selectedAddress);
 
   return (
@@ -54,11 +61,11 @@ export const ProjectAccountSelector = ({
       >
         <UserAvatar
           src={selectedAccount?.image}
-          alt={selectedAccount?.name || ''}
+          alt={getName(selectedAccount?.name)}
           size="medium"
         />
         <Subtitle className="text-bc-neutral-700 font-normal text-left flex-1">
-          {selectedAccount?.name}
+          {getName(selectedAccount?.name)}
         </Subtitle>
         <DropdownIcon className="h-[10px] w-[13px] text-brand-400" />
       </button>
@@ -75,13 +82,11 @@ export const ProjectAccountSelector = ({
         >
           {accounts.map(account => {
             const isSelected = account.address === selectedAddress;
+            const key = account.address ?? account.name;
+            const isSelectable = !!account.address;
 
             return (
-              <li
-                key={account.address}
-                role="option"
-                aria-selected={isSelected}
-              >
+              <li key={key} role="option" aria-selected={isSelected}>
                 <Body
                   size="md"
                   className="font-bold text-bc-neutral-900 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
@@ -90,26 +95,31 @@ export const ProjectAccountSelector = ({
                 </Body>
                 <button
                   type="button"
+                  disabled={!isSelectable}
                   onClick={() => {
                     setOpen(false);
-                    onSelect(account.address);
+                    handleSelect(account.address);
                   }}
                   className={cn(
                     'flex items-center w-full gap-15 px-[20px] py-[10px]',
                     'cursor-pointer border-none bg-bc-neutral-0',
                     'rounded transition-colors hover:bg-bc-neutral-200',
+                    {
+                      'opacity-60 cursor-not-allowed hover:bg-bc-neutral-0':
+                        !isSelectable,
+                    },
                   )}
                 >
                   <UserAvatar
                     src={account.image}
                     size="medium"
-                    alt={account.name}
+                    alt={getName(account.name)}
                   />
                   <Body
                     size="md"
                     className="font-medium text-bc-neutral-800 ml-[15px]"
                   >
-                    {account.name}
+                    {getName(account.name)}
                   </Body>
                   {isSelected && (
                     <CheckIcon

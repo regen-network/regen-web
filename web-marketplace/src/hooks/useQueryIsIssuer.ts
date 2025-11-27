@@ -10,18 +10,23 @@ import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
   address?: string | null;
+  enabled?: boolean;
 };
 
-function useQueryIsIssuer({ address }: Props) {
+function useQueryIsIssuer({ address, enabled = true }: Props) {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
 
-  const { data: classesByIssuerData, isFetching } = useQuery(
+  const {
+    data: classesByIssuerData,
+    isFetching,
+    isFetched,
+  } = useQuery(
     getClassesByIssuerQuery({
-      enabled: !!activeAddress && !!graphqlClient,
+      enabled: !!activeAddress && !!graphqlClient && enabled,
       client: graphqlClient,
       issuer: activeAddress,
     }),
@@ -30,7 +35,7 @@ function useQueryIsIssuer({ address }: Props) {
   const isIssuer =
     (classesByIssuerData?.data.allClassIssuers?.nodes?.length ?? 0) > 0;
 
-  return { isIssuer, isLoadingIsIssuer: isFetching };
+  return { isIssuer, isLoadingIsIssuer: isFetching || !isFetched };
 }
 
 export { useQueryIsIssuer };

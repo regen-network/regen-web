@@ -75,7 +75,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { setDeliverTxResponse } = useCreateProjectContext();
+  const { setDeliverTxResponse, projectCreatorAddress, isOrganizationAccount } =
+    useCreateProjectContext();
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
@@ -172,9 +173,13 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       );
       return;
     }
+    const adminAddress = isOrganizationAccount
+      ? projectCreatorAddress
+      : wallet?.address;
+
     await projectCreateSubmit({
       classId: creditClassId || '',
-      admin: wallet?.address || '',
+      admin: adminAddress || '',
       metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,

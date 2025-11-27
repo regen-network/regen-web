@@ -19,12 +19,16 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { creditClassItems, loading } = useGetCreditClassItems();
-  const { setCreditClassId, setCreditClassOnChainId } =
+  const { setCreditClassId, setCreditClassOnChainId, projectCreatorAddress } =
     useCreateProjectContext();
   const { activeAccount } = useAuth();
 
-  const adminAddr = activeAccount?.addr;
+  const adminAddr = projectCreatorAddress || activeAccount?.addr;
+
+  const { creditClassItems, loading } = useGetCreditClassItems({
+    address: adminAddr,
+  });
+
   const creditClassLength = creditClassItems?.length;
 
   function handleSelection(

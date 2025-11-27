@@ -45,6 +45,7 @@ export const DashboardNavHeader = ({
   onFinishOrgCreation,
 }: Props) => {
   const { name = '', address, image, id } = activeAccount;
+  const { _ } = useLingui();
 
   const avatarSrc =
     image ||
@@ -55,11 +56,12 @@ export const DashboardNavHeader = ({
           ? AccountType.User
           : AccountType.Organization,
     });
+  const displayName = name || _(UNNAMED);
 
   const short = address ? `${address.slice(0, 9)}…${address.slice(-6)}` : '';
   const copyAddress = address ?? '';
 
-  const { _ } = useLingui();
+  const canSwitch = accounts.length > 1;
 
   const [open, setOpen] = useState(false);
   const rootRef = useClickOutside<HTMLDivElement>(() => {
@@ -74,7 +76,7 @@ export const DashboardNavHeader = ({
         collapsed ? 'justify-center mb-[64px]' : 'gap-15 px-3 py-4 mb-20',
       )}
     >
-      <UserAvatar src={avatarSrc} alt={name} size="md" />
+      <UserAvatar src={avatarSrc} alt={displayName} size="md" />
 
       {!collapsed && (
         <div className="flex flex-col">
@@ -86,7 +88,7 @@ export const DashboardNavHeader = ({
             aria-haspopup="true"
           >
             <Subtitle className="text-bc-neutral-900 pt-5 text-[16px] text-left">
-              {name || _(UNNAMED)}
+              {displayName}
             </Subtitle>
             <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
           </button>

@@ -39,7 +39,7 @@ export default meta;
 export const Default = (
   args: Pick<
     ProjectCollaboratorsProps,
-    | 'onInvite'
+    | 'onAddMember'
     | 'onUpdateRole'
     | 'onRemove'
     | 'onEditOrgRole'
@@ -118,6 +118,7 @@ export const Default = (
     };
 
     setCollaborators(prev => [...prev, newMember]);
+    args.onAddMember?.(data);
   };
 
   return (

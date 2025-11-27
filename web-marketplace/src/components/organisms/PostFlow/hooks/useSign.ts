@@ -1,4 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -8,18 +13,28 @@ import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v2/tx';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
+import {
+  attestAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
+import { ProjectFieldsFragment } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import {
   processingModalAtom,
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getTxsEventQueryKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import {
   CREATE_DATA_POST,
@@ -33,7 +48,10 @@ import {
 } from './useFetchMsgAnchor';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
-type UseSignParams = UseFetchMsgAnchorParams;
+type UseSignParams = UseFetchMsgAnchorParams & {
+  offChainProject?: ProjectFieldsFragment | null;
+};
+
 type SignParams = {
   contentHash: ContentHash_Graph;
 } & FetchMsgAnchorParams;
@@ -44,6 +62,7 @@ export const useSign = ({
   offChainProjectId,
   projectName,
   onModalClose,
+  offChainProject,
 }: UseSignParams) => {
   const { _ } = useLingui();
   const getSuccessModalContent = useGetSuccessModalContent();
@@ -69,6 +88,43 @@ export const useSign = ({
   const { signAndBroadcast } = useMsgClient();
   const reactQueryClient = useQueryClient();
 
+  const { activeAccountId } = useAuth();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const orgDao = useDaoOrganization();
+  const feeGranter = useFeeGranter({ offChainProject });
+  const { data } = useQuery(
+    getDaoByAddressWithAssignmentsQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!orgDao?.address,
+      address: orgDao?.address as string,
+    }),
+  );
+  const currentUserOrgAssignment = useMemo(
+    () =>
+      data?.daoByAddress?.assignmentsByDaoAddress?.nodes?.find(
+        assignment => assignment?.accountId === activeAccountId,
+      ),
+    [data, activeAccountId],
+  );
+  const { roleId, authorizationId } = getRoleAuthorizationIds({
+    type: 'organization',
+    currentUserRole: currentUserOrgAssignment?.roleName,
+    authorizationName: 'can_anchor_attest_data',
+  });
+  const withOrganization = useMemo(
+    () =>
+      feeGranter && orgDao && roleId && authorizationId
+        ? {
+            daoAddress: orgDao.address,
+            daoRbamAddress: orgDao.daoRbamAddress,
+            roleId,
+            authorizationId,
+          }
+        : undefined,
+    [feeGranter, orgDao, roleId, authorizationId],
+  );
+
   const fetchAnchorTxHash = useCallback(
     async ({ iri }: { iri: string }) => {
       const { data: anchorTxsData } = await refetch();
@@ -82,15 +138,34 @@ export const useSign = ({
 
   const sign = useCallback(
     async ({ contentHash, iri, createdPostData }: SignParams) => {
-      if (wallet?.address)
+      if (wallet?.address) {
+        let txMsg;
+        if (withOrganization) {
+          const msgAttest = {
+            attestor: withOrganization.daoAddress,
+            contentHashes: [contentHash],
+          };
+          const action = attestAction({
+            roleId: withOrganization.roleId,
+            authorizationId: withOrganization.authorizationId,
+            ...msgAttest,
+          });
+          txMsg = wrapRbamActions({
+            walletAddress: wallet?.address,
+            rbamAddress: withOrganization?.daoRbamAddress,
+            actions: [action],
+          });
+        } else {
+          txMsg = regen.data.v2.MessageComposer.withTypeUrl.attest({
+            attestor: wallet?.address,
+            contentHashes: [contentHash],
+          });
+        }
         await signAndBroadcast(
           {
-            msgs: [
-              regen.data.v2.MessageComposer.withTypeUrl.attest({
-                attestor: wallet?.address,
-                contentHashes: [contentHash],
-              }),
-            ],
+            msgs: [txMsg],
+            feeGranter,
+            fee: 'auto',
           },
           (): void => {
             setProcessingModalAtom(atom => void (atom.open = true));
@@ -157,6 +232,7 @@ export const useSign = ({
             },
           },
         );
+      }
     },
     [
       _,
@@ -172,6 +248,8 @@ export const useSign = ({
       setTxSuccessfulModalAtom,
       signAndBroadcast,
       wallet?.address,
+      withOrganization,
+      feeGranter,
     ],
   );
 

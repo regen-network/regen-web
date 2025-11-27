@@ -407,12 +407,12 @@ const dataAuthorization = {
     $or: [
       {
         stargate: {
-          type_url: '/regen.data.v1.MsgAnchor',
+          type_url: '/regen.data.v2.MsgAnchor',
         },
       },
       {
         stargate: {
-          type_url: '/regen.data.v1.MsgAttest',
+          type_url: '/regen.data.v2.MsgAttest',
         },
       },
     ],
@@ -431,6 +431,7 @@ export const organizationRoles = (
     authorizations: [
       ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
       ...orgAdminAuthorizations(daoAddress),
+      dataAuthorization,
     ],
     assignments: [initialOwnerAddress],
   },
@@ -445,6 +446,7 @@ export const organizationRoles = (
         rbamAddress,
       ),
       ...orgAdminAuthorizations(daoAddress),
+      dataAuthorization,
     ],
   },
   {
@@ -463,6 +465,7 @@ export const organizationRoles = (
         },
       },
       orgEditAuthorization(daoAddress),
+      dataAuthorization,
     ],
   },
   {

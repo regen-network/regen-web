@@ -1,3 +1,4 @@
+import { MsgAttest } from '@regen-network/api/regen/data/v2/tx';
 import {
   MsgPut,
   MsgTake,
@@ -50,6 +51,23 @@ type RoleAuthorizationIds = {
   roleId: number;
   /** the id of the authorization that has permission */
   authorizationId: number;
+};
+
+type AttestActionParams = RoleAuthorizationIds & MsgAttest;
+
+export const attestAction = ({
+  roleId,
+  authorizationId,
+  ...msg
+}: AttestActionParams) => {
+  const protoBytes = MsgAttest.encode(msg).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgAttest.typeUrl,
+    value: protoBytes,
+  });
 };
 
 type UpdateProjectAdminActionParams = RoleAuthorizationIds &

@@ -523,6 +523,7 @@ function ProjectDetails(): JSX.Element {
           onModalClose={() => {
             setIsCreatePostModalOpen(false);
           }}
+          offChainProject={offChainProject}
           projectLocation={projectLocation}
           projectId={onChainOrOffChainProjectId}
           offChainProjectId={offChainProject?.id}

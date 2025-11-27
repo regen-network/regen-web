@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 
 import {
   useDeleteAssignmentMutation,
@@ -21,6 +22,7 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 import {
   MEMBER_NOT_FOUND,
   MISSING_REQUIRED_PARAMS,
@@ -51,12 +53,15 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const [updateAssignment] = useUpdateAssignmentMutation();
+  const { signAndBroadcast } = useMsgClient();
 
   const {
     projectAuthorizationId,
     projectRoleId,
     refetchCollaborators,
     orgDaoAddress,
+    feeGranter,
+    onTxErrorCallback,
   } = useCollaboratorsContext(params);
   const [deleteAssignment] = useDeleteAssignmentMutation();
 
@@ -147,30 +152,44 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
           });
 
       try {
-        setProcessingModal(atom => void (atom.open = true));
-        await signingCosmWasmClient.execute(
-          wallet.address,
-          daoRbamAddress,
-          {
+        const executeMsg = getMsgExecuteContract({
+          walletAddress: wallet?.address,
+          contract: daoRbamAddress,
+          executeActionsMsg: {
             execute_actions: {
               actions: [...memberRoleActions, ...projectOwnerActions],
             },
           },
-          2,
-        );
-        // revoking the old role if it was only off chain
-        if (!assigned) {
-          await deleteAssignment({
-            variables: {
-              input: { daoAddress, roleName: oldRoleName, accountId: id },
-            },
-          });
-        }
-        await refetchCollaborators({
-          address: memberAddress,
-          role,
-          accountId: id,
         });
+
+        await signAndBroadcast(
+          {
+            msgs: [executeMsg],
+            fee: 'auto',
+            feeGranter,
+          },
+          () => setProcessingModal(atom => void (atom.open = true)),
+          {
+            onError: (e?: Error) => {
+              onTxErrorCallback(e);
+            },
+            onSuccess: async () => {
+              // revoking the old role if it was only off chain
+              if (!assigned) {
+                await deleteAssignment({
+                  variables: {
+                    input: { daoAddress, roleName: oldRoleName, accountId: id },
+                  },
+                });
+              }
+              await refetchCollaborators({
+                address: memberAddress,
+                role,
+                accountId: id,
+              });
+            },
+          },
+        );
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -179,6 +198,7 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
     [
       wallet,
       signingCosmWasmClient,
+      signAndBroadcast,
       daoAddress,
       daoRbamAddress,
       cw4GroupAddress,
@@ -191,6 +211,8 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
       setProcessingModal,
       setErrorBannerText,
       _,
+      feeGranter,
+      onTxErrorCallback,
     ],
   );
 

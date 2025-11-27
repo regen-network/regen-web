@@ -2,7 +2,6 @@ import {
   createContext,
   MutableRefObject,
   useContext,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -19,6 +18,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { usePathSection } from 'legacy-pages/Dashboard/hooks/usePathSection';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
+import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { startCase } from 'lodash';
 
@@ -56,7 +56,6 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
 import useProjectEditSubmit, {
@@ -93,7 +92,7 @@ function ProjectEdit(): JSX.Element {
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { wallet } = useWallet();
-  const { activeAccountId, activeAccount } = useAuth();
+  const { activeAccountId } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const section = usePathSection();
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
@@ -102,7 +101,6 @@ function ProjectEdit(): JSX.Element {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
   const { queryClient } = useLedger();
-  const dao = useDaoOrganization();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -188,18 +186,7 @@ function ProjectEdit(): JSX.Element {
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;
 
-  // If user is external project collaborator (not part of org, only project)
-  // he needs to pay for tx fees
-  // Else if user part of organization, fees are handled by organization throught feegrant
-  const adminDao = offChainProject?.daoByAdminDaoAddress;
-  const projectOrgId =
-    offChainProject?.organizationProjectByProjectId?.organizationId;
-  const feeGranter =
-    adminDao?.address &&
-    projectOrgId &&
-    dao?.organizationByDaoAddress?.id === projectOrgId
-      ? dao?.address
-      : undefined;
+  const feeGranter = useFeeGranter({ offChainProject });
 
   const projectEditSubmit = useProjectEditSubmit({
     projectId,

@@ -1,4 +1,4 @@
-import { AccountsOrderBy } from 'generated/graphql';
+import { AccountsOrderBy, ProjectFieldsFragment } from 'generated/graphql';
 
 import {
   Member,
@@ -19,4 +19,5 @@ export type CollaboratorsHookParams = {
   cw4GroupAddress?: string;
   collaborators: Member[];
   daoAccountsOrderBy: AccountsOrderBy;
+  offChainProject?: ProjectFieldsFragment | null;
 };

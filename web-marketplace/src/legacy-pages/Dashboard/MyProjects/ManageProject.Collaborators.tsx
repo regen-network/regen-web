@@ -38,7 +38,7 @@ import { useMigrateProject } from './hooks/useMigrateProject';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();
-  const { project, isLoading } =
+  const { project, isLoading, offChainProject } =
     useOutletContext<ReturnType<typeof useFetchProject>>();
   const { activeAccountId } = useAuth();
   const graphqlClient =
@@ -181,6 +181,7 @@ const Collaborators = (): JSX.Element => {
       cw4GroupAddress: projectDao?.cw4GroupAddress,
       collaborators,
       daoAccountsOrderBy,
+      offChainProject,
     });
 
   if (

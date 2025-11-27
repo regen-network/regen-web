@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 
 import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
@@ -14,6 +15,7 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 import {
   MEMBER_NOT_FOUND,
   MISSING_REQUIRED_PARAMS,
@@ -38,13 +40,51 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const [deleteAssignment] = useDeleteAssignmentMutation();
+  const { signAndBroadcast } = useMsgClient();
 
   const {
     projectAuthorizationId,
     projectRoleId,
     refetchCollaborators,
     orgDaoAddress,
+    feeGranter,
+    onTxErrorCallback,
   } = useCollaboratorsContext(params);
+
+  const removeCollaboratorOffChain = useCallback(
+    async (id: string, role: ProjectRole) => {
+      if (!daoAddress) {
+        setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
+        return;
+      }
+      try {
+        await deleteAssignment({
+          variables: { input: { daoAddress, roleName: role, accountId: id } },
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getDaoByAddressWithAssignmentsQueryKey({
+            address: daoAddress,
+          }),
+        });
+        if (orgDaoAddress)
+          await reactQueryClient.invalidateQueries({
+            queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+              daoAddress: orgDaoAddress,
+            }),
+          });
+      } catch (e) {
+        setErrorBannerText(String(e));
+      }
+    },
+    [
+      daoAddress,
+      setErrorBannerText,
+      _,
+      deleteAssignment,
+      reactQueryClient,
+      orgDaoAddress,
+    ],
+  );
 
   const removeCollaboratorWithWalletAddress = useCallback(
     async (
@@ -102,27 +142,36 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
         setProcessingModal(atom => void (atom.open = true));
 
         if (msg) {
-          await signingCosmWasmClient.execute(
-            wallet.address,
-            daoRbamAddress,
-            msg,
-            2,
-          );
-        }
-        if (!assigned) {
-          await deleteAssignment({
-            variables: {
-              input: { daoAddress, roleName: role, accountId: id },
-            },
+          const executeMsg = getMsgExecuteContract({
+            walletAddress: wallet?.address,
+            contract: daoRbamAddress,
+            executeActionsMsg: msg,
           });
-        }
 
-        await refetchCollaborators({
-          address: collaboratorAddress,
-          role,
-          accountId: id,
-          shouldFindAssignment: false,
-        });
+          await signAndBroadcast(
+            {
+              msgs: [executeMsg],
+              fee: 'auto',
+              feeGranter,
+            },
+            undefined,
+            {
+              onError: (e?: Error) => {
+                onTxErrorCallback(e);
+              },
+              onSuccess: async () => {
+                await refetchCollaborators({
+                  address: collaboratorAddress,
+                  role,
+                  accountId: id,
+                  shouldFindAssignment: false,
+                });
+              },
+            },
+          );
+        } else if (!assigned) {
+          await removeCollaboratorOffChain(id, role);
+        }
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -131,54 +180,21 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
     [
       wallet?.address,
       signingCosmWasmClient,
+      signAndBroadcast,
       daoAddress,
       daoRbamAddress,
       cw4GroupAddress,
       currentUserRole,
-
       projectAuthorizationId,
       projectRoleId,
       setErrorBannerText,
       _,
-      deleteAssignment,
       reactQueryClient,
       refetchCollaborators,
       setProcessingModal,
-    ],
-  );
-
-  const removeCollaboratorOffChain = useCallback(
-    async (id: string, role: ProjectRole) => {
-      if (!daoAddress) {
-        setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
-        return;
-      }
-      try {
-        await deleteAssignment({
-          variables: { input: { daoAddress, roleName: role, accountId: id } },
-        });
-        await reactQueryClient.invalidateQueries({
-          queryKey: getDaoByAddressWithAssignmentsQueryKey({
-            address: daoAddress,
-          }),
-        });
-        if (orgDaoAddress)
-          await reactQueryClient.invalidateQueries({
-            queryKey: getOrganizationProjectsByDaoAddressQueryKey({
-              daoAddress: orgDaoAddress,
-            }),
-          });
-      } catch (e) {
-        setErrorBannerText(String(e));
-      }
-    },
-    [
-      daoAddress,
-      setErrorBannerText,
-      _,
-      deleteAssignment,
-      reactQueryClient,
-      orgDaoAddress,
+      feeGranter,
+      onTxErrorCallback,
+      removeCollaboratorOffChain,
     ],
   );
 

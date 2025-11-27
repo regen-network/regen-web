@@ -1,13 +1,12 @@
 import { useCallback } from 'react';
-import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
-import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { apiServerUrl } from 'lib/env';
@@ -21,6 +20,7 @@ import {
   MemberData,
   ProjectRole,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
 import { addMemberActions, getNewProjectRoleId } from 'hooks/org-members/utils';
 
@@ -32,18 +32,20 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
     params;
   const { _ } = useLingui();
   const { wallet } = useWallet();
-  const { signingCosmWasmClient } = useLedger();
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const { signAndBroadcast } = useMsgClient();
 
   const {
     projectRoleId,
     projectAuthorizationId,
     refetchCollaborators,
     orgDaoAddress,
+    feeGranter,
+    onTxErrorCallback,
   } = useCollaboratorsContext(params);
 
   const addCollaboratorWithWalletAddress = useCallback(
@@ -52,7 +54,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
 
       if (
         !wallet?.address ||
-        !signingCosmWasmClient ||
         !daoAddress ||
         !daoRbamAddress ||
         !cw4GroupAddress ||
@@ -66,11 +67,10 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       }
 
       try {
-        setProcessingModal(atom => void (atom.open = true));
-        await signingCosmWasmClient.execute(
-          wallet.address,
-          daoRbamAddress,
-          {
+        const executeMsg = getMsgExecuteContract({
+          walletAddress: wallet?.address,
+          contract: daoRbamAddress,
+          executeActionsMsg: {
             execute_actions: {
               actions: addMemberActions({
                 daoRbamAddress,
@@ -84,9 +84,22 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
               }),
             },
           },
-          2,
+        });
+
+        await signAndBroadcast(
+          {
+            msgs: [executeMsg],
+            fee: 'auto',
+            feeGranter,
+          },
+          () => setProcessingModal(atom => void (atom.open = true)),
+          {
+            onError: onTxErrorCallback,
+            onSuccess: async () => {
+              await refetchCollaborators({ address: addressOrEmail, role });
+            },
+          },
         );
-        await refetchCollaborators({ address: addressOrEmail, role });
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -94,7 +107,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
     },
     [
       wallet?.address,
-      signingCosmWasmClient,
+      signAndBroadcast,
       daoAddress,
       daoRbamAddress,
       cw4GroupAddress,
@@ -105,6 +118,8 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       _,
       refetchCollaborators,
       setProcessingModal,
+      feeGranter,
+      onTxErrorCallback,
     ],
   );
 

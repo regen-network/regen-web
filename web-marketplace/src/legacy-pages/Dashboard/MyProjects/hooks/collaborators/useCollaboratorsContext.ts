@@ -7,13 +7,14 @@ import {
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { errorModalAtom, processingModalAtom } from 'lib/atoms/modals.atoms';
 import { GET_ASSIGNED_KEY } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
@@ -24,10 +25,11 @@ import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
 import { findAssignment, getAuthorizationName } from 'hooks/org-members/utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
+import { useFeeGranter } from '../useFeeGranter';
 import { CollaboratorsHookParams, RefetchCollaboratorsParams } from './types';
 
 export function useCollaboratorsContext(params: CollaboratorsHookParams) {
-  const { currentUserRole, daoAddress } = params;
+  const { currentUserRole, daoAddress, offChainProject } = params;
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const reactQueryClient = useQueryClient();
@@ -35,6 +37,8 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const setErrorCode = useSetAtom(errorCodeAtom);
+  const setErrorModal = useSetAtom(errorModalAtom);
   const daoOrganization = useDaoOrganization();
   const orgDaoAddress = daoOrganization?.address;
 
@@ -134,12 +138,22 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
     ],
   );
 
+  const feeGranter = useFeeGranter({ offChainProject });
+
+  const onTxErrorCallback = (error?: Error): void => {
+    setErrorCode(ERRORS.DEFAULT);
+    setErrorModal(atom => void (atom.description = String(error)));
+    setProcessingModal(atom => void (atom.open = false));
+  };
+
   return {
     // computed
     projectRoleId,
     projectAuthorizationId,
     orgDaoAddress,
+    feeGranter,
     // helpers
     refetchCollaborators,
+    onTxErrorCallback,
   };
 }

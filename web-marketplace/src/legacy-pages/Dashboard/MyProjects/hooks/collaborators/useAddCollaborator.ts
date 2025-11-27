@@ -124,6 +124,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       setProcessingModal,
       feeGranter,
       onTxErrorCallback,
+      setBannerText,
     ],
   );
 
@@ -173,7 +174,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       setErrorBannerText,
       _,
       reactQueryClient,
-      params.daoAccountsOrderBy,
       retryCsrfRequest,
       orgDaoAddress,
       setBannerText,
@@ -204,7 +204,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       setErrorBannerText,
       _,
       token,
-      setBannerText,
     ],
   );
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
 import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
+import { useRouter } from 'next/navigation';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -25,6 +25,7 @@ import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { OptimizedImage } from 'components/atoms/OptimizedImage';
 
+import defaultProject from '../../../../public/jpg/default-project.jpg';
 import {
   BACKGROUND_IMAGE_ALT,
   // CONVERT_TO_DRAFT,
@@ -55,8 +56,8 @@ const ProjectDashboardBanner = ({
   const { _ } = useLingui();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const navigate = useNavigate();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
+  const router = useRouter();
 
   const truncatedPlace = truncateEnd(
     project.place ?? '',
@@ -99,14 +100,15 @@ const ProjectDashboardBanner = ({
 
   const projectName = project.name || _(UNTITLED_PROJECT);
 
-  const defaultImagePosition = project.imgSrc ? '' : 'object-[0%_20%]';
+  const defaultImagePosition =
+    project.imgSrc === defaultProject.src ? 'object-[0%_20%]' : '';
 
   return (
     <div className="relative w-full mt-20 ">
       <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
         <div className="absolute inset-0">
           <OptimizedImage
-            src={project.imgSrc || '/default-project-image.jpg'}
+            src={project.imgSrc}
             alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
             className={`w-full h-full object-cover ${defaultImagePosition}`}
           />
@@ -119,7 +121,7 @@ const ProjectDashboardBanner = ({
           }}
         >
           <OptimizedImage
-            src={project.imgSrc || '/default-project-image.jpg'}
+            src={project.imgSrc}
             alt=""
             className={`w-full h-full object-cover scale-110 blur-sm ${defaultImagePosition}`}
           />
@@ -192,7 +194,7 @@ const ProjectDashboardBanner = ({
               <OutlinedButton
                 startIcon={<EyeIcon />}
                 onClick={() =>
-                  navigate(`/project/${project.slug || project.id}`)
+                  router.push(`/project/${project.slug || project.id}`)
                 }
               >
                 {_(VIEW)}
@@ -209,9 +211,9 @@ const ProjectDashboardBanner = ({
                     if (isDraft) {
                       const currentStep =
                         projectsCurrentStep[id] || 'basic-info';
-                      navigate(`/project-pages/${id}/${currentStep}`);
+                      router.push(`/project-pages/${id}/${currentStep}`);
                     } else {
-                      navigate(`/project-pages/${id}/edit/basic-info`);
+                      router.push(`/project-pages/${id}/edit/basic-info`);
                     }
                   }}
                 >

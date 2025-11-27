@@ -124,3 +124,4 @@ export const projectRoles: {
 
 export const MISSING_REQUIRED_PARAMS = msg`missing required parameters`;
 export const MEMBER_NOT_FOUND = msg`member not found`;
+export const MEMBER_REMOVED = msg`This user has been removed from your organization`;

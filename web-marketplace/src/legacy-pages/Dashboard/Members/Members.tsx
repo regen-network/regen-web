@@ -15,6 +15,7 @@ export const Members = () => {
       cw4GroupAddress: dao?.cw4GroupAddress,
       members,
       daoAccountsOrderBy,
+      feeGranter: dao?.address,
     });
 
   const { setDebouncedValue, accounts, daoData, saveProfile, onUpload } =

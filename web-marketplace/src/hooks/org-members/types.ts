@@ -20,6 +20,7 @@ export type MembersHookParams = {
   cw4GroupAddress?: string;
   members: Member[];
   daoAccountsOrderBy: AccountsOrderBy;
+  feeGranter?: string;
 };
 
 export type AssignmentToDelete = {

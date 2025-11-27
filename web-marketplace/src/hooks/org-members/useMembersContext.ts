@@ -8,14 +8,15 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { useUpdateAssignmentMutation } from 'generated/graphql';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { errorModalAtom, processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
   MAX_REFETCH_ATTEMPTS,
@@ -49,6 +50,8 @@ export function useMembersContext(params: MembersHookParams) {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const setErrorCode = useSetAtom(errorCodeAtom);
+  const setErrorModal = useSetAtom(errorModalAtom);
   const { wallet } = useWallet();
 
   // Data needed for computed values
@@ -157,6 +160,25 @@ export function useMembersContext(params: MembersHookParams) {
                 }),
               });
             }
+            if (projectsCurrentUserCanManageMembers?.length) {
+              await Promise.all(
+                projectsCurrentUserCanManageMembers.map(async project => {
+                  const projectDaoAddress =
+                    project?.projectByProjectId?.adminDaoAddress;
+                  if (projectDaoAddress)
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                        address: projectDaoAddress,
+                      }),
+                    });
+                }),
+              );
+            }
+            await reactQueryClient.invalidateQueries({
+              queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+                daoAddress,
+              }),
+            });
           }
         }
         i++;
@@ -199,6 +221,7 @@ export function useMembersContext(params: MembersHookParams) {
       updateAssignment,
       setErrorBannerText,
       wallet?.address,
+      projectsCurrentUserCanManageMembers,
     ],
   );
 
@@ -240,6 +263,12 @@ export function useMembersContext(params: MembersHookParams) {
     [checkErrors],
   );
 
+  const onTxErrorCallback = (error?: Error): void => {
+    setErrorCode(ERRORS.DEFAULT);
+    setErrorModal(atom => void (atom.description = String(error)));
+    setProcessingModal(atom => void (atom.open = false));
+  };
+
   return {
     // computed
     projectsCurrentUserCanManageMembers,
@@ -251,5 +280,6 @@ export function useMembersContext(params: MembersHookParams) {
     refetchMembers,
     checkProjectsErrors,
     checkErrors,
+    onTxErrorCallback,
   };
 }

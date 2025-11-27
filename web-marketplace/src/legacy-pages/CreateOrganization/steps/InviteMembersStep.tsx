@@ -19,6 +19,7 @@ export const InviteMembersStep = () => {
       cw4GroupAddress: dao?.cw4GroupAddress,
       members,
       daoAccountsOrderBy,
+      // no feeGranter set since no coin have been transfered to organization yet
     });
 
   const { setDebouncedValue, accounts, daoData, saveProfile, onUpload } =

@@ -1,2 +1,2 @@
-export { ProjectAccountSelector } from './ProjectAccountSelector';
 export type { ProjectAccountSelectorProps } from './ProjectAccountSelector';
+export { ProjectAccountSelector } from './ProjectAccountSelector';

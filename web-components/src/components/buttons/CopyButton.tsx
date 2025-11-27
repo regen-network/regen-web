@@ -48,11 +48,7 @@ export const CopyButton = ({
   }, []);
 
   const banner = (
-    <Banner
-      text={toastText}
-      duration={1000}
-      onClose={() => setCopied(false)}
-    />
+    <Banner text={toastText} duration={1000} onClose={() => setCopied(false)} />
   );
 
   return (

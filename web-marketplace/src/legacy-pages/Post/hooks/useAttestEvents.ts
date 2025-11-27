@@ -33,6 +33,7 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 
 import postCreated from '../../../../public/svg/post-created.svg';
 import postSigned from '../../../../public/svg/post-signed.svg';
@@ -163,7 +164,21 @@ export const useAttestEvents = ({
       ) || [],
   });
   const attestorsAccounts = attestorsAccountsResults?.map(
-    (res, i) => res.data?.accountByAddr,
+    res => res.data?.accountByAddr,
+  );
+
+  const attestorsOrgsResults = useQueries({
+    queries:
+      attestTxResponses?.map(txRes =>
+        getOrganizationByDaoAddressQuery({
+          daoAddress: txRes.attestor,
+          client: graphqlClient,
+          enabled: !!graphqlClient,
+        }),
+      ) || [],
+  });
+  const attestorsOrgs = attestorsOrgsResults?.map(
+    res => res.data?.organizationByDaoAddress,
   );
 
   const events: Array<Event> = [];
@@ -199,16 +214,22 @@ export const useAttestEvents = ({
       const attestorAccount = attestorsAccounts?.find(
         acc => acc?.addr === attestTxResponses?.[i].attestor,
       );
+      const attestorOrg = attestorsOrgs?.find(
+        org => org?.daoAddress === attestTxResponses?.[i].attestor,
+      );
       const attestorIsRegistry =
-        !!registryAddr &&
-        !!attestorAccount?.addr &&
-        attestorAccount?.addr === registryAddr;
+        (!!registryAddr &&
+          !!attestorAccount?.addr &&
+          attestorAccount?.addr === registryAddr) ||
+        (!!attestorOrg?.daoAddress && attestorOrg?.daoAddress === registryAddr);
 
       const attestorIsAdmin =
-        !!adminAddr &&
-        !!attestorAccount?.addr &&
-        attestorAccount?.addr === adminAddr;
+        (!!adminAddr &&
+          !!attestorAccount?.addr &&
+          attestorAccount?.addr === adminAddr) ||
+        (!!attestorOrg?.daoAddress && attestorOrg?.daoAddress === adminAddr);
 
+      const account = attestorAccount || attestorOrg;
       events.unshift({
         icon: postSigned,
         label: _(msg`Signed by`),
@@ -219,12 +240,14 @@ export const useAttestEvents = ({
         ),
         txhash: attestTxResponses[i].txhash,
         user: {
-          name: attestorAccount?.name || _(DEFAULT_NAME),
-          link: attestorAccount?.id
-            ? `/profiles/${attestorAccount?.id}`
-            : undefined,
-          type: attestorAccount?.type ?? 'USER',
-          image: attestorAccount?.image || DEFAULT_PROFILE_USER_AVATAR,
+          name: account?.name || _(DEFAULT_NAME),
+          link: account?.id ? `/profiles/${account?.id}` : undefined,
+          type: attestorAccount
+            ? 'USER'
+            : attestorOrg
+            ? 'ORGANIZATION'
+            : 'USER',
+          image: account?.image || DEFAULT_PROFILE_USER_AVATAR,
           tag: attestorIsAdmin
             ? _(ADMIN)
             : attestorIsRegistry

@@ -14,6 +14,7 @@ export const OrganizationMembers = ({
   onAddMember,
   onSaveProfile,
   onUpload,
+  daoWithAddress,
 }: BaseProps) => {
   return (
     <OrganizationMembersBase
@@ -28,6 +29,7 @@ export const OrganizationMembers = ({
       setDebouncedValue={setDebouncedValue}
       onSaveProfile={onSaveProfile}
       onUpload={onUpload}
+      daoWithAddress={daoWithAddress}
     />
   );
 };

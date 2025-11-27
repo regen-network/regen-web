@@ -7,6 +7,7 @@ import { postData } from 'utils/fetch/postData';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { apiServerUrl } from 'lib/env';
@@ -24,6 +25,7 @@ import { useMsgClient } from 'hooks';
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
 import { addMemberActions, getNewProjectRoleId } from 'hooks/org-members/utils';
 
+import { MEMBER_ADDED } from './constants';
 import { CollaboratorsHookParams } from './types';
 import { useCollaboratorsContext } from './useCollaboratorsContext';
 
@@ -34,6 +36,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
   const { wallet } = useWallet();
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const setBannerText = useSetAtom(bannerTextAtom);
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -97,6 +100,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
             onError: onTxErrorCallback,
             onSuccess: async () => {
               await refetchCollaborators({ address: addressOrEmail, role });
+              setBannerText(_(MEMBER_ADDED));
             },
           },
         );
@@ -148,7 +152,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
             await reactQueryClient.invalidateQueries({
               queryKey: getDaoByAddressWithAssignmentsQueryKey({
                 address: daoAddress,
-                daoAccountsOrderBy: params.daoAccountsOrderBy,
               }),
             });
             if (orgDaoAddress)
@@ -157,6 +160,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
                   daoAddress: orgDaoAddress,
                 }),
               });
+            setBannerText(_(MEMBER_ADDED));
           },
         });
       } catch (e) {
@@ -172,6 +176,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       params.daoAccountsOrderBy,
       retryCsrfRequest,
       orgDaoAddress,
+      setBannerText,
     ],
   );
 
@@ -199,6 +204,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       setErrorBannerText,
       _,
       token,
+      setBannerText,
     ],
   );
 

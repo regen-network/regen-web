@@ -22,6 +22,7 @@ import {
 } from 'hooks/org-members/constants';
 import { removeMemberActions } from 'hooks/org-members/utils';
 
+import { MEMBER_REMOVED } from './constants';
 import { CollaboratorsHookParams } from './types';
 import { useCollaboratorsContext } from './useCollaboratorsContext';
 
@@ -72,6 +73,7 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
               daoAddress: orgDaoAddress,
             }),
           });
+        setErrorBannerText(_(MEMBER_REMOVED));
       } catch (e) {
         setErrorBannerText(String(e));
       }
@@ -166,6 +168,7 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
                   accountId: id,
                   shouldFindAssignment: false,
                 });
+                setErrorBannerText(_(MEMBER_REMOVED));
               },
             },
           );

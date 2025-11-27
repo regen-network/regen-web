@@ -1,12 +1,8 @@
-import { useLingui } from '@lingui/react';
-import { useSetAtom } from 'jotai';
-
 import {
   DaoByAddressQuery,
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
-import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import {
   BaseMemberRole,
@@ -14,7 +10,6 @@ import {
   MemberData,
   RoleOption,
 } from './BaseMembersTable.types';
-import { MEMBER_REMOVED_BANNER } from './modals/constants';
 import { InviteMemberModal } from './modals/InviteMemberModal';
 import { PersonalProfileSchemaType } from './modals/modals.schema';
 import PersonalProfileModal from './modals/ProfileModal';
@@ -61,9 +56,6 @@ export const Modals = <T extends BaseMemberRole>({
   isOrg = true,
   roleOptions,
 }: ModalsProps<T>) => {
-  const setBannerText = useSetAtom(bannerTextAtom);
-  const { _ } = useLingui();
-
   return (
     <>
       <InviteMemberModal
@@ -88,7 +80,6 @@ export const Modals = <T extends BaseMemberRole>({
         onConfirm={async () => {
           if (memberToRemove) {
             await onRemove(memberToRemove);
-            setBannerText(_(MEMBER_REMOVED_BANNER));
           }
           setShowRemoveModal(false);
           setMemberToRemove(null);

@@ -17,6 +17,7 @@ import { formatDate } from 'web-components/src/utils/format';
 import {
   AccountFieldsFragment,
   Maybe,
+  Organization,
   ProjectFieldsFragment,
 } from 'generated/graphql';
 import {
@@ -213,20 +214,18 @@ export const getAccountInfo = (account?: AccountFieldsFragment | null) => {
   return { account, defaultAvatar: DEFAULT_PROFILE_USER_AVATAR };
 };
 
-type Organization = {
-  id: string;
-  name?: string | null;
-  image?: string | null;
-  daoAddress?: string | null;
-};
+type OrganizationType = Pick<
+  Organization,
+  'id' | 'name' | 'image' | 'daoAddress'
+>;
 
 /**
  * Transforms organization data into an Account object for display as project admin
  */
 export const getOrganizationAsAdmin = (
-  organization: Organization,
+  organization: OrganizationType,
 ): Account => ({
-  name: organization.name || '',
+  name: organization.name || i18n._(DEFAULT_NAME),
   image: organization.image || DEFAULT_PROFILE_COMPANY_AVATAR,
   link: `/profiles/${organization.daoAddress}`,
   address: organization.daoAddress || '',

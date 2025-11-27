@@ -18,8 +18,10 @@ import { Link } from 'components/atoms';
 import { ROLE_AUTHOR } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
-import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
-import { getCanCreatePost } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import {
+  getCanCreatePost,
+  getCanEditProject,
+} from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
 import { useFetchProject } from './hooks/useFetchProject';

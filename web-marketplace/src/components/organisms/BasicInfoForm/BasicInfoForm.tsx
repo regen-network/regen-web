@@ -163,6 +163,19 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
             } else {
               updatePendingProjectId(null);
             }
+          } else {
+            // Update the off-chain project with any form changes before retrying migration
+            await onSubmit({
+              values,
+              shouldNavigate: false,
+              projectPatch:
+                !!values['schema:name'] &&
+                initialValues?.['schema:name'] !== values['schema:name']
+                  ? {
+                      slug,
+                    }
+                  : undefined,
+            });
           }
 
           if (currentProjectId && isOrganizationAccount) {

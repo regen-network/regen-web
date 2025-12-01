@@ -95,11 +95,7 @@ const MyProjects = (): JSX.Element => {
               emptyTitle={MY_PROJECTS_EMPTY_TITLE}
               isFirstProject={isFirstProject}
               onClick={() => {
-                if (isIssuer) {
-                  navigate(`/project-pages/${DRAFT_ID}/account`);
-                } else {
-                  navigate(`/project-pages/${DRAFT_ID}/basic-info`);
-                }
+                navigate(`/project-pages/${DRAFT_ID}/account`);
               }}
               sx={{ height: { xs: '100%' } }}
             />

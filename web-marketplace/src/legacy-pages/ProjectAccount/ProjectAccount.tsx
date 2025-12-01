@@ -36,7 +36,6 @@ export const ProjectAccount = (): JSX.Element | null => {
     isDraftRef,
   } = useCreateProjectContext();
 
-  // Build the two account options: personal and organization
   const personalAccount = useMemo(
     (): AccountOption | null =>
       activeAccount
@@ -77,7 +76,6 @@ export const ProjectAccount = (): JSX.Element | null => {
     node => node?.accountId === activeAccount?.id,
   )?.roleName;
 
-  // Determine if user should skip this step (no DAO or insufficient permissions)
   const shouldSkip =
     !dao ||
     !activeAccount ||
@@ -85,7 +83,6 @@ export const ProjectAccount = (): JSX.Element | null => {
     !organizationAccount ||
     !(organizationRole === 'owner' || organizationRole === 'admin');
 
-  // Determine which address to use for issuer check
   const addressToCheck = projectCreatorAddress || activeAccount?.addr;
 
   const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({

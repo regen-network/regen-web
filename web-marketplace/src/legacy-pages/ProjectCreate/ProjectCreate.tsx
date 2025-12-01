@@ -20,11 +20,7 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
-import {
-  projectsCurrentStepAtom,
-  projectsDraftState,
-  ProjectsDraftStatus,
-} from './ProjectCreate.store';
+import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;

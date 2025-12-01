@@ -36,11 +36,13 @@ import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
+  getAuthorizationName,
   getNewOrgRoleId,
   getNewProjectRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from './utils';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useUpdateMemberRole(params: MembersHookParams) {
   const {
@@ -62,8 +64,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
   const { signAndBroadcast } = useMsgClient();
 
   const {
-    projectAuthorizationId,
-    projectRoleId,
     roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
@@ -92,9 +92,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         !role ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -177,6 +175,20 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
+            const projectCurrentUserRole = project?.currentUserRole;
+            const authorizationName = getAuthorizationName(
+              projectCurrentUserRole,
+            );
+            const {
+              roleId: projectRoleId,
+              authorizationId: projectAuthorizationId,
+            } = getRoleAuthorizationIds({
+              type: 'project',
+              currentUserRole: projectCurrentUserRole,
+              authorizationName,
+            });
+            if (!projectRoleId || !projectAuthorizationId) return null;
+
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
@@ -339,8 +351,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       reactQueryClient,
       deleteAssignment,

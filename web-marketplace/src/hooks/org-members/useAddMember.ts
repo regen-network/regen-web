@@ -30,9 +30,11 @@ import { MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
+  getAuthorizationName,
   getNewOrgRoleId,
   getNewProjectRoleId,
 } from './utils';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useAddMember(params: MembersHookParams) {
   const {
@@ -57,8 +59,6 @@ export function useAddMember(params: MembersHookParams) {
     projectsCurrentUserCanManageMembers,
     roleId,
     authorizationId,
-    projectRoleId,
-    projectAuthorizationId,
     refetchMembers,
     checkProjectsErrors,
     onTxErrorCallback,
@@ -80,9 +80,7 @@ export function useAddMember(params: MembersHookParams) {
         !role ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -108,6 +106,20 @@ export function useAddMember(params: MembersHookParams) {
 
       const projectExecuteInstructions = (projectsCurrentUserCanManageMembers
         ?.map(project => {
+          const projectCurrentUserRole = project?.currentUserRole;
+          const authorizationName = getAuthorizationName(
+            projectCurrentUserRole,
+          );
+          const {
+            roleId: projectRoleId,
+            authorizationId: projectAuthorizationId,
+          } = getRoleAuthorizationIds({
+            type: 'project',
+            currentUserRole: projectCurrentUserRole,
+            authorizationName,
+          });
+          if (!projectRoleId || !projectAuthorizationId) return null;
+
           const projectDao = project?.projectByProjectId?.daoByAdminDaoAddress;
           if (!projectDao) return null;
 
@@ -176,8 +188,6 @@ export function useAddMember(params: MembersHookParams) {
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,

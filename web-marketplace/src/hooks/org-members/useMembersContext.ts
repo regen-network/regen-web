@@ -91,16 +91,6 @@ export function useMembersContext(params: MembersHookParams) {
       }),
     [currentUserRole, authorizationName],
   );
-  const { roleId: projectRoleId, authorizationId: projectAuthorizationId } =
-    useMemo(
-      () =>
-        getRoleAuthorizationIds({
-          type: 'project',
-          currentUserRole,
-          authorizationName,
-        }),
-      [currentUserRole, authorizationName],
-    );
 
   const refetchMembers = useCallback(
     async ({
@@ -274,8 +264,6 @@ export function useMembersContext(params: MembersHookParams) {
     projectsCurrentUserCanManageMembers,
     roleId,
     authorizationId,
-    projectRoleId,
-    projectAuthorizationId,
     // helpers
     refetchMembers,
     checkProjectsErrors,

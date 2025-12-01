@@ -25,7 +25,8 @@ import {
 } from './constants';
 import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
-import { removeMemberActions } from './utils';
+import { getAuthorizationName, removeMemberActions } from './utils';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useRemoveMember(params: MembersHookParams) {
   const {
@@ -46,10 +47,6 @@ export function useRemoveMember(params: MembersHookParams) {
   const { signAndBroadcast } = useMsgClient();
 
   const {
-    // TODO this should be recomputed for each project
-    // because it could be that user has different roles in different projects
-    projectAuthorizationId,
-    projectRoleId,
     roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
@@ -74,9 +71,7 @@ export function useRemoveMember(params: MembersHookParams) {
         !cw4GroupAddress ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -120,6 +115,20 @@ export function useRemoveMember(params: MembersHookParams) {
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
+            const projectCurrentUserRole = project?.currentUserRole;
+            const authorizationName = getAuthorizationName(
+              projectCurrentUserRole,
+            );
+            const {
+              roleId: projectRoleId,
+              authorizationId: projectAuthorizationId,
+            } = getRoleAuthorizationIds({
+              type: 'project',
+              currentUserRole: projectCurrentUserRole,
+              authorizationName,
+            });
+            if (!projectRoleId || !projectAuthorizationId) return null;
+
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
@@ -243,8 +252,6 @@ export function useRemoveMember(params: MembersHookParams) {
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,

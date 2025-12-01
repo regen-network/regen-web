@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
@@ -26,7 +27,6 @@ import {
 import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import { getAuthorizationName, removeMemberActions } from './utils';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useRemoveMember(params: MembersHookParams) {
   const {

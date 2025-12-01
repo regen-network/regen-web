@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import {
   useDeleteAssignmentMutation,
@@ -42,7 +43,6 @@ import {
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from './utils';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useUpdateMemberRole(params: MembersHookParams) {
   const {

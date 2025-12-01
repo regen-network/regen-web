@@ -6,6 +6,7 @@ import { useSetAtom } from 'jotai';
 import { MEMBER_ADDED } from 'legacy-pages/Dashboard/MyProjects/hooks/collaborators/constants';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
@@ -34,7 +35,6 @@ import {
   getNewOrgRoleId,
   getNewProjectRoleId,
 } from './utils';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 export function useAddMember(params: MembersHookParams) {
   const {

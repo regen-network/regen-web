@@ -594,16 +594,14 @@ export function getProjectsCurrentUserCanManageMembers({
   return projects.reduce<ProjectWithCurrentUserRole[]>((acc, project) => {
     if (!project) return acc;
     const assignments =
-      project.projectByProjectId?.daoByAdminDaoAddress
-        ?.assignmentsByDaoAddress?.nodes;
-    const currentUserRole = assignments
-      ?.find(
-        assignment =>
-          assignment?.accountId === activeAccountId &&
-          (assignment?.roleName === ROLE_OWNER ||
-            assignment?.roleName === ROLE_ADMIN),
-      )
-      ?.roleName as ProjectRole | undefined;
+      project.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress
+        ?.nodes;
+    const currentUserRole = assignments?.find(
+      assignment =>
+        assignment?.accountId === activeAccountId &&
+        (assignment?.roleName === ROLE_OWNER ||
+          assignment?.roleName === ROLE_ADMIN),
+    )?.roleName as ProjectRole | undefined;
 
     if (!currentUserRole) return acc;
 

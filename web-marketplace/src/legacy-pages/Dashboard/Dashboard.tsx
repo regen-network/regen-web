@@ -11,6 +11,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
@@ -156,9 +157,10 @@ export const Dashboard = () => {
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment = assignments?.find(
-      assignment => assignment?.accountId === activeAccountId,
-    );
+    const assignment = getAccountAssignment({
+      accountId: activeAccountId,
+      assignments,
+    });
 
     const organizationName = organizationProfile?.name?.trim();
 

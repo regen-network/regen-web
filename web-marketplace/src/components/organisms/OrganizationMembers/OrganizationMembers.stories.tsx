@@ -8,10 +8,13 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../ActionDropdown/ActionDropdown.constants';
-import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  Member,
+  MemberData,
+} from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembers } from './OrganizationMembers';
 import { mockAccounts, mockMembers } from './OrganizationMembers.mock';
-import { Member } from './OrganizationMembers.types';
 
 const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',
@@ -99,11 +102,7 @@ export const Default = (args: {
   const handleRemove = async (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
-  const addMember = async (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => {
+  const addMember = async (data: MemberData<BaseMemberRole>) => {
     if (!data.role) return;
 
     const foundAccount = mockAccounts.find(

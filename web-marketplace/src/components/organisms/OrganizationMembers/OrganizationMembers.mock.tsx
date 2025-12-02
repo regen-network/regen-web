@@ -1,5 +1,5 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { Member } from './OrganizationMembers.types';
+import { Member } from '../BaseMembersTable/BaseMembersTable.types';
 
 export const mockMembers: Member[] = [
   {

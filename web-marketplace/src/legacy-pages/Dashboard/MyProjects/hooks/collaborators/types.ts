@@ -1,28 +1,23 @@
-import { AccountsOrderBy } from 'generated/graphql';
+import { AccountsOrderBy, ProjectFieldsFragment } from 'generated/graphql';
 
 import {
-  BaseMemberRole,
   Member,
+  ProjectRole,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
-export type RefetchMembersParams = {
+export type RefetchCollaboratorsParams = {
   address: string;
   role: string;
-  visible?: boolean;
   accountId?: string;
   shouldFindAssignment?: boolean;
 };
 
-export type MembersHookParams = {
-  currentUserRole?: BaseMemberRole;
+export type CollaboratorsHookParams = {
+  currentUserRole?: ProjectRole;
   daoAddress?: string;
   daoRbamAddress?: string;
   cw4GroupAddress?: string;
-  members: Member[];
+  collaborators: Member[];
   daoAccountsOrderBy: AccountsOrderBy;
-};
-
-export type AssignmentToDelete = {
-  daoAddress: string;
-  roleName: string;
+  offChainProject?: ProjectFieldsFragment | null;
 };

@@ -13,6 +13,8 @@ import {
   MsgUpdateProjectMetadata,
 } from '@regen-network/api/regen/ecocredit/v1/tx';
 
+import { Assignment } from 'generated/graphql';
+
 import { orgRoles, projectRoles } from 'hooks/org-members/constants';
 
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
@@ -213,4 +215,19 @@ export function getRoleAuthorizationIds({
       : undefined;
 
   return { roleId, authorizationId, roleConfig };
+}
+
+type GetAccountAssignmentParams = {
+  accountId?: string;
+  assignments?: Array<Pick<
+    Assignment,
+    'accountId' | 'roleName' | 'visible' | 'onChainRoleId'
+  > | null>;
+};
+
+export function getAccountAssignment({
+  accountId,
+  assignments,
+}: GetAccountAssignmentParams) {
+  return assignments?.find(assignment => assignment?.accountId === accountId);
 }

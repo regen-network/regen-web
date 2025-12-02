@@ -6,21 +6,24 @@ import { Title } from 'web-components/src/components/typography/Title';
 
 import {
   CANCEL_LABEL,
+  PROJECT_REMOVE_MEMBER_TITLE,
   REMOVE_CONFIRM_LABEL,
   REMOVE_MEMBER_DESCRIPTION,
   REMOVE_MEMBER_TITLE,
-} from './OrganizationMembers.constants';
+} from './constants';
 
 interface RemoveMemberModalProps {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void | Promise<void>;
+  isOrg?: boolean;
 }
 
 export const RemoveMemberModal = ({
   open,
   onClose,
   onConfirm,
+  isOrg,
 }: RemoveMemberModalProps) => {
   const { _ } = useLingui();
 
@@ -31,7 +34,7 @@ export const RemoveMemberModal = ({
         id="remove-member-title"
         className="mb-16 md:mb-20 mt-0 mx-auto text-center px-10"
       >
-        {_(REMOVE_MEMBER_TITLE)}
+        {isOrg ? _(REMOVE_MEMBER_TITLE) : _(PROJECT_REMOVE_MEMBER_TITLE)}
       </Title>
       <p
         id="remove-member-description"

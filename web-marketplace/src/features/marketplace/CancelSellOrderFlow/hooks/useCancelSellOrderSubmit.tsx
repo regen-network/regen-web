@@ -67,7 +67,6 @@ const useCancelSellOrderSubmit = ({
     isOrganizationDashboard,
     organizationRole,
     organizationRbamAddress,
-    organizationDaoAddress,
     feeGranter,
   } = useDashboardContext();
 

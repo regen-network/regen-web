@@ -38,7 +38,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   context: 'organization' | 'project';
   additionalColumns?: string[];
   showMobileInvite?: boolean;
-  currentUserRole: ProjectRole | BaseMemberRole;
+  currentUserRole?: ProjectRole | BaseMemberRole;
   hideHeader?: boolean;
   hideDescription?: boolean;
   hideHelpDocs?: boolean;

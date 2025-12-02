@@ -1,7 +1,7 @@
 // Hardcoded organization/project roles and authorizations IDs
 // to avoid querying the RBAM contract for them everytime
 
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 type OrgRole = {
   roleId: number;

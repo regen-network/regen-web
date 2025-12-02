@@ -29,6 +29,7 @@ import {
   RoleOption,
 } from '../BaseMembersTable.types';
 import {
+  ADD_COLLABORATOR_LABEL,
   ADD_MEMBER_LABEL,
   ADMIN_EDITOR_RULE,
   CANCEL_LABEL,
@@ -171,7 +172,7 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
       >
         <header>
           <Title variant="h4" className="mb-30 md:mb-45 text-center">
-            {_(ADD_MEMBER_LABEL)}
+            {isOrg ? _(ADD_MEMBER_LABEL) : _(ADD_COLLABORATOR_LABEL)}
           </Title>
         </header>
 

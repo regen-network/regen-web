@@ -35,7 +35,8 @@ export const getInviteSchema = (_: TranslatorType, isOrg: boolean) =>
     })
     .refine(
       schema =>
-        schema.role !== 'viewer' &&
+        schema.role !== ROLE_VIEWER &&
+        schema.role !== ROLE_AUTHOR &&
         z.string().email().safeParse(schema.addressOrEmail).success
           ? false
           : true,
@@ -46,7 +47,8 @@ export const getInviteSchema = (_: TranslatorType, isOrg: boolean) =>
     )
     .refine(
       schema =>
-        schema.role !== 'viewer' &&
+        schema.role !== ROLE_VIEWER &&
+        schema.role !== ROLE_AUTHOR &&
         !z.string().email().safeParse(schema.addressOrEmail).success
           ? isValidAddress(schema.addressOrEmail)
           : true,
@@ -57,7 +59,7 @@ export const getInviteSchema = (_: TranslatorType, isOrg: boolean) =>
     )
     .refine(
       schema =>
-        schema.role === 'viewer'
+        schema.role === ROLE_VIEWER || schema.role === ROLE_AUTHOR
           ? isValidAddress(schema.addressOrEmail) ||
             z.string().email().safeParse(schema.addressOrEmail).success
           : true,

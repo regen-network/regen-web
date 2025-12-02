@@ -2,6 +2,7 @@ import { msg } from '@lingui/core/macro';
 
 // Invite Member Modal
 export const ADD_MEMBER_LABEL = msg`Add a member`;
+export const ADD_COLLABORATOR_LABEL = msg`Add a project collaborator`;
 export const ROLE_LABEL = msg`Role`;
 export const CHOOSE_ROLE_HELP = msg`Choose a role`;
 export const CHOOSE_A_ROLE_FOR_THIS_USER = msg`Choose a role for this user`;

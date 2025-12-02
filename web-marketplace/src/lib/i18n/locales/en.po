@@ -383,6 +383,10 @@ msgstr ""
 msgid "Add a photo"
 msgstr ""
 
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:5
+msgid "Add a project collaborator"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:119
 msgid "Add a video"
 msgstr ""
@@ -460,7 +464,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:9
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:10
 msgid "Admins or editors must be invited via a REGEN address"
 msgstr ""
 
@@ -635,7 +639,7 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:22
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:23
 msgid "Any posts they have created or signed will remain."
 msgstr ""
 
@@ -673,11 +677,11 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:24
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:25
 msgid "Are you sure you want to remove this collaborator from your project?"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:21
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:22
 msgid "Are you sure you want to remove this member from your organization?"
 msgstr ""
 
@@ -1033,7 +1037,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:14
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:15
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:20
 msgid "CANCEL"
 msgstr ""
@@ -1094,7 +1098,7 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:34
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:35
 msgid "Change"
 msgstr ""
 
@@ -1143,11 +1147,11 @@ msgstr ""
 msgid "Choose a practice start date"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:6
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:7
 msgid "Choose a role"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:7
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:8
 msgid "Choose a role for this user"
 msgstr ""
 
@@ -1249,7 +1253,7 @@ msgstr ""
 msgid "Collaborator actions"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:134
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:135
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
@@ -1428,7 +1432,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:169
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:170
 msgid "create an organization"
 msgstr ""
 
@@ -1891,7 +1895,7 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:35
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:36
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:108
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:236
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
@@ -2171,7 +2175,7 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:8
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:9
 msgid "Email or REGEN address"
 msgstr ""
 
@@ -2200,11 +2204,11 @@ msgstr ""
 msgid "Enter a new credit card"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:16
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:17
 msgid "Enter a REGEN address in order to add this user as an Owner, Admin or Editor."
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:11
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:12
 msgid "Enter email or address"
 msgstr ""
 
@@ -2388,7 +2392,7 @@ msgstr ""
 #~ msgid "For Buyers"
 #~ msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:31
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr ""
 
@@ -2537,7 +2541,7 @@ msgstr ""
 msgid "i.e. Sunnybrook Farms"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:13
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:14
 msgid "If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name."
 msgstr ""
 
@@ -2638,7 +2642,7 @@ msgstr ""
 msgid "Invalid date"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:17
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:18
 msgid "Invalid email or REGEN address"
 msgstr ""
 
@@ -2650,7 +2654,7 @@ msgstr ""
 msgid "Invalid regen address"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:18
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:19
 msgid "Invalid REGEN address"
 msgstr ""
 
@@ -2658,7 +2662,7 @@ msgstr ""
 msgid "Invalid token"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:15
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:16
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:19
 msgid "Invite"
 msgstr ""
@@ -2679,7 +2683,7 @@ msgstr ""
 msgid "Invite teammates to collaborate on your organization."
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:12
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:13
 msgid "Is this member visible on the organization page?"
 msgstr ""
 
@@ -3189,7 +3193,7 @@ msgstr ""
 #~ msgid "My prefinance projects"
 #~ msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:32
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:33
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:180
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
@@ -3362,7 +3366,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:159
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:160
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3568,7 +3572,7 @@ msgstr ""
 msgid "Personal profile"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:27
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:28
 msgid "Personal Profile"
 msgstr ""
 
@@ -3874,7 +3878,7 @@ msgstr ""
 msgid "Profile image"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:33
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:34
 msgid "Profile Image"
 msgstr ""
 
@@ -4193,7 +4197,7 @@ msgstr ""
 #~ msgid "Regen - Ecocredits"
 #~ msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:10
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:11
 msgid "REGEN address"
 msgstr ""
 
@@ -4415,7 +4419,7 @@ msgstr ""
 msgid "Riparian forest"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:5
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:6
 msgid "Role"
 msgstr ""
 
@@ -4456,7 +4460,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:31
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:32
 msgid "SAVE"
 msgstr ""
 
@@ -5164,7 +5168,7 @@ msgstr ""
 msgid "This may take up to 15 seconds."
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:127
+#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:133
 msgid "This member already belongs to another organization."
 msgstr ""
 
@@ -5196,7 +5200,11 @@ msgstr ""
 msgid "This user has been removed from the project"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:121
+#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:145
+msgid "This user is already a collaborator of the project"
+msgstr ""
+
+#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:126
 msgid "This user is already a member of the organization"
 msgstr ""
 
@@ -5224,7 +5232,7 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:29
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:30
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr ""
@@ -5858,7 +5866,7 @@ msgstr ""
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:23
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:24
 msgid "Yes, Remove"
 msgstr ""
 
@@ -5894,7 +5902,7 @@ msgstr ""
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:141
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:142
 msgid "You can create an organization and migrate your personal projects to it."
 msgstr ""
 
@@ -5911,7 +5919,11 @@ msgid "You can only keep the profile info from one of these accounts, which incl
 msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:104
-msgid "You cannot add a DAO to an organization"
+#~ msgid "You cannot add a DAO to an organization"
+#~ msgstr ""
+
+#: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:107
+msgid "You cannot add a DAO to an organization or project."
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:8
@@ -6004,7 +6016,7 @@ msgstr ""
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:158
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:159
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 
@@ -6068,7 +6080,7 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: src/components/organisms/BaseMembersTable/modals/constants.ts:28
+#: src/components/organisms/BaseMembersTable/modals/constants.ts:29
 msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
 msgstr ""
 

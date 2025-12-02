@@ -69,7 +69,9 @@ const MyProjects = (): JSX.Element => {
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
     keepUnpublished: true,
-    organization: organizationData?.organizationByDaoAddress,
+    organization: isOrganizationDashboard
+      ? organizationData?.organizationByDaoAddress
+      : undefined,
     isLoading: isLoadingOrganizationByDaoAddress,
   });
 

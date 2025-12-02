@@ -11,6 +11,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
@@ -65,7 +66,6 @@ import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
-import { getAccountAssignment } from 'utils/rbam.utils';
 
 type DashboardNavAccount = AccountOption & {
   source: 'auth' | 'dao';

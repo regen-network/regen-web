@@ -11,6 +11,7 @@ import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -26,7 +27,6 @@ import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/ho
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { getAccountAssignment } from 'utils/rbam.utils';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();

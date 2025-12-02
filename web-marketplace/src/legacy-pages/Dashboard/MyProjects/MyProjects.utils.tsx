@@ -1,6 +1,7 @@
 import { ProjectsDraftStatus } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
 import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
@@ -19,7 +20,6 @@ import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTa
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
 import { UseCanAccessManageProjectWithRoleParams } from './hooks/useCanAccessManageProjectWithRole';
-import { getAccountAssignment } from 'utils/rbam.utils';
 
 export const getDefaultProject = (
   disabled: boolean,

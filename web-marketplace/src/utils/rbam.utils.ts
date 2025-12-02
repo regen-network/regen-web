@@ -13,10 +13,11 @@ import {
   MsgUpdateProjectMetadata,
 } from '@regen-network/api/regen/ecocredit/v1/tx';
 
+import { Assignment } from 'generated/graphql';
+
 import { orgRoles, projectRoles } from 'hooks/org-members/constants';
 
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
-import { Assignment } from 'generated/graphql';
 
 /**
  * Helper to wrap RBAM actions in a MsgExecuteContract for signing.

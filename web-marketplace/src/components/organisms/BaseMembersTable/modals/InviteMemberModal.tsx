@@ -53,6 +53,7 @@ interface InviteMemberModalProps<T> {
   daoWithAddress?: DaoByAddressQuery['daoByAddress'];
   isOrg?: boolean;
   roleOptions: RoleOption[];
+  currentDaoAddress?: string;
 }
 
 export const InviteMemberModal = <T extends BaseMemberRole>({
@@ -64,6 +65,7 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
   daoWithAddress,
   isOrg = true,
   roleOptions,
+  currentDaoAddress,
 }: InviteMemberModalProps<T>) => {
   const { _ } = useLingui();
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -101,7 +103,7 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
   useEffect(() => {
     if (daoWithAddress) {
       setError('addressOrEmail', {
-        message: _(msg`You cannot add a DAO to an organization`),
+        message: _(msg`You cannot add a DAO to an organization or project.`),
       });
     }
   }, [daoWithAddress, setError, _]);
@@ -110,27 +112,41 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
     const accs = accounts?.getAccountsByNameOrAddr?.nodes || [];
     if (accs.length === 1) {
       const acc = accs[0];
-      // Check only assignment within an organization
-      const dao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-        dao => !!dao?.organizationByDaoAddress,
-      );
-      if (dao && currentDaoOrganization) {
-        // provided address already belongs to the current organization
-        if (dao.address === currentDaoOrganization.address) {
+      if (isOrg) {
+        // Check only assignment within an organization
+        const dao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+          dao => !!dao?.organizationByDaoAddress,
+        );
+        if (dao && currentDaoOrganization) {
+          // provided address already belongs to the current organization/project
+          if (dao.address === currentDaoOrganization.address) {
+            setError('addressOrEmail', {
+              message: _(
+                msg`This user is already a member of the organization`,
+              ),
+            });
+          } else {
+            // provided address belongs to a different organization
+            setError('addressOrEmail', {
+              message: _(
+                msg`This member already belongs to another organization.`,
+              ),
+            });
+          }
+        }
+      } else if (currentDaoAddress) {
+        const sameProjectDao =
+          acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+            otherDao => otherDao?.address === currentDaoAddress,
+          );
+        if (sameProjectDao) {
           setError('addressOrEmail', {
-            message: _(msg`This user is already a member of the organization`),
-          });
-        } else {
-          // provided address belongs to a different organization
-          setError('addressOrEmail', {
-            message: _(
-              msg`This member already belongs to another organization.`,
-            ),
+            message: _(msg`This user is already a collaborator of the project`),
           });
         }
       }
     }
-  }, [accounts, currentDaoOrganization, setError, _]);
+  }, [accounts, currentDaoOrganization, setError, _, isOrg, currentDaoAddress]);
 
   return (
     <Modal

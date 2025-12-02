@@ -37,6 +37,7 @@ export const ProjectCollaborators = ({
   migrateProject,
   offChainId,
   createOrganization,
+  currentDaoAddress,
 }: ProjectCollaboratorsProps) => {
   const { _ } = useLingui();
   const currentMember = useMemo(
@@ -192,6 +193,7 @@ export const ProjectCollaborators = ({
           currentMember={currentMember}
           roleOptions={roleOptions}
           isOrg={false}
+          currentDaoAddress={currentDaoAddress}
         />
       )}
     </>

@@ -21,4 +21,5 @@ export interface ProjectCollaboratorsProps {
   migrateProject: () => Promise<void>;
   createOrganization: () => void;
   offChainId?: string | null;
+  currentDaoAddress?: string;
 }

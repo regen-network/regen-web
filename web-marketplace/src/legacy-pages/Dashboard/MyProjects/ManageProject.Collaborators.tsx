@@ -89,6 +89,7 @@ const Collaborators = (): JSX.Element => {
       onUpdateRole={updateCollaboratorRole}
       onRemove={removeCollaborator}
       onEditOrgRole={() => navigate(`/dashboard/organization/members`)}
+      currentDaoAddress={projectDao?.address}
     />
   );
 };

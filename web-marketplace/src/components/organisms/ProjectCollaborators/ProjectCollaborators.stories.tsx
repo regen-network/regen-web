@@ -142,4 +142,5 @@ Default.args = {
   partOfOrganization: true,
   createOrganization: action('create-organization'),
   migrateProject: action('migrate-project'),
+  currentDaoAddress: 'dao1xyz...',
 };

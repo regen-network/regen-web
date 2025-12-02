@@ -34,6 +34,7 @@ type ModalsProps<T> = {
   currentMember: Member;
   isOrg?: boolean;
   roleOptions: RoleOption[];
+  currentDaoAddress?: string;
 };
 
 export const Modals = <T extends BaseMemberRole>({
@@ -55,6 +56,7 @@ export const Modals = <T extends BaseMemberRole>({
   currentMember,
   isOrg = true,
   roleOptions,
+  currentDaoAddress,
 }: ModalsProps<T>) => {
   return (
     <>
@@ -70,6 +72,7 @@ export const Modals = <T extends BaseMemberRole>({
         daoWithAddress={daoWithAddress}
         isOrg={isOrg}
         roleOptions={roleOptions}
+        currentDaoAddress={currentDaoAddress}
       />
       <RemoveMemberModal
         open={showRemoveModal}

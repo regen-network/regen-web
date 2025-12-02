@@ -134,9 +134,7 @@ const ManageProject = () => {
       </div>
 
       {/* Content section */}
-      <div className="p-30 border border-bc-neutral-300 border-solid rounded-lg bg-bc-neutral-0">
-        <Outlet context={{ project, isLoading, offChainProject }} />
-      </div>
+      <Outlet context={{ project, isLoading, offChainProject }} />
 
       {canCreatePost && postProjectId && (
         <PostFlow

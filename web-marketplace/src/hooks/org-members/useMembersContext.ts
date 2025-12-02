@@ -17,6 +17,10 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import {
+  MAX_REFETCH_ATTEMPTS,
+  REFETCH_DELAY_MS,
+} from 'lib/constants/shared.constants';
 import { getBalanceQueryKey } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.utils';
 import { GET_ASSIGNED_KEY } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -107,7 +111,7 @@ export function useMembersContext(params: MembersHookParams) {
       let stop = false;
       let i = 0;
       // wait for the assignment change(s) to be indexed in the db
-      while (!stop && i < 15) {
+      while (!stop && i < MAX_REFETCH_ATTEMPTS) {
         if (!accountId) {
           // fetch new member account
           const accRes = await getFromCacheOrFetch({
@@ -156,7 +160,7 @@ export function useMembersContext(params: MembersHookParams) {
           }
         }
         i++;
-        await timer(500);
+        await timer(REFETCH_DELAY_MS);
       }
       if (!stop) {
         setProcessingModal(atom => void (atom.open = false));

@@ -15,6 +15,10 @@ import { timer } from 'utils/timer';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { errorModalAtom, processingModalAtom } from 'lib/atoms/modals.atoms';
+import {
+  MAX_REFETCH_ATTEMPTS,
+  REFETCH_DELAY_MS,
+} from 'lib/constants/shared.constants';
 import { GET_ASSIGNED_KEY } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
@@ -75,7 +79,7 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
       let stop = false;
       let i = 0;
       // wait for the assignment change(s) to be indexed in the db
-      while (!stop && i < 15) {
+      while (!stop && i < MAX_REFETCH_ATTEMPTS) {
         if (!accountId) {
           // fetch new member account
           const accRes = await getFromCacheOrFetch({
@@ -104,7 +108,7 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
           }
         }
         i++;
-        await timer(500);
+        await timer(REFETCH_DELAY_MS);
       }
       if (!stop) {
         setProcessingModal(atom => void (atom.open = false));

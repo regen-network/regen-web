@@ -35,6 +35,7 @@ export const ProjectCollaborators = ({
   partOfOrganization,
   canMigrate,
   migrateProject,
+  offChainId,
   createOrganization,
 }: ProjectCollaboratorsProps) => {
   const { _ } = useLingui();
@@ -143,8 +144,8 @@ export const ProjectCollaborators = ({
                 </Trans>
               </Body>
             )}
-            {partOfOrganization && migrateProject ? (
-              canMigrate ? (
+            {partOfOrganization ? (
+              canMigrate && offChainId ? (
                 <OutlinedButton onClick={migrateProject} className="mt-25">
                   {_(MIGRATE_PROJECT)}
                 </OutlinedButton>
@@ -153,7 +154,9 @@ export const ProjectCollaborators = ({
                   arrow
                   placement="top"
                   title={_(
-                    msg`You must be an Owner, Admin or Editor of your organization to migrate a project.`,
+                    offChainId
+                      ? msg`You must be an Owner, Admin or Editor of your organization to migrate a project.`
+                      : msg`Offchain project id is needed to migrate a project. Edit project description or media to create one.`,
                   )}
                 >
                   <OutlinedButton disabled className="mt-25">

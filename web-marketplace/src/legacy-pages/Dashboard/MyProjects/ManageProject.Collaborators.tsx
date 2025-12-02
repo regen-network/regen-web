@@ -73,7 +73,8 @@ const Collaborators = (): JSX.Element => {
       canMigrate={canMigrate}
       isProjectDao={!!projectDao}
       partOfOrganization={!!daoOrganization}
-      migrateProject={project.offChainId ? migrateProject : undefined}
+      offChainId={project.offChainId}
+      migrateProject={migrateProject}
       createOrganization={createOrganization}
       collaborators={collaborators}
       sortDir={daoAccountsOrderBy}

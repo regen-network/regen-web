@@ -18,6 +18,7 @@ export interface ProjectCollaboratorsProps {
   isProjectDao: boolean;
   canMigrate: boolean;
   partOfOrganization: boolean;
-  migrateProject?: () => Promise<void>;
+  migrateProject: () => Promise<void>;
   createOrganization: () => void;
+  offChainId?: string | null;
 }

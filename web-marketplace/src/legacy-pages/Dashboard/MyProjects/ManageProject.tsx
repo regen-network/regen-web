@@ -1,10 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
@@ -37,8 +32,6 @@ const ManageProject = () => {
   const { project, offChainProject, onChainProject, isLoading } =
     useFetchProject();
   const { loginDisabled, wallet } = useWallet();
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const createPostDisabled =
     !activeAccountId || project.draft || !project.location;

@@ -56,7 +56,6 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
 import useProjectEditSubmit, {

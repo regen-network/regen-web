@@ -84,6 +84,7 @@ export const Modals = <T extends BaseMemberRole>({
           setShowRemoveModal(false);
           setMemberToRemove(null);
         }}
+        isOrg={isOrg}
       />
       <PersonalProfileModal
         open={showPersonalProfileModal}

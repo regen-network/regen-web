@@ -21,6 +21,7 @@ export const INVALID_REGEN_ADDRESS_ERROR = msg`Invalid REGEN address`;
 export const REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this member from your organization?`;
 export const REMOVE_MEMBER_DESCRIPTION = msg`Any posts they have created or signed will remain.`;
 export const REMOVE_CONFIRM_LABEL = msg`Yes, Remove`;
+export const PROJECT_REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this collaborator from your project?`;
 
 // Personal Profile Modal
 export const PERSONAL_PROFILE_TITLE = msg`Personal Profile`;

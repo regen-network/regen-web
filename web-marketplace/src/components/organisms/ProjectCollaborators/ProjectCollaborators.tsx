@@ -90,7 +90,10 @@ export const ProjectCollaborators = ({
                   role={col.role}
                   currentUserRole={currentUserRole}
                   isCurrentUser={col.isCurrentUser}
-                  onRemove={() => onRemove(col.id)}
+                  onRemove={() => {
+                    setMemberToRemove(col.id);
+                    setShowRemoveModal(true);
+                  }}
                   onEditOrgRole={onEditOrgRole}
                   canEditOrgRole={col.canEditOrgRole}
                 />
@@ -114,7 +117,10 @@ export const ProjectCollaborators = ({
                   role={col.role}
                   currentUserRole={currentUserRole}
                   isCurrentUser={col.isCurrentUser}
-                  onRemove={() => onRemove(col.id)}
+                  onRemove={() => {
+                    setMemberToRemove(col.id);
+                    setShowRemoveModal(true);
+                  }}
                   onEditOrgRole={onEditOrgRole}
                   canEditOrgRole={col.canEditOrgRole}
                 />

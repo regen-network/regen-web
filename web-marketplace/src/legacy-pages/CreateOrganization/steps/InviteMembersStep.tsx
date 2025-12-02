@@ -26,6 +26,7 @@ import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/ho
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
@@ -51,9 +52,10 @@ export const InviteMembersStep = () => {
 
   const currentUserRole = useMemo(
     () =>
-      dao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccountId,
-      )?.roleName,
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments: dao?.assignmentsByDaoAddress?.nodes,
+      })?.roleName,
     [dao, activeAccountId],
   ) as BaseMemberRole | undefined;
 
@@ -61,9 +63,10 @@ export const InviteMembersStep = () => {
     () =>
       (
         dao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(acc => {
-          const assignment = dao?.assignmentsByDaoAddress?.nodes?.find(
-            assignment => acc?.id === assignment?.accountId,
-          );
+          const assignment = getAccountAssignment({
+            accountId: acc?.id,
+            assignments: dao?.assignmentsByDaoAddress?.nodes,
+          });
           return assignment
             ? {
                 id: acc?.id,

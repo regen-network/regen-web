@@ -35,6 +35,7 @@ import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useUpdateCollaborators } from './hooks/collaborators';
 import { useFetchProject } from './hooks/useFetchProject';
 import { useMigrateProject } from './hooks/useMigrateProject';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 const Collaborators = (): JSX.Element => {
   const { _ } = useLingui();
@@ -76,9 +77,10 @@ const Collaborators = (): JSX.Element => {
   const projectDao = projectAssignmentsData?.daoByAddress;
   const activeAccountOrgAssignment = useMemo(
     () =>
-      orgDao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccountId,
-      ),
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments: orgDao?.assignmentsByDaoAddress?.nodes,
+      }),
     [orgDao, activeAccountId],
   );
 
@@ -167,9 +169,10 @@ const Collaborators = (): JSX.Element => {
 
   const currentUserRole = useMemo(
     () =>
-      projectDao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccountId,
-      )?.roleName,
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments: projectDao?.assignmentsByDaoAddress?.nodes,
+      })?.roleName,
     [projectDao, activeAccountId],
   ) as ProjectRole | undefined;
 

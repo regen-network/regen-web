@@ -19,6 +19,7 @@ import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTa
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
 import { UseCanAccessManageProjectWithRoleParams } from './hooks/useCanAccessManageProjectWithRole';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 export const getDefaultProject = (
   disabled: boolean,
@@ -77,7 +78,11 @@ export const handleProjectsDraftStatus = (
 
 export type CanAccessManageProjectWithRoleParams =
   UseCanAccessManageProjectWithRoleParams & {
-    assignments?: (Pick<Assignment, 'accountId' | 'roleName'> | null)[] | null;
+    assignments?:
+      | (Pick<
+          Assignment,
+          'accountId' | 'roleName' | 'onChainRoleId' | 'visible'
+        > | null)[];
   };
 export const canAccessManageProjectWithRole = ({
   onChainProject,
@@ -91,9 +96,10 @@ export const canAccessManageProjectWithRole = ({
     (offChainProject?.adminAccountId &&
       activeAccountId === offChainProject?.adminAccountId);
 
-  const activeAccountRole = assignments?.find(
-    assignment => assignment?.accountId === activeAccountId,
-  )?.roleName;
+  const activeAccountRole = getAccountAssignment({
+    accountId: activeAccountId,
+    assignments,
+  })?.roleName;
 
   const isProjectCollaborator = Boolean(activeAccountRole);
 

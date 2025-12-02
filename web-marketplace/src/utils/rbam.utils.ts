@@ -16,6 +16,7 @@ import {
 import { orgRoles, projectRoles } from 'hooks/org-members/constants';
 
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
+import { Assignment } from 'generated/graphql';
 
 /**
  * Helper to wrap RBAM actions in a MsgExecuteContract for signing.
@@ -213,4 +214,19 @@ export function getRoleAuthorizationIds({
       : undefined;
 
   return { roleId, authorizationId, roleConfig };
+}
+
+type GetAccountAssignmentParams = {
+  accountId?: string;
+  assignments?: Array<Pick<
+    Assignment,
+    'accountId' | 'roleName' | 'visible' | 'onChainRoleId'
+  > | null>;
+};
+
+export function getAccountAssignment({
+  accountId,
+  assignments,
+}: GetAccountAssignmentParams) {
+  return assignments?.find(assignment => assignment?.accountId === accountId);
 }

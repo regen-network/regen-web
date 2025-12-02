@@ -65,6 +65,7 @@ import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 type DashboardNavAccount = AccountOption & {
   source: 'auth' | 'dao';
@@ -156,9 +157,10 @@ export const Dashboard = () => {
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment = assignments?.find(
-      assignment => assignment?.accountId === activeAccountId,
-    );
+    const assignment = getAccountAssignment({
+      accountId: activeAccountId,
+      assignments,
+    });
 
     const organizationName = organizationProfile?.name?.trim();
 

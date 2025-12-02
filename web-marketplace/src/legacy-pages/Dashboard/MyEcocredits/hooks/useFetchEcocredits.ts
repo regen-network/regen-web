@@ -129,9 +129,10 @@ export const useFetchEcocredits = ({
   // Reload callback
   const reloadBalances = useCallback((): void => {
     reactQueryClient.invalidateQueries({
-      queryKey: balancesQuery.queryKey,
+      queryKey: ['balances', reqAddress],
+      refetchType: 'all',
     });
-  }, [reactQueryClient, balancesQuery]);
+  }, [reactQueryClient, reqAddress]);
 
   return {
     credits,

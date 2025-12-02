@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -38,7 +38,7 @@ export const UserSellOrdersToolbar = ({
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const sellerAddress = accountAddress ?? wallet?.address;
-  const { credits } = useFetchEcocredits({
+  const { credits, reloadBalances } = useFetchEcocredits({
     address: sellerAddress,
     isPaginatedQuery: false,
   });
@@ -46,6 +46,12 @@ export const UserSellOrdersToolbar = ({
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
   const hasTradableCredits = tradableCredits.length > 0;
   const canStartSellFlow = canManageSellOrders && hasTradableCredits;
+
+  useEffect(() => {
+    if (isSellFlowStarted) {
+      reloadBalances();
+    }
+  }, [isSellFlowStarted, reloadBalances]);
 
   return (
     <>

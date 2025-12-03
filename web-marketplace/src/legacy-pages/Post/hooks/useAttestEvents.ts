@@ -29,7 +29,7 @@ import { StaticImageData } from 'next/image';
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
-import { AccountByIdQuery } from 'generated/graphql';
+import { AccountByIdQuery, AccountType } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { messageActionEquals } from 'lib/ecocredit/constants';
@@ -247,10 +247,10 @@ export const useAttestEvents = ({
 
       const account = attestorAccount || attestorOrg;
       const accountType = attestorAccount
-        ? 'USER'
+        ? AccountType.User
         : attestorOrg
-        ? 'ORGANIZATION'
-        : 'USER';
+        ? AccountType.Organization
+        : AccountType.User;
       events.unshift({
         icon: postSigned,
         label: _(msg`Signed by`),

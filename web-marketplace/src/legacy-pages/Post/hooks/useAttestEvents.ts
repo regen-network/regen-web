@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -11,7 +12,10 @@ import {
   MsgAnchor as MsgAnchorV1,
   MsgAttest as MsgAttestV1,
 } from '@regen-network/api/regen/data/v1/tx';
-import { EventAttest } from '@regen-network/api/regen/data/v2/events';
+import {
+  EventAnchor,
+  EventAttest,
+} from '@regen-network/api/regen/data/v2/events';
 import {
   MsgAnchor as MsgAnchorV2,
   MsgAttest as MsgAttestV2,
@@ -74,7 +78,10 @@ export const useAttestEvents = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: anchorV1TxsEventData } = useQuery(
+  const {
+    data: anchorV1TxsEventData,
+    isLoading: isLoadingAnchorV1TxsEventData,
+  } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
@@ -85,7 +92,10 @@ export const useAttestEvents = ({
     }),
   );
 
-  const { data: anchorV2TxsEventData } = useQuery(
+  const {
+    data: anchorV2TxsEventData,
+    isLoading: isLoadingAnchorV2TxsEventData,
+  } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
@@ -96,7 +106,10 @@ export const useAttestEvents = ({
     }),
   );
 
-  const { data: attestV1TxsEventData } = useQuery(
+  const {
+    data: attestV1TxsEventData,
+    isLoading: isLoadingAttestV1TxsEventData,
+  } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient,
@@ -107,7 +120,10 @@ export const useAttestEvents = ({
     }),
   );
 
-  const { data: attestV2TxsEventData } = useQuery(
+  const {
+    data: attestV2TxsEventData,
+    isLoading: isLoadingAttestV2TxsEventData,
+  } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient,
@@ -119,7 +135,11 @@ export const useAttestEvents = ({
   );
 
   // Anchor/Attest events executed from organization through cosmwasm MsgExecuteContract
-  const { data: msgExecuteContractTxsEventData } = useQuery(
+  // TODO optimize query so that we stop fetching all pages as long as we have the condition below in the events
+  const {
+    data: msgExecuteContractTxsEventData,
+    isLoading: isLoadingMsgExecuteContractTxsEventData,
+  } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient,
@@ -130,43 +150,66 @@ export const useAttestEvents = ({
     }),
   );
 
-  let anchorTx: TxResponse | undefined;
-  let attestTxResponses:
-    | {
-        timestamp: string;
-        txhash: string;
-        attestor: string;
-      }[]
-    | undefined;
-  if (iri) {
-    anchorTx = [
-      ...(anchorV1TxsEventData?.txResponses ?? []),
-      ...(anchorV2TxsEventData?.txResponses ?? []),
-      ...(msgExecuteContractTxsEventData?.txResponses ?? []),
-    ].filter(txRes => txRes.rawLog.includes(iri))?.[0];
+  const anchorMsgExecuteContractTxsEventData = useMemo(
+    () =>
+      msgExecuteContractTxsEventData?.txResponses?.filter(txRes =>
+        txRes.events.find(event => EventAnchor.typeUrl.includes(event.type)),
+      ) ?? [],
+    [msgExecuteContractTxsEventData],
+  );
 
-    attestTxResponses = [
-      ...(attestV1TxsEventData?.txResponses ?? []),
-      ...(attestV2TxsEventData?.txResponses ?? []),
-      ...(msgExecuteContractTxsEventData?.txResponses ?? []),
-    ]
-      .filter(txRes => txRes.rawLog.includes(iri))
-      ?.map(txRes => {
-        const events = txRes.logs[0].events.filter(event => {
-          return EventAttest.typeUrl.includes(event.type);
-        });
-        const attestors = events.map(event => {
-          const attributes = event.attributes
-            .filter(attr => attr.key === 'attestor')
-            .map(attr => attr.value);
-          return attributes;
-        });
-        const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
-        const { timestamp, txhash } = txRes;
+  const attestMsgExecuteContractTxsEventData = useMemo(
+    () =>
+      msgExecuteContractTxsEventData?.txResponses?.filter(txRes =>
+        txRes.events.find(event => EventAttest.typeUrl.includes(event.type)),
+      ) ?? [],
+    [msgExecuteContractTxsEventData],
+  );
 
-        return { timestamp, txhash, attestor };
-      });
-  }
+  const anchorTx = useMemo(
+    () =>
+      [
+        ...(anchorV1TxsEventData?.txResponses ?? []),
+        ...(anchorV2TxsEventData?.txResponses ?? []),
+        ...anchorMsgExecuteContractTxsEventData,
+      ].filter(txRes => iri && txRes.rawLog.includes(iri))?.[0],
+    [
+      anchorV1TxsEventData,
+      anchorV2TxsEventData,
+      anchorMsgExecuteContractTxsEventData,
+      iri,
+    ],
+  );
+  const attestTxResponses = useMemo(
+    () =>
+      [
+        ...(attestV1TxsEventData?.txResponses ?? []),
+        ...(attestV2TxsEventData?.txResponses ?? []),
+        ...attestMsgExecuteContractTxsEventData,
+      ]
+        .filter(txRes => iri && txRes.rawLog.includes(iri))
+        ?.map(txRes => {
+          const events = txRes.logs[0].events.filter(event => {
+            return EventAttest.typeUrl.includes(event.type);
+          });
+          const attestors = events.map(event => {
+            const attributes = event.attributes
+              .filter(attr => attr.key === 'attestor')
+              .map(attr => attr.value);
+            return attributes;
+          });
+          const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
+          const { timestamp, txhash } = txRes;
+
+          return { timestamp, txhash, attestor };
+        }),
+    [
+      attestV1TxsEventData,
+      attestV2TxsEventData,
+      attestMsgExecuteContractTxsEventData,
+      iri,
+    ],
+  );
 
   const attestorsAccountsResults = useQueries({
     queries:
@@ -182,6 +225,9 @@ export const useAttestEvents = ({
   const attestorsAccounts = attestorsAccountsResults?.map(
     res => res.data?.accountByAddr,
   );
+  const attestorAccountsLoading = attestorsAccountsResults?.some(
+    res => res.isLoading,
+  );
 
   const attestorsOrgsResults = useQueries({
     queries:
@@ -196,6 +242,7 @@ export const useAttestEvents = ({
   const attestorsOrgs = attestorsOrgsResults?.map(
     res => res.data?.organizationByDaoAddress,
   );
+  const attestorsOrgsLoading = attestorsOrgsResults?.some(res => res.isLoading);
 
   const events: Array<Event> = [];
 
@@ -274,5 +321,15 @@ export const useAttestEvents = ({
       });
     }
   }
-  return { events };
+  return {
+    events,
+    loading:
+      isLoadingAnchorV1TxsEventData ||
+      isLoadingAnchorV2TxsEventData ||
+      isLoadingAttestV1TxsEventData ||
+      isLoadingAttestV2TxsEventData ||
+      isLoadingMsgExecuteContractTxsEventData ||
+      attestorAccountsLoading ||
+      attestorsOrgsLoading,
+  };
 };

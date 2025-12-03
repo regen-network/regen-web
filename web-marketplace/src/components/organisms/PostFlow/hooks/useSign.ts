@@ -16,6 +16,7 @@ import { useSetAtom } from 'jotai';
 import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
 import {
   attestAction,
+  getAccountAssignment,
   getRoleAuthorizationIds,
   wrapRbamActions,
 } from 'utils/rbam.utils';
@@ -35,7 +36,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { getAccountAssignment } from 'utils/rbam.utils';
 
 import {
   CREATE_DATA_POST,
@@ -94,6 +94,7 @@ export const useSign = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const orgDao = useDaoOrganization();
   const feeGranter = useFeeGranter({ offChainProject });
+
   const { data } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,

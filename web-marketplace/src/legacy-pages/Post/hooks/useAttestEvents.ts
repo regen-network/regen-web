@@ -17,11 +17,13 @@ import {
   MsgAttest as MsgAttestV2,
 } from '@regen-network/api/regen/data/v2/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useAtom } from 'jotai';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 import { StaticImageData } from 'next/image';
 
 import { User } from 'web-components/src/components/user/UserInfo';
@@ -116,6 +118,18 @@ export const useAttestEvents = ({
     }),
   );
 
+  // Anchor/Attest events executed from organization through cosmwasm MsgExecuteContract
+  const { data: msgExecuteContractTxsEventData } = useQuery(
+    getGetTxsEventQuery({
+      client: queryClient,
+      enabled: !!queryClient,
+      request: {
+        events: [`${messageActionEquals}'${MsgExecuteContract.typeUrl}'`],
+        orderBy: OrderBy.ORDER_BY_DESC,
+      },
+    }),
+  );
+
   let anchorTx: TxResponse | undefined;
   let attestTxResponses:
     | {
@@ -128,11 +142,13 @@ export const useAttestEvents = ({
     anchorTx = [
       ...(anchorV1TxsEventData?.txResponses ?? []),
       ...(anchorV2TxsEventData?.txResponses ?? []),
+      ...(msgExecuteContractTxsEventData?.txResponses ?? []),
     ].filter(txRes => txRes.rawLog.includes(iri))?.[0];
 
     attestTxResponses = [
       ...(attestV1TxsEventData?.txResponses ?? []),
       ...(attestV2TxsEventData?.txResponses ?? []),
+      ...(msgExecuteContractTxsEventData?.txResponses ?? []),
     ]
       .filter(txRes => txRes.rawLog.includes(iri))
       ?.map(txRes => {
@@ -230,6 +246,11 @@ export const useAttestEvents = ({
         (!!attestorOrg?.daoAddress && attestorOrg?.daoAddress === adminAddr);
 
       const account = attestorAccount || attestorOrg;
+      const accountType = attestorAccount
+        ? 'USER'
+        : attestorOrg
+        ? 'ORGANIZATION'
+        : 'USER';
       events.unshift({
         icon: postSigned,
         label: _(msg`Signed by`),
@@ -242,12 +263,8 @@ export const useAttestEvents = ({
         user: {
           name: account?.name || _(DEFAULT_NAME),
           link: account?.id ? `/profiles/${account?.id}` : undefined,
-          type: attestorAccount
-            ? 'USER'
-            : attestorOrg
-            ? 'ORGANIZATION'
-            : 'USER',
-          image: account?.image || DEFAULT_PROFILE_USER_AVATAR,
+          type: accountType,
+          image: getDefaultAvatar({ ...account, type: accountType }),
           tag: attestorIsAdmin
             ? _(ADMIN)
             : attestorIsRegistry

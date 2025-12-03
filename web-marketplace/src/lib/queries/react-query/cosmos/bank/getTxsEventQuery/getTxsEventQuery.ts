@@ -43,7 +43,6 @@ export const getGetTxsEventQuery = ({
       );
       txs.push(...response.txs);
       txResponses.push(...response.txResponses);
-      if (stopCondition) console.log('txResponses', txResponses);
 
       if (stopCondition?.({ txs, txResponses })) break;
 

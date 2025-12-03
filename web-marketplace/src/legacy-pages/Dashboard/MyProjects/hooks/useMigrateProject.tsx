@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';

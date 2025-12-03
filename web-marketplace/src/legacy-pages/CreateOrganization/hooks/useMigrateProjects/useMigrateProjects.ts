@@ -52,6 +52,7 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
+import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
@@ -80,7 +81,6 @@ import {
   getOrgAssignments,
   getSelectedCardSellOrdersWithNewIds,
 } from './useMigrateProjects.utils';
-import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
 
 type UseMigrateProjectsParams = {
   projects: NormalizeProject[];
@@ -691,6 +691,7 @@ export const useMigrateProjects = ({
       updateCardSellOrders,
       currentUserRole,
       orgAssignmentsData,
+      onSuccess,
     ],
   );
 

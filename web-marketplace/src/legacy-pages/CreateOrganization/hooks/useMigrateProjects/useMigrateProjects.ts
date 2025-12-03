@@ -80,12 +80,23 @@ import {
   getOrgAssignments,
   getSelectedCardSellOrdersWithNewIds,
 } from './useMigrateProjects.utils';
+import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
 
-export const useMigrateProjects = (
-  projects: NormalizeProject[],
-  handleSaveNext?: (formValues: OrganizationMultiStepData) => void,
-  data?: OrganizationMultiStepData,
-) => {
+type UseMigrateProjectsParams = {
+  projects: NormalizeProject[];
+  // Create organization flow handler to save and go to next step
+  handleSaveNext?: (formValues: OrganizationMultiStepData) => void;
+  data?: OrganizationMultiStepData;
+  // Migrating a single project callback from the project dashboard
+  onSuccess?: () => void;
+};
+
+export const useMigrateProjects = ({
+  projects,
+  handleSaveNext,
+  data,
+  onSuccess,
+}: UseMigrateProjectsParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { queryClient, signingCosmWasmClient } = useLedger();
@@ -214,33 +225,39 @@ export const useMigrateProjects = (
 
       // Then, add off-chain assignments for members without wallet addresses
       const allPromises = selectedProjectsWithAddresses.flatMap(project =>
-        orgAssignments.offChainAssignments.map(assignment => {
+        orgAssignments.offChainAssignments.map(async assignment => {
           if (token) {
-            return postData({
-              url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
-              parseTextResponse: true,
-              data: {
-                email: assignment.email,
-                roleName: assignment.roleName,
-                daoAddress: project.adminDaoAddress,
-                visible: true,
-                onChainRoleId: getNewProjectRoleId(assignment.roleName),
-              },
-              token,
-              retryCsrfRequest,
-            });
+            try {
+              const response = await postData({
+                url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+                data: {
+                  email: assignment.email,
+                  roleName: assignment.roleName,
+                  daoAddress: project.dao.address,
+                  visible: true,
+                  onChainRoleId: getNewProjectRoleId(assignment.roleName),
+                },
+                token,
+                retryCsrfRequest,
+              });
+              if (response.error) {
+                throw new Error(response.error);
+              }
+              return response;
+            } catch (error) {
+              throw error;
+            }
           }
           return Promise.resolve(null);
         }),
       );
 
       const results = await Promise.allSettled(allPromises);
-
       results.forEach((result, idx) => {
         if (result.status === 'rejected') {
           setErrorBannerText(
             _(
-              msg`Adding member to ${
+              msg`Adding member to project ${
                 selectedProjectsWithAddresses[idx].offChainId as string
               } failed: ${result.reason}`,
             ),
@@ -340,12 +357,18 @@ export const useMigrateProjects = (
         }),
         refetchType: 'all',
       });
-      if (dao)
+      if (dao) {
         await reactQueryClient.invalidateQueries({
           queryKey: getOrganizationProjectsByDaoAddressQueryKey({
             daoAddress: dao.address,
           }),
         });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrganizationByDaoAddressQueryKey({
+            daoAddress: dao.address,
+          }),
+        });
+      }
       reloadBalances();
     },
     [reactQueryClient, wallet?.address, activeAccountId, reloadBalances, dao],
@@ -631,6 +654,7 @@ export const useMigrateProjects = (
               if (handleSaveNext && data)
                 handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
+              if (onSuccess) onSuccess();
             },
             onError: error => {
               setProcessingModalAtom(atom => void (atom.open = false));

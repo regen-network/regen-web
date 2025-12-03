@@ -28,11 +28,11 @@ export const MigrateProjectsStep = ({
   const { _ } = useLingui();
   const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
 
-  const { migrateProjects } = useMigrateProjects(
+  const { migrateProjects } = useMigrateProjects({
     projects,
     handleSaveNext,
     data,
-  );
+  });
 
   return (
     <div>

@@ -139,7 +139,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       try {
         await postData({
           url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
-          parseTextResponse: true,
           data: {
             email: addressOrEmail,
             roleName: role,

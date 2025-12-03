@@ -1,5 +1,4 @@
-// AI Generated Code
-// TODO update the tests to match the modified utility function
+// AI Generated Code for the most part
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -9,22 +8,17 @@ import {
 
 import {
   ROLE_ADMIN,
-  ROLE_AUTHOR,
   ROLE_EDITOR,
   ROLE_OWNER,
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { getOrgAssignments } from './useMigrateProjects.utils';
 
 type AssignmentInput = {
   accountId: string;
-  roleName:
-    | typeof ROLE_OWNER
-    | typeof ROLE_ADMIN
-    | typeof ROLE_EDITOR
-    | typeof ROLE_AUTHOR
-    | typeof ROLE_VIEWER;
+  roleName: BaseMemberRole;
   addr?: string | null;
   email?: string | null;
   googleEmail?: string | null;
@@ -84,7 +78,6 @@ describe('getOrgAssignments', () => {
       { accountId: 'owner', roleName: ROLE_OWNER, addr: 'owner-addr' },
       { accountId: 'admin', roleName: ROLE_ADMIN, addr: 'admin-addr' },
       { accountId: 'editor', roleName: ROLE_EDITOR, addr: 'editor-addr' },
-      { accountId: 'author', roleName: ROLE_AUTHOR, addr: 'author-addr' },
       { accountId: 'viewer', roleName: ROLE_VIEWER, addr: 'viewer-addr' },
     ]);
 
@@ -113,14 +106,12 @@ describe('getOrgAssignments', () => {
     const data = createOrgAssignmentsData([
       { accountId: 'owner', roleName: ROLE_OWNER, addr: 'owner-addr' },
       { accountId: 'admin', roleName: ROLE_ADMIN, addr: 'admin-addr' },
-      { accountId: 'author-off', roleName: ROLE_AUTHOR, email: 'e@f.com' },
       { accountId: 'viewer-off', roleName: ROLE_VIEWER, email: 'g@h.com' },
     ]);
 
     const result = getOrgAssignments(ROLE_OWNER, data);
 
     expect(result.offChainAssignments).toEqual([
-      { email: 'e@f.com', roleName: ROLE_AUTHOR },
       { email: 'g@h.com', roleName: ROLE_VIEWER },
     ]);
   });

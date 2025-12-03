@@ -81,7 +81,6 @@ import {
   getOrgAssignments,
   getSelectedCardSellOrdersWithNewIds,
 } from './useMigrateProjects.utils';
-import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
 
 type UseMigrateProjectsParams = {
   projects: NormalizeProject[];

@@ -160,9 +160,11 @@ export const ProjectCollaborators = ({
                       : msg`Offchain project id is needed to migrate a project. Edit project description or media to create one.`,
                   )}
                 >
-                  <OutlinedButton disabled className="mt-25">
-                    {_(MIGRATE_PROJECT)}
-                  </OutlinedButton>
+                  <span>
+                    <OutlinedButton disabled className="mt-25">
+                      {_(MIGRATE_PROJECT)}
+                    </OutlinedButton>
+                  </span>
                 </InfoTooltip>
               )
             ) : (

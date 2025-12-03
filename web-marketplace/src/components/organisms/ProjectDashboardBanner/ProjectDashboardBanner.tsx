@@ -227,9 +227,11 @@ const ProjectDashboardBanner = ({
                     title={createPostTooltipText}
                     placement="top"
                   >
-                    <ContainedButton onClick={onCreatePost} disabled>
-                      {_(CREATE_POST)}
-                    </ContainedButton>
+                    <span>
+                      <ContainedButton onClick={onCreatePost} disabled>
+                        {_(CREATE_POST)}
+                      </ContainedButton>
+                    </span>
                   </InfoTooltip>
                 ) : (
                   <ContainedButton onClick={onCreatePost}>

@@ -34,6 +34,7 @@ type Params = {
   adminAccountId?: string;
   organization?: ReturnType<typeof useProfileData>['organization'];
   isLoading?: boolean;
+  withExternalMemberProjects?: boolean;
 };
 
 export const useFetchProjectByAdmin = ({
@@ -42,6 +43,7 @@ export const useFetchProjectByAdmin = ({
   adminAccountId,
   organization,
   isLoading,
+  withExternalMemberProjects = true,
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -61,8 +63,10 @@ export const useFetchProjectByAdmin = ({
   );
 
   // Get projects current user is an external member of
-  const { externalMemberProjects, isAssignmentsLoading } =
-    useMembersProjects(adminAccountId);
+  const { externalMemberProjects, isAssignmentsLoading } = useMembersProjects(
+    adminAccountId,
+    !withExternalMemberProjects,
+  );
 
   // or for organization
   const orgOffChainProjects = organization

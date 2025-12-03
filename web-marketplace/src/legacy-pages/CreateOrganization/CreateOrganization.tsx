@@ -183,6 +183,7 @@ export default function CreateOrganizationPage(): JSX.Element {
     adminAccountId: activeAccount?.id,
     adminAddress: activeAccount?.addr,
     keepUnpublished: true,
+    withExternalMemberProjects: false,
   });
 
   const projects = useMemo(

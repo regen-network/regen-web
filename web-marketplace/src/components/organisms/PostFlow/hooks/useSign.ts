@@ -35,6 +35,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import {
   CREATE_DATA_POST,
@@ -102,10 +103,11 @@ export const useSign = ({
   );
   const currentUserOrgAssignment = useMemo(
     () =>
-      data?.daoByAddress?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccountId,
-      ),
-    [data, activeAccountId],
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments: data?.daoByAddress?.assignmentsByDaoAddress?.nodes,
+      }),
+    [data?.daoByAddress?.assignmentsByDaoAddress?.nodes, activeAccountId],
   );
   const { roleId, authorizationId } = getRoleAuthorizationIds({
     type: 'organization',

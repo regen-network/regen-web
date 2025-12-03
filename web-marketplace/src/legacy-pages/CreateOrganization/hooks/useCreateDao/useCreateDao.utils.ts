@@ -503,6 +503,10 @@ export const projectRoles = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,
+  adminAssignments: string[] = [],
+  editorAssignments: string[] = [],
+  authorAssignments: string[] = [],
+  viewerAssignments: string[] = [],
 ) => [
   {
     name: 'owner',
@@ -525,23 +529,27 @@ export const projectRoles = (
       ),
       ...projectAdminAuthorizations,
     ],
+    assignments: adminAssignments,
   },
   {
     name: 'editor',
     metadata:
       'Can edit all project page info and posts. Cannot manage users or credits.',
     authorizations: [projectsAuthorization, dataAuthorization],
+    assignments: editorAssignments,
   },
   {
     name: 'author',
     metadata:
       'Can create, edit, and delete their own data posts. Cannot see private post data.',
     authorizations: [dataAuthorization],
+    assignments: authorAssignments,
   },
   {
     name: 'viewer',
     metadata:
       'Viewer of the organization, can view all data across all projects, even when private.',
+    assignments: viewerAssignments,
   },
 ];
 
@@ -779,6 +787,10 @@ type GetProposalModulesParams = {
   rbamSalt: string;
   now: number;
   daoType: 'organization' | 'project';
+  adminAssignments?: string[];
+  editorAssignments?: string[];
+  authorAssignments?: string[];
+  viewerAssignments?: string[];
 };
 export const getProposalModules = ({
   walletAddress,
@@ -788,6 +800,10 @@ export const getProposalModules = ({
   rbamSalt,
   now,
   daoType,
+  adminAssignments,
+  editorAssignments,
+  authorAssignments,
+  viewerAssignments,
 }: GetProposalModulesParams) => [
   {
     admin: { core_module: {} },
@@ -804,7 +820,15 @@ export const getProposalModules = ({
               cw4GroupAddress,
               rbamAddress,
             )
-          : projectRoles(walletAddress, cw4GroupAddress, rbamAddress),
+          : projectRoles(
+              walletAddress,
+              cw4GroupAddress,
+              rbamAddress,
+              adminAssignments,
+              editorAssignments,
+              authorAssignments,
+              viewerAssignments,
+            ),
       protobuf_registry_code_id: CODE_IDS.protobufRegistry,
     }),
     funds: [],

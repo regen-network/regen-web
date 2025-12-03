@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -25,6 +25,7 @@ import {
   getMsgExecuteContract,
 } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
+import { getAccountAssignment } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import {
@@ -37,6 +38,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { ledgerRPCUri } from 'lib/ledger';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -49,14 +51,17 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
 import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { orgRoles } from 'hooks/org-members/constants';
+import { getNewProjectRoleId } from 'hooks/org-members/utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient from 'hooks/useMsgClient';
 
@@ -71,7 +76,10 @@ import {
   predictAllAddresses,
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
-import { getSelectedCardSellOrdersWithNewIds } from './useMigrateProjects.utils';
+import {
+  getOrgAssignments,
+  getSelectedCardSellOrdersWithNewIds,
+} from './useMigrateProjects.utils';
 
 export const useMigrateProjects = (
   projects: NormalizeProject[],
@@ -113,15 +121,35 @@ export const useMigrateProjects = (
     }),
   );
 
+  const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
+    useQuery(
+      getDaoByAddressWithAssignmentsQuery({
+        client: graphqlClient,
+        enabled: !!graphqlClient && !!dao?.address,
+        address: dao?.address as string,
+      }),
+    );
+
+  const currentUserRole = useMemo(
+    () =>
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments:
+          orgAssignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes,
+      })?.roleName,
+    [orgAssignmentsData, activeAccountId],
+  ) as BaseMemberRole | undefined;
+
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
   });
 
-  const updateOffChainProjectAdmin = useCallback(
+  const updateOffChainProjectAdminAssignments = useCallback(
     async (
       selectedProjectsWithAddresses: (NormalizeProject & {
         dao: { address: string };
       })[],
+      orgAssignments: ReturnType<typeof getOrgAssignments>,
     ) => {
       // First we need to make sure that the project daos have been indexed off-chain
       let stop = false;
@@ -183,8 +211,44 @@ export const useMigrateProjects = (
           );
         }
       });
+
+      // Then, add off-chain assignments for members without wallet addresses
+      const allPromises = selectedProjectsWithAddresses.flatMap(project =>
+        orgAssignments.offChainAssignments.map(assignment => {
+          if (token) {
+            return postData({
+              url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+              parseTextResponse: true,
+              data: {
+                email: assignment.email,
+                roleName: assignment.roleName,
+                daoAddress: project.adminDaoAddress,
+                visible: true,
+                onChainRoleId: getNewProjectRoleId(assignment.roleName),
+              },
+              token,
+              retryCsrfRequest,
+            });
+          }
+          return Promise.resolve(null);
+        }),
+      );
+
+      const results = await Promise.allSettled(allPromises);
+
+      results.forEach((result, idx) => {
+        if (result.status === 'rejected') {
+          setErrorBannerText(
+            _(
+              msg`Adding member to ${
+                selectedProjectsWithAddresses[idx].offChainId as string
+              } failed: ${result.reason}`,
+            ),
+          );
+        }
+      });
     },
-    [setErrorBannerText, updateProject, _, refetch],
+    [setErrorBannerText, updateProject, _, refetch, retryCsrfRequest, token],
   );
 
   const updateCardSellOrders = useCallback(
@@ -289,7 +353,7 @@ export const useMigrateProjects = (
 
   const migrateProjects = useCallback(
     async (values: FormValues) => {
-      if (isLoadingSellOrders || isLoadingCredits) {
+      if (isLoadingSellOrders || isLoadingCredits || isLoadingOrgAssignments) {
         // prevent submission while loading data
         return;
       }
@@ -370,6 +434,11 @@ export const useMigrateProjects = (
           }),
         );
 
+        const orgAssignments = getOrgAssignments(
+          currentUserRole,
+          orgAssignmentsData,
+        );
+
         const createDaosMsgs = selectedProjectsWithAddresses.map(project => {
           const now = Date.now();
 
@@ -381,6 +450,10 @@ export const useMigrateProjects = (
             rbamAddress: project.rbam.address,
             rbamSalt: project.rbam.salt,
             now,
+            adminAssignments: orgAssignments.adminAssignments,
+            editorAssignments: orgAssignments.editorAssignments,
+            authorAssignments: orgAssignments.authorAssignments,
+            viewerAssignments: orgAssignments.viewerAssignments,
           });
 
           const votingModule = getVotingModule({
@@ -518,7 +591,11 @@ export const useMigrateProjects = (
           {
             onSuccess: async deliverTxResponse => {
               // Update off-chain projects admin to new DAO addresses
-              await updateOffChainProjectAdmin(selectedProjectsWithAddresses);
+              // and add off-chain projects assignments (for members without wallet addresses)
+              await updateOffChainProjectAdminAssignments(
+                selectedProjectsWithAddresses,
+                orgAssignments,
+              );
 
               // Update card sell orders
               const selectedCardSellOrders =
@@ -532,6 +609,7 @@ export const useMigrateProjects = (
 
               // Transfer stripe connect settings to DAO
               if (
+                selectedCardSellOrders.length > 0 &&
                 privActiveAccount?.can_use_stripe_connect &&
                 activeAccount?.stripeConnectedAccountId &&
                 token
@@ -572,6 +650,7 @@ export const useMigrateProjects = (
       setErrorBannerText,
       isLoadingCredits,
       isLoadingSellOrders,
+      isLoadingOrgAssignments,
       sellOrdersData,
       wallet?.address,
       signingCosmWasmClient,
@@ -584,8 +663,10 @@ export const useMigrateProjects = (
       privActiveAccount,
       activeAccount,
       reloadData,
-      updateOffChainProjectAdmin,
+      updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
+      currentUserRole,
+      orgAssignmentsData,
     ],
   );
 

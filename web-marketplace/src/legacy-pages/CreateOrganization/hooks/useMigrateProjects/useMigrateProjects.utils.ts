@@ -1,9 +1,18 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/events';
 
+import { DaoByAddressWithAssignmentsQuery } from 'generated/graphql';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 export const getSelectedCardSellOrdersWithNewIds = (
@@ -42,4 +51,66 @@ export const getSelectedCardSellOrdersWithNewIds = (
   ).map(order => ({ ...order, newId: sellOrderIdMap[order.id] }));
 
   return selectedCardSellOrders;
+};
+
+export const getOrgAssignments = (
+  orgCurrentUserRole?: BaseMemberRole,
+  orgAssignmentsData?: DaoByAddressWithAssignmentsQuery | null,
+) => {
+  let adminAssignments: string[] = [];
+  let editorAssignments: string[] = [];
+  let authorAssignments: string[] = [];
+  let viewerAssignments: string[] = [];
+  const offChainAssignments: { email: string; roleName: BaseMemberRole }[] = [];
+
+  if (orgCurrentUserRole)
+    orgAssignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes?.forEach(
+      assignment => {
+        const account =
+          orgAssignmentsData?.daoByAddress?.accountsByAssignmentDaoAddressAndAccountId?.nodes.find(
+            acc => acc?.id === assignment?.accountId,
+          );
+        const id = account?.id;
+        const email =
+          account?.privateAccountById?.email ||
+          account?.privateAccountById?.googleEmail;
+        if (account?.addr) {
+          switch (assignment?.roleName) {
+            case ROLE_OWNER:
+              // Since the user who migrates the project becomes the owner of the project,
+              // if the current user is not the org owner,
+              // we want to downgrade the current org owner to admin in the project,
+              // because they can only be one owner.
+              if (orgCurrentUserRole !== ROLE_OWNER) {
+                adminAssignments.push(account.addr);
+              }
+              break;
+            case ROLE_ADMIN:
+              adminAssignments.push(account.addr);
+              break;
+            case ROLE_EDITOR:
+              editorAssignments.push(account.addr);
+              break;
+            case ROLE_AUTHOR:
+              authorAssignments.push(account.addr);
+              break;
+            case ROLE_VIEWER:
+              viewerAssignments.push(account.addr);
+              break;
+          }
+        } else if (email && id && assignment?.roleName) {
+          offChainAssignments.push({
+            email,
+            roleName: assignment?.roleName as BaseMemberRole,
+          });
+        }
+      },
+    );
+  return {
+    adminAssignments,
+    editorAssignments,
+    authorAssignments,
+    viewerAssignments,
+    offChainAssignments,
+  };
 };

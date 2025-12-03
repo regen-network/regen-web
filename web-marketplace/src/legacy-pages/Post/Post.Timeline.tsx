@@ -8,6 +8,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { Grid } from '@mui/material';
 import Image from 'next/image';
 
+import { Loading } from 'web-components/src/components/loading';
 import Section from 'web-components/src/components/section';
 import {
   Body,
@@ -25,7 +26,6 @@ import { LinkWithArrow } from 'components/atoms';
 
 import { useAttestEvents } from './hooks/useAttestEvents';
 import { SEE_BLOCKCHAIN_RECORD, TIMELINE } from './Post.constants';
-import { Loading } from 'web-components/src/components/loading';
 
 type Props = {
   createdAt: string;

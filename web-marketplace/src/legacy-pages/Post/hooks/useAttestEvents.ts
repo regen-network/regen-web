@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -38,6 +38,7 @@ import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
+import { GetTxsEventQueryResponse } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.types';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
 
@@ -134,81 +135,123 @@ export const useAttestEvents = ({
     }),
   );
 
-  // Anchor/Attest events executed from organization through cosmwasm MsgExecuteContract
-  // TODO optimize query so that we stop fetching all pages as long as we have the condition below in the events
+  const anchorTxFromAnchorMsg = useMemo(
+    () =>
+      [
+        ...(anchorV1TxsEventData?.txResponses ?? []),
+        ...(anchorV2TxsEventData?.txResponses ?? []),
+      ].filter(txRes => iri && txRes.rawLog.includes(iri))?.[0],
+    [anchorV1TxsEventData, anchorV2TxsEventData, iri],
+  );
+
+  const attestTxsFromAttestMsg = useMemo(
+    () =>
+      [
+        ...(attestV1TxsEventData?.txResponses ?? []),
+        ...(attestV2TxsEventData?.txResponses ?? []),
+      ].filter(txRes => iri && txRes.rawLog.includes(iri)),
+
+    [attestV1TxsEventData, attestV2TxsEventData, iri],
+  );
+
+  const shouldStopMsgExecuteContractQuery = useCallback(
+    () =>
+      ({ txResponses = [] }: GetTxsEventQueryResponse): boolean => {
+        if (!iri) return false;
+
+        const matchesIri = (txRes: TxResponse) =>
+          !!txRes.rawLog && txRes.rawLog.includes(iri);
+
+        const hasAnchorEvent =
+          onlyAttestEvents ||
+          !!anchorTxFromAnchorMsg ||
+          txResponses.some(
+            txRes =>
+              matchesIri(txRes) &&
+              txRes.events?.some(event =>
+                EventAnchor.typeUrl.includes(event.type),
+              ),
+          );
+        const hasAttestEvent = txResponses.some(
+          txRes =>
+            matchesIri(txRes) &&
+            txRes.events?.some(event =>
+              EventAttest.typeUrl.includes(event.type),
+            ),
+        );
+
+        return hasAnchorEvent && hasAttestEvent;
+      },
+    [iri, onlyAttestEvents, anchorTxFromAnchorMsg],
+  );
+
+  // If we haven't found both anchor and attest txs yet, keep querying MsgExecuteContract txs
+  // in case the attest or anchor was done via a contract call
   const {
     data: msgExecuteContractTxsEventData,
     isLoading: isLoadingMsgExecuteContractTxsEventData,
   } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
-      enabled: !!queryClient,
+      enabled:
+        !!queryClient &&
+        attestTxsFromAttestMsg.length === 0 &&
+        !isLoadingAnchorV1TxsEventData &&
+        !isLoadingAnchorV2TxsEventData,
       request: {
         events: [`${messageActionEquals}'${MsgExecuteContract.typeUrl}'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
+      stopCondition: iri ? shouldStopMsgExecuteContractQuery() : undefined,
+      stopConditionKey: iri
+        ? `${iri}-${onlyAttestEvents ? 'attest-only' : 'anchor-attest'}`
+        : undefined,
     }),
-  );
-
-  const anchorMsgExecuteContractTxsEventData = useMemo(
-    () =>
-      msgExecuteContractTxsEventData?.txResponses?.filter(txRes =>
-        txRes.events.find(event => EventAnchor.typeUrl.includes(event.type)),
-      ) ?? [],
-    [msgExecuteContractTxsEventData],
-  );
-
-  const attestMsgExecuteContractTxsEventData = useMemo(
-    () =>
-      msgExecuteContractTxsEventData?.txResponses?.filter(txRes =>
-        txRes.events.find(event => EventAttest.typeUrl.includes(event.type)),
-      ) ?? [],
-    [msgExecuteContractTxsEventData],
   );
 
   const anchorTx = useMemo(
     () =>
-      [
-        ...(anchorV1TxsEventData?.txResponses ?? []),
-        ...(anchorV2TxsEventData?.txResponses ?? []),
-        ...anchorMsgExecuteContractTxsEventData,
-      ].filter(txRes => iri && txRes.rawLog.includes(iri))?.[0],
-    [
-      anchorV1TxsEventData,
-      anchorV2TxsEventData,
-      anchorMsgExecuteContractTxsEventData,
-      iri,
-    ],
+      anchorTxFromAnchorMsg ??
+      msgExecuteContractTxsEventData?.txResponses
+        ?.filter(txRes =>
+          txRes.events.find(event => EventAnchor.typeUrl.includes(event.type)),
+        )
+        .filter(txRes => iri && txRes.rawLog.includes(iri))?.[0] ??
+      [],
+    [msgExecuteContractTxsEventData, anchorTxFromAnchorMsg, iri],
   );
+
+  const attestMsgExecuteContractTxsEventData = useMemo(
+    () =>
+      msgExecuteContractTxsEventData?.txResponses
+        ?.filter(txRes =>
+          txRes.events.find(event => EventAttest.typeUrl.includes(event.type)),
+        )
+        ?.filter(txRes => iri && txRes.rawLog.includes(iri)) ?? [],
+    [msgExecuteContractTxsEventData, iri],
+  );
+
   const attestTxResponses = useMemo(
     () =>
       [
-        ...(attestV1TxsEventData?.txResponses ?? []),
-        ...(attestV2TxsEventData?.txResponses ?? []),
+        ...(attestTxsFromAttestMsg ?? []),
         ...attestMsgExecuteContractTxsEventData,
-      ]
-        .filter(txRes => iri && txRes.rawLog.includes(iri))
-        ?.map(txRes => {
-          const events = txRes.logs[0].events.filter(event => {
-            return EventAttest.typeUrl.includes(event.type);
-          });
-          const attestors = events.map(event => {
-            const attributes = event.attributes
-              .filter(attr => attr.key === 'attestor')
-              .map(attr => attr.value);
-            return attributes;
-          });
-          const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
-          const { timestamp, txhash } = txRes;
+      ]?.map(txRes => {
+        const events = txRes.logs[0].events.filter(event => {
+          return EventAttest.typeUrl.includes(event.type);
+        });
+        const attestors = events.map(event => {
+          const attributes = event.attributes
+            .filter(attr => attr.key === 'attestor')
+            .map(attr => attr.value);
+          return attributes;
+        });
+        const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
+        const { timestamp, txhash } = txRes;
 
-          return { timestamp, txhash, attestor };
-        }),
-    [
-      attestV1TxsEventData,
-      attestV2TxsEventData,
-      attestMsgExecuteContractTxsEventData,
-      iri,
-    ],
+        return { timestamp, txhash, attestor };
+      }),
+    [attestMsgExecuteContractTxsEventData, attestTxsFromAttestMsg],
   );
 
   const attestorsAccountsResults = useQueries({

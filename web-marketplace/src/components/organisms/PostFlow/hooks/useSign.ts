@@ -12,6 +12,7 @@ import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v2/tx';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useSetAtom } from 'jotai';
 import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
 import {
@@ -205,6 +206,17 @@ export const useSign = ({
                 queryKey: getTxsEventQueryKey({
                   request: {
                     events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
+                    orderBy: OrderBy.ORDER_BY_DESC,
+                  },
+                }),
+              });
+              // Can take quite long so we do not await
+              reactQueryClient.invalidateQueries({
+                queryKey: getTxsEventQueryKey({
+                  request: {
+                    events: [
+                      `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
+                    ],
                     orderBy: OrderBy.ORDER_BY_DESC,
                   },
                 }),

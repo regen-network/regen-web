@@ -86,6 +86,8 @@ export type Account = Node & {
   sellOrdersBySellerAccountId: SellOrdersConnection;
   /** Reads and enables pagination through a set of `Assignment`. */
   assignmentsByAccountId: AssignmentsConnection;
+  /** Reads and enables pagination through a set of `OrganizationMemberRemoval`. */
+  organizationMemberRemovalsByAccountId: OrganizationMemberRemovalsConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -118,6 +120,8 @@ export type Account = Node & {
   daosByAssignmentAccountIdAndDaoAddress: AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection;
   /** Reads and enables pagination through a set of `Role`. */
   rolesByAssignmentAccountIdAndRoleName: AccountRolesByAssignmentAccountIdAndRoleNameManyToManyConnection;
+  /** Reads and enables pagination through a set of `Organization`. */
+  organizationsByOrganizationMemberRemovalAccountIdAndOrganizationId: AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyConnection;
 };
 
 
@@ -276,6 +280,17 @@ export type AccountAssignmentsByAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AssignmentsOrderBy>>;
   condition?: Maybe<AssignmentCondition>;
+};
+
+
+export type AccountOrganizationMemberRemovalsByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
+  condition?: Maybe<OrganizationMemberRemovalCondition>;
 };
 
 
@@ -456,6 +471,17 @@ export type AccountRolesByAssignmentAccountIdAndRoleNameArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RolesOrderBy>>;
   condition?: Maybe<RoleCondition>;
+};
+
+
+export type AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationsOrderBy>>;
+  condition?: Maybe<OrganizationCondition>;
 };
 
 /** A connection to a list of `Account` values, with data from `Project`. */
@@ -929,6 +955,29 @@ export type AccountInput = {
   active?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Organization` values, with data from `OrganizationMemberRemoval`. */
+export type AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyConnection = {
+  __typename?: 'AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyConnection';
+  /** A list of `Organization` objects. */
+  nodes: Array<Maybe<Organization>>;
+  /** A list of edges which contains the `Organization`, info from the `OrganizationMemberRemoval`, and the cursor to aid in pagination. */
+  edges: Array<AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Organization` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Organization` edge in the connection, with data from `OrganizationMemberRemoval`. */
+export type AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyEdge = {
+  __typename?: 'AccountOrganizationsByOrganizationMemberRemovalAccountIdAndOrganizationIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Organization` at the end of the edge. */
+  node?: Maybe<Organization>;
+  removedAt: Scalars['Datetime'];
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -1934,6 +1983,43 @@ export type CreateOrganizationInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Organization` to be created by this mutation. */
   organization: OrganizationInput;
+};
+
+/** All input for the create `OrganizationMemberRemoval` mutation. */
+export type CreateOrganizationMemberRemovalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationMemberRemoval` to be created by this mutation. */
+  organizationMemberRemoval: OrganizationMemberRemovalInput;
+};
+
+/** The output of our create `OrganizationMemberRemoval` mutation. */
+export type CreateOrganizationMemberRemovalPayload = {
+  __typename?: 'CreateOrganizationMemberRemovalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationMemberRemoval` that was created by this mutation. */
+  organizationMemberRemoval?: Maybe<OrganizationMemberRemoval>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `OrganizationMemberRemoval`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Organization` that is related to this `OrganizationMemberRemoval`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** An edge for our `OrganizationMemberRemoval`. May be used by Relay 1. */
+  organizationMemberRemovalEdge?: Maybe<OrganizationMemberRemovalsEdge>;
+};
+
+
+/** The output of our create `OrganizationMemberRemoval` mutation. */
+export type CreateOrganizationMemberRemovalPayloadOrganizationMemberRemovalEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
 };
 
 /** The output of our create `Organization` mutation. */
@@ -3964,6 +4050,55 @@ export type DeleteOrganizationInput = {
   nodeId: Scalars['ID'];
 };
 
+/** All input for the `deleteOrganizationMemberRemovalByAccountIdAndOrganizationId` mutation. */
+export type DeleteOrganizationMemberRemovalByAccountIdAndOrganizationIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  accountId: Scalars['UUID'];
+  organizationId: Scalars['UUID'];
+};
+
+/** All input for the `deleteOrganizationMemberRemoval` mutation. */
+export type DeleteOrganizationMemberRemovalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `OrganizationMemberRemoval` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `OrganizationMemberRemoval` mutation. */
+export type DeleteOrganizationMemberRemovalPayload = {
+  __typename?: 'DeleteOrganizationMemberRemovalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationMemberRemoval` that was deleted by this mutation. */
+  organizationMemberRemoval?: Maybe<OrganizationMemberRemoval>;
+  deletedOrganizationMemberRemovalId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `OrganizationMemberRemoval`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Organization` that is related to this `OrganizationMemberRemoval`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** An edge for our `OrganizationMemberRemoval`. May be used by Relay 1. */
+  organizationMemberRemovalEdge?: Maybe<OrganizationMemberRemovalsEdge>;
+};
+
+
+/** The output of our delete `OrganizationMemberRemoval` mutation. */
+export type DeleteOrganizationMemberRemovalPayloadOrganizationMemberRemovalEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
+};
+
 /** The output of our delete `Organization` mutation. */
 export type DeleteOrganizationPayload = {
   __typename?: 'DeleteOrganizationPayload';
@@ -5403,6 +5538,8 @@ export type Mutation = {
   createMetadataGraphTranslation?: Maybe<CreateMetadataGraphTranslationPayload>;
   /** Creates a single `Organization`. */
   createOrganization?: Maybe<CreateOrganizationPayload>;
+  /** Creates a single `OrganizationMemberRemoval`. */
+  createOrganizationMemberRemoval?: Maybe<CreateOrganizationMemberRemovalPayload>;
   /** Creates a single `OrganizationProject`. */
   createOrganizationProject?: Maybe<CreateOrganizationProjectPayload>;
   /** Creates a single `Post`. */
@@ -5499,6 +5636,10 @@ export type Mutation = {
   updateOrganizationById?: Maybe<UpdateOrganizationPayload>;
   /** Updates a single `Organization` using a unique key and a patch. */
   updateOrganizationByDaoAddress?: Maybe<UpdateOrganizationPayload>;
+  /** Updates a single `OrganizationMemberRemoval` using its globally unique id and a patch. */
+  updateOrganizationMemberRemoval?: Maybe<UpdateOrganizationMemberRemovalPayload>;
+  /** Updates a single `OrganizationMemberRemoval` using a unique key and a patch. */
+  updateOrganizationMemberRemovalByAccountIdAndOrganizationId?: Maybe<UpdateOrganizationMemberRemovalPayload>;
   /** Updates a single `OrganizationProject` using its globally unique id and a patch. */
   updateOrganizationProject?: Maybe<UpdateOrganizationProjectPayload>;
   /** Updates a single `OrganizationProject` using a unique key and a patch. */
@@ -5637,6 +5778,10 @@ export type Mutation = {
   deleteOrganizationById?: Maybe<DeleteOrganizationPayload>;
   /** Deletes a single `Organization` using a unique key. */
   deleteOrganizationByDaoAddress?: Maybe<DeleteOrganizationPayload>;
+  /** Deletes a single `OrganizationMemberRemoval` using its globally unique id. */
+  deleteOrganizationMemberRemoval?: Maybe<DeleteOrganizationMemberRemovalPayload>;
+  /** Deletes a single `OrganizationMemberRemoval` using a unique key. */
+  deleteOrganizationMemberRemovalByAccountIdAndOrganizationId?: Maybe<DeleteOrganizationMemberRemovalPayload>;
   /** Deletes a single `OrganizationProject` using its globally unique id. */
   deleteOrganizationProject?: Maybe<DeleteOrganizationProjectPayload>;
   /** Deletes a single `OrganizationProject` using a unique key. */
@@ -5796,6 +5941,12 @@ export type MutationCreateMetadataGraphTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateOrganizationArgs = {
   input: CreateOrganizationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateOrganizationMemberRemovalArgs = {
+  input: CreateOrganizationMemberRemovalInput;
 };
 
 
@@ -6084,6 +6235,18 @@ export type MutationUpdateOrganizationByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateOrganizationByDaoAddressArgs = {
   input: UpdateOrganizationByDaoAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrganizationMemberRemovalArgs = {
+  input: UpdateOrganizationMemberRemovalInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrganizationMemberRemovalByAccountIdAndOrganizationIdArgs = {
+  input: UpdateOrganizationMemberRemovalByAccountIdAndOrganizationIdInput;
 };
 
 
@@ -6502,6 +6665,18 @@ export type MutationDeleteOrganizationByDaoAddressArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrganizationMemberRemovalArgs = {
+  input: DeleteOrganizationMemberRemovalInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrganizationMemberRemovalByAccountIdAndOrganizationIdArgs = {
+  input: DeleteOrganizationMemberRemovalByAccountIdAndOrganizationIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteOrganizationProjectArgs = {
   input: DeleteOrganizationProjectInput;
 };
@@ -6784,6 +6959,10 @@ export type Organization = Node & {
   daoByDaoAddress?: Maybe<Dao>;
   /** Reads and enables pagination through a set of `OrganizationProject`. */
   organizationProjectsByOrganizationId: OrganizationProjectsConnection;
+  /** Reads and enables pagination through a set of `OrganizationMemberRemoval`. */
+  organizationMemberRemovalsByOrganizationId: OrganizationMemberRemovalsConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByOrganizationMemberRemovalOrganizationIdAndAccountId: OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyConnection;
 };
 
 
@@ -6795,6 +6974,51 @@ export type OrganizationOrganizationProjectsByOrganizationIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
   condition?: Maybe<OrganizationProjectCondition>;
+};
+
+
+export type OrganizationOrganizationMemberRemovalsByOrganizationIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
+  condition?: Maybe<OrganizationMemberRemovalCondition>;
+};
+
+
+export type OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+/** A connection to a list of `Account` values, with data from `OrganizationMemberRemoval`. */
+export type OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyConnection = {
+  __typename?: 'OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `OrganizationMemberRemoval`, and the cursor to aid in pagination. */
+  edges: Array<OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `OrganizationMemberRemoval`. */
+export type OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyEdge = {
+  __typename?: 'OrganizationAccountsByOrganizationMemberRemovalOrganizationIdAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  removedAt: Scalars['Datetime'];
 };
 
 /**
@@ -6843,6 +7067,81 @@ export type OrganizationInput = {
   name?: Maybe<Scalars['String']>;
   linkedinLink?: Maybe<Scalars['String']>;
 };
+
+export type OrganizationMemberRemoval = Node & {
+  __typename?: 'OrganizationMemberRemoval';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  accountId: Scalars['UUID'];
+  organizationId: Scalars['UUID'];
+  removedAt: Scalars['Datetime'];
+  /** Reads a single `Account` that is related to this `OrganizationMemberRemoval`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Organization` that is related to this `OrganizationMemberRemoval`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+};
+
+/**
+ * A condition to be used against `OrganizationMemberRemoval` object types. All
+ * fields are tested for equality and combined with a logical ‘and.’
+ */
+export type OrganizationMemberRemovalCondition = {
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `organizationId` field. */
+  organizationId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `removedAt` field. */
+  removedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `OrganizationMemberRemoval` */
+export type OrganizationMemberRemovalInput = {
+  accountId: Scalars['UUID'];
+  organizationId: Scalars['UUID'];
+  removedAt: Scalars['Datetime'];
+};
+
+/** Represents an update to a `OrganizationMemberRemoval`. Fields that are set will be updated. */
+export type OrganizationMemberRemovalPatch = {
+  accountId?: Maybe<Scalars['UUID']>;
+  organizationId?: Maybe<Scalars['UUID']>;
+  removedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `OrganizationMemberRemoval` values. */
+export type OrganizationMemberRemovalsConnection = {
+  __typename?: 'OrganizationMemberRemovalsConnection';
+  /** A list of `OrganizationMemberRemoval` objects. */
+  nodes: Array<Maybe<OrganizationMemberRemoval>>;
+  /** A list of edges which contains the `OrganizationMemberRemoval` and cursor to aid in pagination. */
+  edges: Array<OrganizationMemberRemovalsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `OrganizationMemberRemoval` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `OrganizationMemberRemoval` edge in the connection. */
+export type OrganizationMemberRemovalsEdge = {
+  __typename?: 'OrganizationMemberRemovalsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `OrganizationMemberRemoval` at the end of the edge. */
+  node?: Maybe<OrganizationMemberRemoval>;
+};
+
+/** Methods to use when ordering `OrganizationMemberRemoval`. */
+export enum OrganizationMemberRemovalsOrderBy {
+  Natural = 'NATURAL',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
+  OrganizationIdAsc = 'ORGANIZATION_ID_ASC',
+  OrganizationIdDesc = 'ORGANIZATION_ID_DESC',
+  RemovedAtAsc = 'REMOVED_AT_ASC',
+  RemovedAtDesc = 'REMOVED_AT_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** Represents an update to a `Organization`. Fields that are set will be updated. */
 export type OrganizationPatch = {
@@ -8229,6 +8528,8 @@ export type Query = Node & {
   allMetadataGraphTranslations?: Maybe<MetadataGraphTranslationsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
   allOrganizations?: Maybe<OrganizationsConnection>;
+  /** Reads and enables pagination through a set of `OrganizationMemberRemoval`. */
+  allOrganizationMemberRemovals?: Maybe<OrganizationMemberRemovalsConnection>;
   /** Reads and enables pagination through a set of `OrganizationProject`. */
   allOrganizationProjects?: Maybe<OrganizationProjectsConnection>;
   /** Reads and enables pagination through a set of `Post`. */
@@ -8279,6 +8580,7 @@ export type Query = Node & {
   metadataGraphTranslationByIriAndLanguageCode?: Maybe<MetadataGraphTranslation>;
   organizationById?: Maybe<Organization>;
   organizationByDaoAddress?: Maybe<Organization>;
+  organizationMemberRemovalByAccountIdAndOrganizationId?: Maybe<OrganizationMemberRemoval>;
   organizationProjectByOrganizationIdAndProjectId?: Maybe<OrganizationProject>;
   organizationProjectByProjectId?: Maybe<OrganizationProject>;
   postByIri?: Maybe<Post>;
@@ -8333,6 +8635,8 @@ export type Query = Node & {
   metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
   /** Reads a single `Organization` using its globally unique `ID`. */
   organization?: Maybe<Organization>;
+  /** Reads a single `OrganizationMemberRemoval` using its globally unique `ID`. */
+  organizationMemberRemoval?: Maybe<OrganizationMemberRemoval>;
   /** Reads a single `OrganizationProject` using its globally unique `ID`. */
   organizationProject?: Maybe<OrganizationProject>;
   /** Reads a single `Post` using its globally unique `ID`. */
@@ -8527,6 +8831,18 @@ export type QueryAllOrganizationsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
   condition?: Maybe<OrganizationCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllOrganizationMemberRemovalsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
+  condition?: Maybe<OrganizationMemberRemovalCondition>;
 };
 
 
@@ -8842,6 +9158,13 @@ export type QueryOrganizationByDaoAddressArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryOrganizationMemberRemovalByAccountIdAndOrganizationIdArgs = {
+  accountId: Scalars['UUID'];
+  organizationId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryOrganizationProjectByOrganizationIdAndProjectIdArgs = {
   organizationId: Scalars['UUID'];
   projectId: Scalars['UUID'];
@@ -9081,6 +9404,12 @@ export type QueryMetadataGraphTranslationArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryOrganizationArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryOrganizationMemberRemovalArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -10365,6 +10694,58 @@ export type UpdateOrganizationInput = {
   organizationPatch: OrganizationPatch;
 };
 
+/** All input for the `updateOrganizationMemberRemovalByAccountIdAndOrganizationId` mutation. */
+export type UpdateOrganizationMemberRemovalByAccountIdAndOrganizationIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `OrganizationMemberRemoval` being updated. */
+  organizationMemberRemovalPatch: OrganizationMemberRemovalPatch;
+  accountId: Scalars['UUID'];
+  organizationId: Scalars['UUID'];
+};
+
+/** All input for the `updateOrganizationMemberRemoval` mutation. */
+export type UpdateOrganizationMemberRemovalInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `OrganizationMemberRemoval` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `OrganizationMemberRemoval` being updated. */
+  organizationMemberRemovalPatch: OrganizationMemberRemovalPatch;
+};
+
+/** The output of our update `OrganizationMemberRemoval` mutation. */
+export type UpdateOrganizationMemberRemovalPayload = {
+  __typename?: 'UpdateOrganizationMemberRemovalPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `OrganizationMemberRemoval` that was updated by this mutation. */
+  organizationMemberRemoval?: Maybe<OrganizationMemberRemoval>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `OrganizationMemberRemoval`. */
+  accountByAccountId?: Maybe<Account>;
+  /** Reads a single `Organization` that is related to this `OrganizationMemberRemoval`. */
+  organizationByOrganizationId?: Maybe<Organization>;
+  /** An edge for our `OrganizationMemberRemoval`. May be used by Relay 1. */
+  organizationMemberRemovalEdge?: Maybe<OrganizationMemberRemovalsEdge>;
+};
+
+
+/** The output of our update `OrganizationMemberRemoval` mutation. */
+export type UpdateOrganizationMemberRemovalPayloadOrganizationMemberRemovalEdgeArgs = {
+  orderBy?: Maybe<Array<OrganizationMemberRemovalsOrderBy>>;
+};
+
 /** The output of our update `Organization` mutation. */
 export type UpdateOrganizationPayload = {
   __typename?: 'UpdateOrganizationPayload';
@@ -11338,7 +11719,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'custodialAddress' | 'stripeConnectedAccountId'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'custodialAddress' | 'stripeConnectedAccountId' | 'title'>
     & { accountTranslationsById: (
       { __typename?: 'AccountTranslationsConnection' }
       & { nodes: Array<Maybe<(
@@ -11361,7 +11742,7 @@ export type AccountByIdQuery = (
           & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
         )>, projectByAdminDaoAddress?: Maybe<(
           { __typename?: 'Project' }
-          & Pick<Project, 'id'>
+          & Pick<Project, 'onChainId' | 'id'>
         )> }
       )>> }
     ) }
@@ -12237,6 +12618,7 @@ export const AccountByIdDocument = gql`
     nonce
     custodialAddress
     stripeConnectedAccountId
+    title
     accountTranslationsById {
       nodes {
         languageCode
@@ -12272,6 +12654,7 @@ export const AccountByIdDocument = gql`
           twitterLink
         }
         projectByAdminDaoAddress {
+          onChainId
           id
         }
       }

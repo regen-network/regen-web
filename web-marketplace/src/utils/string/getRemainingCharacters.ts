@@ -1,7 +1,7 @@
 const DEFAULT_CHAR_LIMIT = 160;
 
 type Params = {
-  value?: string;
+  value?: string | null;
   charLimit?: number;
 };
 

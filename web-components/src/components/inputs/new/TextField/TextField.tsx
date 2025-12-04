@@ -81,7 +81,9 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
               )}
               {description && (
                 <Box sx={{ display: 'flex', mt: 1 }}>
-                  <Body size="sm">{description}</Body>
+                  <Body size="sm" className="text-sc-text-paragraph">
+                    {description}
+                  </Body>
                 </Box>
               )}
             </>

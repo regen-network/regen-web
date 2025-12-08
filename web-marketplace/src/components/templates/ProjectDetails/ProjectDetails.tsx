@@ -471,7 +471,6 @@ function ProjectDetails(): JSX.Element {
       />
 
       <DataStream
-        // TODO adminAddr set to organization after Ralph's PR is merged
         adminAddr={offChainProject?.accountByAdminAccountId?.addr}
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}

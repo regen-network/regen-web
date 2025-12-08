@@ -283,6 +283,7 @@ export function useRemoveMember(params: MembersHookParams) {
         });
       } catch (e) {
         setErrorBannerText(String(e));
+        return;
       }
 
       if (projectsCurrentUserCanManageMembers) {
@@ -296,15 +297,21 @@ export function useRemoveMember(params: MembersHookParams) {
                 a => a?.accountId === id,
               )?.roleName;
             if (!projectDaoAddress || !projectRoleName) return;
-            await deleteAssignment({
-              variables: {
-                input: {
-                  daoAddress: projectDaoAddress,
-                  roleName: projectRoleName,
-                  accountId: id,
+            try {
+              await deleteAssignment({
+                variables: {
+                  input: {
+                    daoAddress: projectDaoAddress,
+                    roleName: projectRoleName,
+                    accountId: id,
+                  },
                 },
-              },
-            });
+              });
+            } catch (e) {
+              setErrorBannerText(String(e));
+              return;
+            }
+
             await reactQueryClient.invalidateQueries({
               queryKey: getDaoByAddressWithAssignmentsQueryKey({
                 address: projectDaoAddress,

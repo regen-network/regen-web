@@ -20,6 +20,7 @@ import {
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { truncate } from 'web-components/src/utils/truncate';
 
 export const useMembers = () => {
   const { _ } = useLingui();
@@ -84,7 +85,8 @@ export const useMembers = () => {
                   _(DEFAULT_NAME),
                 email:
                   acc?.privateAccountById?.email ||
-                  acc?.privateAccountById?.googleEmail,
+                  acc?.privateAccountById?.googleEmail ||
+                  truncate(acc?.addr),
                 onChainRoleId: parseInt(assignment?.onChainRoleId),
               }
             : null;

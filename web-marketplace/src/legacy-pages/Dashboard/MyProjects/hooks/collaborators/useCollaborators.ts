@@ -26,6 +26,7 @@ import {
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { truncate } from 'web-components/src/utils/truncate';
 
 export const useCollaborators = (
   project: NormalizeProject,
@@ -124,7 +125,8 @@ export const useCollaborators = (
                     daoOrganizationForAccount?.organizationByDaoAddress?.name,
                   email:
                     acc?.privateAccountById?.email ||
-                    acc?.privateAccountById?.googleEmail,
+                    acc?.privateAccountById?.googleEmail ||
+                    truncate(acc?.addr),
                   onChainRoleId: parseInt(assignment?.onChainRoleId),
                   // current user has to be an owner or admin of the collaborator organization
                   canEditOrgRole:

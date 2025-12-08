@@ -82,7 +82,6 @@ export const MemberOnBoarding = ({
     router.push(path);
   }, [router, dao]);
 
-  const isConnectingRef = useRef(false);
   const {
     isConfirmationModalOpen,
     emailModalError,
@@ -91,16 +90,14 @@ export const MemberOnBoarding = ({
     onMailCodeChange,
     onResendPasscode,
     onEmailSubmit,
-  } = useEmailConfirmationData({
-    isConnectingRef,
-  });
+  } = useEmailConfirmationData({});
   const {
     isModalOpen,
     modalState,
     onModalClose,
     walletsUiConfig,
     onButtonClick: showLoginModal,
-  } = useLoginData({ isConnectingRef });
+  } = useLoginData({});
 
   const walletRequired =
     role === ROLE_ADMIN || role === ROLE_OWNER || role === ROLE_EDITOR;
@@ -145,7 +142,7 @@ export const MemberOnBoarding = ({
           <PersonalProfile
             initialValues={{
               name: account?.name || '',
-              profileImage: account?.image,
+              avatar: account?.image,
               title: account?.title,
               description: account?.description,
             }}

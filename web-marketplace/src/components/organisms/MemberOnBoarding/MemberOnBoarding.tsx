@@ -25,11 +25,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
-import {
-  ROLE_ADMIN,
-  ROLE_EDITOR,
-  ROLE_OWNER,
-} from '../ActionDropdown/ActionDropdown.constants';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import {
   EMAIL_CONFIRMATION_CANCEL,
@@ -40,6 +35,7 @@ import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
 import { LoginModal } from '../LoginModal/LoginModal';
 import { PersonalProfile } from './MemberOnBoarding.PersonalProfile';
+import { isWalletRequiredForRole } from './MemberOnBoarding.utils';
 
 type MemberOnBoardingProps = {
   accountId: string;
@@ -99,8 +95,7 @@ export const MemberOnBoarding = ({
     onButtonClick: showLoginModal,
   } = useLoginData({});
 
-  const walletRequired =
-    role === ROLE_ADMIN || role === ROLE_OWNER || role === ROLE_EDITOR;
+  const walletRequired = isWalletRequiredForRole(role);
 
   const loginPromptedRef = useRef(false);
 

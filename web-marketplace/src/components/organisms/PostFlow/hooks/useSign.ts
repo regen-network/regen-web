@@ -156,7 +156,7 @@ export const useSign = ({
           });
           txMsg = wrapRbamActions({
             walletAddress: wallet?.address,
-            rbamAddress: withOrganization?.daoRbamAddress,
+            rbamAddress: withOrganization.daoRbamAddress,
             actions: [action],
           });
         } else {
@@ -211,7 +211,7 @@ export const useSign = ({
                 }),
               });
               // Can take quite long so we do not await
-              reactQueryClient.invalidateQueries({
+              void reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
                   request: {
                     events: [

@@ -197,7 +197,9 @@ export const useAttestEvents = ({
         !!queryClient &&
         attestTxsFromAttestMsg.length === 0 &&
         !isLoadingAnchorV1TxsEventData &&
-        !isLoadingAnchorV2TxsEventData,
+        !isLoadingAnchorV2TxsEventData &&
+        !isLoadingAttestV1TxsEventData &&
+        !isLoadingAttestV2TxsEventData,
       request: {
         events: [`${messageActionEquals}'${MsgExecuteContract.typeUrl}'`],
         orderBy: OrderBy.ORDER_BY_DESC,
@@ -209,26 +211,30 @@ export const useAttestEvents = ({
     }),
   );
 
+  const msgExecuteContractTxsEventDataResponses = useMemo(
+    () =>
+      msgExecuteContractTxsEventData?.txResponses.filter(
+        txRes => iri && txRes.rawLog.includes(iri),
+      ),
+    [msgExecuteContractTxsEventData, iri],
+  );
+
   const anchorTx = useMemo(
     () =>
       anchorTxFromAnchorMsg ??
-      msgExecuteContractTxsEventData?.txResponses
-        ?.filter(txRes =>
-          txRes.events.find(event => EventAnchor.typeUrl.includes(event.type)),
-        )
-        .filter(txRes => iri && txRes.rawLog.includes(iri))?.[0] ??
-      [],
-    [msgExecuteContractTxsEventData, anchorTxFromAnchorMsg, iri],
+      msgExecuteContractTxsEventDataResponses?.filter(txRes =>
+        txRes.events.find(event => EventAnchor.typeUrl.includes(event.type)),
+      )?.[0] ??
+      undefined,
+    [msgExecuteContractTxsEventDataResponses, anchorTxFromAnchorMsg],
   );
 
   const attestMsgExecuteContractTxsEventData = useMemo(
     () =>
-      msgExecuteContractTxsEventData?.txResponses
-        ?.filter(txRes =>
-          txRes.events.find(event => EventAttest.typeUrl.includes(event.type)),
-        )
-        ?.filter(txRes => iri && txRes.rawLog.includes(iri)) ?? [],
-    [msgExecuteContractTxsEventData, iri],
+      msgExecuteContractTxsEventDataResponses?.filter(txRes =>
+        txRes.events.find(event => EventAttest.typeUrl.includes(event.type)),
+      ) ?? [],
+    [msgExecuteContractTxsEventDataResponses],
   );
 
   const attestTxResponses = useMemo(

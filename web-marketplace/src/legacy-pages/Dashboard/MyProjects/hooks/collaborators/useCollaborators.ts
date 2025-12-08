@@ -13,6 +13,8 @@ import {
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getAccountAssignment } from 'utils/rbam.utils';
 
+import { truncate } from 'web-components/src/utils/truncate';
+
 import { AccountsOrderBy } from 'generated/graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -26,7 +28,6 @@ import {
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { truncate } from 'web-components/src/utils/truncate';
 
 export const useCollaborators = (
   project: NormalizeProject,

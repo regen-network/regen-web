@@ -9,6 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
@@ -27,6 +28,7 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useMsgClient } from 'hooks';
 import { feegrantGrantAllowanceAction } from 'hooks/org-members/utils';
 
 import {
@@ -52,6 +54,7 @@ import {
 export const useCreateDao = () => {
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
+  const { signAndBroadcast } = useMsgClient();
   const queryClient = useQueryClient();
   const { _ } = useLingui();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -251,14 +254,26 @@ export const useCreateDao = () => {
           },
         };
 
-        const executeResult = await signingCosmWasmClient.executeMultiple(
-          walletAddress,
-          [
-            { contractAddress: cwAdminFactoryAddr, msg: instantiateMsg },
-            { contractAddress: rbamAddress, msg: feegrantMsg },
+        const executeResult = await signAndBroadcast({
+          msgs: [
+            getMsgExecuteContract({
+              walletAddress,
+              contract: cwAdminFactoryAddr,
+              executeActionsMsg: instantiateMsg,
+            }),
+            getMsgExecuteContract({
+              walletAddress,
+              contract: rbamAddress,
+              executeActionsMsg: feegrantMsg,
+            }),
           ],
-          gasMultiplier,
-        );
+          fee: gasMultiplier,
+        });
+
+        if (!executeResult || typeof executeResult === 'string') {
+          if (!executeResult) return;
+          throw new Error(executeResult);
+        }
 
         // If user profile has been transferred to organization, empty out user profile fields
         if (params.transferHandled) {
@@ -320,6 +335,7 @@ export const useCreateDao = () => {
       setErrorBannerText,
       refetchAccount,
       updateAccountById,
+      signAndBroadcast,
     ],
   );
 

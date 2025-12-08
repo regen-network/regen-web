@@ -67,7 +67,7 @@ export const MemberOnBoarding = ({
   );
   const account = data?.accountById;
   const dao = findDao(daoAddress, data);
-  console.log('dao', dao);
+
   const navigateToDashboard = useCallback(() => {
     const projectId =
       dao?.projectByAdminDaoAddress?.onChainId ||
@@ -87,7 +87,7 @@ export const MemberOnBoarding = ({
     onResendPasscode,
     onEmailSubmit,
   } = useEmailConfirmationData({});
-  console.log('isConfirmationModalOpen', isConfirmationModalOpen);
+
   const {
     isModalOpen,
     modalState,
@@ -172,7 +172,6 @@ export const MemberOnBoarding = ({
           signInButton={{
             text: _(EMAIL_CONFIRMATION_SUBMIT),
             disabled: true,
-            onClick: () => void 0,
           }}
           mailLink={{ text: email, href: '#' }}
           onClose={onConfirmationModalClose}

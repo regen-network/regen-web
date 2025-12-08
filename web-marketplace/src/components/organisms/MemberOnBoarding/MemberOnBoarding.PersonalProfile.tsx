@@ -16,9 +16,7 @@ import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { Body, Title } from 'web-components/src/components/typography';
 
-import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { useAuth } from 'lib/auth/auth';
 import {
   APPLY,
   TITLE_CROP,

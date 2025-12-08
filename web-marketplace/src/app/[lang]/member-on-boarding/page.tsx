@@ -48,7 +48,6 @@ export default async function Page({
   );
 
   const dao = findDao(daoAddress, accountResponse);
-
   if (!dao) {
     return null;
   }

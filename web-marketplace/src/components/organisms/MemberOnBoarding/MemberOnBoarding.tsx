@@ -67,7 +67,7 @@ export const MemberOnBoarding = ({
   );
   const account = data?.accountById;
   const dao = findDao(daoAddress, data);
-
+  console.log('dao', dao);
   const navigateToDashboard = useCallback(() => {
     const projectId =
       dao?.projectByAdminDaoAddress?.onChainId ||
@@ -87,6 +87,7 @@ export const MemberOnBoarding = ({
     onResendPasscode,
     onEmailSubmit,
   } = useEmailConfirmationData({});
+  console.log('isConfirmationModalOpen', isConfirmationModalOpen);
   const {
     isModalOpen,
     modalState,
@@ -96,7 +97,6 @@ export const MemberOnBoarding = ({
   } = useLoginData({});
 
   const walletRequired = isWalletRequiredForRole(role);
-
   const loginPromptedRef = useRef(false);
 
   useEffect(() => {

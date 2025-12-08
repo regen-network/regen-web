@@ -1,13 +1,11 @@
 'use client';
 
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useSetAtom } from 'jotai';
-import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
-import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCallback';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
@@ -17,7 +15,6 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { Body, Title } from 'web-components/src/components/typography';
-import { deleteImage } from 'web-components/src/utils/s3';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -28,20 +25,19 @@ import {
   TITLE_IGNORE_CROP,
   UPDATE,
 } from 'lib/constants/shared.constants';
-import { apiServerUrl } from 'lib/env';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import {
-  PROFILE_AVATAR_FILE_NAME,
-  UPLOAD_IMAGE,
-} from '../EditProfileForm/EditProfileForm.constants';
+import { useSaveProfile } from '../BaseMembersTable/modals/hooks/useSaveProfile';
 import {
   personalProfileSchema,
   PersonalProfileSchemaType,
 } from '../BaseMembersTable/modals/modals.schema';
-import { useSaveProfile } from '../BaseMembersTable/modals/hooks/useSaveProfile';
+import {
+  PROFILE_AVATAR_FILE_NAME,
+  UPLOAD_IMAGE,
+} from '../EditProfileForm/EditProfileForm.constants';
 
 type PersonalProfileProps = {
   initialValues?: PersonalProfileSchemaType;
@@ -53,7 +49,6 @@ export const PersonalProfile = ({
   onSuccess,
 }: PersonalProfileProps) => {
   const { _ } = useLingui();
-  const { activeAccountId } = useAuth();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
 
   const form = useZodForm({
@@ -65,7 +60,6 @@ export const PersonalProfile = ({
   const { isSubmitting, errors, isValid } = useFormState({
     control: form.control,
   });
-  const [updateAccountById] = useUpdateAccountByIdMutation();
 
   /* Fields watch */
 
@@ -107,7 +101,7 @@ export const PersonalProfile = ({
         setErrorBannerText(String(error));
       }
     },
-    [activeAccountId, updateAccountById, onSuccess, setErrorBannerText],
+    [saveProfile, onSuccess, setErrorBannerText],
   );
 
   return (

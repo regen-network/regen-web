@@ -105,13 +105,26 @@ export const MemberOnBoarding = ({
   const walletRequired =
     role === ROLE_ADMIN || role === ROLE_OWNER || role === ROLE_EDITOR;
 
+  const loginPromptedRef = useRef(false);
+
   useEffect(() => {
-    if (!loading && !activeAccountId && activeAccountId !== accountId) {
-      if (walletRequired) {
-        showLoginModal();
-      } else {
-        onEmailSubmit({ email });
-      }
+    if (
+      loginPromptedRef.current ||
+      loading ||
+      activeAccountId ||
+      activeAccountId === accountId
+    ) {
+      return;
+    }
+
+    loginPromptedRef.current = true;
+
+    if (walletRequired) {
+      showLoginModal();
+    } else {
+      void onEmailSubmit({ email }).catch(() => {
+        loginPromptedRef.current = false;
+      });
     }
   }, [
     loading,

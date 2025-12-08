@@ -71,9 +71,9 @@ export const getInviteSchema = (_: TranslatorType, isOrg: boolean) =>
 
 export const personalProfileSchema = z.object({
   name: z.string().min(1),
-  avatar: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().max(160).optional(),
+  avatar: z.string().optional().nullable(),
+  title: z.string().optional().nullable(),
+  description: z.string().max(160).optional().nullable(),
 });
 
 export type PersonalProfileSchemaType = z.infer<typeof personalProfileSchema>;

@@ -40,7 +40,8 @@ import {
 import {
   personalProfileSchema,
   PersonalProfileSchemaType,
-} from './MemberOnBoarding.PersonalProfile.schema';
+} from '../BaseMembersTable/modals/modals.schema';
+import { useSaveProfile } from '../BaseMembersTable/modals/hooks/useSaveProfile';
 
 type PersonalProfileProps = {
   initialValues?: PersonalProfileSchemaType;
@@ -68,9 +69,9 @@ export const PersonalProfile = ({
 
   /* Fields watch */
 
-  const profileImage = useWatch({
+  const avatar = useWatch({
     control: form.control,
-    name: 'profileImage',
+    name: 'avatar',
   });
 
   const description = useWatch({
@@ -87,7 +88,7 @@ export const PersonalProfile = ({
 
   const setProfileImage = useCallback(
     ({ value }: { value: string }): void => {
-      form.setValue('profileImage', value, {
+      form.setValue('avatar', value, {
         shouldDirty: true,
         shouldValidate: true,
       });
@@ -95,46 +96,15 @@ export const PersonalProfile = ({
     [form],
   );
 
-  const fileNamesToDeleteRef = useRef<string[]>([]);
-
-  const onUpload = useOnUploadCallback({
-    fileNamesToDeleteRef,
-  });
+  const { saveProfile, onUpload } = useSaveProfile();
 
   const onSubmit = useCallback(
     async (values: PersonalProfileSchemaType) => {
-      if (activeAccountId) {
-        try {
-          const { profileImage, title, name, description } = values;
-          await updateAccountById({
-            variables: {
-              input: {
-                id: activeAccountId,
-                accountPatch: {
-                  name,
-                  description,
-                  image: profileImage,
-                  title,
-                },
-              },
-            },
-          });
-
-          await Promise.all(
-            fileNamesToDeleteRef.current.map(async fileName => {
-              await deleteImage(
-                PROFILE_S3_PATH,
-                activeAccountId,
-                fileName,
-                apiServerUrl,
-              );
-            }),
-          );
-          fileNamesToDeleteRef.current = [];
-          onSuccess();
-        } catch (error) {
-          setErrorBannerText(String(error));
-        }
+      try {
+        await saveProfile(values);
+        onSuccess();
+      } catch (error) {
+        setErrorBannerText(String(error));
       }
     },
     [activeAccountId, updateAccountById, onSuccess, setErrorBannerText],
@@ -164,7 +134,7 @@ export const PersonalProfile = ({
             label={_(msg`Profile image`)}
             buttonText={_(UPLOAD_IMAGE)}
             setValue={setProfileImage}
-            {...form.register('profileImage')}
+            {...form.register('avatar')}
             name="profile-image"
             initialFileName={PROFILE_AVATAR_FILE_NAME}
             uploadText={_(UPLOAD_IMAGE)}
@@ -174,11 +144,11 @@ export const PersonalProfile = ({
             titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
             circularCrop
             onUpload={onUpload}
-            value={profileImage ?? undefined}
+            value={avatar ?? undefined}
           >
             <ImageFieldAvatar
-              key={profileImage || 'profile-image-placeholder'}
-              value={profileImage ?? ''}
+              key={avatar || 'profile-image-placeholder'}
+              value={avatar ?? ''}
             />
           </ImageField>
           <TextField

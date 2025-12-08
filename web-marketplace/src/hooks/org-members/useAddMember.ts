@@ -10,8 +10,8 @@ import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';

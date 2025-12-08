@@ -11,6 +11,8 @@ import {
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 
+import { truncate } from 'web-components/src/utils/truncate';
+
 import { AccountsOrderBy } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
@@ -20,7 +22,6 @@ import {
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
-import { truncate } from 'web-components/src/utils/truncate';
 
 export const useMembers = () => {
   const { _ } = useLingui();

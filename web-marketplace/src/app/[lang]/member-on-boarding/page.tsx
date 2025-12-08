@@ -26,12 +26,12 @@ export default async function Page({
 
   if (
     !accountId ||
-    !email ||
-    !role ||
-    !daoAddress ||
     typeof accountId !== 'string' ||
+    !email ||
     typeof email !== 'string' ||
+    !role ||
     typeof role !== 'string' ||
+    !daoAddress ||
     typeof daoAddress !== 'string'
   ) {
     return null;
@@ -42,7 +42,7 @@ export default async function Page({
     getAccountByIdQuery({
       client: apolloClient,
       languageCode: lang,
-      id: accountId as string,
+      id: accountId,
       enabled: !!accountId,
     }),
   );

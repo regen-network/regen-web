@@ -28,12 +28,10 @@ const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
 };
 
 export default function TerrasosRoutes({
   reactQueryClient,
-  apolloClientFactory,
 }: RouterProps): JSX.Element {
   // Sets React Router’s basename to the current locale (e.g., /en, /es)
   // so all legacy React Router paths (/, /projects, etc.) resolve under /{lang}.
@@ -50,7 +48,6 @@ export default function TerrasosRoutes({
     <RouterProvider
       router={getRouter({
         reactQueryClient,
-        apolloClientFactory,
         basename,
       })}
       fallbackElement={<PageLoader />}
@@ -60,13 +57,11 @@ export default function TerrasosRoutes({
 
 type RouterParams = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
   basename?: string;
 };
 
 export const getTerrasosRoutes = ({
   reactQueryClient,
-  apolloClientFactory,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
     <Route element={<RegistryLayout />}>
@@ -95,15 +90,11 @@ export const getTerrasosRoutes = ({
 
 export const getRouter = ({
   reactQueryClient,
-  apolloClientFactory,
   basename = '',
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
-  return sentryCreateBrowserRouter(
-    getTerrasosRoutes({ reactQueryClient, apolloClientFactory }),
-    {
-      basename,
-    },
-  );
+  return sentryCreateBrowserRouter(getTerrasosRoutes({ reactQueryClient }), {
+    basename,
+  });
 };

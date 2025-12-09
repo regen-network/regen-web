@@ -134,8 +134,11 @@ const Collaborators = safeLazy(
     ),
 );
 
-export default function RegenRoutes() {
-  const reactQueryClient = new QueryClient();
+type RouterProps = {
+  reactQueryClient: QueryClient;
+};
+
+export default function RegenRoutes({ reactQueryClient }: RouterProps) {
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { queryClient: rpcQueryClient } = useLedger();

@@ -26,11 +26,11 @@ import {
   SAVE_LABEL,
   TITLE_LABEL,
   TITLE_SUBHEADER,
-} from '../OrganizationMembers.constants';
+} from './constants';
 import {
   personalProfileSchema,
   PersonalProfileSchemaType,
-} from './InviteMembers.schema';
+} from './modals.schema';
 
 interface PersonalProfileModalProps {
   open: boolean;

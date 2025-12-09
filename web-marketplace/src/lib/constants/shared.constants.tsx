@@ -17,7 +17,7 @@ import {
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-// Contants
+// Constants
 
 export const COPY_SUCCESS = msg`Link copied!`;
 export const EDIT_TEXT = msg`Edit`;
@@ -111,6 +111,8 @@ export const PAGE_NOT_FOUND_BODY = msg`The page you are looking for might have b
 export const READ = msg`read`;
 export const LESS = msg`less`;
 export const MORE = msg`more`;
+export const MAX_REFETCH_ATTEMPTS = 15;
+export const REFETCH_DELAY_MS = 500;
 
 // Components
 

@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
 import ProjectDashboardBanner from './ProjectDashboardBanner';
@@ -25,7 +26,7 @@ const exampleProject: ProjectBannerProps['project'] = {
   name: 'Rainforest Reforest',
   place: 'Amazon Basin, Brazil',
   area: 1200,
-  areaUnit: 'ha',
+  areaUnit: 'unit:HA',
   imgSrc:
     'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
   slug: 'rainforest-restoration',
@@ -38,4 +39,9 @@ export const Default = (args: ProjectBannerProps) => (
 Default.args = {
   project: exampleProject,
   canEdit: true,
+  canCreatePost: true,
+  onCreatePost: action('Create Post Clicked'),
+  migrateProject: action('Migrate Project Clicked'),
+  createPostTooltipText: 'Create post disabled tooltip',
+  createPostDisabled: false,
 };

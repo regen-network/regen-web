@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
 import { EncodeObject } from '@cosmjs/proto-signing';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
@@ -25,6 +25,7 @@ import {
   getMsgExecuteContract,
 } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
+import { getAccountAssignment } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import {
@@ -37,9 +38,11 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { ledgerRPCUri } from 'lib/ledger';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
 import { getSellOrdersBySellerKey } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery.utils';
@@ -47,11 +50,19 @@ import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
+import { getAssignmentsWithProjectsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery.utils';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
+import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery.utils';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { orgRoles } from 'hooks/org-members/constants';
+import { getNewProjectRoleId } from 'hooks/org-members/utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient from 'hooks/useMsgClient';
 
@@ -66,14 +77,30 @@ import {
   predictAllAddresses,
 } from '../useCreateDao/useCreateDao.utils';
 import { OrganizationMultiStepData } from '../useOrganizationFlow';
-import { getSelectedCardSellOrdersWithNewIds } from './useMigrateProjects.utils';
+import {
+  getOrgAssignments,
+  getSelectedCardSellOrdersWithNewIds,
+} from './useMigrateProjects.utils';
 
-export const useMigrateProjects = (projects: NormalizeProject[]) => {
+type UseMigrateProjectsParams = {
+  projects: NormalizeProject[];
+  // Create organization flow handler to save and go to next step
+  handleSaveNext?: (formValues: OrganizationMultiStepData) => void;
+  data?: OrganizationMultiStepData;
+  // Migrating a single project callback from the project dashboard
+  onSuccess?: () => void;
+};
+
+export const useMigrateProjects = ({
+  projects,
+  handleSaveNext,
+  data,
+  onSuccess,
+}: UseMigrateProjectsParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { queryClient, signingCosmWasmClient } = useLedger();
   const reactQueryClient = useQueryClient();
-  const { handleSaveNext, data } = useMultiStep<OrganizationMultiStepData>();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
@@ -105,15 +132,35 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
     }),
   );
 
+  const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
+    useQuery(
+      getDaoByAddressWithAssignmentsQuery({
+        client: graphqlClient,
+        enabled: !!graphqlClient && !!dao?.address,
+        address: dao?.address as string,
+      }),
+    );
+
+  const currentUserRole = useMemo(
+    () =>
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments:
+          orgAssignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes,
+      })?.roleName,
+    [orgAssignmentsData, activeAccountId],
+  ) as BaseMemberRole | undefined;
+
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
   });
 
-  const updateOffChainProjectAdmin = useCallback(
+  const updateOffChainProjectAdminAssignments = useCallback(
     async (
       selectedProjectsWithAddresses: (NormalizeProject & {
         dao: { address: string };
       })[],
+      orgAssignments: ReturnType<typeof getOrgAssignments>,
     ) => {
       // First we need to make sure that the project daos have been indexed off-chain
       let stop = false;
@@ -163,6 +210,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           });
         }),
       );
+
       updateOffChainAdminRes.forEach((result, idx) => {
         if (result.status === 'rejected') {
           setErrorBannerText(
@@ -174,8 +222,50 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           );
         }
       });
+
+      // Then, add off-chain assignments for members without wallet addresses
+      const allPromises = selectedProjectsWithAddresses.flatMap(project =>
+        orgAssignments.offChainAssignments.map(async assignment => {
+          if (token) {
+            try {
+              const response = await postData({
+                url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+                data: {
+                  email: assignment.email,
+                  roleName: assignment.roleName,
+                  daoAddress: project.dao.address,
+                  visible: true,
+                  onChainRoleId: getNewProjectRoleId(assignment.roleName),
+                },
+                token,
+                retryCsrfRequest,
+              });
+              if (response.error) {
+                throw new Error(response.error);
+              }
+              return response;
+            } catch (error) {
+              throw error;
+            }
+          }
+          return Promise.resolve(null);
+        }),
+      );
+
+      const results = await Promise.allSettled(allPromises);
+      results.forEach((result, idx) => {
+        if (result.status === 'rejected') {
+          setErrorBannerText(
+            _(
+              msg`Adding member to project ${
+                selectedProjectsWithAddresses[idx].offChainId as string
+              } failed: ${result.reason}`,
+            ),
+          );
+        }
+      });
     },
-    [setErrorBannerText, updateProject, _, refetch],
+    [setErrorBannerText, updateProject, _, refetch, retryCsrfRequest, token],
   );
 
   const updateCardSellOrders = useCallback(
@@ -215,35 +305,78 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
     [setErrorBannerText, updateSellOrder, _],
   );
 
-  const reloadData = useCallback(async () => {
-    if (wallet?.address) {
+  const reloadData = useCallback(
+    async (selectedProjects: NormalizeProject[]) => {
+      await Promise.all(
+        selectedProjects.map(async project => {
+          if (project.offChainId)
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectByIdKey(project.offChainId),
+              refetchType: 'all',
+            });
+          const isOnChainId = getIsOnChainId(project.id);
+          if (isOnChainId) {
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectByOnChainIdKey(project.id),
+              refetchType: 'all',
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectKey(project.id),
+              refetchType: 'all',
+            });
+          }
+        }),
+      );
+      if (wallet?.address) {
+        await reactQueryClient.invalidateQueries({
+          queryKey: getSellOrdersBySellerKey(wallet?.address),
+          refetchType: 'all',
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getProjectsByAdminKey({
+            admin: wallet?.address,
+          }),
+          refetchType: 'all',
+        });
+      }
+
       await reactQueryClient.invalidateQueries({
         queryKey: [GET_ACCOUNTS_QUERY_KEY],
         refetchType: 'all',
       });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getSellOrdersBySellerKey(wallet?.address),
-        refetchType: 'all',
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getProjectsByAdminKey({
-          admin: wallet?.address,
-        }),
-        refetchType: 'all',
-      });
+
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountProjectsByIdQueryKey({
           id: activeAccountId,
         }),
         refetchType: 'all',
       });
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAssignmentsWithProjectsQueryKey({
+          id: activeAccountId,
+        }),
+        refetchType: 'all',
+      });
+      if (dao) {
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+            daoAddress: dao.address,
+          }),
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrganizationByDaoAddressQueryKey({
+            daoAddress: dao.address,
+          }),
+        });
+      }
       reloadBalances();
-    }
-  }, [reactQueryClient, wallet?.address, activeAccountId, reloadBalances]);
+    },
+    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances, dao],
+  );
 
   const migrateProjects = useCallback(
     async (values: FormValues) => {
-      if (isLoadingSellOrders || isLoadingCredits) {
+      if (isLoadingSellOrders || isLoadingCredits || isLoadingOrgAssignments) {
         // prevent submission while loading data
         return;
       }
@@ -256,7 +389,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
         setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
         return;
       }
-      const organizationId = data.dao?.organizationId;
+      const organizationId = dao?.organizationByDaoAddress?.id;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
         return;
@@ -324,6 +457,11 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           }),
         );
 
+        const orgAssignments = getOrgAssignments(
+          currentUserRole,
+          orgAssignmentsData,
+        );
+
         const createDaosMsgs = selectedProjectsWithAddresses.map(project => {
           const now = Date.now();
 
@@ -335,6 +473,10 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             rbamAddress: project.rbam.address,
             rbamSalt: project.rbam.salt,
             now,
+            adminAssignments: orgAssignments.adminAssignments,
+            editorAssignments: orgAssignments.editorAssignments,
+            authorAssignments: orgAssignments.authorAssignments,
+            viewerAssignments: orgAssignments.viewerAssignments,
           });
 
           const votingModule = getVotingModule({
@@ -472,7 +614,11 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
           {
             onSuccess: async deliverTxResponse => {
               // Update off-chain projects admin to new DAO addresses
-              await updateOffChainProjectAdmin(selectedProjectsWithAddresses);
+              // and add off-chain projects assignments (for members without wallet addresses)
+              await updateOffChainProjectAdminAssignments(
+                selectedProjectsWithAddresses,
+                orgAssignments,
+              );
 
               // Update card sell orders
               const selectedCardSellOrders =
@@ -486,6 +632,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
 
               // Transfer stripe connect settings to DAO
               if (
+                selectedCardSellOrders.length > 0 &&
                 privActiveAccount?.can_use_stripe_connect &&
                 activeAccount?.stripeConnectedAccountId &&
                 token
@@ -503,9 +650,11 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
                 }
               }
 
-              await reloadData();
-              handleSaveNext({ ...data, ...values });
+              await reloadData(selectedProjects);
+              if (handleSaveNext && data)
+                handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
+              if (onSuccess) onSuccess();
             },
             onError: error => {
               setProcessingModalAtom(atom => void (atom.open = false));
@@ -514,7 +663,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
             },
           },
         );
-      } else handleSaveNext({ ...data, ...values });
+      } else if (handleSaveNext && data) handleSaveNext({ ...data, ...values });
     },
     [
       projects,
@@ -525,6 +674,7 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       setErrorBannerText,
       isLoadingCredits,
       isLoadingSellOrders,
+      isLoadingOrgAssignments,
       sellOrdersData,
       wallet?.address,
       signingCosmWasmClient,
@@ -537,8 +687,11 @@ export const useMigrateProjects = (projects: NormalizeProject[]) => {
       privActiveAccount,
       activeAccount,
       reloadData,
-      updateOffChainProjectAdmin,
+      updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
+      currentUserRole,
+      orgAssignmentsData,
+      onSuccess,
     ],
   );
 

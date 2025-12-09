@@ -10,20 +10,26 @@ import { isValidAddress } from 'web-components/src/components/inputs/validation'
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import type { MemberData } from 'components/organisms/OrganizationMembers/OrganizationMembers.BaseTable';
+import {
+  BaseMemberRole,
+  MemberData,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
-import { addMemberActions, getNewRoleId } from './utils';
+import {
+  addMemberActions,
+  getNewOrgRoleId,
+  getNewProjectRoleId,
+} from './utils';
 
 export function useAddMember(params: MembersHookParams) {
   const { daoAddress, daoRbamAddress, cw4GroupAddress, currentUserRole } =
@@ -31,7 +37,6 @@ export function useAddMember(params: MembersHookParams) {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
-  const { activeAccountId } = useAuth();
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
@@ -50,7 +55,7 @@ export function useAddMember(params: MembersHookParams) {
 
   const addMemberWithWalletAddress = useCallback(
     async (
-      data: MemberData,
+      data: MemberData<BaseMemberRole>,
       roleIdToAdd: number,
       projectRoleIdToAdd: number,
     ) => {
@@ -157,7 +162,7 @@ export function useAddMember(params: MembersHookParams) {
 
   const addMemberOffChain = useCallback(
     async (
-      data: MemberData,
+      data: MemberData<BaseMemberRole>,
       roleIdToAdd: number,
       projectRoleIdToAdd: number,
     ) => {
@@ -170,7 +175,6 @@ export function useAddMember(params: MembersHookParams) {
       try {
         await postData({
           url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
-          parseTextResponse: true,
           data: {
             email: addressOrEmail,
             roleName: role,
@@ -182,8 +186,8 @@ export function useAddMember(params: MembersHookParams) {
           retryCsrfRequest,
           onSuccess: async () => {
             await reactQueryClient.invalidateQueries({
-              queryKey: getAccountByIdQueryKey({
-                id: activeAccountId,
+              queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                address: daoAddress,
                 daoAccountsOrderBy: params.daoAccountsOrderBy,
               }),
             });
@@ -213,7 +217,6 @@ export function useAddMember(params: MembersHookParams) {
             async project =>
               await postData({
                 url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
-                parseTextResponse: true,
                 data: {
                   email: addressOrEmail,
                   roleName: role,
@@ -229,6 +232,12 @@ export function useAddMember(params: MembersHookParams) {
                       daoAddress,
                     }),
                   });
+                  if (project?.projectByProjectId?.adminDaoAddress)
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                        address: project?.projectByProjectId?.adminDaoAddress,
+                      }),
+                    });
                 },
               }),
           ),
@@ -242,7 +251,6 @@ export function useAddMember(params: MembersHookParams) {
       setErrorBannerText,
       _,
       reactQueryClient,
-      activeAccountId,
       params.daoAccountsOrderBy,
       projectsCurrentUserCanManageMembers,
       retryCsrfRequest,
@@ -251,7 +259,7 @@ export function useAddMember(params: MembersHookParams) {
   );
 
   const addMember = useCallback(
-    async (data: MemberData) => {
+    async (data: MemberData<BaseMemberRole>) => {
       const { role, addressOrEmail } = data;
       const isWalletAddr = isValidAddress(addressOrEmail);
 
@@ -260,8 +268,8 @@ export function useAddMember(params: MembersHookParams) {
         return;
       }
 
-      const roleIdToAdd = getNewRoleId({ type: 'organization', role });
-      const projectRoleIdToAdd = getNewRoleId({ type: 'project', role });
+      const roleIdToAdd = getNewOrgRoleId(role);
+      const projectRoleIdToAdd = getNewProjectRoleId(role);
 
       if (isWalletAddr) {
         await addMemberWithWalletAddress(data, roleIdToAdd, projectRoleIdToAdd);

@@ -12,6 +12,7 @@ import { SaveChangesWarningModal } from 'web-components/src/components/modal/Sav
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { deleteImage } from 'web-components/src/utils/s3';
 
+import { ProjectFieldsFragment } from 'generated/graphql';
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -54,6 +55,7 @@ type Props = {
   offChainProjectId?: string;
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   disableScrollLock?: boolean;
+  offChainProject?: ProjectFieldsFragment | null;
 };
 
 export const PostFlow = ({
@@ -66,6 +68,7 @@ export const PostFlow = ({
   offChainProjectId: _offChainProjectId,
   setDraftPost,
   disableScrollLock = false,
+  offChainProject,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const fileNamesToDeleteRef = useRef<string[]>([]);
@@ -250,12 +253,14 @@ export const PostFlow = ({
     },
     [offChainProjectId, onModalClose, setDraftPost],
   );
+
   const sign = useSign({
     projectSlug,
     projectId,
     offChainProjectId,
     projectName,
     onModalClose,
+    offChainProject,
   });
 
   return (

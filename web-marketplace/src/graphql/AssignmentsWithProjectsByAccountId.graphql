@@ -1,0 +1,16 @@
+query AssignmentsWithProjectsByAccountId($id: UUID!) {
+  accountById(id: $id) {
+    assignmentsByAccountId {
+      nodes {
+        roleName
+        onChainRoleId
+        daoByDaoAddress {
+          address
+          projectByAdminDaoAddress {
+            ...projectFields
+          }
+        }
+      }
+    }
+  }
+}

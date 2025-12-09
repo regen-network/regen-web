@@ -9,6 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { AccountType, useUpdateAccountByIdMutation } from 'generated/graphql';
@@ -17,16 +18,16 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import {
+  MAX_REFETCH_ATTEMPTS,
+  REFETCH_DELAY_MS,
+} from 'lib/constants/shared.constants';
 import { ledgerRPCUri } from 'lib/ledger';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { orgRoles } from 'hooks/org-members/constants';
-import {
-  feegrantGrantAllowanceAction,
-  getRoleAuthorizationIds,
-} from 'hooks/org-members/utils';
+import { feegrantGrantAllowanceAction } from 'hooks/org-members/utils';
 
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
@@ -75,7 +76,7 @@ export const useCreateDao = () => {
       let hasDaoOrganization = false;
       let i = 0;
       // wait for the organization dao to be indexed
-      while (!hasDaoOrganization && i < 10) {
+      while (!hasDaoOrganization && i < MAX_REFETCH_ATTEMPTS) {
         const res = await refetch();
         const dao =
           res?.data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
@@ -87,7 +88,7 @@ export const useCreateDao = () => {
         }
 
         i++;
-        await timer(1000);
+        await timer(REFETCH_DELAY_MS);
       }
       return hasDaoOrganization;
     },

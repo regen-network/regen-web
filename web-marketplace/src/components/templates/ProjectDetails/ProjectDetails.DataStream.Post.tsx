@@ -114,7 +114,7 @@ export const DataStreamPost = ({
   const creatorAccount = creatorAccountData?.accountById;
   const creatorIsAdmin = creatorAccount?.id === adminAccountId;
 
-  const { events } = useAttestEvents({
+  const { events, loading } = useAttestEvents({
     iri,
     createdAt,
     creatorAccount,

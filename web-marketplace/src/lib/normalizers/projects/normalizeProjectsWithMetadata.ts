@@ -9,9 +9,8 @@ import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 import {
   AccountFieldsFragment,
   Maybe,
-  Project,
+  ProjectFieldsFragment,
   ProjectSellOrdersFieldsFragment,
-  SellOrder,
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
@@ -82,7 +81,11 @@ export const normalizeProjectsWithMetadata = ({
 };
 
 type OffChainProjectToNormalize = Maybe<
-  Pick<Project, 'id' | 'slug' | 'published'> & ProjectSellOrdersFieldsFragment
+  Pick<
+    ProjectFieldsFragment,
+    'id' | 'slug' | 'published' | 'daoByAdminDaoAddress' | 'onChainId'
+  > &
+    ProjectSellOrdersFieldsFragment
 >;
 
 interface NormalizeProjectWithMetadataParams {
@@ -128,6 +131,9 @@ export type NormalizeProject = ProjectWithOrderData & {
     creditsRegistered: number;
   };
   ecosystemType?: string[];
+  adminDaoAddress?: Maybe<string>;
+  adminDaoRbamAddress?: Maybe<string>;
+  adminDaoCw4GroupAddress?: Maybe<string>;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -145,6 +151,7 @@ export const normalizeProjectWithMetadata = ({
     metadata: classMetadata,
     sanityClass,
   });
+
   const program = getDisplayAccount(
     classMetadata?.['regen:sourceRegistry'],
     programAccount,
@@ -184,7 +191,8 @@ export const normalizeProjectWithMetadata = ({
       (projectWithOrderData as NormalizeProject)?.ecosystemType,
     offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
-    draft: !projectWithOrderData && !offChainProject?.published,
+    draft:
+      !projectWithOrderData && offChainProject && !offChainProject.published,
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||
@@ -195,8 +203,8 @@ export const normalizeProjectWithMetadata = ({
     imgSrc:
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
-      projectWithOrderData?.imgSrc ||
-      creditClassImage,
+      creditClassImage ||
+      projectWithOrderData?.imgSrc,
     location: projectMetadata?.['schema:location'],
     place:
       projectMetadata?.['schema:location']?.place_name ||
@@ -229,6 +237,11 @@ export const normalizeProjectWithMetadata = ({
       creditsRetired: 0,
       creditsRegistered: 0,
     },
+    offChain: offChainProject && !offChainProject?.onChainId,
+    adminDaoAddress: offChainProject?.daoByAdminDaoAddress?.address,
+    adminDaoRbamAddress: offChainProject?.daoByAdminDaoAddress?.daoRbamAddress,
+    adminDaoCw4GroupAddress:
+      offChainProject?.daoByAdminDaoAddress?.cw4GroupAddress,
   } as NormalizeProject;
 };
 

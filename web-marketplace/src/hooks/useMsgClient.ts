@@ -154,6 +154,7 @@ export default function useMsgClient(
       setIsWaitingForSigning,
       setErrorCodeAtom,
       queryClient,
+      simulate,
     ],
   );
 

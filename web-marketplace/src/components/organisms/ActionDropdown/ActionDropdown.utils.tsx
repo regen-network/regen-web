@@ -16,6 +16,7 @@ export const getActionItems = ({
   onRemove,
   onEditOrgRole,
   navigate,
+  canEditOrgRole = false,
   _,
 }: GetActionItemsParams): ActionItem[] => {
   // Only owner or admins can manage other members
@@ -40,11 +41,12 @@ export const getActionItems = ({
     label: _(ACTION_EDIT_ORG_ROLE),
     onClick: onEditOrgRole,
   };
+  const canEditOrgRoleFlag =
+    canEditOrgRole && onEditOrgRole && context !== ORGANIZATION_CONTEXT;
 
-  const currentUserActions =
-    context === ORGANIZATION_CONTEXT
-      ? [editMyProfile]
-      : [editMyProfile, editOrgRole];
+  const currentUserActions = canEditOrgRoleFlag
+    ? [editMyProfile, editOrgRole]
+    : [editMyProfile];
 
   if (isCurrentUser) {
     if (role !== ROLE_ADMIN) {
@@ -55,5 +57,5 @@ export const getActionItems = ({
   if (role === ROLE_OWNER) {
     return [];
   }
-  return [remove];
+  return canEditOrgRoleFlag ? [remove, editOrgRole] : [remove];
 };

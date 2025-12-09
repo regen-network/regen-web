@@ -1,11 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
@@ -23,6 +29,7 @@ import {
   DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
 } from 'lib/constants/shared.constants';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -89,6 +96,8 @@ export const Dashboard = () => {
     ? '/dashboard/organization'
     : '/dashboard';
   const section = usePathSection();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
@@ -136,12 +145,22 @@ export const Dashboard = () => {
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
 
+  const { data } = useQuery(
+    getDaoByAddressWithAssignmentsQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!organizationAddress,
+      address: organizationAddress as string,
+    }),
+  );
+  const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
+
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (!organizationAddress || !organizationDao) return undefined;
 
-    const assignment = organizationDao.assignmentsByDaoAddress?.nodes?.find(
-      node => node?.accountId === activeAccountId,
-    );
+    const assignment = getAccountAssignment({
+      accountId: activeAccountId,
+      assignments,
+    });
 
     const organizationName = organizationProfile?.name?.trim();
 
@@ -163,6 +182,7 @@ export const Dashboard = () => {
     activeAccountId,
     organizationProfile?.name,
     organizationProfile?.image,
+    assignments,
   ]);
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
@@ -235,11 +255,11 @@ export const Dashboard = () => {
     ? undefined
     : activeAccountId ?? undefined;
 
-  const { isCreditClassCreator, isProjectAdmin, isIssuer, showCreditClasses } =
-    useProfileItems({
+  const { isCreditClassCreator, isIssuer, showCreditClasses } = useProfileItems(
+    {
       address: dashboardAccountAddress,
-      accountId: dashboardAccountId,
-    });
+    },
+  );
 
   const projects = useFetchProjectByAdmin({
     adminAccountId: dashboardAccountId,
@@ -281,7 +301,6 @@ export const Dashboard = () => {
   const dashboardContextValue = useMemo(
     () => ({
       isCreditClassCreator,
-      isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
       selectedAccount: selectedAccount
@@ -309,7 +328,6 @@ export const Dashboard = () => {
     }),
     [
       isCreditClassCreator,
-      isProjectAdmin,
       isIssuer,
       sanityProfilePageData,
       selectedAccount,

@@ -15,7 +15,7 @@ import {
 import { getStargateAction } from 'utils/cosmwasm';
 
 import {
-  AccountByIdQuery,
+  DaoByAddressWithAssignmentsQuery,
   OrganizationProjectsByDaoAddressQuery,
 } from 'generated/graphql';
 
@@ -23,7 +23,10 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  ProjectRole,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 import { orgRoles, projectRoles } from './constants';
 
@@ -530,7 +533,7 @@ const revokeAction = ({
 });
 
 type FindNewAssignmentParams = {
-  data?: AccountByIdQuery | null;
+  data?: DaoByAddressWithAssignmentsQuery | null;
   daoAddress?: string;
   accountId: string;
   roleName: string;
@@ -543,42 +546,18 @@ export function findAssignment({
   roleName,
 }: FindNewAssignmentParams) {
   if (!daoAddress) return;
-  const assignments =
-    data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-      node => node?.address === daoAddress,
-    )?.assignmentsByDaoAddress?.nodes;
+  const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
   return assignments?.find(
     assig => assig?.accountId === accountId && assig?.roleName === roleName,
   );
 }
 
-type GetRoleAuthorizationIdsParams = {
-  type: 'organization' | 'project';
-  currentUserRole?: BaseMemberRole;
-  authorizationName?: 'can_manage_members' | 'can_manage_members_except_owner';
-};
-export function getRoleAuthorizationIds({
-  type,
-  currentUserRole,
-  authorizationName,
-}: GetRoleAuthorizationIdsParams) {
-  const roles = type === 'organization' ? orgRoles : projectRoles;
-
-  const roleId = currentUserRole ? roles[currentUserRole].roleId : undefined;
-  const authorizationId =
-    currentUserRole && authorizationName
-      ? roles[currentUserRole].authorizations[authorizationName]
-      : undefined;
-  return { roleId, authorizationId };
+export function getNewOrgRoleId(role: BaseMemberRole) {
+  return orgRoles[role]?.roleId;
 }
 
-type GetProjectIdsParams = {
-  type: 'organization' | 'project';
-  role: BaseMemberRole;
-};
-export function getNewRoleId({ type, role }: GetProjectIdsParams) {
-  const roles = type === 'organization' ? orgRoles : projectRoles;
-  return roles[role].roleId;
+export function getNewProjectRoleId(role: ProjectRole) {
+  return projectRoles[role]?.roleId;
 }
 
 export function getAuthorizationName(currentUserRole?: string) {

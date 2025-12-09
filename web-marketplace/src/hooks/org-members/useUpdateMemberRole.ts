@@ -13,7 +13,8 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -33,7 +34,8 @@ import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
-  getNewRoleId,
+  getNewOrgRoleId,
+  getNewProjectRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from './utils';
@@ -92,8 +94,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         return;
       }
 
-      const newRoleId = getNewRoleId({ type: 'organization', role });
-      const projectNewRoleId = getNewRoleId({ type: 'project', role });
+      const newRoleId = getNewOrgRoleId(role);
+      const projectNewRoleId = getNewProjectRoleId(role);
 
       // If we assign member the owner role,
       // it means we need to downgrade current user to admin
@@ -106,14 +108,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 authorizationId,
                 roleId,
                 memberAddress: wallet.address,
-                newRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_ADMIN,
-                }),
-                oldRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_OWNER,
-                }),
+                newRoleId: getNewOrgRoleId(ROLE_ADMIN),
+                oldRoleId: getNewOrgRoleId(ROLE_OWNER),
               }),
               updateAuthorizationAction({
                 daoRbamAddress,
@@ -203,14 +199,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                       authorizationId: projectAuthorizationId!,
                       roleId: projectRoleId,
                       memberAddress: wallet.address,
-                      newRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_ADMIN,
-                      }),
-                      oldRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_OWNER,
-                      }),
+                      newRoleId: getNewProjectRoleId(ROLE_ADMIN),
+                      oldRoleId: getNewProjectRoleId(ROLE_OWNER),
                     }),
                     updateAuthorizationAction({
                       daoRbamAddress: projectDao.daoRbamAddress,
@@ -351,10 +341,10 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             },
           },
         });
+
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({
-            id: activeAccountId,
-            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          queryKey: getDaoByAddressWithAssignmentsQueryKey({
+            address: daoAddress,
           }),
         });
       } catch (e) {
@@ -382,12 +372,16 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 },
               },
             });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                address: projectDaoAddress,
+              }),
+            });
           }),
         );
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({
-            id: activeAccountId,
-            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+            daoAddress,
           }),
         });
         checkProjectsErrors(projectsRes, projectsCurrentUserCanManageMembers);
@@ -396,8 +390,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
     [
       daoAddress,
       reactQueryClient,
-      activeAccountId,
-      params.daoAccountsOrderBy,
       projectsCurrentUserCanManageMembers,
       updateAssignment,
       setErrorBannerText,

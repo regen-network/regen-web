@@ -6,9 +6,14 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../ActionDropdown/ActionDropdown.constants';
-import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
+import {
+  MemberData,
+  ProjectRole,
+} from '../BaseMembersTable/BaseMembersTable.types';
+import { mockAccounts } from '../OrganizationMembers/OrganizationMembers.mock';
 import { ProjectCollaborators } from './ProjectCollaborators';
 import { mockCollaborators } from './ProjectCollaborators.mock';
+import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 
 const meta: Meta<typeof ProjectCollaborators> = {
   title: 'Marketplace/Organisms/ProjectCollaborators',
@@ -17,10 +22,6 @@ const meta: Meta<typeof ProjectCollaborators> = {
     collaborators: {
       control: 'object',
       description: 'List of collaborators',
-    },
-    onInvite: {
-      action: 'invite-clicked',
-      description: 'Called when invite button is clicked',
     },
     onUpdateRole: {
       action: 'role-changed',
@@ -35,12 +36,20 @@ const meta: Meta<typeof ProjectCollaborators> = {
 
 export default meta;
 
-export const Default = (args: {
-  onInvite: () => void;
-  onUpdateRole: (id: string, role: ProjectRole) => void;
-  onRemove?: (id: string) => void;
-  onEditOrgRole: () => void;
-}) => {
+export const Default = (
+  args: Pick<
+    ProjectCollaboratorsProps,
+    | 'onAddMember'
+    | 'onUpdateRole'
+    | 'onRemove'
+    | 'onEditOrgRole'
+    | 'isProjectDao'
+    | 'canMigrate'
+    | 'partOfOrganization'
+    | 'createOrganization'
+    | 'migrateProject'
+  >,
+) => {
   const [collaborators, setCollaborators] = useState(mockCollaborators || []);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
@@ -78,12 +87,40 @@ export const Default = (args: {
     [args],
   );
   const handleRemove = useCallback(
-    (id: string) => {
+    async (id: string) => {
       setCollaborators(prev => prev?.filter(c => c.id !== id));
       args.onRemove?.(id);
     },
     [args],
   );
+
+  const addMember = async (data: MemberData<ProjectRole>) => {
+    if (!data.role) return;
+
+    const foundAccount = mockAccounts.find(
+      acc =>
+        acc.addr === data.addressOrEmail || acc.name === data.addressOrEmail,
+    );
+
+    const newMember = {
+      id: `member-${Date.now()}`,
+      name: foundAccount?.name || data.addressOrEmail,
+      email: foundAccount?.addr || data.addressOrEmail,
+      avatar: foundAccount?.image || undefined,
+      role: data.role,
+      onChainRoleId: 1,
+      visible: data.visible,
+      isCurrentUser: false,
+      hasWalletAddress: true,
+      title: foundAccount?.description || '',
+      organization:
+        foundAccount?.type === 'organization' ? foundAccount.name || '' : '',
+    };
+
+    setCollaborators(prev => [...prev, newMember]);
+    args.onAddMember?.(data);
+  };
+
   return (
     <ProjectCollaborators
       {...args}
@@ -91,13 +128,19 @@ export const Default = (args: {
       onToggleSort={toggleSort}
       onUpdateRole={updateRole}
       onRemove={handleRemove}
+      onAddMember={addMember}
     />
   );
 };
 
 Default.args = {
-  onInvite: action('invite-clicked'),
   onUpdateRole: action('role-changed'),
   onRemove: action('collaborator-removed'),
   onEditOrgRole: action('edit-org-role'),
+  isProjectDao: true,
+  canMigrate: true,
+  partOfOrganization: true,
+  createOrganization: action('create-organization'),
+  migrateProject: action('migrate-project'),
+  currentDaoAddress: 'dao1xyz...',
 };

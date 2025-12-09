@@ -4,11 +4,19 @@ fragment projectFields on Project {
   accountByAdminAccountId {
     ...accountFields
   }
+  daoByAdminDaoAddress {
+    address
+    daoRbamAddress
+    cw4GroupAddress
+  }
   onChainId
   metadata
   approved
   published
   slug
+  organizationProjectByProjectId {
+    organizationId
+  }
   creditClassByCreditClassId {
     onChainId
     accountByRegistryId {

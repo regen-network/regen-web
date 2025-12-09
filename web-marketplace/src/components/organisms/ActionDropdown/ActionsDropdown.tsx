@@ -19,11 +19,12 @@ import { getActionItems } from './ActionDropdown.utils';
 
 export interface ActionsDropdownProps {
   role: ProjectRole;
-  currentUserRole: ProjectRole;
+  currentUserRole?: ProjectRole;
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
   context?: Context;
+  canEditOrgRole?: boolean;
 }
 
 export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
@@ -33,6 +34,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   onRemove,
   onEditOrgRole,
   context = PROJECT_CONTEXT,
+  canEditOrgRole = false,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -68,6 +70,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     onRemove,
     onEditOrgRole,
     navigate,
+    canEditOrgRole,
     _,
   });
 

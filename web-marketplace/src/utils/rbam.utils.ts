@@ -1,4 +1,4 @@
-import { regen } from '@regen-network/api';
+import { MsgAttest } from '@regen-network/api/regen/data/v2/tx';
 import {
   MsgPut,
   MsgTake,
@@ -7,7 +7,14 @@ import {
   MsgCancelSellOrder,
   MsgSell,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
-import { MsgRetire, MsgSend } from '@regen-network/api/regen/ecocredit/v1/tx';
+import {
+  MsgRetire,
+  MsgSend,
+  MsgUpdateProjectAdmin,
+  MsgUpdateProjectMetadata,
+} from '@regen-network/api/regen/ecocredit/v1/tx';
+
+import { Assignment } from 'generated/graphql';
 
 import { orgRoles, projectRoles } from 'hooks/org-members/constants';
 
@@ -44,6 +51,59 @@ type RoleAuthorizationIds = {
   roleId: number;
   /** the id of the authorization that has permission */
   authorizationId: number;
+};
+
+type AttestActionParams = RoleAuthorizationIds & MsgAttest;
+
+export const attestAction = ({
+  roleId,
+  authorizationId,
+  ...msg
+}: AttestActionParams) => {
+  const protoBytes = MsgAttest.encode(msg).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgAttest.typeUrl,
+    value: protoBytes,
+  });
+};
+
+type UpdateProjectAdminActionParams = RoleAuthorizationIds &
+  MsgUpdateProjectAdmin;
+
+export const updateProjectAdminAction = ({
+  roleId,
+  authorizationId,
+  ...msg
+}: UpdateProjectAdminActionParams) => {
+  const protoBytes = MsgUpdateProjectAdmin.encode(msg).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgUpdateProjectAdmin.typeUrl,
+    value: protoBytes,
+  });
+};
+
+type UpdateProjectMetadataActionParams = RoleAuthorizationIds &
+  MsgUpdateProjectMetadata;
+
+export const updateProjectMetadataAction = ({
+  roleId,
+  authorizationId,
+  ...msg
+}: UpdateProjectMetadataActionParams) => {
+  const protoBytes = MsgUpdateProjectMetadata.encode(msg).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgUpdateProjectMetadata.typeUrl,
+    value: protoBytes,
+  });
 };
 
 type CreditSendActionParams = RoleAuthorizationIds & MsgSend;
@@ -173,4 +233,19 @@ export function getRoleAuthorizationIds({
       : undefined;
 
   return { roleId, authorizationId, roleConfig };
+}
+
+type GetAccountAssignmentParams = {
+  accountId?: string;
+  assignments?: Array<Pick<
+    Assignment,
+    'accountId' | 'roleName' | 'visible' | 'onChainRoleId'
+  > | null>;
+};
+
+export function getAccountAssignment({
+  accountId,
+  assignments,
+}: GetAccountAssignmentParams) {
+  return assignments?.find(assignment => assignment?.accountId === accountId);
 }

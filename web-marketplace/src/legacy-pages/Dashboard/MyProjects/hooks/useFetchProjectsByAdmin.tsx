@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -8,6 +9,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useProfileData } from 'legacy-pages/Profile/hooks/useProfileData';
 
+import { ProjectFieldsFragment } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
@@ -24,6 +26,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectBy
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useFetchProjectsWithOrders } from './useFetchProjectsWithOrders';
+import { useMembersProjects } from './useMembersProjects';
 
 type Params = {
   keepUnpublished?: boolean;
@@ -31,6 +34,7 @@ type Params = {
   adminAccountId?: string;
   organization?: ReturnType<typeof useProfileData>['organization'];
   isLoading?: boolean;
+  withExternalMemberProjects?: boolean;
 };
 
 export const useFetchProjectByAdmin = ({
@@ -39,6 +43,7 @@ export const useFetchProjectByAdmin = ({
   adminAccountId,
   organization,
   isLoading,
+  withExternalMemberProjects = true,
 }: Params) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -56,8 +61,15 @@ export const useFetchProjectByAdmin = ({
       languageCode: selectedLanguage,
     }),
   );
+
+  // Get projects current user is an external member of
+  const { externalMemberProjects, isAssignmentsLoading } = useMembersProjects(
+    adminAccountId,
+    !withExternalMemberProjects,
+  );
+
   // or for organization
-  const offChainProjects = organization
+  const orgOffChainProjects = organization
     ? organization.organizationProjectsByOrganizationId.nodes.map(
         node => node?.projectByProjectId,
       )
@@ -65,6 +77,26 @@ export const useFetchProjectByAdmin = ({
 
   // On chain projects
   // for account
+
+  // Get on chain projects data for externalMemberProjects
+  const externalMemberProjectsRes = useQueries({
+    queries:
+      externalMemberProjects?.map(project =>
+        getProjectQuery({
+          enabled: !!project?.onChainId && !!queryClient,
+          client: queryClient,
+          request: {
+            projectId: project?.onChainId as string,
+          },
+        }),
+      ) || [],
+  });
+  const externalMemberOnChainProjects = externalMemberProjectsRes
+    .map(projectRes => {
+      return projectRes.data?.project;
+    })
+    .filter(Boolean) as ProjectInfo[];
+
   const { data: projectsData, isFetching: isOnChainProjectsLoading } = useQuery(
     getProjectsByAdminQuery({
       enabled: !!adminAddress && !!queryClient && !organization && !isLoading,
@@ -72,6 +104,7 @@ export const useFetchProjectByAdmin = ({
       request: { admin: adminAddress as string },
     }),
   );
+
   // or for organization
   const orgProjectsRes = useQueries({
     queries:
@@ -92,6 +125,14 @@ export const useFetchProjectByAdmin = ({
     .filter(Boolean) as ProjectInfo[];
   const isLoadingProjectsRes = orgProjectsRes.some(res => res.isLoading);
 
+  const offChainProjects = organization
+    ? orgOffChainProjects
+    : ([
+        ...(accountData?.data?.accountById?.projectsByAdminAccountId?.nodes ??
+          []),
+        ...(externalMemberProjects ? externalMemberProjects : []),
+      ] as ProjectFieldsFragment[]);
+
   const { data: sanityCreditClassData } = useQuery(
     getAllSanityCreditClassesQuery({
       sanityClient,
@@ -101,12 +142,16 @@ export const useFetchProjectByAdmin = ({
   );
 
   // Get data for on chain projects
+  const onChainProjects = [
+    ...(projectsData?.projects ? projectsData?.projects : []),
+    ...externalMemberOnChainProjects,
+  ];
   const {
     projects: onChainProjectsWithData,
     isProjectsMetadataLoading,
     isClassesMetadataLoading,
   } = useFetchProjectsWithOrders({
-    projects: projectsData?.projects || orgProjects,
+    projects: organization ? orgProjects : onChainProjects,
     offChainProjects,
     sanityCreditClassData,
   });
@@ -136,14 +181,12 @@ export const useFetchProjectByAdmin = ({
     res => res.isLoading,
   );
 
-  const onlyOffChainProjectsWithData =
-    onlyOffChainProjects?.map((project, index) => {
-      const sanityProject = sanityProjects?.[index];
+  const onlyOffChainProjectsWithData = useMemo(() => {
+    return (
+      onlyOffChainProjects?.map((project, index) => {
+        const sanityProject = sanityProjects?.[index];
 
-      return {
-        offChain: true,
-        published: !!project?.published,
-        ...normalizeProjectWithMetadata({
+        return normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,
           projectPageMetadata: project?.metadata,
@@ -157,9 +200,10 @@ export const useFetchProjectByAdmin = ({
               '',
           }),
           sanityProject,
-        }),
-      };
-    }) ?? [];
+        });
+      }) ?? []
+    );
+  }, [onlyOffChainProjects, sanityProjects, sanityCreditClassData]);
 
   const projects = [
     ...onChainProjectsWithData,
@@ -175,6 +219,7 @@ export const useFetchProjectByAdmin = ({
       isProjectsMetadataLoading ||
       isClassesMetadataLoading ||
       sanityProjectsLoading ||
-      isLoadingProjectsRes,
+      isLoadingProjectsRes ||
+      isAssignmentsLoading,
   };
 };

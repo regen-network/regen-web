@@ -8,19 +8,17 @@ import { useOnUploadCallback } from 'legacy-pages/Dashboard/hooks/useOnUploadCal
 
 import { deleteImage } from 'web-components/src/utils/s3';
 
-import {
-  AccountsOrderBy,
-  useUpdateAccountByIdMutation,
-} from 'generated/graphql';
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
 
-import { PersonalProfileSchemaType } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.schema';
+import { PersonalProfileSchemaType } from 'components/organisms/BaseMembersTable/modals/modals.schema';
 
-export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
+export const useSaveProfile = () => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const reactQueryClient = useQueryClient();
 
@@ -62,11 +60,29 @@ export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
       await reactQueryClient.invalidateQueries({
         queryKey: getAccountByIdQueryKey({
           id: activeAccountId,
-          daoAccountsOrderBy,
         }),
       });
+
+      await Promise.all(
+        activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.map(
+          async dao => {
+            if (dao)
+              await reactQueryClient.invalidateQueries({
+                queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                  address: dao.address,
+                }),
+                refetchType: 'all',
+              });
+          },
+        ) || [],
+      );
     },
-    [activeAccountId, updateAccountById, daoAccountsOrderBy, reactQueryClient],
+    [
+      activeAccountId,
+      updateAccountById,
+      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes,
+      reactQueryClient,
+    ],
   );
 
   return { saveProfile, onUpload };

@@ -2,17 +2,22 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
-import {
-  MsgUpdateProjectAdmin,
-  MsgUpdateProjectMetadata,
-} from '@regen-network/api/regen/ecocredit/v1/tx';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import {
+  getRoleAuthorizationIds,
+  updateProjectAdminAction,
+  updateProjectMetadataAction,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
+import { ProjectFieldsFragment } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
+import { useWallet } from 'lib/wallet/wallet';
 
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -32,6 +37,9 @@ type Props = {
     title,
     cardTitle,
   }: OnTxSuccessfulProps) => void;
+  adminDao?: ProjectFieldsFragment['daoByAdminDaoAddress'];
+  currentUserRole?: ProjectRole;
+  feeGranter?: string;
 };
 
 export type UseProjectEditSubmitParams = (
@@ -45,12 +53,22 @@ const useProjectEditSubmit = ({
   projectId,
   admin,
   creditClassId,
+  adminDao,
+  currentUserRole,
+  feeGranter,
   signAndBroadcast,
   onBroadcast,
   onTxSuccessful,
   onErrorCallback,
 }: Props): UseProjectEditSubmitParams => {
   const { _ } = useLingui();
+  const { wallet } = useWallet();
+
+  const { roleId, authorizationId } = getRoleAuthorizationIds({
+    type: 'project',
+    currentUserRole,
+    authorizationName: 'can_manage_projects',
+  });
 
   const projectEditSubmit = useCallback(
     async (
@@ -63,31 +81,54 @@ const useProjectEditSubmit = ({
         getAnchoredProjectBaseMetadata(metadata, creditClassId),
       );
       if (!iriResponse) return;
-      const msgs: Array<
-        | { typeUrl: string; value: MsgUpdateProjectMetadata }
-        | { typeUrl: string; value: MsgUpdateProjectAdmin }
-      > = [];
+      const msgs = [];
+      const actions = [];
 
       const { updateProjectMetadata, updateProjectAdmin } =
         regen.ecocredit.v1.MessageComposer.withTypeUrl;
       if (projectId && admin) {
-        if (doUpdateMetadata)
-          msgs.push(
-            updateProjectMetadata({
-              projectId,
-              admin,
-              newMetadata: iriResponse.iri,
-            }),
-          );
+        if (doUpdateMetadata) {
+          const msg = {
+            projectId,
+            admin,
+            newMetadata: iriResponse.iri,
+          };
+          if (adminDao?.address && authorizationId && roleId) {
+            actions.push(
+              updateProjectMetadataAction({ authorizationId, roleId, ...msg }),
+            );
+          } else msgs.push(updateProjectMetadata(msg));
+        }
 
-        if (doUpdateAdmin && newAdmin)
+        if (doUpdateAdmin && newAdmin) {
+          const msg = {
+            projectId,
+            admin,
+            newAdmin,
+          };
+          if (adminDao?.address && authorizationId && roleId) {
+            actions.push(
+              updateProjectAdminAction({ authorizationId, roleId, ...msg }),
+            );
+          } else
+            msgs.push(
+              updateProjectAdmin({
+                projectId,
+                admin,
+                newAdmin,
+              }),
+            );
+        }
+
+        if (actions.length > 0 && adminDao?.daoRbamAddress && wallet?.address) {
           msgs.push(
-            updateProjectAdmin({
-              projectId,
-              admin,
-              newAdmin,
+            wrapRbamActions({
+              walletAddress: wallet?.address,
+              rbamAddress: adminDao?.daoRbamAddress,
+              actions,
             }),
           );
+        }
 
         const onError = (err?: Error): void => {
           onErrorCallback && onErrorCallback(err);
@@ -131,10 +172,14 @@ const useProjectEditSubmit = ({
           }
         };
 
-        await signAndBroadcast({ msgs }, () => onBroadcast(), {
-          onError,
-          onSuccess,
-        });
+        await signAndBroadcast(
+          { msgs, fee: 'auto', feeGranter },
+          () => onBroadcast(),
+          {
+            onError,
+            onSuccess,
+          },
+        );
       }
     },
     [
@@ -146,6 +191,12 @@ const useProjectEditSubmit = ({
       onErrorCallback,
       onTxSuccessful,
       onBroadcast,
+      authorizationId,
+      roleId,
+      adminDao?.address,
+      feeGranter,
+      wallet?.address,
+      adminDao?.daoRbamAddress,
     ],
   );
 

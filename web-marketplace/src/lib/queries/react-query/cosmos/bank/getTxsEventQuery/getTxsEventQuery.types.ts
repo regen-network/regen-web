@@ -22,6 +22,8 @@ export type ReactQueryGetTxsEventProps = {
     limit?: bigint;
     orderBy?: OrderBy;
   };
+  stopConditionKey?: string;
+  stopCondition?: (response: GetTxsEventQueryResponse) => boolean;
 } & {
   client?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQueryGetTxsEventResponse>;

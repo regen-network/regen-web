@@ -4,77 +4,69 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { Body } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
-import { useLedger } from 'ledger';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
-import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
-import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  Member,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
-import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
 import { useUpdateMembers } from 'hooks/org-members';
-
-import { useSaveProfile } from '../hooks/useSaveProfile';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 export const InviteMembersStep = () => {
   const { _ } = useLingui();
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
-  const { signingCosmWasmClient } = useLedger();
   const { activeAccountId } = useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  const daoOrganization = useDaoOrganization();
 
   const { data } = useQuery(
-    getAccountByIdQuery({
+    getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
-      enabled: !!graphqlClient && !!activeAccountId,
-      id: activeAccountId,
+      enabled: !!graphqlClient && !!daoOrganization?.address,
+      address: daoOrganization?.address as string,
       daoAccountsOrderBy,
-      languageCode: selectedLanguage,
     }),
   );
-  const activeAccount = useMemo(() => data?.accountById, [data]);
 
-  const dao = useMemo(
-    () =>
-      activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-        dao => !!dao?.organizationByDaoAddress,
-      ),
-    [activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes],
-  );
+  const dao = data?.daoByAddress;
 
   const currentUserRole = useMemo(
     () =>
-      dao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccount?.id,
-      )?.roleName,
-    [dao, activeAccount],
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments: dao?.assignmentsByDaoAddress?.nodes,
+      })?.roleName,
+    [dao, activeAccountId],
   ) as BaseMemberRole | undefined;
 
   const members = useMemo(
     () =>
       (
         dao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(acc => {
-          const assignment = dao?.assignmentsByDaoAddress?.nodes?.find(
-            assignment => acc?.id === assignment?.accountId,
-          );
+          const assignment = getAccountAssignment({
+            accountId: acc?.id,
+            assignments: dao?.assignmentsByDaoAddress?.nodes,
+          });
           return assignment
             ? {
                 id: acc?.id,
@@ -85,9 +77,10 @@ export const InviteMembersStep = () => {
                 visible: assignment?.visible,
                 address: acc?.addr,
                 hasWalletAddress: !!acc?.addr,
-                isCurrentUser: acc?.id === activeAccount?.id,
+                isCurrentUser: acc?.id === activeAccountId,
                 organization:
-                  dao?.organizationByDaoAddress?.name || _(DEFAULT_NAME),
+                  daoOrganization?.organizationByDaoAddress?.name ||
+                  _(DEFAULT_NAME),
                 email:
                   acc?.privateAccountById?.email ||
                   acc?.privateAccountById?.googleEmail,
@@ -96,7 +89,7 @@ export const InviteMembersStep = () => {
             : null;
         }) ?? []
       ).filter(Boolean) as Member[],
-    [dao, activeAccount?.id, _],
+    [dao, activeAccountId, _, daoOrganization],
   );
 
   const { addMember, removeMember, updateRole, updateVisibility } =
@@ -109,24 +102,8 @@ export const InviteMembersStep = () => {
       daoAccountsOrderBy,
     });
 
-  const [debouncedValue, setDebouncedValue] = useState('');
-  const { data: accounts } = useQuery(
-    getAccountsByNameOrAddrQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedValue,
-      input: debouncedValue,
-      languageCode: selectedLanguage,
-    }),
-  );
-  const { data: daoData } = useQuery(
-    getDaoByAddressQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !!debouncedValue,
-      address: debouncedValue,
-    }),
-  );
-
-  const { saveProfile, onUpload } = useSaveProfile(daoAccountsOrderBy);
+  const { setDebouncedValue, accounts, daoData, saveProfile, onUpload } =
+    useInviteMember();
 
   return (
     <div className="text-center">

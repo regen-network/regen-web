@@ -10,9 +10,12 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../../ActionDropdown/ActionDropdown.constants';
-import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  Member,
+  MemberData,
+} from '../../BaseMembersTable/BaseMembersTable.types';
 import { mockAccounts, mockMembers } from '../OrganizationMembers.mock';
-import { Member } from '../OrganizationMembers.types';
 import { OrganizationMembersInviteTable } from './InviteMembers.Table';
 
 i18n.activate('en');
@@ -112,11 +115,7 @@ export const Default = (args: {
   const removeMember = async (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
-  const addMember = async (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => {
+  const addMember = async (data: MemberData<BaseMemberRole>) => {
     if (!data.role) return;
 
     const foundAccount = mockAccounts.find(
@@ -131,7 +130,7 @@ export const Default = (args: {
       avatar: foundAccount?.image || undefined,
       role: data.role,
       onChainRoleId: 1,
-      visible: data.visible,
+      visible: data.visible || false,
       isCurrentUser: false,
       hasWalletAddress: true,
       title: foundAccount?.description || '',

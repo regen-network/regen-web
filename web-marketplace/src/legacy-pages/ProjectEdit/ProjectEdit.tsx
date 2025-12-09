@@ -17,11 +17,14 @@ import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 import { usePathSection } from 'legacy-pages/Dashboard/hooks/usePathSection';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
+import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
+import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { startCase } from 'lodash';
 
 import Banner from 'web-components/src/components/banner';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { Loading } from 'web-components/src/components/loading';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
@@ -43,6 +46,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -50,6 +54,7 @@ import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useMsgClient } from 'hooks';
 
 import { ProjectDenied } from '../../components/organisms/ProjectDenied/ProjectDenied';
@@ -151,21 +156,44 @@ function ProjectEdit(): JSX.Element {
         id: projectId,
       }),
     );
+  const {
+    data: projectByOnChainIdRes,
+    isFetching: isFetchingProjectByOnChainId,
+  } = useQuery(
+    getProjectByOnChainIdQuery({
+      client: graphqlClient,
+      languageCode: selectedLanguage,
+      enabled: !!projectId && isOnChainId,
+      onChainId: projectId as string,
+    }),
+  );
 
-  const offChainProject = projectByOffChainIdRes?.data?.projectById;
-  const isLoading = isFetchingProject || isFetchingProjectById;
+  const offChainProject =
+    projectByOffChainIdRes?.data?.projectById ??
+    projectByOnChainIdRes?.data?.projectByOnChainId;
+  const isLoading =
+    isFetchingProject || isFetchingProjectById || isFetchingProjectByOnChainId;
 
-  const isNotAdmin =
-    ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||
-      (offChainProject?.adminAccountId &&
-        activeAccountId !== offChainProject?.adminAccountId)) &&
-    !isLoading;
+  const { role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId,
+    wallet,
+  });
+  const { canEdit } = getCanEditProject({
+    role,
+  });
   const hasProject = !!onChainProject || !!offChainProject;
   const isOnChain = !isLoading && !!onChainProject;
+
+  const feeGranter = useFeeGranter({ offChainProject });
 
   const projectEditSubmit = useProjectEditSubmit({
     projectId,
     admin: onChainProject?.admin,
+    adminDao: offChainProject?.daoByAdminDaoAddress,
+    currentUserRole: role,
+    feeGranter,
     creditClassId: onChainProject?.classId,
     signAndBroadcast,
     onBroadcast,
@@ -183,7 +211,11 @@ function ProjectEdit(): JSX.Element {
   // For react-hook-form based forms
   const isDirtyRef = useRef<boolean>(false);
 
-  if (isNotAdmin) {
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!canEdit) {
     return (
       <ProjectDenied
         isEdit
@@ -201,6 +233,9 @@ function ProjectEdit(): JSX.Element {
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
+        : feeGranter
+        ? // if there's a feeGranter, user is part of organization
+          '/dashboard/organization/projects'
         : '/dashboard/projects';
       if (isFormDirty) {
         setIsWarningModalOpen(path);

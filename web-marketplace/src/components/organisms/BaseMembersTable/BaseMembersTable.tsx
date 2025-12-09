@@ -34,11 +34,11 @@ interface BaseMembersTableProps<T extends BaseUser> {
   onInvite?: () => void;
   onSort?: () => void;
   sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
-  children: (user: T, canAdmin: boolean) => React.ReactNode;
+  children: ((user: T, canAdmin: boolean) => React.ReactNode) | React.ReactNode;
   context: 'organization' | 'project';
   additionalColumns?: string[];
   showMobileInvite?: boolean;
-  currentUserRole: ProjectRole | BaseMemberRole;
+  currentUserRole?: ProjectRole | BaseMemberRole;
   hideHeader?: boolean;
   hideDescription?: boolean;
   hideHelpDocs?: boolean;
@@ -80,10 +80,12 @@ export const BaseMembersTable = <T extends BaseUser>({
       {!hideHeader && (
         <div className="flex justify-between items-center mb-10">
           <Title variant="h4">
-            {title}{' '}
-            <span className="text-bc-neutral-400 font-normal">
-              ({users.length})
-            </span>
+            {title}
+            {users.length > 0 && (
+              <span className="pl-[2px] text-bc-neutral-400 font-normal">
+                ({users.length})
+              </span>
+            )}
           </Title>
 
           {/* desktop / tablet invite */}
@@ -146,59 +148,68 @@ export const BaseMembersTable = <T extends BaseUser>({
         </ContainedButton>
       )}
 
-      {/* Desktop column headers */}
-      <div
-        className={`hidden ${headerBreakpoint} pb-20 justify-between font-muli text-sc-text-sub-header font-bold text-[12px]`}
-      >
-        <div
-          className="w-[330px] px-6 flex items-center cursor-pointer"
-          onClick={onSort}
-        >
-          {_(NAME)}
-          <DropdownIcon
-            className={`ml-10 w-4 h-4 transition-transform ${
-              sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
-            }`}
-          />
-        </div>
-        <div className="w-[170px] text-left">{_(ROLE)}</div>
-        {additionalColumns.map((column, index) => (
-          <div key={index} className="w-[150px] text-left">
-            {column}
-          </div>
-        ))}
-        {showActionsColumn && <div className="w-[60px]" />}
-      </div>
-
-      {/* Mobile column header - just Name */}
-      <div
-        className={`${
-          isProjectContext ? 'lg:hidden' : 'xl:hidden'
-        } pb-20 font-muli text-sc-text-sub-header font-bold text-[12px]`}
-      >
-        <div className="px-6 flex items-center cursor-pointer" onClick={onSort}>
-          {_(NAME)}
-          <DropdownIcon
-            className={`ml-10 w-4 h-4 transition-transform ${
-              sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
-            }`}
-          />
-        </div>
-      </div>
-
-      {/* Rows */}
-      <div className="flex flex-col">
-        {users.map((user, index) => (
+      {typeof children === 'function' ? (
+        <>
+          {/* Desktop column headers */}
           <div
-            key={user.id}
-            className={`flex flex-col ${rowBreakpoint} justify-between py-20 gap-8 border-0 border-t border-solid border-sc-surface-stroke ${
-              isProjectContext ? 'lg:gap-0' : 'xl:gap-0'
-            }`}
+            className={`hidden ${headerBreakpoint} pb-20 justify-between font-muli text-sc-text-sub-header font-bold text-[12px]`}
           >
-            {children(user, canAdmin)}
+            <div
+              className="w-[330px] px-6 flex items-center cursor-pointer"
+              onClick={onSort}
+            >
+              {_(NAME)}
+              <DropdownIcon
+                className={`ml-10 w-4 h-4 transition-transform ${
+                  sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
+                }`}
+              />
+            </div>
+            <div className="w-[170px] text-left">{_(ROLE)}</div>
+            {additionalColumns.map((column, index) => (
+              <div key={index} className="w-[150px] text-left">
+                {column}
+              </div>
+            ))}
+            {showActionsColumn && <div className="w-[60px]" />}
           </div>
-        ))}
-      </div>
+
+          {/* Mobile column header - just Name */}
+          <div
+            className={`${
+              isProjectContext ? 'lg:hidden' : 'xl:hidden'
+            } pb-20 font-muli text-sc-text-sub-header font-bold text-[12px]`}
+          >
+            <div
+              className="px-6 flex items-center cursor-pointer"
+              onClick={onSort}
+            >
+              {_(NAME)}
+              <DropdownIcon
+                className={`ml-10 w-4 h-4 transition-transform ${
+                  sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
+                }`}
+              />
+            </div>
+          </div>
+
+          {/* Rows */}
+          <div className="flex flex-col">
+            {users.map(user => (
+              <div
+                key={user.id}
+                className={`flex flex-col ${rowBreakpoint} justify-between py-20 gap-8 border-0 border-t border-solid border-sc-surface-stroke ${
+                  isProjectContext ? 'lg:gap-0' : 'xl:gap-0'
+                }`}
+              >
+                {children(user, canAdmin)}
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        children
+      )}
     </div>
   );
 };

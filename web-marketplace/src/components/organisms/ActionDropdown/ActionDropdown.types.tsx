@@ -11,10 +11,11 @@ export type ActionItem = {
 export interface GetActionItemsParams {
   context: Context;
   role: string;
-  currentUserRole: string;
+  currentUserRole?: string;
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
   navigate: (path: string) => void;
   _: TranslatorType;
+  canEditOrgRole?: boolean;
 }

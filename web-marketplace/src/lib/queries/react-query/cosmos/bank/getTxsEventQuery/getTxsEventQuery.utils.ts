@@ -6,11 +6,16 @@ export const getEventsKey = (events?: string[]): string =>
 
 type GetTxsEventQueryKeyParams = {
   request: ReactQueryGetTxsEventProps['request'];
+  stopConditionKey?: ReactQueryGetTxsEventProps['stopConditionKey'];
 };
-export const getTxsEventQueryKey = ({ request }: GetTxsEventQueryKeyParams) => [
+export const getTxsEventQueryKey = ({
+  request,
+  stopConditionKey,
+}: GetTxsEventQueryKeyParams) => [
   GET_TXS_EVENT_KEY,
   getEventsKey(request.events),
   String(request.page),
   String(request.limit),
   request.orderBy,
+  stopConditionKey ?? '',
 ];

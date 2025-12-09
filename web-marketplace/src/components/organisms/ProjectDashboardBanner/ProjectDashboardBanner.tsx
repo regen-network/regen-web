@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { useAtom } from 'jotai';
+import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
+import { useRouter } from 'next/navigation';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { getAbbreviation } from 'web-components/src/components/cards/ProjectCard/ProjectCard.utils';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
-import ClipboardIcon from 'web-components/src/components/icons/ClipboardIcon';
-import { DraftDocumentIcon } from 'web-components/src/components/icons/DraftDocumentIcon';
+// import ClipboardIcon from 'web-components/src/components/icons/ClipboardIcon';
+// import { DraftDocumentIcon } from 'web-components/src/components/icons/DraftDocumentIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
-import TrashIcon from 'web-components/src/components/icons/TrashIcon';
+// import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
-import { Title } from 'web-components/src/components/typography';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { Title } from 'web-components/src/components/typography/Title';
+
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { OptimizedImage } from 'components/atoms/OptimizedImage';
 
+import defaultProject from '../../../../public/jpg/default-project.jpg';
 import {
   BACKGROUND_IMAGE_ALT,
-  CONVERT_TO_DRAFT,
-  DELETE_PROJECT,
+  // CONVERT_TO_DRAFT,
+  // DELETE_PROJECT,
   DESKTOP_GRADIENT,
   EDIT,
   MAX_ADDRESS_LENGTH_DESKTOP,
   MAX_ADDRESS_LENGTH_MOBILE,
   MIGRATE_PROJECT,
   MOBILE_GRADIENT,
-  REGISTER_WITH_PROTOCOL,
+  // REGISTER_WITH_PROTOCOL,
   TOGGLE_PROJECT_OPTIONS,
   UNTITLED_PROJECT,
   VIEW,
@@ -36,14 +44,20 @@ import {
 import { ProjectBannerProps } from './ProjectDashboardBanner.types';
 import { truncateEnd } from './ProjectDashboardBanner.utils';
 
-const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
+const ProjectDashboardBanner = ({
   project,
   canEdit,
-}) => {
+  canCreatePost,
+  onCreatePost,
+  migrateProject,
+  createPostDisabled,
+  createPostTooltipText,
+}: ProjectBannerProps) => {
   const { _ } = useLingui();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const navigate = useNavigate();
+  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
+  const router = useRouter();
 
   const truncatedPlace = truncateEnd(
     project.place ?? '',
@@ -56,42 +70,47 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   });
 
   const menuItems = [
-    {
-      label: _(REGISTER_WITH_PROTOCOL),
-      color: 'text-bc-neutral-700',
-      icon: <ClipboardIcon />,
-      action: () => setIsMenuOpen(false),
-    },
-    {
-      label: _(CONVERT_TO_DRAFT),
-      color: 'text-bc-neutral-700',
-      icon: <DraftDocumentIcon className="w-6 h-6" hasGradient />,
-      action: () => setIsMenuOpen(false),
-    },
+    // Commented items are fully not implemented yet
+    // {
+    //   label: _(REGISTER_WITH_PROTOCOL),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <ClipboardIcon />,
+    //   action: () => setIsMenuOpen(false),
+    // },
+    // {
+    //   label: _(CONVERT_TO_DRAFT),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <DraftDocumentIcon className="w-6 h-6" hasGradient />,
+    //   action: () => setIsMenuOpen(false),
+    // },
     {
       label: _(MIGRATE_PROJECT),
       color: 'text-bc-neutral-700',
       icon: <ArrowDownIcon direction="next" fontSize="medium" hasGradient />,
-      action: () => setIsMenuOpen(false),
+      action: migrateProject,
+      hidden: !!project.adminDaoAddress || !migrateProject,
     },
-    {
-      label: _(DELETE_PROJECT),
-      color: 'text-bc-neutral-700',
-      icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
-      action: () => setIsMenuOpen(false),
-    },
-  ];
+    // {
+    //   label: _(DELETE_PROJECT),
+    //   color: 'text-bc-neutral-700',
+    //   icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
+    //   action: () => setIsMenuOpen(false),
+    // },
+  ].filter(item => !item.hidden);
 
   const projectName = project.name || _(UNTITLED_PROJECT);
+
+  const defaultImagePosition =
+    project.imgSrc === defaultProject.src ? 'object-[0%_20%]' : '';
 
   return (
     <div className="relative w-full mt-20 ">
       <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
         <div className="absolute inset-0">
           <OptimizedImage
-            src={project.imgSrc || '/default-project-image.jpg'}
+            src={project.imgSrc}
             alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${defaultImagePosition}`}
           />
         </div>
         <div
@@ -102,9 +121,9 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
           }}
         >
           <OptimizedImage
-            src={project.imgSrc || '/default-project-image.jpg'}
+            src={project.imgSrc}
             alt=""
-            className="w-full h-full object-cover scale-110 blur-sm"
+            className={`w-full h-full object-cover scale-110 blur-sm ${defaultImagePosition}`}
           />
         </div>
 
@@ -114,37 +133,45 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
         {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">
           {/* Top right menu button */}
-          <div className="flex justify-end" ref={menuContainerRef}>
-            <div className="absolute top-4 right-4">
-              <button
-                onClick={() => setIsMenuOpen(o => !o)}
-                aria-haspopup="true"
-                aria-expanded={isMenuOpen}
-                aria-label={_(TOGGLE_PROJECT_OPTIONS)}
-                className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
-              >
-                <HorizontalDotsIcon sx={{ color: 'white' }} />
-              </button>
-            </div>
-            {isMenuOpen && (
-              <div className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10">
-                {menuItems.map((item, idx) => (
-                  <button
-                    key={idx}
-                    className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
-                    onClick={item.action}
-                  >
-                    {item.icon}
-                    {item.label}
-                  </button>
-                ))}
+          {menuItems.length > 0 && (
+            <div className="flex justify-end" ref={menuContainerRef}>
+              <div className="absolute top-4 right-4">
+                <button
+                  onClick={() => setIsMenuOpen(o => !o)}
+                  aria-haspopup="true"
+                  aria-expanded={isMenuOpen}
+                  aria-label={_(TOGGLE_PROJECT_OPTIONS)}
+                  className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
+                >
+                  <HorizontalDotsIcon sx={{ color: 'white' }} />
+                </button>
               </div>
-            )}
-          </div>
+              {isMenuOpen && (
+                <div className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10">
+                  {menuItems.map((item, idx) => (
+                    <button
+                      key={idx}
+                      className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        item.action && item.action();
+                      }}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Project info and buttons */}
-          <div className="flex flex-col justify-end max-w-[70%]">
-            <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]">
+          <div className="flex flex-col justify-end xl:max-w-[70%]">
+            <Title
+              variant="h3"
+              className="text-bc-neutral-0 mb-2 line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]"
+            >
               {projectName}
             </Title>
 
@@ -153,7 +180,9 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               <ProjectPlaceInfo
                 place={truncatedPlace}
                 area={project.area}
-                areaUnit={project.areaUnit}
+                areaUnit={getAbbreviation(
+                  getAreaUnit(_, project.areaUnit as qudtUnit, project.area),
+                )}
                 smFontSize="0.8125rem"
                 fontSize="14px"
                 color="white"
@@ -165,7 +194,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               <OutlinedButton
                 startIcon={<EyeIcon />}
                 onClick={() =>
-                  navigate(`/project/${project.slug || project.id}`)
+                  router.push(`/project/${project.slug || project.id}`)
                 }
               >
                 {_(VIEW)}
@@ -174,13 +203,41 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               {canEdit && (
                 <ContainedButton
                   startIcon={<EditIcon sx={{ color: 'white' }} />}
-                  onClick={() =>
-                    navigate(`/project-pages/${project.id}/edit/basic-info`)
-                  }
+                  onClick={() => {
+                    const id = project?.id;
+                    if (!id) return;
+
+                    const isDraft = project.offChain && project.draft;
+                    if (isDraft) {
+                      const currentStep =
+                        projectsCurrentStep[id] || 'basic-info';
+                      router.push(`/project-pages/${id}/${currentStep}`);
+                    } else {
+                      router.push(`/project-pages/${id}/edit/basic-info`);
+                    }
+                  }}
                 >
                   {_(EDIT)}
                 </ContainedButton>
               )}
+              {canCreatePost &&
+                (createPostDisabled ? (
+                  <InfoTooltip
+                    arrow
+                    title={createPostTooltipText}
+                    placement="top"
+                  >
+                    <span>
+                      <ContainedButton onClick={onCreatePost} disabled>
+                        {_(CREATE_POST)}
+                      </ContainedButton>
+                    </span>
+                  </InfoTooltip>
+                ) : (
+                  <ContainedButton onClick={onCreatePost}>
+                    {_(CREATE_POST)}
+                  </ContainedButton>
+                ))}
             </div>
           </div>
         </div>

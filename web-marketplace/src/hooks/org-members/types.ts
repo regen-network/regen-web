@@ -1,7 +1,9 @@
 import { AccountsOrderBy } from 'generated/graphql';
 
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
+import {
+  BaseMemberRole,
+  Member,
+} from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
 export type RefetchMembersParams = {
   address: string;

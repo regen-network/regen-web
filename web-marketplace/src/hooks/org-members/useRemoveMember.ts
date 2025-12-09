@@ -8,9 +8,9 @@ import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
+import { getDaoByAddressWithAssignmentsQueryKey } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery.utils';
+import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -32,7 +32,6 @@ export function useRemoveMember(params: MembersHookParams) {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
-  const { activeAccountId } = useAuth();
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
@@ -237,9 +236,8 @@ export function useRemoveMember(params: MembersHookParams) {
           variables: { input: { daoAddress, roleName: role, accountId: id } },
         });
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({
-            id: activeAccountId,
-            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          queryKey: getDaoByAddressWithAssignmentsQueryKey({
+            address: daoAddress,
           }),
         });
       } catch (e) {
@@ -266,14 +264,19 @@ export function useRemoveMember(params: MembersHookParams) {
                 },
               },
             });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getDaoByAddressWithAssignmentsQueryKey({
+                address: projectDaoAddress,
+              }),
+            });
           }),
         );
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({
-            id: activeAccountId,
-            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
+            daoAddress,
           }),
         });
+
         checkProjectsErrors(projectsRes, projectsCurrentUserCanManageMembers);
       }
     },
@@ -284,8 +287,6 @@ export function useRemoveMember(params: MembersHookParams) {
       _,
       deleteAssignment,
       reactQueryClient,
-      activeAccountId,
-      params.daoAccountsOrderBy,
       checkProjectsErrors,
     ],
   );
@@ -306,12 +307,12 @@ export function useRemoveMember(params: MembersHookParams) {
       if (memberAddress) {
         await removeMemberWithWalletAddress(
           id,
-          role,
+          role as BaseMemberRole,
           memberRoleId,
           memberAddress,
         );
       } else {
-        await removeMemberOffChain(id, role);
+        await removeMemberOffChain(id, role as BaseMemberRole);
       }
     },
     [

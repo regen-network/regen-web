@@ -16,10 +16,8 @@ import { formatDate } from 'web-components/src/utils/format';
 
 import {
   AccountFieldsFragment,
-  CreditClass,
-  Document,
   Maybe,
-  Project,
+  ProjectFieldsFragment,
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
@@ -30,8 +28,6 @@ import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
-  NameImageDescription,
-  ProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
@@ -62,20 +58,9 @@ export const getIsUuid = (str?: string): boolean =>
   !!str &&
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
-type ParseOffChainProjectReturn = {
-  offChainProjectMetadata?: ProjectMetadataLD;
-  managementActions?: NameImageDescription[];
-  projectDocs?: Maybe<Document>[];
-  creditClass?: Maybe<CreditClass>;
-  creditClassVersion?: any;
-  creditClassName?: string;
-  coBenefitsIris?: string[];
-  primaryImpactIRI?: string;
-};
-
 export const parseOffChainProject = (
-  project?: Maybe<Project>,
-): ParseOffChainProjectReturn => {
+  project?: Maybe<ProjectFieldsFragment>,
+) => {
   const offChainProjectMetadata = project?.metadata;
   const managementActions =
     offChainProjectMetadata?.['regen:landManagementActions'];

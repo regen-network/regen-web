@@ -106,7 +106,7 @@ export const SignModal = ({
           </TextButton>
           <ContainedButton
             type="submit"
-            disabled={!isValid || !data?.contentHash?.graph}
+            disabled={!verified || !isValid || !data?.contentHash?.graph}
           >
             <Trans>sign</Trans>
           </ContainedButton>

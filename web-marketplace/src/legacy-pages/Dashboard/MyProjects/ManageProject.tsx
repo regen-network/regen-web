@@ -18,7 +18,10 @@ import { Link } from 'components/atoms';
 import { ROLE_AUTHOR } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
-import { getCanEditProject } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
+import {
+  getCanCreatePost,
+  getCanEditProject,
+} from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
 import { useFetchProject } from './hooks/useFetchProject';
@@ -92,7 +95,7 @@ const ManageProject = () => {
   const { canEdit: canEditProject } = getCanEditProject({
     role,
   });
-  const canCreatePost = canEditProject || role === ROLE_AUTHOR;
+  const { canCreatePost } = getCanCreatePost({ role });
 
   if (isLoading) return <Loading />;
 

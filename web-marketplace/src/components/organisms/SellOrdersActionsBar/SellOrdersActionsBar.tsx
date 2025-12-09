@@ -46,7 +46,8 @@ type Params = {
   avgPricePerTonTooltip?: string;
   isPrefinanceProject?: boolean | null;
   prefinancePrice?: string;
-  isAdmin?: boolean;
+  canEditProject?: boolean;
+  canCreatePost?: boolean;
   children?: ReactNode;
   isSoldOut?: boolean;
   onClickCreatePost?: () => void;
@@ -69,7 +70,8 @@ export const SellOrdersActionsBar = ({
   avgPricePerTonTooltip,
   isPrefinanceProject,
   prefinancePrice,
-  isAdmin,
+  canEditProject,
+  canCreatePost,
   children,
   isSoldOut,
   onClickCreatePost,
@@ -88,6 +90,9 @@ export const SellOrdersActionsBar = ({
   const { loginDisabled } = useWallet();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
+
+  const showAdminButtons = canEditProject || canCreatePost;
+
   return (
     <StickyBar>
       <Box
@@ -97,10 +102,11 @@ export const SellOrdersActionsBar = ({
           width: '100%',
         }}
       >
-        {isAdmin ? (
+        {showAdminButtons ? (
           <>
             {!loginDisabled &&
               onClickCreatePost &&
+              canCreatePost &&
               (isCreatePostButtonDisabled && tooltipText ? (
                 <InfoTooltip arrow title={tooltipText} placement="top">
                   <div>
@@ -116,18 +122,20 @@ export const SellOrdersActionsBar = ({
                   isCreatePostButtonDisabled={!!isCreatePostButtonDisabled}
                 />
               ))}
-            <ContainedButton
-              onClick={() =>
-                router.push(
-                  `/project-pages/${
-                    onChainProjectId ?? offChainProjectId
-                  }/edit/basic-info`,
-                )
-              }
-            >
-              <EditIcon className="mr-10" sx={{ color: '#fff' }} />
-              {_(EDIT_PROJECT)}
-            </ContainedButton>
+            {canEditProject && (
+              <ContainedButton
+                onClick={() =>
+                  router.push(
+                    `/project-pages/${
+                      onChainProjectId ?? offChainProjectId
+                    }/edit/basic-info`,
+                  )
+                }
+              >
+                <EditIcon className="mr-10" sx={{ color: '#fff' }} />
+                {_(EDIT_PROJECT)}
+              </ContainedButton>
+            )}
           </>
         ) : (
           <>

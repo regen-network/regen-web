@@ -1,5 +1,6 @@
 import {
   ROLE_ADMIN,
+  ROLE_AUTHOR,
   ROLE_EDITOR,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
@@ -12,5 +13,19 @@ type GetCanEditProjectParams = {
 export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   return {
     canEdit: role === ROLE_OWNER || role === ROLE_ADMIN || role === ROLE_EDITOR,
+  };
+};
+
+type GetCanCreatePostParams = {
+  role?: ProjectRole;
+};
+
+export const getCanCreatePost = ({ role }: GetCanCreatePostParams) => {
+  return {
+    canCreatePost:
+      role === ROLE_OWNER ||
+      role === ROLE_ADMIN ||
+      role === ROLE_EDITOR ||
+      role === ROLE_AUTHOR,
   };
 };

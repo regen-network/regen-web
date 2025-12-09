@@ -337,6 +337,14 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:187
+msgid "Account"
+msgstr ""
+
+#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:81
+msgid "Account selector"
+msgstr ""
+
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 #~ msgid "Account switch detected!"
 #~ msgstr ""
@@ -349,7 +357,7 @@ msgstr ""
 msgid "Account switcher"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:197
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:298
 msgid "Acres"
 msgstr ""
 
@@ -773,7 +781,7 @@ msgid "basic info"
 msgstr ""
 
 #: src/legacy-pages/BasicInfo/BasicInfo.tsx:73
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:199
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:222
 msgid "Basic Info"
 msgstr ""
 
@@ -1223,6 +1231,10 @@ msgstr ""
 msgid "Choose the photo that will show at the top of the project page and in project preview cards."
 msgstr ""
 
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:183
+msgid "Choose where to create this project"
+msgstr ""
+
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:68
 msgid "class id"
 msgstr ""
@@ -1241,7 +1253,7 @@ msgstr ""
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:236
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:382
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:405
 msgid "close"
 msgstr ""
 
@@ -1252,6 +1264,10 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:30
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Close menu"
+msgstr ""
+
+#: src/legacy-pages/ProjectCreate/ProjectCreate.tsx:140
+msgid "Close project creation"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
@@ -1916,7 +1932,7 @@ msgstr ""
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:159
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:227
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:250
 msgid "Description"
 msgstr ""
 
@@ -2245,7 +2261,7 @@ msgstr ""
 msgid "Error fetching price"
 msgstr ""
 
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:170
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:189
 msgid "Error getting ISO string for jurisdiction. Please edit your location."
 msgstr ""
 
@@ -2491,7 +2507,7 @@ msgstr ""
 msgid "hectares"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:294
 msgid "Hectares"
 msgstr ""
 
@@ -2749,7 +2765,7 @@ msgstr ""
 msgid "join the community"
 msgstr ""
 
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:224
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:247
 msgid "Jurisdiction"
 msgstr ""
 
@@ -2860,7 +2876,7 @@ msgid "listen to podcast"
 msgstr ""
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:24
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:284
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:307
 msgid "Loading video player..."
 msgstr ""
 
@@ -2874,7 +2890,7 @@ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:138
 #: src/legacy-pages/ProjectLocation/ProjectLocation.tsx:44
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:217
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:240
 #: src/lib/constants/shared.constants.tsx:54
 msgid "Location"
 msgstr ""
@@ -3057,7 +3073,7 @@ msgid "media"
 msgstr ""
 
 #: src/legacy-pages/Media/Media.tsx:76
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:242
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:265
 msgid "Media"
 msgstr ""
 
@@ -3094,7 +3110,7 @@ msgstr ""
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:106
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/legacy-pages/ProjectMetadata/ProjectMetadata.tsx:72
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:321
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:344
 msgid "Metadata"
 msgstr ""
 
@@ -3132,6 +3148,10 @@ msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:11
 msgid "Migrate Projects from Personal Account"
+msgstr ""
+
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:191
+msgid "Migration Failed"
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:156
@@ -3184,7 +3204,7 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:110
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:115
 msgid "MsgCreateProject Error"
 msgstr ""
 
@@ -3219,7 +3239,7 @@ msgstr ""
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:119
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:204
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:227
 msgid "Name"
 msgstr ""
 
@@ -3475,6 +3495,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:68
 msgid "Organization"
 msgstr ""
 
@@ -3574,6 +3595,10 @@ msgstr ""
 #: src/components/atoms/PeerReviewed.tsx:22
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
+
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:52
+msgid "Personal"
+msgstr ""
 
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:19
 msgid "Personal Account"
@@ -3999,7 +4024,7 @@ msgid "project developer"
 msgstr ""
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:218
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:310
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:333
 msgid "Project Developer"
 msgstr ""
 
@@ -4431,12 +4456,16 @@ msgstr ""
 msgid "Retirement reason"
 msgstr ""
 
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:192
+msgid "Retry"
+msgstr ""
+
 #: src/components/molecules/PlanStepper.tsx:18
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:36
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:67
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:68
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:195
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:218
 msgid "Review"
 msgstr ""
 
@@ -4457,7 +4486,7 @@ msgstr ""
 msgid "roles"
 msgstr ""
 
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:304
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:327
 #: src/legacy-pages/Roles/Roles.tsx:85
 msgid "Roles"
 msgstr ""
@@ -4718,7 +4747,7 @@ msgstr ""
 msgid "Signing failed"
 msgstr ""
 
-#: src/legacy-pages/ProjectReview/ProjectReview.tsx:207
+#: src/legacy-pages/ProjectReview/ProjectReview.tsx:230
 msgid "Size"
 msgstr ""
 
@@ -5427,6 +5456,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
+#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:39
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:70
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:29
 msgid "Unnamed"
@@ -5916,7 +5946,7 @@ msgstr ""
 msgid "You already belong to an organization. Please manage your existing organization from your dashboard."
 msgstr ""
 
-#: src/legacy-pages/ChooseCreditClass/ChooseCreditClass.tsx:59
+#: src/legacy-pages/ChooseCreditClass/ChooseCreditClass.tsx:75
 msgid "You are not yet listed as an issuer on any credit classes"
 msgstr ""
 

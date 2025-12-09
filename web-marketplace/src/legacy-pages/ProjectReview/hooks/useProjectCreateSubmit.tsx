@@ -29,6 +29,8 @@ interface Props {
   organizationDaoAddress?: string;
   organizationRbamAddress?: string;
   projectDaoAddress?: string;
+  // wallet address of the signer (needed when executing through org RBAM)
+  walletAddress?: string;
 }
 
 type Return = {
@@ -40,6 +42,7 @@ const useProjectCreateSubmit = ({
   organizationDaoAddress,
   organizationRbamAddress,
   projectDaoAddress,
+  walletAddress,
 }: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
   const reactQueryClient = useQueryClient();
@@ -125,7 +128,8 @@ const useProjectCreateSubmit = ({
           ]);
 
           const executeMsg = getMsgExecuteContract({
-            walletAddress: admin,
+            // Sender must be the signer (the user wallet), not the org DAO address
+            walletAddress: walletAddress || admin,
             contract: organizationRbamAddress,
             executeActionsMsg,
           });
@@ -165,6 +169,7 @@ const useProjectCreateSubmit = ({
       organizationDaoAddress,
       organizationRbamAddress,
       projectDaoAddress,
+      walletAddress,
     ],
   );
 

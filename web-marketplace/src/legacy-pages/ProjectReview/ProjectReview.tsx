@@ -149,6 +149,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const project = data?.data?.projectById;
   const { projectCreateSubmit } = useProjectCreateSubmit({
     signAndBroadcast,
+    walletAddress: wallet?.address,
     organizationDaoAddress: isOrganizationAccount
       ? organizationDao?.address
       : undefined,

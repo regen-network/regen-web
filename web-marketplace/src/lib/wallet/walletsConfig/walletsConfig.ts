@@ -7,7 +7,7 @@ export const KeplrWallet: WalletConfig = {
     (await import('@keplr-wallet/stores')).getKeplrFromWindow(),
   getOfflineSignerFunction: client =>
     // This function expects to be bound to the `client` instance.
-    client.getOfflineSignerOnlyAmino.bind(client),
+    client.getOfflineSigner.bind(client),
 };
 
 export const walletsConfig = [KeplrWallet];

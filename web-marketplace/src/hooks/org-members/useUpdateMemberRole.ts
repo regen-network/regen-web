@@ -3,6 +3,8 @@ import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import {
   useDeleteAssignmentMutation,
@@ -23,6 +25,7 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 
 import {
   MEMBER_NOT_FOUND,
@@ -34,6 +37,7 @@ import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
+  getAuthorizationName,
   getNewOrgRoleId,
   getNewProjectRoleId,
   updateAuthorizationAction,
@@ -47,6 +51,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
     cw4GroupAddress,
     members,
     currentUserRole,
+    feeGranter,
   } = params;
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -56,15 +61,16 @@ export function useUpdateMemberRole(params: MembersHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const [updateAssignment] = useUpdateAssignmentMutation();
+  const { signAndBroadcast } = useMsgClient();
 
   const {
-    projectAuthorizationId,
-    projectRoleId,
     roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
     checkProjectsErrors,
+    onTxErrorCallback,
+    checkErrors,
   } = useMembersContext(params);
   const [deleteAssignment] = useDeleteAssignmentMutation();
 
@@ -86,9 +92,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         !role ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -171,6 +175,20 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
+            const projectCurrentUserRole = project?.currentUserRole;
+            const authorizationName = getAuthorizationName(
+              projectCurrentUserRole,
+            );
+            const {
+              roleId: projectRoleId,
+              authorizationId: projectAuthorizationId,
+            } = getRoleAuthorizationIds({
+              type: 'project',
+              currentUserRole: projectCurrentUserRole,
+              authorizationName,
+            });
+            if (!projectRoleId || !projectAuthorizationId) return null;
+
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
@@ -265,13 +283,31 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           .filter(Boolean) || [],
       )) as ExecuteInstruction[];
 
+      const msgs = [orgExecuteInstruction, ...projectExecuteInstructions].map(
+        instruction =>
+          getMsgExecuteContract({
+            walletAddress: wallet?.address,
+            contract: instruction.contractAddress,
+            executeActionsMsg: instruction.msg,
+          }),
+      );
+
       try {
-        setProcessingModal(atom => void (atom.open = true));
-        await signingCosmWasmClient.executeMultiple(
-          wallet.address,
-          [orgExecuteInstruction, ...projectExecuteInstructions],
-          2,
+        const txResult = await signAndBroadcast(
+          {
+            msgs: msgs,
+            fee: 'auto',
+            feeGranter,
+          },
+          () => setProcessingModal(atom => void (atom.open = true)),
+          {
+            onError: onTxErrorCallback,
+          },
         );
+        if (!txResult || typeof txResult === 'string') {
+          return;
+        }
+
         // revoking the old role if it was only off chain
         if (!assigned) {
           await deleteAssignment({
@@ -280,17 +316,21 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             },
           });
         }
-        for (const assignment of offchainProjectAssignmentsToDelete) {
-          await deleteAssignment({
-            variables: {
-              input: {
-                daoAddress: assignment.daoAddress,
-                roleName: assignment.roleName,
-                accountId: id,
+        const delAssignmentsRes = await Promise.allSettled(
+          offchainProjectAssignmentsToDelete.map(async assignment => {
+            await deleteAssignment({
+              variables: {
+                input: {
+                  daoAddress: assignment.daoAddress,
+                  roleName: assignment.roleName,
+                  accountId: id,
+                },
               },
-            },
-          });
-        }
+            });
+          }),
+        );
+        checkErrors(delAssignmentsRes, offchainProjectAssignmentsToDelete);
+
         await refetchMembers({
           address: memberAddress,
           role,
@@ -311,8 +351,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       reactQueryClient,
       deleteAssignment,
@@ -320,6 +358,10 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       setProcessingModal,
       setErrorBannerText,
       activeAccountId,
+      checkErrors,
+      signAndBroadcast,
+      feeGranter,
+      onTxErrorCallback,
       _,
     ],
   );

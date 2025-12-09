@@ -3,6 +3,8 @@ import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
@@ -15,11 +17,16 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 
-import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
+import {
+  MEMBER_NOT_FOUND,
+  MEMBER_REMOVED,
+  MISSING_REQUIRED_PARAMS,
+} from './constants';
 import { AssignmentToDelete, MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
-import { removeMemberActions } from './utils';
+import { getAuthorizationName, removeMemberActions } from './utils';
 
 export function useRemoveMember(params: MembersHookParams) {
   const {
@@ -28,6 +35,7 @@ export function useRemoveMember(params: MembersHookParams) {
     cw4GroupAddress,
     members,
     currentUserRole,
+    feeGranter,
   } = params;
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -36,16 +44,16 @@ export function useRemoveMember(params: MembersHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const reactQueryClient = useQueryClient();
   const [deleteAssignment] = useDeleteAssignmentMutation();
+  const { signAndBroadcast } = useMsgClient();
 
   const {
-    projectAuthorizationId,
-    projectRoleId,
     roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
     checkProjectsErrors,
     checkErrors,
+    onTxErrorCallback,
   } = useMembersContext(params);
 
   const removeMemberWithWalletAddress = useCallback(
@@ -63,9 +71,7 @@ export function useRemoveMember(params: MembersHookParams) {
         !cw4GroupAddress ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -109,6 +115,20 @@ export function useRemoveMember(params: MembersHookParams) {
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
+            const projectCurrentUserRole = project?.currentUserRole;
+            const authorizationName = getAuthorizationName(
+              projectCurrentUserRole,
+            );
+            const {
+              roleId: projectRoleId,
+              authorizationId: projectAuthorizationId,
+            } = getRoleAuthorizationIds({
+              type: 'project',
+              currentUserRole: projectCurrentUserRole,
+              authorizationName,
+            });
+            if (!projectRoleId || !projectAuthorizationId) return null;
+
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
@@ -163,13 +183,30 @@ export function useRemoveMember(params: MembersHookParams) {
         ].filter(Boolean) as ExecuteInstruction[];
 
         if (executions.length > 0) {
-          await signingCosmWasmClient.executeMultiple(
-            wallet.address,
-            executions,
-            2,
+          const msgs = executions.map(instruction =>
+            getMsgExecuteContract({
+              walletAddress: wallet?.address,
+              contract: instruction.contractAddress,
+              executeActionsMsg: instruction.msg,
+            }),
           );
-        }
-        if (!assigned) {
+
+          const txResult = await signAndBroadcast(
+            {
+              msgs: msgs,
+              fee: 'auto',
+              feeGranter,
+            },
+            () => setProcessingModal(atom => void (atom.open = true)),
+            {
+              onError: onTxErrorCallback,
+            },
+          );
+
+          if (!txResult || typeof txResult === 'string') {
+            return;
+          }
+        } else if (!assigned) {
           await deleteAssignment({
             variables: {
               input: { daoAddress, roleName: role, accountId: id },
@@ -198,6 +235,9 @@ export function useRemoveMember(params: MembersHookParams) {
           accountId: id,
           shouldFindAssignment: false,
         });
+        if (delAssignmentsRes.every(res => res.status === 'fulfilled')) {
+          setErrorBannerText(_(MEMBER_REMOVED));
+        }
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -212,8 +252,6 @@ export function useRemoveMember(params: MembersHookParams) {
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,
@@ -222,6 +260,9 @@ export function useRemoveMember(params: MembersHookParams) {
       refetchMembers,
       checkErrors,
       setProcessingModal,
+      signAndBroadcast,
+      feeGranter,
+      onTxErrorCallback,
     ],
   );
 
@@ -242,6 +283,7 @@ export function useRemoveMember(params: MembersHookParams) {
         });
       } catch (e) {
         setErrorBannerText(String(e));
+        return;
       }
 
       if (projectsCurrentUserCanManageMembers) {
@@ -255,15 +297,21 @@ export function useRemoveMember(params: MembersHookParams) {
                 a => a?.accountId === id,
               )?.roleName;
             if (!projectDaoAddress || !projectRoleName) return;
-            await deleteAssignment({
-              variables: {
-                input: {
-                  daoAddress: projectDaoAddress,
-                  roleName: projectRoleName,
-                  accountId: id,
+            try {
+              await deleteAssignment({
+                variables: {
+                  input: {
+                    daoAddress: projectDaoAddress,
+                    roleName: projectRoleName,
+                    accountId: id,
+                  },
                 },
-              },
-            });
+              });
+            } catch (e) {
+              setErrorBannerText(String(e));
+              return;
+            }
+
             await reactQueryClient.invalidateQueries({
               queryKey: getDaoByAddressWithAssignmentsQueryKey({
                 address: projectDaoAddress,
@@ -271,6 +319,7 @@ export function useRemoveMember(params: MembersHookParams) {
             });
           }),
         );
+
         await reactQueryClient.invalidateQueries({
           queryKey: getOrganizationProjectsByDaoAddressQueryKey({
             daoAddress,
@@ -278,6 +327,9 @@ export function useRemoveMember(params: MembersHookParams) {
         });
 
         checkProjectsErrors(projectsRes, projectsCurrentUserCanManageMembers);
+        if (projectsRes.every(res => res.status === 'fulfilled')) {
+          setErrorBannerText(_(MEMBER_REMOVED));
+        }
       }
     },
     [

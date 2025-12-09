@@ -24,7 +24,7 @@ type Props = {
     'addr' | 'id' | 'name' | 'type' | 'image'
   > | null;
   section: string;
-  hasProjects?: Array<any>;
+  hasProjects?: boolean;
   hasCreditClasses?: boolean;
   hasCreditBatches?: boolean;
 };
@@ -33,7 +33,7 @@ export const ViewProfileButton = ({
   setIsWarningModalOpen,
   activeAccount,
   section,
-  hasProjects = [],
+  hasProjects,
   hasCreditClasses = true,
   hasCreditBatches = true,
 }: Props) => {
@@ -87,7 +87,7 @@ export const ViewProfileButton = ({
     return null;
   }
 
-  if (section === 'projects' && hasProjects.length === 0) {
+  if (section === 'projects' && !hasProjects) {
     return null;
   }
 

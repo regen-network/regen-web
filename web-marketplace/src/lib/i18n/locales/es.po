@@ -931,7 +931,7 @@ msgstr "cuentas de grupo de búfer"
 #~ msgstr "Comprar"
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy.tsx:217
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:221
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:229
 msgid "BUY"
 msgstr "COMPRAR"
 
@@ -948,7 +948,7 @@ msgstr "Compra y vende créditos de servicios ecosistémicos en el mercado abier
 #~ msgstr "comprar créditos"
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy.tsx:217
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:221
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:229
 msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
@@ -1269,7 +1269,7 @@ msgstr "Acciones de los colaboradores"
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr "La función de colaborador es para proyectos que forman parte de una organización."
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:65
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:68
 msgid "Collaborators"
 msgstr "Colaboradores"
 
@@ -1426,7 +1426,7 @@ msgstr "Copiar enlace a la página del proyecto"
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr "No se pudo encontrar la organización asociada con la DAO creada. Intente actualizar la página más tarde."
 
-#: src/hooks/org-members/useMembersContext.ts:169
+#: src/hooks/org-members/useMembersContext.ts:181
 #: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:117
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr "No se pudieron recuperar las tareas, es posible que deba volver a cargar la página más tarde"
@@ -1614,7 +1614,7 @@ msgstr "Cronología de clases de créditos"
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito."
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:147
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:146
 msgid "Credit classes"
 msgstr "Clases de crédito"
 
@@ -1628,13 +1628,13 @@ msgstr "Clases de crédito"
 #~ msgid "Credit Details"
 #~ msgstr "Detalles de crédito"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:138
 msgid "Credit issuance"
 msgstr "Emisión de crédito"
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:55
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:58
 msgid "Credit Issuance"
 msgstr "Emisión de crédito"
 
@@ -1856,7 +1856,7 @@ msgstr "Navegación lateral del panel"
 msgid "Data Deficient"
 msgstr "Datos deficientes"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:50
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:53
 msgid "Data Posts"
 msgstr "Publicaciones de datos"
 
@@ -2308,7 +2308,7 @@ msgid "Factor:"
 msgstr "Factor:"
 
 #. placeholder {0}: errors.join('\n')
-#: src/hooks/org-members/useMembersContext.ts:222
+#: src/hooks/org-members/useMembersContext.ts:235
 msgid ""
 "Failed for projects:\n"
 "{0}"
@@ -2701,7 +2701,7 @@ msgstr "Invita a tus compañeros de equipo a colaborar en tu organización."
 msgid "Is this member visible on the organization page?"
 msgstr "¿Este miembro es visible en la página de la organización?"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:138
 msgid "Issuance"
 msgstr "Emisión"
 
@@ -2713,7 +2713,7 @@ msgstr "Emisión"
 msgid "Issued"
 msgstr "Emitido"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:142
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:141
 msgid "Issued credit batches"
 msgstr "Lotes de créditos emitidos"
 
@@ -2907,7 +2907,7 @@ msgstr "Inicie sesión para realizar un pago más rápido"
 #~ msgid "Log in with keplr wallet on desktop to setup account"
 #~ msgstr "Inicie sesión con la billetera keplr en el escritorio para configurar la cuenta"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:124
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:123
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr "Finalizar la sesión"
@@ -2968,7 +2968,7 @@ msgstr "Administrar clases de crédito"
 msgid "Manage credits"
 msgstr "Administrar créditos"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:60
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:63
 msgid "Manage Credits"
 msgstr "Administrar créditos"
 
@@ -2988,7 +2988,7 @@ msgstr "Administrar cartera"
 msgid "Manage Project"
 msgstr "Administrar proyecto"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:128
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:131
 msgid "manage project tabs"
 msgstr "administrar pestañas de proyectos"
 
@@ -3451,9 +3451,9 @@ msgstr "Resumen del pedido"
 #~ msgid "orders"
 #~ msgstr "órdenes"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:161
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:157
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:157
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:160
 msgid "Orders"
 msgstr "Pedidos"
 
@@ -3493,7 +3493,7 @@ msgstr "Miembros de la organización"
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr "Los miembros de la organización tienen permisos para todos los proyectos asociados con una organización."
 
-#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:111
+#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:31
 msgid "Organization members have permissions for all projects associated with an organization. You can also skip this step and invite members later."
 msgstr "Los miembros de la organización tienen permisos para todos los proyectos asociados. También puedes omitir este paso e invitar a los miembros más tarde."
 
@@ -5213,6 +5213,10 @@ msgstr "Esta URL única ya está en uso"
 #: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/constants.ts:4
 msgid "This user has been removed from the project"
 msgstr "Este usuario ha sido eliminado del proyecto."
+
+#: src/hooks/org-members/constants.ts:127
+msgid "This user has been removed from your organization"
+msgstr "Este usuario ha sido eliminado de su organización."
 
 #: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:145
 msgid "This user is already a collaborator of the project"

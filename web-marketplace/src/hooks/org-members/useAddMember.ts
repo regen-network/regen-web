@@ -3,11 +3,14 @@ import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { MEMBER_ADDED } from 'legacy-pages/Dashboard/MyProjects/hooks/collaborators/constants';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
-import { useLedger } from 'ledger';
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { apiServerUrl } from 'lib/env';
@@ -21,24 +24,33 @@ import {
   BaseMemberRole,
   MemberData,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useMsgClient } from 'hooks';
 
 import { MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';
 import { useMembersContext } from './useMembersContext';
 import {
   addMemberActions,
+  getAuthorizationName,
   getNewOrgRoleId,
   getNewProjectRoleId,
 } from './utils';
 
 export function useAddMember(params: MembersHookParams) {
-  const { daoAddress, daoRbamAddress, cw4GroupAddress, currentUserRole } =
-    params;
+  const {
+    daoAddress,
+    daoRbamAddress,
+    cw4GroupAddress,
+    currentUserRole,
+    feeGranter,
+  } = params;
   const { _ } = useLingui();
   const { wallet } = useWallet();
-  const { signingCosmWasmClient } = useLedger();
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const setBannerText = useSetAtom(bannerTextAtom);
+  const { signAndBroadcast } = useMsgClient();
+
   const reactQueryClient = useQueryClient();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -47,10 +59,9 @@ export function useAddMember(params: MembersHookParams) {
     projectsCurrentUserCanManageMembers,
     roleId,
     authorizationId,
-    projectRoleId,
-    projectAuthorizationId,
     refetchMembers,
     checkProjectsErrors,
+    onTxErrorCallback,
   } = useMembersContext(params);
 
   const addMemberWithWalletAddress = useCallback(
@@ -63,16 +74,13 @@ export function useAddMember(params: MembersHookParams) {
 
       if (
         !wallet?.address ||
-        !signingCosmWasmClient ||
         !daoAddress ||
         !daoRbamAddress ||
         !cw4GroupAddress ||
         !role ||
         !currentUserRole ||
         !authorizationId ||
-        !roleId ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !roleId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -98,6 +106,20 @@ export function useAddMember(params: MembersHookParams) {
 
       const projectExecuteInstructions = (projectsCurrentUserCanManageMembers
         ?.map(project => {
+          const projectCurrentUserRole = project?.currentUserRole;
+          const authorizationName = getAuthorizationName(
+            projectCurrentUserRole,
+          );
+          const {
+            roleId: projectRoleId,
+            authorizationId: projectAuthorizationId,
+          } = getRoleAuthorizationIds({
+            type: 'project',
+            currentUserRole: projectCurrentUserRole,
+            authorizationName,
+          });
+          if (!projectRoleId || !projectAuthorizationId) return null;
+
           const projectDao = project?.projectByProjectId?.daoByAdminDaoAddress;
           if (!projectDao) return null;
 
@@ -128,14 +150,31 @@ export function useAddMember(params: MembersHookParams) {
         })
         .filter(Boolean) || []) as ExecuteInstruction[];
 
+      const msgs = [orgExecuteInstruction, ...projectExecuteInstructions].map(
+        instruction =>
+          getMsgExecuteContract({
+            walletAddress: wallet?.address,
+            contract: instruction.contractAddress,
+            executeActionsMsg: instruction.msg,
+          }),
+      );
+
       try {
-        setProcessingModal(atom => void (atom.open = true));
-        await signingCosmWasmClient.executeMultiple(
-          wallet.address,
-          [orgExecuteInstruction, ...projectExecuteInstructions],
-          2,
+        await signAndBroadcast(
+          {
+            msgs: msgs,
+            fee: 'auto',
+            feeGranter,
+          },
+          () => setProcessingModal(atom => void (atom.open = true)),
+          {
+            onError: onTxErrorCallback,
+            onSuccess: async () => {
+              await refetchMembers({ address: addressOrEmail, role, visible });
+              setBannerText(_(MEMBER_ADDED));
+            },
+          },
         );
-        await refetchMembers({ address: addressOrEmail, role, visible });
       } catch (e) {
         setProcessingModal(atom => void (atom.open = false));
         setErrorBannerText(String(e));
@@ -143,20 +182,21 @@ export function useAddMember(params: MembersHookParams) {
     },
     [
       wallet?.address,
-      signingCosmWasmClient,
       daoAddress,
       daoRbamAddress,
       cw4GroupAddress,
       currentUserRole,
       authorizationId,
       roleId,
-      projectAuthorizationId,
-      projectRoleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,
       refetchMembers,
       setProcessingModal,
+      setBannerText,
+      onTxErrorCallback,
+      feeGranter,
+      signAndBroadcast,
     ],
   );
 
@@ -243,6 +283,9 @@ export function useAddMember(params: MembersHookParams) {
           ),
         );
         checkProjectsErrors(projectsRes, projectsFiltered);
+        if (projectsRes.every(res => res.status === 'fulfilled')) {
+          setBannerText(_(MEMBER_ADDED));
+        }
       }
     },
     [
@@ -255,6 +298,7 @@ export function useAddMember(params: MembersHookParams) {
       projectsCurrentUserCanManageMembers,
       retryCsrfRequest,
       checkProjectsErrors,
+      setBannerText,
     ],
   );
 

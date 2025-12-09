@@ -51,7 +51,6 @@ import { ORG_ENABLED } from 'lib/env';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
-//import { Members } from 'components/organisms/Members/Members';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 
@@ -120,6 +119,7 @@ const ConnectWalletPage = safeLazy(
   () => import('../../legacy-pages/ConnectWalletPage'),
 );
 const Dashboard = safeLazy(() => import('../../legacy-pages/Dashboard'));
+const Members = safeLazy(() => import('../../legacy-pages/Dashboard/Members'));
 const Orders = safeLazy(() => import('../../legacy-pages/Orders'));
 const CreateOrganization = safeLazy(
   () => import('../../legacy-pages/CreateOrganization'),
@@ -242,6 +242,12 @@ export const getRegenRoutes = ({
             element={<KeplrOrAuthRoute component={Orders} />}
           />
         </>
+      )}
+      {isOrganization && (
+        <Route
+          path="members"
+          element={<KeplrOrAuthRoute component={Members} />}
+        />
       )}
       <Route
         path="sell-orders"

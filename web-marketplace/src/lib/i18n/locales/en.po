@@ -925,7 +925,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy.tsx:217
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:221
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:229
 msgid "BUY"
 msgstr ""
 
@@ -942,7 +942,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy.tsx:217
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:221
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:229
 msgid "BUY CREDITS"
 msgstr ""
 
@@ -1263,7 +1263,7 @@ msgstr ""
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:65
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:68
 msgid "Collaborators"
 msgstr ""
 
@@ -1420,7 +1420,7 @@ msgstr ""
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr ""
 
-#: src/hooks/org-members/useMembersContext.ts:169
+#: src/hooks/org-members/useMembersContext.ts:181
 #: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:117
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
@@ -1608,7 +1608,7 @@ msgstr ""
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:147
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:146
 msgid "Credit classes"
 msgstr ""
 
@@ -1622,13 +1622,13 @@ msgstr ""
 #~ msgid "Credit Details"
 #~ msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:138
 msgid "Credit issuance"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:55
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:58
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1850,7 +1850,7 @@ msgstr ""
 msgid "Data Deficient"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:50
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:53
 msgid "Data Posts"
 msgstr ""
 
@@ -2302,7 +2302,7 @@ msgid "Factor:"
 msgstr ""
 
 #. placeholder {0}: errors.join('\n')
-#: src/hooks/org-members/useMembersContext.ts:222
+#: src/hooks/org-members/useMembersContext.ts:235
 msgid ""
 "Failed for projects:\n"
 "{0}"
@@ -2693,7 +2693,7 @@ msgstr ""
 msgid "Is this member visible on the organization page?"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:139
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:138
 msgid "Issuance"
 msgstr ""
 
@@ -2705,7 +2705,7 @@ msgstr ""
 msgid "Issued"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:142
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:141
 msgid "Issued credit batches"
 msgstr ""
 
@@ -2899,7 +2899,7 @@ msgstr ""
 #~ msgid "Log in with keplr wallet on desktop to setup account"
 #~ msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:124
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:123
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2960,7 +2960,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:60
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:63
 msgid "Manage Credits"
 msgstr ""
 
@@ -2980,7 +2980,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:128
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:131
 msgid "manage project tabs"
 msgstr ""
 
@@ -3443,9 +3443,9 @@ msgstr ""
 #~ msgid "orders"
 #~ msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:158
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:161
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:157
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:157
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:160
 msgid "Orders"
 msgstr ""
 
@@ -3485,7 +3485,7 @@ msgstr ""
 msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:111
+#: src/legacy-pages/CreateOrganization/steps/InviteMembersStep.tsx:31
 msgid "Organization members have permissions for all projects associated with an organization. You can also skip this step and invite members later."
 msgstr ""
 
@@ -5204,6 +5204,10 @@ msgstr ""
 
 #: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/constants.ts:4
 msgid "This user has been removed from the project"
+msgstr ""
+
+#: src/hooks/org-members/constants.ts:127
+msgid "This user has been removed from your organization"
 msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/InviteMemberModal.tsx:145

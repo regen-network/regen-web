@@ -571,17 +571,45 @@ type GetProjectsCurrentUserCanManageMembers = {
   orgData?: OrganizationProjectsByDaoAddressQuery | null;
   activeAccountId?: string;
 };
+
+type OrganizationProjectNode = NonNullable<
+  NonNullable<
+    OrganizationProjectsByDaoAddressQuery['organizationByDaoAddress']
+  >['organizationProjectsByOrganizationId']['nodes'][number]
+>;
+
+type ProjectWithCurrentUserRole = OrganizationProjectNode & {
+  currentUserRole: ProjectRole;
+};
+
 export function getProjectsCurrentUserCanManageMembers({
   orgData,
   activeAccountId,
 }: GetProjectsCurrentUserCanManageMembers) {
-  return orgData?.organizationByDaoAddress?.organizationProjectsByOrganizationId?.nodes?.filter(
-    project =>
-      project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes?.some(
-        assignment =>
-          assignment?.accountId === activeAccountId &&
-          (assignment?.roleName === ROLE_OWNER ||
-            assignment?.roleName === ROLE_ADMIN),
-      ),
-  );
+  const projects =
+    orgData?.organizationByDaoAddress?.organizationProjectsByOrganizationId
+      ?.nodes;
+  if (!projects) return undefined;
+
+  return projects.reduce<ProjectWithCurrentUserRole[]>((acc, project) => {
+    if (!project) return acc;
+    const assignments =
+      project.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress
+        ?.nodes;
+    const currentUserRole = assignments?.find(
+      assignment =>
+        assignment?.accountId === activeAccountId &&
+        (assignment?.roleName === ROLE_OWNER ||
+          assignment?.roleName === ROLE_ADMIN),
+    )?.roleName as ProjectRole | undefined;
+
+    if (!currentUserRole) return acc;
+
+    acc.push({
+      ...project,
+      currentUserRole,
+    });
+
+    return acc;
+  }, []);
 }

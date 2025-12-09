@@ -261,13 +261,12 @@ export const Dashboard = () => {
     },
   );
 
-  const projects = useFetchProjectByAdmin({
+  const { adminProjects } = useFetchProjectByAdmin({
     adminAccountId: dashboardAccountId,
     adminAddress: dashboardAccountAddress,
     keepUnpublished: true,
   });
-
-  const hasProjects = projects?.adminProjects;
+  const hasProjects = !!adminProjects && adminProjects.length > 0;
 
   const { batchesWithSupply } = useFetchPaginatedBatches({
     address: dashboardAccountAddress ?? wallet?.address,
@@ -455,7 +454,7 @@ export const Dashboard = () => {
               loginDisabled={loginDisabled}
               hasWalletAddress={headerHasWalletAddress}
               wallet={headerWallet}
-              hasProjects={!!hasProjects && hasProjects.length > 0}
+              hasProjects={hasProjects}
               hasOrders={
                 !isOrganizationDashboard && !ordersLoading && hasOrders
               }

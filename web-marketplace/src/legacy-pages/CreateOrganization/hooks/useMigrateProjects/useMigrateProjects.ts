@@ -384,21 +384,21 @@ export const useMigrateProjects = ({
       const walletAddress = wallet?.address;
       if (!walletAddress) {
         setErrorBannerText(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
-        throw new Error(_(CREATE_ORG_WALLET_REQUIRED_ERROR));
+        return;
       }
       if (!signingCosmWasmClient) {
         setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
-        throw new Error(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
+        return;
       }
       const organizationId = dao?.organizationByDaoAddress?.id;
       const organizationId = dao?.organizationByDaoAddress?.id;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
-        throw new Error(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
+        return;
       }
       if (!dao) {
         setErrorBannerText(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
-        throw new Error(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
+        return;
       }
       if (!cwAdminFactoryAddr) {
         throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));
@@ -420,7 +420,7 @@ export const useMigrateProjects = ({
             id,
             offChainId: id,
             offChain: true,
-            name: '',
+            name: values.newProjectName || id,
             imgSrc: '',
             place: '',
             draftText: '',
@@ -629,7 +629,7 @@ export const useMigrateProjects = ({
           sellExecuteMsg,
         ].filter(Boolean) as EncodeObject[];
 
-        const txResult = await signAndBroadcast(
+        await signAndBroadcast(
           {
             msgs,
             fee: 2,
@@ -687,42 +687,32 @@ export const useMigrateProjects = ({
             },
           },
         );
-
-        if (!txResult || typeof txResult === 'string') {
-          throw new Error(
-            typeof txResult === 'string'
-              ? txResult
-              : _(
-                  msg`The transaction was canceled before it could be signed or a blockchain error occurred. Please reconnect your wallet and try again.`,
-                ),
-          );
-        }
       } else handleSaveNext({ ...data, ...values });
     },
     [
-      projects,
-      handleSaveNext,
-      data,
-      _,
-      credits,
-      setErrorBannerText,
-      isLoadingCredits,
       isLoadingSellOrders,
-      isLoadingOrgAssignments,
-      sellOrdersData,
+      isLoadingCredits,
       wallet?.address,
       signingCosmWasmClient,
-      reactQueryClient,
-      signAndBroadcast,
       dao,
+      handleSaveNext,
+      data,
+      setErrorBannerText,
+      _,
       setProcessingModalAtom,
-      token,
-      retryCsrfRequest,
-      privActiveAccount,
-      activeAccount,
-      reloadData,
+      projects,
+      credits,
+      isLoadingOrgAssignments,
+      sellOrdersData,
+      signAndBroadcast,
+      reactQueryClient,
       updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
+      privActiveAccount?.can_use_stripe_connect,
+      activeAccount?.stripeConnectedAccountId,
+      token,
+      reloadData,
+      retryCsrfRequest,
       currentUserRole,
       orgAssignmentsData,
       onSuccess,

@@ -52,6 +52,7 @@ import {
   GALLERY_PHOTOS,
   MAIN_PHOTO,
 } from 'components/organisms/MediaForm/MediaForm.constants';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -80,7 +81,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
+  const organizationDao = useDaoOrganization();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  console.log(projectCreatorAddress, isOrganizationAccount);
 
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
@@ -142,8 +146,21 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
-  const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.data?.projectById;
+  const { projectCreateSubmit } = useProjectCreateSubmit({
+    signAndBroadcast,
+    organizationDaoAddress: isOrganizationAccount
+      ? organizationDao?.address
+      : undefined,
+    organizationRbamAddress: isOrganizationAccount
+      ? organizationDao?.daoRbamAddress
+      : undefined,
+    // Project DAO address is stored in DB after migration in BasicInfoForm
+    // We get it from the project data via adminDaoAddress field
+    projectDaoAddress: isOrganizationAccount
+      ? (project as any)?.adminDaoAddress
+      : undefined,
+  });
   const editPath = `/project-pages/${projectId}`;
   const metadata = project?.metadata as ProjectMetadataLD;
   const jurisdiction = useGetJurisdiction({ metadata });

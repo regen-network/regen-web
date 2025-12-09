@@ -10,9 +10,26 @@ type ProjectDraftStatus = {
 };
 export type ProjectsDraftStatus = ProjectDraftStatus[] | [];
 
+type ProjectAccountSelection = {
+  address?: string;
+  isOrganization: boolean;
+};
+
+type ProjectAccountSelections = Record<string, ProjectAccountSelection>;
+
+type PendingProjectIds = Record<string, string | null>;
+
 export const projectsCurrentStepAtom = atomWithStorage(
   'projectsCurrentStep',
   {} as ProjectsCurrentStep,
 );
 
 export const projectsDraftState = atom<ProjectsDraftStatus>([]);
+
+export const projectAccountSelectionsAtom =
+  atomWithStorage<ProjectAccountSelections>('projectAccountSelections', {});
+
+export const pendingProjectIdsAtom = atomWithStorage<PendingProjectIds>(
+  'pendingProjectIds',
+  {},
+);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
@@ -11,29 +11,23 @@ import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMi
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { pendingProjectIdsAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import slugify from 'slug';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import InputLabel from 'web-components/src/components/inputs/InputLabel';
 import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { processingModalAtom } from 'lib/atoms/modals.atoms';
+import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
+import { errorModalAtom, processingModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import {
-  BLOCKCHAIN_RECORD,
   EMPTY_OPTION_TEXT,
   POSITIVE_NUMBER,
   REQUIRED_MESSAGE,
-  SEE_LESS,
-  SEE_MORE,
-  TX_ERROR_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 
-import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
@@ -99,29 +93,26 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     name: 'regen:projectSize.qudt:unit',
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const [processingModal, setProcessingModal] = useAtom(processingModalAtom);
-  const [txError, setTxError] = useState<string | null>(null);
-  const [txHash, setTxHash] = useState<string | null>(null);
-  const [pendingProjectId, setPendingProjectId] = useState<string | null>(null);
+  const setProcessingModal = useSetAtom(processingModalAtom);
+  const setErrorModal = useSetAtom(errorModalAtom);
+  const setErrorCode = useSetAtom(errorCodeAtom);
+  const [pendingProjectIds, setPendingProjectIds] = useAtom(
+    pendingProjectIdsAtom,
+  );
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
   const { migrateProject } = useMigrateProject();
-  const pendingProjectStorageKey = useMemo(
+  const pendingProjectKey = useMemo(
     () => getPendingProjectStorageKey(projectId),
     [projectId],
   );
+  const pendingProjectId = pendingProjectIds[pendingProjectKey] ?? null;
 
   const updatePendingProjectId = useCallback(
     (id: string | null) => {
-      setPendingProjectId(id);
-      if (typeof window === 'undefined') return;
-      if (id) {
-        localStorage.setItem(pendingProjectStorageKey, id);
-      } else {
-        localStorage.removeItem(pendingProjectStorageKey);
-      }
+      setPendingProjectIds(prev => ({ ...prev, [pendingProjectKey]: id }));
     },
-    [pendingProjectStorageKey],
+    [pendingProjectKey, setPendingProjectIds],
   );
 
   useEffect(() => {
@@ -129,16 +120,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   }, [isDirtyRef, isDirty]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
     if (!isOrganizationAccount) {
       updatePendingProjectId(null);
-      return;
     }
-    const storedId = localStorage.getItem(pendingProjectStorageKey);
-    if (storedId) {
-      setPendingProjectId(storedId);
-    }
-  }, [isOrganizationAccount, pendingProjectStorageKey, updatePendingProjectId]);
+  }, [isOrganizationAccount, updatePendingProjectId]);
 
   const submitUntilSuccess = useCallback(
     async (values: BasicInfoFormSchemaType, slugIndex: number) => {
@@ -158,7 +143,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
                 slug,
               },
             });
-            if (isOrganizationAccount && currentProjectId) {
+            if (
+              isOrganizationAccount &&
+              currentProjectId &&
+              projectId === DRAFT_ID
+            ) {
               updatePendingProjectId(currentProjectId);
             } else {
               updatePendingProjectId(null);
@@ -181,24 +170,30 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
           if (currentProjectId && isOrganizationAccount) {
             try {
               setProcessingModal(atom => void (atom.open = true));
-              await migrateProject(currentProjectId);
+              await migrateProject(currentProjectId, values['schema:name']);
               setProcessingModal(atom => void (atom.open = false));
               updatePendingProjectId(null);
-              setTxError(null);
-              setTxHash(null);
               if (shouldNavigateRef?.current) {
                 navigate(`/project-pages/${currentProjectId}/location`);
               }
               return;
             } catch (error) {
               setProcessingModal(atom => void (atom.open = false));
-              setTxError(String(error));
               // Extract tx hash if available from error message
               const errorStr = String(error);
               const hashMatch = errorStr.match(/txhash[:\s]+([A-F0-9]+)/i);
-              if (hashMatch) {
-                setTxHash(hashMatch[1]);
-              }
+              const txHash = hashMatch ? hashMatch[1] : '';
+              setErrorCode(ERRORS.DEFAULT);
+              setErrorModal(atom => {
+                atom.description = errorStr;
+                atom.txHash = txHash;
+                atom.txHashUrl = txHash ? getHashUrl(txHash) : '';
+                atom.cardTitle = _(msg`Migration Failed`);
+                atom.buttonTitle = _(msg`Retry`);
+                atom.onButtonClick = () => {
+                  setErrorModal(atom => void (atom.description = ''));
+                };
+              });
               return;
             }
           }
@@ -245,6 +240,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       isOrganizationAccount,
       migrateProject,
       setProcessingModal,
+      setErrorModal,
+      setErrorCode,
       navigate,
       pendingProjectId,
       updatePendingProjectId,
@@ -252,100 +249,72 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   );
 
   return (
-    <>
-      <Form
-        form={form}
-        formRef={formRef}
-        isDraftRef={isDraftRef}
-        onSubmit={values => submitUntilSuccess(values, 0)}
-      >
-        <OnBoardingCard>
-          <TextField
-            label={_(BASIC_INFO_NAME_LABEL)}
-            description={_(BASIC_INFO_NAME_DESCRIPTION)}
-            placeholder={_(BASIC_INFO_NAME_PLACEHOLDER)}
-            error={!!errors['schema:name']}
-            helperText={errors['schema:name']?.message}
-            {...form.register('schema:name')}
-          />
-          <Box sx={{ display: 'flex', flexDirection: 'column', pt: [3, 12] }}>
-            <InputLabel>{_(BASIC_INFO_SIZE_LABEL)}</InputLabel>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'baseline',
-              }}
-            >
-              <TextField
-                className={cx(classes.parcelField, classes.parcelSize)}
-                type="number"
-                customInputProps={{ step: 'any' }}
-                sx={{ mt: { xs: 0, sm: 0 } }}
-                error={!!errors['regen:projectSize']}
-                helperText={
-                  errors['regen:projectSize']?.['qudt:numericValue']?.message
-                }
-                {...form.register('regen:projectSize.qudt:numericValue', {
-                  valueAsNumber: true,
-                })}
-              />
-              <SelectTextField
-                className={cx(classes.parcelField, classes.parcelUnit)}
-                options={[
-                  {
-                    value: 'unit:HA',
-                    label: _(msg`Hectares`),
-                  },
-                  {
-                    value: 'unit:AC',
-                    label: _(msg`Acres`),
-                  },
-                ]}
-                defaultStyle={false}
-                native={false}
-                value={unit}
-                emptyOptionText={_(EMPTY_OPTION_TEXT)}
-                {...form.register('regen:projectSize.qudt:unit')}
-              />
-            </Box>
-          </Box>
-        </OnBoardingCard>
-        <ProjectPageFooter
-          onPrev={onPrev}
-          isValid={isValid}
-          isSubmitting={isSubmitting}
-          dirty={isDirty}
-          saveAndExit={saveAndExit}
+    <Form
+      form={form}
+      formRef={formRef}
+      isDraftRef={isDraftRef}
+      onSubmit={values => submitUntilSuccess(values, 0)}
+    >
+      <OnBoardingCard>
+        <TextField
+          label={_(BASIC_INFO_NAME_LABEL)}
+          description={_(BASIC_INFO_NAME_DESCRIPTION)}
+          placeholder={_(BASIC_INFO_NAME_PLACEHOLDER)}
+          error={!!errors['schema:name']}
+          helperText={errors['schema:name']?.message}
+          {...form.register('schema:name')}
         />
-      </Form>
-      <ProcessingModal
-        open={!!processingModal?.open}
-        title={_(msg`Processing transaction`)}
-        bodyText={_(msg`Please wait while the transaction is being processed.`)}
+        <Box sx={{ display: 'flex', flexDirection: 'column', pt: [3, 12] }}>
+          <InputLabel>{_(BASIC_INFO_SIZE_LABEL)}</InputLabel>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+            }}
+          >
+            <TextField
+              className={cx(classes.parcelField, classes.parcelSize)}
+              type="number"
+              customInputProps={{ step: 'any' }}
+              sx={{ mt: { xs: 0, sm: 0 } }}
+              error={!!errors['regen:projectSize']}
+              helperText={
+                errors['regen:projectSize']?.['qudt:numericValue']?.message
+              }
+              {...form.register('regen:projectSize.qudt:numericValue', {
+                valueAsNumber: true,
+              })}
+            />
+            <SelectTextField
+              className={cx(classes.parcelField, classes.parcelUnit)}
+              options={[
+                {
+                  value: 'unit:HA',
+                  label: _(msg`Hectares`),
+                },
+                {
+                  value: 'unit:AC',
+                  label: _(msg`Acres`),
+                },
+              ]}
+              defaultStyle={false}
+              native={false}
+              value={unit}
+              emptyOptionText={_(EMPTY_OPTION_TEXT)}
+              {...form.register('regen:projectSize.qudt:unit')}
+            />
+          </Box>
+        </Box>
+      </OnBoardingCard>
+      <ProjectPageFooter
+        onPrev={onPrev}
+        isValid={isValid}
+        isSubmitting={isSubmitting}
+        dirty={isDirty}
+        saveAndExit={saveAndExit}
       />
-      <TxErrorModal
-        error={txError ?? ''}
-        open={!!txError}
-        onClose={() => {
-          setTxError(null);
-          setTxHash(null);
-        }}
-        txHash={txHash ?? ''}
-        txHashUrl={txHash ? getHashUrl(txHash) : ''}
-        cardTitle={_(msg`Migration Failed`)}
-        buttonTitle={_(msg`Retry`)}
-        onButtonClick={() => {
-          setTxError(null);
-          setTxHash(null);
-        }}
-        title={_(TX_ERROR_MODAL_TITLE)}
-        linkComponent={Link}
-        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
-        seeMoreText={_(SEE_MORE)}
-        seeLessText={_(SEE_LESS)}
-      />
-    </>
+    </Form>
   );
 };
 

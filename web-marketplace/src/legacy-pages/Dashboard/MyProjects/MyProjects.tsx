@@ -40,7 +40,7 @@ const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
   const {
-    isIssuer,
+   
     sanityProfilePageData,
     isOrganizationDashboard,
     organizationDaoAddress,
@@ -95,7 +95,12 @@ const MyProjects = (): JSX.Element => {
               emptyTitle={MY_PROJECTS_EMPTY_TITLE}
               isFirstProject={isFirstProject}
               onClick={() => {
-                navigate(`/project-pages/${DRAFT_ID}/account`);
+                navigate(`/project-pages/${DRAFT_ID}/account`, {
+                  state: {
+                    fromDashboard: true,
+                    isOrganization: isOrganizationDashboard,
+                  },
+                });
               }}
               sx={{ height: { xs: '100%' } }}
             />

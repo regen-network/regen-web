@@ -12200,7 +12200,7 @@ export type ProjectBySlugQuery = (
 
 export type ProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'id' | 'adminAccountId' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
+  & Pick<Project, 'id' | 'adminAccountId' | 'adminDaoAddress' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { accountByAdminAccountId?: Maybe<(
     { __typename?: 'Account' }
     & AccountFieldsFragment
@@ -12420,6 +12420,7 @@ export const ProjectFieldsFragmentDoc = gql`
     fragment projectFields on Project {
   id
   adminAccountId
+  adminDaoAddress
   accountByAdminAccountId {
     ...accountFields
   }

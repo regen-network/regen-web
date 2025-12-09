@@ -1,12 +1,13 @@
 import {
-  createContext,
   MutableRefObject,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
 import {
   Outlet,
+  useLocation,
   useNavigate,
   useOutletContext,
   useParams,
@@ -20,7 +21,11 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
-import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
+import {
+  projectAccountSelectionsAtom,
+  projectsDraftState,
+  ProjectsDraftStatus,
+} from './ProjectCreate.store';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
@@ -36,11 +41,11 @@ type ContextType = {
   setHasModalBeenViewed: (state: boolean) => void;
   projectCreatorAddress?: string;
   setProjectCreatorAddress: (address?: string) => void;
-  isOrganizationAccount?: boolean;
+  isOrganizationAccount: boolean;
   setIsOrganizationAccount: (isOrg: boolean) => void;
 };
 
-const defaultProjectCreateContext = createContext<ContextType>({
+const defaultProjectCreateContext: ContextType = {
   deliverTxResponse: undefined,
   setDeliverTxResponse: () => void 0,
   creditClassId: undefined,
@@ -56,17 +61,27 @@ const defaultProjectCreateContext = createContext<ContextType>({
   setProjectCreatorAddress: () => void 0,
   isOrganizationAccount: false,
   setIsOrganizationAccount: () => void 0,
-});
+};
 
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
+
+  // Check if coming from dashboard - this means we should NOT restore from localStorage
+  const state = location.state as
+    | { fromDashboard?: boolean; isOrganization?: boolean }
+    | undefined;
+  const isFromDashboard = !!state?.fromDashboard;
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
   const [projectsState] = useAtom<ProjectsDraftStatus>(projectsDraftState);
+  const [projectAccountSelections, setProjectAccountSelections] = useAtom(
+    projectAccountSelectionsAtom,
+  );
   const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
@@ -74,6 +89,7 @@ export const ProjectCreate = (): JSX.Element => {
   const [projectCreatorAddress, setProjectCreatorAddress] = useState<
     string | undefined
   >();
+
   const [isOrganizationAccount, setIsOrganizationAccount] = useState(false);
 
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
@@ -82,6 +98,35 @@ export const ProjectCreate = (): JSX.Element => {
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
+
+  // Restore persisted account selection for this project
+  // BUT skip if coming from dashboard (we want fresh state from navigation)
+  useEffect(() => {
+    if (!projectId || isFromDashboard) return;
+    const saved = projectAccountSelections[projectId];
+    if (saved) {
+      setProjectCreatorAddress(saved.address);
+      setIsOrganizationAccount(!!saved.isOrganization);
+    }
+  }, [projectAccountSelections, projectId, isFromDashboard]);
+
+  // Persist current selection for this project
+  useEffect(() => {
+    // Avoid overwriting a previous selection with an empty payload
+    if (!projectId || !projectCreatorAddress) return;
+    setProjectAccountSelections(prev => ({
+      ...prev,
+      [projectId]: {
+        address: projectCreatorAddress,
+        isOrganization: isOrganizationAccount,
+      },
+    }));
+  }, [
+    projectCreatorAddress,
+    isOrganizationAccount,
+    projectId,
+    setProjectAccountSelections,
+  ]);
 
   const handleRequestClose = useCallback(() => {
     setShowDiscardModal(false);

@@ -11,11 +11,9 @@ import {
 } from 'react-router-dom';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
 import { safeLazy } from 'utils/safeLazy';
-
-import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
@@ -26,13 +24,9 @@ const AllProjects = safeLazy(
 const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
 const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 
-type RouterProps = {
-  reactQueryClient: QueryClient;
-};
+export default function TerrasosRoutes(): JSX.Element {
+  const reactQueryClient = useQueryClient();
 
-export default function TerrasosRoutes({
-  reactQueryClient,
-}: RouterProps): JSX.Element {
   // Sets React Router’s basename to the current locale (e.g., /en, /es)
   // so all legacy React Router paths (/, /projects, etc.) resolve under /{lang}.
   // TODO: Remove `basename` when the legacy React Router is fully migrated

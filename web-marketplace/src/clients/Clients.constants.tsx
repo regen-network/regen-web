@@ -1,16 +1,14 @@
 import { ReactNode } from 'react';
 import { safeLazy } from 'utils/safeLazy';
 
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
-
 import { CLIENT_CONFIG, MARKETPLACE_CLIENT_TYPE } from './Clients.types';
 
 const RegenRoutes = safeLazy(() => import('./regen/Regen.Routes'));
 const TerrasosRoutes = safeLazy(() => import('./terrasos/Terrasos.Routes'));
 
 export const CLIENTS_MAPPING: Record<MARKETPLACE_CLIENT_TYPE, ReactNode> = {
-  regen: <RegenRoutes reactQueryClient={reactQueryClient} />,
-  terrasos: <TerrasosRoutes reactQueryClient={reactQueryClient} />,
+  regen: <RegenRoutes />,
+  terrasos: <TerrasosRoutes />,
 };
 
 export const CLIENTS_CONFIG_MAPPING: Record<

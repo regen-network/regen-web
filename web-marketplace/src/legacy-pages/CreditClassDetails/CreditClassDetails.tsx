@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   ApolloClient,
@@ -25,18 +25,12 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy';
-import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 
 import { useLedger } from '../../ledger';
-import {
-  getProjectNameFromProjectsData,
-  parseCreditClassVersion,
-} from './CreditClassDetails.utils';
+import { parseCreditClassVersion } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 
 function CreditClassDetails(): JSX.Element {
@@ -46,7 +40,6 @@ function CreditClassDetails(): JSX.Element {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
-  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
   const { data: sanityCreditClassPageData } = useQuery(
     getAllCreditClassPageQuery({
@@ -108,26 +101,6 @@ function CreditClassDetails(): JSX.Element {
     parseCreditClassVersion(dbDataByOnChainId?.creditClassByOnChainId);
 
   const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
-
-  const { projectsWithOrderData } = useBuySellOrderData({
-    classId: creditClassId,
-  });
-
-  const { credits } = useCreateSellOrderData({
-    projectId: projectsWithOrderData[0]?.id,
-  });
-
-  const creditsWithProjectName = useMemo(() => {
-    if (!credits || credits.length === 0) return;
-    return credits.map(batch => ({
-      ...batch,
-      projectName:
-        getProjectNameFromProjectsData(
-          batch.projectId,
-          projectsWithOrderData,
-        ) ?? undefined,
-    }));
-  }, [credits, projectsWithOrderData]);
 
   const onBookCallButtonClick = () => openLink(scheduleCallLink, true);
   const impact = useImpact({
@@ -209,11 +182,6 @@ function CreditClassDetails(): JSX.Element {
       <SellOrdersActionsBar
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
-      />
-      <CreateSellOrderFlow
-        isFlowStarted={isSellFlowStarted}
-        setIsFlowStarted={setIsSellFlowStarted}
-        credits={creditsWithProjectName}
       />
 
       {/* // TODO Display not found or error status

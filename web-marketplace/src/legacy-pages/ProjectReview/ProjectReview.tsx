@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -62,6 +66,7 @@ import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getAccountProjectsByIdQueryKey } from '../../lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
+import { getAssignmentsWithProjectsQuery } from '../../lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
@@ -78,7 +83,8 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { setDeliverTxResponse, projectCreatorAddress, isOrganizationAccount } =
     useCreateProjectContext();
-  const graphqlClient = useApolloClient();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
   const organizationDao = useDaoOrganization();
@@ -92,6 +98,23 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       languageCode: selectedLanguage,
       id: projectId,
     }),
+  );
+
+  const { data: assignmentsData } = useQuery(
+    getAssignmentsWithProjectsQuery({
+      client: graphqlClient,
+      id: activeAccountId || '',
+      enabled: !!graphqlClient && !!activeAccountId && isOrganizationAccount,
+    }),
+  );
+
+  const organizationRole = useMemo(
+    () =>
+      assignmentsData?.accountById?.assignmentsByAccountId?.nodes.find(
+        assignment =>
+          assignment?.daoByDaoAddress?.address === organizationDao?.address,
+      )?.roleName,
+    [assignmentsData, organizationDao?.address],
   );
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
@@ -150,6 +173,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectCreateSubmit } = useProjectCreateSubmit({
     signAndBroadcast,
     walletAddress: wallet?.address,
+    organizationRole,
     organizationDaoAddress: isOrganizationAccount
       ? organizationDao?.address
       : undefined,

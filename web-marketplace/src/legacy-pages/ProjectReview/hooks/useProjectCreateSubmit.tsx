@@ -6,13 +6,12 @@ import {
   getExecuteActionsStargate,
   getMsgExecuteContract,
 } from 'utils/cosmwasm';
+import { getRoleAuthorizationIds } from 'utils/rbam.utils';
 
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
-
-import { orgRoles } from 'hooks/org-members/constants';
 
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 
@@ -31,6 +30,7 @@ interface Props {
   projectDaoAddress?: string;
   // wallet address of the signer (needed when executing through org RBAM)
   walletAddress?: string;
+  organizationRole?: string;
 }
 
 type Return = {
@@ -43,6 +43,7 @@ const useProjectCreateSubmit = ({
   organizationRbamAddress,
   projectDaoAddress,
   walletAddress,
+  organizationRole,
 }: Props): Return => {
   const [updateProject] = useUpdateProjectByIdMutation();
   const reactQueryClient = useQueryClient();
@@ -96,6 +97,17 @@ const useProjectCreateSubmit = ({
           organizationRbamAddress &&
           projectDaoAddress
         ) {
+          const { roleId, authorizationId: createProjectAuthId } =
+            getRoleAuthorizationIds({
+              type: 'organization',
+              currentUserRole: organizationRole,
+              authorizationName: 'can_create_projects',
+            });
+
+          if (!roleId || !createProjectAuthId) {
+            throw new Error('You do not have permission to create projects');
+          }
+
           // Create project with project DAO as admin, executed through org DAO's RBAM
           const createProjectMsg =
             regen.ecocredit.v1.MessageComposer.withTypeUrl.createProject({
@@ -119,9 +131,8 @@ const useProjectCreateSubmit = ({
 
           const executeActionsMsg = getExecuteActionsStargate([
             {
-              authorizationId: orgRoles.owner.authorizations
-                .can_create_projects as number,
-              roleId: orgRoles.owner.roleId,
+              authorizationId: createProjectAuthId,
+              roleId,
               typeUrl: createProjectMsg.typeUrl,
               value: protoBytes,
             },

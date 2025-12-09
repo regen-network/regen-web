@@ -14,7 +14,8 @@ export const useMigrateProject = (
     projects: project ? [project] : [],
     onSuccess:
       navigateToOrg && project
-        ? () => navigate(`/dashboard/organization/projects/${project.id}/manage`)
+        ? () =>
+            navigate(`/dashboard/organization/projects/${project.id}/manage`)
         : undefined,
   });
 

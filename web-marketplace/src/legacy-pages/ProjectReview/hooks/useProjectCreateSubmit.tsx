@@ -136,7 +136,7 @@ const useProjectCreateSubmit = ({
 
           const tx = {
             msgs: [executeMsg],
-            fee: undefined,
+            fee: 'auto' as const, // simulate to avoid underestimating gas on RBAM execute
           };
 
           await signAndBroadcast(tx);
@@ -153,7 +153,7 @@ const useProjectCreateSubmit = ({
 
           const tx = {
             msgs: [msg],
-            fee: undefined,
+            fee: 'auto' as const, // simulate to avoid underestimating gas for project creation
           };
 
           await signAndBroadcast(tx);

@@ -407,6 +407,12 @@ msgstr ""
 msgid "Add video url"
 msgstr ""
 
+#. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
+#. placeholder {1}: result.reason
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:260
+msgid "Adding member to project {0} failed: {1}"
+msgstr ""
+
 #: src/components/organisms/Modals/AddCertificationModal/AddCertificationModal.tsx:17
 msgid "Additional Certificate"
 msgstr ""
@@ -721,7 +727,7 @@ msgstr ""
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:116
+#: src/components/organisms/PostFlow/hooks/useSign.ts:195
 msgid "Attest"
 msgstr ""
 
@@ -1432,7 +1438,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:170
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:172
 msgid "create an organization"
 msgstr ""
 
@@ -1484,7 +1490,7 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:305
 msgid "Created by"
 msgstr ""
 
@@ -3048,7 +3054,7 @@ msgstr ""
 #~ msgid "Member has been removed from your organization."
 #~ msgstr ""
 
-#: src/hooks/org-members/constants.ts:122
+#: src/hooks/org-members/constants.ts:126
 msgid "member not found"
 msgstr ""
 
@@ -3121,7 +3127,7 @@ msgstr ""
 msgid "Minimum of 1 recipient"
 msgstr ""
 
-#: src/hooks/org-members/constants.ts:121
+#: src/hooks/org-members/constants.ts:125
 msgid "missing required parameters"
 msgstr ""
 
@@ -3405,7 +3411,7 @@ msgid "Open menu"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:65
 msgid "Open sell orders"
 msgstr ""
 
@@ -4677,7 +4683,7 @@ msgstr ""
 msgid "signature"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:214
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:352
 msgid "Signed by"
 msgstr ""
 
@@ -5220,7 +5226,7 @@ msgstr ""
 msgid "Threat Category of Ecosystem"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:154
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:193
 msgid "Timed out waiting for project DAOs to be indexed."
 msgstr ""
 
@@ -5429,13 +5435,13 @@ msgstr ""
 
 #. placeholder {0}: selectedCardSellOrders[idx].id
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:218
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:299
 msgid "Updating Card Order {0} failed: {1}"
 msgstr ""
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:179
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:218
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr ""
 
@@ -5988,7 +5994,7 @@ msgstr ""
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:73
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:79
 msgid "You have no tradable credits that can be sold."
 msgstr ""
 

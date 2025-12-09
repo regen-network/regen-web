@@ -413,6 +413,12 @@ msgstr "Agregar perfil"
 msgid "Add video url"
 msgstr "Añadir URL de vídeo"
 
+#. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
+#. placeholder {1}: result.reason
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:260
+msgid "Adding member to project {0} failed: {1}"
+msgstr "Error al agregar miembro al proyecto {0}: {1}"
+
 #: src/components/organisms/Modals/AddCertificationModal/AddCertificationModal.tsx:17
 msgid "Additional Certificate"
 msgstr "Certificado adicional"
@@ -727,7 +733,7 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuaci�
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
 msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a continuación."
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:116
+#: src/components/organisms/PostFlow/hooks/useSign.ts:195
 msgid "Attest"
 msgstr "Dar fe"
 
@@ -1438,7 +1444,7 @@ msgstr "País"
 msgid "Create a project without a credit class"
 msgstr "Crear un proyecto sin una clase de crédito"
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:170
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:172
 msgid "create an organization"
 msgstr "crear una organización"
 
@@ -1490,7 +1496,7 @@ msgstr "Crear proyecto - Acceso denegado"
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:305
 msgid "Created by"
 msgstr "Creado por"
 
@@ -3056,7 +3062,7 @@ msgstr "Medio"
 #~ msgid "Member has been removed from your organization."
 #~ msgstr "El miembro ha sido eliminado de su organización."
 
-#: src/hooks/org-members/constants.ts:122
+#: src/hooks/org-members/constants.ts:126
 msgid "member not found"
 msgstr "miembro no encontrado"
 
@@ -3129,7 +3135,7 @@ msgstr "fecha de inicio mínima"
 msgid "Minimum of 1 recipient"
 msgstr "Mínimo 1 destinatario"
 
-#: src/hooks/org-members/constants.ts:121
+#: src/hooks/org-members/constants.ts:125
 msgid "missing required parameters"
 msgstr "parámetros requeridos faltantes"
 
@@ -3413,7 +3419,7 @@ msgid "Open menu"
 msgstr "Abrir menú"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:65
 msgid "Open sell orders"
 msgstr "Órdenes de venta abiertas"
 
@@ -4685,7 +4691,7 @@ msgstr "Firma este post"
 msgid "signature"
 msgstr "firma"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:214
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:352
 msgid "Signed by"
 msgstr "Firmado por"
 
@@ -5228,7 +5234,7 @@ msgstr "Esta dirección de billetera ya está en uso en otra cuenta. ¿Quieres f
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:154
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:193
 msgid "Timed out waiting for project DAOs to be indexed."
 msgstr "Se agotó el tiempo de espera para que se indexaran los DAO del proyecto."
 
@@ -5437,13 +5443,13 @@ msgstr "Actualizar metadatos del proyecto"
 
 #. placeholder {0}: selectedCardSellOrders[idx].id
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:218
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:299
 msgid "Updating Card Order {0} failed: {1}"
 msgstr "Error al actualizar el pedido de la tarjeta {0}: {1}"
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:179
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:218
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr "Error al actualizar el proyecto fuera de la cadena {0}: {1}"
 
@@ -5996,7 +6002,7 @@ msgstr "Ingresaste:"
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:73
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:79
 msgid "You have no tradable credits that can be sold."
 msgstr "No tienes créditos negociables que se puedan vender."
 

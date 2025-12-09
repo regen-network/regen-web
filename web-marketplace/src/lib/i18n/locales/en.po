@@ -128,6 +128,7 @@ msgstr ""
 #: src/components/organisms/BaseMembersTable/modals/ProfileModal.tsx:178
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:120
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:247
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:170
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:167
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr ""
@@ -1912,6 +1913,7 @@ msgstr ""
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:36
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:108
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:236
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:159
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:227
@@ -2383,6 +2385,10 @@ msgstr ""
 msgid "find another credit card project"
 msgstr ""
 
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:179
+msgid "finish"
+msgstr ""
+
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:15
 msgid "Finish"
 msgstr ""
@@ -2407,6 +2413,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:31
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:151
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr ""
 
@@ -3209,6 +3216,7 @@ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:33
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:180
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:119
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:204
@@ -3588,6 +3596,7 @@ msgid "Personal profile"
 msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:28
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:109
 msgid "Personal Profile"
 msgstr ""
 
@@ -3889,6 +3898,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:190
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:126
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
@@ -5132,6 +5142,10 @@ msgstr ""
 msgid "This field is required"
 msgstr ""
 
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:112
+msgid "This information will appear on any posts that you author."
+msgstr ""
+
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:82
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
@@ -5252,6 +5266,7 @@ msgid "Timestamp"
 msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr ""

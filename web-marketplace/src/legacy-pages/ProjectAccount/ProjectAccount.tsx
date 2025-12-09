@@ -12,10 +12,6 @@ import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 
 import { ProjectPageFooter } from 'components/molecules';
-import {
-  ROLE_ADMIN,
-  ROLE_OWNER,
-} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { UNNAMED } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { ProjectAccountSelector } from 'components/organisms/ProjectAccountSelector/ProjectAccountSelector';
@@ -75,17 +71,10 @@ export const ProjectAccount = (): JSX.Element | null => {
     [dao, _],
   );
 
-  // Get the user's role and check if they have permission to create projects for the org
-  const organizationRole = dao?.assignmentsByDaoAddress?.nodes?.find(
-    node => node?.accountId === activeAccount?.id,
-  )?.roleName;
-
+  // If user has a DAO organization, they have permission to create projects for it
+  // (useDaoOrganization only returns DAOs where the user has an assignment)
   const shouldSkip =
-    !dao ||
-    !activeAccount ||
-    !personalAccount ||
-    !organizationAccount ||
-    !(organizationRole === ROLE_OWNER || organizationRole === ROLE_ADMIN);
+    !dao || !activeAccount || !personalAccount || !organizationAccount;
 
   // Track if we've initialized from dashboard state
   const initializedRef = useRef(false);

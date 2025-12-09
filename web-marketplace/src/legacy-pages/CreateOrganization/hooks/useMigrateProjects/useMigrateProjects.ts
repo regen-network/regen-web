@@ -6,7 +6,6 @@ import {
 } from '@apollo/client';
 import { EncodeObject } from '@cosmjs/proto-signing';
 import { msg } from '@lingui/core/macro';
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
@@ -391,7 +390,6 @@ export const useMigrateProjects = ({
         return;
       }
       const organizationId = dao?.organizationByDaoAddress?.id;
-      const organizationId = dao?.organizationByDaoAddress?.id;
       if (!organizationId) {
         setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
         return;
@@ -687,7 +685,7 @@ export const useMigrateProjects = ({
             },
           },
         );
-      } else handleSaveNext({ ...data, ...values });
+      } else if (handleSaveNext) handleSaveNext({ ...data, ...values });
     },
     [
       isLoadingSellOrders,

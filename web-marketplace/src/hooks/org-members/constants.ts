@@ -15,6 +15,7 @@ type OrgRole = {
     can_edit_organization?: number;
     can_manage_members_except_owner?: number;
     can_update_credit_classes_metadata?: number;
+    can_anchor_attest_data?: number;
   };
 };
 export const orgRoles: {
@@ -33,28 +34,31 @@ export const orgRoles: {
       can_manage_sell_orders: 6,
       can_manage_credit_classes: 7,
       can_edit_organization: 8,
+      can_anchor_attest_data: 9,
     },
   },
   admin: {
-    roleId: 9,
+    roleId: 10,
     authorizations: {
-      can_manage_members_except_owner: 10,
-      can_create_projects: 11,
-      can_manage_credit_issuance: 12,
-      can_manage_credits: 13,
-      can_manage_sell_orders: 14,
-      can_manage_credit_classes: 15,
-      can_edit_organization: 16,
+      can_manage_members_except_owner: 11,
+      can_create_projects: 12,
+      can_manage_credit_issuance: 13,
+      can_manage_credits: 14,
+      can_manage_sell_orders: 15,
+      can_manage_credit_classes: 16,
+      can_edit_organization: 17,
+      can_anchor_attest_data: 18,
     },
   },
   editor: {
-    roleId: 17,
+    roleId: 19,
     authorizations: {
-      can_update_credit_classes_metadata: 18,
-      can_edit_organization: 19,
+      can_update_credit_classes_metadata: 20,
+      can_edit_organization: 21,
+      can_anchor_attest_data: 22,
     },
   },
-  viewer: { roleId: 20, authorizations: {} },
+  viewer: { roleId: 23, authorizations: {} },
 };
 
 type ProjectRole = {

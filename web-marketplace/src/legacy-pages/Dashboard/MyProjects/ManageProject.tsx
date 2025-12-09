@@ -157,6 +157,7 @@ const ManageProject = () => {
             published: true,
           }}
           disableScrollLock={true}
+          offChainProject={offChainProject}
         />
       )}
     </>

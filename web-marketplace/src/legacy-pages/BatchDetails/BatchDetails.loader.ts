@@ -1,7 +1,11 @@
 import { RouterParams } from 'clients/regen/Regen.Routes';
 
-import { getMetadata } from 'lib/db/api/metadata-graph';
-import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
+import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import { getClassIdForBatch } from 'lib/ecocredit/api';
+import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
+import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 export const batchDetailsLoader =
   ({
@@ -18,21 +22,49 @@ export const batchDetailsLoader =
       return { batch: null, metadata: null };
     }
 
-    const batch = await reactQueryClient.fetchQuery({
-      queryKey: ['batch', batchDenom],
-      queryFn: () => getBatchWithSupplyForDenom(batchDenom, rpcQueryClient),
+    const batchInfo = await getFromCacheOrFetch({
+      query: getBatchQuery({
+        client: rpcQueryClient,
+        request: { batchDenom },
+      }),
+      reactQueryClient,
     });
+
+    const supply = await getFromCacheOrFetch({
+      query: getSupplyQuery({
+        client: rpcQueryClient,
+        request: { batchDenom },
+      }),
+      reactQueryClient,
+    });
+
+    const batch: BatchInfoWithSupply = {
+      ...batchInfo?.batch,
+      ...(supply ?? {
+        tradableAmount: '0',
+        retiredAmount: '0',
+        cancelledAmount: '0',
+      }),
+      issuer: batchInfo?.batch?.issuer || '',
+      projectId: batchInfo?.batch?.projectId || '',
+      denom: batchInfo?.batch?.denom || '',
+      metadata: batchInfo?.batch?.metadata || '',
+      startDate: batchInfo?.batch?.startDate || new Date(),
+      endDate: batchInfo?.batch?.endDate || new Date(),
+      issuanceDate: batchInfo?.batch?.issuanceDate || new Date(),
+      open: !!batchInfo?.batch?.open,
+      classId: getClassIdForBatch(batchInfo?.batch),
+    };
 
     let metadata = null;
     if (batch?.metadata) {
-      metadata = await reactQueryClient.fetchQuery({
-        queryKey: ['batchMetadata', batch.metadata, languageCode],
-        queryFn: () =>
-          getMetadata({
-            iri: batch.metadata,
-            client: rpcQueryClient,
-            languageCode,
-          }),
+      metadata = await getFromCacheOrFetch({
+        query: getMetadataQuery({
+          iri: batch.metadata,
+          client: rpcQueryClient,
+          languageCode,
+        }),
+        reactQueryClient,
       });
     }
     return { batch, metadata };

@@ -298,36 +298,8 @@ export const getTxHashForBatch = (
   return match?.txhash;
 };
 
-const getClassIdForBatch = (batch?: BatchInfo): string | undefined => {
+export const getClassIdForBatch = (batch?: BatchInfo): string | undefined => {
   return batch?.denom?.split('-')?.[0] || '-';
-};
-
-export const getBatchWithSupplyForDenom = async (
-  denom: string,
-  client: RPCQueryClient,
-): Promise<BatchInfoWithSupply> => {
-  try {
-    const { batch } = await queryEcoBatchInfo(denom, client);
-    const supply = await queryEcoBatchSupply(denom, client);
-    const batchWithSupply: BatchInfoWithSupply = {
-      ...batch,
-      ...supply,
-      issuer: batch?.issuer || '',
-      projectId: batch?.projectId || '',
-      denom: batch?.denom || '',
-      metadata: batch?.metadata || '',
-      startDate: batch?.startDate || new Date(),
-      endDate: batch?.endDate || new Date(),
-      issuanceDate: batch?.issuanceDate || new Date(),
-      open: !!batch?.open,
-      classId: getClassIdForBatch(batch),
-    };
-    return batchWithSupply;
-  } catch (err) {
-    throw new Error(
-      `Could not get batches with supply for denom ${denom}, ${err}`,
-    );
-  }
 };
 
 export const getReadableMessages = (txResponse: TxResponse): string => {
@@ -349,17 +321,6 @@ const getReadableName = (eventType?: string): string | undefined => {
   return Object.values(ECOCREDIT_MESSAGE_TYPES).find(
     msgType => msgType.message === eventType,
   )?.readable;
-};
-
-export const queryEcoBatchInfo = async (
-  denom: string,
-  client: RPCQueryClient,
-): Promise<QueryBatchResponse> => {
-  try {
-    return client.regen.ecocredit.v1.batch({ batchDenom: denom });
-  } catch (err) {
-    throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
-  }
 };
 
 export interface QuerySupplyProps extends RPCQueryClientProps {

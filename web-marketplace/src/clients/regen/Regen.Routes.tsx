@@ -16,7 +16,7 @@ import {
 } from '@apollo/client';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loader';
 import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
@@ -138,7 +138,8 @@ type RouterProps = {
   reactQueryClient: QueryClient;
 };
 
-export default function RegenRoutes({ reactQueryClient }: RouterProps) {
+export default function RegenRoutes({ reactQueryClient: _ }: RouterProps) {
+  const reactQueryClient = useQueryClient();
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { queryClient: rpcQueryClient } = useLedger();

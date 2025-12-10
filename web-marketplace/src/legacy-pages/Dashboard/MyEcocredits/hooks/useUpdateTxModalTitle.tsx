@@ -13,7 +13,6 @@ type Props = {
 
 const SELL_ORDER_ATTRIBUTE_KEY = 'sell_order_id';
 
-// eslint-disable-next-line
 export const useUpdateTxModalTitle = ({
   deliverTxResponse,
   setTxModalTitle,
@@ -23,7 +22,6 @@ export const useUpdateTxModalTitle = ({
   useEffect(() => {
     const events = deliverTxResponse?.events;
     const event = events?.find(event => EventSell.typeUrl.includes(event.type));
-    console.log('event', event);
     const sellOrderId = event?.attributes.find(
       attribute => attribute.key === SELL_ORDER_ATTRIBUTE_KEY,
     )?.value;

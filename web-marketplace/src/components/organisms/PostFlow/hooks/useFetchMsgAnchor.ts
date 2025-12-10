@@ -71,6 +71,7 @@ export const useFetchMsgAnchor = ({
 
       while (i < 10 && txResponses && txResponses.length === 0) {
         const { data } = await refetch();
+        
         txResponses = data?.txResponses?.filter(txRes =>
           txRes.rawLog.includes(iri),
         );

@@ -6,7 +6,6 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import {
   MsgAnchor as MsgAnchorV1,
@@ -45,6 +44,8 @@ import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/regist
 import postCreated from '../../../../public/svg/post-created.svg';
 import postSigned from '../../../../public/svg/post-signed.svg';
 import { ADMIN, REGISTRY } from '../Post.constants';
+import { matchesIri } from './useAttestEvents.utils';
+import { matches } from 'lodash';
 
 type Event = {
   icon: string | StaticImageData;
@@ -135,16 +136,12 @@ export const useAttestEvents = ({
     }),
   );
 
-  console.log(
-    'anchorV1TxsEventData?.txResponses',
-    anchorV1TxsEventData?.txResponses,
-  );
   const anchorTxFromAnchorMsg = useMemo(
     () =>
       [
         ...(anchorV1TxsEventData?.txResponses ?? []),
         ...(anchorV2TxsEventData?.txResponses ?? []),
-      ].filter(txRes => iri && txRes.rawLog.includes(iri))?.[0],
+      ].filter(txRes => iri && matchesIri(txRes, iri))?.[0],
     [anchorV1TxsEventData, anchorV2TxsEventData, iri],
   );
 
@@ -153,7 +150,7 @@ export const useAttestEvents = ({
       [
         ...(attestV1TxsEventData?.txResponses ?? []),
         ...(attestV2TxsEventData?.txResponses ?? []),
-      ].filter(txRes => iri && txRes.rawLog.includes(iri)),
+      ].filter(txRes => iri && matchesIri(txRes, iri)),
 
     [attestV1TxsEventData, attestV2TxsEventData, iri],
   );
@@ -163,22 +160,19 @@ export const useAttestEvents = ({
       ({ txResponses = [] }: GetTxsEventQueryResponse): boolean => {
         if (!iri) return false;
 
-        const matchesIri = (txRes: TxResponse) =>
-          !!txRes.rawLog && txRes.rawLog.includes(iri);
-
         const hasAnchorEvent =
           onlyAttestEvents ||
           !!anchorTxFromAnchorMsg ||
           txResponses.some(
             txRes =>
-              matchesIri(txRes) &&
+              matchesIri(txRes, iri) &&
               txRes.events?.some(event =>
                 EventAnchor.typeUrl.includes(event.type),
               ),
           );
         const hasAttestEvent = txResponses.some(
           txRes =>
-            matchesIri(txRes) &&
+            matchesIri(txRes, iri) &&
             txRes.events?.some(event =>
               EventAttest.typeUrl.includes(event.type),
             ),
@@ -247,7 +241,7 @@ export const useAttestEvents = ({
         ...(attestTxsFromAttestMsg ?? []),
         ...attestMsgExecuteContractTxsEventData,
       ]?.map(txRes => {
-        const events = txRes.logs[0].events.filter(event => {
+        const events = txRes.events.filter(event => {
           return EventAttest.typeUrl.includes(event.type);
         });
         const attestors = events.map(event => {

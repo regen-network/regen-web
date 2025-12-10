@@ -25,9 +25,10 @@ export const getGetTxsEventQuery = ({
 
     // Just use provided pagination
     if (request.page && request.limit)
-      return await client.cosmos.tx.v1beta1.getTxsEvent(
-        request as GetTxsEventRequest,
-      );
+      return await client.cosmos.tx.v1beta1.getTxsEvent({
+        events: [],
+        ...request,
+      } as GetTxsEventRequest);
 
     // Or loop through all the pages to get all txs
     let txs: Tx[] = [],
@@ -38,9 +39,10 @@ export const getGetTxsEventQuery = ({
     request.orderBy = request.orderBy ?? OrderBy.ORDER_BY_DESC;
     request.page = request.page ?? 1n;
     while (!response || (response.total && txs.length < response.total)) {
-      response = await client.cosmos.tx.v1beta1.getTxsEvent(
-        request as GetTxsEventRequest,
-      );
+      response = await client.cosmos.tx.v1beta1.getTxsEvent({
+        events: [],
+        ...request,
+      } as GetTxsEventRequest);
       txs.push(...response.txs);
       txResponses.push(...response.txResponses);
 

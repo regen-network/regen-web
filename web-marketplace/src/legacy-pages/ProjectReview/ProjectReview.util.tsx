@@ -16,22 +16,20 @@ import {
   VCSProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
+import { EventCreateProject } from '@regen-network/api/regen/ecocredit/v1/events';
 
 export const getOnChainProjectId = (
   deliverTxResponse?: DeliverTxResponse,
 ): string => {
   console.log('getOnChainProjectId deliverTxResponse', deliverTxResponse);
-  if (!deliverTxResponse?.rawLog) return '';
-  const rawLog = JSON.parse(deliverTxResponse?.rawLog);
-  // regen.ecocredit.v1.EventCreateProject
-  const event = rawLog?.[0]?.events?.find((event: any) =>
-    // eslint-disable-next-line lingui/no-unlocalized-strings
-    event?.type?.includes('EventCreateProject'),
+
+  const event = deliverTxResponse?.events?.find(event =>
+    EventCreateProject.typeUrl.includes(event.type),
   );
   const projectId = event?.attributes
-    ?.find((attribute: any) => attribute?.key === 'project_id')
+    ?.find(attribute => attribute?.key === 'project_id')
     ?.value?.replace(/['"]+/g, '');
-  return projectId;
+  return projectId || '';
 };
 
 export const getJurisdiction = async (

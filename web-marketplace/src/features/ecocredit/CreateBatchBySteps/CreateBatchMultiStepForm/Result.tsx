@@ -92,7 +92,7 @@ export default function Result({
   // if fails parsing rawLog, is because it is already a string with the error message
   React.useEffect(() => {
     if (!response) return;
-
+    console.log('create batch response', response);
     try {
       // Parsing the response, specifically the content in the key `rawLog`
       // is an array with a single element, and this is an object with a single key `events`

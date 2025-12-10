@@ -73,14 +73,23 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [
-          `${messageActionEquals}'${MsgBridge.typeUrl}'`,
-          `message.sender='${address}'`,
-        ],
+        query: `${messageActionEquals}'${MsgBridge.typeUrl}'&message.sender='${address}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
   );
+  console.log('txsEventData', txsEventData);
+  const { data: txsEventData2 } = useQuery(
+    getGetTxsEventQuery({
+      client: queryClient,
+      enabled: !!queryClient,
+      request: {
+        query: `${messageActionEquals}'${MsgBridge.typeUrl}'`,
+        orderBy: OrderBy.ORDER_BY_DESC,
+      },
+    }),
+  );
+  console.log('txsEventData2 no msg sender', txsEventData2);
 
   // TxsWithResponse
   const txsWithResponse: TxWithResponse[] =

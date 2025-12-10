@@ -20,6 +20,7 @@ import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
 export const getOnChainProjectId = (
   deliverTxResponse?: DeliverTxResponse,
 ): string => {
+  console.log('getOnChainProjectId deliverTxResponse', deliverTxResponse);
   if (!deliverTxResponse?.rawLog) return '';
   const rawLog = JSON.parse(deliverTxResponse?.rawLog);
   // regen.ecocredit.v1.EventCreateProject

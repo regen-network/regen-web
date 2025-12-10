@@ -35,7 +35,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { GET_TXS_EVENT_KEY } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.constants';
-import { getEventsKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
@@ -101,10 +100,7 @@ export const BridgeFlow = ({
     reactQueryClient.invalidateQueries({
       queryKey: [
         GET_TXS_EVENT_KEY,
-        getEventsKey([
-          `${messageActionEquals}'${MsgBridge.typeUrl}'`,
-          `message.sender='${wallet?.address}'`,
-        ]),
+        `${messageActionEquals}'${MsgBridge.typeUrl}'&message.sender='${wallet?.address}'`,
       ],
     });
   };

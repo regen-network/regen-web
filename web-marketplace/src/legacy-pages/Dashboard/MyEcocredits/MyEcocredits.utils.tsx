@@ -11,7 +11,7 @@ import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
+import { DenomWithHash } from 'lib/ibc/transfer/api';
 
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
@@ -61,23 +61,23 @@ type GetDenomAllowedOptionsParams = {
   allowedDenoms?: AllowedDenom[];
   _: TranslatorType;
   canCreateFiatOrder?: boolean;
-  denomTracesData?: DenomTraceWithHash[] | void;
+  denomsWithHashData?: DenomWithHash[] | void;
 };
 
 export const getDenomAllowedOptions = ({
   allowedDenoms,
   _,
   canCreateFiatOrder,
-  denomTracesData,
+  denomsWithHashData,
 }: GetDenomAllowedOptionsParams): Option[] => {
   const allowedDenomsOptions =
     (allowedDenoms
       ?.map(denom => {
-        const denomTrace = denomTracesData?.find(denomTrace =>
-          denom?.bankDenom?.includes(denomTrace.hash),
+        const denomWithHash = denomsWithHashData?.find(denomWithHash =>
+          denom?.bankDenom?.includes(denomWithHash.hash),
         );
         const baseDenom =
-          (denomTrace ? denomTrace.baseDenom : denom?.bankDenom) ?? '';
+          (denomWithHash ? denomWithHash.base : denom?.bankDenom) ?? '';
 
         // Do not display USDC.grv
         if (baseDenom === GRAVITY_USDC_DENOM) return null;

@@ -51,7 +51,7 @@ export const useFetchMsgAnchor = ({
       client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchor.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
         limit: 1n,
         page: 1n,

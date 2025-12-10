@@ -49,9 +49,7 @@ export const useAddDataToBatches = ({
         client,
         enabled: !!client,
         request: {
-          events: [
-            `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-          ],
+          query: `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
         },
       }),
     );
@@ -63,9 +61,7 @@ export const useAddDataToBatches = ({
       client,
       enabled: !!client,
       request: {
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
-        ],
+        query: `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
       },
     }),
   );

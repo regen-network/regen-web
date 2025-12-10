@@ -27,6 +27,10 @@ export const useUpdateCardItemsTakeBasket = ({
   const [cardItemsTakeDone, setCardItemsTakeDone] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(
+      'useUpdateCardItemsTakeBasket deliverTxResponse',
+      deliverTxResponse,
+    );
     if (!cardItems || !deliverTxResponse || !deliverTxResponse.rawLog) return;
     if (cardItemsTakeDone) return;
 

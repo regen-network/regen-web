@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
-import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,

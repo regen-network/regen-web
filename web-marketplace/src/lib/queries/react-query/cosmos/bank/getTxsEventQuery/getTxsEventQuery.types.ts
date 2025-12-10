@@ -17,7 +17,8 @@ export type ReactQueryGetTxsEventResponse =
   QueryObserverOptions<GetTxsEventQueryResponse | null>;
 
 export type ReactQueryGetTxsEventProps = {
-  request: Omit<GetTxsEventRequest, 'page' | 'limit' | 'orderBy'> & {
+  // events got deprecated post 0.47
+  request: Omit<GetTxsEventRequest, 'page' | 'limit' | 'orderBy' | 'events'> & {
     page?: bigint;
     limit?: bigint;
     orderBy?: OrderBy;

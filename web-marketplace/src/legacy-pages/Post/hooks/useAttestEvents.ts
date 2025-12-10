@@ -87,7 +87,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchorV1.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchorV1.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -101,7 +101,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchorV2.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchorV2.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -115,7 +115,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'${MsgAttestV1.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAttestV1.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -129,12 +129,16 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'${MsgAttestV2.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAttestV2.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
   );
 
+  console.log(
+    'anchorV1TxsEventData?.txResponses',
+    anchorV1TxsEventData?.txResponses,
+  );
   const anchorTxFromAnchorMsg = useMemo(
     () =>
       [
@@ -201,7 +205,7 @@ export const useAttestEvents = ({
         !isLoadingAttestV1TxsEventData &&
         !isLoadingAttestV2TxsEventData,
       request: {
-        events: [`${messageActionEquals}'${MsgExecuteContract.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
       stopCondition: iri ? shouldStopMsgExecuteContractQuery() : undefined,

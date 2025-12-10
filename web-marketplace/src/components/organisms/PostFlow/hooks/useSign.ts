@@ -76,7 +76,7 @@ export const useSign = ({
       client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchor.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
         page: 1n,
         limit: 1n,
@@ -132,6 +132,7 @@ export const useSign = ({
   const fetchAnchorTxHash = useCallback(
     async ({ iri }: { iri: string }) => {
       const { data: anchorTxsData } = await refetch();
+      console.log('anchorTxsData?.txResponses', anchorTxsData?.txResponses);
       const txResponses = anchorTxsData?.txResponses?.filter(
         txRes => iri && txRes.rawLog.includes(iri),
       );
@@ -205,7 +206,7 @@ export const useSign = ({
               await reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
                   request: {
-                    events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
+                    query: `${messageActionEquals}'${MsgAttest.typeUrl}'`,
                     orderBy: OrderBy.ORDER_BY_DESC,
                   },
                 }),
@@ -214,9 +215,7 @@ export const useSign = ({
               void reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
                   request: {
-                    events: [
-                      `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
-                    ],
+                    query: `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
                     orderBy: OrderBy.ORDER_BY_DESC,
                   },
                 }),

@@ -20,7 +20,7 @@ export const useUpdateTxModalTitle = ({
 }: Props) => {
   const { _ } = useLingui();
   const rawLog = deliverTxResponse?.rawLog;
-
+  console.log('my ecocredit rawLog', deliverTxResponse);
   useEffect(() => {
     if (rawLog) {
       const log = JSON.parse(rawLog);

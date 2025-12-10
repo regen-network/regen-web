@@ -15,11 +15,12 @@ export const useFetchUserBalance = (askDenom?: string) => {
     isFetching,
   } = useQuery(
     getAllBalancesQuery({
-      request: { address: wallet?.address as string },
+      request: { address: wallet?.address as string, resolveDenom: true },
       client: queryClient,
       enabled: !!queryClient && !!wallet?.address,
     }),
   );
+  console.log('allBalancesData', allBalancesData);
 
   const microUserBalance = useMemo(
     () =>

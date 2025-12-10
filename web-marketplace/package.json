@@ -30,7 +30,7 @@
     "@mui/material-nextjs": "^7.1.1",
     "@mui/styles": "^5.16.12",
     "@rdfjs/parser-jsonld": "^2.1.0",
-    "@regen-network/api": "^1.0.0-alpha7",
+    "@regen-network/api": "link:@regen-network/api",
     "@sanity/client": "^7.6.0",
     "@sentry/react": "^7.53.0",
     "@sentry/tracing": "^7.53.0",

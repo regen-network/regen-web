@@ -4,13 +4,13 @@ import {
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import { keepPreviousData } from '@tanstack/react-query';
 import uniq from 'lodash/uniq';
-import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 
 import { FetchSimplePriceResponse } from 'lib/coingecko';
-import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
+import { DenomWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
-import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
+import { getDenomByHashesQuery } from '../../../ibc/transfer/getDenomByHashesQuery/getDenomByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
 import { getAskUsdAmount } from '../getSellOrdersBySellerQuery/getSellOrdersBySellerQuery.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from './getSellOrdersExtendedQuery.constants';
@@ -56,12 +56,12 @@ export const getSellOrdersExtendedQuery = ({
     );
 
     // Call DenomsTrace on each ibc denom hash
-    const denomTracesQuery = getDenomTraceByHashesQuery({
+    const denomsQuery = getDenomByHashesQuery({
       hashes: ibcDenomHashes,
       queryClient: client,
     });
-    const denomTraces = await getFromCacheOrFetch<DenomTraceWithHash[] | void>({
-      query: denomTracesQuery,
+    const denoms = await getFromCacheOrFetch<DenomWithHash[] | void>({
+      query: denomsQuery,
       reactQueryClient,
     });
 
@@ -72,14 +72,12 @@ export const getSellOrdersExtendedQuery = ({
         reactQueryClient,
       });
 
-    // Update sell orders by replacing ibc denoms with base denom from DenomTrace if needed
+    // Update sell orders by replacing ibc denoms with base denom from Denom if needed
     const sellOrdersWithBaseDenom = sellOrders.map(sellOrder => {
-      const denomTrace = denomTraces?.find(denomTrace =>
-        sellOrder.askDenom.includes(denomTrace.hash),
+      const denom = denoms?.find(denom =>
+        sellOrder.askDenom.includes(denom.hash),
       );
-      const askBaseDenom = denomTrace
-        ? denomTrace.baseDenom
-        : sellOrder.askDenom;
+      const askBaseDenom = denom ? denom.base : sellOrder.askDenom;
 
       // Compute AskUsdAmount
       const { askAmount, quantity } = sellOrder;

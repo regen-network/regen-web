@@ -10,6 +10,7 @@ interface TakeEventToBatches {
 export const takeEventToBatches = (
   deliverTxResponse: DeliverTxResponse,
 ): TakeEventToBatches[] | undefined => {
+  console.log('takeEventToBatches deliverTxResponse', deliverTxResponse);
   if (!deliverTxResponse || !deliverTxResponse.rawLog) return;
   const rawLog = JSON.parse(deliverTxResponse.rawLog);
   const rawEventTake: EventTx = rawLog[0].events.find((event: EventTx) =>

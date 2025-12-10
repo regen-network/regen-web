@@ -8,7 +8,7 @@ import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/eve
 import { MessageComposer } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx.registry';
 import { useQueryClient } from '@tanstack/react-query';
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
-import { getDenomtrace } from 'utils/ibc/getDenomTrace';
+import { getBaseDenom } from 'utils/ibc/getBaseDenom';
 import {
   getRoleAuthorizationIds,
   sellOrderAction,
@@ -242,7 +242,7 @@ const useCreateSellOrderSubmit = ({
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 
       if (batchDenom && amount && cryptoDenom && credits) {
-        const baseDenom = await getDenomtrace({
+        const baseDenom = await getBaseDenom({
           denom: cryptoDenom,
           queryClient,
         });

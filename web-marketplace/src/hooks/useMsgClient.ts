@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Coin, EncodeObject } from '@cosmjs/proto-signing';
 import { calculateFee, DeliverTxResponse, StdFee } from '@cosmjs/stargate';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { TxRaw } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
@@ -27,9 +29,7 @@ export const defaultFee = {
   gas: '200000',
 } as StdFee;
 
-// Starting with Cosmos SDK 0.47, we see many cases in which 1.3 is not enough anymore
-// E.g. https://github.com/cosmos/cosmos-sdk/issues/16020
-const defaultGasMultiplier = 1.4;
+const defaultGasMultiplier = 1.5;
 
 interface TxData {
   msgs: readonly EncodeObject[];
@@ -70,6 +70,7 @@ export default function useMsgClient(
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setIsWaitingForSigning = useSetAtom(isWaitingForSigningAtom);
+  const { _ } = useLingui();
 
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
@@ -176,7 +177,9 @@ export default function useMsgClient(
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
-        throw new Error(_deliverTxResponse.rawLog);
+        throw new Error(
+          _(msg`Transaction failed with code ${_deliverTxResponse.code}`),
+        );
       } else {
         setDeliverTxResponse(_deliverTxResponse);
         handleTxDelivered && handleTxDelivered(_deliverTxResponse);
@@ -191,6 +194,7 @@ export default function useMsgClient(
       handleTxQueued,
       handleTxDelivered,
       setTxSuccessfulModalAtom,
+      _,
     ],
   );
 

@@ -53,6 +53,7 @@ export const useAddDataToBatches = ({
         },
       }),
     );
+
   const {
     data: createBatchAlphaTxs,
     isFetching: isLoadingCreateBatchAlphaTxs,

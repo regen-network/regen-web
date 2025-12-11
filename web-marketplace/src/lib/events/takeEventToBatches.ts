@@ -1,6 +1,6 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
-import { CreditItemEventTake, EventTx } from 'types/ledger/base';
+import { CreditItemEventTake } from 'types/ledger/base';
 
 interface TakeEventToBatches {
   name: string;
@@ -10,16 +10,14 @@ interface TakeEventToBatches {
 export const takeEventToBatches = (
   deliverTxResponse: DeliverTxResponse,
 ): TakeEventToBatches[] | undefined => {
-  console.log('takeEventToBatches deliverTxResponse', deliverTxResponse);
-  if (!deliverTxResponse || !deliverTxResponse.rawLog) return;
-  const rawLog = JSON.parse(deliverTxResponse.rawLog);
-  const rawEventTake: EventTx = rawLog[0].events.find((event: EventTx) =>
+  if (!deliverTxResponse) return;
+  const eventTake = deliverTxResponse.events.find(event =>
     // eslint-disable-next-line lingui/no-unlocalized-strings
     event.type.includes('EventTake'),
   );
-  if (!rawEventTake) return;
+  if (!eventTake) return;
 
-  const creditsAttribute = rawEventTake.attributes.find(
+  const creditsAttribute = eventTake.attributes.find(
     attribute => attribute.key === 'credits',
   );
   if (!creditsAttribute) return;

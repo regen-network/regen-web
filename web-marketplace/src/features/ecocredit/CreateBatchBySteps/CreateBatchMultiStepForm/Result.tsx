@@ -23,48 +23,38 @@ import { Link } from 'components/atoms';
 
 // We need to extract batch denom and recipients from the
 // transaction response logs for displaying results
-function parseSuccessResponseLog(
-  responseLogEvents: [any],
+function parseSuccessResponse(
+  response: DeliverTxResponse,
 ): Omit<SuccessProps, 'txHash'> {
   // get the batch denom from the `EventCreateBatch` event log
   let batchDenom = '';
-  try {
-    const eventCreateBatch =
-      responseLogEvents &&
-      responseLogEvents.find((event: any) =>
-        event.type.includes('.EventCreateBatch'),
-      );
+  const eventCreateBatch = response.events.find(event =>
+    event.type.includes('.EventCreateBatch'),
+  );
 
-    const batchDenomRaw =
-      eventCreateBatch &&
-      eventCreateBatch.attributes?.find(
-        (obj: any) => obj.key === 'batch_denom',
-      );
-
-    batchDenom = batchDenomRaw.value.replace(/"/g, '');
-  } catch (err) {}
+  const batchDenomRaw =
+    eventCreateBatch &&
+    eventCreateBatch.attributes?.find(obj => obj.key === 'batch_denom');
+  if (batchDenomRaw) batchDenom = batchDenomRaw.value.replace(/"/g, '');
 
   // get the recipients from the `EventTransfer` event log
-  let recipients = [];
-  try {
-    const eventTransfer =
-      responseLogEvents &&
-      responseLogEvents.find((event: any) =>
-        event.type.includes('.EventTransfer'),
-      );
+  let recipients: Recipient[] = [];
+  const eventsTransfer = response.events.filter(event =>
+    event.type.includes('.EventTransfer'),
+  );
 
-    const recipientsLog =
-      eventTransfer &&
-      eventTransfer.attributes?.filter((obj: any) => obj.key === 'recipient');
+  const recipientsLog = eventsTransfer.flatMap(event =>
+    event.attributes?.filter(obj => obj.key === 'recipient'),
+  );
 
-    recipients = recipientsLog.map(({ value }: { value: string }) => {
+  if (recipientsLog)
+    recipients = recipientsLog.map(({ value }) => {
       const recipientAddress = value.replace(/"/g, '');
       return {
         name: truncate(recipientAddress),
         url: getAccountUrl(recipientAddress),
       };
     });
-  } catch (err) {}
 
   return { batchDenom, recipients };
 }
@@ -83,33 +73,21 @@ export default function Result({
   response,
   error,
 }: ResultProps): React.ReactElement {
+  const { _ } = useLingui();
   const [responseProcessed, setResponseProcessed] = React.useState<
     SuccessProps | string
   >();
-
-  // if response, check if false "success" response because `unauthorized` error
-  // if we can parse rawLog, then we assume it is a success response
-  // if fails parsing rawLog, is because it is already a string with the error message
   React.useEffect(() => {
-    if (!response) return;
-    console.log('create batch response', response);
-    try {
-      // Parsing the response, specifically the content in the key `rawLog`
-      // is an array with a single element, and this is an object with a single key `events`
-      const responseLog = response.rawLog && JSON.parse(response.rawLog);
-      const responseLogEvents: [any] = responseLog && responseLog[0].events;
-      const { batchDenom, recipients } =
-        parseSuccessResponseLog(responseLogEvents);
-
+    if (!response || response.code !== 0) return;
+    const { batchDenom, recipients } = parseSuccessResponse(response);
+    if (!batchDenom) setResponseProcessed(_(msg`Could not parse batch denom`));
+    else
       setResponseProcessed({
         batchDenom,
         recipients,
         txHash: response.transactionHash,
       });
-    } catch (e) {
-      setResponseProcessed(response.rawLog);
-    }
-  }, [response]);
+  }, [response, _]);
 
   if (error) return <ErrorResult error={error} />;
 

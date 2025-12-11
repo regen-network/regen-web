@@ -20,7 +20,6 @@ export const useFetchUserBalance = (askDenom?: string) => {
       enabled: !!queryClient && !!wallet?.address,
     }),
   );
-  console.log('allBalancesData', allBalancesData);
 
   const microUserBalance = useMemo(
     () =>

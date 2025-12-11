@@ -78,7 +78,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       },
     }),
   );
-  console.log('txsEventData', txsEventData);
+
   const { data: txsEventData2 } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
@@ -89,7 +89,6 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       },
     }),
   );
-  console.log('txsEventData2 no msg sender', txsEventData2);
 
   // TxsWithResponse
   const txsWithResponse: TxWithResponse[] =

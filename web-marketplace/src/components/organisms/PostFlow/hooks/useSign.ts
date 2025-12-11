@@ -15,6 +15,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useSetAtom } from 'jotai';
 import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
+import { matchesIri } from 'legacy-pages/Post/hooks/useAttestEvents.utils';
 import {
   attestAction,
   getAccountAssignment,
@@ -132,9 +133,8 @@ export const useSign = ({
   const fetchAnchorTxHash = useCallback(
     async ({ iri }: { iri: string }) => {
       const { data: anchorTxsData } = await refetch();
-      console.log('anchorTxsData?.txResponses', anchorTxsData?.txResponses);
-      const txResponses = anchorTxsData?.txResponses?.filter(
-        txRes => iri && txRes.rawLog.includes(iri),
+      const txResponses = anchorTxsData?.txResponses?.filter(txRes =>
+        matchesIri(txRes, iri),
       );
       return txResponses?.[0]?.txhash;
     },

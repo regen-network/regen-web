@@ -45,7 +45,6 @@ import postCreated from '../../../../public/svg/post-created.svg';
 import postSigned from '../../../../public/svg/post-signed.svg';
 import { ADMIN, REGISTRY } from '../Post.constants';
 import { matchesIri } from './useAttestEvents.utils';
-import { matches } from 'lodash';
 
 type Event = {
   icon: string | StaticImageData;
@@ -212,7 +211,7 @@ export const useAttestEvents = ({
   const msgExecuteContractTxsEventDataResponses = useMemo(
     () =>
       msgExecuteContractTxsEventData?.txResponses.filter(
-        txRes => iri && txRes.rawLog.includes(iri),
+        txRes => iri && matchesIri(txRes, iri),
       ),
     [msgExecuteContractTxsEventData, iri],
   );

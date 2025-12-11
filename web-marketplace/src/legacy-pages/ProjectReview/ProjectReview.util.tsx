@@ -3,6 +3,7 @@ import {
   GeocodeFeature,
   GeocodeProperties,
 } from '@mapbox/mapbox-sdk/services/geocoding';
+import { EventCreateProject } from '@regen-network/api/regen/ecocredit/v1/events';
 
 import {
   getCountryCodeByName,
@@ -16,13 +17,10 @@ import {
   VCSProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
-import { EventCreateProject } from '@regen-network/api/regen/ecocredit/v1/events';
 
 export const getOnChainProjectId = (
   deliverTxResponse?: DeliverTxResponse,
 ): string => {
-  console.log('getOnChainProjectId deliverTxResponse', deliverTxResponse);
-
   const event = deliverTxResponse?.events?.find(event =>
     EventCreateProject.typeUrl.includes(event.type),
   );

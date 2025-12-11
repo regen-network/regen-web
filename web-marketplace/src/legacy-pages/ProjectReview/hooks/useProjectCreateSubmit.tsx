@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
@@ -15,8 +17,6 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { useLingui } from '@lingui/react';
-import { msg } from '@lingui/core/macro';
 
 interface MsgCreateProjectValues {
   classId: string;
@@ -177,6 +177,8 @@ const useProjectCreateSubmit = ({
       organizationRbamAddress,
       projectDaoAddress,
       walletAddress,
+      _,
+      organizationRole,
     ],
   );
 

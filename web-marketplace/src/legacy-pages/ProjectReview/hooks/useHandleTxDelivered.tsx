@@ -1,24 +1,27 @@
+import { useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/core/macro';
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
-import { getProjectByIdKey } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.constants';
-import { getUnanchoredProjectMetadata } from 'lib/rdf';
-import { useCallback } from 'react';
+import { useLingui } from '@lingui/react';
 import {
   getRoleAuthorizationIds,
   updateProjectAdminAction,
   wrapRbamActions,
 } from 'utils/rbam.utils';
-import { getOnChainProjectId } from '../ProjectReview.util';
-import { useLingui } from '@lingui/react';
-import { useLedger } from 'ledger';
-import { UseStateSetter } from 'types/react/use-state';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useWallet } from 'lib/wallet/wallet';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
+import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
+import { getProjectByIdKey } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getUnanchoredProjectMetadata } from 'lib/rdf';
+import { useWallet } from 'lib/wallet/wallet';
+
 import { useMsgClient } from 'hooks';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
+import { getOnChainProjectId } from '../ProjectReview.util';
 
 type UseHandleTxDeliveredParams = {
   setDeliverTxResponse: (
@@ -134,6 +137,10 @@ export const useHandleTxDelivered = ({
       navigate,
       editPath,
       metadata,
+      _,
+      signingCosmWasmClient,
+      setDeliverTxResponse,
+      signAndBroadcast,
     ],
   );
 

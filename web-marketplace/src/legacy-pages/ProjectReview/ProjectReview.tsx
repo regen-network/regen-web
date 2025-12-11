@@ -15,6 +15,7 @@ import { useAtom } from 'jotai';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { OMITTED_METADATA_KEYS } from 'legacy-pages/ProjectMetadata/ProjectMetadata.config';
 import { omit } from 'lodash';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 import { ReviewCard } from 'web-components/src/components/cards/ReviewCard/ReviewCard';
@@ -37,6 +38,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getAnchoredProjectMetadata, getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -60,13 +62,11 @@ import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getAccountProjectsByIdQueryKey } from '../../lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
+import { useHandleTxDelivered } from './hooks/useHandleTxDelivered';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import { STORY_PHOTO, STORY_VIDEO } from './ProjectReview.constants';
 import { getProjectReferenceID } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
-import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
-import { getAccountAssignment } from 'utils/rbam.utils';
-import { useHandleTxDelivered } from './hooks/useHandleTxDelivered';
 
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();

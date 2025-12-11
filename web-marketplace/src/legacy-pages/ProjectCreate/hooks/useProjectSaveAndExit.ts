@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateProjectContext } from '../ProjectCreate';
 
 export const useProjectSaveAndExit = () => {
-  const { formRef, shouldNavigateRef } = useCreateProjectContext();
+  const { formRef, shouldNavigateRef, isOrganizationAccount } =
+    useCreateProjectContext();
   const navigate = useNavigate();
 
   const saveAndExit = async (): Promise<void> => {
@@ -12,7 +13,8 @@ export const useProjectSaveAndExit = () => {
       await formRef?.current?.submitForm(true);
       shouldNavigateRef.current = true;
     }
-    navigate('/dashboard/projects');
+    if (isOrganizationAccount) navigate('/dashboard/organization/projects');
+    else navigate('/dashboard/projects');
   };
 
   return saveAndExit;

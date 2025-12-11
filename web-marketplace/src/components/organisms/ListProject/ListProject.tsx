@@ -12,8 +12,6 @@ import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 
-import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
-
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginFlow } from '../LoginFlow/LoginFlow';

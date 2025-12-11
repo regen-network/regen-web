@@ -28,7 +28,7 @@ export const useCanAccessManageProjectWithRole = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: projectDaoData } = useQuery(
+  const { data: projectDaoData, isLoading } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
       enabled:
@@ -50,5 +50,5 @@ export const useCanAccessManageProjectWithRole = ({
     [activeAccountId, offChainProject, onChainProject, wallet, projectDaoData],
   );
 
-  return { canAccessManageProject, role };
+  return { canAccessManageProject, role, isLoading };
 };

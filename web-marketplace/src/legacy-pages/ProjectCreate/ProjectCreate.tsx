@@ -130,8 +130,11 @@ export const ProjectCreate = (): JSX.Element => {
 
   const handleRequestClose = useCallback(() => {
     setShowDiscardModal(false);
-    navigate('/dashboard', { replace: true });
-  }, [navigate]);
+    if (isOrganizationAccount)
+      navigate('/dashboard/organization', { replace: true });
+    else navigate('/dashboard', { replace: true });
+  }, [navigate, isOrganizationAccount]);
+
   return (
     <>
       <div className="bg-bc-neutral-100 min-h-[100vh] relative">

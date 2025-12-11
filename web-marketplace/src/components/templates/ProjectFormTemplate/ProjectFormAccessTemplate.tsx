@@ -34,7 +34,7 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   const { projectId } = useParams();
   const { wallet } = useWallet();
   const { activeAccountId } = useAuth();
-  const { role } = useCanAccessManageProjectWithRole({
+  const { role, isLoading: isRoleLoading } = useCanAccessManageProjectWithRole({
     onChainProject,
     offChainProject,
     activeAccountId,
@@ -46,7 +46,7 @@ const ProjectFormAccessTemplate: React.FC<React.PropsWithChildren<Props>> = ({
   const hasProject = !!onChainProject || !!offChainProject;
   const isDraft = !isEdit && !hasProject && projectId === DRAFT_ID;
 
-  if (loading) {
+  if (loading || isRoleLoading) {
     return <Loading />;
   }
 

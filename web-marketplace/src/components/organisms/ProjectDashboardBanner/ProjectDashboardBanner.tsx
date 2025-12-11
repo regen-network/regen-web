@@ -231,7 +231,11 @@ const ProjectDashboardBanner = ({
                     placement="top"
                   >
                     <span>
-                      <ContainedButton onClick={onCreatePost} disabled>
+                      <ContainedButton
+                        onClick={onCreatePost}
+                        disabled
+                        className="h-full"
+                      >
                         {_(CREATE_POST)}
                       </ContainedButton>
                     </span>

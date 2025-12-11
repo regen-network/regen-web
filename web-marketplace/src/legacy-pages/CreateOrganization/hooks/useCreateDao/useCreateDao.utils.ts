@@ -216,8 +216,28 @@ const orgEditAuthorization = (daoAddress: string) => ({
   },
 });
 
+const projectsAuthorization = {
+  name: 'can_manage_projects',
+  metadata: 'Can manage projects',
+  filter: {
+    $or: [
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
+        },
+      },
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',
+        },
+      },
+    ],
+  },
+};
+
 const orgAdminAuthorizations = (daoAddress: string) => [
   createProjectAuthorization,
+  projectsAuthorization,
   creditIssuanceAuthorization,
   creditManagementAuthorization,
   sellOrdersAuthorization,
@@ -474,25 +494,6 @@ export const organizationRoles = (
       'Viewer of the organization, can view all data across all projects, even when private.',
   },
 ];
-
-const projectsAuthorization = {
-  name: 'can_manage_projects',
-  metadata: 'Can manage projects',
-  filter: {
-    $or: [
-      {
-        stargate: {
-          type_url: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
-        },
-      },
-      {
-        stargate: {
-          type_url: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',
-        },
-      },
-    ],
-  },
-};
 
 const projectAdminAuthorizations = [
   projectsAuthorization,

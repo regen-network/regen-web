@@ -2,11 +2,12 @@ import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 import {
-  getExecuteActionsStargate,
-  getMsgExecuteContract,
-} from 'utils/cosmwasm';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+  createProjectAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
@@ -14,6 +15,8 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
+import { useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
 
 interface MsgCreateProjectValues {
   classId: string;
@@ -27,7 +30,7 @@ interface Props {
   signAndBroadcast: SignAndBroadcastType;
   organizationDaoAddress?: string;
   organizationRbamAddress?: string;
-  projectDaoAddress?: string;
+  projectDaoAddress?: string | null;
   // wallet address of the signer (needed when executing through org RBAM)
   walletAddress?: string;
   organizationRole?: string;
@@ -49,6 +52,7 @@ const useProjectCreateSubmit = ({
   const reactQueryClient = useQueryClient();
   const navigate = useNavigate();
   const { projectId } = useParams();
+  const { _ } = useLingui();
 
   const projectCreateSubmit = useCallback(
     async ({
@@ -78,6 +82,11 @@ const useProjectCreateSubmit = ({
           navigate(`/project-pages/${projectId}/finished`);
         }
       } else {
+        if (!walletAddress) {
+          throw new Error(
+            _(msg`Wallet address is required to create project on-chain`),
+          );
+        }
         // We create the project on-chain
         let iriResponse:
           | IriFromMetadataSuccess<Partial<ProjectMetadataLD>>
@@ -91,7 +100,6 @@ const useProjectCreateSubmit = ({
         }
 
         // If creating from organization, use RBAM execute_actions through org DAO
-        // The project DAO becomes the admin directly
         if (
           organizationDaoAddress &&
           organizationRbamAddress &&
@@ -105,49 +113,37 @@ const useProjectCreateSubmit = ({
             });
 
           if (!roleId || !createProjectAuthId) {
-            throw new Error('You do not have permission to create projects');
+            throw new Error(
+              _(msg`You do not have permission to create projects`),
+            );
           }
 
-          // Create project with project DAO as admin, executed through org DAO's RBAM
-          const createProjectMsg =
-            regen.ecocredit.v1.MessageComposer.withTypeUrl.createProject({
+          // Create project with organization DAO as admin initially
+          // it cannot be the projectDaoAddress because the admin should be the address triggering creation
+          // so it needs to be updated in a separate tx (handleTxDelivered in ProjectReview.tsx)
+          const createProjectActionMsg = createProjectAction({
+            roleId,
+            authorizationId: createProjectAuthId,
+            ...{
               classId,
-              admin: projectDaoAddress,
+              admin: organizationDaoAddress,
               metadata: iriResponse.iri,
               jurisdiction,
               referenceId,
-            });
-
-          // Encode to protobuf bytes
-          const protoBytes = regen.ecocredit.v1.MsgCreateProject.encode(
-            regen.ecocredit.v1.MsgCreateProject.fromPartial({
-              classId,
-              admin: projectDaoAddress,
-              metadata: iriResponse.iri,
-              jurisdiction,
-              referenceId,
-            }),
-          ).finish();
-
-          const executeActionsMsg = getExecuteActionsStargate([
-            {
-              authorizationId: createProjectAuthId,
-              roleId,
-              typeUrl: createProjectMsg.typeUrl,
-              value: protoBytes,
             },
-          ]);
+          });
 
-          const executeMsg = getMsgExecuteContract({
+          const executeMsg = wrapRbamActions({
             // Sender must be the signer (the user wallet), not the org DAO address
-            walletAddress: walletAddress || admin,
-            contract: organizationRbamAddress,
-            executeActionsMsg,
+            walletAddress,
+            rbamAddress: organizationRbamAddress,
+            actions: [createProjectActionMsg],
           });
 
           const tx = {
             msgs: [executeMsg],
             fee: 'auto' as const, // simulate to avoid underestimating gas on RBAM execute
+            feeGranter: organizationDaoAddress,
           };
 
           await signAndBroadcast(tx);

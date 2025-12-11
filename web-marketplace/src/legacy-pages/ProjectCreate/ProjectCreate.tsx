@@ -99,6 +99,15 @@ export const ProjectCreate = (): JSX.Element => {
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
 
+  // TODO fix: we cannot rely entirely on local storage for knowing whether
+  // the project has been created within an organization account or not.
+  // Indeed, if another organization member that is using another browser continues
+  // the project creation process, it will not have the correct context.
+  // A simpler way to check that is just to see if project.adminDaoAddress is set.
+
+  // TODO fix: isOrganizationAccount seems to be set incorrectly too if we "save & exit" from
+  // the basic info form when first creating the project.
+
   // Restore persisted account selection for this project
   // BUT skip if coming from dashboard (we want fresh state from navigation)
   useEffect(() => {

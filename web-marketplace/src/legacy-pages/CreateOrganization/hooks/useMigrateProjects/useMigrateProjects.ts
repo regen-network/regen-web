@@ -362,11 +362,13 @@ export const useMigrateProjects = ({
           queryKey: getOrganizationProjectsByDaoAddressQueryKey({
             daoAddress: dao.address,
           }),
+          refetchType: 'all',
         });
         await reactQueryClient.invalidateQueries({
           queryKey: getOrganizationByDaoAddressQueryKey({
             daoAddress: dao.address,
           }),
+          refetchType: 'all',
         });
       }
       reloadBalances();

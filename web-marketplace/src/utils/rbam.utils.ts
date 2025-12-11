@@ -8,6 +8,7 @@ import {
   MsgSell,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import {
+  MsgCreateProject,
   MsgRetire,
   MsgSend,
   MsgUpdateProjectAdmin,
@@ -66,6 +67,23 @@ export const attestAction = ({
     authorizationId,
     roleId,
     typeUrl: MsgAttest.typeUrl,
+    value: protoBytes,
+  });
+};
+
+type CreateProjectActionParams = RoleAuthorizationIds & MsgCreateProject;
+
+export const createProjectAction = ({
+  roleId,
+  authorizationId,
+  ...msg
+}: CreateProjectActionParams) => {
+  const protoBytes = MsgCreateProject.encode(msg).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgCreateProject.typeUrl,
     value: protoBytes,
   });
 };

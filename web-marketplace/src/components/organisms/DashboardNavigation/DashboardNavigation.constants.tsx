@@ -34,3 +34,5 @@ export const COLLAPSE_SIDEBAR = msg`Collapse sidebar`;
 export const CREATE_ORGANIZATION = msg`+ create an organization`;
 
 export const ORGANIZATION = msg`Organization`;
+export const ORG = 'org';
+export const USER = 'user';

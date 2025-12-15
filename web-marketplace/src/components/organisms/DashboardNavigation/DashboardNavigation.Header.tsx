@@ -14,7 +14,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { AccountType } from 'generated/graphql';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
-import { COPIED, UNNAMED } from './DashboardNavigation.constants';
+import { COPIED, UNNAMED, USER } from './DashboardNavigation.constants';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
@@ -52,7 +52,7 @@ export const DashboardNavHeader = ({
     getDefaultAvatar({
       ...activeAccount,
       type:
-        activeAccount.type === 'user'
+        activeAccount.type === USER
           ? AccountType.User
           : AccountType.Organization,
     });

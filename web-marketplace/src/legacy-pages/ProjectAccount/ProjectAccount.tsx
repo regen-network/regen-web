@@ -12,7 +12,11 @@ import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 
 import { ProjectPageFooter } from 'components/molecules';
-import { UNNAMED } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
+import {
+  ORG,
+  UNNAMED,
+  USER,
+} from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { ProjectAccountSelector } from 'components/organisms/ProjectAccountSelector/ProjectAccountSelector';
 import { OnboardingFormTemplate } from 'components/templates/ProjectFormTemplate/OnboardingFormTemplate';
@@ -42,7 +46,7 @@ export const ProjectAccount = (): JSX.Element | null => {
         ? {
             name: activeAccount.name || _(UNNAMED),
             address: activeAccount.addr || '',
-            type: 'user' as const,
+            type: USER,
             image:
               activeAccount.image ||
               getDefaultAvatar({
@@ -54,14 +58,13 @@ export const ProjectAccount = (): JSX.Element | null => {
         : null,
     [activeAccount, _],
   );
-
   const organizationAccount = useMemo(
     (): AccountOption | null =>
       dao
         ? {
             name: dao.organizationByDaoAddress?.name || _(UNNAMED),
             address: dao.address ?? '',
-            type: 'org' as const,
+            type: ORG,
             image: getDefaultAvatar({
               type: AccountType.Organization,
             }),
@@ -173,7 +176,7 @@ export const ProjectAccount = (): JSX.Element | null => {
     if (selected) {
       setSelectedAddress(address);
       setProjectCreatorAddress(address);
-      setIsOrganizationAccount(selected.type === 'org');
+      setIsOrganizationAccount(selected.type === ORG);
     }
   };
 

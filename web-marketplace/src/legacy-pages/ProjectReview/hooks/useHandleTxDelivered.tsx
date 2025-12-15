@@ -10,9 +10,7 @@ import {
 } from 'utils/rbam.utils';
 
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
-import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdKey } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getUnanchoredProjectMetadata } from 'lib/rdf';
@@ -22,6 +20,7 @@ import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { getOnChainProjectId } from '../ProjectReview.util';
+import { useQueryClient } from '@tanstack/react-query';
 
 type UseHandleTxDeliveredParams = {
   setDeliverTxResponse: (
@@ -48,6 +47,7 @@ export const useHandleTxDelivered = ({
   const [updateProject] = useUpdateProjectByIdMutation();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
+  const reactQueryClient = useQueryClient();
 
   const handleTxDelivered = useCallback(
     () =>

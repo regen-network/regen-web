@@ -100,7 +100,7 @@ export const BridgeFlow = ({
     reactQueryClient.invalidateQueries({
       queryKey: [
         GET_TXS_EVENT_KEY,
-        `${messageActionEquals}'${MsgBridge.typeUrl}'&message.sender='${wallet?.address}'`,
+        `${messageActionEquals}'${MsgBridge.typeUrl}' AND message.sender='${wallet?.address}'`,
       ],
     });
   };

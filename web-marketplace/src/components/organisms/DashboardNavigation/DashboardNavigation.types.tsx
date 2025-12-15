@@ -57,6 +57,8 @@ export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
   activeId?: string;
   onSelect: (id: string) => void;
+  hasOrganization?: boolean;
+  onCreateOrganization?: () => void;
 }
 
 export interface GradientProps {

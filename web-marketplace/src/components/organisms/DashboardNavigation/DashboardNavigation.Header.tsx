@@ -24,6 +24,8 @@ type Props = DashboardNavHeaderData & {
   onViewProfileClick?: (href: string) => void;
   hasWalletAddress?: boolean;
   wallet?: String;
+  hasOrganization?: boolean;
+  onCreateOrganization?: () => void;
 };
 
 export const DashboardNavHeader = ({
@@ -34,6 +36,8 @@ export const DashboardNavHeader = ({
   onViewProfileClick,
   hasWalletAddress = true,
   wallet,
+  hasOrganization = true,
+  onCreateOrganization,
 }: Props) => {
   const { name = '', address, image, id } = activeAccount;
 
@@ -50,7 +54,6 @@ export const DashboardNavHeader = ({
   const short = address ? `${address.slice(0, 9)}…${address.slice(-6)}` : '';
   const copyAddress = address ?? '';
 
-  const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
 
   const [open, setOpen] = useState(false);
@@ -72,20 +75,15 @@ export const DashboardNavHeader = ({
         <div className="flex flex-col">
           <button
             type="button"
-            className={cn(
-              'flex items-center gap-10 bg-transparent border-none pl-0 py-5 md:pt-0',
-              canSwitch ? 'cursor-pointer' : 'cursor-default',
-            )}
-            onClick={() => canSwitch && setOpen(o => !o)}
+            className="flex items-center gap-10 bg-transparent border-none pl-0 py-5 md:pt-0 cursor-pointer"
+            onClick={() => setOpen(o => !o)}
             aria-expanded={open}
             aria-haspopup="true"
           >
             <Subtitle className="text-bc-neutral-900 pt-5 text-[16px] text-left">
               {name || _(UNNAMED)}
             </Subtitle>
-            {canSwitch && (
-              <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
-            )}
+            <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
           </button>
 
           <div className="group flex items-center gap-3">
@@ -131,10 +129,15 @@ export const DashboardNavHeader = ({
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
-          activeId={id}
+          activeId={address}
           onSelect={id => {
             setOpen(false);
-            if (id !== activeAccount.id) onAccountSelect?.(id);
+            if (id !== activeAccount.address) onAccountSelect?.(id);
+          }}
+          hasOrganization={hasOrganization}
+          onCreateOrganization={() => {
+            setOpen(false);
+            onCreateOrganization?.();
           }}
         />
       )}

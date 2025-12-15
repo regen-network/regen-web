@@ -468,6 +468,11 @@ export const Dashboard = () => {
                 navigate('/');
                 setMobileMenuOpen(false);
               }}
+              hasOrganization={!!organizationAccount}
+              onCreateOrganization={() => {
+                setMobileMenuOpen(false);
+                navigate('/organizations/create');
+              }}
               header={{
                 activeAccount: headerActiveAccount,
                 accounts: navigationAccounts,

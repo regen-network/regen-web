@@ -40,6 +40,8 @@ export const DashboardNavigation = ({
   collapsed,
   onToggleCollapse,
   canEditOrg,
+  hasOrganization,
+  onCreateOrganization,
 }: DashboardNavigationProps & {
   mobileMenuOpen?: boolean;
   hasWalletAddress?: boolean;
@@ -49,6 +51,8 @@ export const DashboardNavigation = ({
   hasProjects?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
   canEditOrg?: boolean;
+  hasOrganization?: boolean;
+  onCreateOrganization?: () => void;
 }) => {
   const { _ } = useLingui();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -185,6 +189,8 @@ export const DashboardNavigation = ({
         onViewProfileClick={onViewProfileClick}
         hasWalletAddress={hasWalletAddress}
         wallet={wallet}
+        hasOrganization={hasOrganization}
+        onCreateOrganization={onCreateOrganization}
       />
 
       {/* Navigation sections */}

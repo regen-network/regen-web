@@ -87,7 +87,7 @@ export const ProjectCreate = (): JSX.Element => {
   const { data: projectByOffChainIdRes } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
-      enabled: !!projectId && projectId != DRAFT_ID,
+      enabled: !!projectId && projectId !== DRAFT_ID,
       id: projectId,
       languageCode: selectedLanguage,
     }),

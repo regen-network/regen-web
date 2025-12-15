@@ -48,14 +48,13 @@ export const useCreateOrUpdateProject = () => {
           variables: {
             input: {
               id: offChainProjectId,
-              projectPatch: {
-                adminAccountId: activeAccount?.id,
-                ...projectPatch,
-              },
+              projectPatch,
             },
           },
         });
       } else if (isEdit && onChainProject) {
+        // On chain project created outside of Regen Marketplace (e.g., via CLI)
+        // that doesn't have an off chain project yet
         if (projectPatch.metadata) {
           projectPatch.metadata = getUnanchoredProjectBaseMetadata(
             projectPatch.metadata,

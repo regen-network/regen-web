@@ -22,7 +22,6 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { setCreditClassId, setCreditClassOnChainId, projectCreatorAddress } =
     useCreateProjectContext();
   const { activeAccount } = useAuth();
-
   const adminAddr = projectCreatorAddress || activeAccount?.addr;
 
   const { creditClassItems, loading } = useGetCreditClassItems({

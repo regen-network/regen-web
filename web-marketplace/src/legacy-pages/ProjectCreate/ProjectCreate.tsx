@@ -1,13 +1,6 @@
-import {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { MutableRefObject, useCallback, useRef, useState } from 'react';
 import {
   Outlet,
-  useLocation,
   useNavigate,
   useOutletContext,
   useParams,
@@ -21,11 +14,12 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
-import {
-  projectAccountSelectionsAtom,
-  projectsDraftState,
-  ProjectsDraftStatus,
-} from './ProjectCreate.store';
+import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useApolloClient } from '@apollo/client';
+import { useQuery } from '@tanstack/react-query';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
@@ -66,22 +60,11 @@ const defaultProjectCreateContext: ContextType = {
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const navigate = useNavigate();
-  const location = useLocation();
-  const [showDiscardModal, setShowDiscardModal] = useState(false);
-
-  // Check if coming from dashboard - this means we should NOT restore from localStorage
-  const state = location.state as
-    | { fromDashboard?: boolean; isOrganization?: boolean }
-    | undefined;
-  const isFromDashboard = !!state?.fromDashboard;
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
   const [projectsState] = useAtom<ProjectsDraftStatus>(projectsDraftState);
-  const [projectAccountSelections, setProjectAccountSelections] = useAtom(
-    projectAccountSelectionsAtom,
-  );
   const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
@@ -99,50 +82,23 @@ export const ProjectCreate = (): JSX.Element => {
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
 
-  // TODO fix: we cannot rely entirely on local storage for knowing whether
-  // the project has been created within an organization account or not.
-  // Indeed, if another organization member that is using another browser continues
-  // the project creation process, it will not have the correct context.
-  // A simpler way to check that is just to see if project.adminDaoAddress is set.
-
-  // TODO fix: isOrganizationAccount seems to be set incorrectly too if we "save & exit" from
-  // the basic info form when first creating the project.
-
-  // Restore persisted account selection for this project
-  // BUT skip if coming from dashboard (we want fresh state from navigation)
-  useEffect(() => {
-    if (!projectId || isFromDashboard) return;
-    const saved = projectAccountSelections[projectId];
-    if (saved) {
-      setProjectCreatorAddress(saved.address);
-      setIsOrganizationAccount(!!saved.isOrganization);
-    }
-  }, [projectAccountSelections, projectId, isFromDashboard]);
-
-  // Persist current selection for this project
-  useEffect(() => {
-    // Avoid overwriting a previous selection with an empty payload
-    if (!projectId || !projectCreatorAddress) return;
-    setProjectAccountSelections(prev => ({
-      ...prev,
-      [projectId]: {
-        address: projectCreatorAddress,
-        isOrganization: isOrganizationAccount,
-      },
-    }));
-  }, [
-    projectCreatorAddress,
-    isOrganizationAccount,
-    projectId,
-    setProjectAccountSelections,
-  ]);
+  const graphqlClient = useApolloClient();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const { data: projectByOffChainIdRes } = useQuery(
+    getProjectByIdQuery({
+      client: graphqlClient,
+      enabled: !!projectId && projectId != DRAFT_ID,
+      id: projectId,
+      languageCode: selectedLanguage,
+    }),
+  );
+  const offChainProject = projectByOffChainIdRes?.data?.projectById;
 
   const handleRequestClose = useCallback(() => {
-    setShowDiscardModal(false);
-    if (isOrganizationAccount)
+    if (isOrganizationAccount || offChainProject?.adminDaoAddress)
       navigate('/dashboard/organization', { replace: true });
     else navigate('/dashboard', { replace: true });
-  }, [navigate, isOrganizationAccount]);
+  }, [navigate, isOrganizationAccount, offChainProject]);
 
   return (
     <>

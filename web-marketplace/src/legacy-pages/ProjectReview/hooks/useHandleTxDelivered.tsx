@@ -13,7 +13,7 @@ import {
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
-import { getProjectByIdKey } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getUnanchoredProjectMetadata } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 

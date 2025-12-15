@@ -5,13 +5,12 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useProjectEditContext } from 'legacy-pages';
 import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMigrateProject';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
-import { pendingProjectIdsAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import slugify from 'slug';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -96,34 +95,13 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const setProcessingModal = useSetAtom(processingModalAtom);
   const setErrorModal = useSetAtom(errorModalAtom);
   const setErrorCode = useSetAtom(errorCodeAtom);
-  const [pendingProjectIds, setPendingProjectIds] = useAtom(
-    pendingProjectIdsAtom,
-  );
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
   const { migrateProject } = useMigrateProject();
-  const pendingProjectKey = useMemo(
-    () => getPendingProjectStorageKey(projectId),
-    [projectId],
-  );
-  const pendingProjectId = pendingProjectIds[pendingProjectKey] ?? null;
-
-  const updatePendingProjectId = useCallback(
-    (id: string | null) => {
-      setPendingProjectIds(prev => ({ ...prev, [pendingProjectKey]: id }));
-    },
-    [pendingProjectKey, setPendingProjectIds],
-  );
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
   }, [isDirtyRef, isDirty]);
-
-  useEffect(() => {
-    if (!isOrganizationAccount) {
-      updatePendingProjectId(null);
-    }
-  }, [isOrganizationAccount, updatePendingProjectId]);
 
   const submitUntilSuccess = useCallback(
     async (values: BasicInfoFormSchemaType, slugIndex: number) => {
@@ -133,48 +111,22 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
         if (!isEdit && projectId === DRAFT_ID) {
           const shouldNavigateNow =
             shouldNavigateRef?.current && !isOrganizationAccount;
-          let currentProjectId = pendingProjectId;
 
-          if (!currentProjectId) {
-            currentProjectId = await submitCreateProject({
-              values,
-              shouldNavigate: shouldNavigateNow,
-              projectInput: {
-                slug,
-              },
-            });
-            if (
-              isOrganizationAccount &&
-              currentProjectId &&
-              projectId === DRAFT_ID
-            ) {
-              updatePendingProjectId(currentProjectId);
-            } else {
-              updatePendingProjectId(null);
-            }
-          } else {
-            // Update the off-chain project with any form changes before retrying migration
-            await onSubmit({
-              values,
-              shouldNavigate: false,
-              projectPatch:
-                !!values['schema:name'] &&
-                initialValues?.['schema:name'] !== values['schema:name']
-                  ? {
-                      slug,
-                    }
-                  : undefined,
-            });
-          }
+          const newProjectId = await submitCreateProject({
+            values,
+            shouldNavigate: shouldNavigateNow,
+            projectInput: {
+              slug,
+            },
+          });
 
-          if (currentProjectId && isOrganizationAccount) {
+          if (isOrganizationAccount) {
             try {
               setProcessingModal(atom => void (atom.open = true));
-              await migrateProject(currentProjectId, values['schema:name']);
+              await migrateProject(newProjectId, values['schema:name']);
               setProcessingModal(atom => void (atom.open = false));
-              updatePendingProjectId(null);
               if (shouldNavigateRef?.current) {
-                navigate(`/project-pages/${currentProjectId}/location`);
+                navigate(`/project-pages/${newProjectId}/location`);
               }
               return;
             } catch (error) {
@@ -243,8 +195,6 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       setErrorModal,
       setErrorCode,
       navigate,
-      pendingProjectId,
-      updatePendingProjectId,
     ],
   );
 

@@ -72,8 +72,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { setDeliverTxResponse, projectCreatorAddress, isOrganizationAccount } =
-    useCreateProjectContext();
+  const { setDeliverTxResponse } = useCreateProjectContext();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
@@ -142,21 +141,19 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     editPath,
     metadata,
   });
+  const projectDaoAddress = project?.adminDaoAddress;
+  const organizationDaoAddress = organizationDao?.address;
   const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({
     signAndBroadcast,
     walletAddress: wallet?.address,
     organizationRole,
-    organizationDaoAddress: isOrganizationAccount
-      ? organizationDao?.address
-      : undefined,
-    organizationRbamAddress: isOrganizationAccount
-      ? organizationDao?.daoRbamAddress
-      : undefined,
+    organizationDaoAddress,
+    organizationRbamAddress: organizationDao?.daoRbamAddress,
     // Project DAO address is stored in DB after migration in BasicInfoForm
     // We get it from the project data via adminDaoAddress field
-    projectDaoAddress: project?.adminDaoAddress,
+    projectDaoAddress,
   });
 
   const saveAndExit = useProjectSaveAndExit();
@@ -185,9 +182,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       );
       return;
     }
-    const adminAddress = isOrganizationAccount
-      ? projectCreatorAddress
-      : wallet?.address;
+    const adminAddress =
+      projectDaoAddress && organizationDaoAddress
+        ? organizationDaoAddress
+        : wallet?.address;
 
     await projectCreateSubmit({
       classId: creditClassId || '',

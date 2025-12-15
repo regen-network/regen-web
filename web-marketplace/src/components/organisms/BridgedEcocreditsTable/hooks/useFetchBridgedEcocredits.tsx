@@ -79,17 +79,6 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
     }),
   );
 
-  const { data: txsEventData2 } = useQuery(
-    getGetTxsEventQuery({
-      client: queryClient,
-      enabled: !!queryClient,
-      request: {
-        query: `${messageActionEquals}'${MsgBridge.typeUrl}'`,
-        orderBy: OrderBy.ORDER_BY_DESC,
-      },
-    }),
-  );
-
   // TxsWithResponse
   const txsWithResponse: TxWithResponse[] =
     txsEventData?.txs

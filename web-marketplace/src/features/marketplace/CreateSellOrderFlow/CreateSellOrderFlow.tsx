@@ -92,7 +92,6 @@ export const CreateSellOrderFlow = ({
 
   const closeCreateModal = (): void => {
     setIsCreateSellOrderOpen(false);
-    setIsFlowStarted(false);
   };
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
 

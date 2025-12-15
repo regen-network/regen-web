@@ -191,8 +191,12 @@ msgid "+ Add Photo"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:34
-msgid "+ create new organization"
+msgid "+ create an organization"
 msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:34
+#~ msgid "+ create new organization"
+#~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:20
@@ -340,7 +344,7 @@ msgstr ""
 msgid "Account switch detected! "
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:37
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:53
 msgid "Account switcher"
 msgstr ""
 

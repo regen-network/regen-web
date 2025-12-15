@@ -5,21 +5,22 @@ import {
   useOutletContext,
   useParams,
 } from 'react-router-dom';
+import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
+
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
-import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
-import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useApolloClient } from '@apollo/client';
-import { useQuery } from '@tanstack/react-query';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;

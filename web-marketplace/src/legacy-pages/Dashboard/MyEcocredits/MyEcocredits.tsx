@@ -194,7 +194,7 @@ export const MyEcocredits = (): JSX.Element => {
     setIsProcessingModalOpen(false);
   };
 
-  const handleTxDelivered = (): void => {
+  const handleTxDelivered = async () => {
     setIsProcessingModalOpen(false);
     // Refetch basket/profile data so it shows latest values
     reloadBasketsBalance();

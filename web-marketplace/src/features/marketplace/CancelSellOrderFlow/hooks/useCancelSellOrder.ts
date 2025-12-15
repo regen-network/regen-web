@@ -55,7 +55,7 @@ export const useCancelSellOrder = ({
   const { selectedAccountAddress } = useDashboardContext();
 
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
-  const handleTxDelivered = (): void => {
+  const handleTxDelivered = async () => {
     setIsProcessingModalOpen(false);
   };
   const handleError = (): void => {

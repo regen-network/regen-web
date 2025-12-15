@@ -170,7 +170,7 @@ export default function useCreateBatchSubmit(): Return {
     setIsSubmitModalOpen(true);
   }
 
-  function handleTxDelivered(): void {
+  async function handleTxDelivered() {
     setStatus('success');
     setIsSubmitModalOpen(false);
   }

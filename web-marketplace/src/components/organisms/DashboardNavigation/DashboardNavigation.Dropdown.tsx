@@ -37,10 +37,14 @@ export const AccountSwitcherDropdown = ({
   const { _ } = useLingui();
 
   const allOptions = useMemo(() => {
+    const filteredAccounts = unfinalizedOrgCreation
+      ? accounts.filter(account => account.type !== 'org')
+      : accounts;
+
     const options: (
       | AccountOption
       | { id: typeof CREATE_ORGANIZATION_FORM_ID }
-    )[] = [...accounts];
+    )[] = [...filteredAccounts];
     if (unfinalizedOrgCreation || (!hasOrganization && onCreateOrganization)) {
       options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }

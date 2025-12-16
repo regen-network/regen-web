@@ -6,6 +6,7 @@ import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
+import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -14,6 +15,7 @@ import { AccountType } from 'generated/graphql';
 
 import {
   CREATE_ORGANIZATION,
+  FINISH_ORG_CREATION,
   ORGANIZATION,
   UNNAMED,
 } from './DashboardNavigation.constants';
@@ -28,6 +30,9 @@ export const AccountSwitcherDropdown = ({
   onSelect,
   hasOrganization = true,
   onCreateOrganization,
+  unfinalizedOrgCreation = false,
+  unfinalizedOrgName,
+  onFinishOrgCreation,
 }: AccountSwitcherDropdownProps) => {
   const { _ } = useLingui();
 
@@ -36,16 +41,16 @@ export const AccountSwitcherDropdown = ({
       | AccountOption
       | { id: typeof CREATE_ORGANIZATION_FORM_ID }
     )[] = [...accounts];
-    if (!hasOrganization && onCreateOrganization) {
+    if (!hasOrganization && (onCreateOrganization || unfinalizedOrgCreation)) {
       options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }
     return options;
-  }, [accounts, hasOrganization, onCreateOrganization]);
+  }, [accounts, hasOrganization, onCreateOrganization, unfinalizedOrgCreation]);
 
   return (
     <ul
       className={cn(
-        'absolute top-[35px] left-[-13px] w-[280px]',
+        'absolute top-[35px] left-[-13px] min-w-[280px]',
         'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-10',
         'list-none p-0 m-0',
       )}
@@ -70,7 +75,11 @@ export const AccountSwitcherDropdown = ({
 
         const handleClick = () => {
           if (isCreateOrg) {
-            onCreateOrganization?.();
+            if (unfinalizedOrgCreation) {
+              onFinishOrgCreation?.();
+            } else {
+              onCreateOrganization?.();
+            }
           } else if (accountAddress) {
             onSelect(accountAddress);
           }
@@ -95,9 +104,24 @@ export const AccountSwitcherDropdown = ({
                 alt={account?.name || _(ORGANIZATION)}
               />
               {isCreateOrg ? (
-                <TextButton className="ml-3 mr-auto text-left text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
-                  {_(CREATE_ORGANIZATION)}
-                </TextButton>
+                unfinalizedOrgCreation && unfinalizedOrgName ? (
+                  <div className="ml-3 mr-auto text-left flex flex-col">
+                    <Body
+                      size="md"
+                      className="truncate text-bc-neutral-700 font-bold"
+                    >
+                      {unfinalizedOrgName}
+                    </Body>
+                    <TextButton className="group text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
+                      {_(FINISH_ORG_CREATION)}
+                      <SmallArrowIcon className="text-brand-400 group-hover:text-brand-200 h-[8px] ml-3" />
+                    </TextButton>
+                  </div>
+                ) : (
+                  <TextButton className="ml-3 mr-auto text-left text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
+                    {_(CREATE_ORGANIZATION)}
+                  </TextButton>
+                )
               ) : (
                 <Body
                   size="md"

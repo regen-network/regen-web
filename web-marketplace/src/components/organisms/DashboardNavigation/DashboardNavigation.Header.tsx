@@ -26,6 +26,9 @@ type Props = DashboardNavHeaderData & {
   wallet?: String;
   hasOrganization?: boolean;
   onCreateOrganization?: () => void;
+  unfinalizedOrgCreation?: boolean;
+  unfinalizedOrgName?: string;
+  onFinishOrgCreation?: () => void;
 };
 
 export const DashboardNavHeader = ({
@@ -38,6 +41,9 @@ export const DashboardNavHeader = ({
   wallet,
   hasOrganization = true,
   onCreateOrganization,
+  unfinalizedOrgCreation = false,
+  unfinalizedOrgName,
+  onFinishOrgCreation,
 }: Props) => {
   const { name = '', address, image, id } = activeAccount;
 
@@ -139,6 +145,12 @@ export const DashboardNavHeader = ({
           onCreateOrganization={() => {
             setOpen(false);
             onCreateOrganization?.();
+          }}
+          unfinalizedOrgCreation={unfinalizedOrgCreation}
+          unfinalizedOrgName={unfinalizedOrgName}
+          onFinishOrgCreation={() => {
+            setOpen(false);
+            onFinishOrgCreation?.();
           }}
         />
       )}

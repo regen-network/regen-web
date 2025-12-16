@@ -20,11 +20,14 @@ export const useOrganizationActions = () => {
     useState(false);
   const [, setError] = useState<unknown>();
 
-  const { menuOrganizationProfile, unfinalizedOrgCreation } =
-    useOrganizationMenuProfile({
-      activeAccount,
-      wallet,
-    });
+  const {
+    menuOrganizationProfile,
+    unfinalizedOrgCreation,
+    unfinalizedOrgName,
+  } = useOrganizationMenuProfile({
+    activeAccount,
+    wallet,
+  });
   const router = useRouter();
 
   const createOrganization = useCallback(() => {
@@ -74,6 +77,7 @@ export const useOrganizationActions = () => {
     finishOrgCreation,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
+    unfinalizedOrgName,
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,

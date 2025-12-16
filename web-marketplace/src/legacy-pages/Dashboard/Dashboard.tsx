@@ -90,7 +90,12 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const { createOrganization } = useOrganizationActions();
+  const {
+    createOrganization,
+    unfinalizedOrgCreation,
+    unfinalizedOrgName,
+    finishOrgCreation,
+  } = useOrganizationActions();
   const isOrganizationDashboard = pathname.startsWith(
     '/dashboard/organization',
   );
@@ -474,6 +479,12 @@ export const Dashboard = () => {
               onCreateOrganization={() => {
                 setMobileMenuOpen(false);
                 createOrganization();
+              }}
+              unfinalizedOrgCreation={unfinalizedOrgCreation}
+              unfinalizedOrgName={unfinalizedOrgName}
+              onFinishOrgCreation={() => {
+                setMobileMenuOpen(false);
+                finishOrgCreation();
               }}
               header={{
                 activeAccount: headerActiveAccount,

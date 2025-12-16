@@ -35,6 +35,7 @@ export const useOrganizationMenuProfile = ({
   }, [organizationProgress, walletAddress]);
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
+  const unfinalizedOrgName = unfinishedEntry?.name;
 
   const organizationDao = useDaoOrganization();
   const organizationProfile = organizationDao?.organizationByDaoAddress;
@@ -63,5 +64,6 @@ export const useOrganizationMenuProfile = ({
   return {
     menuOrganizationProfile,
     unfinalizedOrgCreation,
+    unfinalizedOrgName,
   };
 };

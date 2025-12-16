@@ -42,6 +42,9 @@ export const DashboardNavigation = ({
   canEditOrg,
   hasOrganization,
   onCreateOrganization,
+  unfinalizedOrgCreation,
+  unfinalizedOrgName,
+  onFinishOrgCreation,
 }: DashboardNavigationProps & {
   mobileMenuOpen?: boolean;
   hasWalletAddress?: boolean;
@@ -53,6 +56,9 @@ export const DashboardNavigation = ({
   canEditOrg?: boolean;
   hasOrganization?: boolean;
   onCreateOrganization?: () => void;
+  unfinalizedOrgCreation?: boolean;
+  unfinalizedOrgName?: string;
+  onFinishOrgCreation?: () => void;
 }) => {
   const { _ } = useLingui();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -191,6 +197,9 @@ export const DashboardNavigation = ({
         wallet={wallet}
         hasOrganization={hasOrganization}
         onCreateOrganization={onCreateOrganization}
+        unfinalizedOrgCreation={unfinalizedOrgCreation}
+        unfinalizedOrgName={unfinalizedOrgName}
+        onFinishOrgCreation={onFinishOrgCreation}
       />
 
       {/* Navigation sections */}

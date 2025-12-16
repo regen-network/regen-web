@@ -34,8 +34,8 @@ export const SelectProjectCard = ({
         aria-label={name}
       />
       {selected && (
-        <div className="absolute flex justify-center z-50 items-center w-full h-full">
-          <div className="absolute w-50 h-50 rounded-full p-1 bg-brand-100 flex items-center justify-center mb-[75px]">
+        <div className="absolute z-50 top-[72px] left-1/2 -ml-25">
+          <div className="w-50 h-50 rounded-full p-1 bg-brand-100 flex items-center justify-center">
             <SuccessIcon
               className="h-40 w-40 text-brand-400"
               aria-hidden="true"

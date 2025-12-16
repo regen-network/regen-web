@@ -24,7 +24,7 @@ export const MigrateProjects = ({
   useSetFormState({ isSubmitting, isValid, setIsSubmitting, setIsValid });
 
   return (
-    <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">
+    <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl bg-sc-card-standard-background">
       <Form
         id={MIGRATE_PROJECTS_FORM_ID}
         form={form}

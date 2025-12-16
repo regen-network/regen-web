@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { CREATE_ORGANIZATION_FORM_ID } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -21,11 +22,9 @@ import {
   AccountSwitcherDropdownProps,
 } from './DashboardNavigation.types';
 
-const CREATE_ORG_ID = 'create-organization';
-
 export const AccountSwitcherDropdown = ({
   accounts,
-  activeId,
+  activeAddress,
   onSelect,
   hasOrganization = true,
   onCreateOrganization,
@@ -33,11 +32,12 @@ export const AccountSwitcherDropdown = ({
   const { _ } = useLingui();
 
   const allOptions = useMemo(() => {
-    const options: (AccountOption | { id: typeof CREATE_ORG_ID })[] = [
-      ...accounts,
-    ];
+    const options: (
+      | AccountOption
+      | { id: typeof CREATE_ORGANIZATION_FORM_ID }
+    )[] = [...accounts];
     if (!hasOrganization && onCreateOrganization) {
-      options.push({ id: CREATE_ORG_ID });
+      options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }
     return options;
   }, [accounts, hasOrganization, onCreateOrganization]);
@@ -53,10 +53,10 @@ export const AccountSwitcherDropdown = ({
       aria-label={_(msg`Account switcher`)}
     >
       {allOptions.map(option => {
-        const isCreateOrg = option.id === CREATE_ORG_ID;
+        const isCreateOrg = option.id === CREATE_ORGANIZATION_FORM_ID;
         const account = isCreateOrg ? null : (option as AccountOption);
-        const accountId = account?.address;
-        const isSelected = !isCreateOrg && accountId === activeId;
+        const accountAddress = account?.address;
+        const isSelected = !isCreateOrg && accountAddress === activeAddress;
 
         const avatarSrc = account
           ? account.image ||
@@ -71,8 +71,8 @@ export const AccountSwitcherDropdown = ({
         const handleClick = () => {
           if (isCreateOrg) {
             onCreateOrganization?.();
-          } else if (accountId) {
-            onSelect(accountId);
+          } else if (accountAddress) {
+            onSelect(accountAddress);
           }
         };
 

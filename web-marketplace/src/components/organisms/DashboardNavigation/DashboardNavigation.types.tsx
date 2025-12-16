@@ -55,8 +55,8 @@ export interface DashboardNavFooterProps {
 
 export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
-  activeId?: string;
-  onSelect: (id: string) => void;
+  activeAddress?: string;
+  onSelect: (address: string) => void;
   hasOrganization?: boolean;
   onCreateOrganization?: () => void;
 }

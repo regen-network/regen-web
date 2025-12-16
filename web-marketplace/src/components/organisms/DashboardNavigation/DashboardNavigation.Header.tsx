@@ -129,10 +129,11 @@ export const DashboardNavHeader = ({
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
-          activeId={address}
-          onSelect={id => {
+          activeAddress={address}
+          onSelect={selectedAddress => {
             setOpen(false);
-            if (id !== activeAccount.address) onAccountSelect?.(id);
+            if (selectedAddress !== activeAccount.address)
+              onAccountSelect?.(selectedAddress);
           }}
           hasOrganization={hasOrganization}
           onCreateOrganization={() => {

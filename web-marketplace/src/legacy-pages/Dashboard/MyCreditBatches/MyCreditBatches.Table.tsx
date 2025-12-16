@@ -46,7 +46,13 @@ export const MyCreditBatchesTable = ({
         alignItems: 'center',
       }}
     >
-      <div className="border-solid border-bc-neutral-300 border-[1px] rounded-[10px] overflow-hidden">
+      <div
+        className={
+          hasNoBatches
+            ? ''
+            : 'border-solid border-bc-neutral-300 border-[1px] rounded-[10px] overflow-hidden'
+        }
+      >
         <Box
           sx={{
             display: hasNoBatches ? 'none' : 'flex',

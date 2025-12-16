@@ -119,16 +119,14 @@ export const CreateSellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeCreateModal();
-    refetchSellOrders && refetchSellOrders();
   };
 
   // Navigate to portfolio after successful transaction
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
+    refetchSellOrders?.();
     if (redirectOnSuccess) {
       router.push('/dashboard/portfolio');
-    } else {
-      handleTxModalClose();
     }
   };
 

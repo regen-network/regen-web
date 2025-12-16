@@ -2,11 +2,6 @@ import { useCallback, useMemo } from 'react';
 import { EncodeObject } from '@cosmjs/proto-signing';
 import { cosmos } from '@regen-network/api';
 import { GenericAuthorization } from '@regen-network/api/cosmos/authz/v1beta1/authz';
-import {
-  MsgCancelSellOrder,
-  MsgUpdateSellOrders,
-} from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
-import { MsgSend } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
@@ -25,6 +20,8 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import useMsgClient from 'hooks/useMsgClient';
+
+import { grantee, msgTypes } from './useStripeAccount.constants';
 
 /**
  * Custom React hook to manage Stripe connected account interactions.
@@ -65,14 +62,7 @@ const useStripeAccount = () => {
   );
 
   const setupAccount = useCallback(async () => {
-    const grantee = process.env.NEXT_PUBLIC_REGEN_WORKER_ADDRESS;
     if (activeAccount?.addr && token && grantee) {
-      const msgTypes = [
-        MsgCancelSellOrder.typeUrl,
-        MsgUpdateSellOrders.typeUrl,
-        MsgSend.typeUrl,
-      ];
-
       const { roleId, authorizationId } = getRoleAuthorizationIds({
         type: 'organization',
         currentUserRole: organizationRole,
@@ -97,7 +87,7 @@ const useStripeAccount = () => {
                 roleId,
                 authorizationId,
                 granter: organizationDaoAddress,
-                grantee,
+                grantee: grantee as string,
                 grant: {
                   authorization: GenericAuthorization.toProtoMsg({
                     msg: typeUrl,
@@ -111,7 +101,7 @@ const useStripeAccount = () => {
         grants = msgTypes.map(typeUrl =>
           cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
             granter: activeAccount?.addr as string,
-            grantee,
+            grantee: grantee as string,
             grant: {
               authorization: GenericAuthorization.toProtoMsg({ msg: typeUrl }),
             },

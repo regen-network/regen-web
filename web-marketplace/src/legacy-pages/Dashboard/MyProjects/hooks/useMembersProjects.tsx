@@ -22,14 +22,18 @@ export const useMembersProjects = (accountId?: string, disabled = false) => {
       enabled: accountId !== undefined && !disabled,
     }),
   );
+
   const allMemberProjects = useMemo(
     () =>
-      assignmentsData?.accountById?.assignmentsByAccountId?.nodes
-        ?.map(
-          assignment => assignment?.daoByDaoAddress?.projectByAdminDaoAddress,
-        )
-        .filter(Boolean),
-    [assignmentsData],
+      disabled
+        ? []
+        : assignmentsData?.accountById?.assignmentsByAccountId?.nodes
+            ?.map(
+              assignment =>
+                assignment?.daoByDaoAddress?.projectByAdminDaoAddress,
+            )
+            .filter(Boolean),
+    [assignmentsData, disabled],
   );
 
   // Compute projects current user is an external member of
@@ -48,7 +52,6 @@ export const useMembersProjects = (accountId?: string, disabled = false) => {
   );
 
   return {
-    allMemberProjects,
     externalMemberProjects,
     isAssignmentsLoading,
   };

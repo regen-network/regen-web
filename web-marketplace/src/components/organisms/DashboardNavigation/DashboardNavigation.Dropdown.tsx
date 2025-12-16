@@ -41,7 +41,7 @@ export const AccountSwitcherDropdown = ({
       | AccountOption
       | { id: typeof CREATE_ORGANIZATION_FORM_ID }
     )[] = [...accounts];
-    if (!hasOrganization && (onCreateOrganization || unfinalizedOrgCreation)) {
+    if (unfinalizedOrgCreation || (!hasOrganization && onCreateOrganization)) {
       options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }
     return options;

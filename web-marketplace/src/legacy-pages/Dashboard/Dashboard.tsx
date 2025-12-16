@@ -62,6 +62,7 @@ import {
   PORTFOLIO,
   PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
+import { DashboardNavAccount } from './Dashboard.types';
 import {
   getActivePortfolioTab,
   getPortfolioTabs,
@@ -72,11 +73,6 @@ import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
-type DashboardNavAccount = AccountOption & {
-  source: 'auth' | 'dao';
-  roleAccountId?: string;
-  roleName?: string;
-};
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -186,6 +182,8 @@ export const Dashboard = () => {
       source: 'dao',
       roleAccountId: assignment?.accountId ?? undefined,
       roleName: assignment?.roleName ?? undefined,
+      canUseStripeConnect: organizationDao?.canUseStripeConnect || false,
+      stripeConnectedAccountId: organizationDao?.stripeConnectedAccountId,
     };
   }, [
     organizationAddress,
@@ -208,6 +206,8 @@ export const Dashboard = () => {
         type: activeAccount.type === 'ORGANIZATION' ? ORG : USER,
         image: activeAccount.image ?? undefined,
         source: 'auth',
+        canUseStripeConnect: privActiveAccount?.can_use_stripe_connect || false,
+        stripeConnectedAccountId: activeAccount.stripeConnectedAccountId,
       });
     }
 
@@ -217,7 +217,12 @@ export const Dashboard = () => {
     }
 
     return accounts;
-  }, [activeAccount, organizationAccount, personalResolvedAddress]);
+  }, [
+    activeAccount,
+    organizationAccount,
+    personalResolvedAddress,
+    privActiveAccount?.can_use_stripe_connect,
+  ]);
 
   const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {
     if (isOrganizationDashboard) {
@@ -317,15 +322,7 @@ export const Dashboard = () => {
       isCreditClassCreator,
       isIssuer,
       sanityProfilePageData,
-      selectedAccount: selectedAccount
-        ? {
-            id: selectedAccount.id,
-            name: selectedAccount.name,
-            address: selectedAccount.address,
-            type: selectedAccount.type,
-            image: selectedAccount.image,
-          }
-        : undefined,
+      selectedAccount,
       isOrganizationDashboard,
       selectedAccountAddress: selectedAccount?.address ?? wallet?.address,
       organizationRole,

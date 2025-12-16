@@ -2,14 +2,14 @@ import { useOutletContext } from 'react-router-dom';
 
 import { AllProfilePageQuery } from 'generated/sanity-graphql';
 
-import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
+import { DashboardNavAccount } from './Dashboard.types';
 
 type DashboardContextType = {
   isIssuer: boolean;
   isCreditClassCreator: boolean;
   isCreditClassAdmin?: boolean;
   sanityProfilePageData?: AllProfilePageQuery;
-  selectedAccount?: AccountOption;
+  selectedAccount?: DashboardNavAccount;
   isOrganizationDashboard?: boolean;
   selectedAccountAddress?: string;
   organizationRole?: string;

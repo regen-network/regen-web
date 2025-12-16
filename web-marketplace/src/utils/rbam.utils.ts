@@ -1,3 +1,4 @@
+import { MsgGrant } from '@regen-network/api/cosmos/authz/v1beta1/tx';
 import { MsgAttest } from '@regen-network/api/regen/data/v2/tx';
 import {
   MsgPut,
@@ -222,6 +223,23 @@ export const cancelSellOrderAction = ({
     authorizationId,
     roleId,
     typeUrl: MsgCancelSellOrder.typeUrl,
+    value: protoBytes,
+  });
+};
+
+type AuthzGrantActionParams = RoleAuthorizationIds & MsgGrant;
+
+export const authzGrantAction = ({
+  roleId,
+  authorizationId,
+  ...msgParams
+}: AuthzGrantActionParams) => {
+  const protoBytes = MsgGrant.encode(msgParams).finish();
+
+  return getStargateAction({
+    authorizationId,
+    roleId,
+    typeUrl: MsgGrant.typeUrl,
     value: protoBytes,
   });
 };

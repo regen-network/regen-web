@@ -136,11 +136,17 @@ const creditManagementAuthorization = {
   },
 };
 
+const authzFilter = {
+  stargate: {
+    type_url: '/cosmos.authz.v1beta1.MsgGrant',
+  },
+};
 const sellOrdersAuthorization = {
   name: 'can_manage_sell_orders',
   metadata: 'Can manage sell orders',
   filter: {
     $or: [
+      authzFilter,
       {
         stargate: {
           type_url: '/regen.ecocredit.marketplace.v1.MsgSell',

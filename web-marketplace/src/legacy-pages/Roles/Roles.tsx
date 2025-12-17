@@ -56,12 +56,16 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const projectDeveloper = offChainProject?.accountByDeveloperId;
   const verifier = offChainProject?.accountByVerifierId;
+  const adminDaoAddress = offChainProject?.adminDaoAddress;
 
   const initialValues: RolesFormSchemaType = useMemo(
     () => ({
       // In edit mode, use existing on chain project admin
-      // In creation mode, use active account wallet address
-      admin: (isEdit ? onChainProject?.admin : activeAccount?.addr) || '',
+      // In creation mode, use admin dao address or active account wallet address
+      admin:
+        (isEdit
+          ? onChainProject?.admin
+          : adminDaoAddress || activeAccount?.addr) || '',
       projectDeveloper: getProjectStakeholderInitialValues(_, projectDeveloper),
       verifier: getProjectStakeholderInitialValues(_, verifier),
     }),
@@ -72,6 +76,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       _,
       projectDeveloper,
       verifier,
+      adminDaoAddress,
     ],
   );
 

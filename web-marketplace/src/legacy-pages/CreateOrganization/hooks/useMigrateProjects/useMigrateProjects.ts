@@ -89,6 +89,11 @@ type UseMigrateProjectsParams = {
   data?: OrganizationMultiStepData;
   // Migrating a single project callback from the project dashboard
   onSuccess?: () => void;
+  // Optional fee granter address (organization dao) when migrating projects
+  // after organization creation.
+  // It's not set when migrating project from the organization creation flow
+  // since the organization dao doesn't have any funds yet at this point.
+  feeGranter?: string;
 };
 
 export const useMigrateProjects = ({
@@ -96,6 +101,7 @@ export const useMigrateProjects = ({
   handleSaveNext,
   data,
   onSuccess,
+  feeGranter,
 }: UseMigrateProjectsParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -633,6 +639,7 @@ export const useMigrateProjects = ({
           {
             msgs,
             fee: 2,
+            feeGranter,
           },
           undefined,
           {

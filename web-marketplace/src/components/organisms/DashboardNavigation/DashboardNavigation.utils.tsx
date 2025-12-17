@@ -184,7 +184,6 @@ export function getDashboardNavigationSections(
   if (!loginDisabled || hasProjects) {
     sections.push(getProjectsSection(_, collapsed));
   }
-
   if (isIssuer || showCreditClasses || hasCreditBatches) {
     const issuance = getCreditIssuanceSection(_, collapsed);
     issuance.items = issuance.items.filter(item => {

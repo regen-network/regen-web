@@ -277,7 +277,11 @@ export const Dashboard = () => {
 
   const { batchesWithSupply } = useFetchPaginatedBatches({
     address: dashboardAccountAddress ?? wallet?.address,
+    // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+    // so in case the current user account has not wallet address, we need to disable the fetch
+    forceAddress: true,
   });
+
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const onAccountSelect = (id: string) => {

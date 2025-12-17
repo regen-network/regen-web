@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 export const useMigrateProject = (

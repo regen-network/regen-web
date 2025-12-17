@@ -723,6 +723,7 @@ export const useMigrateProjects = ({
       currentUserRole,
       orgAssignmentsData,
       onSuccess,
+      feeGranter,
     ],
   );
 

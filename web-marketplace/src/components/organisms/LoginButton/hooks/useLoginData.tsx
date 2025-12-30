@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useManager } from '@cosmos-kit/react-lite';
 import { useLingui } from '@lingui/react';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { useRouter } from 'next/navigation';
@@ -22,7 +21,7 @@ export const useLoginData = ({
 }) => {
   const { _ } = useLingui();
   const { wallet, connect } = useWallet();
-  const { walletRepos } = useManager();
+  // const { walletRepos } = useManager();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalState, setModalState] = useState<LoginModalState>('select');
@@ -45,7 +44,6 @@ export const useLoginData = ({
     onModalClose,
     setModalState,
     connect,
-    connectWalletConnect: walletRepos[0]?.connect, // only one walletRepos for regen
   });
 
   const walletsUiConfig = useMemo(

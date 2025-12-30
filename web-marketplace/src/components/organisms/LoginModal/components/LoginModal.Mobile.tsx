@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { State, WalletModalProps, WalletStatus } from '@cosmos-kit/core';
+import { State, WalletModalProps, WalletStatus } from '@interchain-kit/core';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import QRCode from 'qrcode.react';

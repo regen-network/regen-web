@@ -4,13 +4,12 @@ import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import type { StdSignature } from '@cosmjs/launchpad';
 import type { OfflineSigner } from '@cosmjs/proto-signing';
-import { WalletStatus } from '@cosmos-kit/core';
+import { WalletState } from '@interchain-kit/core';
 import {
   useChain,
-  useManager,
-  useWallet as useCosmosKitWallet,
-  useWalletClient,
-} from '@cosmos-kit/react-lite';
+  useChainWallet,
+  useWalletManager,
+} from '@interchain-kit/react';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
@@ -33,7 +32,7 @@ import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
-import { emptySender, KEPLR_MOBILE } from './wallet.constants';
+import { emptySender, WALLET_CONNECT } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
@@ -107,26 +106,20 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const walletConfigRef = useRef<WalletConfig | undefined>();
   const [error, setError] = useState<unknown>(undefined);
   const { track } = useTracker();
-
-  // Connecting via Wallet Connect is handled entirely using @cosmos-kit
-  const [walletConnect, setWalletConnect] = useState<boolean>(false);
-  const { closeView } = useChain('regen', false);
-  const { client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
-  const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
-  const { walletRepos } = useManager();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const address = mainWallet?.getChainWallet('regen')?.address;
-  const walletStatus = walletRepos[0]?.current?.walletStatus;
+  // Connecting via Wallet Connect is handled entirely using @interchain-kit
+  const [walletConnect, setWalletConnect] = useState<boolean>(false);
+  const { closeView } = useChain('regen');
+  const { address, status } = useChainWallet('regen', WALLET_CONNECT);
+  const walletManager = useWalletManager();
 
   useEffect(() => {
-    if (
-      walletStatus === WalletStatus.Connected &&
-      address &&
-      !wallet?.offlineSigner
-    ) {
-      const offlineSigner =
-        walletConnectClient?.getOfflineSignerAmino?.('regen-1');
+    async function getOfflineSigner() {
+      const offlineSigner = await walletManager.getOfflineSigner(
+        WALLET_CONNECT,
+        'regen',
+      );
       if (offlineSigner) {
         closeView();
         setWallet({
@@ -141,14 +134,25 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         });
       }
     }
-  }, [
-    address,
-    walletStatus,
-    walletConnectClient,
-    closeView,
-    wallet?.offlineSigner,
-    track,
-  ]);
+    if (status === WalletState.Connected && address && !wallet?.offlineSigner) {
+      getOfflineSigner();
+      //     const offlineSigner =
+      //       walletConnectClient?.getOfflineSignerAmino?.('regen-1');
+      //     if (offlineSigner) {
+      //       closeView();
+      //       setWallet({
+      //         offlineSigner,
+      //         address,
+      //         shortAddress: truncate(address),
+      //       });
+      //       setWalletConnect(true);
+      //       track<ConnectEvent>('loginWalletConnect', {
+      //         date: new Date().toUTCString(),
+      //         account: address,
+      //       });
+      //     }
+    }
+  }, [address, status, walletManager, closeView, wallet?.offlineSigner, track]);
 
   const signArbitrary = useSignArbitrary({
     setError,

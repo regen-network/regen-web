@@ -1,23 +1,31 @@
 'use client';
 
 // import { useEffect, useState } from 'react';
-// import { useLingui } from '@lingui/react';
-// import { Box } from '@mui/material';
-// import QRCode from 'qrcode.react';
+import { useWalletManager, WalletModalProps } from '@interchain-kit/react';
+import { useLingui } from '@lingui/react';
+import { QRCodeSVG } from 'qrcode.react';
 
-// import { Center } from 'web-components/src/components/box';
-// import { Loading } from 'web-components/src/components/loading';
-// import Modal from 'web-components/src/components/modal';
-// import { Title } from 'web-components/src/components/typography';
+import { Center } from 'web-components/src/components/box';
+import { Loading } from 'web-components/src/components/loading';
+import Modal from 'web-components/src/components/modal';
+import { Title } from 'web-components/src/components/typography';
 
-// import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
+import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
 
 export interface Props {
   qrCodeUri?: string;
 }
 
-const LoginModalMobile = () => {
-  // const { _ } = useLingui();
+const LoginModalMobile = ({
+  isOpen,
+  close,
+}: // wallets,
+// currentWallet,
+WalletModalProps) => {
+  const { _ } = useLingui();
+  const { walletConnectQRCodeUri } = useWalletManager();
+
+  // console.log('walletConnectQRCodeUri', walletConnectQRCodeUri);
   // const onCloseModal = () => {
   //   setOpen(false);
   // };
@@ -54,21 +62,20 @@ const LoginModalMobile = () => {
   // const qrCodeUri = current?.qrUrl?.data;
 
   return (
-    <></>
-    // <Modal open={isOpen} onClose={onCloseModal}>
-    //   <Box sx={{ minHeight: 400 }}>
-    //     <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
-    //       {connecting ? _(CONNECTING_LABEL) : qrCodeUri && _(QR_CODE_LABEL)}
-    //     </Title>
-    //     <Center sx={{ pt: 9, height: 340 }}>
-    //       {connecting ? (
-    //         <Loading />
-    //       ) : (
-    //         qrCodeUri && <QRCode size={300} value={qrCodeUri} />
-    //       )}
-    //     </Center>
-    //   </Box>
-    // </Modal>
+    <Modal open={isOpen} onClose={close}>
+      <div className="min-h-[400px]">
+        <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
+          {walletConnectQRCodeUri ? _(QR_CODE_LABEL) : _(CONNECTING_LABEL)}
+        </Title>
+        <Center sx={{ pt: 9, height: 340 }}>
+          {walletConnectQRCodeUri ? (
+            <QRCodeSVG size={300} value={walletConnectQRCodeUri} />
+          ) : (
+            <Loading />
+          )}
+        </Center>
+      </div>
+    </Modal>
   );
 };
 

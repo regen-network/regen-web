@@ -1,6 +1,6 @@
 'use client';
 import { WCCosmosWallet, WCWallet } from '@interchain-kit/core';
-import { ChainProvider, InterchainWalletModal } from '@interchain-kit/react';
+import { ChainProvider } from '@interchain-kit/react';
 import { assetLists, chains } from 'chain-registry';
 
 import {
@@ -8,7 +8,7 @@ import {
   walletConnectOption,
 } from 'lib/wallet/wallet.constants';
 
-import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
+// import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
 
 const keplrMobile = new WCWallet(walletConnectOption, {
   metadata: walletConnectClientMeta,
@@ -20,7 +20,7 @@ export function ChainWrapper({ children }: React.PropsWithChildren) {
     <ChainProvider
       chains={chains.filter(chain => chain.chainName === 'regen')}
       assetLists={assetLists.filter(chain => chain.chainName === 'regen')}
-      wallets={[walletConnect]}
+      wallets={[keplrMobile]}
       // walletModal={() => <InterchainWalletModal />}
     >
       {children}

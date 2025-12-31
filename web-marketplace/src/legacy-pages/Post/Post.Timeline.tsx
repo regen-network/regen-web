@@ -5,7 +5,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import { Grid } from '@mui/material';
+import { CircularProgress, Grid, Skeleton } from '@mui/material';
 import Image from 'next/image';
 
 import { Loading } from 'web-components/src/components/loading';
@@ -55,66 +55,68 @@ export const PostTimeline = ({
 
   return (
     <Section className="max-w-[750px] m-auto sm:p-0 py-0">
-      <Title variant="h6">{_(TIMELINE)}</Title>
-      {loading ? (
-        <Loading />
-      ) : (
-        <Timeline
-          sx={{
-            padding: 0,
-            [`& .${timelineItemClasses.root}:before`]: {
-              flex: 0,
-              padding: 0,
-            },
-          }}
-        >
-          {events.map((event, index) => {
-            return (
-              <TimelineItem key={event.timestamp}>
-                <TimelineSeparator>
-                  <Image src={event.icon} alt={event.label} />
-                  {index < events.length - 1 && (
-                    <TimelineConnector className="bg-grey-300 w-1 mr-[2px]" />
-                  )}
-                </TimelineSeparator>
+      <div className="flex items-center gap-5">
+        <Title variant="h6">{_(TIMELINE)}</Title>
+        {loading && <CircularProgress size={20} color="secondary" />}
+      </div>
 
-                <TimelineContent className="p-20 pt-0">
-                  <Grid container alignItems="center">
-                    <Grid item>
-                      <Subtitle component="div" className="mr-5">
-                        {event.label}
-                      </Subtitle>
-                    </Grid>
-                    <Grid item>
-                      <UserInfo
-                        size="sm"
-                        user={event.user}
-                        fontFamily={defaultFontFamily}
-                        classNames={{
-                          info: 'ml-3',
-                        }}
-                        nameHasPadding={false}
-                      />
-                    </Grid>
+      <Timeline
+        sx={{
+          padding: 0,
+          [`& .${timelineItemClasses.root}:before`]: {
+            flex: 0,
+            padding: 0,
+          },
+        }}
+      >
+        {events.map((event, index) => {
+          return (
+            <TimelineItem key={event.timestamp}>
+              <TimelineSeparator>
+                <Image src={event.icon} alt={event.label} />
+                {index < events.length - 1 && (
+                  <TimelineConnector className="bg-grey-300 w-1 mr-[2px]" />
+                )}
+              </TimelineSeparator>
+
+              <TimelineContent className="p-20 pt-0">
+                <Grid container alignItems="center">
+                  <Grid item>
+                    <Subtitle component="div" className="mr-5">
+                      {event.label}
+                    </Subtitle>
                   </Grid>
-                  <Body className="text-grey-400 pt-5 pb-10" size="xs">
-                    {event.timestamp}
+                  <Grid item>
+                    <UserInfo
+                      size="sm"
+                      user={event.user}
+                      fontFamily={defaultFontFamily}
+                      classNames={{
+                        info: 'ml-3',
+                      }}
+                      nameHasPadding={false}
+                    />
+                  </Grid>
+                </Grid>
+                <Body className="text-grey-400 pt-5 pb-10" size="xs">
+                  {event.timestamp}
+                </Body>
+                {event.txhash ? (
+                  <Body size="sm">
+                    {_(SEE_BLOCKCHAIN_RECORD)}:{' '}
+                    <LinkWithArrow
+                      href={getHashUrl(event.txhash)}
+                      label={truncate(event.txhash)}
+                    />
                   </Body>
-                  {event.txhash && (
-                    <Body size="sm">
-                      {_(SEE_BLOCKCHAIN_RECORD)}:{' '}
-                      <LinkWithArrow
-                        href={getHashUrl(event.txhash)}
-                        label={truncate(event.txhash)}
-                      />
-                    </Body>
-                  )}
-                </TimelineContent>
-              </TimelineItem>
-            );
-          })}
-        </Timeline>
-      )}
+                ) : loading ? (
+                  <Skeleton className="max-w-[300px]" />
+                ) : null}
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
     </Section>
   );
 };

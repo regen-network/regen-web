@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useWalletManager } from '@interchain-kit/react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -6,7 +7,7 @@ import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { gradients } from 'styles/gradients';
-import '@interchain-kit/react/styles.css';
+
 import { BlockContent } from 'web-components/src/components/block-content';
 import { Loading } from 'web-components/src/components/loading';
 import Modal from 'web-components/src/components/modal';
@@ -35,7 +36,8 @@ import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
-import { useWalletManager } from '@interchain-kit/react';
+
+import '@interchain-kit/react/styles.css';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();

@@ -34,6 +34,7 @@ import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { emptySender, WALLET_CONNECT } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
+import { wrapSigner } from './wallet.utils';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
 export interface Wallet {
@@ -120,10 +121,12 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         WALLET_CONNECT,
         'regen',
       );
+      // Wrap the signer to add compatibility with CosmJS methods
+      const wrappedSigner = wrapSigner(offlineSigner);
       if (offlineSigner) {
         closeView();
         setWallet({
-          offlineSigner,
+          offlineSigner: wrappedSigner,
           address,
           shortAddress: truncate(address),
         });
@@ -136,21 +139,6 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     }
     if (status === WalletState.Connected && address && !wallet?.offlineSigner) {
       getOfflineSigner();
-      //     const offlineSigner =
-      //       walletConnectClient?.getOfflineSignerAmino?.('regen-1');
-      //     if (offlineSigner) {
-      //       closeView();
-      //       setWallet({
-      //         offlineSigner,
-      //         address,
-      //         shortAddress: truncate(address),
-      //       });
-      //       setWalletConnect(true);
-      //       track<ConnectEvent>('loginWalletConnect', {
-      //         date: new Date().toUTCString(),
-      //         account: address,
-      //       });
-      //     }
     }
   }, [address, status, walletManager, closeView, wallet?.offlineSigner, track]);
 

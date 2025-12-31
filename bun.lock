@@ -128,7 +128,6 @@
         "@google-cloud/translate": "^8.5.0",
         "@hookform/resolvers": "^5.0.1",
         "@interchain-kit/core": "^0.7.0",
-        "@interchain-kit/keplr-mobile": "^0.7.0",
         "@interchain-kit/react": "^0.7.0",
         "@keplr-wallet/provider": "^0.11.10",
         "@keplr-wallet/stores": "^0.11.10",
@@ -1073,8 +1072,6 @@
     "@inquirer/external-editor": ["@inquirer/external-editor@1.0.3", "", { "dependencies": { "chardet": "^2.1.1", "iconv-lite": "^0.7.0" }, "peerDependencies": { "@types/node": ">=18" }, "optionalPeers": ["@types/node"] }, "sha512-RWbSrDiYmO4LbejWY7ttpxczuwQyZLBUyygsA9Nsv95hpzUWwnNTVQmAq3xuh7vNwCp07UTmE5i11XAEExx4RA=="],
 
     "@interchain-kit/core": ["@interchain-kit/core@0.7.0", "", { "dependencies": { "@chain-registry/keplr": "^2.0.1", "@chain-registry/types": "^2.0.1", "@interchainjs/cosmos": "1.17.3", "@interchainjs/cosmos-types": "1.17.3", "@interchainjs/types": "1.17.3", "@ledgerhq/hw-app-cosmos": "^6.30.4", "@ledgerhq/hw-transport": "^6.31.4", "@ledgerhq/hw-transport-webhid": "^6.30.0", "@ledgerhq/hw-transport-webusb": "^6.29.4", "@solana/web3.js": "^1.98.4", "@walletconnect/sign-client": "^2.19.1", "@walletconnect/types": "^2.19.1", "@walletconnect/universal-provider": "^2.19.1", "base64-js": "^1.5.1", "bowser": "^2.11.0", "bs58": "^6.0.0", "buffer": "^6.0.3", "chain-registry": "^2.0.1", "interchainjs": "1.17.3", "long": "^5.2.3", "pino-pretty": "^7.6.0" } }, "sha512-7Oza+59DLTyhyDzijNyki9aSrgcq+zVsOSz/vFUqzF7ObZGjb6n5DsgDNDi0ZcL3Ta4S3yQCBYESLvqmJDRlEw=="],
-
-    "@interchain-kit/keplr-mobile": ["@interchain-kit/keplr-mobile@0.7.0", "", { "dependencies": { "@interchain-kit/core": "^0.7.0" } }, "sha512-HiDw74Yk9YxMUbdLVlSVJ+HW7Nr1eu9nyu5NV2V9Edjz81lRNcRB/KOucc5hxVKT0JUqbErjES6cRSFnxL1iXw=="],
 
     "@interchain-kit/react": ["@interchain-kit/react@0.7.1", "", { "dependencies": { "@chain-registry/types": "^2.0.1", "@interchain-kit/core": "^0.7.0", "@interchain-kit/store": "^0.6.1", "@interchain-ui/react": "^1.26.3", "@interchainjs/cosmos": "1.17.3", "@interchainjs/cosmos-types": "1.17.3", "@interchainjs/types": "1.17.3", "@react-icons/all-files": "^4.1.0", "@walletconnect/types": "^2.17.3", "interchainjs": "1.17.3", "jest-transform-stub": "^2.0.0", "postcss": "^8.5.6", "postcss-cli": "^11.0.1", "postcss-import": "^16.1.1", "zustand": "^5.0.3" }, "peerDependencies": { "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "react": "^19.0.0", "react-dom": "^19.0.0" } }, "sha512-G4NBdUelEb5M9qanm2DjOa4KkfGMsqYSu8RjTK93rEWmfPr5qN+vVhoA5DwgUVkZnpIDO85uI+Fy6joG9v6RAg=="],
 

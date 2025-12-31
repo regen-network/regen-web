@@ -38,8 +38,8 @@ export const useConnectToWallet = ({
       }
       if (walletType === WalletType.WalletConnectKeplr) {
         onModalClose();
-        // openView();
-        connectWalletConnect();
+        openView();
+        await connectWalletConnect();
       }
     },
     [connect, connectWalletConnect, isConnectingRef, onModalClose, openView],

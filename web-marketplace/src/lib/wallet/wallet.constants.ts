@@ -78,39 +78,4 @@ export const walletConnectOption: Wallet = {
   },
 };
 
-export const keplrExtensionInfo: Wallet = {
-  windowKey: 'keplr',
-  cosmosKey: 'keplr',
-  ethereumKey: 'keplr.ethereum',
-  walletIdentifyKey: 'keplr.ethereum.isKeplr',
-  name: WALLET_CONNECT,
-  prettyName: 'Keplr',
-  mode: 'extension',
-  // logo: ICON,
-  keystoreChange: 'keplr_keystorechange',
-  downloads: [
-    {
-      device: 'desktop',
-      browser: 'chrome',
-      link: 'https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap?hl=en',
-    },
-    {
-      device: 'desktop',
-      browser: 'firefox',
-      link: 'https://addons.mozilla.org/en-US/firefox/addon/keplr/',
-    },
-    {
-      link: 'https://www.keplr.app/download',
-    },
-  ],
-  walletconnect: {
-    name: 'Keplr',
-    projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
-  },
-  walletConnectLink: {
-    android: `intent://wcV2?{wc-uri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`,
-    ios: `keplrwallet://wcV2?{wc-uri}`,
-  },
-};
-
 export const emptySender = { address: '', shortAddress: '' };

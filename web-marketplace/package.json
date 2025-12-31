@@ -17,7 +17,6 @@
     "@google-cloud/translate": "^8.5.0",
     "@hookform/resolvers": "^5.0.1",
     "@interchain-kit/core": "^0.7.0",
-    "@interchain-kit/keplr-mobile": "^0.7.0",
     "@interchain-kit/react": "^0.7.0",
     "@keplr-wallet/provider": "^0.11.10",
     "@keplr-wallet/stores": "^0.11.10",

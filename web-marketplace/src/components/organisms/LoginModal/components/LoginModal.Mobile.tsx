@@ -15,6 +15,7 @@ import Modal from 'web-components/src/components/modal';
 import { Title } from 'web-components/src/components/typography';
 
 import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
+import { useCallback } from 'react';
 
 export interface Props {
   qrCodeUri?: string;
@@ -24,7 +25,19 @@ const LoginModalMobile = ({ isOpen, close }: WalletModalProps) => {
   const { _ } = useLingui();
   const { walletConnectQRCodeUri } = useWalletManager();
 
-  const showQrCode = Boolean(walletConnectQRCodeUri) && !isMobile();
+  const showQrCode = !isMobile();
+
+  const openKeplrMobile = useCallback(() => {
+    let wcUrl: string | undefined = '';
+    const encodedUri = encodeURIComponent(walletConnectQRCodeUri);
+    if (isAndroid()) {
+      wcUrl = `intent://wcV2?${encodedUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
+    }
+    if (isIOS()) {
+      wcUrl = `keplrwallet://wcV2?${encodedUri}`;
+    }
+    window.open(wcUrl, '_self');
+  }, [walletConnectQRCodeUri]);
 
   return (
     <Modal open={isOpen} onClose={close}>
@@ -34,30 +47,17 @@ const LoginModalMobile = ({ isOpen, close }: WalletModalProps) => {
         </Title>
         <Center sx={{ pt: 9, height: 340 }}>
           {showQrCode ? (
-            <QRCodeSVG size={300} value={walletConnectQRCodeUri} />
-          ) : (
-            <>
+            walletConnectQRCodeUri ? (
+              <QRCodeSVG size={300} value={walletConnectQRCodeUri} />
+            ) : (
               <Loading />
-              {walletConnectQRCodeUri && (
-                <OutlinedButton
-                  onClick={() => {
-                    let wcUrl: string | undefined = '';
-                    const encodedUri = encodeURIComponent(
-                      walletConnectQRCodeUri,
-                    );
-                    if (isAndroid()) {
-                      wcUrl = `intent://wcV2?${encodedUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
-                    }
-                    if (isIOS()) {
-                      wcUrl = `keplrwallet://wcV2?${encodedUri}`;
-                    }
-                    window.open(wcUrl, '_self');
-                  }}
-                >
-                  <Trans>Open Keplr Mobile</Trans>
-                </OutlinedButton>
-              )}
-            </>
+            )
+          ) : walletConnectQRCodeUri ? (
+            <OutlinedButton onClick={openKeplrMobile}>
+              <Trans>Click to open Keplr Mobile</Trans>
+            </OutlinedButton>
+          ) : (
+            <Loading />
           )}
         </Center>
       </div>

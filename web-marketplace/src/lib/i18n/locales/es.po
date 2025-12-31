@@ -1057,7 +1057,7 @@ msgstr "Puede ver todas las publicaciones, documentos y datos de ubicación, inc
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:122
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:16
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:9
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:10
 msgid "cancel"
 msgstr "Cancelar"
 
@@ -1257,6 +1257,10 @@ msgstr "Limpiar todo"
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
+#: src/components/organisms/LoginModal/components/LoginModal.Mobile.tsx:57
+msgid "Click to open Keplr Mobile"
+msgstr "Haga clic para abrir Keplr Mobile"
+
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:236
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:246
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:397
@@ -1366,7 +1370,7 @@ msgstr "conectar"
 msgid "CONNECT"
 msgstr "CONECTAR"
 
-#: src/legacy-pages/Home/Home.tsx:124
+#: src/legacy-pages/Home/Home.tsx:128
 msgid "Connect <0>Capital</0> to <1>Ecological</1> Outcomes"
 msgstr "Conectar el <0>capital</0> con los resultados <1>ecológicos</1>"
 
@@ -1648,7 +1652,7 @@ msgid "Credit classes"
 msgstr "Clases de crédito"
 
 #: src/components/layout/Layout.Footer.tsx:33
-#: src/legacy-pages/Home/Home.tsx:178
+#: src/legacy-pages/Home/Home.tsx:182
 #: src/legacy-pages/Profile/Profile.tsx:124
 msgid "Credit Classes"
 msgstr "Clases de crédito"
@@ -1974,7 +1978,7 @@ msgstr "DESCUBRE PROYECTOS"
 msgid "Does your project include grasslands?"
 msgstr "¿Su proyecto incluye pastizales?"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:6
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:7
 msgid "Don’t see anything?"
 msgstr "¿No ves nada?"
 
@@ -2355,7 +2359,7 @@ msgstr "No se pudo inicializar el cliente de firma"
 msgid "Failed to request funds"
 msgstr "No se pudo solicitar fondos"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:14
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:15
 msgid "Failed to resend passcode"
 msgstr "No se pudo reenviar la contraseña"
 
@@ -2372,7 +2376,7 @@ msgstr "No se pudo validar el token"
 msgid "Featured projects"
 msgstr "Proyectos destacados"
 
-#: src/legacy-pages/Home/Home.tsx:170
+#: src/legacy-pages/Home/Home.tsx:174
 msgid "Featured Projects"
 msgstr "Proyectos destacados"
 
@@ -2663,7 +2667,7 @@ msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una 
 msgid "Includes escrowed credits."
 msgstr "Incluye créditos en depósito."
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:13
 msgid "Incorrect code! Double-check the code and try again."
 msgstr "¡Código incorrecto! Verifique el código nuevamente e intente nuevamente."
 
@@ -2786,7 +2790,7 @@ msgstr "Únete a la comunidad"
 msgid "Jurisdiction"
 msgstr "Jurisdicción"
 
-#: src/components/organisms/LoginButton/LoginButton.config.ts:23
+#: src/components/organisms/LoginButton/LoginButton.config.ts:24
 msgid "Keplr Chrome Extension"
 msgstr "Extensión Keplr para Chrome"
 
@@ -2844,7 +2848,7 @@ msgstr "Más información"
 
 #: src/components/layout/Layout.ConnectedEmailErrorModal.tsx:58
 #: src/components/layout/Layout.Footer.tsx:61
-#: src/legacy-pages/Home/Home.tsx:197
+#: src/legacy-pages/Home/Home.tsx:201
 msgid "Learn More"
 msgstr "Más información"
 
@@ -2926,8 +2930,7 @@ msgstr "Lugar de retiro"
 msgid "Locations are private"
 msgstr "Las ubicaciones son privadas"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:10
-#: src/components/organisms/LoginButton/LoginButton.legacy.tsx:79
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
 #: src/components/organisms/LoginButton/LoginButton.tsx:79
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:103
 msgid "log in"
@@ -3289,7 +3292,7 @@ msgstr "Casi amenazado"
 msgid "New admin address"
 msgstr "Nueva dirección de administrador"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:7
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:8
 msgid "New confirmation code sent"
 msgstr "Nuevo código de confirmación enviado"
 
@@ -4363,7 +4366,7 @@ msgstr "Requerido con código postal"
 msgid "Resend after {resendTimeLeft} seconds."
 msgstr "Reenviar después de {resendTimeLeft} segundos."
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:8
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "Resend email."
 msgstr "Reenviar correo electrónico."
 
@@ -4736,7 +4739,7 @@ msgstr "Mostrar proyectos fuera de la cadena"
 msgid "sign"
 msgstr "firmar"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Sign in successful"
 msgstr "Inicio de sesión exitoso"
 
@@ -5171,7 +5174,7 @@ msgstr "Este certificado aún no se ha generado porque la transferencia de créd
 msgid "This change will only be made after you save the change and sign the transaction."
 msgstr "Este cambio solo se realizará después de guardar el cambio y firmar la transacción."
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:13
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:14
 msgid "This code has expired!"
 msgstr "¡Este código ha expirado!"
 

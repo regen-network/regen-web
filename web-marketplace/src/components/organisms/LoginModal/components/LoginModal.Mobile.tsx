@@ -1,6 +1,7 @@
 'use client';
 
 // import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { isAndroid, isIOS } from '@interchain-kit/core';
 import { useWalletManager, WalletModalProps } from '@interchain-kit/react';
 import { useLingui } from '@lingui/react';
@@ -15,7 +16,6 @@ import Modal from 'web-components/src/components/modal';
 import { Title } from 'web-components/src/components/typography';
 
 import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
-import { useCallback } from 'react';
 
 export interface Props {
   qrCodeUri?: string;

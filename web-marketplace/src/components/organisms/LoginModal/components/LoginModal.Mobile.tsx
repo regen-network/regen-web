@@ -11,6 +11,7 @@ import Modal from 'web-components/src/components/modal';
 import { Title } from 'web-components/src/components/typography';
 
 import { CONNECTING_LABEL, QR_CODE_LABEL } from './LoginModal.Mobile.constants';
+import { isMobile } from '@walletconnect/utils';
 
 export interface Props {
   qrCodeUri?: string;
@@ -60,15 +61,16 @@ WalletModalProps) => {
   // }, [qrState, walletStatus, qrMsg, message, isOpen]);
 
   // const qrCodeUri = current?.qrUrl?.data;
+  const showQrCode = Boolean(walletConnectQRCodeUri) && !isMobile();
 
   return (
     <Modal open={isOpen} onClose={close}>
       <div className="min-h-[400px]">
         <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
-          {walletConnectQRCodeUri ? _(QR_CODE_LABEL) : _(CONNECTING_LABEL)}
+          {showQrCode ? _(QR_CODE_LABEL) : _(CONNECTING_LABEL)}
         </Title>
         <Center sx={{ pt: 9, height: 340 }}>
-          {walletConnectQRCodeUri ? (
+          {showQrCode ? (
             <QRCodeSVG size={300} value={walletConnectQRCodeUri} />
           ) : (
             <Loading />

@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { gradients } from 'styles/gradients';
-
+import '@interchain-kit/react/styles.css';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { Loading } from 'web-components/src/components/loading';
 import Modal from 'web-components/src/components/modal';
@@ -35,6 +35,7 @@ import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
+import { useWalletManager } from '@interchain-kit/react';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
@@ -42,6 +43,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [modalLink, setModalLink] = useState<string>('');
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { isKeplrMobileWeb } = useWallet();
+  const { walletConnectQRCodeUri } = useWalletManager();
 
   const { classes } = useHomeStyles();
 

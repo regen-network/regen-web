@@ -1,29 +1,44 @@
 'use client';
-import { WCCosmosWallet, WCWallet } from '@interchain-kit/core';
+import {
+  ExtensionWallet,
+  selectWalletByPlatform,
+  WCCosmosWallet,
+  WCWallet,
+  CosmosWallet,
+  isMobile,
+  WCMobileWebWallet,
+} from '@interchain-kit/core';
 import { ChainProvider, InterchainWalletModal } from '@interchain-kit/react';
 import { assetLists, chains } from 'chain-registry';
 
 import {
   walletConnectClientMeta,
   walletConnectOption,
+  keplrExtensionInfo,
 } from 'lib/wallet/wallet.constants';
 
 import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
+// import { WCMobileWebWallet } from 'lib/wallet/wc-mobile-web-wallet';
 
-const keplrMobile = new WCWallet(walletConnectOption, {
+const desktopWalletConnect = new WCWallet(walletConnectOption, {
   metadata: walletConnectClientMeta,
 });
-keplrMobile.setNetworkWallet('cosmos', new WCCosmosWallet());
+desktopWalletConnect.setNetworkWallet('cosmos', new WCCosmosWallet());
+
+const mobileWalletConnect = new WCMobileWebWallet(keplrExtensionInfo, {
+  metadata: walletConnectClientMeta,
+});
 
 export function ChainWrapper({ children }: React.PropsWithChildren) {
   return (
     <ChainProvider
       chains={chains.filter(chain => chain.chainName === 'regen')}
       assetLists={assetLists.filter(chain => chain.chainName === 'regen')}
-      wallets={[keplrMobile]}
-      walletModal={props => <LoginModalMobile {...props} />}
+      wallets={[isMobile() ? mobileWalletConnect : desktopWalletConnect]}
+      // walletModal={props => <LoginModalMobile {...props} />}
     >
       {children}
+      <InterchainWalletModal />
     </ChainProvider>
   );
 }

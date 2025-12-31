@@ -5,6 +5,7 @@ import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { MsgAnchor } from '@regen-network/api/regen/data/v2/tx';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { matchesIri } from 'legacy-pages/Post/hooks/useAttestEvents.utils';
 import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
@@ -51,7 +52,7 @@ export const useFetchMsgAnchor = ({
       client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchor.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
         limit: 1n,
         page: 1n,
@@ -71,8 +72,9 @@ export const useFetchMsgAnchor = ({
 
       while (i < 10 && txResponses && txResponses.length === 0) {
         const { data } = await refetch();
+
         txResponses = data?.txResponses?.filter(txRes =>
-          txRes.rawLog.includes(iri),
+          matchesIri(txRes, iri),
         );
         i++;
         if (txResponses && txResponses.length === 1) {

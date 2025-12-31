@@ -15,7 +15,6 @@ import unhappyBee from '../../public/png/unhappy-bee.png';
 
 export default function Error({ error }: { error: Error }) {
   const { _ } = useLingui();
-
   const normalizedError = normalizeError(error);
 
   return (

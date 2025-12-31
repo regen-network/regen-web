@@ -27,7 +27,7 @@ export const useUpdateCardItemsTakeBasket = ({
   const [cardItemsTakeDone, setCardItemsTakeDone] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!cardItems || !deliverTxResponse || !deliverTxResponse.rawLog) return;
+    if (!cardItems || !deliverTxResponse) return;
     if (cardItemsTakeDone) return;
 
     const batchesFromTake = takeEventToBatches(deliverTxResponse);

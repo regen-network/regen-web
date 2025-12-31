@@ -8,7 +8,7 @@ import { i18n } from '@lingui/core';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import uniq from 'lodash/uniq';
-import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 
 import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
@@ -17,7 +17,7 @@ import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
-import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
+import { getDenomByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomByHashesQuery/getDenomByHashesQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getPaymentIntentQuery } from 'lib/queries/react-query/registry-server/getPaymentIntentQuery/getPaymentIntentQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -177,8 +177,8 @@ export const useOrders = () => {
       .map(order => order?.askDenom?.replace(IBC_DENOM_PREFIX, '')),
   );
 
-  const { data: denomTracesData, isLoading: isDenomTracesLoading } = useQuery(
-    getDenomTraceByHashesQuery({
+  const { data: denomsData, isLoading: isDenomsLoading } = useQuery(
+    getDenomByHashesQuery({
       enabled: !!queryClient,
       hashes: ibcDenomHashes.filter(Boolean) as string[],
       queryClient: queryClient as QueryClient,
@@ -196,16 +196,15 @@ export const useOrders = () => {
     offChainProjectsLoading ||
     onChainProjectsLoading ||
     metadataLoading ||
-    isDenomTracesLoading;
+    isDenomsLoading;
 
   const orders = useMemo(
     () =>
       sortedOrders.map((order, i) => {
-        const denomTrace = denomTracesData?.find(denomTrace =>
-          order?.askDenom?.includes(denomTrace.hash),
+        const denom = denomsData?.find(denom =>
+          order?.askDenom?.includes(denom.hash),
         );
-        const askBaseDenom =
-          (denomTrace ? denomTrace.baseDenom : order?.askDenom) ?? '';
+        const askBaseDenom = (denom ? denom.base : order?.askDenom) ?? '';
         const retirement =
           retirementResults[i]?.data?.data?.allRetirements?.nodes?.[0];
         const formattedDate = i18n.date(order?.timestamp, {
@@ -255,7 +254,7 @@ export const useOrders = () => {
         };
       }),
     [
-      denomTracesData,
+      denomsData,
       normalizedOnChainProjects,
       offChainProjects,
       projectsMetadata,

@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
-import { getDenomtrace } from 'utils/ibc/getDenomTrace';
+import { getBaseDenom } from 'utils/ibc/getBaseDenom';
 import {
   cancelSellOrderAction,
   getRoleAuthorizationIds,
@@ -139,7 +139,7 @@ const useCancelSellOrderSubmit = ({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
 
-      const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
+      const baseDenom = await getBaseDenom({ denom: askDenom, queryClient });
 
       const projectId =
         selectedSellOrder.project?.id ??

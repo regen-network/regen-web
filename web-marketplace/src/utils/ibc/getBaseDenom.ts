@@ -1,5 +1,5 @@
 import { QueryClient } from 'ledger';
-import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
+import { queryDenomByHashes } from 'lib/ibc/transfer/api';
 
 export const IBC_DENOM_PREFIX = 'ibc/';
 
@@ -8,7 +8,7 @@ type Params = {
   queryClient?: QueryClient;
 };
 
-export const getDenomtrace = async ({
+export const getBaseDenom = async ({
   denom,
   queryClient,
 }: Params): Promise<string> => {
@@ -16,11 +16,11 @@ export const getDenomtrace = async ({
 
   if (denom.includes(IBC_DENOM_PREFIX) && queryClient) {
     const ibcDenomhash = denom.replace(IBC_DENOM_PREFIX, '');
-    const denomTrace = await queryDenomTraceByHashes({
+    const denomByHash = await queryDenomByHashes({
       hashes: [ibcDenomhash],
       queryClient,
     });
-    baseDenom = denomTrace[0]?.baseDenom;
+    baseDenom = denomByHash[0]?.base;
   }
 
   return baseDenom;

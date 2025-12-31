@@ -6,7 +6,6 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import {
   MsgAnchor as MsgAnchorV1,
@@ -45,6 +44,7 @@ import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/regist
 import postCreated from '../../../../public/svg/post-created.svg';
 import postSigned from '../../../../public/svg/post-signed.svg';
 import { ADMIN, REGISTRY } from '../Post.constants';
+import { matchesIri } from './useAttestEvents.utils';
 
 type Event = {
   icon: string | StaticImageData;
@@ -87,7 +87,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchorV1.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchorV1.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -101,7 +101,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchorV2.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchorV2.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -115,7 +115,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'${MsgAttestV1.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAttestV1.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -129,7 +129,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'${MsgAttestV2.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAttestV2.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -140,7 +140,7 @@ export const useAttestEvents = ({
       [
         ...(anchorV1TxsEventData?.txResponses ?? []),
         ...(anchorV2TxsEventData?.txResponses ?? []),
-      ].filter(txRes => iri && txRes.rawLog.includes(iri))?.[0],
+      ].filter(txRes => iri && matchesIri(txRes, iri))?.[0],
     [anchorV1TxsEventData, anchorV2TxsEventData, iri],
   );
 
@@ -149,7 +149,7 @@ export const useAttestEvents = ({
       [
         ...(attestV1TxsEventData?.txResponses ?? []),
         ...(attestV2TxsEventData?.txResponses ?? []),
-      ].filter(txRes => iri && txRes.rawLog.includes(iri)),
+      ].filter(txRes => iri && matchesIri(txRes, iri)),
 
     [attestV1TxsEventData, attestV2TxsEventData, iri],
   );
@@ -159,22 +159,19 @@ export const useAttestEvents = ({
       ({ txResponses = [] }: GetTxsEventQueryResponse): boolean => {
         if (!iri) return false;
 
-        const matchesIri = (txRes: TxResponse) =>
-          !!txRes.rawLog && txRes.rawLog.includes(iri);
-
         const hasAnchorEvent =
           onlyAttestEvents ||
           !!anchorTxFromAnchorMsg ||
           txResponses.some(
             txRes =>
-              matchesIri(txRes) &&
+              matchesIri(txRes, iri) &&
               txRes.events?.some(event =>
                 EventAnchor.typeUrl.includes(event.type),
               ),
           );
         const hasAttestEvent = txResponses.some(
           txRes =>
-            matchesIri(txRes) &&
+            matchesIri(txRes, iri) &&
             txRes.events?.some(event =>
               EventAttest.typeUrl.includes(event.type),
             ),
@@ -201,7 +198,7 @@ export const useAttestEvents = ({
         !isLoadingAttestV1TxsEventData &&
         !isLoadingAttestV2TxsEventData,
       request: {
-        events: [`${messageActionEquals}'${MsgExecuteContract.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
       stopCondition: iri ? shouldStopMsgExecuteContractQuery() : undefined,
@@ -214,7 +211,7 @@ export const useAttestEvents = ({
   const msgExecuteContractTxsEventDataResponses = useMemo(
     () =>
       msgExecuteContractTxsEventData?.txResponses.filter(
-        txRes => iri && txRes.rawLog.includes(iri),
+        txRes => iri && matchesIri(txRes, iri),
       ),
     [msgExecuteContractTxsEventData, iri],
   );
@@ -243,7 +240,7 @@ export const useAttestEvents = ({
         ...(attestTxsFromAttestMsg ?? []),
         ...attestMsgExecuteContractTxsEventData,
       ]?.map(txRes => {
-        const events = txRes.logs[0].events.filter(event => {
+        const events = txRes.events.filter(event => {
           return EventAttest.typeUrl.includes(event.type);
         });
         const attestors = events.map(event => {

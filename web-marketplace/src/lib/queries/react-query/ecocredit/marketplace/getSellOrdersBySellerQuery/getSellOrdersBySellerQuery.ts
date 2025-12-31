@@ -9,12 +9,12 @@ import {
   QueryObserverOptions,
 } from '@tanstack/react-query';
 import uniq from 'lodash/uniq';
-import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 
 import { QueryClient } from 'ledger';
 
 import { getSimplePriceQuery } from '../../../coingecko/simplePrice/simplePriceQuery';
-import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
+import { getDenomByHashesQuery } from '../../../ibc/transfer/getDenomByHashesQuery/getDenomByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
 import { SellOrderInfoExtented } from '../getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 import {
@@ -107,8 +107,8 @@ export function getSellOrdersBySellerQuery(queryConfig: {
           .map(order => order.askDenom.replace(IBC_DENOM_PREFIX, '')),
       );
 
-      const denomTraces = await getFromCacheOrFetch({
-        query: getDenomTraceByHashesQuery({
+      const denoms = await getFromCacheOrFetch({
+        query: getDenomByHashesQuery({
           hashes: ibcDenomHashes,
           queryClient: client,
         }),
@@ -122,8 +122,8 @@ export function getSellOrdersBySellerQuery(queryConfig: {
 
       // Sell orders with base denom and askAmount
       return sellOrders.map(order => {
-        const trace = denomTraces?.find(x => order.askDenom.includes(x.hash));
-        const askBaseDenom = trace ? trace.baseDenom : order.askDenom;
+        const denom = denoms?.find(x => order.askDenom.includes(x.hash));
+        const askBaseDenom = denom ? denom.base : order.askDenom;
         const askUsdAmount = getAskUsdAmount({
           askAmount: order.askAmount,
           askBaseDenom,

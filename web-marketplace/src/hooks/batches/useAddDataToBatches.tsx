@@ -49,12 +49,11 @@ export const useAddDataToBatches = ({
         client,
         enabled: !!client,
         request: {
-          events: [
-            `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-          ],
+          query: `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
         },
       }),
     );
+
   const {
     data: createBatchAlphaTxs,
     isFetching: isLoadingCreateBatchAlphaTxs,
@@ -63,9 +62,7 @@ export const useAddDataToBatches = ({
       client,
       enabled: !!client,
       request: {
-        events: [
-          `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
-        ],
+        query: `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
       },
     }),
   );

@@ -15,6 +15,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useSetAtom } from 'jotai';
 import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
+import { matchesIri } from 'legacy-pages/Post/hooks/useAttestEvents.utils';
 import {
   attestAction,
   getAccountAssignment,
@@ -76,7 +77,7 @@ export const useSign = ({
       client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        query: `${messageActionEquals}'${MsgAnchor.typeUrl}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
         page: 1n,
         limit: 1n,
@@ -132,8 +133,8 @@ export const useSign = ({
   const fetchAnchorTxHash = useCallback(
     async ({ iri }: { iri: string }) => {
       const { data: anchorTxsData } = await refetch();
-      const txResponses = anchorTxsData?.txResponses?.filter(
-        txRes => iri && txRes.rawLog.includes(iri),
+      const txResponses = anchorTxsData?.txResponses?.filter(txRes =>
+        matchesIri(txRes, iri),
       );
       return txResponses?.[0]?.txhash;
     },
@@ -205,7 +206,7 @@ export const useSign = ({
               await reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
                   request: {
-                    events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
+                    query: `${messageActionEquals}'${MsgAttest.typeUrl}'`,
                     orderBy: OrderBy.ORDER_BY_DESC,
                   },
                 }),
@@ -214,9 +215,7 @@ export const useSign = ({
               void reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
                   request: {
-                    events: [
-                      `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
-                    ],
+                    query: `${messageActionEquals}'${MsgExecuteContract.typeUrl}'`,
                     orderBy: OrderBy.ORDER_BY_DESC,
                   },
                 }),

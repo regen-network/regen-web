@@ -292,9 +292,18 @@ const getClassProjectForBatch = async ({
 
 export const getTxHashForBatch = (
   txResponses: TxResponse[],
-  log: string,
+  batchDenom: string,
 ): string | undefined => {
-  const match = txResponses?.find(tx => tx.rawLog.includes(log));
+  const match = txResponses?.find(tx =>
+    tx.events?.some(
+      event =>
+        event.type.includes('.EventCreateBatch') &&
+        event.attributes?.some(
+          attr =>
+            attr.key === 'batch_denom' && attr.value === `"${batchDenom}"`,
+        ),
+    ),
+  );
   return match?.txhash;
 };
 

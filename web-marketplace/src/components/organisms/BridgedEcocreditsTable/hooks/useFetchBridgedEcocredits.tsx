@@ -73,10 +73,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [
-          `${messageActionEquals}'${MsgBridge.typeUrl}'`,
-          `message.sender='${address}'`,
-        ],
+        query: `${messageActionEquals}'${MsgBridge.typeUrl}' AND message.sender='${address}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),

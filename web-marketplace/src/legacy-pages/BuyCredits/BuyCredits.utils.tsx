@@ -14,7 +14,7 @@ import {
 } from 'config/allowedBaseDenoms';
 import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { postData } from 'utils/fetch/postData';
-import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 
 import { getFormattedNumber } from 'web-components/src/utils/format';
 import { truncate } from 'web-components/src/utils/truncate';

@@ -1,18 +1,18 @@
-import { QueryDenomTraceResponse } from '@regen-network/api/ibc/applications/transfer/v1/query';
-import { DenomTrace } from '@regen-network/api/ibc/applications/transfer/v1/transfer';
+import { QueryDenomResponse } from '@regen-network/api/ibc/applications/transfer/v1/query';
+import { Denom } from '@regen-network/api/ibc/applications/transfer/v1/token';
 
 import { QueryClient } from 'ledger';
 
-type QueryDenomTraceByHashParams = {
+type QueryDenomByHashParams = {
   queryClient: QueryClient;
   hash: string;
 };
-export const queryDenomTrace = async ({
+export const queryDenom = async ({
   hash,
   queryClient,
-}: QueryDenomTraceByHashParams): Promise<QueryDenomTraceResponse> => {
+}: QueryDenomByHashParams): Promise<QueryDenomResponse> => {
   try {
-    return queryClient.ibc.applications.transfer.v1.denomTrace({ hash });
+    return queryClient.ibc.applications.transfer.v1.denom({ hash });
   } catch (err) {
     throw new Error(
       // eslint-disable-next-line lingui/no-unlocalized-strings
@@ -21,25 +21,25 @@ export const queryDenomTrace = async ({
   }
 };
 
-export type QueryDenomTraceByHashesParams = {
+export type QueryDenomByHashesParams = {
   queryClient: QueryClient;
   hashes: string[];
 };
-export type DenomTraceWithHash = DenomTrace & { hash: string };
+export type DenomWithHash = Denom & { hash: string };
 
-export const queryDenomTraceByHashes = async ({
+export const queryDenomByHashes = async ({
   queryClient,
   hashes,
-}: QueryDenomTraceByHashesParams): Promise<DenomTraceWithHash[]> => {
-  const denomTraces = await Promise.all(
+}: QueryDenomByHashesParams): Promise<DenomWithHash[]> => {
+  const denoms = await Promise.all(
     hashes.map(async hash => {
-      const { denomTrace } = await queryDenomTrace({ queryClient, hash });
+      const { denom } = await queryDenom({ queryClient, hash });
 
-      return denomTrace ? { ...denomTrace, hash } : undefined;
+      return denom ? { ...denom, hash } : undefined;
     }),
   );
 
-  return denomTraces
+  return denoms
     .flat()
-    .filter((trace): trace is DenomTraceWithHash => trace !== undefined);
+    .filter((trace): trace is DenomWithHash => trace !== undefined);
 };

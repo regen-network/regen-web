@@ -26,7 +26,7 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
       alignItems="center"
       flexDirection="column"
       sx={{
-        mt: 17.5,
+        py: 17.5,
         maxWidth: 560,
         mx: 'auto',
         px: 3.75,

@@ -456,6 +456,7 @@ export const Dashboard = () => {
           {/* Left sidebar navigation */}
           <div className="md:sticky md:top-0 md:h-screen">
             <DashboardNavigation
+              isOrganizationDashboard={isOrganizationDashboard}
               collapsed={collapsed}
               onToggleCollapse={setCollapsed}
               currentPath={section ?? ''}

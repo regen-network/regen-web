@@ -166,7 +166,6 @@ const getOrdersSection = (
 
 export function getDashboardNavigationSections(
   _: TranslatorType,
-  accountType: 'user' | 'org',
   loginDisabled: boolean,
   collapsed = false,
   isIssuer = false,
@@ -176,6 +175,7 @@ export function getDashboardNavigationSections(
   hasOrders = false,
   hasCreditBatches = false,
   canEditOrg = true,
+  isOrganizationDashboard?: boolean,
 ): DashboardNavigationSection[] {
   const sections = [];
   if (hasWalletAddress) {
@@ -197,7 +197,7 @@ export function getDashboardNavigationSections(
     sections.push(getOrdersSection(_, collapsed));
   }
 
-  if (accountType === 'user') {
+  if (!isOrganizationDashboard) {
     sections.push(...getUserSections(_, loginDisabled));
   } else {
     sections.push(getOrgSection(_, collapsed, canEditOrg));

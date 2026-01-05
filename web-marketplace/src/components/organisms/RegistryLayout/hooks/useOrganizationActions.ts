@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
+import { shouldRedirectToCreateOrgAtom } from 'legacy-pages/Dashboard/Dashboard.store';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from 'lib/auth/auth';
@@ -8,7 +9,6 @@ import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { useLoginData } from '../../LoginButton/hooks/useLoginData';
 import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
-import { shouldRedirectToCreateOrgAtom } from 'legacy-pages/Dashboard/Dashboard.store';
 
 export const useOrganizationActions = () => {
   const { activeAccount, privActiveAccount } = useAuth();

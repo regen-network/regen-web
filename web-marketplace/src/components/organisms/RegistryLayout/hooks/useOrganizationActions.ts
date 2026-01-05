@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from 'lib/auth/auth';
@@ -7,6 +8,7 @@ import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { useLoginData } from '../../LoginButton/hooks/useLoginData';
 import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
+import { shouldRedirectToCreateOrgAtom } from 'legacy-pages/Dashboard/Dashboard.store';
 
 export const useOrganizationActions = () => {
   const { activeAccount, privActiveAccount } = useAuth();
@@ -16,9 +18,9 @@ export const useOrganizationActions = () => {
 
   const [isConnectWalletModalOpen, setIsConnectWalletModalOpen] =
     useState(false);
-  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] =
-    useState(false);
-  const [, setError] = useState<unknown>();
+  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] = useAtom(
+    shouldRedirectToCreateOrgAtom,
+  );
 
   const {
     menuOrganizationProfile,
@@ -38,7 +40,13 @@ export const useOrganizationActions = () => {
     } else if (isConnected) {
       router.push('/organizations/create');
     }
-  }, [router, privActiveAccount, isConnected, onButtonClick]);
+  }, [
+    router,
+    privActiveAccount,
+    isConnected,
+    onButtonClick,
+    setShouldRedirectToCreateOrg,
+  ]);
 
   const finishOrgCreation = useCallback(() => {
     onButtonClick();
@@ -49,25 +57,25 @@ export const useOrganizationActions = () => {
     setIsConnectWalletModalOpen(false);
     setShouldRedirectToCreateOrg(false);
     onModalClose();
-  }, [onModalClose]);
+  }, [onModalClose, setShouldRedirectToCreateOrg]);
 
   const handleWalletConnect = useCallback(() => {
     connect?.({
       walletType: WalletType.Keplr,
-      doLogin: true,
+      doLogin: false,
     });
   }, [connect]);
 
   useEffect(() => {
-    if (shouldRedirectToCreateOrg && isConnected && !isConnectWalletModalOpen) {
+    if (shouldRedirectToCreateOrg && isConnected) {
       setShouldRedirectToCreateOrg(false);
       router.push('/organizations/create');
     }
   }, [
     shouldRedirectToCreateOrg,
     isConnected,
-    isConnectWalletModalOpen,
     router,
+    setShouldRedirectToCreateOrg,
   ]);
 
   return {
@@ -81,6 +89,5 @@ export const useOrganizationActions = () => {
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
-    setError,
   };
 };

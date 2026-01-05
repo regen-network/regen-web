@@ -2,12 +2,11 @@
 
 import { useCallback, useEffect } from 'react';
 import { useLingui } from '@lingui/react';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 
 import { KeplrWalletConnectModal } from 'web-components/src/components/modal/keplr-wallet-connect-modal/KeplrWalletConnectModal';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { connectWalletModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
@@ -31,7 +30,6 @@ export const LayoutConnectWalletModal = (): JSX.Element => {
     connectWalletModalAtom,
   );
 
-  const setError = useSetAtom(errorBannerTextAtom);
   const { loaded, isConnected, connect } = useWallet();
   const { open, onClose } = connectWalletModal;
   const { activeAccount, privActiveAccount } = useAuth();
@@ -85,10 +83,6 @@ export const LayoutConnectWalletModal = (): JSX.Element => {
       )}
       <ConnectWalletFlow
         isConnectModalOpened={!!open}
-        setError={(e: unknown) => {
-          setError(String(e));
-          onCloseModal();
-        }}
         onConnectModalClose={onCloseModal}
       />
     </>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -66,6 +66,7 @@ import {
   PORTFOLIO,
   PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
+import { dashboardConnectWalletFlowAtom } from './Dashboard.store';
 import { DashboardNavAccount } from './Dashboard.types';
 import {
   getActivePortfolioTab,
@@ -89,6 +90,9 @@ export const Dashboard = () => {
   >(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [shouldResumeConnectWalletFlow, setShouldResumeConnectWalletFlow] =
+    useAtom(dashboardConnectWalletFlowAtom);
+
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
@@ -104,8 +108,16 @@ export const Dashboard = () => {
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
-    setError,
   } = useOrganizationActions();
+
+  const markConnectWalletFlowActive = useCallback(() => {
+    setShouldResumeConnectWalletFlow(true);
+  }, [setShouldResumeConnectWalletFlow]);
+
+  const clearConnectWalletFlow = useCallback(() => {
+    setShouldResumeConnectWalletFlow(false);
+  }, [setShouldResumeConnectWalletFlow]);
+
   const isOrganizationDashboard = pathname.startsWith(
     '/dashboard/organization',
   );
@@ -636,21 +648,31 @@ export const Dashboard = () => {
       </NavigationProvider>
       <AccountConnectWalletModal
         open={isConnectWalletModalOpen}
-        onClose={handleConnectWalletModalClose}
+        onClose={() => {
+          clearConnectWalletFlow();
+          handleConnectWalletModalClose();
+        }}
         title={_(CONNECT_TO_KEPLR_ORGANIZATION)}
         description={connectWalletDescription}
         wallets={[
           {
             ...walletsUiConfig[0],
-            onClick: handleWalletConnect,
+            onClick: () => {
+              markConnectWalletFlowActive();
+              handleWalletConnect();
+            },
           },
         ]}
         state={modalState}
       />
       <ConnectWalletFlow
-        isConnectModalOpened={isConnectWalletModalOpen}
-        setError={setError}
-        onConnectModalClose={handleConnectWalletModalClose}
+        isConnectModalOpened={
+          isConnectWalletModalOpen || shouldResumeConnectWalletFlow
+        }
+        onConnectModalClose={() => {
+          handleConnectWalletModalClose();
+        }}
+        clearConnectWalletFlow={clearConnectWalletFlow}
       />
     </>
   );

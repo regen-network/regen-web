@@ -97,7 +97,6 @@ export const LayoutHeader = () => {
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
-    setError,
   } = useOrganizationActions();
 
   const menuItems = useMemo(
@@ -228,7 +227,6 @@ export const LayoutHeader = () => {
       />
       <ConnectWalletFlow
         isConnectModalOpened={isConnectWalletModalOpen}
-        setError={setError}
         onConnectModalClose={handleConnectWalletModalClose}
       />
     </>

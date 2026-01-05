@@ -1,7 +1,4 @@
-import { useState } from 'react';
 import { useLingui } from '@lingui/react';
-
-import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
@@ -20,7 +17,6 @@ import { useVerifyToken } from './hooks/useVerifyToken';
 
 export const DashboardSettings = () => {
   const { _ } = useLingui();
-  const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
   const { connect } = useWallet();
@@ -62,12 +58,6 @@ export const DashboardSettings = () => {
 
   return (
     <div className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-sc-card-standard-stroke rounded-[10px]">
-      {(error as string) && (
-        <ErrorBanner
-          text={(error as string).toString()}
-          onClose={() => setError(undefined)}
-        />
-      )}
       <UserAccountSettings
         email={privActiveAccount?.email ?? ''}
         socialProviders={_socialProviders}
@@ -94,7 +84,6 @@ export const DashboardSettings = () => {
       />
       <ConnectWalletFlow
         isConnectModalOpened={isModalOpen}
-        setError={setError}
         onConnectModalClose={onModalClose}
       />
     </div>

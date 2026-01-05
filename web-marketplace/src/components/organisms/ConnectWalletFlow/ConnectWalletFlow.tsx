@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -6,8 +6,9 @@ import {
 } from '@apollo/client';
 import { StdSignature } from '@cosmjs/launchpad';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -24,12 +25,12 @@ import { useMergeAccounts } from './hooks/useMergeAccounts';
 type ConnectWalletFlowProps = {
   onConnectModalClose: () => void;
   isConnectModalOpened: boolean;
-  setError: (e: unknown) => void;
+  clearConnectWalletFlow?: () => void;
 };
 export const ConnectWalletFlow = ({
   isConnectModalOpened,
   onConnectModalClose,
-  setError,
+  clearConnectWalletFlow,
 }: ConnectWalletFlowProps) => {
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -39,6 +40,15 @@ export const ConnectWalletFlow = ({
     useState(false);
   const [selectAccountModalOpen, setSelectAccountModalOpen] = useState(false);
   const [signature, setSignature] = useState<StdSignature | undefined>();
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+
+  const setError = useCallback(
+    (e: unknown) => {
+      setErrorBannerText(String(e));
+      onConnectModalClose();
+    },
+    [setErrorBannerText, onConnectModalClose],
+  );
 
   useConnectWalletToAccount({
     isConnectModalOpened,
@@ -47,9 +57,13 @@ export const ConnectWalletFlow = ({
     setAddressUsedModalOpen,
     setAddressUsedWithEmailModalOpen,
     setSignature,
+    clearConnectWalletFlow,
   });
 
-  const mergeAccounts = useMergeAccounts({ signature, setError });
+  const mergeAccounts = useMergeAccounts({
+    signature,
+    setError,
+  });
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;

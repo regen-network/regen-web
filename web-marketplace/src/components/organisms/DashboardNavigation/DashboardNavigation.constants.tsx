@@ -33,6 +33,4 @@ export const COLLAPSE_SIDEBAR = msg`Collapse sidebar`;
 
 export const CREATE_ORGANIZATION = msg`+ create an organization`;
 
-export const FINISH_ORG_CREATION = msg`finish creating organization`;
-
 export const ORGANIZATION = msg`Organization`;

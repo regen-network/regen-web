@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
@@ -25,10 +24,10 @@ type Props = DashboardNavHeaderData & {
   hasWalletAddress?: boolean;
   wallet?: String;
   hasOrganization?: boolean;
-  onCreateOrganization?: () => void;
+  onCreateOrganization: () => void;
   unfinalizedOrgCreation?: boolean;
   unfinalizedOrgName?: string;
-  onFinishOrgCreation?: () => void;
+  onFinishOrgCreation: () => void;
 };
 
 export const DashboardNavHeader = ({
@@ -120,7 +119,11 @@ export const DashboardNavHeader = ({
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
             onClick={() =>
               onViewProfileClick?.(
-                '/profiles/' + (wallet || address || id || ''),
+                '/profiles/' +
+                  (wallet ||
+                    (address && !address.includes('@') ? address : '') ||
+                    id ||
+                    ''),
               )
             }
           >

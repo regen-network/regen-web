@@ -13,9 +13,9 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AccountType } from 'generated/graphql';
 
+import { FINISH_ORG_CREATION } from '../RegistryLayout/RegistryLayout.constants';
 import {
   CREATE_ORGANIZATION,
-  FINISH_ORG_CREATION,
   ORGANIZATION,
   UNNAMED,
 } from './DashboardNavigation.constants';

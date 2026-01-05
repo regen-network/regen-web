@@ -57,7 +57,6 @@ export const useCancelSellOrder = ({
   const handleTxQueued = (): void => setIsProcessingModalOpen(true);
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
-    refetchSellOrders();
   };
   const handleError = (): void => {
     setIsProcessingModalOpen(false);
@@ -77,6 +76,7 @@ export const useCancelSellOrder = ({
     setTxModalHeader('');
     setDeliverTxResponse(undefined);
     setError(undefined);
+    refetchSellOrders();
   };
 
   const handleCancelModalClose = (): void => {

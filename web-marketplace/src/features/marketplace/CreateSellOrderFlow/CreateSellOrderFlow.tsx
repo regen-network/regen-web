@@ -92,7 +92,6 @@ export const CreateSellOrderFlow = ({
 
   const closeCreateModal = (): void => {
     setIsCreateSellOrderOpen(false);
-    setIsFlowStarted(false);
   };
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
 
@@ -108,6 +107,7 @@ export const CreateSellOrderFlow = ({
     setDeliverTxResponse(undefined);
     setError(undefined);
     setIsFlowStarted(false);
+    refetchSellOrders?.();
   };
 
   const handleError = (): void => {
@@ -120,7 +120,6 @@ export const CreateSellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeCreateModal();
-    refetchSellOrders && refetchSellOrders();
   };
 
   // Navigate to portfolio after successful transaction
@@ -128,8 +127,6 @@ export const CreateSellOrderFlow = ({
     handleTxModalClose();
     if (redirectOnSuccess) {
       router.push('/dashboard/portfolio');
-    } else {
-      handleTxModalClose();
     }
   };
 

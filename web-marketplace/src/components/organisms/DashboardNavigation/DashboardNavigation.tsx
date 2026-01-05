@@ -55,10 +55,10 @@ export const DashboardNavigation = ({
   onToggleCollapse: (collapsed: boolean) => void;
   canEditOrg?: boolean;
   hasOrganization?: boolean;
-  onCreateOrganization?: () => void;
+  onCreateOrganization: () => void;
   unfinalizedOrgCreation?: boolean;
   unfinalizedOrgName?: string;
-  onFinishOrgCreation?: () => void;
+  onFinishOrgCreation: () => void;
 }) => {
   const { _ } = useLingui();
   const scrollContainerRef = useRef<HTMLDivElement>(null);

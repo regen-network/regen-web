@@ -236,3 +236,16 @@ export const getLabelDisplayedRows =
       ? _(msg`${from}–${displayedTo} of ${count}`)
       : _(msg`${from}–${displayedTo} of more than ${to}`);
   };
+
+export const connectWalletDescription = (
+  <Trans>
+    Creating an organization requires signing a blockchain transaction. Learn
+    more about wallets in our{' '}
+    <Link
+      href="https://guides.regen.network/guides/wallets"
+      className="font-bold bg-clip-text text-transparent bg-blue-green-gradient"
+    >
+      user guide.
+    </Link>
+  </Trans>
+);

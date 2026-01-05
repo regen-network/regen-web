@@ -149,13 +149,13 @@ export const DashboardNavHeader = ({
           hasOrganization={hasOrganization}
           onCreateOrganization={() => {
             setOpen(false);
-            onCreateOrganization?.();
+            onCreateOrganization();
           }}
           unfinalizedOrgCreation={unfinalizedOrgCreation}
           unfinalizedOrgName={unfinalizedOrgName}
           onFinishOrgCreation={() => {
             setOpen(false);
-            onFinishOrgCreation?.();
+            onFinishOrgCreation();
           }}
         />
       )}

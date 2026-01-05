@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
@@ -17,6 +16,7 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
+import { connectWalletDescription } from 'lib/constants/shared.constants';
 import { ORG_ENABLED } from 'lib/env';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
@@ -99,19 +99,6 @@ export const LayoutHeader = () => {
     handleWalletConnect,
     setError,
   } = useOrganizationActions();
-
-  const connectWalletDescription = (
-    <Trans>
-      Creating an organization requires signing a blockchain transaction. Learn
-      more about wallets in our{' '}
-      <Link
-        href="https://guides.regen.network/guides/wallets"
-        className="font-bold bg-clip-text text-transparent bg-blue-green-gradient"
-      >
-        user guide.
-      </Link>
-    </Trans>
-  );
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),

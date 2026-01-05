@@ -25,6 +25,7 @@ import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
+  connectWalletDescription,
   DISCARD_CHANGES_BODY,
   DISCARD_CHANGES_BUTTON,
   DISCARD_CHANGES_TITLE,
@@ -35,12 +36,14 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import {
   ROLE_ADMIN,
   ROLE_EDITOR,
   ROLE_OWNER,
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import {
   ORG,
@@ -49,6 +52,7 @@ import {
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
+import { CONNECT_TO_KEPLR_ORGANIZATION } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
@@ -91,10 +95,16 @@ export const Dashboard = () => {
   const location = useLocation();
   const { pathname } = location;
   const {
+    modalState,
+    walletsUiConfig,
     createOrganization,
-    unfinalizedOrgCreation,
-    unfinalizedOrgName,
     finishOrgCreation,
+    unfinalizedOrgName,
+    unfinalizedOrgCreation,
+    isConnectWalletModalOpen,
+    handleConnectWalletModalClose,
+    handleWalletConnect,
+    setError,
   } = useOrganizationActions();
   const isOrganizationDashboard = pathname.startsWith(
     '/dashboard/organization',
@@ -436,191 +446,212 @@ export const Dashboard = () => {
         });
 
   return (
-    <NavigationProvider collapsed={collapsed}>
-      <div className="bg-grey-100 min-h-screen">
-        <div className="relative md:flex md:min-h-screen">
-          {/* Mobile Header */}
-          <DashboardNavigationMobileHeader
-            activeAccount={headerActiveAccount}
-            onMenuClick={() => setMobileMenuOpen(true)}
-            mobileMenuOpen={mobileMenuOpen}
-          />
-
-          {/* Mobile overlay with blur */}
-          {mobileMenuOpen && (
-            <div
-              className="md:hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-30"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-          )}
-
-          {/* Left sidebar navigation */}
-          <div className="md:sticky md:top-0 md:h-screen">
-            <DashboardNavigation
-              isOrganizationDashboard={isOrganizationDashboard}
-              collapsed={collapsed}
-              onToggleCollapse={setCollapsed}
-              currentPath={section ?? ''}
-              onNavItemClick={onNavClick}
-              isIssuer={isIssuer}
-              showCreditClasses={showCreditClasses}
-              loginDisabled={loginDisabled}
-              hasWalletAddress={headerHasWalletAddress}
-              wallet={headerWallet}
-              hasProjects={hasProjects}
-              hasOrders={
-                !isOrganizationDashboard && !ordersLoading && hasOrders
-              }
-              hasCreditBatches={hasCreditBatches}
-              canEditOrg={!isOrganizationViewer}
+    <>
+      <NavigationProvider collapsed={collapsed}>
+        <div className="bg-grey-100 min-h-screen">
+          <div className="relative md:flex md:min-h-screen">
+            {/* Mobile Header */}
+            <DashboardNavigationMobileHeader
+              activeAccount={headerActiveAccount}
+              onMenuClick={() => setMobileMenuOpen(true)}
               mobileMenuOpen={mobileMenuOpen}
-              onLogout={handleLogout}
-              onCloseMobile={() => setMobileMenuOpen(false)}
-              onExitClick={() => {
-                setIsWarningModalOpen(undefined);
-                navigate('/');
-                setMobileMenuOpen(false);
-              }}
-              hasOrganization={!!organizationAccount}
-              onCreateOrganization={() => {
-                setMobileMenuOpen(false);
-                createOrganization();
-              }}
-              unfinalizedOrgCreation={unfinalizedOrgCreation}
-              unfinalizedOrgName={unfinalizedOrgName}
-              onFinishOrgCreation={() => {
-                setMobileMenuOpen(false);
-                finishOrgCreation();
-              }}
-              header={{
-                activeAccount: headerActiveAccount,
-                accounts: navigationAccounts,
-                onAccountSelect: (id: string) => {
-                  setIsWarningModalOpen(undefined);
-                  onAccountSelect(id);
-                  setMobileMenuOpen(false);
-                },
-                onViewProfileClick: (path: string) => {
-                  setIsWarningModalOpen(undefined);
-                  navigate(path);
-                  setMobileMenuOpen(false);
-                },
-              }}
             />
-          </div>
 
-          {/* Content area */}
-          <div
-            className={cn(
-              'flex-1 min-w-0 w-full md:w-auto md:pt-0 pt-[25px] transition-all duration-300',
-              mobileMenuOpen && 'md:blur-0 blur-sm',
+            {/* Mobile overlay with blur */}
+            {mobileMenuOpen && (
+              <div
+                className="md:hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-30"
+                onClick={() => setMobileMenuOpen(false)}
+              />
             )}
-          >
+
+            {/* Left sidebar navigation */}
+            <div className="md:sticky md:top-0 md:h-screen">
+              <DashboardNavigation
+                isOrganizationDashboard={isOrganizationDashboard}
+                collapsed={collapsed}
+                onToggleCollapse={setCollapsed}
+                currentPath={section ?? ''}
+                onNavItemClick={onNavClick}
+                isIssuer={isIssuer}
+                showCreditClasses={showCreditClasses}
+                loginDisabled={loginDisabled}
+                hasWalletAddress={headerHasWalletAddress}
+                wallet={headerWallet}
+                hasProjects={hasProjects}
+                hasOrders={
+                  !isOrganizationDashboard && !ordersLoading && hasOrders
+                }
+                hasCreditBatches={hasCreditBatches}
+                canEditOrg={!isOrganizationViewer}
+                mobileMenuOpen={mobileMenuOpen}
+                onLogout={handleLogout}
+                onCloseMobile={() => setMobileMenuOpen(false)}
+                onExitClick={() => {
+                  setIsWarningModalOpen(undefined);
+                  navigate('/');
+                  setMobileMenuOpen(false);
+                }}
+                hasOrganization={!!organizationAccount}
+                onCreateOrganization={() => {
+                  setMobileMenuOpen(false);
+                  createOrganization();
+                }}
+                unfinalizedOrgCreation={unfinalizedOrgCreation}
+                unfinalizedOrgName={unfinalizedOrgName}
+                onFinishOrgCreation={() => {
+                  setMobileMenuOpen(false);
+                  finishOrgCreation();
+                }}
+                header={{
+                  activeAccount: headerActiveAccount,
+                  accounts: navigationAccounts,
+                  onAccountSelect: (id: string) => {
+                    setIsWarningModalOpen(undefined);
+                    onAccountSelect(id);
+                    setMobileMenuOpen(false);
+                  },
+                  onViewProfileClick: (path: string) => {
+                    setIsWarningModalOpen(undefined);
+                    navigate(path);
+                    setMobileMenuOpen(false);
+                  },
+                }}
+              />
+            </div>
+
+            {/* Content area */}
             <div
               className={cn(
-                'px-10 md:px-30 2xl:mx-auto',
-                pathname.includes('/manage')
-                  ? 'xl:px-[111px] pt-20 pb-25 md:pb-40'
-                  : 'py-25 md:py-40',
-                section === 'profile' || section === 'settings'
-                  ? 'max-w-[767px]'
-                  : 'max-w-[1400px]',
+                'flex-1 min-w-0 w-full md:w-auto md:pt-0 pt-[25px] transition-all duration-300',
+                mobileMenuOpen && 'md:blur-0 blur-sm',
               )}
             >
               <div
                 className={cn(
-                  'w-full flex flex-col items-center',
-                  section ? 'flex' : 'hidden',
+                  'px-10 md:px-30 2xl:mx-auto',
+                  pathname.includes('/manage')
+                    ? 'xl:px-[111px] pt-20 pb-25 md:pb-40'
+                    : 'py-25 md:py-40',
+                  section === 'profile' || section === 'settings'
+                    ? 'max-w-[767px]'
+                    : 'max-w-[1400px]',
                 )}
               >
-                {/* Header section - hide completely on manage pages */}
-                {!pathname.includes('/manage') && (
-                  <div className="w-full h-50 my-25 md:mt-0 lg:my-0 flex justify-between items-center">
-                    <div className="flex flex-col">
-                      {/* Mobile-only subtitle */}
-                      <div className="block md:hidden mb-2">
-                        <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
-                          {isOrganizationDashboard
-                            ? _(ORGANIZATION_DASHBOARD)
-                            : section === 'settings'
-                            ? _(PERSONAL_ACCOUNT)
-                            : _(PERSONAL_DASHBOARD)}
-                        </span>
+                <div
+                  className={cn(
+                    'w-full flex flex-col items-center',
+                    section ? 'flex' : 'hidden',
+                  )}
+                >
+                  {/* Header section - hide completely on manage pages */}
+                  {!pathname.includes('/manage') && (
+                    <div className="w-full h-50 my-25 md:mt-0 lg:my-0 flex justify-between items-center">
+                      <div className="flex flex-col">
+                        {/* Mobile-only subtitle */}
+                        <div className="block md:hidden mb-2">
+                          <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
+                            {isOrganizationDashboard
+                              ? _(ORGANIZATION_DASHBOARD)
+                              : section === 'settings'
+                              ? _(PERSONAL_ACCOUNT)
+                              : _(PERSONAL_DASHBOARD)}
+                          </span>
+                        </div>
+                        {/* Main title */}
+                        <Title
+                          variant="h1"
+                          className="text-[21px] md:text-[32px] leading-[1.4]"
+                        >
+                          {pathname.includes('/portfolio')
+                            ? _(PORTFOLIO)
+                            : startCase(section)}
+                        </Title>
                       </div>
-                      {/* Main title */}
-                      <Title
-                        variant="h1"
-                        className="text-[21px] md:text-[32px] leading-[1.4]"
-                      >
-                        {pathname.includes('/portfolio')
-                          ? _(PORTFOLIO)
-                          : startCase(section)}
-                      </Title>
-                    </div>
 
-                    {(section === 'credit-classes' ||
-                      section === 'projects' ||
-                      section === 'portfolio' ||
-                      section === 'credit-batches' ||
-                      section === 'profile' ||
-                      section === 'members') && (
-                      <ViewProfileButton
-                        setIsWarningModalOpen={setIsWarningModalOpen}
-                        section={section}
-                        activeAccount={viewProfileAccount}
-                        hasProjects={hasProjects}
-                        hasCreditClasses={showCreditClasses}
-                        hasCreditBatches={hasCreditBatches}
-                      />
-                    )}
-                  </div>
-                )}
-
-                {/* Portfolio tabs section - only show if user has bridge credits */}
-                {!bridgeLoading &&
-                  hasAnyBridgeCredits &&
-                  (section === 'portfolio' ||
-                    pathname.includes('/portfolio/bridge')) && (
-                    <div className="w-full mb-20 md:mb-8 lg:mb-0">
-                      <IconTabs
-                        aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
-                        tabs={portfolioTabs}
-                        activeTab={activePortfolioTab}
-                        linkComponent={Link}
-                        mobileFullWidth
-                      />
+                      {(section === 'credit-classes' ||
+                        section === 'projects' ||
+                        section === 'portfolio' ||
+                        section === 'credit-batches' ||
+                        section === 'profile' ||
+                        section === 'members') && (
+                        <ViewProfileButton
+                          setIsWarningModalOpen={setIsWarningModalOpen}
+                          section={section}
+                          activeAccount={viewProfileAccount}
+                          hasProjects={hasProjects}
+                          hasCreditClasses={showCreditClasses}
+                          hasCreditBatches={hasCreditBatches}
+                        />
+                      )}
                     </div>
                   )}
 
-                <WithLoader isLoading={accountChanging || loading}>
-                  <div
-                    className={cn(
-                      'border border-grey-200 bg-grey-100 w-full',
-                      !pathname.includes('/manage') && 'lg:mt-30 min-h-[520px]',
+                  {/* Portfolio tabs section - only show if user has bridge credits */}
+                  {!bridgeLoading &&
+                    hasAnyBridgeCredits &&
+                    (section === 'portfolio' ||
+                      pathname.includes('/portfolio/bridge')) && (
+                      <div className="w-full mb-20 md:mb-8 lg:mb-0">
+                        <IconTabs
+                          aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
+                          tabs={portfolioTabs}
+                          activeTab={activePortfolioTab}
+                          linkComponent={Link}
+                          mobileFullWidth
+                        />
+                      </div>
                     )}
-                  >
-                    <Outlet context={dashboardContextValue} />
-                  </div>
-                </WithLoader>
+
+                  <WithLoader isLoading={accountChanging || loading}>
+                    <div
+                      className={cn(
+                        'border border-grey-200 bg-grey-100 w-full',
+                        !pathname.includes('/manage') &&
+                          'lg:mt-30 min-h-[520px]',
+                      )}
+                    >
+                      <Outlet context={dashboardContextValue} />
+                    </div>
+                  </WithLoader>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <SaveChangesWarningModal
-          open={!!isWarningModalOpen}
-          title={_(DISCARD_CHANGES_TITLE)}
-          bodyText={_(DISCARD_CHANGES_BODY)}
-          buttonText={_(DISCARD_CHANGES_BUTTON)}
-          navigate={() => {
-            if (isWarningModalOpen) navigate(isWarningModalOpen);
-            isDirtyRef.current = false;
-          }}
-          onClose={() => {
-            setIsWarningModalOpen(undefined);
-          }}
-        />
-      </div>
-    </NavigationProvider>
+          <SaveChangesWarningModal
+            open={!!isWarningModalOpen}
+            title={_(DISCARD_CHANGES_TITLE)}
+            bodyText={_(DISCARD_CHANGES_BODY)}
+            buttonText={_(DISCARD_CHANGES_BUTTON)}
+            navigate={() => {
+              if (isWarningModalOpen) navigate(isWarningModalOpen);
+              isDirtyRef.current = false;
+            }}
+            onClose={() => {
+              setIsWarningModalOpen(undefined);
+            }}
+          />
+        </div>
+      </NavigationProvider>
+      <AccountConnectWalletModal
+        open={isConnectWalletModalOpen}
+        onClose={handleConnectWalletModalClose}
+        title={_(CONNECT_TO_KEPLR_ORGANIZATION)}
+        description={connectWalletDescription}
+        wallets={[
+          {
+            ...walletsUiConfig[0],
+            onClick: handleWalletConnect,
+          },
+        ]}
+        state={modalState}
+      />
+      <ConnectWalletFlow
+        isConnectModalOpened={isConnectWalletModalOpen}
+        setError={setError}
+        onConnectModalClose={handleConnectWalletModalClose}
+      />
+    </>
   );
 };

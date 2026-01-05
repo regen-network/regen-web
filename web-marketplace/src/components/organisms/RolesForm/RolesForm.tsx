@@ -28,6 +28,7 @@ import {
   REQUIRED_MESSAGE,
 } from 'lib/constants/shared.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -49,7 +50,6 @@ import {
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { getRolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
-import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;

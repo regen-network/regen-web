@@ -196,6 +196,14 @@ msgstr "+ Agregar nuevo perfil"
 msgid "+ Add Photo"
 msgstr "+ Agregar foto"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:34
+msgid "+ create an organization"
+msgstr "+ crear una organización"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:34
+#~ msgid "+ create new organization"
+#~ msgstr "+ crear nueva organización"
+
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:20
 #: src/legacy-pages/Dashboard/MyProjects/MyProjects.constants.ts:4
@@ -342,7 +350,7 @@ msgstr "Nosotros"
 msgid "Account switch detected! "
 msgstr "¡Cambio de cuenta detectado!"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:30
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:53
 msgid "Account switcher"
 msgstr "selector de cuentas"
 
@@ -3465,6 +3473,7 @@ msgstr "Organización"
 msgid "organization"
 msgstr "organización"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
 msgid "Organization"
 msgstr "Organización"
@@ -5663,7 +5672,7 @@ msgstr "ver publicación"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:124
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:122
 msgid "View public profile"
 msgstr "Ver perfil público"
 

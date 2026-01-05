@@ -44,6 +44,7 @@ import {
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
+import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
@@ -89,6 +90,12 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
+  const {
+    createOrganization,
+    unfinalizedOrgCreation,
+    unfinalizedOrgName,
+    finishOrgCreation,
+  } = useOrganizationActions();
   const isOrganizationDashboard = pathname.startsWith(
     '/dashboard/organization',
   );
@@ -467,6 +474,17 @@ export const Dashboard = () => {
                 setIsWarningModalOpen(undefined);
                 navigate('/');
                 setMobileMenuOpen(false);
+              }}
+              hasOrganization={!!organizationAccount}
+              onCreateOrganization={() => {
+                setMobileMenuOpen(false);
+                createOrganization();
+              }}
+              unfinalizedOrgCreation={unfinalizedOrgCreation}
+              unfinalizedOrgName={unfinalizedOrgName}
+              onFinishOrgCreation={() => {
+                setMobileMenuOpen(false);
+                finishOrgCreation();
               }}
               header={{
                 activeAccount: headerActiveAccount,

@@ -42,6 +42,7 @@ export default meta;
 export const Default: StoryFn<typeof DashboardNavigation> = () => {
   const [activeAccountId, setActiveAccountId] = useState(MOCK_ACCOUNTS[0].id);
   const [currentPath, setCurrentPath] = useState('portfolio');
+  const [collapsed, setCollapsed] = useState(false);
 
   const activeAccount =
     MOCK_ACCOUNTS.find(a => a.id === activeAccountId) || MOCK_ACCOUNTS[0];
@@ -56,36 +57,9 @@ export const Default: StoryFn<typeof DashboardNavigation> = () => {
     setActiveAccountId(id);
   };
 
-  return (
-    <DashboardNavigation
-      currentPath={currentPath}
-      onNavItemClick={handleNavItemClick}
-      onLogout={() => action('navigation')('logout')}
-      onCloseMobile={() => action('navigation')('close-mobile')}
-      onExitClick={() => action('navigation')('homepage')}
-      header={{
-        activeAccount,
-        accounts: MOCK_ACCOUNTS,
-        onAccountSelect: handleAccountSelect,
-        onViewProfileClick: path =>
-          action('navigation')(`view-profile: ${path}`),
-      }}
-      collapsed={false}
-      onToggleCollapse={function (collapsed: boolean): void {
-        throw new Error('Function not implemented.');
-      }}
-    />
-  );
-};
-
-// New story for navigation without organization
-export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
-  const [currentPath, setCurrentPath] = useState('portfolio');
-  const activeAccount = SINGLE_USER_ACCOUNT[0];
-
-  const handleNavItemClick = (path: string) => {
-    action('navigation')(path);
-    setCurrentPath(path);
+  const handleToggleCollapse = (nextCollapsed: boolean) => {
+    action('toggle-collapse')(nextCollapsed);
+    setCollapsed(nextCollapsed);
   };
 
   return (
@@ -95,6 +69,46 @@ export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
       onLogout={() => action('navigation')('logout')}
       onCloseMobile={() => action('navigation')('close-mobile')}
       onExitClick={() => action('navigation')('homepage')}
+      onCreateOrganization={() => action('navigation')('create-organization')}
+      onFinishOrgCreation={() => action('navigation')('finish-org-creation')}
+      header={{
+        activeAccount,
+        accounts: MOCK_ACCOUNTS,
+        onAccountSelect: handleAccountSelect,
+        onViewProfileClick: path =>
+          action('navigation')(`view-profile: ${path}`),
+      }}
+      collapsed={collapsed}
+      onToggleCollapse={handleToggleCollapse}
+    />
+  );
+};
+
+// New story for navigation without organization
+export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
+  const [currentPath, setCurrentPath] = useState('portfolio');
+  const [collapsed, setCollapsed] = useState(false);
+  const activeAccount = SINGLE_USER_ACCOUNT[0];
+
+  const handleNavItemClick = (path: string) => {
+    action('navigation')(path);
+    setCurrentPath(path);
+  };
+
+  const handleToggleCollapse = (nextCollapsed: boolean) => {
+    action('toggle-collapse')(nextCollapsed);
+    setCollapsed(nextCollapsed);
+  };
+
+  return (
+    <DashboardNavigation
+      currentPath={currentPath}
+      onNavItemClick={handleNavItemClick}
+      onLogout={() => action('navigation')('logout')}
+      onCloseMobile={() => action('navigation')('close-mobile')}
+      onExitClick={() => action('navigation')('homepage')}
+      onCreateOrganization={() => action('navigation')('create-organization')}
+      onFinishOrgCreation={() => action('navigation')('finish-org-creation')}
       header={{
         activeAccount,
         accounts: SINGLE_USER_ACCOUNT,
@@ -102,10 +116,9 @@ export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
         onViewProfileClick: path =>
           action('navigation')(`view-profile: ${path}`),
       }}
-      collapsed={false}
-      onToggleCollapse={function (collapsed: boolean): void {
-        throw new Error('Function not implemented.');
-      }}
+      collapsed={collapsed}
+      onToggleCollapse={handleToggleCollapse}
+      hasOrganization={false}
     />
   );
 };

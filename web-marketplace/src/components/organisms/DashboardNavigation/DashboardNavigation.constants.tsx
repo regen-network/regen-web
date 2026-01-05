@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const NAV_BASE_CLASSES =
   'relative flex flex-col h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-grey-300 bg-bc-neutral-0 max-h-screen';
@@ -30,3 +30,7 @@ export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
 export const CLOSE_MENU = msg`Close menu`;
 export const EXPAND_SIDEBAR = msg`Expand sidebar`;
 export const COLLAPSE_SIDEBAR = msg`Collapse sidebar`;
+
+export const CREATE_ORGANIZATION = msg`+ create an organization`;
+
+export const ORGANIZATION = msg`Organization`;

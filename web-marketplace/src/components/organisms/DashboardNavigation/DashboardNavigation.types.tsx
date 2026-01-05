@@ -55,8 +55,13 @@ export interface DashboardNavFooterProps {
 
 export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
-  activeId?: string;
-  onSelect: (id: string) => void;
+  activeAddress?: string;
+  onSelect: (address: string) => void;
+  hasOrganization?: boolean;
+  onCreateOrganization?: () => void;
+  unfinalizedOrgCreation?: boolean;
+  unfinalizedOrgName?: string;
+  onFinishOrgCreation?: () => void;
 }
 
 export interface GradientProps {

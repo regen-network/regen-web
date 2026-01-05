@@ -16,8 +16,9 @@ import { AccountType } from 'generated/graphql';
 import { FINISH_ORG_CREATION } from '../RegistryLayout/RegistryLayout.constants';
 import {
   CREATE_ORGANIZATION,
-  UNNAMED,
   ORG,
+  ORGANIZATION,
+  UNNAMED,
 } from './DashboardNavigation.constants';
 import {
   AccountOption,
@@ -77,7 +78,9 @@ export const AccountSwitcherDropdown = ({
             })
           : getDefaultAvatar({ type: AccountType.Organization });
 
-        const name = account?.name || _(UNNAMED);
+        const name = isCreateOrg
+          ? _(ORGANIZATION)
+          : account?.name || _(UNNAMED);
 
         const handleClick = () => {
           if (isCreateOrg) {

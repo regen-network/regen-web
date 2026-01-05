@@ -49,6 +49,7 @@ import {
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { getRolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
+import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;
@@ -161,6 +162,13 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       languageCode: selectedLanguage,
     }),
   );
+  const { data: daoData } = useQuery(
+    getDaoByAddressQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!admin,
+      address: admin as string,
+    }),
+  );
 
   const [projectDeveloperValue, setProjectDeveloperValue] = useState('');
   const { data: accountsProjectDeveloper } = useQuery(
@@ -201,6 +209,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
         try {
           await submit({
             values,
+            adminDaoAddress: daoData?.daoByAddress?.address,
             adminAccountId: adminAccountData?.accountByAddr?.id,
             shouldNavigate: shouldNavigateRef?.current,
           });

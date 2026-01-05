@@ -31,6 +31,7 @@ interface Props {
 export type RoleSubmitProps = {
   values: RolesFormSchemaType;
   adminAccountId?: string;
+  adminDaoAddress?: string;
   shouldNavigate?: boolean;
 };
 
@@ -54,6 +55,7 @@ const useRolesSubmit = ({
     async ({
       values,
       adminAccountId,
+      adminDaoAddress,
       shouldNavigate = true,
     }: RoleSubmitProps): Promise<void> => {
       try {
@@ -82,6 +84,7 @@ const useRolesSubmit = ({
         if (values.admin && admin !== values.admin) {
           doUpdateAdmin = true;
           projectPatch.adminAccountId = adminAccountId;
+          projectPatch.adminDaoAddress = adminDaoAddress;
         }
         const newMetadata = {
           ...metadata,

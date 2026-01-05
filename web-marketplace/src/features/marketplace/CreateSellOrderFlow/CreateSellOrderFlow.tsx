@@ -107,6 +107,7 @@ export const CreateSellOrderFlow = ({
     setDeliverTxResponse(undefined);
     setError(undefined);
     setIsFlowStarted(false);
+    refetchSellOrders?.();
   };
 
   const handleError = (): void => {
@@ -124,7 +125,6 @@ export const CreateSellOrderFlow = ({
   // Navigate to portfolio after successful transaction
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    refetchSellOrders?.();
     if (redirectOnSuccess) {
       router.push('/dashboard/portfolio');
     }

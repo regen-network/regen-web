@@ -46,6 +46,11 @@ type Props = {
    * Address can be fetched asynchronously (based on some account/organization uuid),
    */
   isAddressLoading?: boolean;
+  /**
+   * Forces the address filter to be applied even if the address is not provided.
+   * This can be useful to disable fetching batches when the address is not available.
+   */
+  forceAddress?: boolean;
 };
 
 export const useFetchPaginatedBatches = ({
@@ -54,6 +59,7 @@ export const useFetchPaginatedBatches = ({
   creditClassId,
   withAllData = true,
   isAddressLoading = false,
+  forceAddress = false,
 }: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
@@ -102,7 +108,8 @@ export const useFetchPaginatedBatches = ({
         !!queryClient &&
         !projectId &&
         !address &&
-        !creditClassId,
+        !creditClassId &&
+        !forceAddress,
     }),
   );
 

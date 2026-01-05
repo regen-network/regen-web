@@ -92,6 +92,7 @@ export const Profile = (): JSX.Element => {
   const { batchesWithSupply } = useFetchPaginatedBatches({
     address,
     isAddressLoading: isLoading,
+    forceAddress: true,
   });
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 

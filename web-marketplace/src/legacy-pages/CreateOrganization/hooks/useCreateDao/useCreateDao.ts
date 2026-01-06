@@ -186,6 +186,11 @@ export const useCreateDao = () => {
             key: 'organization_id',
             value: params.organizationId,
           });
+          // this is required to move s3 media from the current account to the new org folder
+          initialItems.push({
+            key: 'creator_account_id',
+            value: activeAccountId,
+          });
         }
 
         if (sanitizedBackgroundImage) {

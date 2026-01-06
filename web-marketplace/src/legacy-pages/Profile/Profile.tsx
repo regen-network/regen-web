@@ -250,7 +250,9 @@ export const Profile = (): JSX.Element => {
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={infos}
-              editLink={isOwnProfile ? '/dashboard/profile' : ''}
+              editLink={
+                isOwnProfile ? (organization ? '/dashboard/organization/profile' : '/dashboard/profile') : ''
+              }
               profileLink={profileLink}
               variant={
                 account?.type

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
@@ -58,6 +59,7 @@ const ProjectDashboardBanner = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const router = useRouter();
+  const navigate = useNavigate();
 
   const truncatedPlace = truncateEnd(
     project.place ?? '',
@@ -194,6 +196,7 @@ const ProjectDashboardBanner = ({
               <OutlinedButton
                 startIcon={<EyeIcon />}
                 onClick={() =>
+                  // project page belongs to next app router so we need to use next router
                   router.push(`/project/${project.slug || project.id}`)
                 }
               >
@@ -211,9 +214,9 @@ const ProjectDashboardBanner = ({
                     if (isDraft) {
                       const currentStep =
                         projectsCurrentStep[id] || 'basic-info';
-                      router.push(`/project-pages/${id}/${currentStep}`);
+                      navigate(`/project-pages/${id}/${currentStep}`);
                     } else {
-                      router.push(`/project-pages/${id}/edit/basic-info`);
+                      navigate(`/project-pages/${id}/edit/basic-info`);
                     }
                   }}
                 >

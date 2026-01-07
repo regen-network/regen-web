@@ -12,6 +12,7 @@ query AccountById($id: UUID!) {
     nonce
     custodialAddress
     stripeConnectedAccountId
+    title
     accountTranslationsById {
       nodes {
         languageCode
@@ -47,6 +48,7 @@ query AccountById($id: UUID!) {
           twitterLink
         }
         projectByAdminDaoAddress {
+          onChainId
           id
         }
       }

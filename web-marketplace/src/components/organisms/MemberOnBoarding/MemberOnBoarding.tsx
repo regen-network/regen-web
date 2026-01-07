@@ -1,0 +1,188 @@
+'use client';
+
+import { useCallback, useEffect, useRef } from 'react';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
+import { useLingui } from '@lingui/react';
+import { useQuery } from '@tanstack/react-query';
+import { findDao } from 'app/[lang]/member-on-boarding/utils';
+import { useAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+
+import { Loading } from 'web-components/src/components/loading';
+import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
+
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useAuth } from 'lib/auth/auth';
+import {
+  EMAIL_CONFIRMATION_ARIA_LABEL,
+  EMAIL_CONFIRMATION_CODE_HELPER,
+  EMAIL_CONFIRMATION_DESCRIPTION,
+  EMAIL_CONFIRMATION_TITLE,
+} from 'lib/constants/shared.constants';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
+
+import { useLoginData } from '../LoginButton/hooks/useLoginData';
+import {
+  EMAIL_CONFIRMATION_CANCEL,
+  EMAIL_CONFIRMATION_SUBMIT,
+} from '../LoginButton/LoginButton.constants';
+import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
+import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
+import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
+import { LoginModal } from '../LoginModal/LoginModal';
+import { PersonalProfile } from './MemberOnBoarding.PersonalProfile';
+import { isWalletRequiredForRole } from './MemberOnBoarding.utils';
+
+type MemberOnBoardingProps = {
+  accountId: string;
+  role: string;
+  email: string;
+  daoAddress: string;
+};
+
+export const MemberOnBoarding = ({
+  accountId,
+  role,
+  email,
+  daoAddress,
+}: MemberOnBoardingProps) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { activeAccountId, loading } = useAuth();
+  const router = useRouter();
+  const { _ } = useLingui();
+
+  const { data, isFetching: isLoadingAccountById } = useQuery(
+    getAccountByIdQuery({
+      client: graphqlClient,
+      languageCode: selectedLanguage,
+      id: accountId,
+      enabled: !!accountId && !!graphqlClient,
+    }),
+  );
+  const account = data?.accountById;
+  const dao = findDao(daoAddress, data);
+
+  const navigateToDashboard = useCallback(() => {
+    const projectId =
+      dao?.projectByAdminDaoAddress?.onChainId ||
+      dao?.projectByAdminDaoAddress?.id;
+    const path = projectId
+      ? `/dashboard/projects/${projectId}/manage/collaborators`
+      : '/dashboard/organization/members';
+    router.push(path);
+  }, [router, dao]);
+
+  const {
+    isConfirmationModalOpen,
+    emailModalError,
+    resendTimeLeft,
+    onConfirmationModalClose,
+    onMailCodeChange,
+    onResendPasscode,
+    onEmailSubmit,
+  } = useEmailConfirmationData({});
+
+  const {
+    isModalOpen,
+    modalState,
+    onModalClose,
+    walletsUiConfig,
+    onButtonClick: showLoginModal,
+  } = useLoginData({});
+
+  const walletRequired = isWalletRequiredForRole(role);
+  const loginPromptedRef = useRef(false);
+
+  useEffect(() => {
+    if (
+      loginPromptedRef.current ||
+      loading ||
+      activeAccountId ||
+      activeAccountId === accountId
+    ) {
+      return;
+    }
+
+    loginPromptedRef.current = true;
+
+    if (walletRequired) {
+      showLoginModal();
+    } else {
+      void onEmailSubmit({ email }).catch(() => {
+        loginPromptedRef.current = false;
+      });
+    }
+  }, [
+    loading,
+    activeAccountId,
+    accountId,
+    walletRequired,
+    email,
+    showLoginModal,
+    onEmailSubmit,
+  ]);
+
+  return (
+    <>
+      {activeAccountId === accountId ? (
+        isLoadingAccountById ? (
+          <Loading />
+        ) : (
+          <PersonalProfile
+            initialValues={{
+              name: account?.name || '',
+              avatar: account?.image,
+              title: account?.title,
+              description: account?.description,
+            }}
+            onSuccess={navigateToDashboard}
+          />
+        )
+      ) : walletRequired ? (
+        <LoginModal
+          open={isModalOpen}
+          onClose={onModalClose}
+          wallets={[walletsUiConfig[0]]}
+          socialProviders={[]}
+          onEmailSubmit={async ({ email }) => {
+            await onEmailSubmit({ email, callback: onModalClose });
+          }}
+          state={modalState}
+          onlyWallets
+        />
+      ) : (
+        <EmailConfirmationModal
+          ariaLabel={_(EMAIL_CONFIRMATION_ARIA_LABEL)}
+          resendText={getResendCodeLabel({ resendTimeLeft, _ })}
+          resendButtonLink={getResendCodeButtonLink({
+            resendTimeLeft,
+            onResendPasscode,
+            _,
+          })}
+          cancelButton={{
+            text: _(EMAIL_CONFIRMATION_CANCEL),
+            onClick: onConfirmationModalClose,
+          }}
+          signInButton={{
+            text: _(EMAIL_CONFIRMATION_SUBMIT),
+            disabled: true,
+          }}
+          mailLink={{ text: email, href: '#' }}
+          onClose={onConfirmationModalClose}
+          open={isConfirmationModalOpen}
+          error={emailModalError}
+          onCodeChange={onMailCodeChange}
+          title={_(EMAIL_CONFIRMATION_TITLE)}
+          description={_(EMAIL_CONFIRMATION_DESCRIPTION)}
+          helperText={_(EMAIL_CONFIRMATION_CODE_HELPER)}
+        />
+      )}
+    </>
+  );
+};

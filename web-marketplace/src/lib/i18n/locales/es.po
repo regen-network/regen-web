@@ -134,6 +134,7 @@ msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} c
 #: src/components/organisms/BaseMembersTable/modals/ProfileModal.tsx:178
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:120
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:247
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:170
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:167
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} carácter} other {{remainingDescriptionCharacters} caracteres}}"
@@ -1918,6 +1919,7 @@ msgstr "descripción"
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:36
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:108
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:236
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:159
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/legacy-pages/Description/Description.tsx:48
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:227
@@ -2391,6 +2393,10 @@ msgstr "Filtros"
 msgid "find another credit card project"
 msgstr "Encuentra otro proyecto de tarjeta de crédito"
 
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:179
+msgid "finish"
+msgstr "finalizar"
+
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:15
 msgid "Finish"
 msgstr "Finalizar"
@@ -2415,6 +2421,7 @@ msgstr "Finalizado"
 #~ msgstr "Para compradores"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:31
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:151
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr "Por ejemplo: agricultor, director de tecnología, director ejecutivo, analista de datos, guardabosques, etc."
 
@@ -3217,6 +3224,7 @@ msgstr "Debe tener destinatarios"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:33
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:180
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:119
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:31
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:204
@@ -3596,6 +3604,7 @@ msgid "Personal profile"
 msgstr "Perfil personal"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:28
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:109
 msgid "Personal Profile"
 msgstr "Perfil personal"
 
@@ -3897,6 +3906,7 @@ msgstr "Perfil"
 #~ msgstr "Banner de perfil"
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:190
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:126
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr "Imagen de perfil"
@@ -5140,6 +5150,10 @@ msgstr "Esta función aún no es compatible con Wallet Connect y Keplr Mobile. I
 msgid "This field is required"
 msgstr "Este campo es obligatorio"
 
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:112
+msgid "This information will appear on any posts that you author."
+msgstr "Esta información aparecerá en cualquier publicación que usted cree."
+
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:82
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr "Esto es comparable a firmar un documento legal e implica que usted cree que el contenido es exacto."
@@ -5260,6 +5274,7 @@ msgid "Timestamp"
 msgstr "Marca de tiempo"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr "Título"

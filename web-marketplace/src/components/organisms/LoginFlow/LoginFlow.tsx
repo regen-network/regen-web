@@ -89,7 +89,6 @@ const LoginFlow = ({
         signInButton={{
           text: _(EMAIL_CONFIRMATION_SUBMIT),
           disabled: true,
-          onClick: () => void 0,
         }}
         mailLink={{ text: email, href: '#' }}
         onClose={onConfirmationModalClose}

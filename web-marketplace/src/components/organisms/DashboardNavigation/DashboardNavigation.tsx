@@ -22,6 +22,7 @@ import { DashboardNavigationProps } from './DashboardNavigation.types';
 import { getDashboardNavigationSections } from './DashboardNavigation.utils';
 
 export const DashboardNavigation = ({
+  isOrganizationDashboard,
   header: { activeAccount, accounts, onAccountSelect, onViewProfileClick },
   currentPath,
   onNavItemClick,
@@ -46,6 +47,7 @@ export const DashboardNavigation = ({
   unfinalizedOrgName,
   onFinishOrgCreation,
 }: DashboardNavigationProps & {
+  isOrganizationDashboard?: boolean;
   mobileMenuOpen?: boolean;
   hasWalletAddress?: boolean;
   wallet?: String;
@@ -81,7 +83,6 @@ export const DashboardNavigation = ({
     () =>
       getDashboardNavigationSections(
         _,
-        activeAccount.type,
         loginDisabled || false,
         collapsed,
         isIssuer || false,
@@ -91,6 +92,7 @@ export const DashboardNavigation = ({
         hasOrders ?? false,
         hasCreditBatches ?? false,
         canEditOrg ?? true,
+        isOrganizationDashboard,
       ),
     [
       _,

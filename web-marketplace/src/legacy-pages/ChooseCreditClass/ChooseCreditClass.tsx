@@ -1,11 +1,13 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Grid } from '@mui/material';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 
 import { useAuth } from 'lib/auth/auth';
 
+import { OnboardingFormTemplate } from 'components/templates/ProjectFormTemplate/OnboardingFormTemplate';
 import { ProjectFormAccessTemplate } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate';
 
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
@@ -14,14 +16,18 @@ import { CreateOffchainProjectCard } from './ChooseCreditClass.OffchainCard';
 import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
 
 const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const { creditClassItems, loading } = useGetCreditClassItems();
-  const { setCreditClassId, setCreditClassOnChainId } =
+  const { setCreditClassId, setCreditClassOnChainId, projectCreatorAddress } =
     useCreateProjectContext();
   const { activeAccount } = useAuth();
+  const adminAddr = projectCreatorAddress || activeAccount?.addr;
 
-  const adminAddr = activeAccount?.addr;
+  const { creditClassItems, loading } = useGetCreditClassItems({
+    address: adminAddr,
+  });
+
   const creditClassLength = creditClassItems?.length;
 
   function handleSelection(
@@ -35,34 +41,44 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
   return (
     <ProjectFormAccessTemplate loading={loading} adminAddr={adminAddr}>
-      <ChooseCreditClassGrid
-        justifyContent={creditClassLength > 1 ? 'flex-start' : 'center'}
+      <OnboardingFormTemplate
+        activeStep={1}
+        title=""
         loading={loading}
-        isIssuer={creditClassLength > 0}
+        classes={{ formWrap: 'max-w-full' }}
       >
-        <>
-          <CreateOffchainProjectCard onClick={() => handleSelection()} />
-          {creditClassLength > 0 ? (
-            creditClassItems?.map(creditClassItem => (
-              <ChooseCreditClassItem
-                key={creditClassItem.onChainId}
-                title={creditClassItem.title}
-                imgSrc={creditClassItem.imageSrc}
-                description={creditClassItem.description}
-                onClick={() =>
-                  handleSelection(creditClassItem.id, creditClassItem.onChainId)
-                }
-              />
-            ))
-          ) : (
-            <Grid item xs={12} sm={6}>
-              <Trans>
-                You are not yet listed as an issuer on any credit classes
-              </Trans>
-            </Grid>
-          )}
-        </>
-      </ChooseCreditClassGrid>
+        <ChooseCreditClassGrid
+          justifyContent={creditClassLength > 1 ? 'flex-start' : 'center'}
+          loading={loading}
+          isIssuer={creditClassLength > 0}
+        >
+          <>
+            <CreateOffchainProjectCard onClick={() => handleSelection()} />
+            {creditClassLength > 0 ? (
+              creditClassItems?.map(creditClassItem => (
+                <ChooseCreditClassItem
+                  key={creditClassItem.onChainId}
+                  title={creditClassItem.title}
+                  imgSrc={creditClassItem.imageSrc}
+                  description={creditClassItem.description}
+                  onClick={() =>
+                    handleSelection(
+                      creditClassItem.id,
+                      creditClassItem.onChainId,
+                    )
+                  }
+                />
+              ))
+            ) : (
+              <Grid item xs={12} sm={6}>
+                <Trans>
+                  You are not yet listed as an issuer on any credit classes
+                </Trans>
+              </Grid>
+            )}
+          </>
+        </ChooseCreditClassGrid>
+      </OnboardingFormTemplate>
     </ProjectFormAccessTemplate>
   );
 };

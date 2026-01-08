@@ -25,6 +25,7 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
 import { Link } from 'components/atoms';
+import { ORG } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
@@ -122,7 +123,7 @@ export const EditProfile = () => {
   const editProfileFormKey = useMemo(() => {
     if (isOrgDashboard) {
       return [
-        'org',
+        ORG,
         organizationId ?? '',
         organizationProfile?.image ?? '',
         organizationProfile?.bgImage ?? '',

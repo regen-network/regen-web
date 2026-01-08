@@ -5,6 +5,8 @@ import { Project } from 'web-components/src/components/cards/SelectProjectCard/S
 
 export type FormValues = {
   selectedProjectIds: string[];
+  /** Optional project name for newly created projects (used as DAO name) */
+  newProjectName?: string;
 };
 export type MigrateProjectsProps = {
   /** Array of projects to display. */

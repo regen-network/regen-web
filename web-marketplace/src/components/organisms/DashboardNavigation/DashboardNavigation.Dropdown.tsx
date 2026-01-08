@@ -16,6 +16,7 @@ import { AccountType } from 'generated/graphql';
 import { FINISH_ORG_CREATION } from '../RegistryLayout/RegistryLayout.constants';
 import {
   CREATE_ORGANIZATION,
+  ORG,
   ORGANIZATION,
   UNNAMED,
 } from './DashboardNavigation.constants';
@@ -71,11 +72,15 @@ export const AccountSwitcherDropdown = ({
           ? account.image ||
             getDefaultAvatar({
               type:
-                account.type === 'org'
+                account.type === ORG
                   ? AccountType.Organization
                   : AccountType.User,
             })
           : getDefaultAvatar({ type: AccountType.Organization });
+
+        const name = isCreateOrg
+          ? _(ORGANIZATION)
+          : account?.name || _(UNNAMED);
 
         const handleClick = () => {
           if (isCreateOrg) {
@@ -102,11 +107,7 @@ export const AccountSwitcherDropdown = ({
                   : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',
               )}
             >
-              <UserAvatar
-                src={avatarSrc}
-                size="medium"
-                alt={account?.name || _(ORGANIZATION)}
-              />
+              <UserAvatar src={avatarSrc} size="medium" alt={name} />
               {isCreateOrg ? (
                 unfinalizedOrgCreation && unfinalizedOrgName ? (
                   <div className="ml-3 mr-auto text-left flex flex-col">
@@ -131,7 +132,7 @@ export const AccountSwitcherDropdown = ({
                   size="md"
                   className="ml-3 mr-auto truncate text-left text-bc-neutral-700 font-bold"
                 >
-                  {account?.name || _(UNNAMED)}
+                  {name}
                 </Body>
               )}
               {isSelected && (

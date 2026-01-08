@@ -42,6 +42,10 @@ import {
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
+import {
+  ORG,
+  USER,
+} from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
@@ -177,7 +181,7 @@ export const Dashboard = () => {
     return {
       name: organizationName,
       address: organizationAddress,
-      type: 'org' as const,
+      type: ORG,
       image: organizationImage,
       source: 'dao',
       roleAccountId: assignment?.accountId ?? undefined,
@@ -201,7 +205,7 @@ export const Dashboard = () => {
         id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
         name: activeAccount.name || '',
         address: personalResolvedAddress,
-        type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+        type: activeAccount.type === 'ORGANIZATION' ? ORG : USER,
         image: activeAccount.image ?? undefined,
         source: 'auth',
       });
@@ -237,7 +241,7 @@ export const Dashboard = () => {
   }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
 
   const organizationRole = useMemo(() => {
-    if (!isOrganizationDashboard || selectedAccount?.type !== 'org')
+    if (!isOrganizationDashboard || selectedAccount?.type !== ORG)
       return undefined;
 
     return selectedAccount?.roleName;
@@ -288,7 +292,7 @@ export const Dashboard = () => {
     const target = navigationAccounts.find(account => account.address === id);
     if (!target) return;
 
-    if (target.type === 'org') {
+    if (target.type === ORG) {
       if (!isOrganizationDashboard) {
         navigate('/dashboard/organization');
       }
@@ -377,7 +381,7 @@ export const Dashboard = () => {
     Account,
     'addr' | 'id' | 'name' | 'type' | 'image'
   > | null>(() => {
-    if (selectedAccount?.type === 'org') {
+    if (selectedAccount?.type === ORG) {
       return {
         id: selectedAccount.roleAccountId ?? selectedAccount.id,
         addr: selectedAccount.address ?? '',
@@ -409,10 +413,10 @@ export const Dashboard = () => {
   const hasWalletAddress = !!wallet?.address;
 
   const headerWallet =
-    selectedAccount?.type === 'org' ? selectedAccount.address : wallet?.address;
+    selectedAccount?.type === ORG ? selectedAccount.address : wallet?.address;
 
   const headerHasWalletAddress =
-    selectedAccount?.type === 'org'
+    selectedAccount?.type === ORG
       ? !!selectedAccount?.address
       : hasWalletAddress;
 
@@ -423,14 +427,14 @@ export const Dashboard = () => {
           id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
           name: activeAccount.name || '',
           address: resolvedAddress || personalResolvedAddress,
-          type: activeAccount.type === 'ORGANIZATION' ? 'org' : 'user',
+          type: activeAccount.type === 'ORGANIZATION' ? ORG : USER,
           image: activeAccount.image ?? undefined,
         }
       : {
           id: personalResolvedAddress,
           name: '',
           address: resolvedAddress || personalResolvedAddress,
-          type: 'user',
+          type: USER,
           image: undefined,
         });
 

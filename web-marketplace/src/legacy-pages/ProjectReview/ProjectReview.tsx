@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
-import { DeliverTxResponse } from '@cosmjs/stargate';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -12,6 +15,7 @@ import { useAtom } from 'jotai';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { OMITTED_METADATA_KEYS } from 'legacy-pages/ProjectMetadata/ProjectMetadata.config';
 import { omit } from 'lodash';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 import { ReviewCard } from 'web-components/src/components/cards/ReviewCard/ReviewCard';
@@ -34,14 +38,9 @@ import {
 } from 'lib/constants/shared.constants';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
+import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
-import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
-import {
-  getAnchoredProjectMetadata,
-  getAreaUnit,
-  getUnanchoredProjectMetadata,
-  qudtUnit,
-} from 'lib/rdf';
+import { getAnchoredProjectMetadata, getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import {
   STORY_LABEL,
@@ -52,23 +51,21 @@ import {
   GALLERY_PHOTOS,
   MAIN_PHOTO,
 } from 'components/organisms/MediaForm/MediaForm.constants';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
-import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getAccountProjectsByIdQueryKey } from '../../lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
+import { useHandleTxDelivered } from './hooks/useHandleTxDelivered';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import { STORY_PHOTO, STORY_VIDEO } from './ProjectReview.constants';
-import {
-  getOnChainProjectId,
-  getProjectReferenceID,
-} from './ProjectReview.util';
+import { getProjectReferenceID } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -76,9 +73,11 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { setDeliverTxResponse } = useCreateProjectContext();
-  const graphqlClient = useApolloClient();
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
+  const organizationDao = useDaoOrganization();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data, isLoading } = useQuery(
@@ -88,10 +87,30 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       id: projectId,
     }),
   );
+
+  const { data: assignmentsData } = useQuery(
+    getDaoByAddressWithAssignmentsQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!organizationDao?.address,
+      address: organizationDao?.address as string,
+    }),
+  );
+  const assignments =
+    assignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes;
+  const assignment = useMemo(
+    () =>
+      getAccountAssignment({
+        accountId: activeAccountId,
+        assignments,
+      }),
+    [activeAccountId, assignments],
+  );
+
+  const organizationRole = assignment?.roleName;
+
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [bannerError, setBannerError] = useState('');
-  const [updateProject] = useUpdateProjectByIdMutation();
 
   const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
@@ -110,42 +129,33 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     setTxModalTitle(_(msg`MsgCreateProject Error`));
   };
 
-  const handleTxDelivered = async (
-    _deliverTxResponse: DeliverTxResponse,
-  ): Promise<void> => {
-    setDeliverTxResponse(_deliverTxResponse);
-    const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
-
-    if (projectId) {
-      await updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              onChainId: projectOnChainId,
-              published: true,
-              metadata: getUnanchoredProjectMetadata(
-                metadata,
-                projectOnChainId,
-              ),
-            },
-          },
-        },
-      });
-      await reactQueryClient.invalidateQueries({
-        queryKey: getProjectByIdKey(projectId),
-      });
-      navigate(`${editPath}/finished`);
-    }
-  };
-
-  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
-    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
-  const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const metadata = project?.metadata as ProjectMetadataLD;
   const jurisdiction = useGetJurisdiction({ metadata });
+
+  const handleTxDelivered = useHandleTxDelivered({
+    setDeliverTxResponse,
+    organizationRole,
+    projectAdminDaoAddress: project?.adminDaoAddress,
+    editPath,
+    metadata,
+  });
+  const projectDaoAddress = project?.adminDaoAddress;
+  const organizationDaoAddress = organizationDao?.address;
+  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
+    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const { projectCreateSubmit } = useProjectCreateSubmit({
+    signAndBroadcast,
+    walletAddress: wallet?.address,
+    organizationRole,
+    organizationDaoAddress,
+    organizationRbamAddress: organizationDao?.daoRbamAddress,
+    // Project DAO address is stored in DB after migration in BasicInfoForm
+    // We get it from the project data via adminDaoAddress field
+    projectDaoAddress,
+  });
+
   const saveAndExit = useProjectSaveAndExit();
 
   const creditClassId = metadata?.['regen:creditClassId'];
@@ -172,9 +182,14 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       );
       return;
     }
+    const adminAddress =
+      projectDaoAddress && organizationDaoAddress
+        ? organizationDaoAddress
+        : wallet?.address;
+
     await projectCreateSubmit({
       classId: creditClassId || '',
-      admin: wallet?.address || '',
+      admin: adminAddress || '',
       metadata: getAnchoredProjectMetadata(metadata, creditClassId),
       jurisdiction: jurisdiction || '',
       referenceId,

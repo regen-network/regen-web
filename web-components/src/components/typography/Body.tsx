@@ -7,6 +7,7 @@ interface Props extends TypographyProps {
   mobileSize?: TextSize;
   styleLinks?: boolean;
   styleLists?: boolean;
+  color?: string;
 }
 
 export const Body = styled(Typography, {
@@ -23,10 +24,12 @@ export const Body = styled(Typography, {
     size = 'md',
     styleLinks = true,
     styleLists = true,
+    color,
   }) => {
     const { breakpoints, typography } = theme;
     const { variant, mobileVariant } = getSizeVariants(size, mobileSize);
     return {
+      color: color || theme.palette.info.dark,
       lineHeight: '150%',
       fontWeight: 400,
       whiteSpace: 'pre-wrap',
@@ -72,10 +75,3 @@ export const Body = styled(Typography, {
     };
   },
 );
-
-Body.defaultProps = {
-  size: 'md',
-  color: 'info.dark',
-  styleLists: true,
-  styleLinks: true,
-};

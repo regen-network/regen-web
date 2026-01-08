@@ -16,6 +16,7 @@ import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { USER } from './DashboardNavigation.constants';
 import {
   DashboardNavigationSection,
   GradientProps,

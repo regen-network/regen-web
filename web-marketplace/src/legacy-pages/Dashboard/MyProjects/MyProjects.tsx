@@ -40,7 +40,6 @@ const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
   const {
-    isIssuer,
     sanityProfilePageData,
     isOrganizationDashboard,
     organizationDaoAddress,
@@ -86,60 +85,66 @@ const MyProjects = (): JSX.Element => {
   }, [adminProjects, setProjectsDraftState]);
 
   return (
-    <Grid container spacing={8}>
-      {activeAccountId && (
-        <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            buttonText={MY_PROJECTS_BUTTON_TEXT}
-            emptyTitle={MY_PROJECTS_EMPTY_TITLE}
-            isFirstProject={isFirstProject}
-            onClick={() => {
-              if (isIssuer) {
-                navigate(`/project-pages/${DRAFT_ID}/choose-credit-class`);
-              } else {
-                navigate(`/project-pages/${DRAFT_ID}/basic-info`);
-              }
-            }}
-            sx={{ height: { xs: '100%' } }}
-          />
-        </Grid>
-      )}
+    <>
+      <Grid container spacing={8}>
+        {activeAccountId && (
+          <Grid item xs={12} md={6} lg={4}>
+            <CreateProjectCard
+              buttonText={MY_PROJECTS_BUTTON_TEXT}
+              emptyTitle={MY_PROJECTS_EMPTY_TITLE}
+              isFirstProject={isFirstProject}
+              onClick={() => {
+                navigate(`/project-pages/${DRAFT_ID}/account`, {
+                  state: {
+                    fromDashboard: true,
+                    isOrganization: isOrganizationDashboard,
+                  },
+                });
+              }}
+              sx={{ height: { xs: '100%' } }}
+            />
+          </Grid>
+        )}
 
-      {adminProjects &&
-        adminProjects.length > 0 &&
-        adminProjects.map((project, i) => {
-          return (
-            <Grid key={i} item xs={12} md={6} lg={4}>
-              <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
-                <ProjectCard
-                  asAdmin
-                  adminPrompt={
-                    sanityProfilePageData?.allProfilePage?.[0]
-                      ?.projectCardPromptRaw
-                  }
-                  {...getDefaultProject(!activeAccountId, _)}
-                  {...project}
-                  button={{
-                    text: _(MANAGE_PROJECT_BUTTON_TEXT),
-                    disabled: false,
-                    startIcon: <CogIcon linearGradient />,
-                  }}
-                  onButtonClick={() => {
-                    // Navigate to new manage project page
-                    navigate(
-                      isOrganizationDashboard
-                        ? `/dashboard/organization/projects/${project.id}/manage`
-                        : `/dashboard/projects/${project.id}/manage`,
-                    );
-                  }}
-                  track={track}
-                  pathname={location.pathname}
-                />
-              </WithLoader>
-            </Grid>
-          );
-        })}
-    </Grid>
+        {adminProjects &&
+          adminProjects.length > 0 &&
+          adminProjects.map((project, i) => {
+            return (
+              <Grid key={i} item xs={12} md={6} lg={4}>
+                <WithLoader
+                  isLoading={isLoadingAdminProjects}
+                  variant="skeleton"
+                >
+                  <ProjectCard
+                    asAdmin
+                    adminPrompt={
+                      sanityProfilePageData?.allProfilePage?.[0]
+                        ?.projectCardPromptRaw
+                    }
+                    {...getDefaultProject(!activeAccountId, _)}
+                    {...project}
+                    button={{
+                      text: _(MANAGE_PROJECT_BUTTON_TEXT),
+                      disabled: false,
+                      startIcon: <CogIcon linearGradient />,
+                    }}
+                    onButtonClick={() => {
+                      // Navigate to new manage project page
+                      navigate(
+                        isOrganizationDashboard
+                          ? `/dashboard/organization/projects/${project.id}/manage`
+                          : `/dashboard/projects/${project.id}/manage`,
+                      );
+                    }}
+                    track={track}
+                    pathname={location.pathname}
+                  />
+                </WithLoader>
+              </Grid>
+            );
+          })}
+      </Grid>
+    </>
   );
 };
 

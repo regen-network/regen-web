@@ -54,6 +54,8 @@ export const useSubmitCreateProject = () => {
         });
         if (shouldNavigate) navigate(`/project-pages/${projectId}/location`);
       }
+
+      return projectId;
     },
     [
       activeAccountId,

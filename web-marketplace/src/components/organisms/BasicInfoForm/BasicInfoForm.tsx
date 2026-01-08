@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { useProjectEditContext } from 'legacy-pages';
+import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMigrateProject';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
@@ -17,7 +18,9 @@ import InputLabel from 'web-components/src/components/inputs/InputLabel';
 import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
+import { errorModalAtom, processingModalAtom } from 'lib/atoms/modals.atoms';
+import { getHashUrl } from 'lib/block-explorer';
 import {
   EMPTY_OPTION_TEXT,
   POSITIVE_NUMBER,
@@ -43,6 +46,9 @@ import {
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 import { useSubmitCreateProject } from './hooks/useSubmitCreateProject';
 
+const getPendingProjectStorageKey = (draftId?: string) =>
+  `create-project-pending-id-${draftId ?? 'draft'}`;
+
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
   onPrev?: () => void;
@@ -57,8 +63,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const { _ } = useLingui();
   const { classes, cx } = useBasicInfoStyles();
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const saveAndExit = useProjectSaveAndExit();
-  const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const { formRef, shouldNavigateRef, isDraftRef, isOrganizationAccount } =
+    useCreateProjectContext();
   const basicInfoFormSchema = useMemo(
     () =>
       getBasicInfoFormSchema({
@@ -84,8 +92,12 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     name: 'regen:projectSize.qudt:unit',
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setProcessingModal = useSetAtom(processingModalAtom);
+  const setErrorModal = useSetAtom(errorModalAtom);
+  const setErrorCode = useSetAtom(errorCodeAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
+  const { migrateProject } = useMigrateProject();
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -97,13 +109,46 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
         const slugEnd = slugIndex ? `-${slugIndex + 1}` : '';
         const slug = `${slugify(values['schema:name'])}${slugEnd}`;
         if (!isEdit && projectId === DRAFT_ID) {
-          await submitCreateProject({
+          const shouldNavigateNow =
+            shouldNavigateRef?.current && !isOrganizationAccount;
+
+          const newProjectId = await submitCreateProject({
             values,
-            shouldNavigate: shouldNavigateRef?.current,
+            shouldNavigate: shouldNavigateNow,
             projectInput: {
               slug,
             },
           });
+
+          if (isOrganizationAccount) {
+            try {
+              setProcessingModal(atom => void (atom.open = true));
+              await migrateProject(newProjectId, values['schema:name']);
+              setProcessingModal(atom => void (atom.open = false));
+              if (shouldNavigateRef?.current) {
+                navigate(`/project-pages/${newProjectId}/location`);
+              }
+              return;
+            } catch (error) {
+              setProcessingModal(atom => void (atom.open = false));
+              // Extract tx hash if available from error message
+              const errorStr = String(error);
+              const hashMatch = errorStr.match(/txhash[:\s]+([A-F0-9]+)/i);
+              const txHash = hashMatch ? hashMatch[1] : '';
+              setErrorCode(ERRORS.DEFAULT);
+              setErrorModal(atom => {
+                atom.description = errorStr;
+                atom.txHash = txHash;
+                atom.txHashUrl = txHash ? getHashUrl(txHash) : '';
+                atom.cardTitle = _(msg`Migration Failed`);
+                atom.buttonTitle = _(msg`Retry`);
+                atom.onButtonClick = () => {
+                  setErrorModal(atom => void (atom.description = ''));
+                };
+              });
+              return;
+            }
+          }
         } else {
           await onSubmit({
             values,
@@ -144,6 +189,12 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       setErrorBannerTextAtom,
       shouldNavigateRef,
       submitCreateProject,
+      isOrganizationAccount,
+      migrateProject,
+      setProcessingModal,
+      setErrorModal,
+      setErrorCode,
+      navigate,
     ],
   );
 

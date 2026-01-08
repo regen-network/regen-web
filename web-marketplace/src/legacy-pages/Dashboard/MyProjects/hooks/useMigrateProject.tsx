@@ -4,24 +4,36 @@ import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMig
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
 export const useMigrateProject = (
-  project: NormalizeProject,
+  project?: NormalizeProject,
   navigateToOrg: boolean = false,
 ) => {
   const navigate = useNavigate();
+  const orgDao = useDaoOrganization();
 
   const { migrateProjects } = useMigrateProjects({
-    projects: [project],
-    onSuccess: navigateToOrg
-      ? () => navigate(`/dashboard/organization/projects/${project.id}/manage`)
-      : undefined,
+    projects: project ? [project] : [],
+    onSuccess:
+      navigateToOrg && project
+        ? () =>
+            navigate(`/dashboard/organization/projects/${project.id}/manage`)
+        : undefined,
+    feeGranter: orgDao?.address,
   });
 
-  const migrateProject = useCallback(async () => {
-    await migrateProjects({
-      selectedProjectIds: [project.id],
-    });
-  }, [migrateProjects, project.id]);
+  const migrateProject = useCallback(
+    async (projectId?: string, projectName?: string) => {
+      const id = projectId || project?.id;
+      if (!id) return;
+      await migrateProjects({
+        selectedProjectIds: [id],
+        newProjectName: projectName,
+      });
+    },
+    [migrateProjects, project?.id],
+  );
 
   return { migrateProject };
 };

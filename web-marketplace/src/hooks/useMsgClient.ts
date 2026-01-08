@@ -61,7 +61,7 @@ type MsgClientType = {
 
 export default function useMsgClient(
   handleTxQueued?: () => void,
-  handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
+  handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => Promise<void>,
   handleError?: () => void,
 ): MsgClientType {
   const { signingCosmWasmClient, queryClient } = useLedger();
@@ -182,7 +182,7 @@ export default function useMsgClient(
         );
       } else {
         setDeliverTxResponse(_deliverTxResponse);
-        handleTxDelivered && handleTxDelivered(_deliverTxResponse);
+        handleTxDelivered && (await handleTxDelivered(_deliverTxResponse));
         setTxSuccessfulModalAtom(
           atom => void (atom.txHash = _deliverTxResponse.transactionHash),
         );

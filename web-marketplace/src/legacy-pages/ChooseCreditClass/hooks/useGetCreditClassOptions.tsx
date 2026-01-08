@@ -25,7 +25,13 @@ interface CreditClassItem {
   disabled?: boolean;
 }
 
-function useGetCreditClassItems(): {
+interface UseGetCreditClassItemsParams {
+  address?: string | null;
+}
+
+function useGetCreditClassItems({
+  address: addressParam,
+}: UseGetCreditClassItemsParams = {}): {
   creditClassItems: CreditClassItem[];
   loading: boolean;
 } {
@@ -33,7 +39,7 @@ function useGetCreditClassItems(): {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { activeAccount } = useAuth();
-  const address = activeAccount?.addr;
+  const address = addressParam || activeAccount?.addr;
 
   const { data: classesByIssuerData, isLoading } = useQuery(
     getClassesByIssuerQuery({

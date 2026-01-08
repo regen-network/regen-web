@@ -89,6 +89,11 @@ type UseMigrateProjectsParams = {
   data?: OrganizationMultiStepData;
   // Migrating a single project callback from the project dashboard
   onSuccess?: () => void;
+  // Optional fee granter address (organization dao) when migrating projects
+  // after organization creation.
+  // It's not set when migrating project from the organization creation flow
+  // since the organization dao doesn't have any funds yet at this point.
+  feeGranter?: string;
 };
 
 export const useMigrateProjects = ({
@@ -96,6 +101,7 @@ export const useMigrateProjects = ({
   handleSaveNext,
   data,
   onSuccess,
+  feeGranter,
 }: UseMigrateProjectsParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -362,11 +368,13 @@ export const useMigrateProjects = ({
           queryKey: getOrganizationProjectsByDaoAddressQueryKey({
             daoAddress: dao.address,
           }),
+          refetchType: 'all',
         });
         await reactQueryClient.invalidateQueries({
           queryKey: getOrganizationByDaoAddressQueryKey({
             daoAddress: dao.address,
           }),
+          refetchType: 'all',
         });
       }
       reloadBalances();
@@ -405,9 +413,31 @@ export const useMigrateProjects = ({
       const projectIds = values.selectedProjectIds;
       if (projectIds.length > 0) {
         setProcessingModalAtom(atom => void (atom.open = true));
-        const selectedProjects = projects.filter(project =>
-          projectIds.includes(project.id),
+        let selectedProjects = projects.filter(
+          project =>
+            projectIds.includes(project.id) ||
+            (project.offChainId && projectIds.includes(project.offChainId)),
         );
+
+        // If no projects found in array but we have IDs, create minimal project objects
+        // This handles the case of newly created off-chain projects in create project flow
+        if (selectedProjects.length === 0 && projectIds.length > 0) {
+          selectedProjects = projectIds.map(id => ({
+            id,
+            offChainId: id,
+            offChain: true,
+            name: values.newProjectName || id,
+            imgSrc: '',
+            place: '',
+            draftText: '',
+            complianceCredits: {
+              creditsAvailable: 0,
+              creditsRetired: 0,
+              creditsRegistered: 0,
+            },
+            sellOrders: [],
+          })) as NormalizeProject[];
+        }
 
         const onChainProjectIds = projects
           .filter(
@@ -609,6 +639,7 @@ export const useMigrateProjects = ({
           {
             msgs,
             fee: 2,
+            feeGranter,
           },
           undefined,
           {
@@ -663,35 +694,36 @@ export const useMigrateProjects = ({
             },
           },
         );
-      } else if (handleSaveNext && data) handleSaveNext({ ...data, ...values });
+      } else if (handleSaveNext) handleSaveNext({ ...data, ...values });
     },
     [
-      projects,
-      handleSaveNext,
-      data,
-      _,
-      credits,
-      setErrorBannerText,
-      isLoadingCredits,
       isLoadingSellOrders,
-      isLoadingOrgAssignments,
-      sellOrdersData,
+      isLoadingCredits,
       wallet?.address,
       signingCosmWasmClient,
-      reactQueryClient,
-      signAndBroadcast,
       dao,
+      handleSaveNext,
+      data,
+      setErrorBannerText,
+      _,
       setProcessingModalAtom,
-      token,
-      retryCsrfRequest,
-      privActiveAccount,
-      activeAccount,
-      reloadData,
+      projects,
+      credits,
+      isLoadingOrgAssignments,
+      sellOrdersData,
+      signAndBroadcast,
+      reactQueryClient,
       updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
+      privActiveAccount?.can_use_stripe_connect,
+      activeAccount?.stripeConnectedAccountId,
+      token,
+      reloadData,
+      retryCsrfRequest,
       currentUserRole,
       orgAssignmentsData,
       onSuccess,
+      feeGranter,
     ],
   );
 

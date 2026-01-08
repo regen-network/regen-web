@@ -359,7 +359,7 @@ msgstr "Selector de cuentas"
 msgid "Account switch detected! "
 msgstr "¡Cambio de cuenta detectado!"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:53
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:63
 msgid "Account switcher"
 msgstr "selector de cuentas"
 
@@ -432,7 +432,7 @@ msgstr "Añadir URL de vídeo"
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:260
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:266
 msgid "Adding member to project {0} failed: {1}"
 msgstr "Error al agregar miembro al proyecto {0}: {1}"
 
@@ -750,7 +750,7 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuaci�
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
 msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a continuación."
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:195
+#: src/components/organisms/PostFlow/hooks/useSign.ts:196
 msgid "Attest"
 msgstr "Dar fe"
 
@@ -808,7 +808,7 @@ msgid "baskets table"
 msgstr "mesa de cestas"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:20
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:156
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:134
 msgid "batch denom"
 msgstr "nombre del lote"
 
@@ -1258,7 +1258,7 @@ msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:236
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:246
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:397
 msgid "close"
 msgstr "cerca"
@@ -1277,7 +1277,7 @@ msgid "Close project creation"
 msgstr "Cerrar la creación del proyecto"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:224
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:220
 #: src/lib/constants/shared.constants.tsx:96
 msgid "CLOSE WINDOW"
 msgstr "CERRAR VENTANA"
@@ -1451,6 +1451,10 @@ msgstr "Copiar enlace a la página del proyecto"
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr "No se pudo encontrar la organización asociada con la DAO creada. Intente actualizar la página más tarde."
 
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:83
+msgid "Could not parse batch denom"
+msgstr "No se pudo analizar la denominación del lote"
+
 #: src/hooks/org-members/useMembersContext.ts:181
 #: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:117
 msgid "Could not refetch assignments, you might need to reload the page later"
@@ -1478,8 +1482,8 @@ msgstr "crear una organización"
 msgid "create credit batch"
 msgstr "crear lote de credito"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:151
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:221
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:129
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:199
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
 msgid "Create Credit Batch"
 msgstr "Crear lote de créditos"
@@ -1521,7 +1525,7 @@ msgstr "Crear proyecto - Acceso denegado"
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:305
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:302
 msgid "Created by"
 msgstr "Creado por"
 
@@ -1570,7 +1574,7 @@ msgstr "tabla de lotes de crédito"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:129
+#: src/legacy-pages/Profile/Profile.tsx:130
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1645,7 +1649,7 @@ msgstr "Clases de crédito"
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:178
-#: src/legacy-pages/Profile/Profile.tsx:123
+#: src/legacy-pages/Profile/Profile.tsx:124
 msgid "Credit Classes"
 msgstr "Clases de crédito"
 
@@ -2992,11 +2996,11 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/legacy-pages/Profile/Profile.tsx:181
+#: src/legacy-pages/Profile/Profile.tsx:182
 msgid "Manage Credit Batches"
 msgstr "Administrar lotes de crédito"
 
-#: src/legacy-pages/Profile/Profile.tsx:176
+#: src/legacy-pages/Profile/Profile.tsx:177
 msgid "Manage Credit Classes"
 msgstr "Administrar clases de crédito"
 
@@ -3008,7 +3012,7 @@ msgstr "Administrar créditos"
 msgid "Manage Credits"
 msgstr "Administrar créditos"
 
-#: src/legacy-pages/Profile/Profile.tsx:171
+#: src/legacy-pages/Profile/Profile.tsx:172
 msgid "Manage Members"
 msgstr "Gestionar miembros"
 
@@ -3016,7 +3020,7 @@ msgstr "Gestionar miembros"
 msgid "Manage organization"
 msgstr "Gestionar la organización"
 
-#: src/legacy-pages/Profile/Profile.tsx:161
+#: src/legacy-pages/Profile/Profile.tsx:162
 msgid "Manage Portfolio"
 msgstr "Administrar cartera"
 
@@ -3032,7 +3036,7 @@ msgstr "administrar pestañas de proyectos"
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
 
-#: src/legacy-pages/Profile/Profile.tsx:166
+#: src/legacy-pages/Profile/Profile.tsx:167
 msgid "Manage Projects"
 msgstr "Administrar proyectos"
 
@@ -3103,7 +3107,7 @@ msgid "member not found"
 msgstr "miembro no encontrado"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:113
-#: src/legacy-pages/Profile/Profile.tsx:117
+#: src/legacy-pages/Profile/Profile.tsx:118
 msgid "Members"
 msgstr "Miembros"
 
@@ -3775,7 +3779,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:103
+#: src/legacy-pages/Profile/Profile.tsx:104
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -4164,7 +4168,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:109
+#: src/legacy-pages/Profile/Profile.tsx:110
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -4184,7 +4188,7 @@ msgstr "Proporcione información de contacto personal para esta organización."
 #~ msgid "Public profile"
 #~ msgstr "Perfil público"
 
-#: src/legacy-pages/Profile/Profile.tsx:271
+#: src/legacy-pages/Profile/Profile.tsx:272
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 
@@ -4504,7 +4508,7 @@ msgid "roles"
 msgstr "roles"
 
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:319
-#: src/legacy-pages/Roles/Roles.tsx:85
+#: src/legacy-pages/Roles/Roles.tsx:90
 msgid "Roles"
 msgstr "Roles"
 
@@ -4569,7 +4573,7 @@ msgstr "buscar nuevos creditos"
 msgid "sectoral scopes"
 msgstr "ámbitos sectoriales"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:234
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:212
 msgid "SEE ALL CREDIT BATCHES"
 msgstr "VER TODOS LOS LOTES DE CRÉDITO"
 
@@ -4581,7 +4585,7 @@ msgstr "Ver todas las metodologías"
 msgid "See an example»"
 msgstr "Ver un ejemplo»"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:180
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:158
 msgid "SEE CREDIT BATCH"
 msgstr "VER LOTE DE CRÉDITOS"
 
@@ -4639,7 +4643,7 @@ msgid "Sell Order #"
 msgstr "Orden de venta n.°"
 
 #. placeholder {0}: sellOrderId.replaceAll('"', '')
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useUpdateTxModalTitle.tsx:39
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useUpdateTxModalTitle.tsx:29
 msgid "Sell Order #{0}"
 msgstr "Orden de venta n.° {0}"
 
@@ -4748,7 +4752,7 @@ msgstr "Firma este post"
 msgid "signature"
 msgstr "firma"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:352
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:349
 msgid "Signed by"
 msgstr "Firmado por"
 
@@ -4838,7 +4842,7 @@ msgstr "Lo sentimos, este correo electrónico ya está conectado a otra cuenta."
 msgid "Sorry, you don’t have any REGEN to cover transaction fees"
 msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:216
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:194
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
 #: src/lib/constants/shared.constants.tsx:92
 msgid "Sorry, your transaction was not successful."
@@ -5299,7 +5303,7 @@ msgstr "Esta dirección de billetera ya está en uso en otra cuenta. ¿Quieres f
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:193
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:199
 msgid "Timed out waiting for project DAOs to be indexed."
 msgstr "Se agotó el tiempo de espera para que se indexaran los DAO del proyecto."
 
@@ -5424,6 +5428,11 @@ msgstr "Comercio"
 msgid "Traditional grazing"
 msgstr "Pastoreo tradicional"
 
+#. placeholder {0}: _deliverTxResponse.code
+#: src/hooks/useMsgClient.ts:181
+msgid "Transaction failed with code {0}"
+msgstr "La transacción falló con el código {0}"
+
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:132
 msgid "Transaction signing failed"
 msgstr "Falló la firma de la transacción."
@@ -5510,13 +5519,13 @@ msgstr "Actualizar metadatos del proyecto"
 
 #. placeholder {0}: selectedCardSellOrders[idx].id
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:299
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:305
 msgid "Updating Card Order {0} failed: {1}"
 msgstr "Error al actualizar el pedido de la tarjeta {0}: {1}"
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:218
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:224
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr "Error al actualizar el proyecto fuera de la cadena {0}: {1}"
 
@@ -5726,7 +5735,7 @@ msgstr "ver publicación"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:122
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:133
 msgid "View public profile"
 msgstr "Ver perfil público"
 

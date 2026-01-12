@@ -1,5 +1,11 @@
 import { useMemo, useState } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  Outlet,
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -38,7 +44,7 @@ import {
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link } from 'components/atoms';
+import { Link, ReactRouterMuiLink } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
@@ -225,6 +231,7 @@ export const Profile = (): JSX.Element => {
     description: account?.description?.trimEnd() ?? '',
     socialsLinks,
   };
+  const navigate = useNavigate();
 
   return (
     <WithLoader
@@ -251,7 +258,11 @@ export const Profile = (): JSX.Element => {
               avatar={avatarImage}
               infos={infos}
               editLink={
-                isOwnProfile ? (organization ? '/dashboard/organization/profile' : '/dashboard/profile') : ''
+                isOwnProfile
+                  ? organization
+                    ? '/dashboard/organization/profile'
+                    : '/dashboard/profile'
+                  : ''
               }
               profileLink={profileLink}
               variant={
@@ -273,9 +284,9 @@ export const Profile = (): JSX.Element => {
                     <IconTabs
                       aria-label={_(msg`public profile tabs`)}
                       tabs={tabs}
-                      linkComponent={Link}
                       activeTab={activeTab}
                       mobileFullWidth
+                      linkComponent={ReactRouterMuiLink}
                     />
                     <div className="flex w-full md:w-auto mt-[30px] mb-7.5 md:mt-0 md:mb-0">
                       {manageButtonConfig.map(

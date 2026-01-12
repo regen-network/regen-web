@@ -1,5 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 export const RegistryLayout = () => {
-  return <Outlet />;
+  return (
+    <>
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          const profileMatch = matches.find(match =>
+            match.pathname.includes('/profiles/'),
+          );
+          return profileMatch ? profileMatch.pathname : location.key;
+        }}
+      />
+      <Outlet />
+    </>
+  );
 };

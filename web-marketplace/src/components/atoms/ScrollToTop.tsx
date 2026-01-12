@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 // List of route segments that should not trigger a scroll reset
-const whitelist = ['ecocredit-batches'];
+const whitelist = ['ecocredit-batches', 'profiles'];
 
 /**
  * Automatically scrolls the page to the top when navigating to a new route,
@@ -16,8 +16,9 @@ function ScrollToTop(): null {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!whitelist.some(route => pathname.includes(route)))
+    if (!whitelist.some(route => pathname.includes(route))) {
       window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return null; // No UI component, only side effect

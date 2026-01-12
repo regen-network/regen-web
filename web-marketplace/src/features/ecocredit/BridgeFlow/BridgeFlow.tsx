@@ -100,6 +100,7 @@ export const BridgeFlow = ({
     reactQueryClient.invalidateQueries({
       queryKey: [
         GET_TXS_EVENT_KEY,
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         `${messageActionEquals}'${MsgBridge.typeUrl}' AND message.sender='${wallet?.address}'`,
       ],
     });

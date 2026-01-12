@@ -1529,7 +1529,7 @@ msgstr "Crear orden de venta"
 msgid "Created by"
 msgstr "Creado por"
 
-#: src/components/layout/Layout.Header.tsx:104
+#: src/lib/constants/shared.constants.tsx:241
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr "Para crear una organización es necesario firmar una transacción en blockchain. Obtén más información sobre las billeteras en nuestra <0>guía del usuario</0>."
 

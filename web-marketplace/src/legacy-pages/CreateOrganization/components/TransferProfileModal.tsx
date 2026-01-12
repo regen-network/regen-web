@@ -51,7 +51,7 @@ export function TransferProfileModal({
 
         <div className="flex-1 px-20 md:px-40">
           <div className="flex flex-col rounded-[5px] border border-solid border-bc-neutral-300 bg-bc-neutral-0 px-20 py-30 md:p-40">
-            <p className="mb-20 text-[18px] font-bold text-bc-neutral-500">
+            <p className="mt-0 mb-20 text-[18px] font-bold text-bc-neutral-500">
               {_(CREATE_ORG_TRANSFER_MODAL_SECTION_TITLE)}
             </p>
             <div className="flex items-center gap-[15px]">

@@ -12,10 +12,11 @@ import {
 } from '@interchain-kit/react';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import truncate from 'lodash/truncate';
 
 import { AccountByAddrQuery, Maybe } from 'generated/graphql';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -114,27 +115,37 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const { closeView } = useChain('regen');
   const { address, status } = useChainWallet('regen', WALLET_CONNECT);
   const walletManager = useWalletManager();
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+
+  useEffect(() => {
+    setErrorBannerText(String(error));
+  }, [error, setErrorBannerText]);
 
   useEffect(() => {
     async function getOfflineSigner() {
-      const offlineSigner = await walletManager.getOfflineSigner(
-        WALLET_CONNECT,
-        'regen',
-      );
-      // Wrap the signer to add compatibility with CosmJS methods
-      const wrappedSigner = wrapSigner(offlineSigner);
-      if (offlineSigner) {
+      try {
+        const offlineSigner = await walletManager.getOfflineSigner(
+          WALLET_CONNECT,
+          'regen',
+        );
+        // Wrap the signer to add compatibility with CosmJS methods
+        const wrappedSigner = wrapSigner(offlineSigner);
+        if (offlineSigner) {
+          closeView();
+          setWallet({
+            offlineSigner: wrappedSigner,
+            address,
+            shortAddress: truncate(address),
+          });
+          setWalletConnect(true);
+          track<ConnectEvent>('loginWalletConnect', {
+            date: new Date().toUTCString(),
+            account: address,
+          });
+        }
+      } catch (e) {
         closeView();
-        setWallet({
-          offlineSigner: wrappedSigner,
-          address,
-          shortAddress: truncate(address),
-        });
-        setWalletConnect(true);
-        track<ConnectEvent>('loginWalletConnect', {
-          date: new Date().toUTCString(),
-          account: address,
-        });
+        setError(e);
       }
     }
     if (status === WalletState.Connected && address && !wallet?.offlineSigner) {

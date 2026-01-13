@@ -209,7 +209,6 @@ export const useFetchProjectByAdmin = ({
     ...onChainProjectsWithData,
     ...onlyOffChainProjectsWithData,
   ];
-
   return {
     adminProjects: projects as NormalizeProject[],
     accountData,

@@ -7098,7 +7098,7 @@ export type OrganizationMemberRemovalCondition = {
 export type OrganizationMemberRemovalInput = {
   accountId: Scalars['UUID'];
   organizationId: Scalars['UUID'];
-  removedAt: Scalars['Datetime'];
+  removedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** Represents an update to a `OrganizationMemberRemoval`. Fields that are set will be updated. */
@@ -11736,7 +11736,7 @@ export type AccountByIdQuery = (
       { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Dao' }
-        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress'>
+        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'stripeConnectedAccountId'>
         & { organizationByDaoAddress?: Maybe<(
           { __typename?: 'Organization' }
           & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
@@ -12645,6 +12645,8 @@ export const AccountByIdDocument = gql`
         address
         daoRbamAddress
         cw4GroupAddress
+        canUseStripeConnect
+        stripeConnectedAccountId
         organizationByDaoAddress {
           id
           name

@@ -7,8 +7,8 @@ import {
 import { EncodeObject } from '@cosmjs/proto-signing';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { regen } from '@regen-network/api';
-import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
+import { cosmos, regen } from '@regen-network/api';
+import { GenericAuthorization } from '@regen-network/api/cosmos/authz/v1beta1/authz';
 import { MsgSend_SendCredits } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -20,12 +20,15 @@ import {
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
 import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
-import {
-  getExecuteActionsStargate,
-  getMsgExecuteContract,
-} from 'utils/cosmwasm';
+import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
-import { getAccountAssignment } from 'utils/rbam.utils';
+import {
+  authzGrantAction,
+  getAccountAssignment,
+  getRoleAuthorizationIds,
+  sellOrderAction,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import {
@@ -60,8 +63,11 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { FormValues } from 'components/organisms/MigrateProjects/MigrateProjects.types';
+import {
+  grantee,
+  msgTypes,
+} from 'components/organisms/SellerSetupAccount/hooks/useStripeAccount.constants';
 import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { orgRoles } from 'hooks/org-members/constants';
 import { getNewProjectRoleId } from 'hooks/org-members/utils';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient from 'hooks/useMsgClient';
@@ -594,37 +600,71 @@ export const useMigrateProjects = ({
         let sellExecuteMsg:
           | ReturnType<typeof getMsgExecuteContract>
           | undefined;
-        if (selectedSellOrders.length > 0) {
-          // Encode MsgSell to protobuf bytes
-          const protoBytes = MsgSell.encode({
-            seller: dao.address,
-            orders: selectedSellOrders.map(order => ({
-              batchDenom: order.batchDenom,
-              quantity: order.quantity,
-              askPrice: {
-                denom: order.askDenom,
-                amount: order.askAmount,
-              },
-              disableAutoRetire: order.disableAutoRetire,
-              expiration: order.expiration,
-            })),
-          }).finish();
-
-          const executeActionsMsg = getExecuteActionsStargate([
-            {
-              authorizationId: orgRoles.owner.authorizations
-                .can_manage_sell_orders as number,
-              roleId: orgRoles.owner.roleId,
-              typeUrl: MsgSell.typeUrl,
-              value: protoBytes,
+        let authzMsgs: EncodeObject[] = [];
+        const { roleId, authorizationId } = getRoleAuthorizationIds({
+          type: 'organization',
+          currentUserRole,
+          authorizationName: 'can_manage_sell_orders',
+        });
+        if (selectedSellOrders.length > 0 && roleId && authorizationId) {
+          const executeActionsMsg = sellOrderAction({
+            authorizationId,
+            roleId,
+            ...{
+              seller: dao.address,
+              orders: selectedSellOrders.map(order => ({
+                batchDenom: order.batchDenom,
+                quantity: order.quantity,
+                askPrice: {
+                  denom: order.askDenom,
+                  amount: order.askAmount,
+                },
+                disableAutoRetire: order.disableAutoRetire,
+                expiration: order.expiration,
+              })),
             },
-          ]);
-
-          sellExecuteMsg = getMsgExecuteContract({
-            walletAddress,
-            contract: dao.daoRbamAddress,
-            executeActionsMsg,
           });
+
+          sellExecuteMsg = wrapRbamActions({
+            walletAddress,
+            rbamAddress: dao.daoRbamAddress,
+            actions: [executeActionsMsg],
+          });
+
+          if (
+            privActiveAccount?.can_use_stripe_connect &&
+            activeAccount?.stripeConnectedAccountId &&
+            grantee
+          ) {
+            // Ungrant for current account
+            const ungrantMsgs = msgTypes.map(typeUrl =>
+              cosmos.authz.v1beta1.MessageComposer.withTypeUrl.revoke({
+                granter: walletAddress,
+                grantee: grantee as string,
+                msgTypeUrl: typeUrl,
+              }),
+            );
+            authzMsgs.push(...ungrantMsgs);
+            // Grant for organization dao
+            const grantMsg = wrapRbamActions({
+              walletAddress: walletAddress,
+              rbamAddress: dao.daoRbamAddress,
+              actions: msgTypes.map(typeUrl =>
+                authzGrantAction({
+                  roleId,
+                  authorizationId,
+                  granter: dao.address,
+                  grantee: grantee as string,
+                  grant: {
+                    authorization: GenericAuthorization.toProtoMsg({
+                      msg: typeUrl,
+                    }),
+                  },
+                }),
+              ),
+            });
+            authzMsgs.push(grantMsg);
+          }
         }
 
         const msgs = [
@@ -633,6 +673,7 @@ export const useMigrateProjects = ({
           sendCreditsMsg,
           ...updateProjectAdminMsgs,
           sellExecuteMsg,
+          ...authzMsgs,
         ].filter(Boolean) as EncodeObject[];
 
         await signAndBroadcast(

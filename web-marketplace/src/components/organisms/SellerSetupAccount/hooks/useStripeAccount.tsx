@@ -1,14 +1,16 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { EncodeObject } from '@cosmjs/proto-signing';
 import { cosmos } from '@regen-network/api';
 import { GenericAuthorization } from '@regen-network/api/cosmos/authz/v1beta1/authz';
-import {
-  MsgCancelSellOrder,
-  MsgUpdateSellOrders,
-} from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
-import { MsgSend } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { postData } from 'utils/fetch/postData';
+import {
+  authzGrantAction,
+  getRoleAuthorizationIds,
+  wrapRbamActions,
+} from 'utils/rbam.utils';
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -18,6 +20,8 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import useMsgClient from 'hooks/useMsgClient';
+
+import { grantee, msgTypes } from './useStripeAccount.constants';
 
 /**
  * Custom React hook to manage Stripe connected account interactions.
@@ -41,29 +45,75 @@ const useStripeAccount = () => {
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
+  const {
+    feeGranter,
+    organizationRole,
+    isOrganizationDashboard,
+    organizationRbamAddress,
+    organizationDaoAddress,
+  } = useDashboardContext();
+
+  const stripeDaoData = useMemo(
+    () =>
+      isOrganizationDashboard && organizationDaoAddress
+        ? { daoAddress: organizationDaoAddress }
+        : undefined,
+    [isOrganizationDashboard, organizationDaoAddress],
+  );
 
   const setupAccount = useCallback(async () => {
-    const grantee = process.env.NEXT_PUBLIC_REGEN_WORKER_ADDRESS;
     if (activeAccount?.addr && token && grantee) {
-      const msgTypes = [
-        MsgCancelSellOrder.typeUrl,
-        MsgUpdateSellOrders.typeUrl,
-        MsgSend.typeUrl,
-      ];
+      const { roleId, authorizationId } = getRoleAuthorizationIds({
+        type: 'organization',
+        currentUserRole: organizationRole,
+        authorizationName: 'can_manage_sell_orders',
+      });
 
-      const grants = msgTypes.map(typeUrl =>
-        cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
-          granter: activeAccount?.addr as string,
-          grantee,
-          grant: {
-            authorization: GenericAuthorization.toProtoMsg({ msg: typeUrl }),
-          },
-        }),
-      );
+      let grants: EncodeObject[] = [];
+      if (
+        isOrganizationDashboard &&
+        organizationRole &&
+        organizationDaoAddress &&
+        organizationRbamAddress &&
+        roleId &&
+        authorizationId
+      ) {
+        grants = [
+          wrapRbamActions({
+            walletAddress: activeAccount?.addr,
+            rbamAddress: organizationRbamAddress,
+            actions: msgTypes.map(typeUrl =>
+              authzGrantAction({
+                roleId,
+                authorizationId,
+                granter: organizationDaoAddress,
+                grantee: grantee as string,
+                grant: {
+                  authorization: GenericAuthorization.toProtoMsg({
+                    msg: typeUrl,
+                  }),
+                },
+              }),
+            ),
+          }),
+        ];
+      } else {
+        grants = msgTypes.map(typeUrl =>
+          cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
+            granter: activeAccount?.addr as string,
+            grantee: grantee as string,
+            grant: {
+              authorization: GenericAuthorization.toProtoMsg({ msg: typeUrl }),
+            },
+          }),
+        );
+      }
 
       await signAndBroadcast(
         {
           msgs: grants,
+          feeGranter,
+          fee: 'auto',
         },
         (): void => {
           setProcessingModalAtom(atom => void (atom.open = true));
@@ -77,6 +127,7 @@ const useStripeAccount = () => {
             try {
               await postData({
                 url: `${apiUri}/marketplace/v1/stripe/accounts`,
+                data: stripeDaoData,
                 token,
                 retryCsrfRequest,
                 onSuccess: async response => {
@@ -99,6 +150,12 @@ const useStripeAccount = () => {
     setProcessingModalAtom,
     signAndBroadcast,
     token,
+    feeGranter,
+    isOrganizationDashboard,
+    organizationRole,
+    organizationRbamAddress,
+    organizationDaoAddress,
+    stripeDaoData,
   ]);
 
   const openLoginLink = useCallback(async () => {
@@ -106,6 +163,7 @@ const useStripeAccount = () => {
       try {
         await postData({
           url: `${apiUri}/marketplace/v1/stripe/login-link`,
+          data: stripeDaoData,
           token,
           retryCsrfRequest,
           onSuccess: async response => {
@@ -116,7 +174,7 @@ const useStripeAccount = () => {
         setErrorBannerText(String(e));
       }
     }
-  }, [retryCsrfRequest, setErrorBannerText, token]);
+  }, [retryCsrfRequest, setErrorBannerText, token, stripeDaoData]);
 
   return { setupAccount, openLoginLink };
 };

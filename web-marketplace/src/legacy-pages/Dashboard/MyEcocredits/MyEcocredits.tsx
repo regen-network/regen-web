@@ -125,6 +125,7 @@ export const MyEcocredits = (): JSX.Element => {
   const { privActiveAccount, activeAccount } = useAuth();
   const { loginDisabled } = useWallet();
   const {
+    selectedAccount,
     selectedAccountAddress,
     isOrganizationDashboard,
     isOrganizationOwner,
@@ -495,14 +496,14 @@ export const MyEcocredits = (): JSX.Element => {
 
   const canCreateFiatOrder = useMemo(() => {
     return (
-      !!privActiveAccount?.can_use_stripe_connect &&
-      !!activeAccount?.stripeConnectedAccountId &&
+      !!selectedAccount?.canUseStripeConnect &&
+      !!selectedAccount?.stripeConnectedAccountId &&
       !loginDisabled
     );
   }, [
-    activeAccount?.stripeConnectedAccountId,
+    selectedAccount?.stripeConnectedAccountId,
     loginDisabled,
-    privActiveAccount?.can_use_stripe_connect,
+    selectedAccount?.canUseStripeConnect,
   ]);
   const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 

@@ -2,13 +2,13 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
@@ -32,8 +32,8 @@ export const UserSellOrdersToolbar = ({
   canManageSellOrders = true,
   accountAddress,
 }: UserSellOrdersToolbarProps) => {
+  const { selectedAccount } = useDashboardContext();
   const { _ } = useLingui();
-  const { privActiveAccount, activeAccount } = useAuth();
   const { loginDisabled, wallet } = useWallet();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -99,8 +99,8 @@ export const UserSellOrdersToolbar = ({
             refetchSellOrders={refetchSellOrders}
             redirectOnSuccess={false}
             canCreateFiatOrder={
-              !!privActiveAccount?.can_use_stripe_connect &&
-              !!activeAccount?.stripeConnectedAccountId &&
+              !!selectedAccount?.canUseStripeConnect &&
+              !!selectedAccount?.stripeConnectedAccountId &&
               !loginDisabled
             }
             accountAddress={sellerAddress}

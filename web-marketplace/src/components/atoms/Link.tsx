@@ -43,7 +43,10 @@ const NextLinkBehavior = React.forwardRef<
 ReactRouterLinkBehavior.displayName = 'ReactRouterLinkBehavior';
 // eslint-disable-next-line lingui/no-unlocalized-strings
 NextLinkBehavior.displayName = 'NextLinkBehavior';
-const createMuiLink = (internalComponent: React.ElementType) => {
+const createMuiLink = (
+  internalComponent: React.ElementType,
+  { applyLocalePrefix = true }: { applyLocalePrefix?: boolean } = {},
+) => {
   const Component = forwardRef<HTMLAnchorElement, LinkProps>(
     ({ href, children, target, ...linkProps }, ref) => {
       const locale = useCurrentLocale();
@@ -56,10 +59,10 @@ const createMuiLink = (internalComponent: React.ElementType) => {
         !!href && href.startsWith('/');
       // const hasAnchor = href?.includes('#');
 
-      const withLocalePrefix = (href: string): string =>
-        isInternalLink(href) ? ensureLocalePrefix(href, locale) : href;
-
-      const internalHref = withLocalePrefix(href);
+      const internalHref =
+        applyLocalePrefix && isInternalLink(href)
+          ? ensureLocalePrefix(href, locale)
+          : href;
 
       return isInternalLink(href) ? (
         <MuiLink
@@ -97,7 +100,9 @@ const createMuiLink = (internalComponent: React.ElementType) => {
  * Renders a Material UI `Link` - will use React Router Link for local links.
  * Defaults to `target='_blank'` for external links.
  */
-export const ReactRouterMuiLink = createMuiLink(ReactRouterLinkBehavior);
+export const ReactRouterMuiLink = createMuiLink(ReactRouterLinkBehavior, {
+  applyLocalePrefix: false,
+});
 
 /**
  * Renders a Material UI `Link` - will use Next Link for local links.

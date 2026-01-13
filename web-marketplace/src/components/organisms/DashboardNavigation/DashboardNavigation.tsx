@@ -106,6 +106,7 @@ export const DashboardNavigation = ({
       hasOrders,
       hasCreditBatches,
       canEditOrg,
+      isOrganizationDashboard,
     ],
   );
 

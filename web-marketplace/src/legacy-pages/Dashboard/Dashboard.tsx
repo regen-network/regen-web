@@ -108,15 +108,9 @@ export const Dashboard = () => {
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
+    clearConnectWalletFlow,
+    openConnectWalletModal,
   } = useOrganizationActions();
-
-  const markConnectWalletFlowActive = useCallback(() => {
-    setShouldResumeConnectWalletFlow(true);
-  }, [setShouldResumeConnectWalletFlow]);
-
-  const clearConnectWalletFlow = useCallback(() => {
-    setShouldResumeConnectWalletFlow(false);
-  }, [setShouldResumeConnectWalletFlow]);
 
   const isOrganizationDashboard = pathname.startsWith(
     '/dashboard/organization',
@@ -358,6 +352,7 @@ export const Dashboard = () => {
       feeGranter: isOrganizationDashboard
         ? organizationAccount?.address
         : undefined,
+      onConnectWalletClick: openConnectWalletModal,
     }),
     [
       isCreditClassCreator,
@@ -374,6 +369,7 @@ export const Dashboard = () => {
       isOrganizationEditor,
       isOrganizationViewer,
       wallet?.address,
+      openConnectWalletModal,
     ],
   );
 
@@ -658,7 +654,7 @@ export const Dashboard = () => {
           {
             ...walletsUiConfig[0],
             onClick: () => {
-              markConnectWalletFlowActive();
+              setShouldResumeConnectWalletFlow(true);
               handleWalletConnect();
             },
           },

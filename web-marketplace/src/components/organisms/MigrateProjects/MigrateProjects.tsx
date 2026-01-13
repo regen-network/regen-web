@@ -40,18 +40,22 @@ export const MigrateProjects = ({
               {projects.map(project => {
                 const isSelected = selectedIds.includes(project.id);
                 return (
-                  <SelectProjectCard
+                  <div
                     key={project.id}
-                    project={project}
-                    selected={isSelected}
-                    onClick={() => {
-                      if (isSelected) {
-                        onChange(selectedIds.filter(id => id !== project.id));
-                      } else {
-                        onChange([...selectedIds, project.id]);
-                      }
-                    }}
-                  />
+                    className={isSelected ? 'opacity-100' : 'opacity-70'}
+                  >
+                    <SelectProjectCard
+                      project={project}
+                      selected={isSelected}
+                      onClick={() => {
+                        if (isSelected) {
+                          onChange(selectedIds.filter(id => id !== project.id));
+                        } else {
+                          onChange([...selectedIds, project.id]);
+                        }
+                      }}
+                    />
+                  </div>
                 );
               })}
             </div>

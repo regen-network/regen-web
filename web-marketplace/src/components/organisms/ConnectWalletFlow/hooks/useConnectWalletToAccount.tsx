@@ -27,6 +27,7 @@ type Params = {
   setAddressUsedModalOpen: UseStateSetter<boolean>;
   setAddressUsedWithEmailModalOpen: UseStateSetter<boolean>;
   setSignature: UseStateSetter<StdSignature | undefined>;
+  clearConnectWalletFlow?: () => void;
 };
 
 export const useConnectWalletToAccount = ({
@@ -36,6 +37,7 @@ export const useConnectWalletToAccount = ({
   setAddressUsedModalOpen,
   setAddressUsedWithEmailModalOpen,
   setSignature,
+  clearConnectWalletFlow,
 }: Params) => {
   const { activeAccountId, activeAccount, loading } = useAuth();
   const { wallet, walletConfig } = useWallet();
@@ -75,6 +77,8 @@ export const useConnectWalletToAccount = ({
           token,
           retryCsrfRequest,
           onSuccess: async () => {
+            clearConnectWalletFlow?.();
+
             await track<AccountEvent>('connectWallet', {
               id: activeAccount?.id,
               account: wallet.address,
@@ -127,6 +131,7 @@ export const useConnectWalletToAccount = ({
     setAddressUsedModalOpen,
     setAddressUsedWithEmailModalOpen,
     setError,
+    clearConnectWalletFlow,
   ]);
 
   // Step 5: trigger connect wallet callback whenever wallet address is available and action modal is opened

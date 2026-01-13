@@ -1,36 +1,26 @@
-import { useState } from 'react';
 import { useLingui } from '@lingui/react';
-
-import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
+import { useSetAtom } from 'jotai';
 
 import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
-import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
-import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
-import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
-import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData.legacy';
 import { useEmailConfirmationData } from 'components/organisms/LoginFlow/hooks/useEmailConfirmationData';
 import { UserAccountSettings } from 'components/organisms/UserAccountSettings/UserAccountSettings';
 import { EMAIL_ADDED } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/UserAccountSettings.types';
 
+import { useDashboardContext } from './Dashboard.context';
+import { shouldRedirectToCreateOrgAtom } from './Dashboard.store';
 import { useSocialProviders } from './hooks/useSocialProviders';
 import { useVerifyToken } from './hooks/useVerifyToken';
 
 export const DashboardSettings = () => {
   const { _ } = useLingui();
-  const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
-  const { connect } = useWallet();
-  const {
-    isModalOpen,
-    modalState,
-    onButtonClick,
-    onModalClose,
-    walletsUiConfig,
-  } = useLoginData({});
+  const { onConnectWalletClick } = useDashboardContext();
+  const setShouldRedirectToCreateOrg = useSetAtom(
+    shouldRedirectToCreateOrgAtom,
+  );
 
   // Social providers
   const socialProviders = useSocialProviders();
@@ -52,7 +42,12 @@ export const DashboardSettings = () => {
   // Keplr account
   const walletProviderInfo: WalletProviderInfo = hasKeplrAccount
     ? { address: String(activeAccount?.addr) }
-    : { connect: onButtonClick };
+    : {
+        connect: () => {
+          setShouldRedirectToCreateOrg(false); // reset any org creation redirect
+          onConnectWalletClick();
+        },
+      };
 
   const emailConfirmationData = useEmailConfirmationData({
     emailConfirmationText: _(EMAIL_ADDED),
@@ -62,40 +57,12 @@ export const DashboardSettings = () => {
 
   return (
     <div className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-sc-card-standard-stroke rounded-[10px]">
-      {(error as string) && (
-        <ErrorBanner
-          text={(error as string).toString()}
-          onClose={() => setError(undefined)}
-        />
-      )}
       <UserAccountSettings
         email={privActiveAccount?.email ?? ''}
         socialProviders={_socialProviders}
         walletProvider={walletProviderInfo}
         custodialAddress={activeAccount?.custodialAddress}
         emailConfirmationData={emailConfirmationData}
-      />
-      <AccountConnectWalletModal
-        open={isModalOpen}
-        onClose={onModalClose}
-        wallets={[
-          {
-            ...walletsUiConfig[0],
-            onClick: () => {
-              connect &&
-                connect({
-                  walletType: WalletType.Keplr,
-                  doLogin: false,
-                });
-            },
-          },
-        ]}
-        state={modalState}
-      />
-      <ConnectWalletFlow
-        isConnectModalOpened={isModalOpen}
-        setError={setError}
-        onConnectModalClose={onModalClose}
       />
     </div>
   );

@@ -1,4 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useAtom, useSetAtom } from 'jotai';
+import {
+  dashboardConnectWalletFlowAtom,
+  shouldRedirectToCreateOrgAtom,
+} from 'legacy-pages/Dashboard/Dashboard.store';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from 'lib/auth/auth';
@@ -11,14 +16,24 @@ import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
 export const useOrganizationActions = () => {
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, connect, isConnected } = useWallet();
-  const { modalState, onButtonClick, onModalClose, walletsUiConfig } =
-    useLoginData({});
+  const {
+    modalState,
+    onButtonClick: openConnectWalletModal,
+    onModalClose,
+    walletsUiConfig,
+    isModalOpen,
+  } = useLoginData({});
 
-  const [isConnectWalletModalOpen, setIsConnectWalletModalOpen] =
-    useState(false);
-  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] =
-    useState(false);
-  const [, setError] = useState<unknown>();
+  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] = useAtom(
+    shouldRedirectToCreateOrgAtom,
+  );
+  const setShouldResumeConnectWalletFlow = useSetAtom(
+    dashboardConnectWalletFlowAtom,
+  );
+
+  const clearConnectWalletFlow = useCallback(() => {
+    setShouldResumeConnectWalletFlow(false);
+  }, [setShouldResumeConnectWalletFlow]);
 
   const {
     menuOrganizationProfile,
@@ -33,41 +48,44 @@ export const useOrganizationActions = () => {
   const createOrganization = useCallback(() => {
     if (privActiveAccount && !isConnected) {
       setShouldRedirectToCreateOrg(true);
-      setIsConnectWalletModalOpen(true);
-      onButtonClick();
+      openConnectWalletModal();
     } else if (isConnected) {
       router.push('/organizations/create');
     }
-  }, [router, privActiveAccount, isConnected, onButtonClick]);
+  }, [
+    router,
+    privActiveAccount,
+    isConnected,
+    openConnectWalletModal,
+    setShouldRedirectToCreateOrg,
+  ]);
 
   const finishOrgCreation = useCallback(() => {
-    onButtonClick();
     router.push('/organizations/create');
-  }, [router, onButtonClick]);
+  }, [router]);
 
   const handleConnectWalletModalClose = useCallback(() => {
-    setIsConnectWalletModalOpen(false);
     setShouldRedirectToCreateOrg(false);
     onModalClose();
-  }, [onModalClose]);
+  }, [onModalClose, setShouldRedirectToCreateOrg]);
 
   const handleWalletConnect = useCallback(() => {
     connect?.({
       walletType: WalletType.Keplr,
-      doLogin: true,
+      doLogin: false,
     });
   }, [connect]);
 
   useEffect(() => {
-    if (shouldRedirectToCreateOrg && isConnected && !isConnectWalletModalOpen) {
+    if (shouldRedirectToCreateOrg && isConnected) {
       setShouldRedirectToCreateOrg(false);
       router.push('/organizations/create');
     }
   }, [
     shouldRedirectToCreateOrg,
     isConnected,
-    isConnectWalletModalOpen,
     router,
+    setShouldRedirectToCreateOrg,
   ]);
 
   return {
@@ -78,9 +96,10 @@ export const useOrganizationActions = () => {
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
-    isConnectWalletModalOpen,
+    isConnectWalletModalOpen: isModalOpen,
     handleConnectWalletModalClose,
     handleWalletConnect,
-    setError,
+    clearConnectWalletFlow,
+    openConnectWalletModal,
   };
 };

@@ -6,6 +6,10 @@ import {
 } from 'web-components/src/components/header/components/NavLink';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { useCurrentLocale } from 'lib/i18n/hooks/useCurrentLocale';
+import { ensureLocalePrefix } from 'lib/i18n/utils/ensureLocalePrefix';
+
+import { normalizePath, PROFILES_PATH } from './HeaderNavLink.utils';
 import { Link } from './Link';
 
 /**
@@ -19,8 +23,15 @@ export const HeaderNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   disabled,
 }) => {
   const pathname = usePathname();
-  const isActive = pathname === href;
-  const { classes } = useNavLinkStyles({ isActive: !!isActive, disabled });
+  const locale = useCurrentLocale();
+  const hrefWithLocale = ensureLocalePrefix(href, locale);
+  const normalizedPathname = normalizePath(pathname);
+  const normalizedHref = normalizePath(hrefWithLocale);
+  const isProfileLink = normalizedHref.includes(PROFILES_PATH);
+  const isActive =
+    normalizedPathname === normalizedHref ||
+    (isProfileLink && normalizedPathname.startsWith(`${normalizedHref}/`));
+  const { classes } = useNavLinkStyles({ isActive, disabled });
 
   const handleDisabledButtonClick = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,

@@ -37,7 +37,6 @@ export const CardItemValue = ({
           minWidth: 0,
           maxWidth: '100%',
           overflowWrap: 'anywhere',
-          wordBreak: 'break-word',
         }}
       >
         {value.icon && value.icon}
@@ -47,7 +46,6 @@ export const CardItemValue = ({
               color: 'secondary.main',
               minWidth: 0,
               overflowWrap: 'anywhere',
-              wordBreak: 'break-word',
             }}
             href={value.url}
             target={value.url.startsWith('/') ? '_self' : '_blank'}

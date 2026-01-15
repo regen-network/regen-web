@@ -136,6 +136,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   txHash,
   txHashUrl,
   linkComponent,
+  isFullscreenMobile,
   buttonLink,
   socialItems,
   blockchainRecordText,
@@ -153,6 +154,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
     <Modal
       open={open}
       onClose={onClose}
+      isFullscreenMobile={isFullscreenMobile}
       className={cn(styles.root, classes?.root)}
     >
       {header}

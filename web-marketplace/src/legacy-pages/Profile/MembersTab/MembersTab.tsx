@@ -7,7 +7,7 @@ import { LinkComponentType } from 'web-components/src/types/shared/linkComponent
 import { useAuth } from 'lib/auth/auth';
 import { EDIT_TEXT } from 'lib/constants/shared.constants';
 
-import { Link } from 'components/atoms/Link';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import { UNNAMED } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 

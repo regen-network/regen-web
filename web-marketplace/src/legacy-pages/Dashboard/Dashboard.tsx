@@ -34,7 +34,7 @@ import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/reg
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link } from 'components/atoms';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import {

@@ -43,6 +43,7 @@ const NextLinkBehavior = React.forwardRef<
 ReactRouterLinkBehavior.displayName = 'ReactRouterLinkBehavior';
 // eslint-disable-next-line lingui/no-unlocalized-strings
 NextLinkBehavior.displayName = 'NextLinkBehavior';
+
 const createMuiLink = (
   internalComponent: React.ElementType,
   { applyLocalePrefix = true }: { applyLocalePrefix?: boolean } = {},
@@ -51,21 +52,40 @@ const createMuiLink = (
     ({ href, children, target, ...linkProps }, ref) => {
       const locale = useCurrentLocale();
       if (!href || typeof href !== 'string') {
-        return (
-          <Box {...linkProps} component="span">
-            {children}
-          </Box>
-        );
+        // @ts-expect-error
+        return <Box {...linkProps}>{children}</Box>;
       }
 
       const isInternalLink = (href: string): boolean =>
         !!href && href.startsWith('/');
+      // const hasAnchor = href?.includes('#');
 
       const internalHref =
         applyLocalePrefix && isInternalLink(href)
           ? ensureLocalePrefix(href, locale)
           : href;
 
+      return isInternalLink(href) ? (
+        <MuiLink
+          {...linkProps}
+          ref={ref}
+          component={internalComponent}
+          href={internalHref}
+        >
+          {children}
+        </MuiLink>
+      ) : (
+        <MuiLink
+          {...linkProps}
+          ref={ref}
+          href={href}
+          target={target || '_blank'}
+        >
+          {children}
+        </MuiLink>
+      );
+    },
+  );
       return isInternalLink(href) ? (
         <MuiLink
           {...linkProps}

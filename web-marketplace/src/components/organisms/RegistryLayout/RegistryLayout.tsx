@@ -1,17 +1,30 @@
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
-export const RegistryLayout = () => {
+import { LayoutFooter } from 'components/layout/Layout.Footer';
+import { LayoutHeader } from 'components/layout/Layout.Header';
+
+type RegistryLayoutProps = {
+  showHeaderFooter?: boolean;
+};
+
+export const RegistryLayout = ({
+  showHeaderFooter = false,
+}: RegistryLayoutProps) => {
+  const { pathname } = useLocation();
+  const isFullScreen =
+    pathname.startsWith('/dashboard') ||
+    pathname.startsWith('/organizations/create') ||
+    pathname.startsWith('/project-pages/');
+
+  if (!showHeaderFooter) return <Outlet />;
+
   return (
-    <>
-      <ScrollRestoration
-        getKey={(location, matches) => {
-          const profileMatch = matches.find(match =>
-            match.pathname.startsWith('/profiles/'),
-          );
-          return profileMatch ? profileMatch.pathname : location.key;
-        }}
-      />
-      <Outlet />
-    </>
+    <div className="min-h-screen flex flex-col">
+      {!isFullScreen && <LayoutHeader />}
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      {!isFullScreen && <LayoutFooter />}
+    </div>
   );
 };

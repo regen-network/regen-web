@@ -24,7 +24,7 @@ import { apiServerUrl } from 'lib/env';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
-import { Link } from 'components/atoms';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 import { ORG } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';

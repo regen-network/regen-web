@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 
 import {
   NavLinkProps,
@@ -7,14 +7,14 @@ import {
 } from 'web-components/src/components/header/components/NavLink';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { Link } from './Link';
+import { ReactRouterMuiLink as Link } from './Link';
 
 /**
  * Renders a registry `Link` with the navlink styles applied.
  */
 export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
   ({ children, href, overrideClassname, className, disabled }) => {
-    const pathname = usePathname();
+    const { pathname } = useLocation();
     const isActive = pathname === href;
     const { classes } = useNavLinkStyles({ isActive: !!isActive, disabled });
 

@@ -6,7 +6,7 @@ import { Item } from 'web-components/src/components/header/components/HeaderMenu
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-import { Link } from 'components/atoms';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 
 export const getMenuItems = (
   pathname: string,

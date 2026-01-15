@@ -44,7 +44,6 @@ export const MigrateProjects = ({
                     key={project.id}
                     project={project}
                     selected={isSelected}
-                    className={isSelected ? 'opacity-100' : 'opacity-70'}
                     onClick={() => {
                       if (isSelected) {
                         onChange(selectedIds.filter(id => id !== project.id));

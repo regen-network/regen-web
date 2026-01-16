@@ -64,6 +64,7 @@ export const useFetchPaginatedBatches = ({
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
+  isLoadingBatches: boolean;
 } => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
@@ -180,9 +181,16 @@ export const useFetchPaginatedBatches = ({
       tradableAmount: '',
     }));
 
+  const isLoadingBatches =
+    batchesResult.isLoading ||
+    batchesByIssuerResult.isLoading ||
+    batchesByProjectResult.isLoading ||
+    batchesByClassResult.isLoading;
+
   return {
     batchesWithSupply: batchesWithSupply ?? batchesWithDefaultSupply,
     setPaginationParams,
     paginationParams: { ...paginationParams, count: allBatchesCount },
+    isLoadingBatches,
   };
 };

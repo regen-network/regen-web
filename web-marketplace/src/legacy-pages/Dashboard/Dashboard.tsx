@@ -322,20 +322,24 @@ export const Dashboard = () => {
   });
   const hasProjects = !!adminProjects && adminProjects.length > 0;
 
-  const { batchesWithSupply: personalBatchesWithSupply } =
-    useFetchPaginatedBatches({
-      address: personalDashboardAddress ?? wallet?.address,
-      // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
-      // so in case the current user account has not wallet address, we need to disable the fetch
-      forceAddress: true,
-    });
-  const { batchesWithSupply: organizationBatchesWithSupply } =
-    useFetchPaginatedBatches({
-      address: organizationDashboardAddress,
-      // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
-      // so in case the current user account has not wallet address, we need to disable the fetch
-      forceAddress: true,
-    });
+  const {
+    batchesWithSupply: personalBatchesWithSupply,
+    isLoadingBatches: personalBatchesLoading,
+  } = useFetchPaginatedBatches({
+    address: personalDashboardAddress ?? wallet?.address,
+    // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+    // so in case the current user account has not wallet address, we need to disable the fetch
+    forceAddress: true,
+  });
+  const {
+    batchesWithSupply: organizationBatchesWithSupply,
+    isLoadingBatches: organizationBatchesLoading,
+  } = useFetchPaginatedBatches({
+    address: organizationDashboardAddress,
+    // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+    // so in case the current user account has not wallet address, we need to disable the fetch
+    forceAddress: true,
+  });
 
   const personalHasCreditBatches =
     personalBatchesWithSupply && personalBatchesWithSupply.length > 0;
@@ -360,20 +364,34 @@ export const Dashboard = () => {
     if (!suffix) return toBase;
 
     const section = suffix.split('/')[0];
-    const targetHasCreditBatches = targetIsOrg
-      ? organizationHasCreditBatches
-      : personalHasCreditBatches;
-    const targetShowCreditClasses = targetIsOrg
-      ? organizationProfileItems.showCreditClasses
-      : personalProfileItems.showCreditClasses;
+    const targetProfileItems = targetIsOrg
+      ? organizationProfileItems
+      : personalProfileItems;
+    const targetHasCreditBatches =
+      targetProfileItems.isIssuer ||
+      (targetIsOrg ? organizationHasCreditBatches : personalHasCreditBatches);
+    const targetCreditBatchesLoading =
+      (targetIsOrg ? organizationBatchesLoading : personalBatchesLoading) ||
+      targetProfileItems.isLoadingIsIssuer;
+    const targetHasCreditClasses = targetProfileItems.showCreditClasses;
+    const targetCreditClassesLoading =
+      targetProfileItems.isLoadingCreditClasses;
     const isUnsupported = targetIsOrg
       ? section === 'settings' || section === 'my-orders'
       : section === 'members';
 
-    if (section === 'credit-batches' && !targetHasCreditBatches) {
+    if (
+      section === 'credit-batches' &&
+      !targetHasCreditBatches &&
+      !targetCreditBatchesLoading
+    ) {
       return `${toBase}/portfolio`;
     }
-    if (section === 'credit-classes' && !targetShowCreditClasses) {
+    if (
+      section === 'credit-classes' &&
+      !targetHasCreditClasses &&
+      !targetCreditClassesLoading
+    ) {
       return `${toBase}/portfolio`;
     }
 

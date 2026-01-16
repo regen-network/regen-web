@@ -380,22 +380,18 @@ export const Dashboard = () => {
       ? section === 'settings' || section === 'my-orders'
       : section === 'members';
 
-    if (
-      section === 'credit-batches' &&
-      !targetHasCreditBatches &&
-      !targetCreditBatchesLoading
-    ) {
-      return `${toBase}/portfolio`;
-    }
-    if (
-      section === 'credit-classes' &&
-      !targetHasCreditClasses &&
-      !targetCreditClassesLoading
-    ) {
-      return `${toBase}/portfolio`;
-    }
+    const shouldFallback =
+      isUnsupported ||
+      (section === 'credit-batches' &&
+        !targetHasCreditBatches &&
+        !targetCreditBatchesLoading) ||
+      (section === 'credit-classes' &&
+        !targetHasCreditClasses &&
+        !targetCreditClassesLoading);
 
-    return isUnsupported ? `${toBase}/portfolio` : `${toBase}/${suffix}`;
+    if (shouldFallback) return `${toBase}/portfolio`;
+
+    return `${toBase}/${suffix}`;
   };
 
   const onAccountSelect = (address: string) => {

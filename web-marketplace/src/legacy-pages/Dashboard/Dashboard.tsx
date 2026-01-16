@@ -114,12 +114,12 @@ export const Dashboard = () => {
     openConnectWalletModal,
   } = useOrganizationActions();
 
-  const isOrganizationDashboard = pathname.startsWith(
-    '/dashboard/organization',
-  );
+  const orgDashboardBasePath = '/dashboard/organization';
+  const personalDashboardBasePath = '/dashboard';
+  const isOrganizationDashboard = pathname.startsWith(orgDashboardBasePath);
   const dashboardBasePath = isOrganizationDashboard
-    ? '/dashboard/organization'
-    : '/dashboard';
+    ? orgDashboardBasePath
+    : personalDashboardBasePath;
   const section = usePathSection();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -301,11 +301,19 @@ export const Dashboard = () => {
     ? undefined
     : activeAccountId ?? undefined;
 
-  const { isCreditClassCreator, isIssuer, showCreditClasses } = useProfileItems(
-    {
-      address: dashboardAccountAddress,
-    },
-  );
+  const personalDashboardAddress = loginDisabled
+    ? wallet?.address
+    : activeAccount?.addr;
+  const organizationDashboardAddress = organizationAccount?.address;
+
+  const personalProfileItems = useProfileItems({
+    address: personalDashboardAddress,
+  });
+  const organizationProfileItems = useProfileItems({
+    address: organizationDashboardAddress,
+  });
+  const { isCreditClassCreator, isIssuer, showCreditClasses } =
+    isOrganizationDashboard ? organizationProfileItems : personalProfileItems;
 
   const { adminProjects } = useFetchProjectByAdmin({
     adminAccountId: dashboardAccountId,
@@ -314,14 +322,63 @@ export const Dashboard = () => {
   });
   const hasProjects = !!adminProjects && adminProjects.length > 0;
 
-  const { batchesWithSupply } = useFetchPaginatedBatches({
-    address: dashboardAccountAddress ?? wallet?.address,
-    // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
-    // so in case the current user account has not wallet address, we need to disable the fetch
-    forceAddress: true,
-  });
+  const { batchesWithSupply: personalBatchesWithSupply } =
+    useFetchPaginatedBatches({
+      address: personalDashboardAddress ?? wallet?.address,
+      // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+      // so in case the current user account has not wallet address, we need to disable the fetch
+      forceAddress: true,
+    });
+  const { batchesWithSupply: organizationBatchesWithSupply } =
+    useFetchPaginatedBatches({
+      address: organizationDashboardAddress,
+      // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+      // so in case the current user account has not wallet address, we need to disable the fetch
+      forceAddress: true,
+    });
 
-  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
+  const personalHasCreditBatches =
+    personalBatchesWithSupply && personalBatchesWithSupply.length > 0;
+  const organizationHasCreditBatches =
+    organizationBatchesWithSupply && organizationBatchesWithSupply.length > 0;
+
+  const hasCreditBatches = isOrganizationDashboard
+    ? organizationHasCreditBatches
+    : personalHasCreditBatches;
+
+  const getSwitchDashboardPath = (targetIsOrg: boolean) => {
+    const fromBase = isOrganizationDashboard
+      ? orgDashboardBasePath
+      : personalDashboardBasePath;
+    const toBase = targetIsOrg
+      ? orgDashboardBasePath
+      : personalDashboardBasePath;
+    const rawSuffix = pathname.startsWith(fromBase)
+      ? pathname.slice(fromBase.length)
+      : '';
+    const suffix = rawSuffix.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!suffix) return toBase;
+
+    const section = suffix.split('/')[0];
+    const targetHasCreditBatches = targetIsOrg
+      ? organizationHasCreditBatches
+      : personalHasCreditBatches;
+    const targetShowCreditClasses = targetIsOrg
+      ? organizationProfileItems.showCreditClasses
+      : personalProfileItems.showCreditClasses;
+    const isUnsupported = targetIsOrg
+      ? section === 'settings' || section === 'my-orders'
+      : section === 'members';
+
+    if (section === 'credit-batches' && !targetHasCreditBatches) {
+      return `${toBase}/portfolio`;
+    }
+    if (section === 'credit-classes' && !targetShowCreditClasses) {
+      return `${toBase}/portfolio`;
+    }
+
+    return isUnsupported ? `${toBase}/portfolio` : `${toBase}/${suffix}`;
+  };
 
   const onAccountSelect = (address: string) => {
     const target = navigationAccounts.find(
@@ -329,14 +386,9 @@ export const Dashboard = () => {
     );
     if (!target) return;
 
-    if (target.type === ORG) {
-      if (!isOrganizationDashboard) {
-        navigate('/dashboard/organization');
-      }
-    } else {
-      if (isOrganizationDashboard) {
-        navigate('/dashboard');
-      }
+    const targetIsOrg = target.type === ORG;
+    if (targetIsOrg !== isOrganizationDashboard) {
+      navigate(getSwitchDashboardPath(targetIsOrg));
     }
 
     setMobileMenuOpen(false);

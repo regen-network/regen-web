@@ -1,0 +1,22 @@
+query IndexerAllDataEventsByIri(
+  $iri: String!
+  $eventTypeIncludes: String!
+  $orderBy: [UnifiedDataEventsOrderBy!]
+) {
+  allUnifiedDataEvents(
+    orderBy: $orderBy
+    filter: {
+      iri: { equalTo: $iri }
+      eventType: { includes: $eventTypeIncludes }
+    }
+  ) {
+    nodes {
+      iri
+      attestor
+      eventType
+      blockHeight
+      txHash
+      timestamp
+    }
+  }
+}

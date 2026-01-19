@@ -6,7 +6,7 @@ export const RegistryLayout = () => {
       <ScrollRestoration
         getKey={(location, matches) => {
           const profileMatch = matches.find(match =>
-            match.pathname.includes('/profiles/'),
+            match.pathname.startsWith('/profiles/'),
           );
           return profileMatch ? profileMatch.pathname : location.key;
         }}

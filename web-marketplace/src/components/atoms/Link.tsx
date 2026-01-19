@@ -51,13 +51,15 @@ const createMuiLink = (
     ({ href, children, target, ...linkProps }, ref) => {
       const locale = useCurrentLocale();
       if (!href || typeof href !== 'string') {
-        // @ts-expect-error
-        return <Box {...linkProps}>{children}</Box>;
+        return (
+          <Box {...linkProps} component="span">
+            {children}
+          </Box>
+        );
       }
 
       const isInternalLink = (href: string): boolean =>
         !!href && href.startsWith('/');
-      // const hasAnchor = href?.includes('#');
 
       const internalHref =
         applyLocalePrefix && isInternalLink(href)

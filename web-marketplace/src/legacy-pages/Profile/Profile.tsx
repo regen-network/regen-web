@@ -1,11 +1,5 @@
 import { useMemo, useState } from 'react';
-import {
-  Outlet,
-  ScrollRestoration,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -231,7 +225,12 @@ export const Profile = (): JSX.Element => {
     description: account?.description?.trimEnd() ?? '',
     socialsLinks,
   };
-  const navigate = useNavigate();
+
+  const editLink = isOwnProfile
+    ? organization
+      ? '/dashboard/organization/profile'
+      : '/dashboard/profile'
+    : '';
 
   return (
     <WithLoader
@@ -257,13 +256,7 @@ export const Profile = (): JSX.Element => {
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={infos}
-              editLink={
-                isOwnProfile
-                  ? organization
-                    ? '/dashboard/organization/profile'
-                    : '/dashboard/profile'
-                  : ''
-              }
+              editLink={editLink}
               profileLink={profileLink}
               variant={
                 account?.type

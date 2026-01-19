@@ -19,10 +19,10 @@ export const SelectProjectCard = ({
   return (
     <label
       htmlFor={cardId}
-      className={`cursor-pointer rounded-[10px] overflow-hidden shadow-sm outline outline-solid relative z-50 ${
+      className={`cursor-pointer rounded-[10px] overflow-hidden shadow-lg outline outline-solid relative z-50 ${
         selected
-          ? 'rounded-xl outline-brand-400 outline-[3px]'
-          : 'outline-1 outline-grey-300 focus-within:shadow-xs focus-within:shadow-brand-400/50'
+          ? 'rounded-xl outline-brand-400 outline-[3px] opacity-100'
+          : 'outline-1 outline-grey-300 opacity-70'
       }`}
     >
       <input

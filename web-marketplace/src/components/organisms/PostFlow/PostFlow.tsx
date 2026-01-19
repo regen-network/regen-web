@@ -292,13 +292,14 @@ export const PostFlow = ({
           setIsSignModalOpen(false);
           if (iri) fetchMsgAnchor({ iri, createdPostData });
         }}
-        handleSign={async (contentHash: ContentHash_Graph) => {
+        handleSign={async (contentHash: ContentHash_Graph, signAs) => {
           if (iri) {
             setIsSignModalOpen(false);
             await sign({
               contentHash,
               iri,
               createdPostData,
+              signAs,
             });
           }
         }}

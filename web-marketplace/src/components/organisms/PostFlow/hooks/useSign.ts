@@ -57,6 +57,7 @@ type UseSignParams = UseFetchMsgAnchorParams & {
 
 type SignParams = {
   contentHash: ContentHash_Graph;
+  signAs?: 'user' | 'org';
 } & FetchMsgAnchorParams;
 
 export const useSign = ({
@@ -119,7 +120,7 @@ export const useSign = ({
   });
   const withOrganization = useMemo(
     () =>
-      feeGranter && orgDao && roleId && authorizationId
+      orgDao && roleId && authorizationId
         ? {
             daoAddress: orgDao.address,
             daoRbamAddress: orgDao.daoRbamAddress,
@@ -127,7 +128,7 @@ export const useSign = ({
             authorizationId,
           }
         : undefined,
-    [feeGranter, orgDao, roleId, authorizationId],
+    [orgDao, roleId, authorizationId],
   );
 
   const fetchAnchorTxHash = useCallback(
@@ -142,10 +143,20 @@ export const useSign = ({
   );
 
   const sign = useCallback(
-    async ({ contentHash, iri, createdPostData }: SignParams) => {
+    async ({ contentHash, iri, createdPostData, signAs }: SignParams) => {
       if (wallet?.address) {
+        // Show processing modal immediately
+        setProcessingModalAtom(atom => void (atom.open = true));
+
+        const useOrganization =
+          signAs === 'org'
+            ? !!withOrganization
+            : signAs === 'user'
+            ? false
+            : !!withOrganization;
+
         let txMsg;
-        if (withOrganization) {
+        if (useOrganization && withOrganization) {
           const msgAttest = {
             attestor: withOrganization.daoAddress,
             contentHashes: [contentHash],
@@ -169,12 +180,10 @@ export const useSign = ({
         await signAndBroadcast(
           {
             msgs: [txMsg],
-            feeGranter,
+            feeGranter: useOrganization ? feeGranter : undefined,
             fee: 'auto',
           },
-          (): void => {
-            setProcessingModalAtom(atom => void (atom.open = true));
-          },
+          undefined,
           {
             onError: async (error?: Error) => {
               const anchorTxHash = await fetchAnchorTxHash({ iri });

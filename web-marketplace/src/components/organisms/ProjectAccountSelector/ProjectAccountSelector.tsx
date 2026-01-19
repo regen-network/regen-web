@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
@@ -17,6 +18,7 @@ export interface ProjectAccountSelectorProps {
   selectedAddress: string;
   onSelect: (id: string) => void;
   label?: string;
+  menuPortal?: boolean;
 }
 
 export const ProjectAccountSelector = ({
@@ -24,12 +26,41 @@ export const ProjectAccountSelector = ({
   selectedAddress,
   onSelect,
   label,
+  menuPortal = false,
 }: ProjectAccountSelectorProps) => {
   const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   const rootRef = useClickOutside<HTMLDivElement>(() => {
     if (open) setOpen(false);
   });
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [menuPosition, setMenuPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  } | null>(null);
+
+  const updatePosition = () => {
+    const button = buttonRef.current;
+    if (!button) return;
+    const rect = button.getBoundingClientRect();
+    setMenuPosition({
+      top: rect.bottom + 8,
+      left: rect.left,
+      width: rect.width,
+    });
+  };
+
+  useEffect(() => {
+    if (!open || !menuPortal) return;
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, true);
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition, true);
+    };
+  }, [menuPortal, open]);
 
   const handleSelect = (address?: string) => {
     if (!address) return;
@@ -40,6 +71,83 @@ export const ProjectAccountSelector = ({
   const getName = (name?: string) => name?.trim() || unnamedLabel;
   const selectedAccount = accounts.find(acc => acc.address === selectedAddress);
 
+  const dropdown = (
+    <ul
+      className={cn(
+        menuPortal
+          ? 'fixed rounded shadow-[0_0_20px_rgba(0,0,0,0.25)]'
+          : 'absolute top-[calc(100%+8px)] left-0 w-full rounded',
+        'list-none m-0 p-10 bg-bc-neutral-0',
+      )}
+      style={
+        menuPortal && menuPosition
+          ? {
+              top: menuPosition.top,
+              left: menuPosition.left,
+              width: menuPosition.width,
+              zIndex: 1400,
+            }
+          : undefined
+      }
+      role="listbox"
+      aria-label={_(msg`Account selector`)}
+      onMouseDown={menuPortal ? event => event.stopPropagation() : undefined}
+      onTouchStart={menuPortal ? event => event.stopPropagation() : undefined}
+    >
+      {accounts.map(account => {
+        const isSelected = account.address === selectedAddress;
+        const key = account.address ?? account.name;
+        const isSelectable = !!account.address;
+
+        return (
+          <li key={key} role="option" aria-selected={isSelected}>
+            <Body
+              size="md"
+              className="font-bold text-bc-neutral-900 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
+            >
+              {account.displayName}
+            </Body>
+            <button
+              type="button"
+              disabled={!isSelectable}
+              onClick={() => {
+                setOpen(false);
+                handleSelect(account.address);
+              }}
+              className={cn(
+                'flex items-center w-full gap-15 px-[20px] py-[10px]',
+                'cursor-pointer border-none bg-bc-neutral-0',
+                'rounded transition-colors hover:bg-bc-neutral-200',
+                {
+                  'opacity-60 cursor-not-allowed hover:bg-bc-neutral-0':
+                    !isSelectable,
+                },
+              )}
+            >
+              <UserAvatar
+                src={account.image}
+                size="medium"
+                alt={getName(account.name)}
+              />
+              <Body
+                size="md"
+                className="font-medium text-bc-neutral-800 ml-[15px]"
+              >
+                {getName(account.name)}
+              </Body>
+              {isSelected && (
+                <CheckIcon
+                  className="h-[18px] w-[18px] text-brand-400 ml-auto"
+                  aria-hidden="true"
+                />
+              )}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
   return (
     <div ref={rootRef} className="relative w-full">
       {label && (
@@ -47,15 +155,18 @@ export const ProjectAccountSelector = ({
           {label}
         </Body>
       )}
-      {/* Button to toggle dropdown */}
       <button
+        ref={buttonRef}
         type="button"
         className={cn(
           'flex items-center gap-15 w-full px-[20px] py-[15px]',
           'border-solid border border-bc-neutral-300 rounded bg-bc-neutral-0 cursor-pointer',
           'transition-colors',
         )}
-        onClick={() => setOpen(o => !o)}
+        onClick={() => {
+          if (menuPortal && !open) updatePosition();
+          setOpen(o => !o);
+        }}
         aria-expanded={open}
         aria-haspopup="true"
       >
@@ -70,69 +181,10 @@ export const ProjectAccountSelector = ({
         <DropdownIcon className="h-[10px] w-[13px] text-brand-400" />
       </button>
 
-      {open && (
-        <ul
-          className={cn(
-            'absolute top-[calc(100%+8px)] left-0 w-full rounded',
-            'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-10',
-            'list-none m-0 p-10 bg-bc-neutral-0',
-          )}
-          role="listbox"
-          aria-label={_(msg`Account selector`)}
-        >
-          {accounts.map(account => {
-            const isSelected = account.address === selectedAddress;
-            const key = account.address ?? account.name;
-            const isSelectable = !!account.address;
-
-            return (
-              <li key={key} role="option" aria-selected={isSelected}>
-                <Body
-                  size="md"
-                  className="font-bold text-bc-neutral-900 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
-                >
-                  {account.displayName}
-                </Body>
-                <button
-                  type="button"
-                  disabled={!isSelectable}
-                  onClick={() => {
-                    setOpen(false);
-                    handleSelect(account.address);
-                  }}
-                  className={cn(
-                    'flex items-center w-full gap-15 px-[20px] py-[10px]',
-                    'cursor-pointer border-none bg-bc-neutral-0',
-                    'rounded transition-colors hover:bg-bc-neutral-200',
-                    {
-                      'opacity-60 cursor-not-allowed hover:bg-bc-neutral-0':
-                        !isSelectable,
-                    },
-                  )}
-                >
-                  <UserAvatar
-                    src={account.image}
-                    size="medium"
-                    alt={getName(account.name)}
-                  />
-                  <Body
-                    size="md"
-                    className="font-medium text-bc-neutral-800 ml-[15px]"
-                  >
-                    {getName(account.name)}
-                  </Body>
-                  {isSelected && (
-                    <CheckIcon
-                      className="h-[18px] w-[18px] text-brand-400 ml-auto"
-                      aria-hidden="true"
-                    />
-                  )}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {open &&
+        (menuPortal
+          ? menuPosition && createPortal(dropdown, document.body)
+          : dropdown)}
     </div>
   );
 };

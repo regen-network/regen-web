@@ -186,7 +186,9 @@ export const useAttestEvents = ({
             name: account?.name || _(DEFAULT_NAME),
             link: account?.id ? `/profiles/${account?.id}` : undefined,
             type: accountType,
-            image: getDefaultAvatar({ ...account, type: accountType }),
+            image:
+              account?.image ||
+              getDefaultAvatar({ ...account, type: accountType }),
             tag: attestorIsAdmin
               ? _(ADMIN)
               : attestorIsRegistry

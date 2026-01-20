@@ -121,10 +121,7 @@ export const useAttestEvents = ({
   const events: Array<Event> = [];
 
   // Adding the creation event
-  if (
-    creatorAccount &&
-    !onlyAttestEvents &&
-  ) {
+  if (creatorAccount && !onlyAttestEvents) {
     events.push({
       icon: postCreated,
       label: _(msg`Created by`),
@@ -135,12 +132,13 @@ export const useAttestEvents = ({
         image: creatorAccount.image || DEFAULT_PROFILE_USER_AVATAR,
         tag: creatorIsAdmin ? _(ADMIN) : undefined,
       },
-      timestamp:
-        anchorEvent?.timestamp ? formatDate(
-          anchorEvent.timestamp,
-          // eslint-disable-next-line lingui/no-unlocalized-strings
-          'MMMM D, YYYY | h:mm A',
-        ) : createdAt,
+      timestamp: anchorEvent?.timestamp
+        ? formatDate(
+            anchorEvent.timestamp,
+            // eslint-disable-next-line lingui/no-unlocalized-strings
+            'MMMM D, YYYY | h:mm A',
+          )
+        : createdAt,
       txhash: anchorEvent?.txHash || '',
     });
   }

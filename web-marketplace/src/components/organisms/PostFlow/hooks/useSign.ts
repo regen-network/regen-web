@@ -145,15 +145,17 @@ export const useSign = ({
   const sign = useCallback(
     async ({ contentHash, iri, createdPostData, signAs }: SignParams) => {
       if (wallet?.address) {
+        // Validate that organization option is available when user selects org
+        if (signAs === 'org' && !withOrganization) {
+          throw new Error(
+            'Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization.',
+          );
+        }
+
         // Show processing modal immediately
         setProcessingModalAtom(atom => void (atom.open = true));
 
-        const useOrganization =
-          signAs === 'org'
-            ? !!withOrganization
-            : signAs === 'user'
-            ? false
-            : !!withOrganization;
+        const useOrganization = signAs !== 'user' && !!withOrganization;
 
         let txMsg;
         if (useOrganization && withOrganization) {

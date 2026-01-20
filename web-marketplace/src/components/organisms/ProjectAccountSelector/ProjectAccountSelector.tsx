@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -40,7 +40,7 @@ export const ProjectAccountSelector = ({
     width: number;
   } | null>(null);
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     const button = buttonRef.current;
     if (!button) return;
     const rect = button.getBoundingClientRect();
@@ -49,7 +49,7 @@ export const ProjectAccountSelector = ({
       left: rect.left,
       width: rect.width,
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (!open || !menuPortal) return;
@@ -60,7 +60,7 @@ export const ProjectAccountSelector = ({
       window.removeEventListener('resize', updatePosition);
       window.removeEventListener('scroll', updatePosition, true);
     };
-  }, [menuPortal, open]);
+  }, [menuPortal, open, updatePosition]);
 
   const handleSelect = (address?: string) => {
     if (!address) return;

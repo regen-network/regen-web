@@ -124,9 +124,6 @@ export const useAttestEvents = ({
   if (
     creatorAccount &&
     !onlyAttestEvents &&
-    anchorEvent &&
-    anchorEvent.txHash &&
-    anchorEvent.timestamp
   ) {
     events.push({
       icon: postCreated,
@@ -139,12 +136,12 @@ export const useAttestEvents = ({
         tag: creatorIsAdmin ? _(ADMIN) : undefined,
       },
       timestamp:
-        formatDate(
+        anchorEvent?.timestamp ? formatDate(
           anchorEvent.timestamp,
           // eslint-disable-next-line lingui/no-unlocalized-strings
           'MMMM D, YYYY | h:mm A',
-        ) || createdAt,
-      txhash: anchorEvent.txHash,
+        ) : createdAt,
+      txhash: anchorEvent?.txHash || '',
     });
   }
 

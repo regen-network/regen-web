@@ -2,7 +2,6 @@ import {
   IndexerAllDataEventsByIriDocument,
   IndexerAllDataEventsByIriQuery,
   IndexerAllDataEventsByIriQueryVariables,
-  UnifiedDataEventsOrderBy,
 } from 'generated/indexer-graphql';
 
 import { getAllDataEventsByIriQueryKey } from './getAllDataEventsByIri.constants';

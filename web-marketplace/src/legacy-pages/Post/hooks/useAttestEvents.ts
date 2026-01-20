@@ -73,10 +73,12 @@ export const useAttestEvents = ({
     [data],
   );
   const anchorEvent = useMemo(
+    // gets both v1 and v2 anchor events
+    // there should be only one anchor event
     // eslint-disable-next-line lingui/no-unlocalized-strings
-    () => dataEvents.find(event => event?.eventType?.includes('EventAnchor')), // gets both v1 and v2 anchor events
+    () => dataEvents.find(event => event?.eventType?.includes('EventAnchor')),
     [dataEvents],
-  ); // there should be only one anchor event
+  );
   const attestEvents = useMemo(
     // eslint-disable-next-line lingui/no-unlocalized-strings
     () => dataEvents.filter(event => event?.eventType?.includes('EventAttest')), // gets both v1 and v2 attest events

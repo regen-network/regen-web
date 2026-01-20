@@ -5134,6 +5134,10 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeCountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_COUNT_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_OWNER_ASC',
@@ -5152,14 +5156,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeSumBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_OWNER_ASC',
@@ -5178,14 +5182,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeDistinctCountBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_OWNER_ASC',
@@ -5204,14 +5208,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMinBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_OWNER_ASC',
@@ -5230,14 +5234,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeMaxBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_OWNER_ASC',
@@ -5256,14 +5260,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAverageBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_OWNER_ASC',
@@ -5282,14 +5286,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevSampleBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_OWNER_ASC',
@@ -5308,14 +5312,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeStddevPopulationBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_OWNER_ASC',
@@ -5334,14 +5338,14 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVarianceSampleBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOMS_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationTypeAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TYPE_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationTypeDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TYPE_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_DESC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_ASC',
+  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationJurisdictionAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_JURISDICTION_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationJurisdictionDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_JURISDICTION_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationOwnerAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_OWNER_ASC',
@@ -5360,10 +5364,6 @@ export enum MsgEventsOrderBy {
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationMsgIdxDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_MSG_IDX_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationTxHashAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TX_HASH_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationTxHashDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TX_HASH_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationAmountAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationAmountDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_DESC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_ASC',
-  RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_DESC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomsAsc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOMS_ASC',
   RetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeVariancePopulationBatchDenomsDesc = 'RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOMS_DESC',
   VotesByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeCountAsc = 'VOTES_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_COUNT_ASC',
@@ -8247,6 +8247,8 @@ export type Retirement = Node & {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID'];
   type: Scalars['String'];
+  amount: Scalars['String'];
+  batchDenom: Scalars['String'];
   jurisdiction: Scalars['String'];
   owner: Scalars['String'];
   reason: Scalars['String'];
@@ -8256,8 +8258,6 @@ export type Retirement = Node & {
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
   txHash: Scalars['String'];
-  amount: Scalars['String'];
-  batchDenom: Scalars['String'];
   batchDenoms: Array<Maybe<Scalars['String']>>;
   /** Reads a single `MsgEvent` that is related to this `Retirement`. */
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
@@ -8305,6 +8305,10 @@ export type RetirementAverageAggregates = {
 export type RetirementCondition = {
   /** Checks for equality with the object’s `type` field. */
   type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenom` field. */
+  batchDenom?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `jurisdiction` field. */
   jurisdiction?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `owner` field. */
@@ -8323,10 +8327,6 @@ export type RetirementCondition = {
   msgIdx?: Maybe<Scalars['Int']>;
   /** Checks for equality with the object’s `txHash` field. */
   txHash?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `batchDenom` field. */
-  batchDenom?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `batchDenoms` field. */
   batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
@@ -8335,6 +8335,10 @@ export type RetirementDistinctCountAggregates = {
   __typename?: 'RetirementDistinctCountAggregates';
   /** Distinct count of type across the matching connection */
   type?: Maybe<Scalars['BigInt']>;
+  /** Distinct count of amount across the matching connection */
+  amount?: Maybe<Scalars['BigInt']>;
+  /** Distinct count of batchDenom across the matching connection */
+  batchDenom?: Maybe<Scalars['BigInt']>;
   /** Distinct count of jurisdiction across the matching connection */
   jurisdiction?: Maybe<Scalars['BigInt']>;
   /** Distinct count of owner across the matching connection */
@@ -8353,10 +8357,6 @@ export type RetirementDistinctCountAggregates = {
   msgIdx?: Maybe<Scalars['BigInt']>;
   /** Distinct count of txHash across the matching connection */
   txHash?: Maybe<Scalars['BigInt']>;
-  /** Distinct count of amount across the matching connection */
-  amount?: Maybe<Scalars['BigInt']>;
-  /** Distinct count of batchDenom across the matching connection */
-  batchDenom?: Maybe<Scalars['BigInt']>;
   /** Distinct count of batchDenoms across the matching connection */
   batchDenoms?: Maybe<Scalars['BigInt']>;
 };
@@ -8365,6 +8365,10 @@ export type RetirementDistinctCountAggregates = {
 export type RetirementFilter = {
   /** Filter by the object’s `type` field. */
   type?: Maybe<StringFilter>;
+  /** Filter by the object’s `amount` field. */
+  amount?: Maybe<StringFilter>;
+  /** Filter by the object’s `batchDenom` field. */
+  batchDenom?: Maybe<StringFilter>;
   /** Filter by the object’s `jurisdiction` field. */
   jurisdiction?: Maybe<StringFilter>;
   /** Filter by the object’s `owner` field. */
@@ -8383,10 +8387,6 @@ export type RetirementFilter = {
   msgIdx?: Maybe<IntFilter>;
   /** Filter by the object’s `txHash` field. */
   txHash?: Maybe<StringFilter>;
-  /** Filter by the object’s `amount` field. */
-  amount?: Maybe<StringFilter>;
-  /** Filter by the object’s `batchDenom` field. */
-  batchDenom?: Maybe<StringFilter>;
   /** Filter by the object’s `batchDenoms` field. */
   batchDenoms?: Maybe<StringListFilter>;
   /** Checks for all expressions in this list. */
@@ -8400,6 +8400,8 @@ export type RetirementFilter = {
 /** An input for mutations affecting `Retirement` */
 export type RetirementInput = {
   type: Scalars['String'];
+  amount: Scalars['String'];
+  batchDenom: Scalars['String'];
   jurisdiction: Scalars['String'];
   owner: Scalars['String'];
   reason: Scalars['String'];
@@ -8409,8 +8411,6 @@ export type RetirementInput = {
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
   txHash: Scalars['String'];
-  amount: Scalars['String'];
-  batchDenom: Scalars['String'];
   batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
@@ -8441,6 +8441,8 @@ export type RetirementMinAggregates = {
 /** Represents an update to a `Retirement`. Fields that are set will be updated. */
 export type RetirementPatch = {
   type?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  batchDenom?: Maybe<Scalars['String']>;
   jurisdiction?: Maybe<Scalars['String']>;
   owner?: Maybe<Scalars['String']>;
   reason?: Maybe<Scalars['String']>;
@@ -8450,8 +8452,6 @@ export type RetirementPatch = {
   txIdx?: Maybe<Scalars['Int']>;
   msgIdx?: Maybe<Scalars['Int']>;
   txHash?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  batchDenom?: Maybe<Scalars['String']>;
   batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
@@ -8551,6 +8551,8 @@ export type RetirementsEdge = {
 /** Grouping methods for `Retirement` for usage during aggregation. */
 export enum RetirementsGroupBy {
   Type = 'TYPE',
+  Amount = 'AMOUNT',
+  BatchDenom = 'BATCH_DENOM',
   Jurisdiction = 'JURISDICTION',
   Owner = 'OWNER',
   Reason = 'REASON',
@@ -8562,8 +8564,6 @@ export enum RetirementsGroupBy {
   TxIdx = 'TX_IDX',
   MsgIdx = 'MSG_IDX',
   TxHash = 'TX_HASH',
-  Amount = 'AMOUNT',
-  BatchDenom = 'BATCH_DENOM',
   BatchDenoms = 'BATCH_DENOMS'
 }
 
@@ -8659,6 +8659,10 @@ export enum RetirementsOrderBy {
   Natural = 'NATURAL',
   TypeAsc = 'TYPE_ASC',
   TypeDesc = 'TYPE_DESC',
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  BatchDenomAsc = 'BATCH_DENOM_ASC',
+  BatchDenomDesc = 'BATCH_DENOM_DESC',
   JurisdictionAsc = 'JURISDICTION_ASC',
   JurisdictionDesc = 'JURISDICTION_DESC',
   OwnerAsc = 'OWNER_ASC',
@@ -8677,10 +8681,6 @@ export enum RetirementsOrderBy {
   MsgIdxDesc = 'MSG_IDX_DESC',
   TxHashAsc = 'TX_HASH_ASC',
   TxHashDesc = 'TX_HASH_DESC',
-  AmountAsc = 'AMOUNT_ASC',
-  AmountDesc = 'AMOUNT_DESC',
-  BatchDenomAsc = 'BATCH_DENOM_ASC',
-  BatchDenomDesc = 'BATCH_DENOM_DESC',
   BatchDenomsAsc = 'BATCH_DENOMS_ASC',
   BatchDenomsDesc = 'BATCH_DENOMS_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -10699,8 +10699,6 @@ export enum VotesOrderBy {
 
 export type IndexerAllDataEventsByIriQueryVariables = Exact<{
   iri: Scalars['String'];
-  eventTypeIncludes: Scalars['String'];
-  orderBy?: Maybe<Array<UnifiedDataEventsOrderBy> | UnifiedDataEventsOrderBy>;
 }>;
 
 
@@ -10865,11 +10863,8 @@ export const RetirementFieldsFragmentDoc = gql`
 }
     `;
 export const IndexerAllDataEventsByIriDocument = gql`
-    query IndexerAllDataEventsByIri($iri: String!, $eventTypeIncludes: String!, $orderBy: [UnifiedDataEventsOrderBy!]) {
-  allUnifiedDataEvents(
-    orderBy: $orderBy
-    filter: {iri: {equalTo: $iri}, eventType: {includes: $eventTypeIncludes}}
-  ) {
+    query IndexerAllDataEventsByIri($iri: String!) {
+  allUnifiedDataEvents(orderBy: TIMESTAMP_DESC, filter: {iri: {equalTo: $iri}}) {
     nodes {
       iri
       attestor
@@ -10895,8 +10890,6 @@ export const IndexerAllDataEventsByIriDocument = gql`
  * const { data, loading, error } = useIndexerAllDataEventsByIriQuery({
  *   variables: {
  *      iri: // value for 'iri'
- *      eventTypeIncludes: // value for 'eventTypeIncludes'
- *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

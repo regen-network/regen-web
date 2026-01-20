@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -5,7 +6,6 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import {
@@ -19,15 +19,14 @@ import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
 import { AccountByIdQuery, AccountType } from 'generated/graphql';
-import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getOrganizationByDaoAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByDaoAddressQuery/getOrganizationByDaoAddressQuery';
+import { getAllDataEventsByIriQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllDataEventsByIri/getAllDataEventsByIri';
 
 import postCreated from '../../../../public/svg/post-created.svg';
 import postSigned from '../../../../public/svg/post-signed.svg';
 import { ADMIN, REGISTRY } from '../Post.constants';
-import { getAllDataEventsByIriQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllDataEventsByIri/getAllDataEventsByIri';
 
 type Event = {
   icon: string | StaticImageData;
@@ -61,28 +60,28 @@ export const useAttestEvents = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: anchorEventsData, isLoading: isLoadingAnchorEvents } = useQuery(
-    getAllDataEventsByIriQuery({
-      client: graphqlClient,
-      enabled: !!graphqlClient && !onlyAttestEvents && !!iri,
-      iri: iri as string,
-      eventTypeIncludes: 'EventAnchor', // gets both v1 and v2 anchor events
-    }),
-  );
-
-  const { data: attestEventsData, isLoading: isLoadingAttestEvents } = useQuery(
+  const { data, isLoading: isLoadingEvents } = useQuery(
     getAllDataEventsByIriQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!iri,
       iri: iri as string,
-      eventTypeIncludes: 'EventAttest', // gets both v1 and v2 attest events
     }),
   );
 
-  const anchorEvents =
-    anchorEventsData?.data?.allUnifiedDataEvents?.nodes || [];
-  const attestEvents =
-    attestEventsData?.data?.allUnifiedDataEvents?.nodes || [];
+  const dataEvents = useMemo(
+    () => data?.data?.allUnifiedDataEvents?.nodes || [],
+    [data],
+  );
+  const anchorEvent = useMemo(
+    // eslint-disable-next-line lingui/no-unlocalized-strings
+    () => dataEvents.filter(event => event?.eventType?.includes('EventAnchor')), // gets both v1 and v2 anchor events
+    [dataEvents],
+  )?.[0]; // there should be only one anchor event
+  const attestEvents = useMemo(
+    // eslint-disable-next-line lingui/no-unlocalized-strings
+    () => dataEvents.filter(event => event?.eventType?.includes('EventAttest')), // gets both v1 and v2 attest events
+    [dataEvents],
+  );
 
   const attestorsAccountsResults = useQueries({
     queries:
@@ -120,7 +119,6 @@ export const useAttestEvents = ({
   const events: Array<Event> = [];
 
   // Adding the creation event
-  const anchorEvent = anchorEvents?.[0]; // there should be only one anchor event
   if (
     creatorAccount &&
     !onlyAttestEvents &&
@@ -203,10 +201,6 @@ export const useAttestEvents = ({
   }
   return {
     events,
-    loading:
-      isLoadingAnchorEvents ||
-      isLoadingAttestEvents ||
-      attestorAccountsLoading ||
-      attestorsOrgsLoading,
+    loading: isLoadingEvents || attestorAccountsLoading || attestorsOrgsLoading,
   };
 };

@@ -30638,6 +30638,30 @@
             "deprecationReason": null
           },
           {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_JURISDICTION_ASC",
             "description": null,
             "isDeprecated": false,
@@ -30746,30 +30770,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_SUM_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -30789,6 +30789,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -30902,30 +30926,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_DISTINCT_COUNT_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -30945,6 +30945,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31058,30 +31082,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MIN_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31101,6 +31101,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31214,30 +31238,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_MAX_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31257,6 +31257,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31370,30 +31394,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_AVERAGE_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31413,6 +31413,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31526,30 +31550,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_SAMPLE_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31569,6 +31569,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31682,30 +31706,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_STDDEV_POPULATION_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31725,6 +31725,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31838,30 +31862,6 @@
             "deprecationReason": null
           },
           {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOM_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_SAMPLE_BATCH_DENOMS_ASC",
             "description": null,
             "isDeprecated": false,
@@ -31881,6 +31881,30 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TYPE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -31989,30 +32013,6 @@
           },
           {
             "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_TX_HASH_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "RETIREMENTS_BY_CHAIN_NUM_AND_BLOCK_HEIGHT_AND_TX_IDX_AND_MSG_IDX_AND_TYPE_VARIANCE_POPULATION_BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -49937,6 +49937,38 @@
             "deprecationReason": null
           },
           {
+            "name": "amount",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "jurisdiction",
             "description": null,
             "args": [],
@@ -50062,38 +50094,6 @@
           },
           {
             "name": "txHash",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "amount",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
             "description": null,
             "args": [],
             "type": {
@@ -50369,6 +50369,30 @@
             "deprecationReason": null
           },
           {
+            "name": "amount",
+            "description": "Checks for equality with the object’s `amount` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
+            "description": "Checks for equality with the object’s `batchDenom` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "jurisdiction",
             "description": "Checks for equality with the object’s `jurisdiction` field.",
             "type": {
@@ -50477,30 +50501,6 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
-            "description": "Checks for equality with the object’s `amount` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
-            "description": "Checks for equality with the object’s `batchDenom` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "batchDenoms",
             "description": "Checks for equality with the object’s `batchDenoms` field.",
             "type": {
@@ -50529,6 +50529,30 @@
           {
             "name": "type",
             "description": "Distinct count of type across the matching connection",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amount",
+            "description": "Distinct count of amount across the matching connection",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
+            "description": "Distinct count of batchDenom across the matching connection",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -50647,30 +50671,6 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
-            "description": "Distinct count of amount across the matching connection",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "BigInt",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
-            "description": "Distinct count of batchDenom across the matching connection",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "BigInt",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "batchDenoms",
             "description": "Distinct count of batchDenoms across the matching connection",
             "args": [],
@@ -50697,6 +50697,30 @@
           {
             "name": "type",
             "description": "Filter by the object’s `type` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amount",
+            "description": "Filter by the object’s `amount` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
+            "description": "Filter by the object’s `batchDenom` field.",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilter",
@@ -50815,30 +50839,6 @@
             "deprecationReason": null
           },
           {
-            "name": "amount",
-            "description": "Filter by the object’s `amount` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
-            "description": "Filter by the object’s `batchDenom` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "batchDenoms",
             "description": "Filter by the object’s `batchDenoms` field.",
             "type": {
@@ -50915,6 +50915,38 @@
         "inputFields": [
           {
             "name": "type",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "amount",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -51055,38 +51087,6 @@
           },
           {
             "name": "txHash",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "amount",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -51259,6 +51259,30 @@
             "deprecationReason": null
           },
           {
+            "name": "amount",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "batchDenom",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "jurisdiction",
             "description": null,
             "type": {
@@ -51356,30 +51380,6 @@
           },
           {
             "name": "txHash",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "amount",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "batchDenom",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -51928,6 +51928,18 @@
             "deprecationReason": null
           },
           {
+            "name": "AMOUNT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BATCH_DENOM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "JURISDICTION",
             "description": null,
             "isDeprecated": false,
@@ -51989,18 +52001,6 @@
           },
           {
             "name": "TX_HASH",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "AMOUNT",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "BATCH_DENOM",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -52839,6 +52839,30 @@
             "deprecationReason": null
           },
           {
+            "name": "AMOUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "AMOUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BATCH_DENOM_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "BATCH_DENOM_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "JURISDICTION_ASC",
             "description": null,
             "isDeprecated": false,
@@ -52942,30 +52966,6 @@
           },
           {
             "name": "TX_HASH_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "AMOUNT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "AMOUNT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "BATCH_DENOM_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "BATCH_DENOM_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

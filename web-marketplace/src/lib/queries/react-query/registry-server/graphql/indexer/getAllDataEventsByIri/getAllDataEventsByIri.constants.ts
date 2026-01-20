@@ -1,9 +1,5 @@
-export const getAllDataEventsByIriQueryKey = (
-  iri: string,
-  eventTypeIncludes: string,
-): string[] => [
+export const getAllDataEventsByIriQueryKey = (iri: string): string[] => [
   'graphql',
   'getAllDataEventsByIriQuery',
   iri,
-  eventTypeIncludes,
 ];

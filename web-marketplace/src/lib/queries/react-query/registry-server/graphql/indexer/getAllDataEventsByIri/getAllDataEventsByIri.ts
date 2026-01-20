@@ -14,11 +14,9 @@ import {
 export const getAllDataEventsByIriQuery = ({
   client,
   iri,
-  orderBy = UnifiedDataEventsOrderBy.TimestampDesc,
-  eventTypeIncludes,
   ...params
 }: ReactQueryAllDataEventsByIriProps): ReactQueryAllDataEventsByIriResponse => ({
-  queryKey: getAllDataEventsByIriQueryKey(iri, eventTypeIncludes),
+  queryKey: getAllDataEventsByIriQueryKey(iri),
   queryFn: async () => {
     try {
       const data = await client.query<
@@ -28,8 +26,6 @@ export const getAllDataEventsByIriQuery = ({
         query: IndexerAllDataEventsByIriDocument,
         variables: {
           iri,
-          eventTypeIncludes,
-          orderBy,
         },
       });
 

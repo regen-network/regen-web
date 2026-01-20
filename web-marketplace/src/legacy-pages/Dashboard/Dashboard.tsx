@@ -380,8 +380,12 @@ export const Dashboard = () => {
       ? section === 'settings' || section === 'my-orders'
       : section === 'members';
 
+    const isProjectSpecificRoute =
+      section === 'projects' && suffix.split('/').length > 1;
+
     const shouldFallback =
       isUnsupported ||
+      isProjectSpecificRoute ||
       (section === 'credit-batches' &&
         !targetHasCreditBatches &&
         !targetCreditBatchesLoading) ||

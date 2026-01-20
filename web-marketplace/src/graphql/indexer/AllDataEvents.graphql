@@ -1,7 +1,7 @@
 query IndexerAllDataEventsByIri($iri: String!) {
   allUnifiedDataEvents(
     orderBy: TIMESTAMP_DESC
-    filter: { iri: { equalTo: $iri } }
+    condition: { iri: $iri }
   ) {
     nodes {
       iri

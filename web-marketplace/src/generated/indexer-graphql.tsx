@@ -10864,7 +10864,7 @@ export const RetirementFieldsFragmentDoc = gql`
     `;
 export const IndexerAllDataEventsByIriDocument = gql`
     query IndexerAllDataEventsByIri($iri: String!) {
-  allUnifiedDataEvents(orderBy: TIMESTAMP_DESC, filter: {iri: {equalTo: $iri}}) {
+  allUnifiedDataEvents(orderBy: TIMESTAMP_DESC, condition: {iri: $iri}) {
     nodes {
       iri
       attestor

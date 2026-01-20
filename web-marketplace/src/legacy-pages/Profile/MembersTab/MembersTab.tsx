@@ -21,7 +21,7 @@ export const MembersTab = () => {
   return (
     <WithLoader isLoading={isLoading}>
       {organization ? (
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-20">
           {organization.daoByDaoAddress?.assignmentsByDaoAddress?.nodes.map(
             assignment => {
               const account = assignment?.accountByAccountId;

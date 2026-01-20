@@ -38,7 +38,7 @@ import {
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link } from 'components/atoms';
+import { Link, ReactRouterMuiLink } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
@@ -226,6 +226,12 @@ export const Profile = (): JSX.Element => {
     socialsLinks,
   };
 
+  const editLink = isOwnProfile
+    ? organization
+      ? '/dashboard/organization/profile'
+      : '/dashboard/profile'
+    : '';
+
   return (
     <WithLoader
       isLoading={isLoading || isLoadingIsIssuer}
@@ -250,7 +256,7 @@ export const Profile = (): JSX.Element => {
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={infos}
-              editLink={isOwnProfile ? '/dashboard/profile' : ''}
+              editLink={editLink}
               profileLink={profileLink}
               variant={
                 account?.type
@@ -271,9 +277,9 @@ export const Profile = (): JSX.Element => {
                     <IconTabs
                       aria-label={_(msg`public profile tabs`)}
                       tabs={tabs}
-                      linkComponent={Link}
                       activeTab={activeTab}
                       mobileFullWidth
+                      linkComponent={ReactRouterMuiLink}
                     />
                     <div className="flex w-full md:w-auto mt-[30px] mb-7.5 md:mt-0 md:mb-0">
                       {manageButtonConfig.map(

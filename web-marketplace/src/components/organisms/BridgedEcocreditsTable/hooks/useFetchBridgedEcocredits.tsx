@@ -73,6 +73,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
       client: queryClient,
       enabled: !!queryClient,
       request: {
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         query: `${messageActionEquals}'${MsgBridge.typeUrl}' AND message.sender='${address}'`,
         orderBy: OrderBy.ORDER_BY_DESC,
       },

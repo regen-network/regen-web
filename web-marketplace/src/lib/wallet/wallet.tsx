@@ -118,7 +118,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
 
   useEffect(() => {
-    setErrorBannerText(String(error));
+    if (error) setErrorBannerText(String(error));
   }, [error, setErrorBannerText]);
 
   useEffect(() => {

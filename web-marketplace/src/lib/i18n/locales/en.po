@@ -1051,7 +1051,7 @@ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:122
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:16
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:9
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:10
 msgid "cancel"
 msgstr ""
 
@@ -1251,6 +1251,10 @@ msgstr ""
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
+#: src/components/organisms/LoginModal/components/LoginModal.Mobile.tsx:57
+msgid "Click to open Keplr Mobile"
+msgstr ""
+
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy.tsx:236
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:246
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:397
@@ -1360,7 +1364,7 @@ msgstr ""
 msgid "CONNECT"
 msgstr ""
 
-#: src/legacy-pages/Home/Home.tsx:124
+#: src/legacy-pages/Home/Home.tsx:128
 msgid "Connect <0>Capital</0> to <1>Ecological</1> Outcomes"
 msgstr ""
 
@@ -1642,7 +1646,7 @@ msgid "Credit classes"
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:33
-#: src/legacy-pages/Home/Home.tsx:178
+#: src/legacy-pages/Home/Home.tsx:182
 #: src/legacy-pages/Profile/Profile.tsx:124
 msgid "Credit Classes"
 msgstr ""
@@ -1968,7 +1972,7 @@ msgstr ""
 msgid "Does your project include grasslands?"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:6
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:7
 msgid "Don’t see anything?"
 msgstr ""
 
@@ -2347,7 +2351,7 @@ msgstr ""
 msgid "Failed to request funds"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:14
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:15
 msgid "Failed to resend passcode"
 msgstr ""
 
@@ -2364,7 +2368,7 @@ msgstr ""
 msgid "Featured projects"
 msgstr ""
 
-#: src/legacy-pages/Home/Home.tsx:170
+#: src/legacy-pages/Home/Home.tsx:174
 msgid "Featured Projects"
 msgstr ""
 
@@ -2655,7 +2659,7 @@ msgstr ""
 msgid "Includes escrowed credits."
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:13
 msgid "Incorrect code! Double-check the code and try again."
 msgstr ""
 
@@ -2778,7 +2782,7 @@ msgstr ""
 msgid "Jurisdiction"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.config.ts:23
+#: src/components/organisms/LoginButton/LoginButton.config.ts:24
 msgid "Keplr Chrome Extension"
 msgstr ""
 
@@ -2836,7 +2840,7 @@ msgstr ""
 
 #: src/components/layout/Layout.ConnectedEmailErrorModal.tsx:58
 #: src/components/layout/Layout.Footer.tsx:61
-#: src/legacy-pages/Home/Home.tsx:197
+#: src/legacy-pages/Home/Home.tsx:201
 msgid "Learn More"
 msgstr ""
 
@@ -2918,8 +2922,7 @@ msgstr ""
 msgid "Locations are private"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:10
-#: src/components/organisms/LoginButton/LoginButton.legacy.tsx:79
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
 #: src/components/organisms/LoginButton/LoginButton.tsx:79
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:103
 msgid "log in"
@@ -3281,7 +3284,7 @@ msgstr ""
 msgid "New admin address"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:7
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:8
 msgid "New confirmation code sent"
 msgstr ""
 
@@ -4355,7 +4358,7 @@ msgstr ""
 msgid "Resend after {resendTimeLeft} seconds."
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:8
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "Resend email."
 msgstr ""
 
@@ -4728,7 +4731,7 @@ msgstr ""
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Sign in successful"
 msgstr ""
 
@@ -5163,7 +5166,7 @@ msgstr ""
 msgid "This change will only be made after you save the change and sign the transaction."
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:13
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:14
 msgid "This code has expired!"
 msgstr ""
 

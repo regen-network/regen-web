@@ -4,19 +4,19 @@ import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import type { StdSignature } from '@cosmjs/launchpad';
 import type { OfflineSigner } from '@cosmjs/proto-signing';
-import { WalletStatus } from '@cosmos-kit/core';
+import { WalletState } from '@interchain-kit/core';
 import {
   useChain,
-  useManager,
-  useWallet as useCosmosKitWallet,
-  useWalletClient,
-} from '@cosmos-kit/react-lite';
+  useChainWallet,
+  useWalletManager,
+} from '@interchain-kit/react';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import truncate from 'lodash/truncate';
 
 import { AccountByAddrQuery, Maybe } from 'generated/graphql';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -33,8 +33,9 @@ import { useLogin } from './hooks/useLogin';
 import { useLogout } from './hooks/useLogout';
 import { useOnAccountChange } from './hooks/useOnAccountChange';
 import { useSignArbitrary } from './hooks/useSignArbitrary';
-import { emptySender, KEPLR_MOBILE } from './wallet.constants';
+import { emptySender, WALLET_CONNECT } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
+import { wrapSigner } from './wallet.utils';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
 
 export interface Wallet {
@@ -107,48 +108,50 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const walletConfigRef = useRef<WalletConfig | undefined>();
   const [error, setError] = useState<unknown>(undefined);
   const { track } = useTracker();
-
-  // Connecting via Wallet Connect is handled entirely using @cosmos-kit
-  const [walletConnect, setWalletConnect] = useState<boolean>(false);
-  const { closeView } = useChain('regen', false);
-  const { client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
-  const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
-  const { walletRepos } = useManager();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const address = mainWallet?.getChainWallet('regen')?.address;
-  const walletStatus = walletRepos[0]?.current?.walletStatus;
+  // Connecting via Wallet Connect is handled entirely using @interchain-kit
+  const [walletConnect, setWalletConnect] = useState<boolean>(false);
+  const { closeView } = useChain('regen');
+  const { address, status } = useChainWallet('regen', WALLET_CONNECT);
+  const walletManager = useWalletManager();
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
 
   useEffect(() => {
-    if (
-      walletStatus === WalletStatus.Connected &&
-      address &&
-      !wallet?.offlineSigner
-    ) {
-      const offlineSigner =
-        walletConnectClient?.getOfflineSignerAmino?.('regen-1');
-      if (offlineSigner) {
+    if (error) setErrorBannerText(String(error));
+  }, [error, setErrorBannerText]);
+
+  useEffect(() => {
+    async function getOfflineSigner() {
+      try {
+        const offlineSigner = await walletManager.getOfflineSigner(
+          WALLET_CONNECT,
+          'regen',
+        );
+        // Wrap the signer to add compatibility with CosmJS methods
+        const wrappedSigner = wrapSigner(offlineSigner);
+        if (offlineSigner) {
+          closeView();
+          setWallet({
+            offlineSigner: wrappedSigner,
+            address,
+            shortAddress: truncate(address),
+          });
+          setWalletConnect(true);
+          track<ConnectEvent>('loginWalletConnect', {
+            date: new Date().toUTCString(),
+            account: address,
+          });
+        }
+      } catch (e) {
         closeView();
-        setWallet({
-          offlineSigner,
-          address,
-          shortAddress: truncate(address),
-        });
-        setWalletConnect(true);
-        track<ConnectEvent>('loginWalletConnect', {
-          date: new Date().toUTCString(),
-          account: address,
-        });
+        setError(e);
       }
     }
-  }, [
-    address,
-    walletStatus,
-    walletConnectClient,
-    closeView,
-    wallet?.offlineSigner,
-    track,
-  ]);
+    if (status === WalletState.Connected && address && !wallet?.offlineSigner) {
+      getOfflineSigner();
+    }
+  }, [address, status, walletManager, closeView, wallet?.offlineSigner, track]);
 
   const signArbitrary = useSignArbitrary({
     setError,

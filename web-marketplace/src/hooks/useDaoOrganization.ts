@@ -4,7 +4,6 @@ import { useAuth } from 'lib/auth/auth';
 
 export const useDaoOrganization = () => {
   const { activeAccount } = useAuth();
-
   const daos = useMemo(
     () => activeAccount?.daosByAssignmentAccountIdAndDaoAddress?.nodes ?? [],
     [activeAccount],

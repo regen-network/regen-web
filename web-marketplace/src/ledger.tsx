@@ -25,7 +25,7 @@ import { UseStateSetter } from 'types/react/use-state';
 import { ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet/wallet';
 
-const chain = chains.find(({ chain_name }) => chain_name === 'regen');
+const chain = chains.find(({ chainName }) => chainName === 'regen');
 
 export type QueryClient = Awaited<
   ReturnType<typeof regen.ClientFactory.createRPCQueryClient>

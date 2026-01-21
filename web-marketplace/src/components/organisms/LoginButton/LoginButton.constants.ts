@@ -1,7 +1,8 @@
 import { msg } from '@lingui/core/macro';
 
-// eslint-disable-next-line lingui/no-unlocalized-strings
-export const mobileWalletsName = ['WalletConnect'];
+import { WALLET_CONNECT } from 'lib/wallet/wallet.constants';
+
+export const mobileWalletsName = [WALLET_CONNECT];
 
 export const RESEND_TEXT = msg`Don’t see anything?`;
 export const RESEND_SUCCES = msg`New confirmation code sent`;

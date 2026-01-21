@@ -1,5 +1,5 @@
 import { MutableRefObject, useCallback } from 'react';
-import { useWallet } from '@cosmos-kit/react-lite';
+import { useChainWallet } from '@interchain-kit/react';
 import { useSetAtom } from 'jotai';
 import { resetBuyCreditsFormAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import { BUY_CREDITS_FORM_PREFIX } from 'legacy-pages/BuyCredits/BuyCredits.constants';
@@ -10,8 +10,7 @@ import { Wallet } from '../wallet';
 import {
   AUTO_CONNECT_WALLET_KEY,
   emptySender,
-  KEPLR_MOBILE,
-  WALLET_CONNECT_KEY,
+  WALLET_CONNECT,
 } from '../wallet.constants';
 import { WalletConfig } from '../walletsConfig/walletsConfig.types';
 
@@ -34,12 +33,15 @@ export const useDisconnect = ({
   logout,
   setWalletConnect,
 }: Props): DisconnectType => {
-  const { mainWallet } = useWallet(KEPLR_MOBILE);
+  const { disconnect: disconnectWalletConnect } = useChainWallet(
+    'regen',
+    WALLET_CONNECT,
+  );
   const setShouldResetBuyCreditsForm = useSetAtom(resetBuyCreditsFormAtom);
 
   const disconnect = useCallback(async (): Promise<void> => {
-    if (walletConnect && mainWallet) {
-      await mainWallet.disconnect(true);
+    if (walletConnect) {
+      await disconnectWalletConnect();
       setWalletConnect(false);
     }
 
@@ -47,7 +49,6 @@ export const useDisconnect = ({
     setConnectionType(undefined);
     walletConfigRef.current = undefined;
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
-    localStorage.removeItem(WALLET_CONNECT_KEY);
 
     setShouldResetBuyCreditsForm(true);
 
@@ -61,13 +62,13 @@ export const useDisconnect = ({
     if (!walletConnect && logout) await logout();
   }, [
     walletConnect,
-    mainWallet,
     setWallet,
     setConnectionType,
     walletConfigRef,
     setShouldResetBuyCreditsForm,
     logout,
     setWalletConnect,
+    disconnectWalletConnect,
   ]);
 
   return disconnect;

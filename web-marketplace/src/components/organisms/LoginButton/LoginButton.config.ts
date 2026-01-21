@@ -1,6 +1,7 @@
 import { msg } from '@lingui/core/macro';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
+import { WALLET_CONNECT } from 'lib/wallet/wallet.constants';
 import { ConnectParams } from 'lib/wallet/wallet.types';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
@@ -25,8 +26,7 @@ export const getAllWalletsUiConfig = ({
     onClick: () => connectToWallet({ walletType: WalletType.Keplr }),
   },
   {
-    // eslint-disable-next-line lingui/no-unlocalized-strings
-    name: 'WalletConnect',
+    name: WALLET_CONNECT,
     description: _(msg`Keplr Mobile`),
     image: walletConnectKeplr,
     onClick: () =>

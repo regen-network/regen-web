@@ -11,13 +11,13 @@
     "@cosmjs/launchpad": "^0.27.0",
     "@cosmjs/proto-signing": "^0.36.1",
     "@cosmjs/stargate": "^0.36.1",
-    "@cosmos-kit/keplr-mobile": "^2.6.7",
-    "@cosmos-kit/react-lite": "^2.6.7",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@google-cloud/translate": "^8.5.0",
     "@hookform/resolvers": "^5.0.1",
+    "@interchain-kit/core": "^0.7.0",
+    "@interchain-kit/react": "^0.7.0",
     "@keplr-wallet/provider": "^0.11.10",
     "@keplr-wallet/stores": "^0.11.10",
     "@lingui/core": "^5.1.2",
@@ -53,7 +53,7 @@
     "analytics-plugin-do-not-track": "^0.1.5",
     "auth0-js": "^9.18.0",
     "axios": "^0.21.1",
-    "chain-registry": "^1.18.0",
+    "chain-registry": "^2.0.125",
     "clientjs": "^0.1.11",
     "dayjs": "^1.10.7",
     "formik": "^2.4.6",
@@ -177,8 +177,5 @@
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^2.0.5"
-  },
-  "overrides": {
-    "@walletconnect/sign-client": "2.10.4"
   }
 }

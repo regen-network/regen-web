@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useWalletManager } from '@interchain-kit/react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -36,12 +37,15 @@ import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
 
+import '@interchain-kit/react/styles.css';
+
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { isKeplrMobileWeb } = useWallet();
+  const { walletConnectQRCodeUri } = useWalletManager();
 
   const { classes } = useHomeStyles();
 

@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { State, WalletModalProps, WalletStatus } from '@cosmos-kit/core';
+// import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
+import { isAndroid, isIOS } from '@interchain-kit/core';
+import { useWalletManager, WalletModalProps } from '@interchain-kit/react';
 import { useLingui } from '@lingui/react';
-import { Box } from '@mui/material';
-import QRCode from 'qrcode.react';
+import { Trans } from '@lingui/react/macro';
+import { isMobile } from '@walletconnect/utils';
+import { QRCodeSVG } from 'qrcode.react';
 
 import { Center } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { Loading } from 'web-components/src/components/loading';
 import Modal from 'web-components/src/components/modal';
 import { Title } from 'web-components/src/components/typography';
@@ -17,61 +21,46 @@ export interface Props {
   qrCodeUri?: string;
 }
 
-const LoginModalMobile = ({
-  isOpen,
-  setOpen,
-  walletRepo,
-}: WalletModalProps) => {
+const LoginModalMobile = ({ isOpen, close }: WalletModalProps) => {
   const { _ } = useLingui();
-  const onCloseModal = () => {
-    setOpen(false);
-  };
-  const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode
-  const [qrMsg, setQRMsg] = useState<string>(''); // message of QRCode error
-  const [connecting, setConnecting] = useState<boolean>(false);
+  const { walletConnectQRCodeUri } = useWalletManager();
 
-  const current = walletRepo?.current;
+  const showQrCode = !isMobile();
 
-  (current?.client as any)?.setActions?.({
-    qrUrl: {
-      state: setQRState,
-      message: setQRMsg,
-    },
-  });
-
-  const walletStatus = current?.walletStatus;
-  const message = current?.message;
-
-  useEffect(() => {
-    if (isOpen) {
-      switch (walletStatus) {
-        case WalletStatus.Connecting:
-          if (qrState === State.Init) {
-            setConnecting(true);
-          } else {
-            setConnecting(false);
-          }
-          break;
-      }
+  const openKeplrMobile = useCallback(() => {
+    let wcUrl: string | undefined = '';
+    const encodedUri = encodeURIComponent(walletConnectQRCodeUri);
+    if (isAndroid()) {
+      wcUrl = `intent://wcV2?${encodedUri}#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;`;
     }
-  }, [qrState, walletStatus, qrMsg, message, isOpen]);
-
-  const qrCodeUri = current?.qrUrl?.data;
+    if (isIOS()) {
+      wcUrl = `keplrwallet://wcV2?${encodedUri}`;
+    }
+    window.open(wcUrl, '_self');
+  }, [walletConnectQRCodeUri]);
 
   return (
-    <Modal open={isOpen} onClose={onCloseModal}>
-      <Box sx={{ minHeight: 400 }}>
+    <Modal open={isOpen} onClose={close}>
+      <div className="min-h-[400px]">
         <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
-          {connecting ? _(CONNECTING_LABEL) : qrCodeUri && _(QR_CODE_LABEL)}
+          {showQrCode ? _(QR_CODE_LABEL) : _(CONNECTING_LABEL)}
         </Title>
         <Center sx={{ pt: 9, height: 340 }}>
-          {connecting ? (
-            <Loading />
+          {showQrCode ? (
+            walletConnectQRCodeUri ? (
+              <QRCodeSVG size={300} value={walletConnectQRCodeUri} />
+            ) : (
+              <Loading />
+            )
+          ) : walletConnectQRCodeUri ? (
+            <OutlinedButton onClick={openKeplrMobile}>
+              <Trans>Click to open Keplr Mobile</Trans>
+            </OutlinedButton>
           ) : (
-            qrCodeUri && <QRCode size={300} value={qrCodeUri} />
+            <Loading />
           )}
         </Center>
-      </Box>
+      </div>
     </Modal>
   );
 };

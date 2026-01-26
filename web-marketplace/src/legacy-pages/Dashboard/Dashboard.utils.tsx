@@ -205,3 +205,111 @@ export const getMetadataAction = ({
 
   return undefined;
 };
+
+type GetSwitchDashboardPathParams = {
+  pathname: string;
+  isOrganizationDashboard: boolean;
+  targetIsOrg: boolean;
+  orgDashboardBasePath: string;
+  personalDashboardBasePath: string;
+  organizationProfileItems: {
+    isIssuer: boolean;
+    showCreditClasses: boolean;
+    isLoadingIsIssuer: boolean;
+    isLoadingCreditClasses: boolean;
+  };
+  personalProfileItems: {
+    isIssuer: boolean;
+    showCreditClasses: boolean;
+    isLoadingIsIssuer: boolean;
+    isLoadingCreditClasses: boolean;
+  };
+  organizationHasCreditBatches: boolean;
+  personalHasCreditBatches: boolean;
+  organizationBatchesLoading: boolean;
+  personalBatchesLoading: boolean;
+  hasOrders: boolean;
+  ordersLoading: boolean;
+};
+
+/**
+ * Determines the path to navigate to when switching between personal and organization dashboards.
+ * Attempts to preserve the current section (e.g., projects, credit-batches) when switching,
+ * but falls back to /portfolio if the section is not available in the target dashboard.
+ *
+ * @param params - Configuration for path calculation
+ * @returns The full path to navigate to in the target dashboard
+ */
+export const getSwitchDashboardPath = ({
+  pathname,
+  isOrganizationDashboard,
+  targetIsOrg,
+  orgDashboardBasePath,
+  personalDashboardBasePath,
+  organizationProfileItems,
+  personalProfileItems,
+  organizationHasCreditBatches,
+  personalHasCreditBatches,
+  organizationBatchesLoading,
+  personalBatchesLoading,
+  hasOrders,
+  ordersLoading,
+}: GetSwitchDashboardPathParams): string => {
+  // Determine source and target base paths
+  const fromBase = isOrganizationDashboard
+    ? orgDashboardBasePath
+    : personalDashboardBasePath;
+  const toBase = targetIsOrg ? orgDashboardBasePath : personalDashboardBasePath;
+
+  // Extract the current section from the pathname
+  const rawSuffix = pathname.startsWith(fromBase)
+    ? pathname.slice(fromBase.length)
+    : '';
+  const suffix = rawSuffix.replace(/^\/+/, '').replace(/\/+$/, '');
+
+  // If no section, just return the base path
+  if (!suffix) return toBase;
+
+  const section = suffix.split('/')[0];
+
+  // Get target dashboard's profile items and capabilities
+  const targetProfileItems = targetIsOrg
+    ? organizationProfileItems
+    : personalProfileItems;
+  const targetHasCreditBatches =
+    targetProfileItems.isIssuer ||
+    (targetIsOrg ? organizationHasCreditBatches : personalHasCreditBatches);
+  const targetCreditBatchesLoading =
+    (targetIsOrg ? organizationBatchesLoading : personalBatchesLoading) ||
+    targetProfileItems.isLoadingIsIssuer;
+  const targetHasCreditClasses = targetProfileItems.showCreditClasses;
+  const targetCreditClassesLoading = targetProfileItems.isLoadingCreditClasses;
+
+  // Check if the section is not supported in the target dashboard
+  const isUnsupported = targetIsOrg
+    ? section === 'settings' || section === 'my-orders' // Not available in org dashboard
+    : section === 'members'; // Not available in personal dashboard
+
+  // Check if this is a project-specific route (e.g., /projects/[id]/...)
+  const isProjectSpecificRoute =
+    section === 'projects' && suffix.split('/').length > 1;
+
+  // Determine if we should fallback to /portfolio
+  const shouldFallback =
+    isUnsupported ||
+    isProjectSpecificRoute ||
+    // Don't navigate to credit-batches if target doesn't have any (and not loading)
+    (section === 'credit-batches' &&
+      !targetHasCreditBatches &&
+      !targetCreditBatchesLoading) ||
+    // Don't navigate to credit-classes if target doesn't have any (and not loading)
+    (section === 'credit-classes' &&
+      !targetHasCreditClasses &&
+      !targetCreditClassesLoading) ||
+    // Don't navigate to sell-orders if switching to personal dashboard without orders
+    (section === 'sell-orders' && !targetIsOrg && !hasOrders && !ordersLoading);
+
+  if (shouldFallback) return `${toBase}/portfolio`;
+
+  return `${toBase}/${suffix}`;
+};

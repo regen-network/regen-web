@@ -72,6 +72,7 @@ import { DashboardNavAccount } from './Dashboard.types';
 import {
   getActivePortfolioTab,
   getPortfolioTabs,
+  getSwitchDashboardPath,
   getWalletAddress,
 } from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
@@ -350,57 +351,46 @@ export const Dashboard = () => {
     ? organizationHasCreditBatches
     : personalHasCreditBatches;
 
-  const getSwitchDashboardPath = (targetIsOrg: boolean) => {
-    const fromBase = isOrganizationDashboard
-      ? orgDashboardBasePath
-      : personalDashboardBasePath;
-    const toBase = targetIsOrg
-      ? orgDashboardBasePath
-      : personalDashboardBasePath;
-    const rawSuffix = pathname.startsWith(fromBase)
-      ? pathname.slice(fromBase.length)
-      : '';
-    const suffix = rawSuffix.replace(/^\/+/, '').replace(/\/+$/, '');
-    if (!suffix) return toBase;
+  const { orders, isLoading: ordersLoading } = useOrders();
+  const hasOrders = orders && orders.length > 0;
 
-    const section = suffix.split('/')[0];
-    const targetProfileItems = targetIsOrg
-      ? organizationProfileItems
-      : personalProfileItems;
-    const targetHasCreditBatches =
-      targetProfileItems.isIssuer ||
-      (targetIsOrg ? organizationHasCreditBatches : personalHasCreditBatches);
-    const targetCreditBatchesLoading =
-      (targetIsOrg ? organizationBatchesLoading : personalBatchesLoading) ||
-      targetProfileItems.isLoadingIsIssuer;
-    const targetHasCreditClasses = targetProfileItems.showCreditClasses;
-    const targetCreditClassesLoading =
-      targetProfileItems.isLoadingCreditClasses;
-    const isUnsupported = targetIsOrg
-      ? section === 'settings' || section === 'my-orders'
-      : section === 'members';
-
-    const isProjectSpecificRoute =
-      section === 'projects' && suffix.split('/').length > 1;
-
-    const shouldFallback =
-      isUnsupported ||
-      isProjectSpecificRoute ||
-      (section === 'credit-batches' &&
-        !targetHasCreditBatches &&
-        !targetCreditBatchesLoading) ||
-      (section === 'credit-classes' &&
-        !targetHasCreditClasses &&
-        !targetCreditClassesLoading) ||
-      (section === 'sell-orders' &&
-        !targetIsOrg &&
-        !hasOrders &&
-        !ordersLoading);
-
-    if (shouldFallback) return `${toBase}/portfolio`;
-
-    return `${toBase}/${suffix}`;
-  };
+  /**
+   * Calculates the path to navigate to when switching between dashboards,
+   * attempting to preserve the current section when possible.
+   */
+  const getSwitchDashboardPathCallback = useCallback(
+    (targetIsOrg: boolean) => {
+      return getSwitchDashboardPath({
+        pathname,
+        isOrganizationDashboard,
+        targetIsOrg,
+        orgDashboardBasePath,
+        personalDashboardBasePath,
+        organizationProfileItems,
+        personalProfileItems,
+        organizationHasCreditBatches: organizationHasCreditBatches ?? false,
+        personalHasCreditBatches: personalHasCreditBatches ?? false,
+        organizationBatchesLoading,
+        personalBatchesLoading,
+        hasOrders,
+        ordersLoading,
+      });
+    },
+    [
+      pathname,
+      isOrganizationDashboard,
+      orgDashboardBasePath,
+      personalDashboardBasePath,
+      organizationProfileItems,
+      personalProfileItems,
+      organizationHasCreditBatches,
+      personalHasCreditBatches,
+      organizationBatchesLoading,
+      personalBatchesLoading,
+      hasOrders,
+      ordersLoading,
+    ],
+  );
 
   const onAccountSelect = (address: string) => {
     const target = navigationAccounts.find(
@@ -410,7 +400,7 @@ export const Dashboard = () => {
 
     const targetIsOrg = target.type === ORG;
     if (targetIsOrg !== isOrganizationDashboard) {
-      navigate(getSwitchDashboardPath(targetIsOrg));
+      navigate(getSwitchDashboardPathCallback(targetIsOrg));
     }
 
     setMobileMenuOpen(false);
@@ -506,9 +496,6 @@ export const Dashboard = () => {
     }
     return null;
   }, [selectedAccount, activeAccount]);
-
-  const { orders, isLoading: ordersLoading } = useOrders();
-  const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
     useBridgeAvailability(dashboardAccountAddress ?? wallet?.address);

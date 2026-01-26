@@ -86,27 +86,6 @@ const createMuiLink = (
       );
     },
   );
-      return isInternalLink(href) ? (
-        <MuiLink
-          {...linkProps}
-          ref={ref}
-          component={internalComponent}
-          href={internalHref}
-        >
-          {children}
-        </MuiLink>
-      ) : (
-        <MuiLink
-          {...linkProps}
-          ref={ref}
-          href={href}
-          target={target || '_blank'}
-        >
-          {children}
-        </MuiLink>
-      );
-    },
-  );
 
   const internalName =
     (internalComponent as React.ComponentType).displayName ||

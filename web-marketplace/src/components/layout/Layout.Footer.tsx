@@ -1,10 +1,10 @@
 'use client';
 
+import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
-import { usePathname } from 'next/navigation';
 
 import {
   Footer,
@@ -12,11 +12,11 @@ import {
 } from 'web-components/src/components/footer/footer-new';
 
 import { HomeIconLink } from 'components/atoms/HomeIconLink';
-import { Link } from 'components/atoms/Link';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 
 export const LayoutFooter = () => {
   const { _ } = useLingui();
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const isHidden =
     /^\/project-pages$/.test(pathname) ||
     /^\/project\/[^\/]+\/buy$/.test(pathname);

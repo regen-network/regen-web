@@ -14,7 +14,7 @@ import { LinkComponentType } from 'web-components/src/types/shared/linkComponent
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
-import { Link as LinkComponent } from 'components/atoms';
+import { ReactRouterMuiLink as LinkComponent } from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 

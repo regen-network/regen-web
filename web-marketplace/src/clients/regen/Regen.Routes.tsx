@@ -264,7 +264,7 @@ export const getRegenRoutes = ({
     <>
       {/* Main routes WITH header/footer */}
       <Route
-        element={<RegistryLayout />}
+        element={<RegistryLayout showHeaderFooter />}
         loader={registryLayoutLoader({
           queryClient: reactQueryClient,
           apolloClient,

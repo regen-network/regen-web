@@ -38,7 +38,10 @@ import {
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link, ReactRouterMuiLink } from 'components/atoms';
+import {
+  ReactRouterMuiLink as Link,
+  ReactRouterMuiLink,
+} from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';

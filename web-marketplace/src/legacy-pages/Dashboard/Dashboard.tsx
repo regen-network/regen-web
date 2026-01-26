@@ -34,7 +34,7 @@ import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/reg
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link } from 'components/atoms';
+import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import {
@@ -168,7 +168,7 @@ export const Dashboard = () => {
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
 
-  const { data } = useQuery(
+  const { data, isLoading: isOrgDataLoading } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
       enabled: !!graphqlClient && !!organizationAddress,
@@ -256,10 +256,22 @@ export const Dashboard = () => {
   }, [isOrganizationDashboard, navigationAccounts, organizationAccount]);
 
   useEffect(() => {
-    if (isOrganizationDashboard && !organizationAccount && !loading) {
+    // Only redirect if we're sure there's no org account and loading is complete
+    if (
+      isOrganizationDashboard &&
+      !organizationAccount &&
+      !loading &&
+      !isOrgDataLoading
+    ) {
       navigate('/dashboard', { replace: true });
     }
-  }, [isOrganizationDashboard, organizationAccount, loading, navigate]);
+  }, [
+    isOrganizationDashboard,
+    organizationAccount,
+    loading,
+    isOrgDataLoading,
+    navigate,
+  ]);
 
   const organizationRole = useMemo(() => {
     if (!isOrganizationDashboard || selectedAccount?.type !== ORG)

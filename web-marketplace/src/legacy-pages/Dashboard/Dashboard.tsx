@@ -391,7 +391,11 @@ export const Dashboard = () => {
         !targetCreditBatchesLoading) ||
       (section === 'credit-classes' &&
         !targetHasCreditClasses &&
-        !targetCreditClassesLoading);
+        !targetCreditClassesLoading) ||
+      (section === 'sell-orders' &&
+        !targetIsOrg &&
+        !hasOrders &&
+        !ordersLoading);
 
     if (shouldFallback) return `${toBase}/portfolio`;
 

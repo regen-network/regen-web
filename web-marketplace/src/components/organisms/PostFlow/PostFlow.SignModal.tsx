@@ -44,6 +44,7 @@ type SignModalProps = {
   ) => Promise<void>;
   published?: boolean;
   hasAddress: boolean;
+  isOrganizationProject?: boolean;
 } & RegenModalProps;
 
 export const SignModal = ({
@@ -53,6 +54,7 @@ export const SignModal = ({
   handleSign,
   published,
   hasAddress,
+  isOrganizationProject = false,
 }: SignModalProps) => {
   const { _ } = useLingui();
   const form = useZodForm({
@@ -119,7 +121,8 @@ export const SignModal = ({
   const selectedAccount = accounts.find(
     account => account.address === selectedAddress,
   );
-  const showAccountSelector = accounts.length > 1;
+  // Only show selector for organization projects when user has multiple accounts
+  const showAccountSelector = isOrganizationProject && accounts.length > 1;
 
   return (
     <Modal onClose={onClose} open={open}>

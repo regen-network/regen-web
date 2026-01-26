@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
@@ -91,6 +92,7 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
+  const { pathname } = useLocation();
   const router = useRouter();
 
   const [offChainProjectId, setOffChainProjectId] =
@@ -287,6 +289,12 @@ export const PostFlow = ({
         iri={iri}
         published={createdPostData?.published}
         hasAddress={hasAddress}
+        isOrganizationProject={
+          // Show selector if it's an org project AND we're NOT on the org dashboard
+          // This covers both /project/:slug and /dashboard paths
+          offChainProject?.organizationProjectByProjectId?.organizationId ||
+          pathname.startsWith('/dashboard/organization')
+        }
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);

@@ -36,6 +36,10 @@ import { getTxsEventQueryKey } from 'lib/queries/react-query/cosmos/bank/getTxsE
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import {
+  ORG,
+  USER,
+} from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
@@ -57,7 +61,7 @@ type UseSignParams = UseFetchMsgAnchorParams & {
 
 type SignParams = {
   contentHash: ContentHash_Graph;
-  signAs?: 'user' | 'org';
+  signAs?: typeof USER | typeof ORG;
 } & FetchMsgAnchorParams;
 
 export const useSign = ({
@@ -146,7 +150,7 @@ export const useSign = ({
     async ({ contentHash, iri, createdPostData, signAs }: SignParams) => {
       if (wallet?.address) {
         // Validate that organization option is available when user selects org
-        if (signAs === 'org' && !withOrganization) {
+        if (signAs === ORG && !withOrganization) {
           throw new Error(
             'Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization.',
           );
@@ -155,10 +159,10 @@ export const useSign = ({
         // Show processing modal immediately
         setProcessingModalAtom(atom => void (atom.open = true));
 
-        const useOrganization = signAs !== 'user' && !!withOrganization;
+        const useOrganization = signAs !== USER && !!withOrganization;
 
         let txMsg;
-        if (useOrganization && withOrganization) {
+        if (useOrganization) {
           const msgAttest = {
             attestor: withOrganization.daoAddress,
             contentHashes: [contentHash],

@@ -18,6 +18,7 @@ export interface ProjectAccountSelectorProps {
   selectedAddress: string;
   onSelect: (id: string) => void;
   label?: string;
+  /** When true, renders the dropdown menu in a portal to avoid overflow/z-index issues with parent containers */
   menuPortal?: boolean;
 }
 
@@ -34,12 +35,14 @@ export const ProjectAccountSelector = ({
     if (open) setOpen(false);
   });
   const buttonRef = useRef<HTMLButtonElement>(null);
+  // Track absolute position for portal-rendered menu to align it with the button
   const [menuPosition, setMenuPosition] = useState<{
     top: number;
     left: number;
     width: number;
   } | null>(null);
 
+  // Calculate and update the portal menu's position based on button's current viewport position
   const updatePosition = useCallback(() => {
     const button = buttonRef.current;
     if (!button) return;
@@ -53,6 +56,8 @@ export const ProjectAccountSelector = ({
 
   useEffect(() => {
     if (!open || !menuPortal) return;
+    // When using portal, track button position on scroll/resize to keep menu aligned
+    // This is necessary because the portal is rendered outside the normal DOM flow
     updatePosition();
     window.addEventListener('resize', updatePosition);
     window.addEventListener('scroll', updatePosition, true);
@@ -103,7 +108,7 @@ export const ProjectAccountSelector = ({
           <li key={key} role="option" aria-selected={isSelected}>
             <Body
               size="md"
-              className="font-bold text-bc-neutral-900 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
+              className="font-bold text-bc-neutral-700 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
             >
               {account.displayName}
             </Body>
@@ -181,6 +186,7 @@ export const ProjectAccountSelector = ({
         <DropdownIcon className="h-[10px] w-[13px] text-brand-400" />
       </button>
 
+      {/* Render dropdown: in portal (document.body) to avoid overflow issues, or inline */}
       {open &&
         (menuPortal
           ? menuPosition && createPortal(dropdown, document.body)

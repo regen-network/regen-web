@@ -14,7 +14,7 @@ export const Public: Story = {
   args: {
     ...commonArgs,
     file,
-    isAdmin: false,
+    canManagePost: false,
   },
   argTypes: {
     sharePublicLink: { action: 'share public click' },
@@ -29,7 +29,7 @@ export const Private: Story = {
     privacyLabel: 'Post is private',
     numberOfFiles: 5,
     file,
-    isAdmin: true,
+    canManagePost: true,
   },
   argTypes: {
     sharePublicLink: { action: 'share public click' },
@@ -42,7 +42,7 @@ export const NoImage: Story = {
   args: {
     ...commonArgs,
     privacyLabel: 'Files are private',
-    isAdmin: false,
+    canManagePost: false,
   },
   argTypes: {
     sharePublicLink: { action: 'share public click' },
@@ -54,7 +54,7 @@ export const NoImage: Story = {
 export const Draft: Story = {
   args: {
     ...commonArgs,
-    isAdmin: true,
+    canManagePost: true,
     draftLabel: 'Draft',
   },
   argTypes: {
@@ -70,7 +70,7 @@ export const DraftPrivate: Story = {
     ...commonArgs,
     privacyLabel: 'Post is private',
     numberOfFiles: 5,
-    isAdmin: true,
+    canManagePost: true,
     draftLabel: 'Draft',
     file,
   },

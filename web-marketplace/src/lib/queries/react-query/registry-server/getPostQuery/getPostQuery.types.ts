@@ -22,6 +22,7 @@ export type PostContents = JsonLdDocument & {
 };
 
 export type Post = {
+  id: string;
   iri: string;
   createdAt: string;
   creatorAccountId: string;
@@ -43,6 +44,7 @@ export type Post = {
   prevIri?: string;
   nextIri?: string;
   canDownloadFiles: boolean;
+  updatedAt: string;
 };
 
 export type ReactQueryGetPostQueryResponse = QueryObserverOptions<Post | null>;

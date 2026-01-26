@@ -16,16 +16,15 @@ export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   };
 };
 
-type GetCanCreatePostParams = {
+type GetCanManagePostParams = {
   role?: ProjectRole;
 };
 
-export const getCanCreatePost = ({ role }: GetCanCreatePostParams) => {
-  return {
-    canCreatePost:
-      role === ROLE_OWNER ||
-      role === ROLE_ADMIN ||
-      role === ROLE_EDITOR ||
-      role === ROLE_AUTHOR,
-  };
+export const getCanManagePost = ({ role }: GetCanManagePostParams) => {
+  return (
+    role === ROLE_OWNER ||
+    role === ROLE_ADMIN ||
+    role === ROLE_EDITOR ||
+    role === ROLE_AUTHOR
+  );
 };

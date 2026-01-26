@@ -75,6 +75,8 @@ type Props = {
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   projectLocation: GeocodeFeature;
   openCreatePostModal: () => void;
+  canManagePost: boolean;
+  canViewPost: boolean;
 };
 export const DataStreamPost = ({
   offChainProjectId,
@@ -87,6 +89,8 @@ export const DataStreamPost = ({
   setDraftPost,
   projectLocation,
   openCreatePostModal,
+  canManagePost,
+  canViewPost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -196,7 +200,7 @@ export const DataStreamPost = ({
           <TimelineConnector className="bg-grey-300 w-1" />
         </TimelineSeparator>
         <TimelineContent className="-mt-30 mb-30 pr-0 pl-0">
-          {post.contents && (post.privacy !== 'private' || isAdmin) && (
+          {post.contents && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
               onClick={() =>
@@ -224,7 +228,7 @@ export const DataStreamPost = ({
                 timestamp: post.createdAt,
                 tag: creatorIsAdmin ? _(ADMIN) : undefined,
               }}
-              isAdmin={isAdmin}
+              canManagePost={canManagePost}
               sharePublicLink={() => {
                 copyTextToClipboard(
                   LINK_PREFIX
@@ -240,7 +244,10 @@ export const DataStreamPost = ({
               file={file}
               preview={preview}
               onEditDraft={() => {
+                console.log('Editing draft post');
                 setDraftPost({
+                  id: post.id,
+                  updatedAt: new Date(post.updatedAt),
                   iri: post.iri,
                   title: post.contents?.title,
                   comment: post.contents?.comment,

@@ -49,6 +49,7 @@ type Props = {
   projectLocation?: GeocodeFeature;
   openCreatePostModal: () => void;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+  canManagePost: boolean;
 };
 
 export const DataStream = ({
@@ -59,6 +60,7 @@ export const DataStream = ({
   projectLocation,
   openCreatePostModal,
   setDraftPost,
+  canManagePost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -66,9 +68,6 @@ export const DataStream = ({
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
   const hash = useHash();
-
-  const isAdmin =
-    !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
 
   const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery(
@@ -111,7 +110,7 @@ export const DataStream = ({
             titleAlign="left"
             className="mb-50 sm:mb-[100px] pt-0"
           >
-            {isAdmin && adminDescription && projectLocation && (
+            {canManagePost && adminDescription && projectLocation && (
               <div className="mt-15">
                 <Body className="mb-15 max-w-[683px]" size="lg" component="div">
                   <BlockContent content={adminDescription} />
@@ -158,7 +157,7 @@ export const DataStream = ({
                         post={post}
                         index={i}
                         postsLength={posts.length}
-                        isAdmin={isAdmin}
+                        canManagePost={canManagePost}
                         adminAccountId={adminAccountId}
                         offChainProjectId={offChainProjectId}
                         adminAddr={adminAddr}

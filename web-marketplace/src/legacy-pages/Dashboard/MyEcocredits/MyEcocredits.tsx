@@ -666,7 +666,6 @@ export const MyEcocredits = (): JSX.Element => {
             seeLessText={_(SEE_LESS)}
             open={true}
             onClose={handleTxModalClose}
-            isFullscreenMobile={false}
             txHash={txHash ?? ''}
             txHashUrl={txHashUrl}
             title={txModalHeader ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
@@ -693,7 +692,6 @@ export const MyEcocredits = (): JSX.Element => {
           error={error ?? ''}
           open={!!error}
           onClose={handleTxModalClose}
-          isFullscreenMobile={false}
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
           cardTitle={txModalTitle ?? ''}

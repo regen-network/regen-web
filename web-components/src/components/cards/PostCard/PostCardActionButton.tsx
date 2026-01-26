@@ -1,4 +1,3 @@
-import React from 'react';
 import { IconButton } from '@mui/material';
 
 import {
@@ -10,17 +9,17 @@ import ShareIcon from '../../icons/ShareIcon';
 const ActionButton = ({
   publicPost,
   draft,
-  isAdmin,
+  canManagePost,
   sharePublicLink,
   sharePrivateLink,
   onDelete,
   onEditDraft,
 }: {
-  isAdmin?: boolean;
+  canManagePost?: boolean;
 } & PostAdminButtonProps): JSX.Element => {
   return (
     <div className="z-[1] absolute top-5 right-5 lg:top-[15px] lg:right-[12px] cursor-pointer">
-      {isAdmin ? (
+      {canManagePost ? (
         <PostAdminButton
           publicPost={publicPost}
           draft={draft}

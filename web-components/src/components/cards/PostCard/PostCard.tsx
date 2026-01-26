@@ -25,7 +25,7 @@ interface PostCardProps {
   author: User;
   signers?: Array<User>;
   privacyLabel?: string;
-  isAdmin?: boolean;
+  canManagePost?: boolean;
   numberOfFiles?: number;
   sharePublicLink: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
@@ -47,7 +47,7 @@ export default function PostCard({
   author,
   signers,
   privacyLabel,
-  isAdmin,
+  canManagePost,
   numberOfFiles,
   sharePublicLink,
   sharePrivateLink,
@@ -71,7 +71,7 @@ export default function PostCard({
     >
       <ActionButton
         draft={!!draftLabel}
-        isAdmin={isAdmin}
+        canManagePost={canManagePost}
         sharePublicLink={sharePublicLink}
         sharePrivateLink={sharePrivateLink}
         onDelete={onDelete}

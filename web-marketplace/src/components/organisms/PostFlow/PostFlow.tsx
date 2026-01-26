@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
@@ -46,6 +46,7 @@ import {
   DRAFT_CREATED,
   DRAFT_SAVED,
 } from './PostFlow.constants';
+import { EditedDraftModal } from './PostFlow.EditedDraftModal';
 import { SignModal } from './PostFlow.SignModal';
 
 type Props = {
@@ -86,6 +87,11 @@ export const PostFlow = ({
   const { activeAccount } = useAuth();
   const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
+  const [isDraftEditedModalOpen, setIsDraftEditedModalOpen] = useState(false);
+  const [editedData, setEditedData] = useState<PostFormSchemaType | undefined>(
+    undefined,
+  );
+  const [forceUpdate, setForceUpdate] = useState(false);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData, isFetching } = useQuery(
     getPostQuery({
@@ -95,7 +101,6 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
-  const { pathname } = useLocation();
   const router = useRouter();
 
   const [offChainProjectId, setOffChainProjectId] =
@@ -109,9 +114,38 @@ export const PostFlow = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setBannerText = useSetAtom(bannerTextAtom);
   const draftPostIri = initialValues?.iri;
+  const draftPostId = initialValues?.id;
 
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
+      // Check if draft post has been updated in the meantime
+      if (draftPostId && !forceUpdate) {
+        try {
+          const resp = await fetch(
+            `${apiUri}/marketplace/v1/posts/by-id/${draftPostId}`,
+            {
+              method: 'GET',
+              credentials: 'include',
+            },
+          );
+          if (resp.status !== 200) {
+            throw new Error(
+              _(msg`Cannot get existing post: ${resp.statusText}`),
+            );
+          }
+          const existingPost: { iri: string; updatedAt: string } =
+            await resp.json();
+          if (new Date(existingPost.updatedAt) !== initialValues?.updatedAt) {
+            // We need to overwrite iri in case it has changed
+            setEditedData({ ...data, iri: existingPost.iri });
+            setIsDraftEditedModalOpen(true);
+            return;
+          }
+        } catch (e) {
+          setErrorBannerTextAtom(String(e));
+          return;
+        }
+      }
       if (token) {
         const files = data.files
           ?.filter(file => file.url !== DEFAULT)
@@ -131,9 +165,9 @@ export const PostFlow = ({
         try {
           await postData({
             url: `${apiServerUrl}/marketplace/v1/posts${
-              draftPostIri ? `/${draftPostIri}` : ''
+              data?.iri ? `/${data.iri}` : ''
             }`,
-            method: draftPostIri ? 'PUT' : 'POST',
+            method: data?.iri ? 'PUT' : 'POST',
             data: {
               projectId: offChainProjectId,
               privacy: data.privacyType,
@@ -173,12 +207,15 @@ export const PostFlow = ({
     },
     [
       token,
-      draftPostIri,
       offChainProjectId,
       retryCsrfRequest,
       reactQueryClient,
       selectedLanguage,
       setErrorBannerTextAtom,
+      draftPostId,
+      forceUpdate,
+      initialValues?.updatedAt,
+      _,
     ],
   );
 
@@ -192,6 +229,7 @@ export const PostFlow = ({
 
   const hasAddress =
     !!wallet?.address && activeAccount?.addr === wallet.address;
+
   useEffect(() => {
     if (iri && createdPostData && !isFetching) {
       setIsFormModalOpen(false);
@@ -323,6 +361,18 @@ export const PostFlow = ({
         bodyText={_(DISCARD_CHANGES_BODY)}
         buttonText={_(DISCARD_CHANGES_BUTTON)}
       />
+      {editedData && (
+        <EditedDraftModal
+          open={isDraftEditedModalOpen}
+          onCancel={() => setIsDraftEditedModalOpen(false)}
+          onSubmit={() => {
+            setIsDraftEditedModalOpen(false);
+            setForceUpdate(true);
+            onSubmit(editedData);
+          }}
+          onClose={() => setIsDraftEditedModalOpen(false)}
+        />
+      )}
     </>
   );
 };

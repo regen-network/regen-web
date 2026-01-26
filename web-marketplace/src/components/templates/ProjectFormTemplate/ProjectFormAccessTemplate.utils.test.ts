@@ -8,44 +8,44 @@ import {
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
-import { getCanCreatePost } from './ProjectFormAccessTemplate.utils';
+import { getCanManagePost } from './ProjectFormAccessTemplate.utils';
 
 describe('ProjectFormAccessTemplate.utils', () => {
-  describe('getCanCreatePostWithRole', () => {
+  describe('getCanManagePostWithRole', () => {
     it('should allow creating posts for owner role', () => {
-      const result = getCanCreatePost({ role: ROLE_OWNER });
+      const result = getCanManagePost({ role: ROLE_OWNER });
 
-      expect(result.canCreatePost).toBe(true);
+      expect(result).toBe(true);
     });
 
     it('should allow creating posts for admin role', () => {
-      const result = getCanCreatePost({ role: ROLE_ADMIN });
+      const result = getCanManagePost({ role: ROLE_ADMIN });
 
-      expect(result.canCreatePost).toBe(true);
+      expect(result).toBe(true);
     });
 
     it('should allow creating posts for editor role', () => {
-      const result = getCanCreatePost({ role: ROLE_EDITOR });
+      const result = getCanManagePost({ role: ROLE_EDITOR });
 
-      expect(result.canCreatePost).toBe(true);
+      expect(result).toBe(true);
     });
 
     it('should allow creating posts for author role', () => {
-      const result = getCanCreatePost({ role: ROLE_AUTHOR });
+      const result = getCanManagePost({ role: ROLE_AUTHOR });
 
-      expect(result.canCreatePost).toBe(true);
+      expect(result).toBe(true);
     });
 
     it('should not allow creating posts for viewer role', () => {
-      const result = getCanCreatePost({ role: ROLE_VIEWER });
+      const result = getCanManagePost({ role: ROLE_VIEWER });
 
-      expect(result.canCreatePost).toBe(false);
+      expect(result).toBe(false);
     });
 
     it('should not allow creating posts when role is undefined', () => {
-      const result = getCanCreatePost({ role: undefined });
+      const result = getCanManagePost({ role: undefined });
 
-      expect(result.canCreatePost).toBe(false);
+      expect(result).toBe(false);
     });
   });
 });

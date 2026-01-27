@@ -323,8 +323,10 @@ export const Dashboard = () => {
 
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
-  const onAccountSelect = (id: string) => {
-    const target = navigationAccounts.find(account => account.address === id);
+  const onAccountSelect = (address: string) => {
+    const target = navigationAccounts.find(
+      account => account.address === address,
+    );
     if (!target) return;
 
     if (target.type === ORG) {
@@ -528,9 +530,9 @@ export const Dashboard = () => {
                 header={{
                   activeAccount: headerActiveAccount,
                   accounts: navigationAccounts,
-                  onAccountSelect: (id: string) => {
+                  onAccountSelect: (address: string) => {
                     setIsWarningModalOpen(undefined);
-                    onAccountSelect(id);
+                    onAccountSelect(address);
                     setMobileMenuOpen(false);
                   },
                   onViewProfileClick: (path: string) => {

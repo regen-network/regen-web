@@ -198,11 +198,13 @@ export const getRegenRoutes = ({
     <>
       <Route
         index
-        element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+        element={
+          <Navigate to={address || isOrganization ? 'portfolio' : 'projects'} />
+        }
       />
       <Route
         path="portfolio"
-        element={<KeplrRoute component={MyEcocredits} />}
+        element={<KeplrOrAuthRoute component={MyEcocredits} />}
       />
       <Route
         path="portfolio/bridge"

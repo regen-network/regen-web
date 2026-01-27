@@ -189,7 +189,7 @@ export const PostFlow = ({
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
       // Check if draft post has been updated in the meantime
-      if (draftPostId) {
+      if (draftPostId && initialValues?.updatedAt) {
         try {
           const resp = await fetch(
             `${apiUri}/marketplace/v1/posts/by-id/${draftPostId}`,
@@ -205,7 +205,10 @@ export const PostFlow = ({
           }
           const existingPost: { iri: string; updatedAt: string } =
             await resp.json();
-          if (new Date(existingPost.updatedAt) !== initialValues?.updatedAt) {
+          if (
+            new Date(existingPost.updatedAt).getTime() !==
+            initialValues?.updatedAt.getTime()
+          ) {
             // We need to overwrite iri in case it has changed
             setEditedData({ ...data, iri: existingPost.iri });
             setIsDraftEditedModalOpen(true);

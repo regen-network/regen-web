@@ -1075,6 +1075,11 @@ msgstr "CANCELAR"
 msgid "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry."
 msgstr "Los créditos cancelados se han eliminado del suministro comercializable del lote de créditos. La cancelación de créditos es permanente e implica que los créditos se han trasladado a otra cadena o registro."
 
+#. placeholder {0}: resp.statusText
+#: src/components/organisms/PostFlow/PostFlow.tsx:200
+msgid "Cannot get existing post: {0}"
+msgstr ""
+
 #: src/components/organisms/MediaForm/hooks/useHandleUpload.ts:57
 msgid "Cannot upload file without a project id"
 msgstr "No se puede cargar un archivo sin un ID de proyecto"
@@ -1581,7 +1586,7 @@ msgstr "tabla de lotes de crédito"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:130
+#: src/legacy-pages/Profile/Profile.tsx:133
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1654,7 +1659,7 @@ msgstr "Clases de crédito"
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:182
-#: src/legacy-pages/Profile/Profile.tsx:124
+#: src/legacy-pages/Profile/Profile.tsx:127
 msgid "Credit Classes"
 msgstr "Clases de crédito"
 
@@ -3010,11 +3015,11 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/legacy-pages/Profile/Profile.tsx:182
+#: src/legacy-pages/Profile/Profile.tsx:185
 msgid "Manage Credit Batches"
 msgstr "Administrar lotes de crédito"
 
-#: src/legacy-pages/Profile/Profile.tsx:177
+#: src/legacy-pages/Profile/Profile.tsx:180
 msgid "Manage Credit Classes"
 msgstr "Administrar clases de crédito"
 
@@ -3026,7 +3031,7 @@ msgstr "Administrar créditos"
 msgid "Manage Credits"
 msgstr "Administrar créditos"
 
-#: src/legacy-pages/Profile/Profile.tsx:172
+#: src/legacy-pages/Profile/Profile.tsx:175
 msgid "Manage Members"
 msgstr "Gestionar miembros"
 
@@ -3034,7 +3039,7 @@ msgstr "Gestionar miembros"
 msgid "Manage organization"
 msgstr "Gestionar la organización"
 
-#: src/legacy-pages/Profile/Profile.tsx:162
+#: src/legacy-pages/Profile/Profile.tsx:165
 msgid "Manage Portfolio"
 msgstr "Administrar cartera"
 
@@ -3050,7 +3055,7 @@ msgstr "administrar pestañas de proyectos"
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
 
-#: src/legacy-pages/Profile/Profile.tsx:167
+#: src/legacy-pages/Profile/Profile.tsx:170
 msgid "Manage Projects"
 msgstr "Administrar proyectos"
 
@@ -3121,7 +3126,7 @@ msgid "member not found"
 msgstr "miembro no encontrado"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:113
-#: src/legacy-pages/Profile/Profile.tsx:118
+#: src/legacy-pages/Profile/Profile.tsx:121
 msgid "Members"
 msgstr "Miembros"
 
@@ -3599,6 +3604,10 @@ msgstr "Nuestros servicios"
 #~ msgid "Overview"
 #~ msgstr "Descripción general"
 
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:33
+msgid "overwrite & publish"
+msgstr ""
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:14
 msgid "Owner"
 msgstr "Dueño"
@@ -3803,7 +3812,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:104
+#: src/legacy-pages/Profile/Profile.tsx:107
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -4188,7 +4197,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:110
+#: src/legacy-pages/Profile/Profile.tsx:113
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -4832,6 +4841,10 @@ msgstr "Índice social y cultural"
 #: src/lib/constants/shared.constants.tsx:177
 msgid "Sold Out"
 msgstr "Agotado"
+
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:25
+msgid "Someone made changes to this draft while you were editing."
+msgstr ""
 
 #: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:154
 msgid "Something went wrong while creating the organization."
@@ -6188,6 +6201,10 @@ msgstr "Cambió de cuenta en Keplr, por lo que su cuenta en Regen Marketplace ta
 #: src/legacy-pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
 msgstr "No podrás emitir créditos con esta opción a menos que posteriormente registres este proyecto con una clase de crédito."
+
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:30
+msgid "You will overwrite their changes if you continue."
+msgstr ""
 
 #: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
 msgid "You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."

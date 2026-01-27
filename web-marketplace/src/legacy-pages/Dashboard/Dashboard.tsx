@@ -78,12 +78,24 @@ import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
+// Preload lazy-loaded dashboard sub-pages to prevent flash on first navigation
+const preloadDashboardPages = () => {
+  import('../Orders');
+  import('./Members');
+  import('../Sell/Sell');
+};
+
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { accountChanging, disconnect, loginDisabled, wallet } = useWallet();
   const { loading, activeAccount, activeAccountId, privActiveAccount } =
     useAuth();
+
+  // Preload dashboard sub-pages on mount to eliminate navigation flash
+  useEffect(() => {
+    preloadDashboardPages();
+  }, []);
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined

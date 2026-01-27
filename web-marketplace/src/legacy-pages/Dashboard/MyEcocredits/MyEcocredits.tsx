@@ -64,7 +64,7 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useAllowedDenomOptions } from 'features/marketplace/CreateSellOrderFlow/hooks/useAllowedDenomOptions';
-import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
+import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { CreditRetireModal } from 'components/organisms/Modals/CreditRetireModal/CreditRetireModal';

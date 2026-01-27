@@ -70,6 +70,11 @@ const BasketDetails = safeLazy(
 );
 const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
 const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
+const ProjectDetails = safeLazy(() =>
+  import('../../components/templates/ProjectDetails/ProjectDetails').then(
+    mod => ({ default: mod.ProjectDetails }),
+  ),
+);
 
 const ChooseCreditClassPage = safeLazy(
   () => import('../../legacy-pages/ChooseCreditClass'),
@@ -300,6 +305,7 @@ export const getRegenRoutes = ({
             />
             <Route path="prefinance" element={<PrefinanceProjects />} />
           </Route>
+          <Route path="project/:projectId" element={<ProjectDetails />} />
           <Route path="project/:projectId/buy" element={<BuyCredits />} />
           <Route
             path="post/:iri"

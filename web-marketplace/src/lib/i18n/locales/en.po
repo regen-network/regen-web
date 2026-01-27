@@ -1077,6 +1077,11 @@ msgstr ""
 msgid "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry."
 msgstr ""
 
+#. placeholder {0}: resp.statusText
+#: src/components/organisms/PostFlow/PostFlow.tsx:200
+msgid "Cannot get existing post: {0}"
+msgstr ""
+
 #: src/components/organisms/MediaForm/hooks/useHandleUpload.ts:57
 msgid "Cannot upload file without a project id"
 msgstr ""
@@ -1580,7 +1585,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:130
+#: src/legacy-pages/Profile/Profile.tsx:133
 msgid "Credit Batches"
 msgstr ""
 
@@ -1655,7 +1660,7 @@ msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:182
-#: src/legacy-pages/Profile/Profile.tsx:124
+#: src/legacy-pages/Profile/Profile.tsx:127
 msgid "Credit Classes"
 msgstr ""
 
@@ -2999,11 +3004,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:182
+#: src/legacy-pages/Profile/Profile.tsx:185
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:177
+#: src/legacy-pages/Profile/Profile.tsx:180
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -3015,7 +3020,7 @@ msgstr ""
 msgid "Manage Credits"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:172
+#: src/legacy-pages/Profile/Profile.tsx:175
 msgid "Manage Members"
 msgstr ""
 
@@ -3023,7 +3028,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:162
+#: src/legacy-pages/Profile/Profile.tsx:165
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -3039,7 +3044,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:167
+#: src/legacy-pages/Profile/Profile.tsx:170
 msgid "Manage Projects"
 msgstr ""
 
@@ -3110,7 +3115,7 @@ msgid "member not found"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:113
-#: src/legacy-pages/Profile/Profile.tsx:118
+#: src/legacy-pages/Profile/Profile.tsx:121
 msgid "Members"
 msgstr ""
 
@@ -3588,6 +3593,10 @@ msgstr ""
 #~ msgid "Overview"
 #~ msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:33
+msgid "overwrite & publish"
+msgstr ""
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:14
 msgid "Owner"
 msgstr ""
@@ -3784,7 +3793,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:104
+#: src/legacy-pages/Profile/Profile.tsx:107
 msgid "Portfolio"
 msgstr ""
 
@@ -4173,7 +4182,7 @@ msgstr ""
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:110
+#: src/legacy-pages/Profile/Profile.tsx:113
 msgid "Projects"
 msgstr ""
 
@@ -4817,6 +4826,10 @@ msgstr ""
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 #: src/lib/constants/shared.constants.tsx:177
 msgid "Sold Out"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:25
+msgid "Someone made changes to this draft while you were editing."
 msgstr ""
 
 #: src/legacy-pages/CreateOrganization/steps/OrganizationProfileStep.tsx:154
@@ -6169,6 +6182,10 @@ msgstr ""
 
 #: src/legacy-pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:30
+msgid "You will overwrite their changes if you continue."
 msgstr ""
 
 #: src/legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18

@@ -33,6 +33,10 @@ export const CardItemValue = ({
         sx={{
           display: 'flex',
           alignItems: 'flex-end',
+          flexWrap: 'wrap',
+          minWidth: 0,
+          maxWidth: '100%',
+          overflowWrap: 'anywhere',
         }}
       >
         {value.icon && value.icon}
@@ -40,6 +44,8 @@ export const CardItemValue = ({
           <LinkComponent
             sx={{
               color: 'secondary.main',
+              minWidth: 0,
+              overflowWrap: 'anywhere',
             }}
             href={value.url}
             target={value.url.startsWith('/') ? '_self' : '_blank'}

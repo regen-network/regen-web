@@ -322,6 +322,8 @@ export const Dashboard = () => {
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const onAccountSelect = (id: string) => {
+    console.log('id', id);
+    console.log('navigationAccounts', navigationAccounts);
     const target = navigationAccounts.find(account => account.address === id);
     if (!target) return;
 

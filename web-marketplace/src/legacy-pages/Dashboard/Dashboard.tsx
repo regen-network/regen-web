@@ -77,6 +77,7 @@ import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
+import { useRouter } from 'next/navigation';
 
 export const Dashboard = () => {
   const { _ } = useLingui();
@@ -95,6 +96,7 @@ export const Dashboard = () => {
 
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
+  const router = useRouter();
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
@@ -140,9 +142,9 @@ export const Dashboard = () => {
     try {
       await disconnect();
       setMobileMenuOpen(false);
-      navigate('/');
+      router.push('/');
     } catch (error) {
-      navigate('/');
+      router.push('/');
     }
   };
 
@@ -310,6 +312,8 @@ export const Dashboard = () => {
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const onAccountSelect = (id: string) => {
+    console.log('id', id);
+    console.log('navigationAccounts', navigationAccounts);
     const target = navigationAccounts.find(account => account.address === id);
     if (!target) return;
 
@@ -497,7 +501,7 @@ export const Dashboard = () => {
                 onCloseMobile={() => setMobileMenuOpen(false)}
                 onExitClick={() => {
                   setIsWarningModalOpen(undefined);
-                  navigate('/');
+                  router.push('/');
                   setMobileMenuOpen(false);
                 }}
                 hasOrganization={!!organizationAccount}
@@ -521,7 +525,7 @@ export const Dashboard = () => {
                   },
                   onViewProfileClick: (path: string) => {
                     setIsWarningModalOpen(undefined);
-                    navigate(path);
+                    router.push(path);
                     setMobileMenuOpen(false);
                   },
                 }}

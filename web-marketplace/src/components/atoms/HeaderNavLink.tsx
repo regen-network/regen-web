@@ -48,20 +48,20 @@ export const HeaderNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
    * so the legacy dashboard initializes correctly.
    */
   // TODO: remove this once we have completed the migration to Next.js app router.
-  const isLegacyDashboardRoute =
-    typeof href === 'string' && href.startsWith('/dashboard');
+  // const isLegacyDashboardRoute =
+  //   typeof href === 'string' && href.startsWith('/dashboard');
 
-  if (isLegacyDashboardRoute) {
-    return (
-      <a
-        href={href}
-        className={overrideClassname ?? cn(classes.navLink, className)}
-        {...(disabled ? { onClick: handleDisabledButtonClick } : {})}
-      >
-        {children}
-      </a>
-    );
-  }
+  // if (isLegacyDashboardRoute) {
+  //   return (
+  //     <a
+  //       href={href}
+  //       className={overrideClassname ?? cn(classes.navLink, className)}
+  //       {...(disabled ? { onClick: handleDisabledButtonClick } : {})}
+  //     >
+  //       {children}
+  //     </a>
+  //   );
+  // }
 
   return (
     <Link

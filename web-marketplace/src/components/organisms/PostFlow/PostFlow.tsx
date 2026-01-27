@@ -290,9 +290,8 @@ export const PostFlow = ({
         published={createdPostData?.published}
         hasAddress={hasAddress}
         isOrganizationProject={
-          // Show selector if it's an org project AND we're NOT on the org dashboard
-          // This covers both /project/:slug and /dashboard paths
-          offChainProject?.organizationProjectByProjectId?.organizationId ||
+          // Show selector if it's an org project or we're on the org dashboard
+          !!offChainProject?.organizationProjectByProjectId?.organizationId ||
           pathname.startsWith('/dashboard/organization')
         }
         open={isSignModalOpen}

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -105,7 +105,9 @@ export const SignModal = ({
         name: dao.organizationByDaoAddress?.name || _(UNNAMED),
         address: dao.address,
         type: ORG,
-        image: getDefaultAvatar({ type: AccountType.Organization }),
+        image:
+          dao.organizationByDaoAddress?.image ||
+          getDefaultAvatar({ type: AccountType.Organization }),
         displayName: _(msg`Organization`),
       });
     }
@@ -113,10 +115,33 @@ export const SignModal = ({
     return opts;
   }, [activeAccount, dao, _]);
 
+  // Track whether we've initialized with org default (to avoid overwriting user selection)
+  const [hasInitializedWithOrg, setHasInitializedWithOrg] = useState(
+    () => !!dao?.address,
+  );
+
   // Default to organization if available, otherwise personal
   const [selectedAddress, setSelectedAddress] = useState(
     () => dao?.address || activeAccount?.addr || '',
   );
+
+  // When dao data loads asynchronously, default to org if we haven't already
+  useEffect(() => {
+    if (dao?.address && !hasInitializedWithOrg) {
+      setSelectedAddress(dao.address);
+      setHasInitializedWithOrg(true);
+    }
+  }, [dao?.address, hasInitializedWithOrg]);
+
+  // Reset form and selection state when modal opens
+  useEffect(() => {
+    if (open) {
+      form.reset({ verified: false });
+      // Reset to org default if available, otherwise personal
+      setSelectedAddress(dao?.address || activeAccount?.addr || '');
+      setHasInitializedWithOrg(!!dao?.address);
+    }
+  }, [open, dao?.address, activeAccount?.addr, form]);
 
   const selectedAccount = accounts.find(
     account => account.address === selectedAddress,

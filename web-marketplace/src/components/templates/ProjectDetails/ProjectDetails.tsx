@@ -51,8 +51,9 @@ import { ProjectStorySection } from 'components/organisms/ProjectStorySection/Pr
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import {
-  getCanManagePost,
   getCanEditProject,
+  getCanManagePost,
+  getCanViewPost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
@@ -337,6 +338,7 @@ function ProjectDetails(): JSX.Element {
     role,
   });
   const canManagePost = getCanManagePost({ role });
+  const canViewPost = getCanViewPost({ role });
 
   // Fetch organization data if project belongs to an organization
   const organizationId =
@@ -354,7 +356,7 @@ function ProjectDetails(): JSX.Element {
   const admin = organization
     ? getOrganizationAsAdmin(organization)
     : originalAdmin;
-  console.log('isCreatePostModalOpen', isCreatePostModalOpen);
+
   if (noProjectFound) return <NotFoundPage />;
 
   return (
@@ -515,6 +517,7 @@ function ProjectDetails(): JSX.Element {
         openCreatePostModal={openCreatePostModal}
         setDraftPost={setDraftPost}
         canManagePost={canManagePost}
+        canViewPost={canViewPost}
       />
 
       <ProjectDetailsTableTabs
@@ -535,12 +538,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {onChainOrOffChainProjectId && admin && (
+      {/* {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )}
+      )} */}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

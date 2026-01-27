@@ -23,7 +23,6 @@ import { Body } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.constants';
@@ -50,6 +49,7 @@ type Props = {
   openCreatePostModal: () => void;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   canManagePost: boolean;
+  canViewPost: boolean;
 };
 
 export const DataStream = ({
@@ -61,10 +61,10 @@ export const DataStream = ({
   openCreatePostModal,
   setDraftPost,
   canManagePost,
+  canViewPost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
   const hash = useHash();
@@ -164,6 +164,7 @@ export const DataStream = ({
                         setDraftPost={setDraftPost}
                         projectLocation={projectLocation}
                         openCreatePostModal={openCreatePostModal}
+                        canViewPost={canViewPost}
                       />
                     ))}
                   </Timeline>

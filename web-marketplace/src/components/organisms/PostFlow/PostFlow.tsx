@@ -91,7 +91,6 @@ export const PostFlow = ({
   const [editedData, setEditedData] = useState<PostFormSchemaType | undefined>(
     undefined,
   );
-  const [forceUpdate, setForceUpdate] = useState(false);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData, isFetching } = useQuery(
     getPostQuery({
@@ -116,36 +115,8 @@ export const PostFlow = ({
   const draftPostIri = initialValues?.iri;
   const draftPostId = initialValues?.id;
 
-  const onSubmit = useCallback(
+  const saveDataPost = useCallback(
     async (data: PostFormSchemaType) => {
-      // Check if draft post has been updated in the meantime
-      if (draftPostId && !forceUpdate) {
-        try {
-          const resp = await fetch(
-            `${apiUri}/marketplace/v1/posts/by-id/${draftPostId}`,
-            {
-              method: 'GET',
-              credentials: 'include',
-            },
-          );
-          if (resp.status !== 200) {
-            throw new Error(
-              _(msg`Cannot get existing post: ${resp.statusText}`),
-            );
-          }
-          const existingPost: { iri: string; updatedAt: string } =
-            await resp.json();
-          if (new Date(existingPost.updatedAt) !== initialValues?.updatedAt) {
-            // We need to overwrite iri in case it has changed
-            setEditedData({ ...data, iri: existingPost.iri });
-            setIsDraftEditedModalOpen(true);
-            return;
-          }
-        } catch (e) {
-          setErrorBannerTextAtom(String(e));
-          return;
-        }
-      }
       if (token) {
         const files = data.files
           ?.filter(file => file.url !== DEFAULT)
@@ -212,8 +183,45 @@ export const PostFlow = ({
       reactQueryClient,
       selectedLanguage,
       setErrorBannerTextAtom,
+    ],
+  );
+
+  const onSubmit = useCallback(
+    async (data: PostFormSchemaType) => {
+      // Check if draft post has been updated in the meantime
+      if (draftPostId) {
+        try {
+          const resp = await fetch(
+            `${apiUri}/marketplace/v1/posts/by-id/${draftPostId}`,
+            {
+              method: 'GET',
+              credentials: 'include',
+            },
+          );
+          if (resp.status !== 200) {
+            throw new Error(
+              _(msg`Cannot get existing post: ${resp.statusText}`),
+            );
+          }
+          const existingPost: { iri: string; updatedAt: string } =
+            await resp.json();
+          if (new Date(existingPost.updatedAt) !== initialValues?.updatedAt) {
+            // We need to overwrite iri in case it has changed
+            setEditedData({ ...data, iri: existingPost.iri });
+            setIsDraftEditedModalOpen(true);
+            return;
+          }
+        } catch (e) {
+          setErrorBannerTextAtom(String(e));
+          return;
+        }
+      }
+      await saveDataPost(data);
+    },
+    [
+      saveDataPost,
+      setErrorBannerTextAtom,
       draftPostId,
-      forceUpdate,
       initialValues?.updatedAt,
       _,
     ],
@@ -365,10 +373,9 @@ export const PostFlow = ({
         <EditedDraftModal
           open={isDraftEditedModalOpen}
           onCancel={() => setIsDraftEditedModalOpen(false)}
-          onSubmit={() => {
+          onSubmit={async () => {
             setIsDraftEditedModalOpen(false);
-            setForceUpdate(true);
-            onSubmit(editedData);
+            await saveDataPost(editedData);
           }}
           onClose={() => setIsDraftEditedModalOpen(false)}
         />

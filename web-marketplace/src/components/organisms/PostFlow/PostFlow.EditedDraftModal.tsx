@@ -21,12 +21,12 @@ export const EditedDraftModal = ({
   const { _ } = useLingui();
   return (
     <SadBeeModal open={open} onClose={onClose}>
-      <Title variant="h4">
+      <Title variant="h4" className="text-center my-20">
         <Trans>
           Someone made changes to this draft while you were editing.
         </Trans>
       </Title>
-      <Body size="lg">
+      <Body size="lg" className="text-center mb-50">
         <Trans>You will overwrite their changes if you continue.</Trans>
       </Body>
       <CancelButtonFooter

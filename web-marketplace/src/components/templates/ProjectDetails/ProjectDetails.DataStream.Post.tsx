@@ -68,7 +68,6 @@ type Props = {
   post: Post;
   index: number;
   postsLength: number;
-  isAdmin: boolean;
   adminAccountId?: string | null;
   offChainProjectId?: string;
   adminAddr?: string | null;
@@ -83,7 +82,6 @@ export const DataStreamPost = ({
   post,
   index,
   postsLength,
-  isAdmin,
   adminAccountId,
   adminAddr,
   setDraftPost,
@@ -200,7 +198,7 @@ export const DataStreamPost = ({
           <TimelineConnector className="bg-grey-300 w-1" />
         </TimelineSeparator>
         <TimelineContent className="-mt-30 mb-30 pr-0 pl-0">
-          {post.contents && (
+          {post.contents && (post.privacy !== 'private' || canViewPost) && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
               onClick={() =>
@@ -244,7 +242,6 @@ export const DataStreamPost = ({
               file={file}
               preview={preview}
               onEditDraft={() => {
-                console.log('Editing draft post');
                 setDraftPost({
                   id: post.id,
                   updatedAt: new Date(post.updatedAt),
@@ -272,7 +269,7 @@ export const DataStreamPost = ({
               linkComponent={Link}
             />
           )}
-          {post.privacy === 'private' && !isAdmin && (
+          {post.privacy === 'private' && !canViewPost && (
             <div className="flex items-center px-[16px] py-30 sm:p-30">
               <LockIcon className="w-[18px] h-[18px]" />
               <Subtitle size="lg">{_(PRIVATE_POST)}</Subtitle>
@@ -280,7 +277,7 @@ export const DataStreamPost = ({
           )}
         </TimelineContent>
       </TimelineItem>
-      {isAdmin && (
+      {canManagePost && (
         <DeletePostWarningModal
           onDelete={deletePost}
           open={open}

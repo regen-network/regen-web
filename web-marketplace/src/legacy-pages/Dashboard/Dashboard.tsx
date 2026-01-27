@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -643,7 +643,9 @@ export const Dashboard = () => {
                           'lg:mt-30 min-h-[520px]',
                       )}
                     >
-                      <Outlet context={dashboardContextValue} />
+                      <Suspense fallback={null}>
+                        <Outlet context={dashboardContextValue} />
+                      </Suspense>
                     </div>
                   </WithLoader>
                 </div>

@@ -577,6 +577,7 @@ function ProjectDetails(): JSX.Element {
             files: draftPost?.files || [],
             privacyType: draftPost?.privacyType || 'public',
             published: draftPost?.published || true,
+            updatedAt: draftPost?.updatedAt,
           }}
           setDraftPost={setDraftPost}
         />

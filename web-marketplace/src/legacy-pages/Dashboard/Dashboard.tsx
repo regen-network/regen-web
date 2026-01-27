@@ -324,7 +324,12 @@ export const Dashboard = () => {
   const onAccountSelect = (id: string) => {
     console.log('id', id);
     console.log('navigationAccounts', navigationAccounts);
-    const target = navigationAccounts.find(account => account.address === id);
+    const target = navigationAccounts.find(account => {
+      console.log('account.address', account.address);
+      return account.address === id;
+    });
+    console.log('target', target);
+
     if (!target) return;
 
     if (target.type === ORG) {

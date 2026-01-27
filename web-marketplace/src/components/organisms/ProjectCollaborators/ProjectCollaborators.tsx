@@ -147,7 +147,11 @@ export const ProjectCollaborators = ({
             )}
             {partOfOrganization ? (
               canMigrate && offChainId ? (
-                <OutlinedButton onClick={migrateProject} className="mt-25">
+                <OutlinedButton
+                  // avoid passing the click event as first argument of migrateProject
+                  onClick={() => void migrateProject()}
+                  className="mt-25"
+                >
                   {_(MIGRATE_PROJECT)}
                 </OutlinedButton>
               ) : (

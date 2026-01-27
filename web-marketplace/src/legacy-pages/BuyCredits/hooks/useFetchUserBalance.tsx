@@ -15,7 +15,7 @@ export const useFetchUserBalance = (askDenom?: string) => {
     isFetching,
   } = useQuery(
     getAllBalancesQuery({
-      request: { address: wallet?.address as string, resolveDenom: true },
+      request: { address: wallet?.address as string, resolveDenom: false },
       client: queryClient,
       enabled: !!queryClient && !!wallet?.address,
     }),

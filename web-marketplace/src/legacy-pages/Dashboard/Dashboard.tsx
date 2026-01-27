@@ -11,6 +11,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
+import { useRouter } from 'next/navigation';
 import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
@@ -77,7 +78,6 @@ import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
-import { useRouter } from 'next/navigation';
 
 export const Dashboard = () => {
   const { _ } = useLingui();
@@ -312,8 +312,6 @@ export const Dashboard = () => {
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const onAccountSelect = (id: string) => {
-    console.log('id', id);
-    console.log('navigationAccounts', navigationAccounts);
     const target = navigationAccounts.find(account => account.address === id);
     if (!target) return;
 

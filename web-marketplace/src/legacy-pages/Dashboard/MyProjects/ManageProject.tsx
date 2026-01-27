@@ -18,8 +18,8 @@ import { Link } from 'components/atoms';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 import {
-  getCanManagePost,
   getCanEditProject,
+  getCanManagePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';

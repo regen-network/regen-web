@@ -10,6 +10,7 @@ import { Body, Title } from 'web-components/src/components/typography';
 type EditedDraftModalProps = {
   onCancel: () => void;
   onSubmit: () => void;
+  shouldSaveDraft: boolean;
 } & RegenModalProps;
 
 export const EditedDraftModal = ({
@@ -17,6 +18,7 @@ export const EditedDraftModal = ({
   onSubmit,
   open,
   onClose,
+  shouldSaveDraft,
 }: EditedDraftModalProps) => {
   const { _ } = useLingui();
   return (
@@ -30,7 +32,11 @@ export const EditedDraftModal = ({
         <Trans>You will overwrite their changes if you continue.</Trans>
       </Body>
       <CancelButtonFooter
-        label={_(msg`overwrite & publish`)}
+        label={
+          shouldSaveDraft
+            ? _(msg`overwrite & save`)
+            : _(msg`overwrite & publish`)
+        }
         onCancel={onCancel}
         onClick={onSubmit}
       />

@@ -289,7 +289,11 @@ export const PostFlow = ({
         iri={iri}
         published={createdPostData?.published}
         hasAddress={hasAddress}
-        isOrganizationProject={pathname.startsWith('/dashboard/organization')}
+        isOrganizationProject={
+          // Show selector if it's an org project or we're on the org dashboard
+          !!offChainProject?.organizationProjectByProjectId?.organizationId ||
+          pathname.startsWith('/dashboard/organization')
+        }
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);

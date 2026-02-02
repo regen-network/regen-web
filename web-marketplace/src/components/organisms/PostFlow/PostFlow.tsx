@@ -45,6 +45,8 @@ import {
   basePostContent,
   DRAFT_CREATED,
   DRAFT_SAVED,
+  DRAFT_SUBMIT_LABEL,
+  PUBLISH_SUBMIT_LABEL,
 } from './PostFlow.constants';
 import { EditedDraftModal } from './PostFlow.EditedDraftModal';
 import { SignModal } from './PostFlow.SignModal';
@@ -87,7 +89,9 @@ export const PostFlow = ({
   const { activeAccount } = useAuth();
   const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
-  const [isDraftEditedModalOpen, setIsDraftEditedModalOpen] = useState(false);
+  const [isDraftEditedModalLabel, setIsDraftEditedModalLabel] = useState<
+    string | undefined
+  >(undefined);
   const [editedData, setEditedData] = useState<PostFormSchemaType | undefined>(
     undefined,
   );
@@ -211,7 +215,9 @@ export const PostFlow = ({
           ) {
             // We need to overwrite iri in case it has changed
             setEditedData({ ...data, iri: existingPost.iri });
-            setIsDraftEditedModalOpen(true);
+            setIsDraftEditedModalLabel(
+              data.published ? PUBLISH_SUBMIT_LABEL : DRAFT_SUBMIT_LABEL,
+            );
             return;
           }
         } catch (e) {
@@ -374,13 +380,14 @@ export const PostFlow = ({
       />
       {editedData && (
         <EditedDraftModal
-          open={isDraftEditedModalOpen}
-          onCancel={() => setIsDraftEditedModalOpen(false)}
+          open={!!isDraftEditedModalLabel}
+          shouldSaveDraft={isDraftEditedModalLabel === DRAFT_SUBMIT_LABEL}
+          onCancel={() => setIsDraftEditedModalLabel(undefined)}
           onSubmit={async () => {
-            setIsDraftEditedModalOpen(false);
+            setIsDraftEditedModalLabel(undefined);
             await saveDataPost(editedData);
           }}
-          onClose={() => setIsDraftEditedModalOpen(false)}
+          onClose={() => setIsDraftEditedModalLabel(undefined)}
         />
       )}
     </>

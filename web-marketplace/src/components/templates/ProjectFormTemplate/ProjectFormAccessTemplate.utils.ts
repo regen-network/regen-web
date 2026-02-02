@@ -17,9 +17,7 @@ export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   };
 };
 
-type GetCanManagePostParams = {
-  role?: ProjectRole;
-};
+type GetCanManagePostParams = GetCanEditProjectParams;
 
 export const getCanManagePost = ({ role }: GetCanManagePostParams) => {
   return (

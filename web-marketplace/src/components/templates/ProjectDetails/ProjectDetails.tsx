@@ -538,12 +538,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {/* {onChainOrOffChainProjectId && admin && (
+      {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )} */}
+      )}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

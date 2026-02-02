@@ -172,14 +172,13 @@ const ProjectDashboardBanner = ({
           <div className="flex flex-col justify-end xl:max-w-[70%]">
             <Title
               variant="h3"
-              /* Added p-15 (padding) and -m-15 (negative margin) to offset the layout shift */
-              className="text-bc-neutral-0 line-clamp-2 text-ellipsis [overflow-wrap:anywhere] [text-shadow:0_0_20px_rgba(0,0,0,0.25)] p-15 -m-15 mb-15"
+              className="text-bc-neutral-0 line-clamp-2 text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)] mb-20"
             >
               {projectName}
             </Title>
 
             {/* Address + area */}
-            <div className="max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere] [text-shadow:0_0_20px_rgba(0,0,0,0.25)] p-15 -m-15 mb-20">
+            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
               <ProjectPlaceInfo
                 place={truncatedPlace}
                 area={project.area}

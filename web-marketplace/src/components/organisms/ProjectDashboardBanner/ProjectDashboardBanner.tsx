@@ -130,7 +130,7 @@ const ProjectDashboardBanner = ({
         </div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-grey-700 bg-opacity-20" />
+        <div className="absolute inset-0 bg-[#000] bg-opacity-20" />
 
         {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">

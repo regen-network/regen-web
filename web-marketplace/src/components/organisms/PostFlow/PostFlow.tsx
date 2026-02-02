@@ -33,6 +33,8 @@ import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getP
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
 import PostForm from '../PostForm';
@@ -82,6 +84,7 @@ export const PostFlow = ({
   const [isSignModalOpen, setIsSignModalOpen] = useState(false);
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
+  const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData, isFetching } = useQuery(
@@ -290,8 +293,11 @@ export const PostFlow = ({
         published={createdPostData?.published}
         hasAddress={hasAddress}
         isOrganizationProject={
-          // Show selector if it's an org project or we're on the org dashboard
-          !!offChainProject?.organizationProjectByProjectId?.organizationId ||
+          // Show selector if user is part of the project's organization or we're on the org dashboard
+          (!!offChainProject?.organizationProjectByProjectId?.organizationId &&
+            userDao?.organizationByDaoAddress?.id ===
+              offChainProject?.organizationProjectByProjectId
+                ?.organizationId) ||
           pathname.startsWith('/dashboard/organization')
         }
         open={isSignModalOpen}

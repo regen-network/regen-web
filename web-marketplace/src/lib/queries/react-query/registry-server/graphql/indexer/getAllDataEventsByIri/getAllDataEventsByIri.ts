@@ -30,6 +30,8 @@ export const getAllDataEventsByIriQuery = ({
 
       return data;
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
       return null;
     }
   },

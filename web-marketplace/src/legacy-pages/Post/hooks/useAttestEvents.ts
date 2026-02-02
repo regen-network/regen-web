@@ -172,7 +172,7 @@ export const useAttestEvents = ({
         : AccountType.User;
 
       const attestEvent = attestEvents[i];
-      if (attestEvent && attestEvent.txHash && attestEvent.timestamp)
+      if (attestEvent && attestEvent.txHash && attestEvent.timestamp && account)
         events.unshift({
           icon: postSigned,
           label: _(msg`Signed by`),
@@ -183,11 +183,11 @@ export const useAttestEvents = ({
           ),
           txhash: attestEvent.txHash,
           user: {
-            name: account?.name || _(DEFAULT_NAME),
-            link: account?.id ? `/profiles/${account?.id}` : undefined,
+            name: account.name || _(DEFAULT_NAME),
+            link: account.id ? `/profiles/${account.id}` : undefined,
             type: accountType,
             image:
-              account?.image ||
+              account.image ||
               getDefaultAvatar({ ...account, type: accountType }),
             tag: attestorIsAdmin
               ? _(ADMIN)

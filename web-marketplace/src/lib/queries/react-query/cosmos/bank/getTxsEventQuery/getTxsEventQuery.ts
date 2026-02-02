@@ -15,11 +15,9 @@ import { getTxsEventQueryKey } from './getTxsEventQuery.utils';
 export const getGetTxsEventQuery = ({
   client,
   request,
-  stopCondition,
-  stopConditionKey,
   ...params
 }: ReactQueryGetTxsEventProps): ReactQueryGetTxsEventResponse => ({
-  queryKey: getTxsEventQueryKey({ request, stopConditionKey }),
+  queryKey: getTxsEventQueryKey({ request }),
   queryFn: async () => {
     if (!client) return null;
 
@@ -45,8 +43,6 @@ export const getGetTxsEventQuery = ({
       } as GetTxsEventRequest);
       txs.push(...response.txs);
       txResponses.push(...response.txResponses);
-
-      if (stopCondition?.({ txs, txResponses })) break;
 
       request.page = request.page + 1n;
     }

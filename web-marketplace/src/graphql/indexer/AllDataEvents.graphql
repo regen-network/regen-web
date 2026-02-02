@@ -1,0 +1,15 @@
+query IndexerAllDataEventsByIri($iri: String!) {
+  allUnifiedDataEvents(
+    orderBy: TIMESTAMP_DESC
+    condition: { iri: $iri }
+  ) {
+    nodes {
+      iri
+      attestor
+      eventType
+      blockHeight
+      txHash
+      timestamp
+    }
+  }
+}

@@ -247,14 +247,15 @@ export default function PostCard({
             </Box>
           </Grid>
         )}
-        {!hasFile && (
+        {!hasFile && (privacyLabel || draftLabel) && (
           <Grid
+            className="xl:absolute xl:-top-[7px] xl:right-[25px]"
             item
             xs="auto"
             sx={{
               flexShrink: 0,
               marginRight: '10px',
-              marginBottom: { xs: '0px', md: '20px', xlg: '0px' },
+              marginBottom: { xs: '0px', md: '20px', xl: '0px' },
             }}
           >
             {!draftLabel && privacyLabel && (

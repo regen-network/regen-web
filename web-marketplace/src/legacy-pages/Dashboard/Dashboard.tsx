@@ -360,6 +360,12 @@ export const Dashboard = () => {
    */
   const getSwitchDashboardPathCallback = useCallback(
     (targetIsOrg: boolean) => {
+      // Organizations always have a wallet address (via DAO).
+      // For personal dashboard, check if the user has connected a wallet.
+      const targetHasWalletAddress = targetIsOrg
+        ? true
+        : !!personalDashboardAddress;
+
       return getSwitchDashboardPath({
         pathname,
         isOrganizationDashboard,
@@ -374,6 +380,7 @@ export const Dashboard = () => {
         personalBatchesLoading,
         hasOrders,
         ordersLoading,
+        targetHasWalletAddress,
       });
     },
     [
@@ -389,6 +396,7 @@ export const Dashboard = () => {
       personalBatchesLoading,
       hasOrders,
       ordersLoading,
+      personalDashboardAddress,
     ],
   );
 

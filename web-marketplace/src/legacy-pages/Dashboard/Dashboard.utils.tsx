@@ -206,30 +206,28 @@ export const getMetadataAction = ({
   return undefined;
 };
 
+type DashboardProfileItems = {
+  isIssuer: boolean;
+  showCreditClasses: boolean;
+  isLoadingIsIssuer: boolean;
+  isLoadingCreditClasses: boolean;
+};
+
 type GetSwitchDashboardPathParams = {
   pathname: string;
   isOrganizationDashboard: boolean;
   targetIsOrg: boolean;
   orgDashboardBasePath: string;
   personalDashboardBasePath: string;
-  organizationProfileItems: {
-    isIssuer: boolean;
-    showCreditClasses: boolean;
-    isLoadingIsIssuer: boolean;
-    isLoadingCreditClasses: boolean;
-  };
-  personalProfileItems: {
-    isIssuer: boolean;
-    showCreditClasses: boolean;
-    isLoadingIsIssuer: boolean;
-    isLoadingCreditClasses: boolean;
-  };
+  organizationProfileItems: DashboardProfileItems;
+  personalProfileItems: DashboardProfileItems;
   organizationHasCreditBatches: boolean;
   personalHasCreditBatches: boolean;
   organizationBatchesLoading: boolean;
   personalBatchesLoading: boolean;
   hasOrders: boolean;
   ordersLoading: boolean;
+  targetHasWalletAddress: boolean;
 };
 
 /**
@@ -254,6 +252,7 @@ export const getSwitchDashboardPath = ({
   personalBatchesLoading,
   hasOrders,
   ordersLoading,
+  targetHasWalletAddress,
 }: GetSwitchDashboardPathParams): string => {
   // Determine source and target base paths
   const fromBase = isOrganizationDashboard
@@ -306,10 +305,19 @@ export const getSwitchDashboardPath = ({
     (section === 'credit-classes' &&
       !targetHasCreditClasses &&
       !targetCreditClassesLoading) ||
-    // Don't navigate to sell-orders if switching to personal dashboard without orders
-    (section === 'sell-orders' && !targetIsOrg && !hasOrders && !ordersLoading);
+    // Don't navigate to sell-orders if switching to personal dashboard without wallet
+    // (sell-orders requires a wallet to view/manage)
+    (section === 'sell-orders' && !targetIsOrg && !targetHasWalletAddress) ||
+    // Don't navigate to portfolio if switching to personal dashboard without wallet
+    // (portfolio requires a wallet)
+    (section === 'portfolio' && !targetIsOrg && !targetHasWalletAddress);
 
-  if (shouldFallback) return `${toBase}/portfolio`;
+  // Determine the fallback path based on wallet availability
+  // Web2 users without wallet should go to projects instead of portfolio
+  const fallbackSection =
+    !targetIsOrg && !targetHasWalletAddress ? 'projects' : 'portfolio';
+
+  if (shouldFallback) return `${toBase}/${fallbackSection}`;
 
   return `${toBase}/${suffix}`;
 };

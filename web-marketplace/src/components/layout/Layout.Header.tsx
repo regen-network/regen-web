@@ -1,13 +1,13 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
 import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getWalletAddress } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { usePathname } from 'next/navigation';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
@@ -26,9 +26,9 @@ import { useOrganizationActions } from 'components/organisms/RegistryLayout/hook
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../lib/ledger';
+import { Link } from '../atoms';
 import { HeaderNavLink } from '../atoms/HeaderNavLink';
 import { HomeIconLink } from '../atoms/HomeIconLink';
-import { ReactRouterMuiLink as Link } from '../atoms/Link';
 import { ListProject } from '../organisms/ListProject/ListProject';
 import { LoginButton } from '../organisms/LoginButton/LoginButton';
 import { useHasPrefinanceProjects } from '../organisms/RegistryLayout/hooks/useHasPrefinanceProjects';
@@ -73,7 +73,7 @@ const getProfileLink = (
 
 export const LayoutHeader = () => {
   const { _ } = useLingui();
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, disconnect, accountByAddr } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();

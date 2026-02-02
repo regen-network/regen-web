@@ -14,7 +14,7 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
+import { Link } from 'components/atoms';
 import { ROLE_AUTHOR } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';

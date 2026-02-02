@@ -3,15 +3,20 @@ import { Box } from '@mui/material';
 
 import RegenMarketIcon from 'web-components/src/components/icons/RegenMarketIcon';
 
-import { ReactRouterMuiLink as Link } from './Link';
+import { useCurrentLocale } from 'lib/i18n/hooks/useCurrentLocale';
+import { DEFAULT_LOCALE } from 'lib/i18n/locales';
+
+import { Link } from './Link';
 
 /**
  * A clickable logo that links to the homepage (`/`).
  * It renders the `RegenMarketIcon` with a specified color.
  */
 export const HomeIconLink = ({ color }: { color: string }) => {
+  const locale = useCurrentLocale();
+  const href = locale === DEFAULT_LOCALE ? '/' : `/${locale}`;
   return (
-    <Link href="/">
+    <Link href={href}>
       <Box
         sx={{
           width: { xs: 62, md: 117 },

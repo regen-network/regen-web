@@ -96,6 +96,7 @@ export const DashboardNavigation = ({
       ),
     [
       _,
+      activeAccount.type,
       loginDisabled,
       collapsed,
       isIssuer,

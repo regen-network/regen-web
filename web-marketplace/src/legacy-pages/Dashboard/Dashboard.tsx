@@ -11,6 +11,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
 import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
+import { useRouter } from 'next/navigation';
 import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
@@ -34,7 +35,7 @@ import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/reg
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ReactRouterMuiLink as Link } from 'components/atoms/Link';
+import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import {
@@ -95,6 +96,7 @@ export const Dashboard = () => {
 
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
+  const router = useRouter();
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
@@ -140,9 +142,9 @@ export const Dashboard = () => {
     try {
       await disconnect();
       setMobileMenuOpen(false);
-      navigate('/');
+      router.push('/');
     } catch (error) {
-      navigate('/');
+      router.push('/');
     }
   };
 
@@ -321,8 +323,10 @@ export const Dashboard = () => {
 
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
-  const onAccountSelect = (id: string) => {
-    const target = navigationAccounts.find(account => account.address === id);
+  const onAccountSelect = (address: string) => {
+    const target = navigationAccounts.find(
+      account => account.address === address,
+    );
     if (!target) return;
 
     if (target.type === ORG) {
@@ -509,7 +513,7 @@ export const Dashboard = () => {
                 onCloseMobile={() => setMobileMenuOpen(false)}
                 onExitClick={() => {
                   setIsWarningModalOpen(undefined);
-                  navigate('/');
+                  router.push('/');
                   setMobileMenuOpen(false);
                 }}
                 hasOrganization={!!organizationAccount}
@@ -526,14 +530,14 @@ export const Dashboard = () => {
                 header={{
                   activeAccount: headerActiveAccount,
                   accounts: navigationAccounts,
-                  onAccountSelect: (id: string) => {
+                  onAccountSelect: (address: string) => {
                     setIsWarningModalOpen(undefined);
-                    onAccountSelect(id);
+                    onAccountSelect(address);
                     setMobileMenuOpen(false);
                   },
                   onViewProfileClick: (path: string) => {
                     setIsWarningModalOpen(undefined);
-                    navigate(path);
+                    router.push(path);
                     setMobileMenuOpen(false);
                   },
                 }}

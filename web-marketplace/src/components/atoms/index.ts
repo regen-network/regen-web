@@ -6,7 +6,5 @@ export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';
 export * from './OptimizedImage';
-export * from './RegistryIconLink.legacy';
-export * from './RegistryNavLink.legacy';
 export * from './SanityButton';
 export * from './StatusLabel';

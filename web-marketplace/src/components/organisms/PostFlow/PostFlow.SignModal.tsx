@@ -85,6 +85,18 @@ export const SignModal = ({
   const accounts = useMemo(() => {
     const opts: AccountOption[] = [];
 
+    if (dao?.address) {
+      opts.push({
+        name: dao.organizationByDaoAddress?.name || _(UNNAMED),
+        address: dao.address,
+        type: ORG,
+        image:
+          dao.organizationByDaoAddress?.image ||
+          getDefaultAvatar({ type: AccountType.Organization }),
+        displayName: _(msg`Organization`),
+      });
+    }
+
     if (activeAccount) {
       opts.push({
         name: activeAccount.name || _(UNNAMED),
@@ -97,18 +109,6 @@ export const SignModal = ({
             type: activeAccount.type ?? AccountType.User,
           }),
         displayName: _(msg`Personal`),
-      });
-    }
-
-    if (dao?.address) {
-      opts.push({
-        name: dao.organizationByDaoAddress?.name || _(UNNAMED),
-        address: dao.address,
-        type: ORG,
-        image:
-          dao.organizationByDaoAddress?.image ||
-          getDefaultAvatar({ type: AccountType.Organization }),
-        displayName: _(msg`Organization`),
       });
     }
 

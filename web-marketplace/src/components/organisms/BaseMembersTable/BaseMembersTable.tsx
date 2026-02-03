@@ -5,6 +5,7 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
 import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 import { Title } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
@@ -37,6 +38,8 @@ interface BaseMembersTableProps<T extends BaseUser> {
   children: ((user: T, canAdmin: boolean) => React.ReactNode) | React.ReactNode;
   context: 'organization' | 'project';
   additionalColumns?: string[];
+  additionalColumnTooltips?: React.ReactNode[];
+  roleTooltip?: React.ReactNode;
   showMobileInvite?: boolean;
   currentUserRole?: ProjectRole | BaseMemberRole;
   hideHeader?: boolean;
@@ -56,6 +59,8 @@ export const BaseMembersTable = <T extends BaseUser>({
   children,
   context,
   additionalColumns = [],
+  additionalColumnTooltips = [],
+  roleTooltip,
   showMobileInvite = true,
   currentUserRole,
   hideHeader = false,
@@ -155,7 +160,9 @@ export const BaseMembersTable = <T extends BaseUser>({
             className={`hidden ${headerBreakpoint} pb-20 justify-between font-muli text-sc-text-sub-header font-bold text-[12px]`}
           >
             <div
-              className="w-[330px] px-6 flex items-center cursor-pointer"
+              className={`${
+                isProjectContext ? 'w-[370px]' : 'w-[320px]'
+              } px-6 flex items-center cursor-pointer`}
               onClick={onSort}
             >
               {_(NAME)}
@@ -165,13 +172,34 @@ export const BaseMembersTable = <T extends BaseUser>({
                 }`}
               />
             </div>
-            <div className="w-[170px] text-left">{_(ROLE)}</div>
+            <div className="w-[200px] text-left flex items-center gap-5">
+              {_(ROLE)}
+              {roleTooltip && (
+                <QuestionMarkTooltip
+                  title={roleTooltip}
+                  placement="top"
+                  className="bg-bc-neutral-0"
+                />
+              )}
+            </div>
             {additionalColumns.map((column, index) => (
-              <div key={index} className="w-[150px] text-left">
+              <div
+                key={index}
+                className="w-[170px] text-left flex items-center gap-5"
+              >
                 {column}
+                {additionalColumnTooltips[index] && (
+                  <QuestionMarkTooltip
+                    title={additionalColumnTooltips[index]}
+                    placement="top"
+                    className="bg-bc-neutral-0"
+                  />
+                )}
               </div>
             ))}
-            {showActionsColumn && <div className="w-[60px]" />}
+            {showActionsColumn && (
+              <div className={isProjectContext ? 'w-[60px]' : 'w-[0px]'} />
+            )}
           </div>
 
           {/* Mobile column header - just Name */}

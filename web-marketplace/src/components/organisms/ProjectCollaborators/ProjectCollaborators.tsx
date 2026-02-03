@@ -3,6 +3,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body, Title } from 'web-components/src/components/typography';
@@ -19,6 +20,9 @@ import {
   COLLABORATORS_DESCRIPTION,
   INVITE_COLLABORATORS,
   PROJECT_COLLABORATORS,
+  PROJECT_ROLES_DOCS_URL,
+  ROLE_TOOLTIP_LINK_TEXT,
+  ROLE_TOOLTIP_TEXT,
 } from './ProjectCollaborators.constants';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 import { getRoleItems } from './ProjectCollaborators.utils';
@@ -57,6 +61,20 @@ export const ProjectCollaborators = ({
 
   const roleOptions = getRoleItems(_);
 
+  const roleTooltipContent = (
+    <span className="text-[14px]">
+      {_(ROLE_TOOLTIP_TEXT)}{' '}
+      <a
+        href={PROJECT_ROLES_DOCS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sc-text-link border-none bg-transparent cursor-pointer pl-0 font-bold"
+      >
+        {_(ROLE_TOOLTIP_LINK_TEXT)}
+      </a>
+    </span>
+  );
+
   return (
     <>
       <BaseMembersTable
@@ -72,6 +90,7 @@ export const ProjectCollaborators = ({
         sortDir={sortDir}
         context={PROJECT_CONTEXT}
         showMobileInvite={true}
+        roleTooltip={roleTooltipContent}
       >
         {isProjectDao ? (
           (col, canAdmin) => (

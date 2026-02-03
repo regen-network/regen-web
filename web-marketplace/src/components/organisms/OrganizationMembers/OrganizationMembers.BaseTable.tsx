@@ -24,9 +24,13 @@ import { PersonalProfileSchemaType } from '../BaseMembersTable/modals/modals.sch
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   INVITE_MEMBERS,
+  ORG_ROLES_DOCS_URL,
   ORGANIZATION_MEMBERS,
   ORGANIZATION_MEMBERS_DESCRIPTION,
+  ROLE_TOOLTIP_LINK_TEXT,
+  ROLE_TOOLTIP_TEXT,
   VISIBILITY_ON_PROFILE,
+  VISIBILITY_TOOLTIP,
 } from './OrganizationMembers.constants';
 import { getRoleItems } from './OrganizationMembers.utils';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
@@ -122,6 +126,22 @@ export const OrganizationMembersBase = ({
     cfg.hideOwnerOption && currentUserRole !== ROLE_OWNER,
   );
 
+  const roleTooltipContent = (
+    <span className="text-[14px]">
+      {_(ROLE_TOOLTIP_TEXT)}{' '}
+      <a
+        href={ORG_ROLES_DOCS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sc-text-link border-none bg-transparent cursor-pointer pl-0 font-bold"
+      >
+        {_(ROLE_TOOLTIP_LINK_TEXT)}
+      </a>
+    </span>
+  );
+
+  const visibilityTooltipContent = _(VISIBILITY_TOOLTIP);
+
   return (
     <>
       <BaseMembersTable
@@ -139,6 +159,8 @@ export const OrganizationMembersBase = ({
         sortDir={sortDir}
         context={ORGANIZATION_CONTEXT}
         additionalColumns={[_(VISIBILITY_ON_PROFILE)]}
+        additionalColumnTooltips={[visibilityTooltipContent]}
+        roleTooltip={roleTooltipContent}
         showMobileInvite={cfg.showMobileInvite}
         hideHeader={!cfg.showHeader}
         hideDescription={!cfg.showDescription}
@@ -202,7 +224,7 @@ export const OrganizationMembersBase = ({
               />
             </div>
             {/* Desktop visibility */}
-            <div className="hidden xl:flex w-[150px] justify-end items-center">
+            <div className="hidden xl:flex w-[180px] justify-end items-center">
               <VisibilitySwitch
                 checked={member.visible}
                 disabled={!canAdmin}

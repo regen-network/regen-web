@@ -22,3 +22,9 @@ export const ROLE_EDITOR_DESCRIPTION = msg`Has full control of projects and cred
 
 export const ROLE_VIEWER_LABEL = msg`Viewer`;
 export const ROLE_VIEWER_DESCRIPTION = msg`Can view all data across all projects, even when private.`;
+
+export const VISIBILITY_TOOLTIP = msg`Choose whether this user is visible on the organization profile`;
+export const ROLE_TOOLTIP_TEXT = msg`Learn more about roles`;
+export const ROLE_TOOLTIP_LINK_TEXT = msg`in our docs`;
+export const ORG_ROLES_DOCS_URL =
+  'https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-organization-members#id-1.-understanding-organization-roles';

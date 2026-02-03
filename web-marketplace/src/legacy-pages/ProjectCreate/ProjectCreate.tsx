@@ -19,6 +19,7 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -61,6 +62,7 @@ const defaultProjectCreateContext: ContextType = {
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const navigate = useNavigate();
+  const dao = useDaoOrganization();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
@@ -96,10 +98,21 @@ export const ProjectCreate = (): JSX.Element => {
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
 
   const handleRequestClose = useCallback(() => {
-    if (isOrganizationAccount || offChainProject?.adminDaoAddress)
-      navigate('/dashboard/organization', { replace: true });
-    else navigate('/dashboard', { replace: true });
-  }, [navigate, isOrganizationAccount, offChainProject]);
+    const projectPath = `projects/${projectId}/manage`;
+    if (
+      isOrganizationAccount ||
+      (offChainProject?.adminDaoAddress &&
+        offChainProject?.adminDaoAddress === dao?.address)
+    )
+      navigate(`/dashboard/organization/${projectPath}`, { replace: true });
+    else navigate(`/dashboard/${projectPath}`, { replace: true });
+  }, [
+    navigate,
+    isOrganizationAccount,
+    offChainProject,
+    projectId,
+    dao?.address,
+  ]);
 
   return (
     <>

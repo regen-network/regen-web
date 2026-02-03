@@ -9,7 +9,7 @@ export const RoleTooltip = ({ docsUrl }: { docsUrl: string }) => {
   const { _ } = useLingui();
 
   return (
-    <span className="text-[14px]">
+    <span>
       {_(ROLE_TOOLTIP_TEXT)}{' '}
       <a
         href={docsUrl}

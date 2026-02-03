@@ -225,8 +225,6 @@ type GetSwitchDashboardPathParams = {
   personalHasCreditBatches: boolean;
   organizationBatchesLoading: boolean;
   personalBatchesLoading: boolean;
-  hasOrders: boolean;
-  ordersLoading: boolean;
   targetHasWalletAddress: boolean;
 };
 
@@ -250,8 +248,6 @@ export const getSwitchDashboardPath = ({
   personalHasCreditBatches,
   organizationBatchesLoading,
   personalBatchesLoading,
-  hasOrders,
-  ordersLoading,
   targetHasWalletAddress,
 }: GetSwitchDashboardPathParams): string => {
   // Determine source and target base paths

@@ -378,8 +378,6 @@ export const Dashboard = () => {
         personalHasCreditBatches: personalHasCreditBatches ?? false,
         organizationBatchesLoading,
         personalBatchesLoading,
-        hasOrders,
-        ordersLoading,
         targetHasWalletAddress,
       });
     },
@@ -394,8 +392,6 @@ export const Dashboard = () => {
       personalHasCreditBatches,
       organizationBatchesLoading,
       personalBatchesLoading,
-      hasOrders,
-      ordersLoading,
       personalDashboardAddress,
     ],
   );

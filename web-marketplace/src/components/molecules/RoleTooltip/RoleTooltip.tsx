@@ -3,7 +3,7 @@ import { useLingui } from '@lingui/react';
 import {
   ROLE_TOOLTIP_LINK_TEXT,
   ROLE_TOOLTIP_TEXT,
-} from './RoleTooltip.consants';
+} from './RoleTooltip.constants';
 
 export const RoleTooltip = ({ docsUrl }: { docsUrl: string }) => {
   const { _ } = useLingui();

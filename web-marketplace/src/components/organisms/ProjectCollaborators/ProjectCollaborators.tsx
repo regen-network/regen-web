@@ -3,11 +3,11 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body, Title } from 'web-components/src/components/typography';
 
+import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
@@ -15,7 +15,6 @@ import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { useInviteMember } from '../BaseMembersTable/modals/hooks/useInviteMember';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
-import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import {
   COLLABORATORS_DESCRIPTION,

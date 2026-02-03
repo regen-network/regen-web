@@ -9,6 +9,7 @@ import {
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 
+import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
@@ -27,8 +28,6 @@ import {
   ORG_ROLES_DOCS_URL,
   ORGANIZATION_MEMBERS,
   ORGANIZATION_MEMBERS_DESCRIPTION,
-  ROLE_TOOLTIP_LINK_TEXT,
-  ROLE_TOOLTIP_TEXT,
   VISIBILITY_ON_PROFILE,
   VISIBILITY_TOOLTIP,
 } from './OrganizationMembers.constants';
@@ -126,19 +125,7 @@ export const OrganizationMembersBase = ({
     cfg.hideOwnerOption && currentUserRole !== ROLE_OWNER,
   );
 
-  const roleTooltipContent = (
-    <span className="text-[14px]">
-      {_(ROLE_TOOLTIP_TEXT)}{' '}
-      <a
-        href={ORG_ROLES_DOCS_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-sc-text-link border-none bg-transparent cursor-pointer pl-0 font-bold"
-      >
-        {_(ROLE_TOOLTIP_LINK_TEXT)}
-      </a>
-    </span>
-  );
+  const roleTooltipContent = <RoleTooltip docsUrl={ORG_ROLES_DOCS_URL} />;
 
   const visibilityTooltipContent = _(VISIBILITY_TOOLTIP);
 

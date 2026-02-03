@@ -161,7 +161,7 @@ export const BaseMembersTable = <T extends BaseUser>({
           >
             <div
               className={`${
-                isProjectContext ? 'w-[370px]' : 'w-[320px]'
+                isProjectContext ? 'w-[370px]' : 'w-[340px]'
               } px-6 flex items-center cursor-pointer`}
               onClick={onSort}
             >
@@ -185,7 +185,7 @@ export const BaseMembersTable = <T extends BaseUser>({
             {additionalColumns.map((column, index) => (
               <div
                 key={index}
-                className="w-[170px] text-left flex items-center gap-5"
+                className="w-[220px] text-left flex items-center gap-5"
               >
                 {column}
                 {additionalColumnTooltips[index] && (

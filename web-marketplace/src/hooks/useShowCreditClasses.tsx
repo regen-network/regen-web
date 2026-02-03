@@ -11,13 +11,19 @@ export const useShowCreditClasses = ({
   const isCreditClassCreator = useQueryIfCreditClassCreator({
     address: activeAddress,
   });
-  const { creditClasses } = useFetchCreditClassesWithOrder({
-    admin: activeAddress,
-    userAddress,
-  });
+  const { creditClasses, isLoadingCreditClasses } =
+    useFetchCreditClassesWithOrder({
+      admin: activeAddress,
+      userAddress,
+    });
   const isCreditClassAdmin = (creditClasses?.length ?? 0) > 0;
   const showCreditClasses =
     (isCreditClassCreator || isCreditClassAdmin) && creditClasses.length > 0;
 
-  return { isCreditClassCreator, showCreditClasses, creditClasses };
+  return {
+    isCreditClassCreator,
+    showCreditClasses,
+    creditClasses,
+    isLoadingCreditClasses,
+  };
 };

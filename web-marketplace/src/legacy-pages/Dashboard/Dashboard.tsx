@@ -72,6 +72,7 @@ import { DashboardNavAccount } from './Dashboard.types';
 import {
   getActivePortfolioTab,
   getPortfolioTabs,
+  getSwitchDashboardPath,
   getWalletAddress,
 } from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
@@ -114,12 +115,12 @@ export const Dashboard = () => {
     openConnectWalletModal,
   } = useOrganizationActions();
 
-  const isOrganizationDashboard = pathname.startsWith(
-    '/dashboard/organization',
-  );
+  const orgDashboardBasePath = '/dashboard/organization';
+  const personalDashboardBasePath = '/dashboard';
+  const isOrganizationDashboard = pathname.startsWith(orgDashboardBasePath);
   const dashboardBasePath = isOrganizationDashboard
-    ? '/dashboard/organization'
-    : '/dashboard';
+    ? orgDashboardBasePath
+    : personalDashboardBasePath;
   const section = usePathSection();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -301,11 +302,19 @@ export const Dashboard = () => {
     ? undefined
     : activeAccountId ?? undefined;
 
-  const { isCreditClassCreator, isIssuer, showCreditClasses } = useProfileItems(
-    {
-      address: dashboardAccountAddress,
-    },
-  );
+  const personalDashboardAddress = loginDisabled
+    ? wallet?.address
+    : activeAccount?.addr;
+  const organizationDashboardAddress = organizationAccount?.address;
+
+  const personalProfileItems = useProfileItems({
+    address: personalDashboardAddress,
+  });
+  const organizationProfileItems = useProfileItems({
+    address: organizationDashboardAddress,
+  });
+  const { isCreditClassCreator, isIssuer, showCreditClasses } =
+    isOrganizationDashboard ? organizationProfileItems : personalProfileItems;
 
   const { adminProjects } = useFetchProjectByAdmin({
     adminAccountId: dashboardAccountId,
@@ -314,14 +323,78 @@ export const Dashboard = () => {
   });
   const hasProjects = !!adminProjects && adminProjects.length > 0;
 
-  const { batchesWithSupply } = useFetchPaginatedBatches({
-    address: dashboardAccountAddress ?? wallet?.address,
+  const {
+    batchesWithSupply: personalBatchesWithSupply,
+    isLoadingBatches: personalBatchesLoading,
+  } = useFetchPaginatedBatches({
+    address: personalDashboardAddress ?? wallet?.address,
+    // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
+    // so in case the current user account has not wallet address, we need to disable the fetch
+    forceAddress: true,
+  });
+  const {
+    batchesWithSupply: organizationBatchesWithSupply,
+    isLoadingBatches: organizationBatchesLoading,
+  } = useFetchPaginatedBatches({
+    address: organizationDashboardAddress,
     // useFetchPaginatedBatches is quite generic so it fetches all batches if no address is provided
     // so in case the current user account has not wallet address, we need to disable the fetch
     forceAddress: true,
   });
 
-  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
+  const personalHasCreditBatches =
+    personalBatchesWithSupply && personalBatchesWithSupply.length > 0;
+  const organizationHasCreditBatches =
+    organizationBatchesWithSupply && organizationBatchesWithSupply.length > 0;
+
+  const hasCreditBatches = isOrganizationDashboard
+    ? organizationHasCreditBatches
+    : personalHasCreditBatches;
+
+  const { orders, isLoading: ordersLoading } = useOrders();
+  const hasOrders = orders && orders.length > 0;
+
+  /**
+   * Calculates the path to navigate to when switching between dashboards,
+   * attempting to preserve the current section when possible.
+   */
+  const getSwitchDashboardPathCallback = useCallback(
+    (targetIsOrg: boolean) => {
+      // Organizations always have a wallet address (via DAO).
+      // For personal dashboard, check if the user has connected a wallet.
+      const targetHasWalletAddress = targetIsOrg
+        ? true
+        : !!personalDashboardAddress;
+
+      return getSwitchDashboardPath({
+        pathname,
+        isOrganizationDashboard,
+        targetIsOrg,
+        orgDashboardBasePath,
+        personalDashboardBasePath,
+        organizationProfileItems,
+        personalProfileItems,
+        organizationHasCreditBatches: organizationHasCreditBatches ?? false,
+        personalHasCreditBatches: personalHasCreditBatches ?? false,
+        organizationBatchesLoading,
+        personalBatchesLoading,
+        targetHasWalletAddress,
+      });
+    },
+    [
+      pathname,
+      isOrganizationDashboard,
+      orgDashboardBasePath,
+      personalDashboardBasePath,
+      organizationProfileItems,
+      personalProfileItems,
+      organizationHasCreditBatches,
+      personalHasCreditBatches,
+      organizationBatchesLoading,
+      personalBatchesLoading,
+      personalDashboardAddress,
+    ],
+  );
 
   const onAccountSelect = (address: string) => {
     const target = navigationAccounts.find(
@@ -329,14 +402,9 @@ export const Dashboard = () => {
     );
     if (!target) return;
 
-    if (target.type === ORG) {
-      if (!isOrganizationDashboard) {
-        navigate('/dashboard/organization');
-      }
-    } else {
-      if (isOrganizationDashboard) {
-        navigate('/dashboard');
-      }
+    const targetIsOrg = target.type === ORG;
+    if (targetIsOrg !== isOrganizationDashboard) {
+      navigate(getSwitchDashboardPathCallback(targetIsOrg));
     }
 
     setMobileMenuOpen(false);
@@ -432,9 +500,6 @@ export const Dashboard = () => {
     }
     return null;
   }, [selectedAccount, activeAccount]);
-
-  const { orders, isLoading: ordersLoading } = useOrders();
-  const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
     useBridgeAvailability(dashboardAccountAddress ?? wallet?.address);

@@ -12,18 +12,18 @@ export const useProfileItems = ({ address }: Props) => {
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
-  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
-    address,
-  });
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({ address });
 
-  const { isCreditClassCreator, showCreditClasses } = useShowCreditClasses({
-    activeAddress: activeAddress,
-  });
+  const { isCreditClassCreator, showCreditClasses, isLoadingCreditClasses } =
+    useShowCreditClasses({
+      activeAddress: activeAddress,
+    });
 
   return {
     showCreditClasses,
     isCreditClassCreator: false && isCreditClassCreator,
     isIssuer: isIssuer,
     isLoadingIsIssuer,
+    isLoadingCreditClasses,
   };
 };

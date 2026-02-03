@@ -294,11 +294,9 @@ export const PostFlow = ({
         hasAddress={hasAddress}
         isOrganizationProject={
           // Show selector if user is part of the project's organization or we're on the org dashboard
-          (!!offChainProject?.organizationProjectByProjectId?.organizationId &&
-            userDao?.organizationByDaoAddress?.id ===
-              offChainProject?.organizationProjectByProjectId
-                ?.organizationId) ||
-          pathname.startsWith('/dashboard/organization')
+          !!offChainProject?.organizationProjectByProjectId?.organizationId &&
+          userDao?.organizationByDaoAddress?.id ===
+            offChainProject?.organizationProjectByProjectId?.organizationId
         }
         open={isSignModalOpen}
         onClose={() => {

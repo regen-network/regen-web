@@ -136,7 +136,7 @@ export const ProjectAccountSelector = ({
               />
               <Body
                 size="md"
-                className="font-medium text-bc-neutral-800 ml-[15px]"
+                className="font-medium text-bc-neutral-700 ml-[15px]"
               >
                 {getName(account.name)}
               </Body>

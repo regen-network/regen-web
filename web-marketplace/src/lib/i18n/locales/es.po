@@ -1241,6 +1241,10 @@ msgstr "Elija la foto que se mostrará en la parte superior de la página del pr
 msgid "Choose where to create this project"
 msgstr "Elige dónde crear este proyecto"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:26
+msgid "Choose whether this user is visible on the organization's public profile"
+msgstr "Elija si este usuario es visible en el perfil público de la organización"
+
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:68
 msgid "class id"
 msgstr "identificación de clase"
@@ -1281,6 +1285,7 @@ msgid "Close project creation"
 msgstr "Cerrar la creación del proyecto"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:221
 #: src/lib/constants/shared.constants.tsx:96
 msgid "CLOSE WINDOW"
 msgstr "CERRAR VENTANA"
@@ -1293,7 +1298,7 @@ msgstr "cobeneficio"
 msgid "Collaborator actions"
 msgstr "Acciones de los colaboradores"
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:135
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:140
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr "La función de colaborador es para proyectos que forman parte de una organización."
 
@@ -1476,7 +1481,7 @@ msgstr "País"
 msgid "Create a project without a credit class"
 msgstr "Crear un proyecto sin una clase de crédito"
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:176
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:181
 msgid "create an organization"
 msgstr "crear una organización"
 
@@ -2655,6 +2660,10 @@ msgstr "En una frase, resuma la historia anterior."
 msgid "In order to buy and retire ecocredits using credit card payment, we may generate a dedicated hosted wallet address to use as the recipient of the retired blockchain credits. Please do not send funds or tradable credits to this address, as you will not have the ability to initiate transactions from this account.<0>Learn more»</0>"
 msgstr "Para comprar y retirar ecocréditos mediante pago con tarjeta de crédito, podemos generar una dirección de billetera alojada dedicada para usar como destinatario de los créditos de blockchain retirados. No envíe fondos ni créditos comercializables a esta dirección, ya que no podrá iniciar transacciones desde esta cuenta.<0>Más información»</0>"
 
+#: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:4
+msgid "in our docs"
+msgstr "en nuestros documentos"
+
 #: src/components/organisms/AdditionalityForm.tsx:141
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
 msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una densidad de población muy alta, pastan en una unidad de manejo durante un período muy corto de tiempo."
@@ -2853,6 +2862,10 @@ msgstr "MÁS INFORMACIÓN"
 #: src/legacy-pages/ChooseCreditClass/ChooseCreditClass.config.tsx:5
 msgid "Learn more about creating a credit class»"
 msgstr "Obtenga más información sobre cómo crear una clase de crédito»"
+
+#: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:3
+msgid "Learn more about roles"
+msgstr "Obtenga más información sobre los roles"
 
 #: src/components/molecules/WalletGuideLearnMore.tsx:23
 msgid "Learn more about wallets in our <0>user guide.</0>"
@@ -3426,7 +3439,7 @@ msgstr "de CO2e"
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr "Se necesita la identificación del proyecto fuera de cadena para migrar un proyecto."
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:164
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:169
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr "Se necesita el ID del proyecto fuera de la cadena para migrar un proyecto. Edite la descripción del proyecto o el archivo multimedia para crear uno."
 
@@ -5803,8 +5816,12 @@ msgid "vintage period"
 msgstr "período de cosecha"
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:8
-msgid "VISIBILITY ON PROFILE"
-msgstr "VISIBILIDAD EN EL PERFIL"
+#~ msgid "VISIBILITY ON PROFILE"
+#~ msgstr "VISIBILIDAD EN EL PERFIL"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:8
+msgid "VISIBILITY ON PUBLIC PROFILE"
+msgstr "VISIBILIDAD EN EL PERFIL PÚBLICO"
 
 #: src/components/atoms/ToggleSwitch.tsx:21
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:11
@@ -6002,7 +6019,7 @@ msgstr "Puede agregar aquí el nombre de la organización o persona en cuyo nomb
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr "Puede agregar aquí el nombre de la organización o persona en cuyo nombre está retirando los créditos (es decir, \"Retirado en nombre de la Organización ABC\")"
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:142
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:147
 msgid "You can create an organization and migrate your personal projects to it."
 msgstr "Puedes crear una organización y migrar tus proyectos personales a ella."
 
@@ -6124,7 +6141,7 @@ msgstr "Debes aceptar para continuar"
 msgid "You must assign a new owner before you can change your role."
 msgstr "Debes asignar un nuevo propietario antes de poder cambiar tu rol."
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:163
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:168
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr "Debe ser propietario, administrador o editor de su organización para migrar un proyecto."
 

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
@@ -31,6 +32,8 @@ import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQue
 import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.constants';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
@@ -81,6 +84,7 @@ export const PostFlow = ({
   const [isSignModalOpen, setIsSignModalOpen] = useState(false);
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
+  const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData, isFetching } = useQuery(
@@ -91,6 +95,7 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
+  const { pathname } = useLocation();
   const router = useRouter();
 
   const [offChainProjectId, setOffChainProjectId] =
@@ -287,18 +292,25 @@ export const PostFlow = ({
         iri={iri}
         published={createdPostData?.published}
         hasAddress={hasAddress}
+        isOrganizationProject={
+          // Show selector if user is part of the project's organization or we're on the org dashboard
+          !!offChainProject?.organizationProjectByProjectId?.organizationId &&
+          userDao?.organizationByDaoAddress?.id ===
+            offChainProject?.organizationProjectByProjectId?.organizationId
+        }
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);
           if (iri) fetchMsgAnchor({ iri, createdPostData });
         }}
-        handleSign={async (contentHash: ContentHash_Graph) => {
+        handleSign={async (contentHash: ContentHash_Graph, signAs) => {
           if (iri) {
             setIsSignModalOpen(false);
             await sign({
               contentHash,
               iri,
               createdPostData,
+              signAs,
             });
           }
         }}

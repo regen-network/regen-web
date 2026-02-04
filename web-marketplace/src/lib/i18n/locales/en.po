@@ -341,7 +341,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:81
+#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:98
 msgid "Account selector"
 msgstr ""
 
@@ -426,7 +426,7 @@ msgstr ""
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:266
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:272
 msgid "Adding member to project {0} failed: {1}"
 msgstr ""
 
@@ -724,7 +724,7 @@ msgstr ""
 msgid "Asset"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:72
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:137
 msgid "Attach a signature"
 msgstr ""
 
@@ -744,7 +744,7 @@ msgstr ""
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:196
+#: src/components/organisms/PostFlow/hooks/useSign.ts:211
 msgid "Attest"
 msgstr ""
 
@@ -2582,7 +2582,7 @@ msgstr ""
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:91
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:156
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
@@ -3039,7 +3039,7 @@ msgstr ""
 msgid "manage sell orders"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:26
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
 msgid "Manage your Stripe account for fiat purchases"
 msgstr ""
 
@@ -3511,6 +3511,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:109
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:71
 msgid "Organization"
 msgstr ""
@@ -3612,6 +3613,7 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:99
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:56
 msgid "Personal"
 msgstr ""
@@ -4693,7 +4695,7 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:35
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:33
 msgid "set up account"
 msgstr ""
 
@@ -4727,11 +4729,15 @@ msgstr ""
 msgid "Show off-chain projects"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:111
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:187
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:167
+msgid "Sign as"
+msgstr ""
+
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
 msgid "Sign in successful"
 msgstr ""
 
@@ -4739,7 +4745,7 @@ msgstr ""
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:79
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:144
 msgid "Sign this post"
 msgstr ""
 
@@ -4776,7 +4782,7 @@ msgstr ""
 msgid "SKIP"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:105
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
 msgid "skip this step"
 msgstr ""
 
@@ -5191,7 +5197,7 @@ msgstr ""
 msgid "This information will appear on any posts that you author."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:82
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:147
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
@@ -5298,7 +5304,7 @@ msgstr ""
 msgid "Threat Category of Ecosystem"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:199
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:205
 msgid "Timed out waiting for project DAOs to be indexed."
 msgstr ""
 
@@ -5328,7 +5334,7 @@ msgstr ""
 msgid "Token expired"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:49
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:47
 msgid "tokenization"
 msgstr ""
 
@@ -5477,7 +5483,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
-#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:39
+#: src/components/organisms/ProjectAccountSelector/ProjectAccountSelector.tsx:75
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:70
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:29
 msgid "Unnamed"
@@ -5514,13 +5520,13 @@ msgstr ""
 
 #. placeholder {0}: selectedCardSellOrders[idx].id
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:305
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:311
 msgid "Updating Card Order {0} failed: {1}"
 msgstr ""
 
 #. placeholder {0}: selectedProjectsWithAddresses[idx].offChainId
 #. placeholder {1}: result.reason
-#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:224
+#: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:230
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr ""
 
@@ -5762,7 +5768,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:31
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:29
 msgid "view transactions"
 msgstr ""
 

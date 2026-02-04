@@ -36,6 +36,10 @@ import { getTxsEventQueryKey } from 'lib/queries/react-query/cosmos/bank/getTxsE
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import {
+  ORG,
+  USER,
+} from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { useMsgClient } from 'hooks';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
@@ -57,6 +61,7 @@ type UseSignParams = UseFetchMsgAnchorParams & {
 
 type SignParams = {
   contentHash: ContentHash_Graph;
+  signAs?: typeof USER | typeof ORG;
 } & FetchMsgAnchorParams;
 
 export const useSign = ({
@@ -119,7 +124,7 @@ export const useSign = ({
   });
   const withOrganization = useMemo(
     () =>
-      feeGranter && orgDao && roleId && authorizationId
+      orgDao && roleId && authorizationId
         ? {
             daoAddress: orgDao.address,
             daoRbamAddress: orgDao.daoRbamAddress,
@@ -127,7 +132,7 @@ export const useSign = ({
             authorizationId,
           }
         : undefined,
-    [feeGranter, orgDao, roleId, authorizationId],
+    [orgDao, roleId, authorizationId],
   );
 
   const fetchAnchorTxHash = useCallback(
@@ -142,10 +147,22 @@ export const useSign = ({
   );
 
   const sign = useCallback(
-    async ({ contentHash, iri, createdPostData }: SignParams) => {
+    async ({ contentHash, iri, createdPostData, signAs }: SignParams) => {
       if (wallet?.address) {
+        // Validate that organization option is available when user selects org
+        if (signAs === ORG && !withOrganization) {
+          throw new Error(
+            'Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization.',
+          );
+        }
+
+        // Show processing modal immediately
+        setProcessingModalAtom(atom => void (atom.open = true));
+
+        const useOrganization = signAs !== USER && !!withOrganization;
+
         let txMsg;
-        if (withOrganization) {
+        if (useOrganization) {
           const msgAttest = {
             attestor: withOrganization.daoAddress,
             contentHashes: [contentHash],
@@ -169,12 +186,10 @@ export const useSign = ({
         await signAndBroadcast(
           {
             msgs: [txMsg],
-            feeGranter,
+            feeGranter: useOrganization ? feeGranter : undefined,
             fee: 'auto',
           },
-          (): void => {
-            setProcessingModalAtom(atom => void (atom.open = true));
-          },
+          undefined,
           {
             onError: async (error?: Error) => {
               const anchorTxHash = await fetchAnchorTxHash({ iri });

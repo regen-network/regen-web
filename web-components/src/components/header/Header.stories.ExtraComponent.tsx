@@ -43,6 +43,7 @@ export const ExtraComponent = ({
     unfinalizedOrgCreation,
     finishOrgCreation,
     orgEnabled: true,
+    loginDisabled: false,
     textContent: {
       signedInAs: 'signed in as',
       copyText: { tooltipText: 'Copy address', toastText: 'Address copied' },
@@ -53,6 +54,8 @@ export const ExtraComponent = ({
       organization: 'organization',
       createOrganization: 'create new organization',
       finishOrgCreation: 'finish creating organization',
+      createOrgDisabledTooltip:
+        'Please connect with the Keplr extension on desktop to create an organization',
     },
   });
   return (

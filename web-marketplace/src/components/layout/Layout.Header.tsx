@@ -42,6 +42,7 @@ import {
   AVATAR_ALT,
   CONNECT_TO_KEPLR_ORGANIZATION,
   CREATE_ORG,
+  CREATE_ORG_DISABLED_TOOLTIP,
   FINISH_ORG_CREATION,
   fullWidthRegExp,
   LOGOUT_TEXT,
@@ -75,7 +76,7 @@ export const LayoutHeader = () => {
   const { _ } = useLingui();
   const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
-  const { wallet, disconnect, accountByAddr } = useWallet();
+  const { wallet, disconnect, accountByAddr, loginDisabled } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -141,7 +142,9 @@ export const LayoutHeader = () => {
           organization: _(ORGANIZATION),
           createOrganization: _(CREATE_ORG),
           finishOrgCreation: _(FINISH_ORG_CREATION),
+          createOrgDisabledTooltip: _(CREATE_ORG_DISABLED_TOOLTIP),
         },
+        loginDisabled,
       }),
     [
       pathname,

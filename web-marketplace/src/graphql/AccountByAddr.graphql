@@ -15,5 +15,27 @@ query AccountByAddr($addr: String!) {
         description
       }
     }
+    daosByAssignmentAccountIdAndDaoAddress {
+      nodes {
+        address
+        daoRbamAddress
+        cw4GroupAddress
+        canUseStripeConnect
+        stripeConnectedAccountId
+        organizationByDaoAddress {
+          id
+          name
+          description
+          image
+          bgImage
+          websiteLink
+          twitterLink
+        }
+        projectByAdminDaoAddress {
+          onChainId
+          id
+        }
+      }
+    }
   }
 }

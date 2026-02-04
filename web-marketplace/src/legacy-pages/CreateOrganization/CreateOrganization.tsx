@@ -165,7 +165,7 @@ export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
   const { activeAccount, privActiveAccount, loading: authLoading } = useAuth();
-  const { wallet } = useWallet();
+  const { wallet, loginDisabled } = useWallet();
   const walletAddress = wallet?.address;
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const organizationProgress = useOrganizationProgress();
@@ -228,6 +228,12 @@ export default function CreateOrganizationPage(): JSX.Element {
     setErrorBannerText,
     _,
   ]);
+
+  useEffect(() => {
+    if (loginDisabled) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [loginDisabled]);
 
   const handleRequestClose = useCallback(() => setShowDiscardModal(true), []);
   const handleCancelDiscard = useCallback(() => setShowDiscardModal(false), []);

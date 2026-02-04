@@ -223,7 +223,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         wallet,
         walletConfig: walletConfigRef.current,
         activeWalletAddr,
-        loginDisabled,
+        loginDisabled: true,
         loaded: loaded && !isFetching && (loginDisabled || !authLoading),
         connect,
         connectWallet,

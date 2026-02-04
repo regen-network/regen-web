@@ -96,53 +96,6 @@ export const getProfileUrl = (account: {
   return `/profiles/${identifier}`;
 };
 
-type GetPortfolioTabsParams = {
-  portfolioLabel: string;
-  bridgeLabel: string;
-  basePath: string;
-};
-
-export const getPortfolioTabs = ({
-  portfolioLabel,
-  bridgeLabel,
-  basePath,
-}: GetPortfolioTabsParams): IconTabProps[] => [
-  {
-    label: portfolioLabel,
-    href: `${basePath}/portfolio`,
-    icon: <CreditsIcon fontSize="small" linearGradient />,
-  },
-  {
-    label: bridgeLabel,
-    href: `${basePath}/portfolio/bridge`,
-    icon: <BridgeIcon linearGradient />,
-  },
-];
-
-export const getActivePortfolioTab = (
-  tabs: IconTabProps[],
-  pathname: string,
-): number => {
-  const normalizedPath = pathname.endsWith('/')
-    ? pathname.slice(0, -1)
-    : pathname;
-
-  return Math.max(
-    tabs.findIndex(tab => {
-      const normalizedHref = tab.href?.endsWith('/')
-        ? tab.href.slice(0, -1)
-        : tab.href;
-
-      if (normalizedHref?.endsWith('/bridge')) {
-        return normalizedPath.startsWith(normalizedHref);
-      }
-
-      return normalizedPath === normalizedHref;
-    }),
-    0,
-  );
-};
-
 type MetadataKey = 'banner' | 'website_link' | 'twitter_link';
 
 type GetMetadataActionParams = {

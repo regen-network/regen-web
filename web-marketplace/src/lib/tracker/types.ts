@@ -142,29 +142,6 @@ export interface RetireFailureEvent extends RetireBaseQuantityEvent {
   errorMessage: string | undefined;
 }
 
-// Bridge tracking event metadata specification
-
-interface BridgeBaseEvent {
-  batchDenom: string | undefined;
-  creditClassId: string | undefined;
-  projectId: string | undefined;
-}
-
-interface BridgeBaseQuantityEvent extends BridgeBaseEvent {
-  quantity: number | undefined;
-  recipient: string;
-}
-
-export interface Bridge1Event extends BridgeBaseEvent {}
-
-export interface Bridge2Event extends BridgeBaseQuantityEvent {}
-
-export interface BridgeSuccessEvent extends BridgeBaseQuantityEvent {}
-
-export interface BridgeFailureEvent extends BridgeBaseQuantityEvent {
-  errorMessage: string | undefined;
-}
-
 // Put tracking event metadata specification
 
 interface PutBaseEvent {

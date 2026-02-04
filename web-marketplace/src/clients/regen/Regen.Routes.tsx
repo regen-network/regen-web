@@ -22,9 +22,6 @@ import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loade
 import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
 import { EditProfile } from 'legacy-pages/Dashboard/Dashboard.EditProfile';
 import { DashboardSettings } from 'legacy-pages/Dashboard/Dashboard.Settings';
-import MyBridge from 'legacy-pages/Dashboard/MyBridge';
-import { MyBridgableEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
-import { MyBridgedEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
 import MyCreditBatches from 'legacy-pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'legacy-pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'legacy-pages/Dashboard/MyEcocredits';
@@ -206,14 +203,6 @@ export const getRegenRoutes = ({
         path="portfolio"
         element={<KeplrOrAuthRoute component={MyEcocredits} />}
       />
-      <Route
-        path="portfolio/bridge"
-        element={<KeplrRoute component={MyBridge} />}
-      >
-        <Route index element={<MyBridgableEcocreditsTable />} />
-        <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-        <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
-      </Route>
       <Route
         path="projects"
         element={<KeplrOrAuthRoute component={MyProjects} />}

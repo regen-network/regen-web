@@ -21,6 +21,7 @@ import { useAuth } from 'lib/auth/auth';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   ROLE_ADMIN,
@@ -37,6 +38,7 @@ export const useCollaborators = (
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { _ } = useLingui();
+  const { loginDisabled } = useWallet();
 
   const daoOrganization = useDaoOrganization();
   const { activeAccountId } = useAuth();
@@ -50,6 +52,7 @@ export const useCollaborators = (
       enabled: !!graphqlClient && !!project?.adminDaoAddress,
       address: project?.adminDaoAddress as string,
       daoAccountsOrderBy,
+      includePrivate: !loginDisabled,
     }),
   );
   const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
@@ -58,6 +61,7 @@ export const useCollaborators = (
         client: graphqlClient,
         enabled: !!graphqlClient && !!daoOrganization?.address,
         address: daoOrganization?.address as string,
+        includePrivate: !loginDisabled,
       }),
     );
 

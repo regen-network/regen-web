@@ -18,6 +18,7 @@ export const getDaoByAddressWithAssignmentsQuery = ({
   queryKey: getDaoByAddressWithAssignmentsQueryKey({
     address: params.address,
     daoAccountsOrderBy,
+    includePrivate: params.includePrivate,
   }),
   queryFn: async () => {
     try {

@@ -1,18 +1,21 @@
 import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { log } from 'console';
 import { CREATE_ORGANIZATION_FORM_ID } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AccountType } from 'generated/graphql';
 import { ORG_ENABLED } from 'lib/env';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   CREATE_ORG_DISABLED_TOOLTIP,
@@ -28,9 +31,6 @@ import {
   AccountOption,
   AccountSwitcherDropdownProps,
 } from './DashboardNavigation.types';
-import { useWallet } from 'lib/wallet/wallet';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
-import { log } from 'console';
 
 export const AccountSwitcherDropdown = ({
   accounts,
@@ -94,8 +94,8 @@ export const AccountSwitcherDropdown = ({
           : account?.name || _(UNNAMED);
 
         const handleClick = () => {
-          if (loginDisabled) return;
           if (isCreateOrg) {
+            if (loginDisabled) return;
             if (unfinalizedOrgCreation) {
               onFinishOrgCreation?.();
             } else {

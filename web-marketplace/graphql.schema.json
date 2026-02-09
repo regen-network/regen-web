@@ -1196,7 +1196,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -7693,7 +7693,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -12828,7 +12828,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -12928,7 +12928,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByPostIri",
+            "name": "postByPostId",
             "description": "Reads a single `Post` that is related to this `PostToken`.",
             "args": [],
             "type": {
@@ -13059,7 +13059,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByIri",
+            "name": "postById",
             "description": "Reads a single `Post` that is related to this `PostTranslation`.",
             "args": [],
             "type": {
@@ -23583,6 +23583,45 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "DeletePostByIdInput",
+        "description": "All input for the `deletePostById` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "DeletePostByIriInput",
         "description": "All input for the `deletePostByIri` mutation.",
         "fields": null,
@@ -23608,45 +23647,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "DeletePostInput",
-        "description": "All input for the `deletePost` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "nodeId",
-            "description": "The globally unique `ID` which will identify a single `Post` to be deleted.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
                 "ofType": null
               }
             },
@@ -23756,7 +23756,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -23907,7 +23907,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByPostIri",
+            "name": "postByPostId",
             "description": "Reads a single `Post` that is related to this `PostToken`.",
             "args": [],
             "type": {
@@ -23959,8 +23959,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "DeletePostTranslationByIriAndLanguageCodeInput",
-        "description": "All input for the `deletePostTranslationByIriAndLanguageCode` mutation.",
+        "name": "DeletePostTranslationByIdAndLanguageCodeInput",
+        "description": "All input for the `deletePostTranslationByIdAndLanguageCode` mutation.",
         "fields": null,
         "inputFields": [
           {
@@ -23976,14 +23976,14 @@
             "deprecationReason": null
           },
           {
-            "name": "iri",
+            "name": "id",
             "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "String",
+                "name": "UUID",
                 "ofType": null
               }
             },
@@ -24105,7 +24105,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByIri",
+            "name": "postById",
             "description": "Reads a single `Post` that is related to this `PostTranslation`.",
             "args": [],
             "type": {
@@ -29221,22 +29221,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "metadata",
             "description": null,
             "args": [],
@@ -29246,6 +29230,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "JSON",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
                 "ofType": null
               }
             },
@@ -29416,11 +29416,11 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
-            "description": "Checks for equality with the object’s `updatedAt` field.",
+            "name": "metadata",
+            "description": "Checks for equality with the object’s `metadata` field.",
             "type": {
               "kind": "SCALAR",
-              "name": "Datetime",
+              "name": "JSON",
               "ofType": null
             },
             "defaultValue": null,
@@ -29428,11 +29428,11 @@
             "deprecationReason": null
           },
           {
-            "name": "metadata",
-            "description": "Checks for equality with the object’s `metadata` field.",
+            "name": "updatedAt",
+            "description": "Checks for equality with the object’s `updatedAt` field.",
             "type": {
               "kind": "SCALAR",
-              "name": "JSON",
+              "name": "Datetime",
               "ofType": null
             },
             "defaultValue": null,
@@ -29554,18 +29554,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Datetime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "metadata",
             "description": null,
             "type": {
@@ -29576,6 +29564,18 @@
                 "name": "JSON",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Datetime",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29617,11 +29617,11 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
+            "name": "metadata",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Datetime",
+              "name": "JSON",
               "ofType": null
             },
             "defaultValue": null,
@@ -29629,11 +29629,11 @@
             "deprecationReason": null
           },
           {
-            "name": "metadata",
+            "name": "updatedAt",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "JSON",
+              "name": "Datetime",
               "ofType": null
             },
             "defaultValue": null,
@@ -30366,18 +30366,6 @@
             "deprecationReason": null
           },
           {
-            "name": "UPDATED_AT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "UPDATED_AT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "METADATA_ASC",
             "description": null,
             "isDeprecated": false,
@@ -30385,6 +30373,18 @@
           },
           {
             "name": "METADATA_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UPDATED_AT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "UPDATED_AT_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -32353,8 +32353,8 @@
             "deprecationReason": null
           },
           {
-            "name": "updatePost",
-            "description": "Updates a single `Post` using its globally unique id and a patch.",
+            "name": "updatePostByIri",
+            "description": "Updates a single `Post` using a unique key and a patch.",
             "args": [
               {
                 "name": "input",
@@ -32364,7 +32364,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "UpdatePostInput",
+                    "name": "UpdatePostByIriInput",
                     "ofType": null
                   }
                 },
@@ -32382,7 +32382,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updatePostByIri",
+            "name": "updatePostById",
             "description": "Updates a single `Post` using a unique key and a patch.",
             "args": [
               {
@@ -32393,7 +32393,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "UpdatePostByIriInput",
+                    "name": "UpdatePostByIdInput",
                     "ofType": null
                   }
                 },
@@ -32440,7 +32440,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updatePostTranslationByIriAndLanguageCode",
+            "name": "updatePostTranslationByIdAndLanguageCode",
             "description": "Updates a single `PostTranslation` using a unique key and a patch.",
             "args": [
               {
@@ -32451,7 +32451,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "UpdatePostTranslationByIriAndLanguageCodeInput",
+                    "name": "UpdatePostTranslationByIdAndLanguageCodeInput",
                     "ofType": null
                   }
                 },
@@ -34412,8 +34412,8 @@
             "deprecationReason": null
           },
           {
-            "name": "deletePost",
-            "description": "Deletes a single `Post` using its globally unique id.",
+            "name": "deletePostByIri",
+            "description": "Deletes a single `Post` using a unique key.",
             "args": [
               {
                 "name": "input",
@@ -34423,7 +34423,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeletePostInput",
+                    "name": "DeletePostByIriInput",
                     "ofType": null
                   }
                 },
@@ -34441,7 +34441,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deletePostByIri",
+            "name": "deletePostById",
             "description": "Deletes a single `Post` using a unique key.",
             "args": [
               {
@@ -34452,7 +34452,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeletePostByIriInput",
+                    "name": "DeletePostByIdInput",
                     "ofType": null
                   }
                 },
@@ -34499,7 +34499,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deletePostTranslationByIriAndLanguageCode",
+            "name": "deletePostTranslationByIdAndLanguageCode",
             "description": "Deletes a single `PostTranslation` using a unique key.",
             "args": [
               {
@@ -34510,7 +34510,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "DeletePostTranslationByIriAndLanguageCodeInput",
+                    "name": "DeletePostTranslationByIdAndLanguageCodeInput",
                     "ofType": null
                   }
                 },
@@ -35681,11 +35681,6 @@
           {
             "kind": "OBJECT",
             "name": "Passcode",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "Post",
             "ofType": null
           },
           {
@@ -38744,22 +38739,6 @@
         "description": "Project posts",
         "fields": [
           {
-            "name": "nodeId",
-            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "iri",
             "description": null,
             "args": [],
@@ -38892,6 +38871,22 @@
             "deprecationReason": null
           },
           {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "accountByCreatorAccountId",
             "description": "Reads a single `Account` that is related to this `Post`.",
             "args": [],
@@ -38916,7 +38911,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postTokensByPostIri",
+            "name": "postTokensByPostId",
             "description": "Reads and enables pagination through a set of `PostToken`.",
             "args": [
               {
@@ -39025,7 +39020,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postTranslationsByIri",
+            "name": "postTranslationsById",
             "description": "Reads and enables pagination through a set of `PostTranslation`.",
             "args": [
               {
@@ -39147,13 +39142,7 @@
           }
         ],
         "inputFields": null,
-        "interfaces": [
-          {
-            "kind": "INTERFACE",
-            "name": "Node",
-            "ofType": null
-          }
-        ],
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -39265,6 +39254,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": "Checks for equality with the object’s `id` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "UUID",
               "ofType": null
             },
             "defaultValue": null,
@@ -39480,6 +39481,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "UUID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -39599,6 +39612,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "UUID",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -39690,22 +39715,6 @@
             "deprecationReason": null
           },
           {
-            "name": "postIri",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "token",
             "description": null,
             "args": [],
@@ -39722,7 +39731,23 @@
             "deprecationReason": null
           },
           {
-            "name": "postByPostIri",
+            "name": "postId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "postByPostId",
             "description": "Reads a single `Post` that is related to this `PostToken`.",
             "args": [],
             "type": {
@@ -39776,8 +39801,8 @@
             "deprecationReason": null
           },
           {
-            "name": "postIri",
-            "description": "Checks for equality with the object’s `postIri` field.",
+            "name": "token",
+            "description": "Checks for equality with the object’s `token` field.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -39788,11 +39813,11 @@
             "deprecationReason": null
           },
           {
-            "name": "token",
-            "description": "Checks for equality with the object’s `token` field.",
+            "name": "postId",
+            "description": "Checks for equality with the object’s `postId` field.",
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "UUID",
               "ofType": null
             },
             "defaultValue": null,
@@ -39835,28 +39860,28 @@
             "deprecationReason": null
           },
           {
-            "name": "postIri",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "token",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "postId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -39898,7 +39923,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postIri",
+            "name": "token",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -39910,11 +39935,11 @@
             "deprecationReason": null
           },
           {
-            "name": "token",
+            "name": "postId",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
+              "name": "UUID",
               "ofType": null
             },
             "defaultValue": null,
@@ -40087,18 +40112,6 @@
             "deprecationReason": null
           },
           {
-            "name": "POST_IRI_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "POST_IRI_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "TOKEN_ASC",
             "description": null,
             "isDeprecated": false,
@@ -40106,6 +40119,18 @@
           },
           {
             "name": "TOKEN_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "POST_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "POST_ID_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -40147,22 +40172,6 @@
             "deprecationReason": null
           },
           {
-            "name": "iri",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "languageCode",
             "description": null,
             "args": [],
@@ -40203,7 +40212,23 @@
             "deprecationReason": null
           },
           {
-            "name": "postByIri",
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "postById",
             "description": "Reads a single `Post` that is related to this `PostTranslation`.",
             "args": [],
             "type": {
@@ -40232,18 +40257,6 @@
         "description": "A condition to be used against `PostTranslation` object types. All fields are\ntested for equality and combined with a logical ‘and.’",
         "fields": null,
         "inputFields": [
-          {
-            "name": "iri",
-            "description": "Checks for equality with the object’s `iri` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "languageCode",
             "description": "Checks for equality with the object’s `languageCode` field.",
@@ -40274,6 +40287,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Datetime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": "Checks for equality with the object’s `id` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "UUID",
               "ofType": null
             },
             "defaultValue": null,
@@ -40367,22 +40392,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "iri",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "languageCode",
             "description": null,
             "type": {
@@ -40417,6 +40426,22 @@
               "kind": "SCALAR",
               "name": "Datetime",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -40434,18 +40459,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "iri",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "languageCode",
             "description": null,
             "type": {
@@ -40475,6 +40488,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Datetime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "UUID",
               "ofType": null
             },
             "defaultValue": null,
@@ -40623,18 +40648,6 @@
             "deprecationReason": null
           },
           {
-            "name": "IRI_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "IRI_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "LANGUAGE_CODE_ASC",
             "description": null,
             "isDeprecated": false,
@@ -40666,6 +40679,18 @@
           },
           {
             "name": "TRANSLATION_DATE_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -40930,13 +40955,13 @@
             "deprecationReason": null
           },
           {
-            "name": "PRIMARY_KEY_ASC",
+            "name": "ID_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "PRIMARY_KEY_DESC",
+            "name": "ID_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -42145,7 +42170,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -43399,7 +43424,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -47850,7 +47875,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               },
@@ -50125,18 +50150,47 @@
             "deprecationReason": null
           },
           {
-            "name": "postTranslationByIriAndLanguageCode",
+            "name": "postById",
             "description": null,
             "args": [
               {
-                "name": "iri",
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "String",
+                    "name": "UUID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Post",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "postTranslationByIdAndLanguageCode",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "UUID",
                     "ofType": null
                   }
                 },
@@ -51337,35 +51391,6 @@
             "type": {
               "kind": "OBJECT",
               "name": "OrganizationProject",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "post",
-            "description": "Reads a single `Post` using its globally unique `ID`.",
-            "args": [
-              {
-                "name": "nodeId",
-                "description": "The globally unique `ID` to be used in selecting a single `Post`.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Post",
               "ofType": null
             },
             "isDeprecated": false,
@@ -54167,22 +54192,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "graph",
             "description": null,
             "args": [],
@@ -54231,18 +54240,6 @@
           {
             "name": "createdAt",
             "description": "Checks for equality with the object’s `createdAt` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Datetime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": "Checks for equality with the object’s `updatedAt` field.",
             "type": {
               "kind": "SCALAR",
               "name": "Datetime",
@@ -54379,18 +54376,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Datetime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "graph",
             "description": null,
             "type": {
@@ -54431,18 +54416,6 @@
           },
           {
             "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Datetime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -54626,18 +54599,6 @@
           },
           {
             "name": "CREATED_AT_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "UPDATED_AT_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "UPDATED_AT_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -58587,6 +58548,61 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "UpdatePostByIdInput",
+        "description": "All input for the `updatePostById` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "postPatch",
+            "description": "An object where the defined keys will be set on the `Post` being updated.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PostPatch",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "UUID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "UpdatePostByIriInput",
         "description": "All input for the `updatePostByIri` mutation.",
         "fields": null,
@@ -58628,61 +58644,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UpdatePostInput",
-        "description": "All input for the `updatePost` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "nodeId",
-            "description": "The globally unique `ID` which will identify a single `Post` to be updated.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "postPatch",
-            "description": "An object where the defined keys will be set on the `Post` being updated.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PostPatch",
                 "ofType": null
               }
             },
@@ -58780,7 +58741,7 @@
                     }
                   }
                 },
-                "defaultValue": "[PRIMARY_KEY_ASC]",
+                "defaultValue": "[NATURAL]",
                 "isDeprecated": false,
                 "deprecationReason": null
               }
@@ -58951,7 +58912,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByPostIri",
+            "name": "postByPostId",
             "description": "Reads a single `Post` that is related to this `PostToken`.",
             "args": [],
             "type": {
@@ -59003,8 +58964,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UpdatePostTranslationByIriAndLanguageCodeInput",
-        "description": "All input for the `updatePostTranslationByIriAndLanguageCode` mutation.",
+        "name": "UpdatePostTranslationByIdAndLanguageCodeInput",
+        "description": "All input for the `updatePostTranslationByIdAndLanguageCode` mutation.",
         "fields": null,
         "inputFields": [
           {
@@ -59036,14 +58997,14 @@
             "deprecationReason": null
           },
           {
-            "name": "iri",
+            "name": "id",
             "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "String",
+                "name": "UUID",
                 "ofType": null
               }
             },
@@ -59169,7 +59130,7 @@
             "deprecationReason": null
           },
           {
-            "name": "postByIri",
+            "name": "postById",
             "description": "Reads a single `Post` that is related to this `PostTranslation`.",
             "args": [],
             "type": {

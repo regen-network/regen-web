@@ -76,7 +76,7 @@ export const useSign = ({
   const getSuccessModalContent = useGetSuccessModalContent();
 
   const { queryClient } = useLedger();
-  const { wallet } = useWallet();
+  const { wallet, loginDisabled } = useWallet();
   const { refetch } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,

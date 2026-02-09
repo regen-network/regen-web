@@ -52,7 +52,7 @@ export function useMembersContext(params: MembersHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setErrorCode = useSetAtom(errorCodeAtom);
   const setErrorModal = useSetAtom(errorModalAtom);
-  const { wallet } = useWallet();
+  const { wallet, loginDisabled } = useWallet();
 
   // Data needed for computed values
   const { data: orgData } = useQuery(
@@ -69,6 +69,7 @@ export function useMembersContext(params: MembersHookParams) {
       enabled: !!graphqlClient && !!daoAddress,
       address: daoAddress as string,
       daoAccountsOrderBy: params.daoAccountsOrderBy,
+      includePrivate: !loginDisabled,
     }),
   );
 

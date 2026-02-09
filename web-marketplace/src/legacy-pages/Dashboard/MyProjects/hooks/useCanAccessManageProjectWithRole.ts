@@ -7,7 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
-import { Wallet } from 'lib/wallet/wallet';
+import { useWallet, Wallet } from 'lib/wallet/wallet';
 
 import { canAccessManageProjectWithRole } from '../MyProjects.utils';
 import { useFetchProject } from './useFetchProject';
@@ -25,6 +25,7 @@ export const useCanAccessManageProjectWithRole = ({
   activeAccountId,
   wallet,
 }: UseCanAccessManageProjectWithRoleParams) => {
+  const { loginDisabled } = useWallet();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
@@ -34,6 +35,7 @@ export const useCanAccessManageProjectWithRole = ({
       enabled:
         !!graphqlClient && !!offChainProject?.daoByAdminDaoAddress?.address,
       address: offChainProject?.daoByAdminDaoAddress?.address as string,
+      includePrivate: !loginDisabled,
     }),
   );
 

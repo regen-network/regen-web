@@ -19,10 +19,7 @@ import { getProfileUrl } from './Dashboard.utils';
 
 type Props = {
   setIsWarningModalOpen: UseStateSetter<string | undefined>;
-  activeAccount?: Pick<
-    Account,
-    'addr' | 'id' | 'name' | 'type' | 'image'
-  > | null;
+  activeAccount?: Pick<Account, 'addr' | 'id'> | null;
   section: string;
   hasProjects?: boolean;
   hasCreditClasses?: boolean;

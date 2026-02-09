@@ -123,7 +123,6 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
-  const { privActiveAccount, activeAccount } = useAuth();
   const { loginDisabled } = useWallet();
   const {
     selectedAccount,

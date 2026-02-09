@@ -233,7 +233,7 @@ export default function CreateOrganizationPage(): JSX.Element {
     if (loginDisabled) {
       navigate('/dashboard', { replace: true });
     }
-  }, [loginDisabled]);
+  }, [loginDisabled, navigate]);
 
   const handleRequestClose = useCallback(() => setShowDiscardModal(true), []);
   const handleCancelDiscard = useCallback(() => setShowDiscardModal(false), []);

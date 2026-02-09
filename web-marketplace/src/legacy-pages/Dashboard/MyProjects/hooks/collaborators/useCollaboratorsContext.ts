@@ -24,6 +24,7 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { getOrganizationProjectsByDaoAddressQueryKey } from 'lib/queries/react-query/registry-server/graphql/getOrganizationProjectsByDaoAddressQuery/getOrganizationProjectsByDaoAddressQuery.utils';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
 import { findAssignment, getAuthorizationName } from 'hooks/org-members/utils';
@@ -45,6 +46,7 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
   const setErrorModal = useSetAtom(errorModalAtom);
   const daoOrganization = useDaoOrganization();
   const orgDaoAddress = daoOrganization?.address;
+  const { loginDisabled } = useWallet();
 
   const { refetch } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
@@ -52,6 +54,7 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
       enabled: !!graphqlClient && !!daoAddress,
       address: daoAddress as string,
       daoAccountsOrderBy: params.daoAccountsOrderBy,
+      includePrivate: !loginDisabled,
     }),
   );
 

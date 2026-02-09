@@ -16,6 +16,7 @@ import { truncate } from 'web-components/src/utils/truncate';
 import { AccountsOrderBy } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   BaseMemberRole,
@@ -25,6 +26,7 @@ import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 export const useMembers = () => {
   const { _ } = useLingui();
+  const { loginDisabled } = useWallet();
 
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
@@ -50,6 +52,7 @@ export const useMembers = () => {
       enabled: !!graphqlClient && !!daoOrganization?.address,
       address: daoOrganization?.address as string,
       daoAccountsOrderBy,
+      includePrivate: !loginDisabled,
     }),
   );
 

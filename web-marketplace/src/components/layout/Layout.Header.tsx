@@ -158,6 +158,7 @@ export const LayoutHeader = () => {
       createOrganization,
       unfinalizedOrgCreation,
       finishOrgCreation,
+      loginDisabled,
     ],
   );
 

@@ -75,7 +75,8 @@ import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdm
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { accountChanging, disconnect, loginDisabled, wallet } = useWallet();
+  const { accountChanging, disconnect, loginDisabled, wallet, accountByAddr } =
+    useWallet();
   const { loading, activeAccount, activeAccountId, privActiveAccount } =
     useAuth();
 
@@ -168,6 +169,7 @@ export const Dashboard = () => {
       client: graphqlClient,
       enabled: !!graphqlClient && !!organizationAddress,
       address: organizationAddress as string,
+      includePrivate: !loginDisabled,
     }),
   );
   const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
@@ -176,7 +178,7 @@ export const Dashboard = () => {
     if (!organizationAddress || !organizationDao) return undefined;
 
     const assignment = getAccountAssignment({
-      accountId: activeAccountId,
+      accountId: activeAccountId ?? accountByAddr?.id,
       assignments,
     });
 
@@ -203,23 +205,52 @@ export const Dashboard = () => {
     organizationProfile?.name,
     organizationProfile?.image,
     assignments,
+    accountByAddr?.id,
   ]);
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
     const accounts: DashboardNavAccount[] = [];
 
-    // Add personal account if it exists
-    if (activeAccount) {
-      accounts.push({
-        id: activeAccount.id ?? activeAccount.addr ?? personalResolvedAddress,
-        name: activeAccount.name || '',
+    const buildPersonalAccount = (
+      account:
+        | Pick<
+            Account,
+            | 'id'
+            | 'addr'
+            | 'name'
+            | 'type'
+            | 'image'
+            | 'stripeConnectedAccountId'
+          >
+        | null
+        | undefined,
+      canUseStripeConnect: boolean,
+    ): DashboardNavAccount | null => {
+      if (!account) return null;
+
+      return {
+        id: account.id ?? account.addr ?? personalResolvedAddress,
+        name: account.name || '',
         address: personalResolvedAddress,
-        type: activeAccount.type === 'ORGANIZATION' ? ORG : USER,
-        image: activeAccount.image ?? undefined,
+        type: account.type === 'ORGANIZATION' ? ORG : USER,
+        image: account.image ?? undefined,
         source: 'auth',
-        canUseStripeConnect: privActiveAccount?.can_use_stripe_connect || false,
-        stripeConnectedAccountId: activeAccount.stripeConnectedAccountId,
-      });
+        canUseStripeConnect,
+        stripeConnectedAccountId: account.stripeConnectedAccountId,
+      };
+    };
+
+    const personalAccount = activeAccount
+      ? buildPersonalAccount(
+          activeAccount,
+          !!privActiveAccount?.can_use_stripe_connect,
+        )
+      : loginDisabled
+      ? buildPersonalAccount(accountByAddr, false)
+      : null;
+
+    if (personalAccount) {
+      accounts.push(personalAccount);
     }
 
     // Add organization account if it exists
@@ -231,6 +262,8 @@ export const Dashboard = () => {
   }, [
     activeAccount,
     organizationAccount,
+    loginDisabled,
+    accountByAddr,
     personalResolvedAddress,
     privActiveAccount?.can_use_stripe_connect,
   ]);
@@ -455,28 +488,16 @@ export const Dashboard = () => {
 
   const viewProfileAccount = useMemo<Pick<
     Account,
-    'addr' | 'id' | 'name' | 'type' | 'image'
+    'addr' | 'id'
   > | null>(() => {
-    if (selectedAccount?.type === ORG) {
+    if (selectedAccount) {
       return {
-        id: selectedAccount.roleAccountId ?? selectedAccount.id,
+        id: selectedAccount.id,
         addr: selectedAccount.address ?? '',
-        name: selectedAccount.name || '',
-        type: AccountType.Organization,
-        image: selectedAccount.image,
-      };
-    }
-    if (activeAccount) {
-      return {
-        id: activeAccount.id,
-        addr: activeAccount.addr,
-        name: activeAccount.name,
-        type: activeAccount.type,
-        image: activeAccount.image,
       };
     }
     return null;
-  }, [selectedAccount, activeAccount]);
+  }, [selectedAccount]);
 
   if (!activeAccount && !wallet?.address && !privActiveAccount) return null;
 

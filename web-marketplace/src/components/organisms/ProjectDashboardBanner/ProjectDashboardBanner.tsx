@@ -130,7 +130,7 @@ const ProjectDashboardBanner = ({
         </div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-20" />
+        <div className="absolute inset-0 bg-[#000] bg-opacity-20" />
 
         {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">
@@ -172,13 +172,13 @@ const ProjectDashboardBanner = ({
           <div className="flex flex-col justify-end xl:max-w-[70%]">
             <Title
               variant="h3"
-              className="text-bc-neutral-0 mb-2 line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]"
+              className="text-bc-neutral-0 line-clamp-2 text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)] mb-20"
             >
               {projectName}
             </Title>
 
             {/* Address + area */}
-            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere]">
+            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
               <ProjectPlaceInfo
                 place={truncatedPlace}
                 area={project.area}

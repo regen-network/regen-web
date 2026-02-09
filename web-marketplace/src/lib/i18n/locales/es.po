@@ -359,7 +359,7 @@ msgstr "Selector de cuentas"
 msgid "Account switch detected! "
 msgstr "¡Cambio de cuenta detectado!"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:63
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:70
 msgid "Account switcher"
 msgstr "selector de cuentas"
 
@@ -1297,7 +1297,7 @@ msgstr "Acciones de los colaboradores"
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr "La función de colaborador es para proyectos que forman parte de una organización."
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:68
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:67
 msgid "Collaborators"
 msgstr "Colaboradores"
 
@@ -1458,8 +1458,8 @@ msgstr "No se pudo encontrar la organización asociada con la DAO creada. Intent
 msgid "Could not parse batch denom"
 msgstr "No se pudo analizar la denominación del lote"
 
-#: src/hooks/org-members/useMembersContext.ts:181
-#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:117
+#: src/hooks/org-members/useMembersContext.ts:182
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:120
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr "No se pudieron recuperar las tareas, es posible que deba volver a cargar la página más tarde"
 
@@ -1663,7 +1663,7 @@ msgstr "Emisión de crédito"
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:58
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:57
 msgid "Credit Issuance"
 msgstr "Emisión de crédito"
 
@@ -1885,7 +1885,7 @@ msgstr "Navegación lateral del panel"
 msgid "Data Deficient"
 msgstr "Datos deficientes"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:53
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:52
 msgid "Data Posts"
 msgstr "Publicaciones de datos"
 
@@ -2338,7 +2338,7 @@ msgid "Factor:"
 msgstr "Factor:"
 
 #. placeholder {0}: errors.join('\n')
-#: src/hooks/org-members/useMembersContext.ts:235
+#: src/hooks/org-members/useMembersContext.ts:236
 msgid ""
 "Failed for projects:\n"
 "{0}"
@@ -3005,7 +3005,7 @@ msgstr "Administrar clases de crédito"
 msgid "Manage credits"
 msgstr "Administrar créditos"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:63
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:62
 msgid "Manage Credits"
 msgstr "Administrar créditos"
 
@@ -3025,7 +3025,7 @@ msgstr "Administrar cartera"
 msgid "Manage Project"
 msgstr "Administrar proyecto"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:131
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:130
 msgid "manage project tabs"
 msgstr "administrar pestañas de proyectos"
 
@@ -3687,7 +3687,7 @@ msgstr "Conéctese con Keplr para crear una organización."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:46
 msgid "Please connect with the Keplr extension on desktop to create an organization"
-msgstr ""
+msgstr "Conéctese con la extensión Keplr en el escritorio para crear una organización"
 
 #: src/legacy-pages/Post/Post.constants.ts:4
 msgid "Please contact the project admin to request access."

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { log } from 'console';
 import { CREATE_ORGANIZATION_FORM_ID } from 'legacy-pages/CreateOrganization/CreateOrganization.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 

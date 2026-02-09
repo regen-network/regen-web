@@ -14,7 +14,10 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { AccountType } from 'generated/graphql';
 import { ORG_ENABLED } from 'lib/env';
 
-import { FINISH_ORG_CREATION } from '../RegistryLayout/RegistryLayout.constants';
+import {
+  CREATE_ORG_DISABLED_TOOLTIP,
+  FINISH_ORG_CREATION,
+} from '../RegistryLayout/RegistryLayout.constants';
 import {
   CREATE_ORGANIZATION,
   ORG,
@@ -25,6 +28,9 @@ import {
   AccountOption,
   AccountSwitcherDropdownProps,
 } from './DashboardNavigation.types';
+import { useWallet } from 'lib/wallet/wallet';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { log } from 'console';
 
 export const AccountSwitcherDropdown = ({
   accounts,
@@ -37,6 +43,7 @@ export const AccountSwitcherDropdown = ({
   onFinishOrgCreation,
 }: AccountSwitcherDropdownProps) => {
   const { _ } = useLingui();
+  const { loginDisabled } = useWallet();
 
   const allOptions = useMemo(() => {
     const filteredAccounts = unfinalizedOrgCreation
@@ -87,6 +94,7 @@ export const AccountSwitcherDropdown = ({
           : account?.name || _(UNNAMED);
 
         const handleClick = () => {
+          if (loginDisabled) return;
           if (isCreateOrg) {
             if (unfinalizedOrgCreation) {
               onFinishOrgCreation?.();
@@ -105,10 +113,13 @@ export const AccountSwitcherDropdown = ({
               onClick={handleClick}
               className={cn(
                 'flex w-full items-center gap-10 px-15 py-[20px]',
-                'hover:cursor-pointer border-none',
+                'border-none cursor-pointer',
                 isSelected
                   ? 'bg-bc-neutral-200'
                   : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',
+                loginDisabled && isCreateOrg
+                  ? 'cursor-default'
+                  : 'cursor-pointer',
               )}
             >
               <UserAvatar src={avatarSrc} size="medium" alt={name} />
@@ -126,6 +137,16 @@ export const AccountSwitcherDropdown = ({
                       <SmallArrowIcon className="text-brand-400 group-hover:text-brand-200 h-[8px] ml-3" />
                     </TextButton>
                   </div>
+                ) : loginDisabled ? (
+                  <InfoTooltip
+                    title={_(CREATE_ORG_DISABLED_TOOLTIP)}
+                    arrow
+                    placement="top"
+                  >
+                    <TextButton className="cursor-default ml-3 mr-auto text-left text-[11px] bg-[linear-gradient(180deg,#ACACAC_0%,#CCC_100%)] bg-clip-text text-[transparent]">
+                      {_(CREATE_ORGANIZATION)}
+                    </TextButton>
+                  </InfoTooltip>
                 ) : (
                   <TextButton className="ml-3 mr-auto text-left text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
                     {_(CREATE_ORGANIZATION)}

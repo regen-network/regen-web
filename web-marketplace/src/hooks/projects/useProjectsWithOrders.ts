@@ -124,8 +124,7 @@ export function useProjectsWithOrders({
     );
   const projectsByAdmin = projectsByAdminData?.projects?.filter(
     project =>
-      !skippedProjectId ||
-      project.id !== skippedProjectId ||
+      (!skippedProjectId || project.id !== skippedProjectId) &&
       project.classId !== BRIDGE_CLASS_ID, // bridge projects should not be searchable
   );
   const enoughProjectsByAdmin =

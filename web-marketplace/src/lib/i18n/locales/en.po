@@ -1030,7 +1030,11 @@ msgid "By default these credits are tradable but you may check “retire all cre
 msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete data posts"
+#~ msgid "Can create, edit, and delete data posts"
+#~ msgstr ""
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+msgid "Can create, edit, and delete data posts."
 msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12

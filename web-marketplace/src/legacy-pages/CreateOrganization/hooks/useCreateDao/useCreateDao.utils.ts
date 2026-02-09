@@ -550,7 +550,7 @@ export const projectRoles = (
   },
   {
     name: 'author',
-    metadata: 'Can create, edit, and delete data posts',
+    metadata: 'Can create, edit, and delete data posts.',
     authorizations: [dataAuthorization],
     assignments: authorAssignments,
   },

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const YOU = msg`(you)`;
 
@@ -9,7 +9,7 @@ export const ROLE_EDITOR_LABEL = msg`Editor`;
 export const ROLE_EDITOR_DESCRIPTION = msg`Can edit all project page info and posts. Cannot manage users or credits.`;
 
 export const ROLE_AUTHOR_LABEL = msg`Author`;
-export const ROLE_AUTHOR_DESCRIPTION = msg`Can create, edit, and delete their own data posts. Cannot see private post data.`;
+export const ROLE_AUTHOR_DESCRIPTION = msg`Can create, edit, and delete data posts`;
 
 export const ROLE_VIEWER_LABEL = msg`Viewer`;
 export const ROLE_VIEWER_DESCRIPTION = msg`Can view all posts, documents, and location data, even when private.`;

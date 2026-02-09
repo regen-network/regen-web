@@ -550,8 +550,7 @@ export const projectRoles = (
   },
   {
     name: 'author',
-    metadata:
-      'Can create, edit, and delete their own data posts. Cannot see private post data.',
+    metadata: 'Can create, edit, and delete data posts',
     authorizations: [dataAuthorization],
     assignments: authorAssignments,
   },

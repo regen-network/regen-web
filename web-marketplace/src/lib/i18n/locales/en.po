@@ -724,7 +724,7 @@ msgstr ""
 msgid "Asset"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:137
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:162
 msgid "Attach a signature"
 msgstr ""
 
@@ -1030,8 +1030,12 @@ msgid "By default these credits are tradable but you may check “retire all cre
 msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+msgid "Can create, edit, and delete data posts"
 msgstr ""
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+#~ msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+#~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:9
 msgid "Can edit all project page info and posts. Cannot manage users or credits."
@@ -1275,7 +1279,7 @@ msgid "Close project creation"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:220
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:221
 #: src/lib/constants/shared.constants.tsx:96
 msgid "CLOSE WINDOW"
 msgstr ""
@@ -1445,7 +1449,7 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:308
+#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:313
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr ""
 
@@ -1471,7 +1475,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:172
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:176
 msgid "create an organization"
 msgstr ""
 
@@ -1523,7 +1527,7 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:302
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:127
 msgid "Created by"
 msgstr ""
 
@@ -2582,7 +2586,7 @@ msgstr ""
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:156
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
@@ -3424,7 +3428,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:160
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:164
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3511,7 +3515,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:109
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:96
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:71
 msgid "Organization"
 msgstr ""
@@ -3613,7 +3617,7 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:99
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:111
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:56
 msgid "Personal"
 msgstr ""
@@ -4185,7 +4189,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:272
+#: src/legacy-pages/Profile/Profile.tsx:278
 msgid "public profile tabs"
 msgstr ""
 
@@ -4729,15 +4733,15 @@ msgstr ""
 msgid "Show off-chain projects"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:187
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:212
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:167
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:192
 msgid "Sign as"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Sign in successful"
 msgstr ""
 
@@ -4745,7 +4749,7 @@ msgstr ""
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:144
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:169
 msgid "Sign this post"
 msgstr ""
 
@@ -4753,7 +4757,7 @@ msgstr ""
 msgid "signature"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:349
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
 msgid "Signed by"
 msgstr ""
 
@@ -4782,7 +4786,7 @@ msgstr ""
 msgid "SKIP"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:206
 msgid "skip this step"
 msgstr ""
 
@@ -5197,7 +5201,7 @@ msgstr ""
 msgid "This information will appear on any posts that you author."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:147
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:172
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
@@ -6119,7 +6123,7 @@ msgstr ""
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:159
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:163
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 

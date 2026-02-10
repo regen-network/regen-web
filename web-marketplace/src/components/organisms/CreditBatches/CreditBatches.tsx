@@ -20,6 +20,7 @@ import { truncateHash } from 'web-components/src/utils/truncate';
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
+import { getCreditBatchPath } from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -156,7 +157,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             </WithLoader>,
             <Link
               className={classes.noWrap}
-              href={`${LINK_PREFIX}/credit-batches/${batch.denom}`}
+              href={`${LINK_PREFIX}${getCreditBatchPath(batch.denom)}`}
             >
               {batch.denom}
             </Link>,

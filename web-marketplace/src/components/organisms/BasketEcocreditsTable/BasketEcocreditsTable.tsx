@@ -16,6 +16,7 @@ import {
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { getCreditBatchPath } from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -110,7 +111,7 @@ export const BasketEcocreditsTable: React.FC<
           isLoading={!credit.denom}
           variant="skeleton"
         >
-          <Link href={`/credit-batches/${credit.denom}`}>{credit.denom}</Link>
+          <Link href={getCreditBatchPath(credit.denom)}>{credit.denom}</Link>
         </WithLoader>,
         <AccountLink key={`issuer-${credit.issuer}`} address={credit.issuer} />,
         formatNumber({

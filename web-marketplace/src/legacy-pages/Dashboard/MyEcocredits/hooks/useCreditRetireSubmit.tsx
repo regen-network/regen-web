@@ -13,6 +13,7 @@ import type { Item } from 'web-components/src/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import { getCreditBatchPath } from 'lib/bridge';
 import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner.constants';
 import {
   Retire2Event,
@@ -190,7 +191,7 @@ const useCreditRetireSubmit = ({
           },
           {
             label: _(msg`credit batch id`),
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+            value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
           },
           {
             label: _(msg`amount retired`),

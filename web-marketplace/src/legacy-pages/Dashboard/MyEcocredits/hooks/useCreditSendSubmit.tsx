@@ -13,6 +13,7 @@ import type { Item } from 'web-components/src/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
+import { getCreditBatchPath } from 'lib/bridge';
 import {
   Send2Event,
   SendFailureEvent,
@@ -190,7 +191,7 @@ const useCreditSendSubmit = ({
             },
             {
               label: _(msg`credit batch id`),
-              value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+              value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
             },
             {
               label: _(msg`amount sent`),

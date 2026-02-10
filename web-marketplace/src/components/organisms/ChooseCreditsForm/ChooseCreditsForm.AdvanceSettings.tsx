@@ -7,6 +7,8 @@ import { CREDIT_VINTAGE_OPTIONS } from 'web-marketplace/src/components/molecules
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 
+import { getCreditBatchPath } from 'lib/bridge';
+
 import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
 
 export function AdvanceSettings({
@@ -73,7 +75,7 @@ export function AdvanceSettings({
                   <span className="px-[4px]">|</span>
                   <Link
                     target="_blank"
-                    href={`/credit-batches/${batchDenom}`}
+                    href={getCreditBatchPath(batchDenom)}
                     className="text-brand-300 uppercase bg-transparent border-none font-bold hover:opacity-80 text-xs"
                   >
                     <Trans>view batch</Trans> »

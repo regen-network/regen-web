@@ -23,6 +23,7 @@ import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
+import { getCreditBatchPath } from 'lib/bridge';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { ALL_PROJECTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery.constants';
@@ -297,7 +298,7 @@ const useCreateSellOrderSubmit = ({
           },
           {
             label: _(msg`credit batch id`),
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+            value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
           },
           {
             label: _(msg`amount of credits`),

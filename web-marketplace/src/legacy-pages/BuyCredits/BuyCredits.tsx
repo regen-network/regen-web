@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 
 import { Loading } from 'web-components/src/components/loading';
 
+import { isBridgeClassIdPrefix } from 'lib/bridge';
+
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
@@ -100,7 +102,11 @@ export const BuyCredits = () => {
 
   if (loadingAccountCanBuy) return <Loading />;
 
-  if (noProjectFound) return <NotFoundPage />;
+  if (
+    noProjectFound ||
+    (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId))
+  )
+    return <NotFoundPage />;
 
   return (
     <WithLoader

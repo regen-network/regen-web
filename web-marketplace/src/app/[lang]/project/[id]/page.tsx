@@ -25,11 +25,11 @@ import {
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-interface ProjectPageProps {
+export interface ProjectPageProps {
   params: Promise<{ id: string; lang: string }>;
 }
 
-const getProject = cache(async (id: string, lang: string) => {
+export const getProject = cache(async (id: string, lang: string) => {
   try {
     const isOnChainId = getIsOnChainId(id);
     const isOffChainUuid = getIsUuid(id);
@@ -93,6 +93,7 @@ const getProject = cache(async (id: string, lang: string) => {
     );
 
     return {
+      onChainProjectId,
       projectMetadata: metadataResponse,
       projectPageMetadata: offChainProject?.metadata,
       slug,
@@ -107,11 +108,12 @@ const getProject = cache(async (id: string, lang: string) => {
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
-  if (isBridgeClassIdPrefix(id)) {
-    notFound();
+  const { projectMetadata, projectPageMetadata, onChainProjectId } =
+    await getProject(id, lang);
+  if (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId)) {
+    return;
   }
 
-  const { projectMetadata, projectPageMetadata } = await getProject(id, lang);
   const title =
     projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
   const description = projectPageMetadata?.['schema:description'];
@@ -133,12 +135,12 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
-  if (isBridgeClassIdPrefix(id)) {
-    notFound();
-  }
-
   const sanityClient = await getSanityClient();
-  const { rpcQueryClient, queryClient, slug } = await getProject(id, lang);
+  const { rpcQueryClient, queryClient, slug, onChainProjectId } =
+    await getProject(id, lang);
+  if (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId)) {
+    return notFound();
+  }
   if (slug) {
     redirect(`/${lang}/project/${slug}`);
   }

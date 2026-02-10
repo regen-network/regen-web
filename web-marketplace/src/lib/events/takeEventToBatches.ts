@@ -1,6 +1,7 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import { CreditItemEventTake } from 'types/ledger/base';
+import { getCreditBatchPath } from 'lib/bridge';
 
 interface TakeEventToBatches {
   name: string;
@@ -26,7 +27,7 @@ export const takeEventToBatches = (
   const batchesFromTake = creditsFromTake.map(
     (credit: CreditItemEventTake) => ({
       name: credit.batch_denom,
-      url: `/credit-batches/${credit.batch_denom}`,
+      url: getCreditBatchPath(credit.batch_denom),
     }),
   );
   return batchesFromTake;

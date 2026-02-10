@@ -9,6 +9,7 @@ import InfoLabel from 'web-components/src/components/info-label';
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 import { truncate } from 'web-components/src/utils/truncate';
 
+import { getCreditBatchPath } from 'lib/bridge';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -108,7 +109,7 @@ const getSellOrdersTableRow = ({
   </WithLoader>,
   <Link
     key="batch-denom"
-    href={`/credit-batches/${batchDenom}`}
+    href={getCreditBatchPath(batchDenom)}
     sx={{ ...tableStyles.ellipsisColumn, direction: 'rtl' }}
   >
     {batchDenom}

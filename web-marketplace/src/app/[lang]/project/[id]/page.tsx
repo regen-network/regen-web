@@ -6,9 +6,11 @@ import {
 } from '@tanstack/react-query';
 import { getClient, getSanityClient } from 'app/ApolloClient';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
+import NotFoundPage from 'legacy-pages/NotFound';
 import { redirect } from 'next/navigation';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import { BRIDGE_CLASS_ID } from 'lib/env';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -127,6 +129,10 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id, lang } = await params;
+
+  if (BRIDGE_CLASS_ID && id.includes(BRIDGE_CLASS_ID)) {
+    return <NotFoundPage />;
+  }
 
   const sanityClient = await getSanityClient();
   const { rpcQueryClient, queryClient, slug } = await getProject(id, lang);

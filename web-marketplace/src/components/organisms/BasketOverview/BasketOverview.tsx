@@ -2,15 +2,10 @@ import React from 'react';
 import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
-import { useAtom, useSetAtom } from 'jotai';
-import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';
 import Image from 'next/image';
 
-import { Flex } from 'web-components/src/components/box';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import Section from 'web-components/src/components/section';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import {
   Body,
   Subtitle,
@@ -20,37 +15,19 @@ import { formatNumber } from 'web-components/src/utils/format';
 import { cn } from 'web-components/src/utils/styles/cn';
 import { truncate } from 'web-components/src/utils/truncate';
 
-import {
-  connectWalletModalAtom,
-  switchWalletModalAtom,
-} from 'lib/atoms/modals.atoms';
-import { useWallet } from 'lib/wallet/wallet';
-
 import toucanBasket from '../../../../public/png/toucan-basket.png';
 import topoImg from '../../../../public/svg/background-contour-2.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { MAXIMUM_FRACTION_DIGITS } from '../SellOrdersTable/SellOrdersTable.constants';
-import {
-  PUT_BASKET_HREF,
-  PUT_BASKET_LABEL,
-  PUT_BASKET_TOOLTIP,
-  TAKE_BASKET_HREF,
-  TAKE_BASKET_LABEL,
-  TAKE_BASKET_TOOLTIP,
-} from './BasketOverview.constants';
 import { BasketItem } from './BasketOverview.Item';
 import { BasketItemWithLinkList } from './BasketOverview.ItemWithLinkList';
-import { BasketOverviewModals } from './BasketOverview.modals';
 import {
   BasketImageContainer,
   BasketTextContainer,
   useBasketOverviewStyles,
 } from './BasketOverview.styles';
-import { BasketOverviewTooltip } from './BasketOverview.Tooltip';
 import { CreditClass, Curator } from './BasketOverview.types';
 import { getDateCriteria } from './BasketOverview.utils';
-import { useBasketPutData } from './hooks/useBasketPutData';
-import { useBasketTakeData } from './hooks/useBasketTakeData';
 
 export type BasketOverviewProps = {
   name: string;
@@ -77,21 +54,26 @@ export const BasketOverview: React.FC<
 }) => {
   const { _ } = useLingui();
   const { classes: styles } = useBasketOverviewStyles();
-  const basketPutData = useBasketPutData();
-  const basketTakeData = useBasketTakeData();
-  const { isConnected, activeWalletAddr } = useWallet();
-  const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
-  const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
-  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
-  const { isLoadingPutData, creditBatchDenoms } = basketPutData;
-  const { isLoadingTakeData, basketToken } = basketTakeData;
-  const hasAddress = !!activeWalletAddr;
-  const isPutButtonDisabled =
-    (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
-  const isTakeButtonDisabled =
-    (isLoadingTakeData ||
-      Number(basketToken.balance?.balance?.amount ?? 0) === 0) &&
-    hasAddress;
+
+  // Temporarily hiding CTA buttons until the modals are fixed (see comment in BasketOverview.modals.tsx)
+  // and since they should be disabled permanently for basket with denom process.env.NEXT_PUBLIC_BRIDGE_BASKET
+  // which is the only basket on mainnet so far
+
+  // const basketPutData = useBasketPutData();
+  // const basketTakeData = useBasketTakeData();
+  // const { isConnected, activeWalletAddr } = useWallet();
+  // const [, setBasketDetailAtom] = useAtom(basketDetailAtom);
+  // const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
+  // const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
+  // const { isLoadingPutData, creditBatchDenoms } = basketPutData;
+  // const { isLoadingTakeData, basketToken } = basketTakeData;
+  // const hasAddress = !!activeWalletAddr;
+  // const isPutButtonDisabled =
+  //   (isLoadingPutData || creditBatchDenoms.length === 0) && hasAddress;
+  // const isTakeButtonDisabled =
+  //   (isLoadingTakeData ||
+  //     Number(basketToken.balance?.balance?.amount ?? 0) === 0) &&
+  //   hasAddress;
 
   return (
     <>
@@ -159,7 +141,7 @@ export const BasketOverview: React.FC<
                   />
                 </Grid>
               </OnBoardingCard>
-              <Flex>
+              {/* <Flex>
                 <InfoTooltip
                   title={
                     isPutButtonDisabled ? (
@@ -233,15 +215,15 @@ export const BasketOverview: React.FC<
                     </OutlinedButton>
                   </span>
                 </InfoTooltip>
-              </Flex>
+              </Flex> */}
             </BasketTextContainer>
           </Grid>
         </Section>
       </div>
-      <BasketOverviewModals
+      {/* <BasketOverviewModals
         basketPutData={basketPutData}
         basketTakeData={basketTakeData}
-      />
+      /> */}
     </>
   );
 };

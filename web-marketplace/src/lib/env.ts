@@ -6,6 +6,7 @@ export const IS_DEV = process.env.DEV;
 export const apiServerUrl = process.env.NEXT_PUBLIC_API_URI;
 export const SKIPPED_CLASS_ID = process.env.NEXT_PUBLIC_SKIPPED_CLASS_ID;
 export const BRIDGE_CLASS_ID = process.env.NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID;
+export const BRIDGE_BASKET_DENOM = process.env.NEXT_PUBLIC_BRIDGE_BASKET;
 export const API_URI = process.env.NEXT_PUBLIC_API_URI;
 export const IMAGE_STORAGE_BASE_URL =
   process.env.NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL ??

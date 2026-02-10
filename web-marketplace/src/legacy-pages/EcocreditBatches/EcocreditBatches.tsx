@@ -6,6 +6,8 @@ import { Box } from '@mui/material';
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
 
+import { BRIDGE_CLASS_ID } from 'lib/env';
+
 import { CreditBatches } from 'components/organisms';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
@@ -13,7 +15,7 @@ export const EcocreditBatches = (): JSX.Element => {
   const navigate = useNavigate();
   const { page: routePage } = useParams();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
-    useFetchPaginatedBatches({});
+    useFetchPaginatedBatches({ forbiddenCreditClassId: BRIDGE_CLASS_ID });
   const { page } = paginationParams;
 
   useEffect(() => {

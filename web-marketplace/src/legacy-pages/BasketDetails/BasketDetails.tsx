@@ -8,7 +8,6 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAllBasketDetailsPageQuery } from 'lib/queries/react-query/sanity/getAllBasketDetailsPageQuery/getAllBasketDetailsPageQuery';
 
 import { GettingStartedResourcesCardDefault } from 'components/molecules/GettingStartedResourcesCardDefault/GettingStartedResourcesCardDefault';
-import { BasketDetailsActionsBar } from 'components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar';
 
 import {
   BasketEcocreditsTable,
@@ -54,7 +53,6 @@ const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
         </BasketDetailsSectionLayout>
       )}
-      <BasketDetailsActionsBar />
     </>
   );
 };

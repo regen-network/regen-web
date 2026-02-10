@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
+import { BlockContent } from 'web-components/src/components/block-content';
 import { CreditClassCardItem } from 'web-components/src/components/cards/CreditClassCard/CreditClassCard.Item';
 import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
 import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/ImpactTags';
@@ -29,6 +30,7 @@ import {
   SEE_MORE,
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { BRIDGE_CLASS_ID } from 'lib/env';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -226,20 +228,28 @@ const CreditClassDetailsSimple: React.FC<
                 />
               )}
             </Box>
-            {metadata?.['schema:description'] && (
-              <ReadMore
-                mobileSize="md"
-                classes={{
-                  root: styles.marginBottom,
-                  textContainer: styles.textContainer,
-                  description: styles.description,
-                }}
-                text={_(READ)}
-                lessText={_(LESS)}
-                moreText={_(MORE)}
-              >
-                {metadata?.['schema:description']}
-              </ReadMore>
+            {/* For bridge class we overwrite the onchain description with the one from sanity
+            because the on chain description is hardly editable by the class admin */}
+            {content?.descriptionRaw && onChainClass.id === BRIDGE_CLASS_ID ? (
+              <div className="text-bc-neutral-500 text-[18px] sm:text-[22px] mb-30 sm:mb-40">
+                <BlockContent content={content?.descriptionRaw} />
+              </div>
+            ) : (
+              metadata?.['schema:description'] && (
+                <ReadMore
+                  mobileSize="md"
+                  classes={{
+                    root: styles.marginBottom,
+                    textContainer: styles.textContainer,
+                    description: styles.description,
+                  }}
+                  text={_(READ)}
+                  lessText={_(LESS)}
+                  moreText={_(MORE)}
+                >
+                  {metadata?.['schema:description']}
+                </ReadMore>
+              )
             )}
           </Box>
           <ImpactTags

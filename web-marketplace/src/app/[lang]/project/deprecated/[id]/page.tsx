@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { getClient, getSanityClient } from 'app/ApolloClient';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { isBridgeClassIdPrefix } from 'lib/bridge';
@@ -107,7 +107,7 @@ const getProject = cache(async (id: string, lang: string) => {
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
-  if (isBridgeClassIdPrefix(id)) {
+  if (!isBridgeClassIdPrefix(id)) {
     notFound();
   }
 
@@ -133,15 +133,12 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
-  if (isBridgeClassIdPrefix(id)) {
+  if (!isBridgeClassIdPrefix(id)) {
     notFound();
   }
 
   const sanityClient = await getSanityClient();
-  const { rpcQueryClient, queryClient, slug } = await getProject(id, lang);
-  if (slug) {
-    redirect(`/${lang}/project/${slug}`);
-  }
+  const { rpcQueryClient, queryClient } = await getProject(id, lang);
 
   queryClient.prefetchQuery(
     getAllProjectPageQuery({

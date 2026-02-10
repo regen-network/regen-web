@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
 
-import { BRIDGE_CLASS_ID } from 'lib/env';
+import { isBridgeClassIdPrefix } from 'lib/bridge';
 
 import { BatchDetails } from '../BatchDetails/BatchDetails';
 
 const BridgeBlockedBatchDetails = (): JSX.Element => {
   const { batchDenom } = useParams<{ batchDenom?: string }>();
-  if (BRIDGE_CLASS_ID && batchDenom?.startsWith(BRIDGE_CLASS_ID)) {
+  if (isBridgeClassIdPrefix(batchDenom)) {
     return <NotFoundPage />;
   }
 

@@ -10,6 +10,7 @@ import { Title } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
 
+import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
@@ -39,7 +40,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   context: 'organization' | 'project';
   additionalColumns?: string[];
   additionalColumnTooltips?: React.ReactNode[];
-  roleTooltip?: React.ReactNode;
+  roleTooltipDocsUrl?: string;
   showMobileInvite?: boolean;
   currentUserRole?: ProjectRole | BaseMemberRole;
   hideHeader?: boolean;
@@ -60,7 +61,7 @@ export const BaseMembersTable = <T extends BaseUser>({
   context,
   additionalColumns = [],
   additionalColumnTooltips = [],
-  roleTooltip,
+  roleTooltipDocsUrl,
   showMobileInvite = true,
   currentUserRole,
   hideHeader = false,
@@ -174,9 +175,9 @@ export const BaseMembersTable = <T extends BaseUser>({
             </div>
             <div className="w-[250px] text-left flex items-center gap-5">
               {_(ROLE)}
-              {roleTooltip && (
+              {roleTooltipDocsUrl && (
                 <QuestionMarkTooltip
-                  title={roleTooltip}
+                  title={<RoleTooltip docsUrl={roleTooltipDocsUrl} />}
                   placement="top"
                   className="bg-bc-neutral-0"
                 />

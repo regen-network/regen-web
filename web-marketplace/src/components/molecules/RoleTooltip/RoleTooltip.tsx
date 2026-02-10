@@ -1,24 +1,17 @@
-import { useLingui } from '@lingui/react';
-
-import {
-  ROLE_TOOLTIP_LINK_TEXT,
-  ROLE_TOOLTIP_TEXT,
-} from './RoleTooltip.constants';
+import { Trans } from '@lingui/react/macro';
 
 export const RoleTooltip = ({ docsUrl }: { docsUrl: string }) => {
-  const { _ } = useLingui();
-
   return (
-    <span>
-      {_(ROLE_TOOLTIP_TEXT)}{' '}
+    <Trans>
+      Learn more about roles{' '}
       <a
         href={docsUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="text-sc-text-link border-none bg-transparent cursor-pointer pl-0 font-bold"
       >
-        {_(ROLE_TOOLTIP_LINK_TEXT)}
+        in our docs
       </a>
-    </span>
+    </Trans>
   );
 };

@@ -7,7 +7,6 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body, Title } from 'web-components/src/components/typography';
 
-import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
 import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
@@ -59,8 +58,6 @@ export const ProjectCollaborators = ({
 
   const roleOptions = getRoleItems(_);
 
-  const roleTooltipContent = <RoleTooltip docsUrl={PROJECT_ROLES_DOCS_URL} />;
-
   return (
     <>
       <BaseMembersTable
@@ -76,7 +73,7 @@ export const ProjectCollaborators = ({
         sortDir={sortDir}
         context={PROJECT_CONTEXT}
         showMobileInvite={true}
-        roleTooltip={roleTooltipContent}
+        roleTooltipDocsUrl={PROJECT_ROLES_DOCS_URL}
       >
         {isProjectDao ? (
           (col, canAdmin) => (

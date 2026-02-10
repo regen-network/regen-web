@@ -125,8 +125,6 @@ export const OrganizationMembersBase = ({
     cfg.hideOwnerOption && currentUserRole !== ROLE_OWNER,
   );
 
-  const roleTooltipContent = <RoleTooltip docsUrl={ORG_ROLES_DOCS_URL} />;
-
   const visibilityTooltipContent = _(VISIBILITY_TOOLTIP);
 
   return (
@@ -147,7 +145,7 @@ export const OrganizationMembersBase = ({
         context={ORGANIZATION_CONTEXT}
         additionalColumns={[_(VISIBILITY_ON_PROFILE)]}
         additionalColumnTooltips={[visibilityTooltipContent]}
-        roleTooltip={roleTooltipContent}
+        roleTooltipDocsUrl={ORG_ROLES_DOCS_URL}
         showMobileInvite={cfg.showMobileInvite}
         hideHeader={!cfg.showHeader}
         hideDescription={!cfg.showDescription}

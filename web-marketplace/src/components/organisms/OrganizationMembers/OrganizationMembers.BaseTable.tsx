@@ -211,7 +211,7 @@ export const OrganizationMembersBase = ({
               />
             </div>
             {/* Desktop visibility */}
-            <div className="hidden xl:flex w-[180px] justify-end items-center">
+            <div className="hidden xl:flex w-[180px] justify-center items-center">
               <VisibilitySwitch
                 checked={member.visible}
                 disabled={!canAdmin}

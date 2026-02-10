@@ -161,7 +161,7 @@ export const BaseMembersTable = <T extends BaseUser>({
           >
             <div
               className={`${
-                isProjectContext ? 'w-[370px]' : 'w-[340px]'
+                isProjectContext ? 'w-[410px]' : 'w-[360px]'
               } px-6 flex items-center cursor-pointer`}
               onClick={onSort}
             >
@@ -172,7 +172,7 @@ export const BaseMembersTable = <T extends BaseUser>({
                 }`}
               />
             </div>
-            <div className="w-[200px] text-left flex items-center gap-5">
+            <div className="w-[250px] text-left flex items-center gap-5">
               {_(ROLE)}
               {roleTooltip && (
                 <QuestionMarkTooltip

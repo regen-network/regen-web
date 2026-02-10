@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/regen-network/regen-web/compare/v2.11.1...v2.12.0) (2026-02-10)
+
+### Bug Fixes
+
+- APP-737 empty state email profile ([#2717](https://github.com/regen-network/regen-web/issues/2717)) ([3fe3703](https://github.com/regen-network/regen-web/commit/3fe370332e74223f7e0ba551db5e938bd1edd6ab))
+- APP-825 ui issues in create org flow ([#2777](https://github.com/regen-network/regen-web/issues/2777)) ([899bb4f](https://github.com/regen-network/regen-web/commit/899bb4fbc1880348042c39e1ae610dbe504af074))
+- APP-850 various issues with org creation/profile ([#2784](https://github.com/regen-network/regen-web/issues/2784)) ([ea98b35](https://github.com/regen-network/regen-web/commit/ea98b35efe666480b344c227a8d3d474974ffa2c))
+- APP-860 opacity fix ([#2786](https://github.com/regen-network/regen-web/issues/2786)) ([fd8a54d](https://github.com/regen-network/regen-web/commit/fd8a54d63c11b213bfd88eba27f4cbfb878a4ef9))
+- APP-865 fix send confirmation modal bug ([#2788](https://github.com/regen-network/regen-web/issues/2788)) ([98f56d3](https://github.com/regen-network/regen-web/commit/98f56d33835d0979d2545526336155a7aa51dc3a))
+
+### Features
+
+- APP-671 individual project dashboard header ([#2699](https://github.com/regen-network/regen-web/issues/2699)) ([c7b76cc](https://github.com/regen-network/regen-web/commit/c7b76cc910ea754de863b65a10a826ff31899479))
+- APP-674 project collaborators and org members tables ([#2701](https://github.com/regen-network/regen-web/issues/2701)) ([3f19451](https://github.com/regen-network/regen-web/commit/3f1945143ee19505a6ef36408dd0964f5ec7c6f3))
+- APP-731 migrate projects from personal account ([#2698](https://github.com/regen-network/regen-web/issues/2698)) ([2f728d8](https://github.com/regen-network/regen-web/commit/2f728d8570b471b29080d096dab52950fbf7b6e0))
+- APP-750 rm double no credits in credit batches, add no credit c… ([#2706](https://github.com/regen-network/regen-web/issues/2706)) ([17a6a93](https://github.com/regen-network/regen-web/commit/17a6a934ab954396b15f55ca0ad5e6bd8b61b998))
+- APP-752 text appears blank in dropdown menus ([#2723](https://github.com/regen-network/regen-web/issues/2723)) ([1b6cd8f](https://github.com/regen-network/regen-web/commit/1b6cd8f4132f0a27b1d68ab2105251dcc9fad0de))
+- APP-760 hide photo download icon ([#2733](https://github.com/regen-network/regen-web/issues/2733)) ([0db18d1](https://github.com/regen-network/regen-web/commit/0db18d17f315e1a303e4719b6168596608beb336))
+- APP-762 Upgrade user dropdown based on feedback ([#2735](https://github.com/regen-network/regen-web/issues/2735)) ([73e498a](https://github.com/regen-network/regen-web/commit/73e498a8cd2cb8c466bfc7b7f09f804fe0cd64e0))
+- APP-776 Create new organization - 1. Organization profile ([#2737](https://github.com/regen-network/regen-web/issues/2737)) ([e5174e5](https://github.com/regen-network/regen-web/commit/e5174e5ccecf3828ce83d1306eb8048522169fb6))
+- APP-777 Create new organization - 2. migrate projects (part 1) ([#2745](https://github.com/regen-network/regen-web/issues/2745)) ([b393dbe](https://github.com/regen-network/regen-web/commit/b393dbeec94df6d8ef7392291da81538fd746aaa))
+- APP-777 create organization - 2 migrate projects ([#2748](https://github.com/regen-network/regen-web/issues/2748)) ([b51b9ee](https://github.com/regen-network/regen-web/commit/b51b9eecfa4db924c0cd1704a10c914882c13d1e))
+- APP-778 create new organization 3 personal info ([#2747](https://github.com/regen-network/regen-web/issues/2747)) ([6afbd64](https://github.com/regen-network/regen-web/commit/6afbd64c63dbd64b3c196617f585bd8384811e8d))
+- APP-779 Create new organization 4. invite members ([#2741](https://github.com/regen-network/regen-web/issues/2741)) ([fe4f645](https://github.com/regen-network/regen-web/commit/fe4f645ac6a7b165469d5b663492a9b6d5811d46))
+- APP-789 organization dashboard context switcher ([#2751](https://github.com/regen-network/regen-web/issues/2751)) ([e991014](https://github.com/regen-network/regen-web/commit/e991014eb924f0b443db8761e48248a407b7dd72))
+- APP-790 dashboard projects ([#2760](https://github.com/regen-network/regen-web/issues/2760)) ([9e43591](https://github.com/regen-network/regen-web/commit/9e43591e9c94372fb0dd80fb87b63cee8beb8478))
+- APP-792 member on boarding from email notification link ([#2768](https://github.com/regen-network/regen-web/issues/2768)) ([cdb4df7](https://github.com/regen-network/regen-web/commit/cdb4df7f7a83f859b1eb22b7d1635bcf558253e8))
+- APP-793 project creation from org ([#2765](https://github.com/regen-network/regen-web/issues/2765)) ([c3d981e](https://github.com/regen-network/regen-web/commit/c3d981ef556c9f7777ee79a2d3cb85c84792bbe0))
+- APP-795 organization profile page ([#2756](https://github.com/regen-network/regen-web/issues/2756)) ([07aa585](https://github.com/regen-network/regen-web/commit/07aa5856e668ddda309e75d81e3d6c06ae342d3b))
+- next migration initial phase ([#2749](https://github.com/regen-network/regen-web/issues/2749)) ([6381720](https://github.com/regen-network/regen-web/commit/63817205038fda1af62e3bdbc445998e65125424))
+
 # [2.11.0](https://github.com/regen-network/regen-web/compare/v2.10.1...v2.11.0) (2025-08-04)
 
 ### Features

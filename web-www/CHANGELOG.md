@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/regen-network/regen-web/compare/v2.11.1...v2.12.0) (2026-02-10)
+
+### Bug Fixes
+
+- patch next version ([#2769](https://github.com/regen-network/regen-web/issues/2769)) ([725854f](https://github.com/regen-network/regen-web/commit/725854f356ac718dca1aad820ae73916639a5631))
+
+### Features
+
+- next migration initial phase ([#2749](https://github.com/regen-network/regen-web/issues/2749)) ([6381720](https://github.com/regen-network/regen-web/commit/63817205038fda1af62e3bdbc445998e65125424))
+
 # [2.11.0](https://github.com/regen-network/regen-web/compare/v2.10.1...v2.11.0) (2025-08-04)
 
 **Note:** Version bump only for package web-www

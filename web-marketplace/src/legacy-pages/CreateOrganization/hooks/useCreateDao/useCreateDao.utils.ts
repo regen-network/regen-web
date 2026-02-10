@@ -9,12 +9,6 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/getCodeDetailsQuery/getCodeDetailsQuery';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
-import {
-  ROLE_AUTHOR_DESCRIPTION,
-  ROLE_EDITOR_DESCRIPTION,
-  ROLE_VIEWER_DESCRIPTION,
-} from 'components/organisms/ProjectCollaborators/ProjectCollaborators.constants';
-
 import { CODE_IDS, lookupContractChecksum } from './useCreateDao.constants';
 
 // Roles and authorizations definitions
@@ -549,19 +543,21 @@ export const projectRoles = (
   },
   {
     name: 'editor',
-    metadata: ROLE_EDITOR_DESCRIPTION,
+    metadata:
+      'Can edit all project page info and posts. Cannot manage users or credits.',
     authorizations: [projectsAuthorization, dataAuthorization],
     assignments: editorAssignments,
   },
   {
     name: 'author',
-    metadata: ROLE_AUTHOR_DESCRIPTION,
+    metadata: 'Can create, edit, and delete data posts.',
     authorizations: [dataAuthorization],
     assignments: authorAssignments,
   },
   {
     name: 'viewer',
-    metadata: ROLE_VIEWER_DESCRIPTION,
+    metadata:
+      'Can view all posts, documents, and location data, even when private.',
     assignments: viewerAssignments,
   },
 ];

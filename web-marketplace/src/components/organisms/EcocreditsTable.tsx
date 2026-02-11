@@ -127,12 +127,14 @@ export const EcocreditsTable: React.FC<
         credits?.map((row, i) => {
           return [
             <WithLoader isLoading={row.projectName === ''} variant="skeleton">
-              <Link
-                href={getProjectPath(row?.projectId as string)}
-                sx={tableStyles.ellipsisColumn}
-              >
-                {row?.projectName}
-              </Link>
+              {row?.projectId && (
+                <Link
+                  href={getProjectPath(row?.projectId)}
+                  sx={tableStyles.ellipsisColumn}
+                >
+                  {row?.projectName}
+                </Link>
+              )}
             </WithLoader>,
             <WithLoader isLoading={!row.denom} variant="skeleton">
               <Link href={getCreditBatchPath(row.denom)}>{row.denom}</Link>

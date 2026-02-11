@@ -44,9 +44,9 @@ export const useGetSuccessModalContent = () => {
       const files = createdPostData?.contents?.files as PostFile[] | undefined;
       const filesUrls = createdPostData?.filesUrls;
 
-      const projectUrl = getProjectPath(
-        (projectSlug ?? projectId ?? offChainProjectId) as string,
-      );
+      const projectUrl = `/project/${
+        projectSlug ?? projectId ?? offChainProjectId
+      }`;
       const cardItems: Item[] = [
         {
           label: _(PROJECT),

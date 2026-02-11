@@ -195,7 +195,7 @@ export const BuyCreditsForm = ({
       !warningModalContent.current
     ) {
       // Else if there's no connected wallet address or buy disabled, redirect to project page
-      router.replace(getProjectPath(projectId as string));
+      router.replace(`/project/${projectId}`);
     }
   }, [
     loadingSanityProject,

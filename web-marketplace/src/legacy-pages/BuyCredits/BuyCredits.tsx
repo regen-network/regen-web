@@ -133,11 +133,11 @@ export const BuyCredits = () => {
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={sellOrders}
             creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
-            projectHref={getProjectPath(
-              (offChainProject?.slug ??
-                offChainProject?.onChainId ??
-                onChainProjectId) as string,
-            )}
+            projectHref={`/project/${
+              offChainProject?.slug ??
+              offChainProject?.onChainId ??
+              onChainProjectId
+            }`}
             confirmationTokenId={confirmationTokenId}
             setConfirmationTokenId={setConfirmationTokenId}
             paymentMethodId={paymentMethodId}

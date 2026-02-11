@@ -212,8 +212,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     }
               }
               purchaseInfo={project.purchaseInfo || {}}
-              onClick={() => nextRouter.push(getProjectPath(project.id))}
-              href={getProjectPath(project.id)}
+              onClick={() => nextRouter.push(`/project/${project.id}`)}
+              href={`/project/${project.id}`}
               LinkComponent={Link}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}

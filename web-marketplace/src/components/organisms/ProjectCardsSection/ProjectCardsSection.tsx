@@ -92,7 +92,7 @@ export function ProjectCardsSection({
         <CardsGridContainer cardsCount={projects.length}>
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
-            const href = getProjectPath((project.slug ?? project.id) as string);
+            const href = getProjectPath(project.id);
             const isComplianceProject =
               project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
             const isVoluntaryProject =

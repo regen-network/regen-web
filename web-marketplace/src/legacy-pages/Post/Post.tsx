@@ -134,11 +134,11 @@ function Post(): JSX.Element {
             (!privatePostError || isAdmin) && (
               <>
                 <PostHeader
-                  projectHref={getProjectPath(
-                    (offchainProject?.slug ??
-                      offchainProject?.onChainId ??
-                      projectId) as string,
-                  )}
+                  projectHref={`/project/${
+                    offchainProject?.slug ??
+                    offchainProject?.onChainId ??
+                    projectId
+                  }`}
                   isAdmin={isAdmin}
                   title={data.contents.title || _(UNTITLED)}
                   creatorAccount={creatorAccount}

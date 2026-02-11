@@ -210,9 +210,9 @@ export const PostFlow = ({
         }
         onModalClose();
         router.push(
-          `${getProjectPath(
-            (projectSlug ?? offChainProjectId ?? projectId) as string,
-          )}#data-stream`,
+          `/project/${
+            projectSlug ?? offChainProjectId ?? projectId
+          }#data-stream`,
         );
       }
     }

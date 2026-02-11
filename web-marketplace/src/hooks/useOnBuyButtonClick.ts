@@ -38,7 +38,7 @@ export const useOnBuyButtonClick = () => {
       ) {
         // so we can always go to the buy page,
         // no matter if the user is logged in/connected to a wallet or not
-        router.push(`${getProjectPath(projectId)}/buy`);
+        router.push(`/project/${projectId}/buy`);
       } else {
         if (!activeWalletAddr) {
           // no connected wallet address
@@ -48,7 +48,7 @@ export const useOnBuyButtonClick = () => {
           });
         } else {
           if (isConnected) {
-            router.push(`${getProjectPath(projectId)}/buy`);
+            router.push(`/project/${projectId}/buy`);
           } else {
             // user logged in with web2 but not connected to the wallet address associated to his/er account
             setBuyFromProjectIdAtom(projectId);
@@ -71,7 +71,7 @@ export const useOnBuyButtonClick = () => {
     // As soon as user connects to the right wallet address,
     // we navigate to the buy page
     if (buyFromProjectId && isConnected) {
-      router.push(`${getProjectPath(buyFromProjectId)}/buy`);
+      router.push(`/project/${buyFromProjectId}/buy`);
       setBuyFromProjectIdAtom('');
     }
   }, [buyFromProjectId, isConnected, router, setBuyFromProjectIdAtom]);

@@ -51,9 +51,9 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const projectOnChainId = project?.onChainId;
   const projectOffChainId = project?.id;
   const currentProjectId = projectOnChainId ?? projectOffChainId;
-  const projectUrl = `${window.location.origin}${getProjectPath(
-    (project?.slug ?? currentProjectId) as string,
-  )}`;
+  const projectUrl = `${window.location.origin}/project/${
+    project?.slug ?? currentProjectId
+  }`;
 
   return (
     <OnboardingFormTemplate

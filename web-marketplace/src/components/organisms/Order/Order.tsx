@@ -45,7 +45,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const [cryptoReceiptModalOpen, setCryptoReceiptModalOpen] = useState(false);
 
   const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
-  const projectHref = getProjectPath((project.slug ?? project.id) as string);
+  const projectHref = getProjectPath(project.id as string);
 
   const denom = allowedDenoms?.find(
     denom => denom.bankDenom === paymentInfo.askDenom,

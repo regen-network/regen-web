@@ -17,6 +17,7 @@ import {
   CreditClass,
   ProjectPrefinancing,
 } from 'generated/sanity-graphql';
+import { getProjectPath } from 'lib/bridge';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -199,7 +200,7 @@ export const normalizeProjectWithMetadata = ({
       offChainProject?.slug ||
       offChainProject?.id ||
       projectWithOrderData?.id,
-    href: projectId ? `/project/${projectId}` : undefined,
+    href: projectId ? getProjectPath(projectId) : undefined,
     imgSrc:
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||

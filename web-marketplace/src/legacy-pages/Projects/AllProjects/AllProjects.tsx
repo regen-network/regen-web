@@ -21,6 +21,7 @@ import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { projectsSortAtom } from 'lib/atoms/projects.atoms';
+import { getProjectPath } from 'lib/bridge';
 import {
   DRAFT_TEXT,
   EMPTY_OPTION_TEXT,
@@ -211,8 +212,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     }
               }
               purchaseInfo={project.purchaseInfo || {}}
-              onClick={() => nextRouter.push(`/project/${project.id}`)}
-              href={`/project/${project.id}`}
+              onClick={() => nextRouter.push(getProjectPath(project.id))}
+              href={getProjectPath(project.id)}
               LinkComponent={Link}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}

@@ -9,7 +9,11 @@ import InfoLabel from 'web-components/src/components/info-label';
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 import { truncate } from 'web-components/src/utils/truncate';
 
-import { getCreditBatchPath, getCreditClassPath } from 'lib/bridge';
+import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -54,9 +58,11 @@ const getSellOrdersTableRow = ({
     isLoading={project?.name === undefined}
     variant="skeleton"
   >
-    <Link href={`/project/${project?.id}`} sx={tableStyles.ellipsisColumn}>
-      {project?.name}
-    </Link>
+    {project?.id && (
+      <Link href={getProjectPath(project?.id)} sx={tableStyles.ellipsisColumn}>
+        {project?.name}
+      </Link>
+    )}
   </WithLoader>,
   <Box
     key="ask-usd-amount"

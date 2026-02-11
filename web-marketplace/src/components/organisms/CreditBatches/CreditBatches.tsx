@@ -20,7 +20,11 @@ import { truncateHash } from 'web-components/src/utils/truncate';
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
-import { getCreditBatchPath, getCreditClassPath } from 'lib/bridge';
+import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -136,12 +140,14 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
 
           result.push(
             <WithLoader isLoading={!batch.projectName} variant="skeleton">
-              <Link
-                href={`/project/${batch?.projectId}`}
-                className="block truncate max-w-[125px]"
-              >
-                {batch?.projectName}
-              </Link>
+              {batch?.projectId && (
+                <Link
+                  href={getProjectPath(batch?.projectId)}
+                  className="block truncate max-w-[125px]"
+                >
+                  {batch?.projectName}
+                </Link>
+              )}
             </WithLoader>,
             <WithLoader
               isLoading={!batch.classId}

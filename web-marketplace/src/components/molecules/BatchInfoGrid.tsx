@@ -10,7 +10,7 @@ import {
   formatDate,
 } from 'web-components/src/utils/format';
 
-import { getCreditClassPath } from 'lib/bridge';
+import { getCreditClassPath, getProjectPath } from 'lib/bridge';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
@@ -40,7 +40,7 @@ export const BatchInfoGrid: React.FC<
           <Box component="span" sx={{ textTransform: 'capitalize' }}>
             <LinkWithArrow
               label={projectName || '-'}
-              href={projectOnChainId ? `/project/${projectOnChainId}` : ''}
+              href={projectOnChainId ? getProjectPath(projectOnChainId) : ''}
             />
           </Box>
         </BatchDetail>

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { Loading } from 'web-components/src/components/loading';
 
-import { isBridgeClassIdPrefix } from 'lib/bridge';
+import { getProjectPath, isBridgeClassIdPrefix } from 'lib/bridge';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
@@ -51,7 +51,7 @@ export const BuyCredits = () => {
 
   useEffect(() => {
     if (isLoadingAll) return;
-    if (!canEnterBuy) router.replace(`/project/${projectId}`);
+    if (!canEnterBuy) router.replace(getProjectPath(projectId as string));
   }, [isLoadingAll, canEnterBuy, router, projectId]);
 
   useNavigateToSlug(slug, '/buy');
@@ -133,11 +133,11 @@ export const BuyCredits = () => {
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={sellOrders}
             creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
-            projectHref={`/project/${
-              offChainProject?.slug ??
-              offChainProject?.onChainId ??
-              onChainProjectId
-            }`}
+            projectHref={getProjectPath(
+              (offChainProject?.slug ??
+                offChainProject?.onChainId ??
+                onChainProjectId) as string,
+            )}
             confirmationTokenId={confirmationTokenId}
             setConfirmationTokenId={setConfirmationTokenId}
             paymentMethodId={paymentMethodId}

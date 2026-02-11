@@ -20,6 +20,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { getProjectPath } from 'lib/bridge';
 import {
   DISCARD_CHANGES_BODY,
   DISCARD_CHANGES_BUTTON,
@@ -209,9 +210,9 @@ export const PostFlow = ({
         }
         onModalClose();
         router.push(
-          `/project/${
-            projectSlug ?? offChainProjectId ?? projectId
-          }#data-stream`,
+          `${getProjectPath(
+            (projectSlug ?? offChainProjectId ?? projectId) as string,
+          )}#data-stream`,
         );
       }
     }

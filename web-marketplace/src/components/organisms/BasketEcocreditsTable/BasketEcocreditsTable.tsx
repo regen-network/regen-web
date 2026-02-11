@@ -16,7 +16,11 @@ import {
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { getCreditBatchPath, getCreditClassPath } from 'lib/bridge';
+import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -99,7 +103,7 @@ export const BasketEcocreditsTable: React.FC<
           variant="skeleton"
         >
           <Link
-            href={`/project/${credit.projectId}`}
+            href={getProjectPath(credit.projectId)}
             target="_blank"
             sx={tableStyles.ellipsisColumn}
           >

@@ -6,6 +6,7 @@ import { Item, ItemValue } from 'web-components/src/components/modal/TxModal';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { getProjectPath } from 'lib/bridge';
 import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import {
   Post,
@@ -43,9 +44,9 @@ export const useGetSuccessModalContent = () => {
       const files = createdPostData?.contents?.files as PostFile[] | undefined;
       const filesUrls = createdPostData?.filesUrls;
 
-      const projectUrl = `/project/${
-        projectSlug ?? projectId ?? offChainProjectId
-      }`;
+      const projectUrl = getProjectPath(
+        (projectSlug ?? projectId ?? offChainProjectId) as string,
+      );
       const cardItems: Item[] = [
         {
           label: _(PROJECT),

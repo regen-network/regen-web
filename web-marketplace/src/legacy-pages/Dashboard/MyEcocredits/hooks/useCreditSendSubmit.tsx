@@ -13,7 +13,7 @@ import type { Item } from 'web-components/src/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
-import { getCreditBatchPath } from 'lib/bridge';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import {
   Send2Event,
   SendFailureEvent,
@@ -186,7 +186,7 @@ const useCreditSendSubmit = ({
                 name:
                   credits[creditSendOpen].projectName ||
                   credits[creditSendOpen].projectId,
-                url: `/project/${credits[creditSendOpen].projectId}`,
+                url: getProjectPath(credits[creditSendOpen].projectId),
               },
             },
             {

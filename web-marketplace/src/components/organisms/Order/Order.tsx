@@ -14,6 +14,7 @@ import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/Prefi
 import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { getProjectPath } from 'lib/bridge';
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
@@ -44,7 +45,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const [cryptoReceiptModalOpen, setCryptoReceiptModalOpen] = useState(false);
 
   const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
-  const projectHref = `/project/${project.slug ?? project.id}`;
+  const projectHref = getProjectPath((project.slug ?? project.id) as string);
 
   const denom = allowedDenoms?.find(
     denom => denom.bankDenom === paymentInfo.askDenom,

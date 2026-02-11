@@ -19,6 +19,7 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { getProjectPath } from 'lib/bridge';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -194,7 +195,7 @@ export const BuyCreditsForm = ({
       !warningModalContent.current
     ) {
       // Else if there's no connected wallet address or buy disabled, redirect to project page
-      router.replace(`/project/${projectId}`);
+      router.replace(getProjectPath(projectId as string));
     }
   }, [
     loadingSanityProject,

@@ -10,6 +10,7 @@ import { Body, Label, Title } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { getProjectPath } from 'lib/bridge';
 import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';
 
 import { Link } from 'components/atoms';
@@ -82,7 +83,9 @@ export const DetailsSection: React.FC<
                       <div>
                         {_(TERRASOS_PROJECT_DESCRIPTION)}
                         <Link
-                          href={`${MARKETPLACE_APP_URL}/project/${projectId}`}
+                          href={`${MARKETPLACE_APP_URL}${getProjectPath(
+                            projectId,
+                          )}`}
                           className="ml-3"
                         >
                           {_(TERRASOS_PROJECT_LINK_TEXT)}

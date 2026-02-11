@@ -9,6 +9,7 @@ import CreditClassCard, {
 import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { getCreditClassPath } from 'lib/bridge';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, LINK_PREFIX } from 'lib/env';
 
@@ -43,16 +44,12 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
 }) => {
   const { _ } = useLingui();
   const router = useRouter();
+  const classId = creditClassSanity?.path || onChainCreditClassId;
 
-  return (creditClassSanity || creditClassMetadata) &&
-    (creditClassSanity?.path || onChainCreditClassId) ? (
+  return (creditClassSanity || creditClassMetadata) && classId ? (
     <div
       onClick={() =>
-        router.push(
-          `${LINK_PREFIX}/credit-classes/${
-            creditClassSanity?.path || onChainCreditClassId
-          }`,
-        )
+        router.push(`${LINK_PREFIX}${getCreditClassPath(classId)}`)
       }
     >
       <CreditClassCard

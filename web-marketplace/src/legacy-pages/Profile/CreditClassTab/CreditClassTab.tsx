@@ -4,6 +4,8 @@ import { useLingui } from '@lingui/react';
 import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
 import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
 
+import { getCreditClassPath } from 'lib/bridge';
+
 import WithLoader from 'components/atoms/WithLoader';
 
 import { useMergedCreditClasses } from '../hooks/useMergedCreditClasses';
@@ -42,7 +44,8 @@ export const CreditClassTab = () => {
                   }
                   imgSrc={imageSrc ?? ''}
                   onClick={() =>
-                    navigate(`/credit-classes/${creditClass.path}`)
+                    creditClass.path &&
+                    navigate(getCreditClassPath(creditClass.path))
                   }
                   {...(program && {
                     imageChildren: <ProgramImageChildren program={program} />,

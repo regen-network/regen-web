@@ -12,6 +12,7 @@ import { NoCreditClassesIcon } from 'web-components/src/components/icons/NoCredi
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
+import { getCreditClassPath } from 'lib/bridge';
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
 import { Link as LinkComponent } from 'components/atoms';
@@ -67,7 +68,7 @@ export const MyCreditClasses = (): JSX.Element => {
                       startIcon: <EditIcon sx={{ color: 'grey.100' }} />,
                       disabled: true,
                     }}
-                    href={`/credit-classes/${creditClass.id}`}
+                    href={getCreditClassPath(creditClass.id)}
                     LinkComponent={LinkComponent as LinkComponentType}
                   />
                 </Grid>

@@ -18,7 +18,7 @@ import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { getCreditBatchPath } from 'lib/bridge';
+import { getCreditBatchPath, getCreditClassPath } from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -134,12 +134,14 @@ export const EcocreditsTable: React.FC<
               <Link href={getCreditBatchPath(row.denom)}>{row.denom}</Link>
             </WithLoader>,
             <WithLoader isLoading={row.classId === ''} variant="skeleton">
-              <Link
-                href={`/credit-classes/${row.classId}`}
-                sx={tableStyles.ellipsisContentColumn}
-              >
-                {row?.className && <BlockContent content={row?.className} />}
-              </Link>
+              {row.classId && (
+                <Link
+                  href={getCreditClassPath(row.classId)}
+                  sx={tableStyles.ellipsisContentColumn}
+                >
+                  {row?.className && <BlockContent content={row?.className} />}
+                </Link>
+              )}
             </WithLoader>,
             formatNumber({
               num: row.balance?.tradableAmount,

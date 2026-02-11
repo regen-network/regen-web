@@ -4,6 +4,7 @@ import { CertificateType } from 'web-components/src/components/certificate/certi
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { getCreditClassPath } from 'lib/bridge';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 
@@ -44,7 +45,9 @@ export const getCertificateData = ({
             name: _(msg`Credit class`),
             link: {
               text: retirement.creditClassName ?? '',
-              href: `/credit-classes/${retirement.creditClassId}`,
+              href: retirement.creditClassId
+                ? getCreditClassPath(retirement.creditClassId)
+                : '',
             },
           },
           {

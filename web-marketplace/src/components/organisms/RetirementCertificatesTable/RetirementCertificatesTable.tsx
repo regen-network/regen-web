@@ -16,6 +16,7 @@ import { ViewMore } from 'web-components/src/components/view-more/ViewMore';
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { getCreditClassPath } from 'lib/bridge';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
@@ -114,14 +115,16 @@ export const RetirementCertificatesTable: React.FC<
             viewMoreText={_(VIEW_MORE)}
           />,
           <WithLoader isLoading={row.creditClassId === ''} variant="skeleton">
-            <Link
-              href={`/credit-classes/${row.creditClassId}`}
-              sx={tableStyles.ellipsisContentColumn}
-            >
-              {row?.creditClassName && (
-                <BlockContent content={row?.creditClassName} />
-              )}
-            </Link>
+            {row.creditClassId && (
+              <Link
+                href={getCreditClassPath(row.creditClassId)}
+                sx={tableStyles.ellipsisContentColumn}
+              >
+                {row?.creditClassName && (
+                  <BlockContent content={row?.creditClassName} />
+                )}
+              </Link>
+            )}
           </WithLoader>,
           formatNumber({
             num: row.amountRetired,

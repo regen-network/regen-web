@@ -6,7 +6,6 @@ import { Item, ItemValue } from 'web-components/src/components/modal/TxModal';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
-import { getProjectPath } from 'lib/bridge';
 import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import {
   Post,

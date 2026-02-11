@@ -7,7 +7,6 @@ import {
   chooseHowToPurchaseModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
-import { getProjectPath } from 'lib/bridge';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';

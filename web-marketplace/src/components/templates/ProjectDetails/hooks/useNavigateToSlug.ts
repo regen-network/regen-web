@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { getProjectPath } from 'lib/bridge';
-
 export const useNavigateToSlug = (slug?: string | null, path?: string) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -11,7 +9,7 @@ export const useNavigateToSlug = (slug?: string | null, path?: string) => {
     if (!!slug) {
       // Preserve the hash if it exists in the current URL
       const hash = typeof window !== 'undefined' ? window.location.hash : '';
-      const targetPath = `${getProjectPath(slug)}${path || ''}${hash}`;
+      const targetPath = `/project/${slug}${path || ''}${hash}`;
       if (pathname !== targetPath) {
         router.replace(targetPath);
       }

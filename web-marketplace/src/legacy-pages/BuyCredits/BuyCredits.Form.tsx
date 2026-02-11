@@ -19,7 +19,6 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getProjectPath } from 'lib/bridge';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';

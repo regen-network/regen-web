@@ -9,7 +9,6 @@ import { ProjectCard } from 'web-components/src/components/cards/ProjectCard';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography';
 
-import { getProjectPath } from 'lib/bridge';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,

@@ -22,7 +22,6 @@ import { formatDate } from 'web-components/src/utils/format';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getProjectPath } from 'lib/bridge';
 import { LESS, MORE, PHOTO_CREDIT, READ } from 'lib/constants/shared.constants';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';

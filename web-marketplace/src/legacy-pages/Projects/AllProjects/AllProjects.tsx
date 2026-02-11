@@ -21,7 +21,6 @@ import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { projectsSortAtom } from 'lib/atoms/projects.atoms';
-import { getProjectPath } from 'lib/bridge';
 import {
   DRAFT_TEXT,
   EMPTY_OPTION_TEXT,

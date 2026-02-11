@@ -82,14 +82,16 @@ export const DetailsSection: React.FC<
                     ) : (
                       <div>
                         {_(TERRASOS_PROJECT_DESCRIPTION)}
-                        <Link
-                          href={`${MARKETPLACE_APP_URL}${getProjectPath(
-                            projectId,
-                          )}`}
-                          className="ml-3"
-                        >
-                          {_(TERRASOS_PROJECT_LINK_TEXT)}
-                        </Link>
+                        {projectId && (
+                          <Link
+                            href={`${MARKETPLACE_APP_URL}${getProjectPath(
+                              projectId,
+                            )}`}
+                            className="ml-3"
+                          >
+                            {_(TERRASOS_PROJECT_LINK_TEXT)}
+                          </Link>
+                        )}
                       </div>
                     )}
                   </Body>

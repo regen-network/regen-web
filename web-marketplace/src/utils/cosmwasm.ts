@@ -57,12 +57,12 @@ export type WasmExecuteAction =
  */
 export const getStargateAction = ({
   authorizationId,
-  roleId,
+  // roleId,
   typeUrl,
   value,
 }: StargateAction) => ({
   authorization_id: authorizationId,
-  role_id: roleId,
+  // role_id: roleId,
   msg: {
     stargate: {
       type_url: typeUrl,
@@ -89,7 +89,7 @@ export const getExecuteActionsWasm = (actions: WasmExecuteAction[]) => ({
   execute_actions: {
     actions: actions.map(action => ({
       authorization_id: action.authorizationId,
-      role_id: action.roleId,
+      // role_id: action.roleId,
       msg: {
         wasm: {
           execute: {

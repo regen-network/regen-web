@@ -9,7 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
@@ -57,16 +57,15 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
 
   const authorizationName = getAuthorizationName(currentUserRole);
 
-  const { roleId: projectRoleId, authorizationId: projectAuthorizationId } =
-    useMemo(
-      () =>
-        getRoleAuthorizationIds({
-          type: 'project',
-          currentUserRole,
-          authorizationName,
-        }),
-      [currentUserRole, authorizationName],
-    );
+  const { authorizationId: projectAuthorizationId } = useMemo(
+    () =>
+      getAuthorizationId({
+        type: 'project',
+        currentUserRole,
+        authorizationName,
+      }),
+    [currentUserRole, authorizationName],
+  );
 
   const refetchCollaborators = useCallback(
     async ({
@@ -152,7 +151,6 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
 
   return {
     // computed
-    projectRoleId,
     projectAuthorizationId,
     orgDaoAddress,
     feeGranter,

@@ -8,7 +8,7 @@ import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { postData } from 'utils/fetch/postData';
 import {
   authzGrantAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -63,7 +63,7 @@ const useStripeAccount = () => {
 
   const setupAccount = useCallback(async () => {
     if (activeAccount?.addr && token && grantee) {
-      const { roleId, authorizationId } = getRoleAuthorizationIds({
+      const { authorizationId } = getAuthorizationId({
         type: 'organization',
         currentUserRole: organizationRole,
         authorizationName: 'can_manage_sell_orders',
@@ -75,7 +75,6 @@ const useStripeAccount = () => {
         organizationRole &&
         organizationDaoAddress &&
         organizationRbamAddress &&
-        roleId &&
         authorizationId
       ) {
         grants = [
@@ -84,7 +83,6 @@ const useStripeAccount = () => {
             rbamAddress: organizationRbamAddress,
             actions: msgTypes.map(typeUrl =>
               authzGrantAction({
-                roleId,
                 authorizationId,
                 granter: organizationDaoAddress,
                 grantee: grantee as string,

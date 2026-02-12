@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import {
   creditSendAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
@@ -64,12 +64,11 @@ const useCreditSendSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
@@ -92,7 +91,6 @@ const useCreditSendSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -103,7 +101,6 @@ const useCreditSendSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditSendAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           sender: accountAddress, // DAO address
           recipient,
@@ -215,7 +212,6 @@ const useCreditSendSubmit = ({
       isOrganizationDashboard,
       feeGranter,
       signAndBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

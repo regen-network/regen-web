@@ -7,7 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
 import {
   createProjectAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -105,14 +105,13 @@ const useProjectCreateSubmit = ({
           organizationRbamAddress &&
           projectDaoAddress
         ) {
-          const { roleId, authorizationId: createProjectAuthId } =
-            getRoleAuthorizationIds({
-              type: 'organization',
-              currentUserRole: organizationRole,
-              authorizationName: 'can_create_projects',
-            });
+          const { authorizationId: createProjectAuthId } = getAuthorizationId({
+            type: 'organization',
+            currentUserRole: organizationRole,
+            authorizationName: 'can_create_projects',
+          });
 
-          if (!roleId || !createProjectAuthId) {
+          if (!createProjectAuthId) {
             throw new Error(
               _(msg`You do not have permission to create projects`),
             );
@@ -122,7 +121,6 @@ const useProjectCreateSubmit = ({
           // it cannot be the projectDaoAddress because the admin should be the address triggering creation
           // so it needs to be updated in a separate tx (handleTxDelivered in ProjectReview.tsx)
           const createProjectActionMsg = createProjectAction({
-            roleId,
             authorizationId: createProjectAuthId,
             ...{
               classId,

@@ -3,7 +3,6 @@ import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 
 type StargateAction = {
   authorizationId: number;
-  roleId: number;
   typeUrl: string;
   value: Uint8Array;
 };
@@ -11,7 +10,6 @@ type StargateAction = {
 export type WasmExecuteAction =
   | {
       authorizationId: number;
-      roleId: number;
       contract: string;
       msg: {
         update_config: {
@@ -29,7 +27,6 @@ export type WasmExecuteAction =
     }
   | {
       authorizationId: number;
-      roleId: number;
       contract: string;
       msg: {
         set_item: {
@@ -41,7 +38,6 @@ export type WasmExecuteAction =
     }
   | {
       authorizationId: number;
-      roleId: number;
       contract: string;
       msg: {
         remove_item: {
@@ -57,12 +53,10 @@ export type WasmExecuteAction =
  */
 export const getStargateAction = ({
   authorizationId,
-  // roleId,
   typeUrl,
   value,
 }: StargateAction) => ({
   authorization_id: authorizationId,
-  // role_id: roleId,
   msg: {
     stargate: {
       type_url: typeUrl,

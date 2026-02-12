@@ -81,5 +81,4 @@ export type CreateBatchOrganizationContext = {
   organizationDaoAddress?: string;
   organizationRbamAddress?: string;
   authorizationId?: number;
-  roleId?: number;
 };

@@ -5,7 +5,7 @@ import { regen } from '@regen-network/api';
 import type { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import {
   basketPutAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
@@ -61,16 +61,14 @@ const useBasketPutSubmit = ({
     isOrganizationDashboard,
     organizationRole,
     organizationRbamAddress,
-    organizationDaoAddress,
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
@@ -94,7 +92,6 @@ const useBasketPutSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -105,7 +102,6 @@ const useBasketPutSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = basketPutAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
@@ -211,7 +207,6 @@ const useBasketPutSubmit = ({
       credit.projectName,
       accountAddress,
       isOrganizationDashboard,
-      roleId,
       organizationRbamAddress,
       feeGranter,
       wallet?.address,

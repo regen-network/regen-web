@@ -103,7 +103,6 @@ type GetMetadataActionParams = {
   nextValue?: string | null;
   previousValue?: string | null;
   authorizationId: number;
-  roleId: number;
   daoAddress: string;
 };
 
@@ -112,7 +111,6 @@ export const getMetadataAction = ({
   nextValue,
   previousValue,
   authorizationId,
-  roleId,
   daoAddress,
 }: GetMetadataActionParams): WasmExecuteAction | undefined => {
   const normalizedNext = nextValue ?? null;
@@ -132,7 +130,6 @@ export const getMetadataAction = ({
   if (normalizedNext) {
     return {
       authorizationId,
-      roleId,
       contract: daoAddress,
       msg: {
         set_item: {
@@ -146,7 +143,6 @@ export const getMetadataAction = ({
   if (normalizedPrevious) {
     return {
       authorizationId,
-      roleId,
       contract: daoAddress,
       msg: {
         remove_item: {

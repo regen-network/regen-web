@@ -16,7 +16,7 @@ import {
   getMsgExecuteContract,
   WasmExecuteAction,
 } from 'utils/cosmwasm';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
@@ -173,13 +173,13 @@ export const useUpdateOrganizationProfile = () => {
         throw new Error(_(msg`Wallet not connected.`));
       }
 
-      const { roleId, authorizationId } = getRoleAuthorizationIds({
+      const { authorizationId } = getAuthorizationId({
         type: 'organization',
         currentUserRole: organizationRole,
         authorizationName: 'can_edit_organization',
       });
 
-      if (!authorizationId || !roleId) {
+      if (!authorizationId) {
         throw new Error(
           _(msg`You do not have permission to edit this organization.`),
         );
@@ -219,7 +219,6 @@ export const useUpdateOrganizationProfile = () => {
       const currentConfig = existingConfig?.config ?? {};
       const updateConfigAction = {
         authorizationId,
-        roleId,
         contract: daoAddress,
         msg: {
           update_config: {
@@ -265,7 +264,6 @@ export const useUpdateOrganizationProfile = () => {
           nextValue,
           previousValue,
           authorizationId,
-          roleId,
           daoAddress,
         });
 

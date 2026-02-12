@@ -48,17 +48,14 @@ export const wrapRbamActions = ({
   });
 };
 
-type RoleAuthorizationIds = {
-  /** the id of the role that includes an authorization */
-  roleId: number;
+type AuthorizationId = {
   /** the id of the authorization that has permission */
   authorizationId: number;
 };
 
-type AttestActionParams = RoleAuthorizationIds & MsgAttest;
+type AttestActionParams = AuthorizationId & MsgAttest;
 
 export const attestAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: AttestActionParams) => {
@@ -66,16 +63,14 @@ export const attestAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgAttest.typeUrl,
     value: protoBytes,
   });
 };
 
-type CreateProjectActionParams = RoleAuthorizationIds & MsgCreateProject;
+type CreateProjectActionParams = AuthorizationId & MsgCreateProject;
 
 export const createProjectAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: CreateProjectActionParams) => {
@@ -83,17 +78,14 @@ export const createProjectAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgCreateProject.typeUrl,
     value: protoBytes,
   });
 };
 
-type UpdateProjectAdminActionParams = RoleAuthorizationIds &
-  MsgUpdateProjectAdmin;
+type UpdateProjectAdminActionParams = AuthorizationId & MsgUpdateProjectAdmin;
 
 export const updateProjectAdminAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: UpdateProjectAdminActionParams) => {
@@ -101,17 +93,15 @@ export const updateProjectAdminAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgUpdateProjectAdmin.typeUrl,
     value: protoBytes,
   });
 };
 
-type UpdateProjectMetadataActionParams = RoleAuthorizationIds &
+type UpdateProjectMetadataActionParams = AuthorizationId &
   MsgUpdateProjectMetadata;
 
 export const updateProjectMetadataAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: UpdateProjectMetadataActionParams) => {
@@ -119,16 +109,14 @@ export const updateProjectMetadataAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgUpdateProjectMetadata.typeUrl,
     value: protoBytes,
   });
 };
 
-type CreditSendActionParams = RoleAuthorizationIds & MsgSend;
+type CreditSendActionParams = AuthorizationId & MsgSend;
 
 export const creditSendAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: CreditSendActionParams) => {
@@ -136,16 +124,14 @@ export const creditSendAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgSend.typeUrl,
     value: protoBytes,
   });
 };
 
-type CreditRetireActionParams = RoleAuthorizationIds & MsgRetire;
+type CreditRetireActionParams = AuthorizationId & MsgRetire;
 
 export const creditRetireAction = ({
-  roleId,
   authorizationId,
   ...msgParams
 }: CreditRetireActionParams) => {
@@ -153,16 +139,14 @@ export const creditRetireAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgRetire.typeUrl,
     value: protoBytes,
   });
 };
 
-type BasketPutActionParams = RoleAuthorizationIds & MsgPut;
+type BasketPutActionParams = AuthorizationId & MsgPut;
 
 export const basketPutAction = ({
-  roleId,
   authorizationId,
   ...msgParams
 }: BasketPutActionParams) => {
@@ -170,16 +154,14 @@ export const basketPutAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgPut.typeUrl,
     value: protoBytes,
   });
 };
 
-type BasketTakeActionParams = RoleAuthorizationIds & MsgTake;
+type BasketTakeActionParams = AuthorizationId & MsgTake;
 
 export const basketTakeAction = ({
-  roleId,
   authorizationId,
   ...msgParams
 }: BasketTakeActionParams) => {
@@ -187,16 +169,14 @@ export const basketTakeAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgTake.typeUrl,
     value: protoBytes,
   });
 };
 
-type SellOrderActionParams = RoleAuthorizationIds & MsgSell;
+type SellOrderActionParams = AuthorizationId & MsgSell;
 
 export const sellOrderAction = ({
-  roleId,
   authorizationId,
   ...msg
 }: SellOrderActionParams) => {
@@ -204,16 +184,14 @@ export const sellOrderAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgSell.typeUrl,
     value: protoBytes,
   });
 };
 
-type CancelSellOrderActionParams = RoleAuthorizationIds & MsgCancelSellOrder;
+type CancelSellOrderActionParams = AuthorizationId & MsgCancelSellOrder;
 
 export const cancelSellOrderAction = ({
-  roleId,
   authorizationId,
   ...msgParams
 }: CancelSellOrderActionParams) => {
@@ -221,16 +199,14 @@ export const cancelSellOrderAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgCancelSellOrder.typeUrl,
     value: protoBytes,
   });
 };
 
-type AuthzGrantActionParams = RoleAuthorizationIds & MsgGrant;
+type AuthzGrantActionParams = AuthorizationId & MsgGrant;
 
 export const authzGrantAction = ({
-  roleId,
   authorizationId,
   ...msgParams
 }: AuthzGrantActionParams) => {
@@ -238,7 +214,6 @@ export const authzGrantAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgGrant.typeUrl,
     value: protoBytes,
   });
@@ -250,7 +225,7 @@ type GetRoleAuthorizationIdsParams = {
   authorizationName?: string;
 };
 
-export function getRoleAuthorizationIds({
+export function getAuthorizationId({
   type,
   currentUserRole,
   authorizationName,
@@ -260,7 +235,6 @@ export function getRoleAuthorizationIds({
   const normalizedRole = currentUserRole?.toLowerCase() as keyof typeof roles;
   const roleConfig = normalizedRole ? roles[normalizedRole] : undefined;
 
-  const roleId = roleConfig?.roleId;
   const authorizationId =
     roleConfig && authorizationName
       ? roleConfig.authorizations[
@@ -268,7 +242,7 @@ export function getRoleAuthorizationIds({
         ]
       : undefined;
 
-  return { roleId, authorizationId, roleConfig };
+  return { authorizationId };
 }
 
 type GetAccountAssignmentParams = {

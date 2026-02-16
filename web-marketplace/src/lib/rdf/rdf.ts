@@ -5,6 +5,7 @@ import DatasetExt from 'rdf-ext/lib/Dataset';
 import { Readable } from 'stream';
 
 import { NestedPartial } from 'types/nested-partial';
+import { getProjectPath } from 'lib/bridge';
 import {
   AnchoredProjectMetadataLD,
   ProjectMetadataLD,
@@ -192,6 +193,6 @@ export function getUnanchoredProjectBaseMetadata(
     ...metadata,
     '@context': UNANCHORED_PROJECT_CONTEXT,
     '@type': 'regen:Project-Page',
-    '@id': `${window.location.origin}/project/${onChainId}`,
+    '@id': `${window.location.origin}${getProjectPath(onChainId)}`,
   };
 }

@@ -10,6 +10,8 @@ import {
 } from 'web-components/src/components/typography';
 import { headerFontFamily } from 'web-components/src/theme/muiTheme';
 
+import { getProjectPath } from 'lib/bridge';
+
 import { Link } from 'components/atoms';
 
 type Props = {
@@ -20,7 +22,7 @@ type Props = {
 
 export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
   const { _ } = useLingui();
-
+  const href = projectId ? getProjectPath(projectId) : undefined;
   return (
     <Flex
       alignItems="center"
@@ -88,10 +90,12 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
           >
             <Trans>The project can still be viewed at:</Trans>
           </Subtitle>
-          <Link href={`/project/${projectId}`}>
-            {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
-            {`app.regen.network/project/${projectId}`}
-          </Link>
+          {href && (
+            <Link href={href}>
+              {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+              {`app.regen.network${href}`}
+            </Link>
+          )}
         </>
       )}
     </Flex>

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   QueryBasketResponse,
   QueryBasketsResponse,
@@ -7,6 +7,7 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { BasketTokens, BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
+import { BRIDGE_BASKET_DENOM } from 'lib/env';
 import normalizeCreditBaskets from 'lib/normalizers/creditBaskets/normalizeCreditBaskets';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
@@ -41,7 +42,14 @@ export const useFetchBaskets = ({ credits, address }: Params): Response => {
       request: {},
     }),
   );
-  const basketsInfo = basketsData?.basketsInfo ?? [];
+  const basketsInfo = useMemo(() => {
+    return (
+      basketsData?.basketsInfo?.filter(
+        // hide NCT basket tokens
+        basketInfo => basketInfo.basketDenom !== BRIDGE_BASKET_DENOM,
+      ) ?? []
+    );
+  }, [basketsData]);
 
   // Basket({denom})
   const basketResults = useQueries({

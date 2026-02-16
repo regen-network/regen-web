@@ -18,6 +18,7 @@ import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getProjectPath } from 'lib/bridge';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   DRAFT_TEXT,
@@ -91,7 +92,7 @@ export function ProjectCardsSection({
         <CardsGridContainer cardsCount={projects.length}>
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
-            const href = `/project/${project.slug ?? project.id}`;
+            const href = getProjectPath(project.id);
             const isComplianceProject =
               project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
             const isVoluntaryProject =

@@ -59,24 +59,16 @@ import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
-  BRIDGE,
   DEFAULT_PROFILE_COMPANY_AVATAR,
   ORGANIZATION_DASHBOARD,
   PERSONAL_ACCOUNT,
   PERSONAL_DASHBOARD,
   PORTFOLIO,
-  PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
 import { dashboardConnectWalletFlowAtom } from './Dashboard.store';
 import { DashboardNavAccount } from './Dashboard.types';
-import {
-  getActivePortfolioTab,
-  getPortfolioTabs,
-  getSwitchDashboardPath,
-  getWalletAddress,
-} from './Dashboard.utils';
+import { getSwitchDashboardPath, getWalletAddress } from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
-import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
@@ -457,21 +449,6 @@ export const Dashboard = () => {
     ],
   );
 
-  const portfolioTabs = useMemo(
-    () =>
-      getPortfolioTabs({
-        portfolioLabel: _(PORTFOLIO),
-        bridgeLabel: _(BRIDGE),
-        basePath: dashboardBasePath,
-      }),
-    [_, dashboardBasePath],
-  );
-
-  const activePortfolioTab = useMemo(
-    () => getActivePortfolioTab(portfolioTabs, pathname),
-    [portfolioTabs, pathname],
-  );
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
@@ -500,9 +477,6 @@ export const Dashboard = () => {
     }
     return null;
   }, [selectedAccount, activeAccount]);
-
-  const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
-    useBridgeAvailability(dashboardAccountAddress ?? wallet?.address);
 
   if (!activeAccount && !wallet?.address && !privActiveAccount) return null;
 
@@ -675,22 +649,6 @@ export const Dashboard = () => {
                       )}
                     </div>
                   )}
-
-                  {/* Portfolio tabs section - only show if user has bridge credits */}
-                  {!bridgeLoading &&
-                    hasAnyBridgeCredits &&
-                    (section === 'portfolio' ||
-                      pathname.includes('/portfolio/bridge')) && (
-                      <div className="w-full mb-20 md:mb-8 lg:mb-0">
-                        <IconTabs
-                          aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
-                          tabs={portfolioTabs}
-                          activeTab={activePortfolioTab}
-                          linkComponent={Link}
-                          mobileFullWidth
-                        />
-                      </div>
-                    )}
 
                   <WithLoader isLoading={accountChanging || loading}>
                     <div

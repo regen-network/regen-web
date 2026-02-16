@@ -2,6 +2,7 @@ import { msg } from '@lingui/macro';
 
 import { Item } from 'web-components/src/components/modal/ConfirmModal';
 
+import { getCreditBatchPath } from 'lib/bridge';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
@@ -23,7 +24,7 @@ export const getCancelCardItems = ({
       label: _(msg`batch denom:`),
       value: {
         name: batchDenom,
-        url: `/credit-batches/${batchDenom}`,
+        url: getCreditBatchPath(batchDenom),
       },
     },
   ];

@@ -22,7 +22,12 @@ import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
-import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
+import {
+  BRIDGE_CLASS_ID,
+  IS_REGEN,
+  IS_TERRASOS,
+  SKIPPED_CLASS_ID,
+} from 'lib/env';
 import {
   getCardSellOrders,
   NormalizeProject,
@@ -118,7 +123,9 @@ export function useProjectsWithOrders({
       }),
     );
   const projectsByAdmin = projectsByAdminData?.projects?.filter(
-    project => !skippedProjectId || project.id !== skippedProjectId,
+    project =>
+      (!skippedProjectId || project.id !== skippedProjectId) &&
+      project.classId !== BRIDGE_CLASS_ID, // bridge projects should not be searchable
   );
   const enoughProjectsByAdmin =
     !!projectsByAdmin && !!limit && projectsByAdmin.length >= limit;
@@ -212,6 +219,15 @@ export function useProjectsWithOrders({
 
   /* Normalization/Filtering/Sorting */
 
+  // bridge projects should not be searchable
+  const allProjectFiltered = useMemo(
+    () =>
+      projectsData?.projects?.filter(
+        project => project.classId !== BRIDGE_CLASS_ID,
+      ),
+    [projectsData],
+  );
+
   let projects: ProjectInfo[] | undefined;
   if (projectId) {
     projects = projectArray;
@@ -220,7 +236,7 @@ export function useProjectsWithOrders({
   } else if (adminAddr && enoughProjectsByAdmin) {
     projects = projectsByAdmin;
   } else {
-    projects = projectsData?.projects;
+    projects = allProjectFiltered;
   }
 
   const onChainIdsFromOffChainProjects = allOffChainProjects.map(

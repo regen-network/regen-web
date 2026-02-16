@@ -19,6 +19,11 @@ import { formatDate, formatNumber } from 'web-components/src/utils/format';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
+import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
@@ -122,23 +127,27 @@ export const EcocreditsTable: React.FC<
         credits?.map((row, i) => {
           return [
             <WithLoader isLoading={row.projectName === ''} variant="skeleton">
-              <Link
-                href={`/project/${row?.projectId}`}
-                sx={tableStyles.ellipsisColumn}
-              >
-                {row?.projectName}
-              </Link>
+              {row?.projectId && (
+                <Link
+                  href={getProjectPath(row?.projectId)}
+                  sx={tableStyles.ellipsisColumn}
+                >
+                  {row?.projectName}
+                </Link>
+              )}
             </WithLoader>,
             <WithLoader isLoading={!row.denom} variant="skeleton">
-              <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
+              <Link href={getCreditBatchPath(row.denom)}>{row.denom}</Link>
             </WithLoader>,
             <WithLoader isLoading={row.classId === ''} variant="skeleton">
-              <Link
-                href={`/credit-classes/${row.classId}`}
-                sx={tableStyles.ellipsisContentColumn}
-              >
-                {row?.className && <BlockContent content={row?.className} />}
-              </Link>
+              {row.classId && (
+                <Link
+                  href={getCreditClassPath(row.classId)}
+                  sx={tableStyles.ellipsisContentColumn}
+                >
+                  {row?.className && <BlockContent content={row?.className} />}
+                </Link>
+              )}
             </WithLoader>,
             formatNumber({
               num: row.balance?.tradableAmount,

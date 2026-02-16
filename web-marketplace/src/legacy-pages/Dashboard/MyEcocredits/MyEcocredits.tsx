@@ -22,6 +22,7 @@ import type { Theme } from 'web-components/src/theme/muiTheme';
 import { BasketTokens } from 'types/ledger/ecocredit';
 import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
+import { isBridgeClassIdExact } from 'lib/bridge';
 import {
   AMOUNT_LABEL,
   AVAILABLE_LABEL,
@@ -320,7 +321,11 @@ export const MyEcocredits = (): JSX.Element => {
   >(() => {
     if (!canManagePortfolioActions || !hasTradableCredits) return undefined;
 
-    const RenderCreditActionButtons = (i: number) => {
+    const _renderCreditActionButtons = (i: number) => {
+      // Disabled actions for bridge credits
+      if (isBridgeClassIdExact(credits[i].classId)) {
+        return undefined;
+      }
       if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
         return undefined;
       }
@@ -396,10 +401,10 @@ export const MyEcocredits = (): JSX.Element => {
       return <TableActionButtons buttons={buttons} />;
     };
 
-    RenderCreditActionButtons.displayName =
+    _renderCreditActionButtons.displayName =
       TableActionButtons.displayName ?? TableActionButtons.name;
 
-    return RenderCreditActionButtons;
+    return _renderCreditActionButtons;
   }, [
     _,
     arrowSx,

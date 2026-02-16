@@ -13,6 +13,7 @@ import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getAllBatchesQuery } from 'lib/queries/react-query/ecocredit/getAllBatchesQuery/getAllBatchesQuery';
 import { getBatchesByClassQuery } from 'lib/queries/react-query/ecocredit/getBatchesByClass/getBatchesByClass';
 import { getBatchesByIssuerQuery } from 'lib/queries/react-query/ecocredit/getBatchesByIssuerQuery/getBatchesByIssuerQuery';
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
@@ -51,6 +52,10 @@ type Props = {
    * This can be useful to disable fetching batches when the address is not available.
    */
   forceAddress?: boolean;
+  /**
+   *  Optional forbiddenCreditClassId to filter out batches by credit class
+   */
+  forbiddenCreditClassId?: string;
 };
 
 export const useFetchPaginatedBatches = ({
@@ -60,6 +65,7 @@ export const useFetchPaginatedBatches = ({
   withAllData = true,
   isAddressLoading = false,
   forceAddress = false,
+  forbiddenCreditClassId,
 }: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
   setPaginationParams: UseStateSetter<TablePaginationParams>;
@@ -96,6 +102,15 @@ export const useFetchPaginatedBatches = ({
     }),
   );
 
+  /* All batches fetch (used for client-side filtering) */
+  const allBatchesResult = useQuery(
+    getAllBatchesQuery({
+      client: queryClient,
+      request: {},
+      enabled: !!queryClient && !!forbiddenCreditClassId,
+    }),
+  );
+
   /* Default batches fetch */
   const batchesResult = useQuery(
     getBatchesQuery({
@@ -110,7 +125,8 @@ export const useFetchPaginatedBatches = ({
         !projectId &&
         !address &&
         !creditClassId &&
-        !forceAddress,
+        !forceAddress &&
+        !forbiddenCreditClassId,
     }),
   );
 
@@ -153,13 +169,26 @@ export const useFetchPaginatedBatches = ({
     }),
   );
 
-  const batchesData =
+  let batchesData =
     batchesResult.data ??
     batchesByIssuerResult.data ??
     batchesByProjectResult.data ??
     batchesByClassResult.data;
 
-  const batches = batchesData?.batches ?? [];
+  let allBatchesCount = Number(batchesData?.pagination?.total ?? 0);
+  let batches = batchesData?.batches ?? [];
+
+  if (forbiddenCreditClassId && allBatchesResult.data) {
+    const allBatches = allBatchesResult.data.batches;
+    const filteredBatches = allBatches.filter(
+      batch => !batch.projectId.includes(forbiddenCreditClassId),
+    );
+    allBatchesCount = filteredBatches.length;
+    batches = filteredBatches.slice(
+      page * rowsPerPage,
+      (page + 1) * rowsPerPage,
+    );
+  }
 
   const { batchesWithData: batchesWithSupply } = useAddDataToBatches({
     batches,
@@ -171,8 +200,6 @@ export const useFetchPaginatedBatches = ({
 
   /* Format hook returned variables */
 
-  const batchesPagination = batchesData?.pagination;
-  const allBatchesCount = Number(batchesPagination?.total ?? 0);
   const batchesWithDefaultSupply: BatchInfoWithSupply[] | undefined =
     batches?.map(batch => ({
       ...batch,
@@ -185,7 +212,8 @@ export const useFetchPaginatedBatches = ({
     batchesResult.isLoading ||
     batchesByIssuerResult.isLoading ||
     batchesByProjectResult.isLoading ||
-    batchesByClassResult.isLoading;
+    batchesByClassResult.isLoading ||
+    allBatchesResult.isLoading;
 
   return {
     batchesWithSupply: batchesWithSupply ?? batchesWithDefaultSupply,

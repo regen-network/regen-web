@@ -12,6 +12,7 @@ import {
 
 import { ProjectFieldsFragment } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
+import { getProjectPath } from 'lib/bridge';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
@@ -140,7 +141,7 @@ const useProjectEditSubmit = ({
                 label: 'project',
                 value: {
                   name: metadata['schema:name'] || '',
-                  url: `/project/${projectId}`,
+                  url: getProjectPath(projectId),
                 },
               },
             ];

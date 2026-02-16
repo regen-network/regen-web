@@ -73,8 +73,8 @@ msgstr "(tú)"
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr "{0, plural, one {clase de crédito permitida} other {clases de crédito permitidas}}"
 
-#. placeholder {0}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> );
-#. placeholder {1}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> );
+#. placeholder {0}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
+#. placeholder {1}: import { plural } from '@lingui/core/macro'; import { Trans } from '@lingui/react/macro'; import ContainedButton from 'web-components/src/components/buttons/ContainedButton'; import Modal, { RegenModalProps } from 'web-components/src/components/modal'; import { Body, Title } from 'web-components/src/components/typography'; type OrganizationCreatedModalProps = RegenModalProps & { numberOfMigratedProjects: number; }; export const OrganizationCreatedModal = ({ open, onClose, numberOfMigratedProjects, }: OrganizationCreatedModalProps) => ( <Modal open={open} onClose={onClose}> <Title variant="h4" className="pb-20 text-center"> <Trans>Organization has been created!</Trans> </Title> {numberOfMigratedProjects > 0 && ( <Body size="lg" className="text-center pb-20 italic font-bold"> <Trans> {plural(numberOfMigratedProjects, { one: `${numberOfMigratedProjects} project`, other: `${numberOfMigratedProjects} projects`, })} , with all associated credits and sell orders,{' '} {plural(numberOfMigratedProjects, { one: `was`, other: `were`, })}{' '} migrated to your new organization account. </Trans> </Body> )} <Body size="lg" className="text-center"> <Trans> Please note: this organization is represented on-chain by a DAO (Decentralized Autonomous Organization). You can{' '} <a href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/what-is-a-dao" target="_blank" rel="noreferrer noopener" > learn more about DAOs in our documentation </a> , including how they work and the ways you can participate. </Trans> </Body> <div className="pt-50 flex justify-end"> <ContainedButton onClick={onClose}> <Trans>view org profile</Trans> </ContainedButton> </div> </Modal> ); 
 #: src/legacy-pages/Profile/Profile.OrganizationCreatedModal.tsx:22
 msgid "{0}, with all associated credits and sell orders, {1} migrated to your new organization account."
 msgstr "{0}, con todos los créditos y órdenes de venta asociados, {1} migrados a su nueva cuenta de organización."
@@ -534,7 +534,6 @@ msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos 
 msgid "Amazon"
 msgstr "Amazonas"
 
-#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:186
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:179
 msgid "amount"
@@ -542,7 +541,6 @@ msgstr "cantidad"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:82
-#: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:31
 msgid "Amount"
 msgstr "Cantidad"
@@ -556,16 +554,16 @@ msgid "AMOUNT AVAILABLE"
 msgstr "CANTIDAD DISPONIBLE"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:140
-msgid "Amount Bridgable"
-msgstr "Monto puenteable"
+#~ msgid "Amount Bridgable"
+#~ msgstr "Monto puenteable"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:157
-msgid "Amount Bridged"
-msgstr "Monto puenteado"
+#~ msgid "Amount Bridged"
+#~ msgstr "Monto puenteado"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:21
-msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
-msgstr "El importe puenteado es el mismo que el importe cancelado en la documentación del libro mayor"
+#~ msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
+#~ msgstr "El importe puenteado es el mismo que el importe cancelado en la documentación del libro mayor"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:3
 msgid "Amount cannot exceed"
@@ -730,7 +728,7 @@ msgstr "Como único administrador, no puede cambiar su rol ni eliminarse sin agr
 msgid "Asset"
 msgstr "Activo"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:137
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:162
 msgid "Attach a signature"
 msgstr "Adjuntar una firma"
 
@@ -831,8 +829,6 @@ msgid "batch denom:"
 msgstr "nombre del lote:"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:90
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:157
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:171
 #: src/components/organisms/EcocreditsTable.tsx:118
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:52
 msgid "Batch End Date"
@@ -847,8 +843,6 @@ msgid "Batch start and end date"
 msgstr "Fecha de inicio y fin del lote"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:87
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:152
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:166
 #: src/components/organisms/EcocreditsTable.tsx:117
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:49
 msgid "Batch Start Date"
@@ -906,30 +900,28 @@ msgid "book a call"
 msgstr "Reservar una llamada"
 
 #: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:31
-msgid "Bridgable ecocredits"
-msgstr "Ecocréditos puenteables"
+#~ msgid "Bridgable ecocredits"
+#~ msgstr "Ecocréditos puenteables"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:94
-msgid "bridgable ecocredits table"
-msgstr "Tabla de ecocréditos puenteables"
+#~ msgid "bridgable ecocredits table"
+#~ msgstr "Tabla de ecocréditos puenteables"
 
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:17
 msgid "Bridge"
 msgstr "Puente"
 
 #: src/components/organisms/BridgeModal/BridgeModal.constants.ts:3
-msgid "Bridge Ecocredits to Polygon"
-msgstr "Puente de los ecocréditos al polígono"
+#~ msgid "Bridge Ecocredits to Polygon"
+#~ msgstr "Puente de los ecocréditos al polígono"
 
 #: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:36
-msgid "Bridged ecocredits"
-msgstr "Ecocréditos puente"
+#~ msgid "Bridged ecocredits"
+#~ msgstr "Ecocréditos puente"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:99
-msgid "bridged ecocredits table"
-msgstr "tabla de ecocréditos puente"
+#~ msgid "bridged ecocredits table"
+#~ msgstr "tabla de ecocréditos puente"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:10
 msgid "Brief project summary"
@@ -1036,8 +1028,16 @@ msgid "By default these credits are tradable but you may check “retire all cre
 msgstr "De forma predeterminada, estos créditos son negociables, pero puedes marcar “retirar todos los créditos al transferir” a continuación para retirarlos automáticamente al enviarlos."
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
-msgstr "Pueden crear, editar y eliminar sus propias publicaciones. No pueden ver los datos de publicaciones privadas."
+#~ msgid "Can create, edit, and delete data posts"
+#~ msgstr "Puede crear, editar y eliminar publicaciones de datos."
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+msgid "Can create, edit, and delete data posts."
+msgstr "Puede crear, editar y eliminar publicaciones de datos."
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+#~ msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+#~ msgstr "Pueden crear, editar y eliminar sus propias publicaciones. No pueden ver los datos de publicaciones privadas."
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:9
 msgid "Can edit all project page info and posts. Cannot manage users or credits."
@@ -1124,8 +1124,8 @@ msgid "cfc vintage year"
 msgstr "año de cosecha de cfc"
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:105
-msgid "Chain"
-msgstr "Cadena"
+#~ msgid "Chain"
+#~ msgstr "Cadena"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:35
 msgid "Change"
@@ -1281,7 +1281,6 @@ msgid "Close project creation"
 msgstr "Cerrar la creación del proyecto"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:220
 #: src/lib/constants/shared.constants.tsx:96
 msgid "CLOSE WINDOW"
 msgstr "CERRAR VENTANA"
@@ -1351,8 +1350,8 @@ msgid "Congrats! You successfully created this post."
 msgstr "¡Felicitaciones! Creaste esta publicación exitosamente."
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:3
-msgid "Congrats! Your bridge has been initiated"
-msgstr "¡Felicitaciones! Tu puente ha sido iniciado"
+#~ msgid "Congrats! Your bridge has been initiated"
+#~ msgstr "¡Felicitaciones! Tu puente ha sido iniciado"
 
 #: src/legacy-pages/BuyCredits/BuyCredits.constants.ts:12
 msgid "Congrats! Your purchase was successful."
@@ -1451,7 +1450,7 @@ msgstr "Copiar enlace al perfil"
 msgid "Copy link to project page"
 msgstr "Copiar enlace a la página del proyecto"
 
-#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:308
+#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:313
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr "No se pudo encontrar la organización asociada con la DAO creada. Intente actualizar la página más tarde."
 
@@ -1477,7 +1476,7 @@ msgstr "País"
 msgid "Create a project without a credit class"
 msgstr "Crear un proyecto sin una clase de crédito"
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:172
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:176
 msgid "create an organization"
 msgstr "crear una organización"
 
@@ -1529,7 +1528,7 @@ msgstr "Crear proyecto - Acceso denegado"
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:302
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:127
 msgid "Created by"
 msgstr "Creado por"
 
@@ -1549,7 +1548,6 @@ msgstr "Conceptos básicos de crédito"
 msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
-#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:182
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:172
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:299
@@ -1560,8 +1558,8 @@ msgstr "Identificación del lote de crédito"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:130
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:147
-msgid "Credit Batch Id"
-msgstr "Id. de lote de crédito"
+#~ msgid "Credit Batch Id"
+#~ msgstr "Id. de lote de crédito"
 
 #. placeholder {0}: batchesFromTake.length
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useUpdateCardItemsTakeBasket.tsx:42
@@ -1607,8 +1605,6 @@ msgstr "Clase de crédito"
 
 #: src/components/molecules/BatchInfoGrid.tsx:47
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:84
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:137
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:154
 #: src/components/organisms/EcocreditsTable.tsx:96
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:40
 msgid "Credit Class"
@@ -2006,8 +2002,8 @@ msgstr "Arrastre el mapa para elegir la ubicación"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:19
-msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
-msgstr "Cada lote de crédito tiene un ID único (es decir, denominación) que comienza con la abreviatura del tipo de crédito seguida del ID del proyecto, la fecha de inicio y la fecha de finalización del año de cosecha y termina con el número de secuencia del lote."
+#~ msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
+#~ msgstr "Cada lote de crédito tiene un ID único (es decir, denominación) que comienza con la abreviatura del tipo de crédito seguida del ID del proyecto, la fecha de inicio y la fecha de finalización del año de cosecha y termina con el número de secuencia del lote."
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:3
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the credit class ID followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
@@ -2590,7 +2586,7 @@ msgstr "Acabo de compensar mi huella de carbono en #RegenMarketplace con @regen_
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr "Acabo de comprar créditos de carbono en #RegenMarketplace con @regen_network. Trabajemos juntos para reducir nuestra huella de carbono. ¡Únete a mí para invertir en un futuro regenerativo!"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:156
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr "Verifico que estos datos son exactos según mi leal saber y entender."
 
@@ -2766,8 +2762,6 @@ msgid "issuer"
 msgstr "editor"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:81
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:149
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:163
 #: src/components/organisms/EcocreditsTable.tsx:116
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:46
 msgid "Issuer"
@@ -3336,12 +3330,12 @@ msgid "No basket tokens to display"
 msgstr "No hay fichas de cesta para mostrar"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
-msgid "No bridgable ecocredits found"
-msgstr "No se encontraron ecocréditos puenteables"
+#~ msgid "No bridgable ecocredits found"
+#~ msgstr "No se encontraron ecocréditos puenteables"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:20
-msgid "No bridged ecocredits found"
-msgstr "No se encontraron ecocréditos puente"
+#~ msgid "No bridged ecocredits found"
+#~ msgstr "No se encontraron ecocréditos puente"
 
 #: src/legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab.constants.ts:3
 msgid "No credit batches to display"
@@ -3401,8 +3395,8 @@ msgid "Not Evaluated"
 msgstr "No evaluado"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:129
-msgid "Note / Link"
-msgstr "Nota / Enlace"
+#~ msgid "Note / Link"
+#~ msgstr "Nota / Enlace"
 
 #: src/components/organisms/EditFileForm/EditFileForm.constants.ts:4
 msgid "Note: all location data can be made private on the main create post form."
@@ -3432,7 +3426,7 @@ msgstr "de CO2e"
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr "Se necesita la identificación del proyecto fuera de cadena para migrar un proyecto."
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:160
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:164
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr "Se necesita el ID del proyecto fuera de la cadena para migrar un proyecto. Edite la descripción del proyecto o el archivo multimedia para crear uno."
 
@@ -3519,7 +3513,7 @@ msgstr "organización"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:109
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:96
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:71
 msgid "Organization"
 msgstr "Organización"
@@ -3621,7 +3615,7 @@ msgstr "Información de pago"
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr "Revisado por pares"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:99
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:111
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:56
 msgid "Personal"
 msgstr "Personal"
@@ -3691,13 +3685,17 @@ msgstr "Conéctese a Keplr para utilizar las funciones de Regen Ledger"
 msgid "Please connect with Keplr to create an organization"
 msgstr "Conéctese con Keplr para crear una organización."
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:46
+msgid "Please connect with the Keplr extension on desktop to create an organization"
+msgstr ""
+
 #: src/legacy-pages/Post/Post.constants.ts:4
 msgid "Please contact the project admin to request access."
 msgstr "Comuníquese con el administrador del proyecto para solicitar acceso."
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
-msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
-msgstr "Para resolver este problema, contáctenos en <0>support@regen.network</0>. No reinicie la transacción."
+#~ msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
+#~ msgstr "Para resolver este problema, contáctenos en <0>support@regen.network</0>. No reinicie la transacción."
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
 #~ msgid "Please contact us at <0>support@regen.network</0>to resolve this issue. Do not reinitiate the transaction."
@@ -3994,8 +3992,6 @@ msgstr "proyecto"
 #: src/components/molecules/BatchInfoGrid.tsx:37
 #: src/components/molecules/ProjectSelect.tsx:84
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:73
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:116
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:133
 #: src/components/organisms/EcocreditsTable.tsx:83
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
@@ -4093,8 +4089,6 @@ msgid "Project location"
 msgstr "Ubicación del proyecto"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:92
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:160
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:174
 #: src/components/organisms/EcocreditsTable.tsx:119
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:58
 msgid "Project Location"
@@ -4193,7 +4187,7 @@ msgstr "Proporcione información de contacto personal para esta organización."
 #~ msgid "Public profile"
 #~ msgstr "Perfil público"
 
-#: src/legacy-pages/Profile/Profile.tsx:272
+#: src/legacy-pages/Profile/Profile.tsx:278
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 
@@ -4239,7 +4233,6 @@ msgstr "leer el artículo"
 msgid "receipt"
 msgstr "recibo"
 
-#: src/components/organisms/BridgeForm/BridgeForm.tsx:115
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:142
 msgid "Recipient"
 msgstr "Beneficiario"
@@ -4737,15 +4730,15 @@ msgstr "Mostrar créditos de la comunidad"
 msgid "Show off-chain projects"
 msgstr "Mostrar proyectos fuera de la cadena"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:187
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:212
 msgid "sign"
 msgstr "firmar"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:167
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:192
 msgid "Sign as"
 msgstr "Firmar como"
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Sign in successful"
 msgstr "Inicio de sesión exitoso"
 
@@ -4753,7 +4746,7 @@ msgstr "Inicio de sesión exitoso"
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr "Firma la transacción con Keplr Mobile Wallet"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:144
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:169
 msgid "Sign this post"
 msgstr "Firma este post"
 
@@ -4761,7 +4754,7 @@ msgstr "Firma este post"
 msgid "signature"
 msgstr "firma"
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:349
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
 msgid "Signed by"
 msgstr "Firmado por"
 
@@ -4790,7 +4783,7 @@ msgstr "Tamaño en hectáreas o acres"
 msgid "SKIP"
 msgstr "SALTAR"
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:206
 msgid "skip this step"
 msgstr "omitir este paso"
 
@@ -4903,12 +4896,12 @@ msgid "Stats"
 msgstr "Estadísticas"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:110
-msgid "Status"
-msgstr "Estado"
+#~ msgid "Status"
+#~ msgstr "Estado"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:22
-msgid "Status refreshes automatically once every 10 seconds if in a pending state."
-msgstr "El estado se actualiza automáticamente una vez cada 10 segundos si está en estado pendiente."
+#~ msgid "Status refreshes automatically once every 10 seconds if in a pending state."
+#~ msgstr "El estado se actualiza automáticamente una vez cada 10 segundos si está en estado pendiente."
 
 #: src/components/atoms/WrappedStepCard.tsx:60
 #~ msgid "step"
@@ -5040,8 +5033,8 @@ msgid "The address should be different from the current address"
 msgstr "La dirección debe ser diferente a la dirección actual."
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:5
-msgid "The amount bridgable is the same as the amount tradable. Credits that have been retired cannot be bridged."
-msgstr "El monto que se puede canjear es el mismo que el monto que se puede canjear. Los créditos que se han retirado no se pueden canjear."
+#~ msgid "The amount bridgable is the same as the amount tradable. Credits that have been retired cannot be bridged."
+#~ msgstr "El monto que se puede canjear es el mismo que el monto que se puede canjear. Los créditos que se han retirado no se pueden canjear."
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:16
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
@@ -5205,7 +5198,7 @@ msgstr "Este campo es obligatorio"
 msgid "This information will appear on any posts that you author."
 msgstr "Esta información aparecerá en cualquier publicación que usted cree."
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:147
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:172
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr "Esto es comparable a firmar un documento legal e implica que usted cree que el contenido es exacto."
 
@@ -5245,8 +5238,8 @@ msgstr "Este es el nombre de la granja, rancho, propiedad o proyecto de conserva
 #~ msgstr "Este es el único administrador del proyecto. No puedes cambiar su rol ni eliminarlo a menos que se agregue otro administrador."
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:117
-msgid "This is the Polygon address of the recipient."
-msgstr "Esta es la dirección de polígono del destinatario."
+#~ msgid "This is the Polygon address of the recipient."
+#~ msgstr "Esta es la dirección de polígono del destinatario."
 
 #: src/lib/constants/shared.constants.tsx:53
 msgid "This may take some time if your file size is large."
@@ -5277,8 +5270,8 @@ msgid "This post has been made private by the project administrator."
 msgstr "El administrador del proyecto ha hecho privada esta publicación."
 
 #: src/components/organisms/BridgeModal/BridgeModal.constants.ts:4
-msgid "This service allows you to bridge NCT-eligible ecocredits to Polygon in the form of TCO2s."
-msgstr "Este servicio le permite transferir ecocréditos elegibles para NCT a Polygon en forma de TCO2."
+#~ msgid "This service allows you to bridge NCT-eligible ecocredits to Polygon in the form of TCO2s."
+#~ msgstr "Este servicio le permite transferir ecocréditos elegibles para NCT a Polygon en forma de TCO2."
 
 #: src/components/organisms/SettingsForm/SettingsForm.constants.ts:4
 msgid "This unique url is already taken"
@@ -5321,8 +5314,8 @@ msgid "Timeline"
 msgstr "Cronología"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:107
-msgid "Timestamp"
-msgstr "Marca de tiempo"
+#~ msgid "Timestamp"
+#~ msgstr "Marca de tiempo"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
@@ -5475,8 +5468,8 @@ msgid "tx hash"
 msgstr "hash de tx"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:106
-msgid "Tx Hash"
-msgstr "Hash de transmisión"
+#~ msgid "Tx Hash"
+#~ msgstr "Hash de transmisión"
 
 #: src/components/organisms/LocationForm/LocationForm.constants.ts:4
 msgid "Type an address or latitude, longitude coordinates in decimal degree format (i.e. 41.40338, 2.17403). Note: if you enter rural lat/long coordinates, select the closest town (the map marker on your project page will still appear in the correct location)."
@@ -5592,8 +5585,8 @@ msgid "user profile background image"
 msgstr "imagen de fondo del perfil de usuario"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
-msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
-msgstr "Normalmente tarda menos de 30 minutos en procesarse. Si ha transcurrido más tiempo, contáctenos en <0>support@regen.network</0>."
+#~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
+#~ msgstr "Normalmente tarda menos de 30 minutos en procesarse. Si ha transcurrido más tiempo, contáctenos en <0>support@regen.network</0>."
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
 #~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0>if more time has passed."
@@ -5725,8 +5718,8 @@ msgid "view org profile"
 msgstr "ver perfil de la organización"
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
-msgid "view pending bridged credits"
-msgstr "ver créditos puente pendientes"
+#~ msgid "view pending bridged credits"
+#~ msgstr "ver créditos puente pendientes"
 
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:7
 msgid "view portfolio"
@@ -5815,8 +5808,8 @@ msgid "Visible"
 msgstr "Visible"
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:6
-msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
-msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
+#~ msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
+#~ msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
 
 #: src/lib/constants/shared.constants.tsx:132
 msgid "Visit Our Homepage <0> Instead</0>"
@@ -6127,7 +6120,7 @@ msgstr "Debes aceptar para continuar"
 msgid "You must assign a new owner before you can change your role."
 msgstr "Debes asignar un nuevo propietario antes de poder cambiar tu rol."
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:159
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:163
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr "Debe ser propietario, administrador o editor de su organización para migrar un proyecto."
 

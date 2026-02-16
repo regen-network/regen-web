@@ -1,12 +1,14 @@
 import { formatDate } from 'web-components/src/utils/format';
 
+import { getCreditBatchPath } from 'lib/bridge';
+
 import { GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 
 export const getBatchIds = (batchIds: string[]) => {
   return batchIds.map((batchId: string, index: number) => (
     <WithLoader isLoading={!batchId} variant="skeleton" key={index}>
-      <Link href={`/credit-batches/${batchId}`}>{batchId}</Link>
+      <Link href={getCreditBatchPath(batchId)}>{batchId}</Link>
     </WithLoader>
   ));
 };

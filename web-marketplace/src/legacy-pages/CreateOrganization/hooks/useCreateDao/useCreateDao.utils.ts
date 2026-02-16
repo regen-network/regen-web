@@ -550,15 +550,14 @@ export const projectRoles = (
   },
   {
     name: 'author',
-    metadata:
-      'Can create, edit, and delete their own data posts. Cannot see private post data.',
+    metadata: 'Can create, edit, and delete data posts.',
     authorizations: [dataAuthorization],
     assignments: authorAssignments,
   },
   {
     name: 'viewer',
     metadata:
-      'Viewer of the organization, can view all data across all projects, even when private.',
+      'Can view all posts, documents, and location data, even when private.',
     assignments: viewerAssignments,
   },
 ];

@@ -12,6 +12,7 @@ import {
 import type { FormValues as BasketPutFormValues } from 'web-components/src/components/form/BasketPutForm/BasketPutForm';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import {
   PutInBasket2Event,
   PutInBasketFailureEvent,
@@ -165,14 +166,14 @@ const useBasketPutSubmit = ({
               label: _(msg`project`),
               value: {
                 name: credit.projectName || credit.projectId,
-                url: `/project/${credit.projectId}`,
+                url: getProjectPath(credit.projectId),
               },
             },
             {
               label: _(msg`credit batch id`),
               value: {
                 name: credit.denom,
-                url: `/credit-batches/${credit.denom}`,
+                url: getCreditBatchPath(credit.denom),
               },
             },
             {

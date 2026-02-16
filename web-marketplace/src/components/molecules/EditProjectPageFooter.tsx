@@ -13,6 +13,7 @@ import FixedFooter from 'web-components/src/components/fixed-footer';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { getProjectPath } from 'lib/bridge';
 import { getProjectCardButtonMapping } from 'lib/constants/shared.constants';
 
 interface Props {
@@ -69,7 +70,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
           <OutlinedButton
             className={styles.btn}
             onClick={() => {
-              const path = `/project/${projectId}`;
+              const path = getProjectPath(projectId as string);
               if (isDirtyRef.current) {
                 setIsWarningModalOpen(path);
               } else {

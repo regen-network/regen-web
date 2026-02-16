@@ -528,7 +528,6 @@ msgstr ""
 msgid "Amazon"
 msgstr ""
 
-#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:186
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:179
 msgid "amount"
@@ -536,7 +535,6 @@ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:82
-#: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:31
 msgid "Amount"
 msgstr ""
@@ -550,16 +548,16 @@ msgid "AMOUNT AVAILABLE"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:140
-msgid "Amount Bridgable"
-msgstr ""
+#~ msgid "Amount Bridgable"
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:157
-msgid "Amount Bridged"
-msgstr ""
+#~ msgid "Amount Bridged"
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:21
-msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
-msgstr ""
+#~ msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
+#~ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:3
 msgid "Amount cannot exceed"
@@ -724,7 +722,7 @@ msgstr ""
 msgid "Asset"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:137
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:162
 msgid "Attach a signature"
 msgstr ""
 
@@ -825,8 +823,6 @@ msgid "batch denom:"
 msgstr ""
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:90
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:157
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:171
 #: src/components/organisms/EcocreditsTable.tsx:118
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:52
 msgid "Batch End Date"
@@ -841,8 +837,6 @@ msgid "Batch start and end date"
 msgstr ""
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:87
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:152
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:166
 #: src/components/organisms/EcocreditsTable.tsx:117
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:49
 msgid "Batch Start Date"
@@ -900,30 +894,28 @@ msgid "book a call"
 msgstr ""
 
 #: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:31
-msgid "Bridgable ecocredits"
-msgstr ""
+#~ msgid "Bridgable ecocredits"
+#~ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:94
-msgid "bridgable ecocredits table"
-msgstr ""
+#~ msgid "bridgable ecocredits table"
+#~ msgstr ""
 
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:17
 msgid "Bridge"
 msgstr ""
 
 #: src/components/organisms/BridgeModal/BridgeModal.constants.ts:3
-msgid "Bridge Ecocredits to Polygon"
-msgstr ""
+#~ msgid "Bridge Ecocredits to Polygon"
+#~ msgstr ""
 
 #: src/legacy-pages/Dashboard/MyBridge/MyBridge.tsx:36
-msgid "Bridged ecocredits"
-msgstr ""
+#~ msgid "Bridged ecocredits"
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:99
-msgid "bridged ecocredits table"
-msgstr ""
+#~ msgid "bridged ecocredits table"
+#~ msgstr ""
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:10
 msgid "Brief project summary"
@@ -1030,8 +1022,16 @@ msgid "By default these credits are tradable but you may check “retire all cre
 msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+#~ msgid "Can create, edit, and delete data posts"
+#~ msgstr ""
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+msgid "Can create, edit, and delete data posts."
 msgstr ""
+
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
+#~ msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+#~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:9
 msgid "Can edit all project page info and posts. Cannot manage users or credits."
@@ -1118,8 +1118,8 @@ msgid "cfc vintage year"
 msgstr ""
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:105
-msgid "Chain"
-msgstr ""
+#~ msgid "Chain"
+#~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:35
 msgid "Change"
@@ -1275,7 +1275,6 @@ msgid "Close project creation"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:220
 #: src/lib/constants/shared.constants.tsx:96
 msgid "CLOSE WINDOW"
 msgstr ""
@@ -1345,8 +1344,8 @@ msgid "Congrats! You successfully created this post."
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:3
-msgid "Congrats! Your bridge has been initiated"
-msgstr ""
+#~ msgid "Congrats! Your bridge has been initiated"
+#~ msgstr ""
 
 #: src/legacy-pages/BuyCredits/BuyCredits.constants.ts:12
 msgid "Congrats! Your purchase was successful."
@@ -1445,7 +1444,7 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:308
+#: src/legacy-pages/CreateOrganization/hooks/useCreateDao/useCreateDao.ts:313
 msgid "Could not find the organization associated with the created DAO. Please try refreshing the page later."
 msgstr ""
 
@@ -1471,7 +1470,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:172
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:176
 msgid "create an organization"
 msgstr ""
 
@@ -1523,7 +1522,7 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:302
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:127
 msgid "Created by"
 msgstr ""
 
@@ -1543,7 +1542,6 @@ msgstr ""
 msgid "Credit Batch Details"
 msgstr ""
 
-#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:182
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:172
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:299
@@ -1554,8 +1552,8 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:130
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:147
-msgid "Credit Batch Id"
-msgstr ""
+#~ msgid "Credit Batch Id"
+#~ msgstr ""
 
 #. placeholder {0}: batchesFromTake.length
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useUpdateCardItemsTakeBasket.tsx:42
@@ -1601,8 +1599,6 @@ msgstr ""
 
 #: src/components/molecules/BatchInfoGrid.tsx:47
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:84
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:137
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:154
 #: src/components/organisms/EcocreditsTable.tsx:96
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:40
 msgid "Credit Class"
@@ -2000,8 +1996,8 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:19
-msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
-msgstr ""
+#~ msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
+#~ msgstr ""
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:3
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the credit class ID followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
@@ -2582,7 +2578,7 @@ msgstr ""
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:156
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
@@ -2758,8 +2754,6 @@ msgid "issuer"
 msgstr ""
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:81
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:149
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:163
 #: src/components/organisms/EcocreditsTable.tsx:116
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:46
 msgid "Issuer"
@@ -3328,12 +3322,12 @@ msgid "No basket tokens to display"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
-msgid "No bridgable ecocredits found"
-msgstr ""
+#~ msgid "No bridgable ecocredits found"
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:20
-msgid "No bridged ecocredits found"
-msgstr ""
+#~ msgid "No bridged ecocredits found"
+#~ msgstr ""
 
 #: src/legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab.constants.ts:3
 msgid "No credit batches to display"
@@ -3393,8 +3387,8 @@ msgid "Not Evaluated"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:129
-msgid "Note / Link"
-msgstr ""
+#~ msgid "Note / Link"
+#~ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.constants.ts:4
 msgid "Note: all location data can be made private on the main create post form."
@@ -3424,7 +3418,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:160
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:164
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3511,7 +3505,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:109
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:96
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:71
 msgid "Organization"
 msgstr ""
@@ -3613,7 +3607,7 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:99
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:111
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:56
 msgid "Personal"
 msgstr ""
@@ -3683,13 +3677,17 @@ msgstr ""
 msgid "Please connect with Keplr to create an organization"
 msgstr ""
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:46
+msgid "Please connect with the Keplr extension on desktop to create an organization"
+msgstr ""
+
 #: src/legacy-pages/Post/Post.constants.ts:4
 msgid "Please contact the project admin to request access."
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
-msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
-msgstr ""
+#~ msgid "Please contact us at <0>support@regen.network</0> to resolve this issue. Do not reinitiate the transaction."
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
 #~ msgid "Please contact us at <0>support@regen.network</0>to resolve this issue. Do not reinitiate the transaction."
@@ -3986,8 +3984,6 @@ msgstr ""
 #: src/components/molecules/BatchInfoGrid.tsx:37
 #: src/components/molecules/ProjectSelect.tsx:84
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:73
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:116
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:133
 #: src/components/organisms/EcocreditsTable.tsx:83
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
@@ -4085,8 +4081,6 @@ msgid "Project location"
 msgstr ""
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:92
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:160
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:174
 #: src/components/organisms/EcocreditsTable.tsx:119
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:58
 msgid "Project Location"
@@ -4185,7 +4179,7 @@ msgstr ""
 #~ msgid "Public profile"
 #~ msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:272
+#: src/legacy-pages/Profile/Profile.tsx:278
 msgid "public profile tabs"
 msgstr ""
 
@@ -4231,7 +4225,6 @@ msgstr ""
 msgid "receipt"
 msgstr ""
 
-#: src/components/organisms/BridgeForm/BridgeForm.tsx:115
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:142
 msgid "Recipient"
 msgstr ""
@@ -4729,15 +4722,15 @@ msgstr ""
 msgid "Show off-chain projects"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:187
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:212
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:167
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:192
 msgid "Sign as"
 msgstr ""
 
-#: src/components/organisms/LoginButton/LoginButton.constants.ts:11
+#: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Sign in successful"
 msgstr ""
 
@@ -4745,7 +4738,7 @@ msgstr ""
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:144
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:169
 msgid "Sign this post"
 msgstr ""
 
@@ -4753,7 +4746,7 @@ msgstr ""
 msgid "signature"
 msgstr ""
 
-#: src/legacy-pages/Post/hooks/useAttestEvents.ts:349
+#: src/legacy-pages/Post/hooks/useAttestEvents.ts:178
 msgid "Signed by"
 msgstr ""
 
@@ -4782,7 +4775,7 @@ msgstr ""
 msgid "SKIP"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:206
 msgid "skip this step"
 msgstr ""
 
@@ -4895,12 +4888,12 @@ msgid "Stats"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:110
-msgid "Status"
-msgstr ""
+#~ msgid "Status"
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:22
-msgid "Status refreshes automatically once every 10 seconds if in a pending state."
-msgstr ""
+#~ msgid "Status refreshes automatically once every 10 seconds if in a pending state."
+#~ msgstr ""
 
 #: src/components/atoms/WrappedStepCard.tsx:60
 #~ msgid "step"
@@ -5032,8 +5025,8 @@ msgid "The address should be different from the current address"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:5
-msgid "The amount bridgable is the same as the amount tradable. Credits that have been retired cannot be bridged."
-msgstr ""
+#~ msgid "The amount bridgable is the same as the amount tradable. Credits that have been retired cannot be bridged."
+#~ msgstr ""
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:16
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
@@ -5197,7 +5190,7 @@ msgstr ""
 msgid "This information will appear on any posts that you author."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:147
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:172
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
@@ -5237,8 +5230,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:117
-msgid "This is the Polygon address of the recipient."
-msgstr ""
+#~ msgid "This is the Polygon address of the recipient."
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:53
 msgid "This may take some time if your file size is large."
@@ -5269,8 +5262,8 @@ msgid "This post has been made private by the project administrator."
 msgstr ""
 
 #: src/components/organisms/BridgeModal/BridgeModal.constants.ts:4
-msgid "This service allows you to bridge NCT-eligible ecocredits to Polygon in the form of TCO2s."
-msgstr ""
+#~ msgid "This service allows you to bridge NCT-eligible ecocredits to Polygon in the form of TCO2s."
+#~ msgstr ""
 
 #: src/components/organisms/SettingsForm/SettingsForm.constants.ts:4
 msgid "This unique url is already taken"
@@ -5313,8 +5306,8 @@ msgid "Timeline"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:107
-msgid "Timestamp"
-msgstr ""
+#~ msgid "Timestamp"
+#~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
@@ -5467,8 +5460,8 @@ msgid "tx hash"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:106
-msgid "Tx Hash"
-msgstr ""
+#~ msgid "Tx Hash"
+#~ msgstr ""
 
 #: src/components/organisms/LocationForm/LocationForm.constants.ts:4
 msgid "Type an address or latitude, longitude coordinates in decimal degree format (i.e. 41.40338, 2.17403). Note: if you enter rural lat/long coordinates, select the closest town (the map marker on your project page will still appear in the correct location)."
@@ -5584,8 +5577,8 @@ msgid "user profile background image"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
-msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
-msgstr ""
+#~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0> if more time has passed."
+#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:33
 #~ msgid "Usually takes <30 minutes to process. Please contact us at <0>support@regen.network</0>if more time has passed."
@@ -5717,8 +5710,8 @@ msgid "view org profile"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
-msgid "view pending bridged credits"
-msgstr ""
+#~ msgid "view pending bridged credits"
+#~ msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:7
 msgid "view portfolio"
@@ -5807,8 +5800,8 @@ msgid "Visible"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:6
-msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
-msgstr ""
+#~ msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:132
 msgid "Visit Our Homepage <0> Instead</0>"
@@ -6119,7 +6112,7 @@ msgstr ""
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:159
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:163
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 

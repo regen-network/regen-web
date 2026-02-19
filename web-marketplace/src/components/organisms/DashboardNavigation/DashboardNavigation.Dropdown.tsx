@@ -111,8 +111,7 @@ export const AccountSwitcherDropdown = ({
               type="button"
               onClick={handleClick}
               className={cn(
-                'flex w-full items-center gap-10 px-15 py-[20px]',
-                'border-none cursor-pointer',
+                'flex w-full items-center gap-10 px-15 py-[20px] border-none',
                 isSelected
                   ? 'bg-bc-neutral-200'
                   : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',

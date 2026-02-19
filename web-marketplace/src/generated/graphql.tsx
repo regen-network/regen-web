@@ -4247,6 +4247,17 @@ export type DeletePostByIriInput = {
   iri: Scalars['String'];
 };
 
+/** All input for the `deletePost` mutation. */
+export type DeletePostInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Post` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
 /** The output of our delete `Post` mutation. */
 export type DeletePostPayload = {
   __typename?: 'DeletePostPayload';
@@ -5645,6 +5656,8 @@ export type Mutation = {
   updateOrganizationProjectByOrganizationIdAndProjectId?: Maybe<UpdateOrganizationProjectPayload>;
   /** Updates a single `OrganizationProject` using a unique key and a patch. */
   updateOrganizationProjectByProjectId?: Maybe<UpdateOrganizationProjectPayload>;
+  /** Updates a single `Post` using its globally unique id and a patch. */
+  updatePost?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
   updatePostByIri?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
@@ -5787,6 +5800,8 @@ export type Mutation = {
   deleteOrganizationProjectByOrganizationIdAndProjectId?: Maybe<DeleteOrganizationProjectPayload>;
   /** Deletes a single `OrganizationProject` using a unique key. */
   deleteOrganizationProjectByProjectId?: Maybe<DeleteOrganizationProjectPayload>;
+  /** Deletes a single `Post` using its globally unique id. */
+  deletePost?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
   deletePostByIri?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
@@ -6268,6 +6283,12 @@ export type MutationUpdateOrganizationProjectByProjectIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostArgs = {
+  input: UpdatePostInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePostByIriArgs = {
   input: UpdatePostByIriInput;
 };
@@ -6690,6 +6711,12 @@ export type MutationDeleteOrganizationProjectByOrganizationIdAndProjectIdArgs = 
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteOrganizationProjectByProjectIdArgs = {
   input: DeleteOrganizationProjectByProjectIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostArgs = {
+  input: DeletePostInput;
 };
 
 
@@ -7393,8 +7420,10 @@ export enum PasscodesOrderBy {
 }
 
 /** Project posts */
-export type Post = {
+export type Post = Node & {
   __typename?: 'Post';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
   iri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
   creatorAccountId: Scalars['UUID'];
@@ -7734,7 +7763,9 @@ export enum PostsOrderBy {
   CanDownloadFilesAsc = 'CAN_DOWNLOAD_FILES_ASC',
   CanDownloadFilesDesc = 'CAN_DOWNLOAD_FILES_DESC',
   IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC'
+  IdDesc = 'ID_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
 /** Table to store private account fields like email or google id */
@@ -8642,6 +8673,8 @@ export type Query = Node & {
   organizationMemberRemoval?: Maybe<OrganizationMemberRemoval>;
   /** Reads a single `OrganizationProject` using its globally unique `ID`. */
   organizationProject?: Maybe<OrganizationProject>;
+  /** Reads a single `Post` using its globally unique `ID`. */
+  post?: Maybe<Post>;
   /** Reads a single `PostTranslation` using its globally unique `ID`. */
   postTranslation?: Maybe<PostTranslation>;
   /** Reads a single `Project` using its globally unique `ID`. */
@@ -9423,6 +9456,12 @@ export type QueryOrganizationMemberRemovalArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryOrganizationProjectArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPostArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -10899,6 +10938,19 @@ export type UpdatePostByIriInput = {
   iri: Scalars['String'];
 };
 
+/** All input for the `updatePost` mutation. */
+export type UpdatePostInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Post` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Post` being updated. */
+  postPatch: PostPatch;
+};
+
 /** The output of our update `Post` mutation. */
 export type UpdatePostPayload = {
   __typename?: 'UpdatePostPayload';
@@ -11676,6 +11728,26 @@ export type AccountByAddrQueryVariables = Exact<{
 
 
 export type AccountByAddrQuery = (
+  { __typename?: 'Query' }
+  & { accountByAddr?: Maybe<(
+    { __typename?: 'Account' }
+    & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ) }
+  )> }
+);
+
+export type AccountByAddrWithDaosQueryVariables = Exact<{
+  addr: Scalars['String'];
+}>;
+
+
+export type AccountByAddrWithDaosQuery = (
   { __typename?: 'Query' }
   & { accountByAddr?: Maybe<(
     { __typename?: 'Account' }
@@ -12539,6 +12611,55 @@ export const AccountByAddrDocument = gql`
     description
     websiteLink
     twitterLink
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountByAddrQuery__
+ *
+ * To run a query within a React component, call `useAccountByAddrQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountByAddrQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountByAddrQuery({
+ *   variables: {
+ *      addr: // value for 'addr'
+ *   },
+ * });
+ */
+export function useAccountByAddrQuery(baseOptions: Apollo.QueryHookOptions<AccountByAddrQuery, AccountByAddrQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AccountByAddrQuery, AccountByAddrQueryVariables>(AccountByAddrDocument, options);
+      }
+export function useAccountByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByAddrQuery, AccountByAddrQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AccountByAddrQuery, AccountByAddrQueryVariables>(AccountByAddrDocument, options);
+        }
+export type AccountByAddrQueryHookResult = ReturnType<typeof useAccountByAddrQuery>;
+export type AccountByAddrLazyQueryHookResult = ReturnType<typeof useAccountByAddrLazyQuery>;
+export type AccountByAddrQueryResult = Apollo.QueryResult<AccountByAddrQuery, AccountByAddrQueryVariables>;
+export const AccountByAddrWithDaosDocument = gql`
+    query AccountByAddrWithDaos($addr: String!) {
+  accountByAddr(addr: $addr) {
+    id
+    addr
+    name
+    type
+    image
+    bgImage
+    description
+    websiteLink
+    twitterLink
     stripeConnectedAccountId
     accountTranslationsById {
       nodes {
@@ -12573,32 +12694,32 @@ export const AccountByAddrDocument = gql`
     `;
 
 /**
- * __useAccountByAddrQuery__
+ * __useAccountByAddrWithDaosQuery__
  *
- * To run a query within a React component, call `useAccountByAddrQuery` and pass it any options that fit your needs.
- * When your component renders, `useAccountByAddrQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAccountByAddrWithDaosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountByAddrWithDaosQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAccountByAddrQuery({
+ * const { data, loading, error } = useAccountByAddrWithDaosQuery({
  *   variables: {
  *      addr: // value for 'addr'
  *   },
  * });
  */
-export function useAccountByAddrQuery(baseOptions: Apollo.QueryHookOptions<AccountByAddrQuery, AccountByAddrQueryVariables>) {
+export function useAccountByAddrWithDaosQuery(baseOptions: Apollo.QueryHookOptions<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AccountByAddrQuery, AccountByAddrQueryVariables>(AccountByAddrDocument, options);
+        return Apollo.useQuery<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>(AccountByAddrWithDaosDocument, options);
       }
-export function useAccountByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByAddrQuery, AccountByAddrQueryVariables>) {
+export function useAccountByAddrWithDaosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AccountByAddrQuery, AccountByAddrQueryVariables>(AccountByAddrDocument, options);
+          return Apollo.useLazyQuery<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>(AccountByAddrWithDaosDocument, options);
         }
-export type AccountByAddrQueryHookResult = ReturnType<typeof useAccountByAddrQuery>;
-export type AccountByAddrLazyQueryHookResult = ReturnType<typeof useAccountByAddrLazyQuery>;
-export type AccountByAddrQueryResult = Apollo.QueryResult<AccountByAddrQuery, AccountByAddrQueryVariables>;
+export type AccountByAddrWithDaosQueryHookResult = ReturnType<typeof useAccountByAddrWithDaosQuery>;
+export type AccountByAddrWithDaosLazyQueryHookResult = ReturnType<typeof useAccountByAddrWithDaosLazyQuery>;
+export type AccountByAddrWithDaosQueryResult = Apollo.QueryResult<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>;
 export const AccountByCustodialAddressDocument = gql`
     query AccountByCustodialAddress($custodialAddress: String!) {
   accountByCustodialAddress(custodialAddress: $custodialAddress) {

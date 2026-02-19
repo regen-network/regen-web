@@ -9,33 +9,10 @@ query AccountByAddr($addr: String!) {
     description
     websiteLink
     twitterLink
-    stripeConnectedAccountId
     accountTranslationsById {
       nodes {
         languageCode
         description
-      }
-    }
-    daosByAssignmentAccountIdAndDaoAddress {
-      nodes {
-        address
-        daoRbamAddress
-        cw4GroupAddress
-        canUseStripeConnect
-        stripeConnectedAccountId
-        organizationByDaoAddress {
-          id
-          name
-          description
-          image
-          bgImage
-          websiteLink
-          twitterLink
-        }
-        projectByAdminDaoAddress {
-          onChainId
-          id
-        }
       }
     }
   }

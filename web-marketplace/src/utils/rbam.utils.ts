@@ -219,7 +219,7 @@ export const authzGrantAction = ({
   });
 };
 
-type GetRoleAuthorizationIdsParams = {
+type GetAuthorizationIdParams = {
   type: 'organization' | 'project';
   currentUserRole?: string;
   authorizationName?: string;
@@ -229,7 +229,7 @@ export function getAuthorizationId({
   type,
   currentUserRole,
   authorizationName,
-}: GetRoleAuthorizationIdsParams) {
+}: GetAuthorizationIdParams) {
   const roles = type === 'organization' ? orgRoles : projectRoles;
 
   const normalizedRole = currentUserRole?.toLowerCase() as keyof typeof roles;

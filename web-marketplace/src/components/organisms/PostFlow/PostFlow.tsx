@@ -48,6 +48,7 @@ import {
   DRAFT_SUBMIT_LABEL,
   PUBLISH_SUBMIT_LABEL,
 } from './PostFlow.constants';
+import { DeletedDraftModal } from './PostFlow.DeletedDraftModal';
 import { EditedDraftModal } from './PostFlow.EditedDraftModal';
 import { SignModal } from './PostFlow.SignModal';
 
@@ -90,6 +91,9 @@ export const PostFlow = ({
   const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [isDraftEditedModalLabel, setIsDraftEditedModalLabel] = useState<
+    string | undefined
+  >(undefined);
+  const [isDraftDeletedModalLabel, setIsDraftDeletedModalLabel] = useState<
     string | undefined
   >(undefined);
   const [editedData, setEditedData] = useState<PostFormSchemaType | undefined>(
@@ -194,6 +198,9 @@ export const PostFlow = ({
     async (data: PostFormSchemaType) => {
       // Check if draft post has been updated in the meantime
       if (draftPostId && initialValues?.updatedAt) {
+        const modalLabel = data.published
+          ? PUBLISH_SUBMIT_LABEL
+          : DRAFT_SUBMIT_LABEL;
         try {
           const resp = await fetch(
             `${apiUri}/marketplace/v1/posts/by-id/${draftPostId}`,
@@ -203,6 +210,12 @@ export const PostFlow = ({
             },
           );
           if (resp.status !== 200) {
+            if (resp.status === 404) {
+              // We set iri to undefined to re-create the post
+              setEditedData({ ...data, iri: undefined });
+              setIsDraftDeletedModalLabel(modalLabel);
+              return;
+            }
             throw new Error(
               _(msg`Cannot get existing post: ${resp.statusText}`),
             );
@@ -215,9 +228,7 @@ export const PostFlow = ({
           ) {
             // We need to overwrite iri in case it has changed
             setEditedData({ ...data, iri: existingPost.iri });
-            setIsDraftEditedModalLabel(
-              data.published ? PUBLISH_SUBMIT_LABEL : DRAFT_SUBMIT_LABEL,
-            );
+            setIsDraftEditedModalLabel(modalLabel);
             return;
           }
         } catch (e) {
@@ -378,7 +389,7 @@ export const PostFlow = ({
         bodyText={_(DISCARD_CHANGES_BODY)}
         buttonText={_(DISCARD_CHANGES_BUTTON)}
       />
-      {editedData && (
+      {editedData && isDraftEditedModalLabel && (
         <EditedDraftModal
           open={!!isDraftEditedModalLabel}
           shouldSaveDraft={isDraftEditedModalLabel === DRAFT_SUBMIT_LABEL}
@@ -388,6 +399,18 @@ export const PostFlow = ({
             await saveDataPost(editedData);
           }}
           onClose={() => setIsDraftEditedModalLabel(undefined)}
+        />
+      )}
+      {editedData && isDraftDeletedModalLabel && (
+        <DeletedDraftModal
+          open={!!isDraftDeletedModalLabel}
+          shouldSaveDraft={isDraftDeletedModalLabel === DRAFT_SUBMIT_LABEL}
+          onCancel={() => setIsDraftDeletedModalLabel(undefined)}
+          onSubmit={async () => {
+            setIsDraftDeletedModalLabel(undefined);
+            await saveDataPost(editedData);
+          }}
+          onClose={() => setIsDraftDeletedModalLabel(undefined)}
         />
       )}
     </>

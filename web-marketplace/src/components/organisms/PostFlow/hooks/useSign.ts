@@ -152,7 +152,9 @@ export const useSign = ({
         // Validate that organization option is available when user selects org
         if (signAs === ORG && !withOrganization) {
           throw new Error(
-            'Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization.',
+            _(
+              msg`Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization.`,
+            ),
           );
         }
 

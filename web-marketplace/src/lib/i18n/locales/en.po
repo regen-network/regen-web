@@ -145,7 +145,7 @@ msgstr ""
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:270
+#: src/components/organisms/PostForm/PostForm.tsx:273
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
@@ -287,7 +287,7 @@ msgstr ""
 #~ msgid "1 Ton of CO2e"
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:297
+#: src/components/organisms/PostForm/PostForm.tsx:300
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:476
+#: src/components/organisms/PostForm/PostForm.tsx:479
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr ""
 
@@ -662,6 +662,10 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:27
+msgid "Another user deleted this draft."
+msgstr ""
+
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:23
 msgid "Any posts they have created or signed will remain."
 msgstr ""
@@ -744,7 +748,7 @@ msgstr ""
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below. "
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:211
+#: src/components/organisms/PostFlow/hooks/useSign.ts:213
 msgid "Attest"
 msgstr ""
 
@@ -1078,8 +1082,12 @@ msgid "Cancelled credits have been removed from from the credit batch's tradable
 msgstr ""
 
 #. placeholder {0}: resp.statusText
-#: src/components/organisms/PostFlow/PostFlow.tsx:200
+#: src/components/organisms/PostFlow/PostFlow.tsx:220
 msgid "Cannot get existing post: {0}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useSign.ts:156
+msgid "Cannot sign as organization: missing authorization. You may not have the required role or permissions to sign on behalf of the organization."
 msgstr ""
 
 #: src/components/organisms/MediaForm/hooks/useHandleUpload.ts:57
@@ -1321,7 +1329,7 @@ msgstr ""
 msgid "coming soon"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:283
+#: src/components/organisms/PostForm/PostForm.tsx:286
 msgid "Comment"
 msgstr ""
 
@@ -1585,7 +1593,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/legacy-pages/Profile/Profile.tsx:133
+#: src/legacy-pages/Profile/Profile.tsx:130
 msgid "Credit Batches"
 msgstr ""
 
@@ -1660,7 +1668,7 @@ msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:33
 #: src/legacy-pages/Home/Home.tsx:182
-#: src/legacy-pages/Profile/Profile.tsx:127
+#: src/legacy-pages/Profile/Profile.tsx:124
 msgid "Credit Classes"
 msgstr ""
 
@@ -2389,7 +2397,7 @@ msgstr ""
 msgid "File is uploading"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:448
+#: src/components/organisms/PostForm/PostForm.tsx:451
 msgid "File locations can still be shared privately via a secret link."
 msgstr ""
 
@@ -2401,7 +2409,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:294
+#: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
 
@@ -2414,7 +2422,7 @@ msgstr ""
 msgid "Files available on request"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:483
+#: src/components/organisms/PostForm/PostForm.tsx:486
 msgid "Files can still be shared privately via secret link."
 msgstr ""
 
@@ -2988,27 +2996,27 @@ msgstr ""
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:499
+#: src/components/organisms/PostForm/PostForm.tsx:502
 msgid "Make the entire post private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:413
+#: src/components/organisms/PostForm/PostForm.tsx:416
 msgid "Make the entire post public"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:465
+#: src/components/organisms/PostForm/PostForm.tsx:468
 msgid "Make the files and location data private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:430
+#: src/components/organisms/PostForm/PostForm.tsx:433
 msgid "Make the location data private"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:185
+#: src/legacy-pages/Profile/Profile.tsx:182
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:180
+#: src/legacy-pages/Profile/Profile.tsx:177
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -3020,7 +3028,7 @@ msgstr ""
 msgid "Manage Credits"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:175
+#: src/legacy-pages/Profile/Profile.tsx:172
 msgid "Manage Members"
 msgstr ""
 
@@ -3028,7 +3036,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:165
+#: src/legacy-pages/Profile/Profile.tsx:162
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -3044,7 +3052,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/legacy-pages/Profile/Profile.tsx:170
+#: src/legacy-pages/Profile/Profile.tsx:167
 msgid "Manage Projects"
 msgstr ""
 
@@ -3115,7 +3123,7 @@ msgid "member not found"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:113
-#: src/legacy-pages/Profile/Profile.tsx:121
+#: src/legacy-pages/Profile/Profile.tsx:118
 msgid "Members"
 msgstr ""
 
@@ -3305,7 +3313,7 @@ msgstr ""
 msgid "New member added!"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:257
+#: src/components/organisms/PostForm/PostForm.tsx:260
 msgid "New post"
 msgstr ""
 
@@ -3413,7 +3421,7 @@ msgstr ""
 msgid "Note: all location data can be made private on the main create post form."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:546
+#: src/components/organisms/PostForm/PostForm.tsx:549
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
@@ -3454,7 +3462,7 @@ msgstr ""
 msgid "old project admin"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:441
+#: src/components/organisms/PostForm/PostForm.tsx:444
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
@@ -3593,8 +3601,12 @@ msgstr ""
 #~ msgid "Overview"
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:33
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:38
 msgid "overwrite & publish"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:37
+msgid "overwrite & save"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:14
@@ -3793,7 +3805,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/legacy-pages/Dashboard/Dashboard.constants.tsx:18
-#: src/legacy-pages/Profile/Profile.tsx:107
+#: src/legacy-pages/Profile/Profile.tsx:104
 msgid "Portfolio"
 msgstr ""
 
@@ -3805,7 +3817,7 @@ msgstr ""
 msgid "Position and size your image"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:435
+#: src/components/organisms/PostForm/PostForm.tsx:438
 msgid "Post and files are public"
 msgstr ""
 
@@ -3817,7 +3829,7 @@ msgstr ""
 msgid "Post is private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:470
+#: src/components/organisms/PostForm/PostForm.tsx:473
 msgid "Post is public"
 msgstr ""
 
@@ -3936,7 +3948,7 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:401
+#: src/components/organisms/PostForm/PostForm.tsx:404
 msgid "Privacy settings"
 msgstr ""
 
@@ -4076,7 +4088,7 @@ msgstr ""
 msgid "project end date"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:389
+#: src/components/organisms/PostForm/PostForm.tsx:392
 msgid "Project files cannot be downloaded"
 msgstr ""
 
@@ -4182,7 +4194,7 @@ msgstr ""
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/legacy-pages/Profile/Profile.tsx:113
+#: src/legacy-pages/Profile/Profile.tsx:110
 msgid "Projects"
 msgstr ""
 
@@ -4208,6 +4220,14 @@ msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:71
 msgid "Publications"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:43
+msgid "publish"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:39
+msgid "Publish to keep your changes."
 msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:177
@@ -4409,6 +4429,14 @@ msgstr ""
 msgid "Restoration Factor:"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:32
+msgid "Restore and publish your version?"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:30
+msgid "Restore and save your version?"
+msgstr ""
+
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:126
 msgid "Retirable"
 msgstr ""
@@ -4543,6 +4571,10 @@ msgstr ""
 msgid "Savanna"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:43
+msgid "save"
+msgstr ""
+
 #: src/components/molecules/EditProjectPageFooter.tsx:86
 #: src/components/molecules/ProjectPageFooter.tsx:42
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:27
@@ -4553,7 +4585,7 @@ msgstr ""
 msgid "SAVE"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:540
+#: src/components/organisms/PostForm/PostForm.tsx:543
 msgid "save draft"
 msgstr ""
 
@@ -4563,6 +4595,10 @@ msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CardInfo.tsx:68
 msgid "Save my credit card info for next time"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.DeletedDraftModal.tsx:37
+msgid "Save to keep your changes."
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:95
@@ -4828,7 +4864,7 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:25
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:27
 msgid "Someone made changes to this draft while you were editing."
 msgstr ""
 
@@ -4977,7 +5013,7 @@ msgstr ""
 msgid "Successfully issued credit batches"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:263
+#: src/components/organisms/PostForm/PostForm.tsx:266
 msgid "Summarize this update."
 msgstr ""
 
@@ -5110,11 +5146,11 @@ msgstr ""
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:505
+#: src/components/organisms/PostForm/PostForm.tsx:508
 msgid "The post and all of its contents will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:512
+#: src/components/organisms/PostForm/PostForm.tsx:515
 msgid "The post and files still can be shared privately via secret link."
 msgstr ""
 
@@ -5281,7 +5317,7 @@ msgstr ""
 msgid "This name will appear on the retirement certificate."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:418
+#: src/components/organisms/PostForm/PostForm.tsx:421
 msgid "This post and all of its files will be visible."
 msgstr ""
 
@@ -5339,7 +5375,7 @@ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
-#: src/components/organisms/PostForm/PostForm.tsx:262
+#: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
 msgstr ""
 
@@ -5685,7 +5721,7 @@ msgstr ""
 #~ msgid "VIEW ALL SELL ORDERS"
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:303
+#: src/components/organisms/PostForm/PostForm.tsx:306
 msgid "View all supported file types»"
 msgstr ""
 
@@ -5942,7 +5978,7 @@ msgstr ""
 #~ msgid "Write a short comment or longer project update."
 #~ msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:284
+#: src/components/organisms/PostForm/PostForm.tsx:287
 msgid "Write a short comment or longer project update. "
 msgstr ""
 
@@ -6184,7 +6220,7 @@ msgstr ""
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:30
+#: src/components/organisms/PostFlow/PostFlow.EditedDraftModal.tsx:32
 msgid "You will overwrite their changes if you continue."
 msgstr ""
 

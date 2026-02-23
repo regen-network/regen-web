@@ -16,9 +16,9 @@ export const EDIT_DRAFT_ACTION = msg`Edit Draft`;
 export const DELETE_POST_ACTION = msg`Delete Post`;
 
 export const PUBLIC_LABEL = msg`Public`;
-export const PRIVATE_LABEL = msg`Private`;
-export const PRIVATE_FILES_LABEL = msg`Private files`;
-export const PRIVATE_LOCATIONS_LABEL = msg`Private locations`;
+export const PRIVATE_LABEL = msg`Post is private`;
+export const PRIVATE_FILES_LABEL = msg`Files are private`;
+export const PRIVATE_LOCATIONS_LABEL = msg`Locations are private`;
 
 /* eslint-disable lingui/no-unlocalized-strings */
 /** Column configuration for building sortCallbacks.

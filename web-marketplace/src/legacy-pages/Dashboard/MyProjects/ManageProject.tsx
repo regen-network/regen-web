@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -44,6 +44,18 @@ const ManageProject = () => {
   >();
   const [postProjectName, setPostProjectName] = useState<string | undefined>();
   const [postProjectSlug, setPostProjectSlug] = useState<string | undefined>();
+
+  // Draft post state used when editing a draft from the DataPosts table
+  const [draftPost, setDraftPost] = useState<
+    Partial<import('components/organisms/PostForm/PostForm.schema').PostFormSchemaType> | undefined
+  >();
+
+  const openCreatePostModal = useCallback(() => {
+    setPostProjectId(project.id);
+    setPostOffChainProjectId(project.offChainId);
+    setPostProjectName(project.name);
+    setPostProjectSlug(project.slug);
+  }, [project.id, project.offChainId, project.name, project.slug]);
 
   const tabs = useMemo(
     () => [
@@ -106,12 +118,7 @@ const ManageProject = () => {
           project={project}
           canEdit={canEditProject}
           canCreatePost={canCreatePost}
-          onCreatePost={() => {
-            setPostProjectId(project.id);
-            setPostOffChainProjectId(project.offChainId);
-            setPostProjectName(project.name);
-            setPostProjectSlug(project.slug);
-          }}
+          onCreatePost={openCreatePostModal}
           createPostDisabled={createPostDisabled}
           createPostTooltipText={
             loginDisabled
@@ -135,7 +142,15 @@ const ManageProject = () => {
       </div>
 
       {/* Content section */}
-      <Outlet context={{ project, isLoading, offChainProject }} />
+      <Outlet
+        context={{
+          project,
+          isLoading,
+          offChainProject,
+          openCreatePostModal,
+          setDraftPost,
+        }}
+      />
 
       {canCreatePost && postProjectId && (
         <PostFlow
@@ -144,6 +159,7 @@ const ManageProject = () => {
             setPostOffChainProjectId(undefined);
             setPostProjectName(undefined);
             setPostProjectSlug(undefined);
+            setDraftPost(undefined);
           }}
           projectLocation={project?.location as GeocodeFeature}
           projectId={postProjectId}
@@ -151,12 +167,14 @@ const ManageProject = () => {
           projectName={postProjectName}
           projectSlug={postProjectSlug}
           initialValues={{
-            title: '',
-            comment: '',
-            files: [],
-            privacyType: 'public',
-            published: true,
+            iri: draftPost?.iri,
+            title: draftPost?.title || '',
+            comment: draftPost?.comment || '',
+            files: draftPost?.files || [],
+            privacyType: draftPost?.privacyType || 'public',
+            published: draftPost?.published ?? true,
           }}
+          setDraftPost={setDraftPost}
           disableScrollLock={true}
           offChainProject={offChainProject}
         />

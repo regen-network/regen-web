@@ -3681,6 +3681,10 @@ msgstr ""
 msgid "Please connect with the Keplr extension on desktop to create an organization"
 msgstr ""
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:47
+msgid "Please connect with the Keplr extension on desktop to finish creating organization"
+msgstr ""
+
 #: src/legacy-pages/Post/Post.constants.ts:4
 msgid "Please contact the project admin to request access."
 msgstr ""

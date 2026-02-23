@@ -19,6 +19,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import {
   CREATE_ORG_DISABLED_TOOLTIP,
   FINISH_ORG_CREATION,
+  FINISH_ORG_CREATION_DISABLED_TOOLTIP,
 } from '../RegistryLayout/RegistryLayout.constants';
 import {
   CREATE_ORGANIZATION,
@@ -123,18 +124,39 @@ export const AccountSwitcherDropdown = ({
               <UserAvatar src={avatarSrc} size="medium" alt={name} />
               {isCreateOrg ? (
                 unfinalizedOrgCreation && unfinalizedOrgName ? (
-                  <div className="ml-3 mr-auto text-left flex flex-col">
-                    <Body
-                      size="md"
-                      className="truncate text-bc-neutral-700 font-bold"
+                  loginDisabled ? (
+                    <InfoTooltip
+                      title={_(FINISH_ORG_CREATION_DISABLED_TOOLTIP)}
+                      arrow
+                      placement="top"
                     >
-                      {unfinalizedOrgName}
-                    </Body>
-                    <TextButton className="group text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
-                      {_(FINISH_ORG_CREATION)}
-                      <SmallArrowIcon className="text-brand-400 group-hover:text-brand-200 h-[8px] ml-3" />
-                    </TextButton>
-                  </div>
+                      <div className="ml-3 mr-auto text-left flex flex-col">
+                        <Body
+                          size="md"
+                          className="truncate text-bc-neutral-700 font-bold"
+                        >
+                          {unfinalizedOrgName}
+                        </Body>
+                        <TextButton className="group text-[11px] bg-[linear-gradient(180deg,#ACACAC_0%,#CCC_100%)] bg-clip-text text-[transparent] cursor-default">
+                          {_(FINISH_ORG_CREATION)}
+                          <SmallArrowIcon className="text-bc-neutral-300 h-[8px] ml-3" />
+                        </TextButton>
+                      </div>
+                    </InfoTooltip>
+                  ) : (
+                    <div className="ml-3 mr-auto text-left flex flex-col">
+                      <Body
+                        size="md"
+                        className="truncate text-bc-neutral-700 font-bold"
+                      >
+                        {unfinalizedOrgName}
+                      </Body>
+                      <TextButton className="group text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]">
+                        {_(FINISH_ORG_CREATION)}
+                        <SmallArrowIcon className="text-brand-400 group-hover:text-brand-200 h-[8px] ml-3" />
+                      </TextButton>
+                    </div>
+                  )
                 ) : loginDisabled ? (
                   <InfoTooltip
                     title={_(CREATE_ORG_DISABLED_TOOLTIP)}

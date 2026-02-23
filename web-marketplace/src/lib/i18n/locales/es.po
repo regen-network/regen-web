@@ -752,6 +752,8 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a con
 msgid "Attest"
 msgstr "Dar fe"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:11
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:230
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr "Autor"
@@ -1890,9 +1892,14 @@ msgstr "Navegación lateral del panel"
 msgid "Data Deficient"
 msgstr "Datos deficientes"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:6
 #: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:52
 msgid "Data Posts"
 msgstr "Publicaciones de datos"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:3
+msgid "data posts table"
+msgstr "tabla de publicaciones de datos"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:16
 msgid "Data stream"
@@ -1907,6 +1914,11 @@ msgstr "Los datos se transferirán de este perfil:"
 msgid "date"
 msgstr "fecha"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:229
+msgid "Date Created"
+msgstr "Fecha de creación"
+
 #: src/components/organisms/Documentation/Documentation.constants.ts:10
 #~ msgid "Date of upload"
 #~ msgstr "Fecha de subida"
@@ -1919,6 +1931,10 @@ msgstr "avatar predeterminado"
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:6
 msgid "Delete"
 msgstr "Borrar"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:16
+msgid "Delete Post"
+msgstr "Eliminar publicación"
 
 #: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.constants.tsx:9
 msgid "Delete project"
@@ -1987,6 +2003,7 @@ msgstr "¿No ves nada?"
 msgid "Don’t see anything? <0>Resend email</0>."
 msgstr "¿No ves nada? <0>Reenviar correo electrónico</0>."
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:256
 #: src/components/organisms/MediaSection.tsx:50
 #: src/legacy-pages/Post/Post.constants.ts:16
 #: src/lib/constants/shared.constants.tsx:24
@@ -2125,6 +2142,10 @@ msgstr "Editar"
 #: src/legacy-pages/Dashboard/MyCreditClasses/MyCreditClasses.constants.ts:3
 msgid "edit credit class"
 msgstr "editar clase de credito"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:15
+msgid "Edit Draft"
+msgstr "Editar borrador"
 
 #: src/legacy-pages/Projects/AllProjects/AllProjects.constants.ts:7
 msgid "Edit filters"
@@ -2397,6 +2418,8 @@ msgstr "Nombre del archivo"
 msgid "file name(s)"
 msgstr "nombre(s) de archivo"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:13
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:232
 #: src/components/organisms/PostForm/PostForm.tsx:294
 msgid "Files"
 msgstr "Archivos"
@@ -3362,6 +3385,10 @@ msgstr "No hay lotes de créditos para mostrar"
 #~ msgid "No credits issued"
 #~ msgstr "No se emitieron créditos"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:4
+msgid "No data posts to display"
+msgstr "No hay publicaciones de datos para mostrar"
+
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:59
 #: src/components/organisms/EcocreditsTable.tsx:65
 msgid "No ecocredits to display"
@@ -3939,6 +3966,8 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo utilizabas la tierra?"
 
 #: src/components/layout/Layout.Footer.tsx:105
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:231
 msgid "Privacy"
 msgstr "Privacidad"
 
@@ -3949,6 +3978,18 @@ msgstr "política de privacidad"
 #: src/components/organisms/PostForm/PostForm.tsx:401
 msgid "Privacy settings"
 msgstr "Configuración de privacidad"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:19
+msgid "Private"
+msgstr "Privado"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:20
+msgid "Private files"
+msgstr "Archivos privados"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:21
+msgid "Private locations"
+msgstr "Ubicaciones privadas"
 
 #: src/components/organisms/DeletePostWarningModal/DeletePostWarningModal.constants.ts:4
 msgid "Proceed with caution: this cannot be undone!"
@@ -4203,6 +4244,10 @@ msgstr "Pestañas de proyectos"
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:30
 msgid "Provide personal contact information for this organization."
 msgstr "Proporcione información de contacto personal para esta organización."
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:18
+msgid "Public"
+msgstr "Público"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
 #~ msgid "Public profile"
@@ -5339,6 +5384,8 @@ msgstr "Cronología"
 #~ msgstr "Marca de tiempo"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:228
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
@@ -5515,6 +5562,7 @@ msgstr "Sin nombre"
 msgid "Unregistered projects"
 msgstr "Proyectos no registrados"
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:249
 #: src/legacy-pages/Post/Post.constants.ts:17
 msgid "Untitled"
 msgstr "Intitulado"
@@ -5551,6 +5599,10 @@ msgstr "Error al actualizar el pedido de la tarjeta {0}: {1}"
 #: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:230
 msgid "Updating Offchain Project {0} failed: {1}"
 msgstr "Error al actualizar el proyecto fuera de la cadena {0}: {1}"
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:7
+msgid "Upload data, provide updates, and anchor your information to the blockchain for full transparency and accountability."
+msgstr "Cargue datos, proporcione actualizaciones y ancle su información a la cadena de bloques para lograr total transparencia y responsabilidad."
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26
 msgid "Upload image"

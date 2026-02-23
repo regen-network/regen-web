@@ -47,7 +47,10 @@ const ManageProject = () => {
 
   // Draft post state used when editing a draft from the DataPosts table
   const [draftPost, setDraftPost] = useState<
-    Partial<import('components/organisms/PostForm/PostForm.schema').PostFormSchemaType> | undefined
+    | Partial<
+        import('components/organisms/PostForm/PostForm.schema').PostFormSchemaType
+      >
+    | undefined
   >();
 
   const openCreatePostModal = useCallback(() => {

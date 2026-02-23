@@ -1,9 +1,13 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
+import {
+  DRAFT,
+  POST_IS_PRIVATE,
+  UNTITLED,
+} from 'legacy-pages/Post/Post.constants';
 
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
 import DocumentIcon from 'web-components/src/components/icons/DocumentIcon';
@@ -35,6 +39,10 @@ import {
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 import { SEE_HELP_DOCS } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.constants';
+import {
+  FILES_ARE_PRIVATE,
+  LOCATIONS_ARE_PRIVATE,
+} from 'components/templates/ProjectDetails/ProjectDetails.constant';
 
 import {
   DATA_POSTS_DESCRIPTION,
@@ -43,9 +51,6 @@ import {
   DELETE_POST_ACTION,
   EDIT_DRAFT_ACTION,
   NO_DATA_POSTS_TITLE,
-  PRIVATE_FILES_LABEL,
-  PRIVATE_LABEL,
-  PRIVATE_LOCATIONS_LABEL,
   PUBLIC_LABEL,
 } from './DataPostsTable.constants';
 import { DataPost } from './DataPostsTable.types';
@@ -150,7 +155,7 @@ export const DataPostsTable: React.FC<
           <Tag
             className="bg-bc-red-300"
             labelClassName="font-normal"
-            label={_(PRIVATE_LABEL)}
+            label={_(POST_IS_PRIVATE)}
             icon={<LockIcon className="w-[16px] h-[16px]" />}
           />
         );
@@ -159,7 +164,7 @@ export const DataPostsTable: React.FC<
           <Tag
             className="bg-bc-red-300"
             labelClassName="font-normal"
-            label={_(PRIVATE_FILES_LABEL)}
+            label={_(FILES_ARE_PRIVATE)}
             icon={<PrivateFile className="w-[16px] h-[16px]" />}
           />
         );
@@ -168,7 +173,7 @@ export const DataPostsTable: React.FC<
           <Tag
             className="bg-bc-red-300"
             labelClassName="font-normal"
-            label={_(PRIVATE_LOCATIONS_LABEL)}
+            label={_(LOCATIONS_ARE_PRIVATE)}
             icon={<LocationIcon className="w-[16px] h-[16px]" />}
           />
         );
@@ -246,16 +251,12 @@ export const DataPostsTable: React.FC<
                 title={post.title}
               >
                 <Box component="span" sx={{ fontWeight: 700 }}>
-                  {post.title || (
-                    <em>
-                      <Trans>Untitled</Trans>
-                    </em>
-                  )}
+                  {post.title || <em>{_(UNTITLED)}</em>}
                 </Box>
                 {!post.published && (
                   <span className="ml-10 inline-flex items-center gap-[2px] px-[8px] py-[2px] text-[0.75rem] rounded bg-bc-neutral-300 text-bc-neutral-500 font-bold">
                     <DraftIcon className="w-[14px] h-[14px]" />
-                    <Trans>Draft</Trans>
+                    {_(DRAFT)}
                   </span>
                 )}
               </Box>,

@@ -51,7 +51,6 @@ const ManageProject = () => {
       {
         label: _(msg`Data Posts`),
         href: `/dashboard/projects/${projectId}/manage/data-posts`,
-        hidden: true,
       },
       {
         label: _(msg`Credit Issuance`),

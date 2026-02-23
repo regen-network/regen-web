@@ -6,19 +6,10 @@ export const NO_DATA_POSTS_TITLE = msg`No data posts to display`;
 export const DATA_POSTS_TITLE = msg`Data Posts`;
 export const DATA_POSTS_DESCRIPTION = msg`Upload data, provide updates, and anchor your information to the blockchain for full transparency and accountability.`;
 
-export const TITLE_HEADER = msg`Title`;
-export const DATE_CREATED_HEADER = msg`Date Created`;
-export const AUTHOR_HEADER = msg`Author`;
-export const PRIVACY_HEADER = msg`Privacy`;
-export const FILES_HEADER = msg`Files`;
-
 export const EDIT_DRAFT_ACTION = msg`Edit Draft`;
 export const DELETE_POST_ACTION = msg`Delete Post`;
 
 export const PUBLIC_LABEL = msg`Public`;
-export const PRIVATE_LABEL = msg`Post is private`;
-export const PRIVATE_FILES_LABEL = msg`Files are private`;
-export const PRIVATE_LOCATIONS_LABEL = msg`Locations are private`;
 
 /* eslint-disable lingui/no-unlocalized-strings */
 /** Column configuration for building sortCallbacks.

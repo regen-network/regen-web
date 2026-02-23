@@ -526,7 +526,7 @@ msgstr "todos los perfiles"
 msgid "All projects"
 msgstr "Todos los proyectos"
 
-#: src/components/organisms/PostForm/PostForm.tsx:476
+#: src/components/organisms/PostForm/PostForm.tsx:482
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos a la vista del público."
 
@@ -2406,7 +2406,7 @@ msgstr "Proyectos destacados"
 msgid "File is uploading"
 msgstr "El archivo se está cargando"
 
-#: src/components/organisms/PostForm/PostForm.tsx:448
+#: src/components/organisms/PostForm/PostForm.tsx:452
 msgid "File locations can still be shared privately via a secret link."
 msgstr "Las ubicaciones de los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -2433,7 +2433,7 @@ msgstr "Los archivos son privados"
 msgid "Files available on request"
 msgstr "Archivos disponibles a pedido"
 
-#: src/components/organisms/PostForm/PostForm.tsx:483
+#: src/components/organisms/PostForm/PostForm.tsx:489
 msgid "Files can still be shared privately via secret link."
 msgstr "Los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -3017,19 +3017,19 @@ msgstr "Hacer que Anónimo seleccione"
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr "Asegúrate de que esta sea la dirección REGEN correcta. <0>Si la cambias a una dirección a la que no tienes acceso, no podrás editar el proyecto.</0>"
 
-#: src/components/organisms/PostForm/PostForm.tsx:499
+#: src/components/organisms/PostForm/PostForm.tsx:507
 msgid "Make the entire post private"
 msgstr "Hacer que toda la publicación sea privada"
 
-#: src/components/organisms/PostForm/PostForm.tsx:413
+#: src/components/organisms/PostForm/PostForm.tsx:415
 msgid "Make the entire post public"
 msgstr "Hacer pública toda la publicación"
 
-#: src/components/organisms/PostForm/PostForm.tsx:465
+#: src/components/organisms/PostForm/PostForm.tsx:471
 msgid "Make the files and location data private"
 msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 
-#: src/components/organisms/PostForm/PostForm.tsx:430
+#: src/components/organisms/PostForm/PostForm.tsx:434
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
@@ -3446,7 +3446,7 @@ msgstr "No evaluado"
 msgid "Note: all location data can be made private on the main create post form."
 msgstr "Nota: todos los datos de ubicación pueden hacerse privados en el formulario principal de creación de publicaciones."
 
-#: src/components/organisms/PostForm/PostForm.tsx:546
+#: src/components/organisms/PostForm/PostForm.tsx:554
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr "NOTA: Como las publicaciones están ancladas a la cadena de bloques, no se pueden editar una vez publicadas."
 
@@ -3487,7 +3487,7 @@ msgstr "Método de generación de compensación"
 msgid "old project admin"
 msgstr "antiguo administrador del proyecto"
 
-#: src/components/organisms/PostForm/PostForm.tsx:441
+#: src/components/organisms/PostForm/PostForm.tsx:445
 msgid "Only the locations of the files will be hidden from public view."
 msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del público."
 
@@ -3842,7 +3842,7 @@ msgstr "Pestañas de cartera"
 msgid "Position and size your image"
 msgstr "Posiciona y dimensiona tu imagen"
 
-#: src/components/organisms/PostForm/PostForm.tsx:435
+#: src/components/organisms/PostForm/PostForm.tsx:439
 msgid "Post and files are public"
 msgstr "Las publicaciones y los archivos son públicos."
 
@@ -3854,7 +3854,7 @@ msgstr "La publicación ha sido eliminada"
 msgid "Post is private"
 msgstr "La publicación es privada"
 
-#: src/components/organisms/PostForm/PostForm.tsx:470
+#: src/components/organisms/PostForm/PostForm.tsx:476
 msgid "Post is public"
 msgstr "La publicación es pública"
 
@@ -4603,7 +4603,7 @@ msgstr "Ahorrar"
 msgid "SAVE"
 msgstr "AHORRAR"
 
-#: src/components/organisms/PostForm/PostForm.tsx:540
+#: src/components/organisms/PostForm/PostForm.tsx:548
 msgid "save draft"
 msgstr "guardar borrador"
 
@@ -5156,11 +5156,11 @@ msgstr "El perfil de la organización se ha actualizado en la cadena de bloques,
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr "Es posible que la página que estás buscando haya sido eliminada temporalmente o haya cambiado su nombre."
 
-#: src/components/organisms/PostForm/PostForm.tsx:505
+#: src/components/organisms/PostForm/PostForm.tsx:513
 msgid "The post and all of its contents will be hidden from public view."
 msgstr "La publicación y todo su contenido quedarán ocultos a la vista del público."
 
-#: src/components/organisms/PostForm/PostForm.tsx:512
+#: src/components/organisms/PostForm/PostForm.tsx:520
 msgid "The post and files still can be shared privately via secret link."
 msgstr "La publicación y los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -5327,7 +5327,7 @@ msgstr "Este nombre aparecerá en el certificado de jubilación y es el nombre d
 msgid "This name will appear on the retirement certificate."
 msgstr "Este nombre aparecerá en el certificado de retirada."
 
-#: src/components/organisms/PostForm/PostForm.tsx:418
+#: src/components/organisms/PostForm/PostForm.tsx:420
 msgid "This post and all of its files will be visible."
 msgstr "Esta publicación y todos sus archivos serán visibles."
 

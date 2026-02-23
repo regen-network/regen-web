@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const UnlockIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" fill="none" {...props}>
+  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" {...props}>
     <path
       d="M11 17C11 16.9138 11.0109 16.8301 11.0314 16.7502C10.4163 16.4091 10 15.7532 10 15C10 13.8954 10.8954 13 12 13C13.1046 13 14 13.8954 14 15C14 15.7532 13.5837 16.4091 12.9686 16.7502C12.9891 16.8301 13 16.9138 13 17V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V17Z"
       fill="currentColor"

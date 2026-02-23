@@ -10,7 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { useUpdateAssignmentMutation } from 'generated/graphql';
@@ -82,9 +82,9 @@ export function useMembersContext(params: MembersHookParams) {
   );
 
   const authorizationName = getAuthorizationName(currentUserRole);
-  const { roleId, authorizationId } = useMemo(
+  const { authorizationId } = useMemo(
     () =>
-      getRoleAuthorizationIds({
+      getAuthorizationId({
         type: 'organization',
         currentUserRole,
         authorizationName,
@@ -262,7 +262,6 @@ export function useMembersContext(params: MembersHookParams) {
   return {
     // computed
     projectsCurrentUserCanManageMembers,
-    roleId,
     authorizationId,
     // helpers
     refetchMembers,

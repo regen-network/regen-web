@@ -6,7 +6,7 @@ import { useSetAtom } from 'jotai';
 import { MEMBER_ADDED } from 'legacy-pages/Dashboard/MyProjects/hooks/collaborators/constants';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
 import { postData } from 'utils/fetch/postData';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
@@ -57,7 +57,6 @@ export function useAddMember(params: MembersHookParams) {
 
   const {
     projectsCurrentUserCanManageMembers,
-    roleId,
     authorizationId,
     refetchMembers,
     checkProjectsErrors,
@@ -79,8 +78,7 @@ export function useAddMember(params: MembersHookParams) {
         !cw4GroupAddress ||
         !role ||
         !currentUserRole ||
-        !authorizationId ||
-        !roleId
+        !authorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -94,7 +92,6 @@ export function useAddMember(params: MembersHookParams) {
               daoRbamAddress,
               cw4GroupAddress,
               authorizationId,
-              roleId,
               memberAddress: addressOrEmail,
               roleIdToAdd,
               withFeegrant: true,
@@ -110,15 +107,13 @@ export function useAddMember(params: MembersHookParams) {
           const authorizationName = getAuthorizationName(
             projectCurrentUserRole,
           );
-          const {
-            roleId: projectRoleId,
-            authorizationId: projectAuthorizationId,
-          } = getRoleAuthorizationIds({
-            type: 'project',
-            currentUserRole: projectCurrentUserRole,
-            authorizationName,
-          });
-          if (!projectRoleId || !projectAuthorizationId) return null;
+          const { authorizationId: projectAuthorizationId } =
+            getAuthorizationId({
+              type: 'project',
+              currentUserRole: projectCurrentUserRole,
+              authorizationName,
+            });
+          if (!projectAuthorizationId) return null;
 
           const projectDao = project?.projectByProjectId?.daoByAdminDaoAddress;
           if (!projectDao) return null;
@@ -140,7 +135,6 @@ export function useAddMember(params: MembersHookParams) {
                   daoRbamAddress: projectDao.daoRbamAddress,
                   cw4GroupAddress: projectDao.cw4GroupAddress,
                   authorizationId: projectAuthorizationId,
-                  roleId: projectRoleId,
                   memberAddress: addressOrEmail,
                   roleIdToAdd: projectRoleIdToAdd,
                 }),
@@ -187,7 +181,6 @@ export function useAddMember(params: MembersHookParams) {
       cw4GroupAddress,
       currentUserRole,
       authorizationId,
-      roleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,

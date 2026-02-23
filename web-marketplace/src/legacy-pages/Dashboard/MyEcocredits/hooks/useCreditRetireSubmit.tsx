@@ -5,7 +5,7 @@ import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   creditRetireAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
@@ -71,12 +71,11 @@ const useCreditRetireSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
@@ -100,7 +99,6 @@ const useCreditRetireSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -111,7 +109,6 @@ const useCreditRetireSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditRetireAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           credits: [
@@ -211,7 +208,6 @@ const useCreditRetireSubmit = ({
       isOrganizationDashboard,
       feeGranter,
       signAndBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

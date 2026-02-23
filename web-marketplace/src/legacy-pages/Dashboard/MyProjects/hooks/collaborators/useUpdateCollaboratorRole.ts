@@ -57,7 +57,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
 
   const {
     projectAuthorizationId,
-    projectRoleId,
     refetchCollaborators,
     orgDaoAddress,
     feeGranter,
@@ -81,8 +80,7 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
         !cw4GroupAddress ||
         !role ||
         !currentUserRole ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !projectAuthorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -99,7 +97,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
               ...updateMemberRoleActions({
                 daoRbamAddress,
                 authorizationId: projectAuthorizationId,
-                roleId: projectRoleId,
                 memberAddress: wallet.address,
                 newRoleId: getNewProjectRoleId(ROLE_ADMIN),
                 oldRoleId: getNewProjectRoleId(ROLE_OWNER),
@@ -107,7 +104,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
               updateAuthorizationAction({
                 daoRbamAddress,
                 cw4GroupAddress,
-                roleId: projectRoleId,
                 authorizationId: projectAuthorizationId,
                 newOwnerAddress: memberAddress,
                 authorizationIdToUpdate: projectRoles['admin'].authorizations[
@@ -137,7 +133,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
         ? updateMemberRoleActions({
             daoRbamAddress,
             authorizationId: projectAuthorizationId,
-            roleId: projectRoleId,
             memberAddress,
             newRoleId: projectNewRoleId,
             oldRoleId,
@@ -146,7 +141,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
             daoRbamAddress,
             cw4GroupAddress,
             authorizationId: projectAuthorizationId,
-            roleId: projectRoleId,
             memberAddress,
             roleIdToAdd: projectNewRoleId,
           });
@@ -204,7 +198,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
       cw4GroupAddress,
       currentUserRole,
       projectAuthorizationId,
-      projectRoleId,
       reactQueryClient,
       deleteAssignment,
       refetchCollaborators,

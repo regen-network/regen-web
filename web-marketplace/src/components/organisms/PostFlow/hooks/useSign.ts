@@ -19,7 +19,7 @@ import { matchesIri } from 'legacy-pages/Post/hooks/useAttestEvents.utils';
 import {
   attestAction,
   getAccountAssignment,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -117,22 +117,21 @@ export const useSign = ({
       }),
     [data?.daoByAddress?.assignmentsByDaoAddress?.nodes, activeAccountId],
   );
-  const { roleId, authorizationId } = getRoleAuthorizationIds({
+  const { authorizationId } = getAuthorizationId({
     type: 'organization',
     currentUserRole: currentUserOrgAssignment?.roleName,
     authorizationName: 'can_anchor_attest_data',
   });
   const withOrganization = useMemo(
     () =>
-      orgDao && roleId && authorizationId
+      orgDao && authorizationId
         ? {
             daoAddress: orgDao.address,
             daoRbamAddress: orgDao.daoRbamAddress,
-            roleId,
             authorizationId,
           }
         : undefined,
-    [orgDao, roleId, authorizationId],
+    [orgDao, authorizationId],
   );
 
   const fetchAnchorTxHash = useCallback(
@@ -168,7 +167,6 @@ export const useSign = ({
             contentHashes: [contentHash],
           };
           const action = attestAction({
-            roleId: withOrganization.roleId,
             authorizationId: withOrganization.authorizationId,
             ...msgAttest,
           });

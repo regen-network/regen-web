@@ -45,7 +45,6 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
 
   const {
     projectAuthorizationId,
-    projectRoleId,
     refetchCollaborators,
     orgDaoAddress,
     feeGranter,
@@ -102,8 +101,7 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
         !daoRbamAddress ||
         !cw4GroupAddress ||
         !currentUserRole ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !projectAuthorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -130,7 +128,6 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
                 daoRbamAddress,
                 cw4GroupAddress,
                 authorizationId: projectAuthorizationId,
-                roleId: projectRoleId,
                 memberAddress: collaboratorAddress,
                 memberRoleId: collaboratorRoleId,
                 withFeegrant: true,
@@ -189,7 +186,6 @@ export function useRemoveCollaborator(params: CollaboratorsHookParams) {
       cw4GroupAddress,
       currentUserRole,
       projectAuthorizationId,
-      projectRoleId,
       setErrorBannerText,
       _,
       reactQueryClient,

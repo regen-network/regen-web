@@ -10,7 +10,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { PROFILE_S3_PATH } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 import { timer } from 'utils/timer';
 
 import { AccountType, useUpdateAccountByIdMutation } from 'generated/graphql';
@@ -241,7 +241,7 @@ export const useCreateDao = () => {
           },
         };
 
-        const { roleId, authorizationId } = getRoleAuthorizationIds({
+        const { authorizationId } = getAuthorizationId({
           type: 'organization',
           currentUserRole: 'owner',
           authorizationName: 'can_manage_members',
@@ -252,7 +252,6 @@ export const useCreateDao = () => {
               feegrantGrantAllowanceAction({
                 daoAddress,
                 authorizationId: authorizationId as number,
-                roleId: roleId as number,
                 memberAddress: walletAddress,
               }),
             ],

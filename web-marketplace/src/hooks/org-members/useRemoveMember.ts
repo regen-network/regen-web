@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 
 import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
@@ -47,7 +47,6 @@ export function useRemoveMember(params: MembersHookParams) {
   const { signAndBroadcast } = useMsgClient();
 
   const {
-    roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
@@ -70,8 +69,7 @@ export function useRemoveMember(params: MembersHookParams) {
         !daoRbamAddress ||
         !cw4GroupAddress ||
         !currentUserRole ||
-        !authorizationId ||
-        !roleId
+        !authorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -100,7 +98,6 @@ export function useRemoveMember(params: MembersHookParams) {
                   daoRbamAddress,
                   cw4GroupAddress,
                   authorizationId,
-                  roleId,
                   memberAddress,
                   memberRoleId,
                   withFeegrant: true,
@@ -119,15 +116,13 @@ export function useRemoveMember(params: MembersHookParams) {
             const authorizationName = getAuthorizationName(
               projectCurrentUserRole,
             );
-            const {
-              roleId: projectRoleId,
-              authorizationId: projectAuthorizationId,
-            } = getRoleAuthorizationIds({
-              type: 'project',
-              currentUserRole: projectCurrentUserRole,
-              authorizationName,
-            });
-            if (!projectRoleId || !projectAuthorizationId) return null;
+            const { authorizationId: projectAuthorizationId } =
+              getAuthorizationId({
+                type: 'project',
+                currentUserRole: projectCurrentUserRole,
+                authorizationName,
+              });
+            if (!projectAuthorizationId) return null;
 
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
@@ -164,7 +159,6 @@ export function useRemoveMember(params: MembersHookParams) {
                     daoRbamAddress: projectDao.daoRbamAddress,
                     cw4GroupAddress: projectDao.cw4GroupAddress,
                     authorizationId: projectAuthorizationId,
-                    roleId: projectRoleId,
                     memberAddress,
                     memberRoleId: parseInt(assignment.onChainRoleId),
                   }),
@@ -251,7 +245,6 @@ export function useRemoveMember(params: MembersHookParams) {
       cw4GroupAddress,
       currentUserRole,
       authorizationId,
-      roleId,
       projectsCurrentUserCanManageMembers,
       setErrorBannerText,
       _,

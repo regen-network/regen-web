@@ -8,7 +8,7 @@ import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { getBaseDenom } from 'utils/ibc/getBaseDenom';
 import {
   cancelSellOrderAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -71,12 +71,11 @@ const useCancelSellOrderSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageSellOrdersAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_sell_orders',
-    });
+  const { authorizationId: manageSellOrdersAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_sell_orders',
+  });
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -90,13 +89,11 @@ const useCancelSellOrderSubmit = ({
 
     if (
       isOrganizationDashboard &&
-      roleId &&
       manageSellOrdersAuthId &&
       organizationRbamAddress &&
       wallet?.address
     ) {
       const action = cancelSellOrderAction({
-        roleId,
         authorizationId: manageSellOrdersAuthId,
         seller: accountAddress, // DAO address
         sellOrderId: BigInt(selectedSellOrder.id),
@@ -201,7 +198,6 @@ const useCancelSellOrderSubmit = ({
     setIsProcessingModalOpen,
     setSelectedSellOrder,
     isOrganizationDashboard,
-    roleId,
     manageSellOrdersAuthId,
     organizationRbamAddress,
     wallet?.address,

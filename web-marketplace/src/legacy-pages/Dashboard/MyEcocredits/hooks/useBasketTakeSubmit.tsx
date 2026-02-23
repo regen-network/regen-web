@@ -6,7 +6,7 @@ import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/regen/ecocredit/basket/v1/tx';
 import {
   basketTakeAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -63,12 +63,11 @@ const useBasketTakeSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {
@@ -90,7 +89,6 @@ const useBasketTakeSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -99,7 +97,6 @@ const useBasketTakeSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = basketTakeAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
@@ -182,7 +179,6 @@ const useBasketTakeSubmit = ({
       isOrganizationDashboard,
       feeGranter,
       signAndBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

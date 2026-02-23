@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 
 import {
   useDeleteAssignmentMutation,
@@ -64,7 +64,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
   const { signAndBroadcast } = useMsgClient();
 
   const {
-    roleId,
     authorizationId,
     projectsCurrentUserCanManageMembers,
     refetchMembers,
@@ -91,8 +90,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         !cw4GroupAddress ||
         !role ||
         !currentUserRole ||
-        !authorizationId ||
-        !roleId
+        !authorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -110,7 +108,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
               ...updateMemberRoleActions({
                 daoRbamAddress,
                 authorizationId,
-                roleId,
                 memberAddress: wallet.address,
                 newRoleId: getNewOrgRoleId(ROLE_ADMIN),
                 oldRoleId: getNewOrgRoleId(ROLE_OWNER),
@@ -118,7 +115,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
               updateAuthorizationAction({
                 daoRbamAddress,
                 cw4GroupAddress,
-                roleId,
                 authorizationId,
                 newOwnerAddress: memberAddress,
                 authorizationIdToUpdate: orgRoles['admin'].authorizations[
@@ -148,7 +144,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
         ? updateMemberRoleActions({
             daoRbamAddress,
             authorizationId,
-            roleId,
             memberAddress,
             newRoleId,
             oldRoleId,
@@ -157,7 +152,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             daoRbamAddress,
             cw4GroupAddress,
             authorizationId,
-            roleId,
             memberAddress,
             roleIdToAdd: newRoleId,
           });
@@ -179,15 +173,13 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             const authorizationName = getAuthorizationName(
               projectCurrentUserRole,
             );
-            const {
-              roleId: projectRoleId,
-              authorizationId: projectAuthorizationId,
-            } = getRoleAuthorizationIds({
-              type: 'project',
-              currentUserRole: projectCurrentUserRole,
-              authorizationName,
-            });
-            if (!projectRoleId || !projectAuthorizationId) return null;
+            const { authorizationId: projectAuthorizationId } =
+              getAuthorizationId({
+                type: 'project',
+                currentUserRole: projectCurrentUserRole,
+                authorizationName,
+              });
+            if (!projectAuthorizationId) return null;
 
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
@@ -215,7 +207,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                     ...updateMemberRoleActions({
                       daoRbamAddress: projectDao.daoRbamAddress,
                       authorizationId: projectAuthorizationId!,
-                      roleId: projectRoleId,
                       memberAddress: wallet.address,
                       newRoleId: getNewProjectRoleId(ROLE_ADMIN),
                       oldRoleId: getNewProjectRoleId(ROLE_OWNER),
@@ -223,7 +214,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                     updateAuthorizationAction({
                       daoRbamAddress: projectDao.daoRbamAddress,
                       cw4GroupAddress: projectDao.cw4GroupAddress,
-                      roleId: projectRoleId,
                       authorizationId: projectAuthorizationId!,
                       newOwnerAddress: memberAddress,
                       authorizationIdToUpdate: projectRoles['admin']
@@ -257,7 +247,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
               ? updateMemberRoleActions({
                   daoRbamAddress: projectDao.daoRbamAddress,
                   authorizationId: projectAuthorizationId,
-                  roleId: projectRoleId,
                   memberAddress,
                   newRoleId: projectNewRoleId,
                   oldRoleId: parseInt(oldAssignment.onChainRoleId),
@@ -266,7 +255,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   cw4GroupAddress: projectDao.cw4GroupAddress,
                   daoRbamAddress: projectDao.daoRbamAddress,
                   authorizationId: projectAuthorizationId,
-                  roleId: projectRoleId,
                   memberAddress,
                   roleIdToAdd: projectNewRoleId,
                 });
@@ -350,7 +338,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       cw4GroupAddress,
       currentUserRole,
       authorizationId,
-      roleId,
       projectsCurrentUserCanManageMembers,
       reactQueryClient,
       deleteAssignment,

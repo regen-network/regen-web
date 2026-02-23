@@ -35,8 +35,6 @@ type UpdateAuthorizationActionParams = {
   daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
-  /** the id of the role that includes an authorization to update members */
-  roleId: number;
   /** the id of the authorization that has permission to update members */
   authorizationId: number;
   /** the address of the new owner to be assigned during the update */
@@ -48,14 +46,12 @@ type UpdateAuthorizationActionParams = {
 export const updateAuthorizationAction = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   cw4GroupAddress,
   newOwnerAddress,
   authorizationIdToUpdate,
 }: UpdateAuthorizationActionParams) => {
   return {
     authorization_id: authorizationId,
-    role_id: roleId,
     msg: {
       wasm: {
         execute: {
@@ -84,7 +80,6 @@ type AssignNewOrgOwnerActionsParams = Pick<
   | 'daoRbamAddress'
   | 'cw4GroupAddress'
   | 'authorizationId'
-  | 'roleId'
   | 'currentOwnerAddress'
   | 'newOwnerAddress'
   | 'newOwnerOldRoleId'
@@ -93,7 +88,6 @@ type AssignNewOrgOwnerActionsParams = Pick<
 export const assignNewOrgOwnerActions = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   cw4GroupAddress,
   currentOwnerAddress,
   newOwnerAddress,
@@ -104,7 +98,6 @@ export const assignNewOrgOwnerActions = ({
   return assignNewOwnerActions({
     daoRbamAddress,
     authorizationId,
-    roleId,
     cw4GroupAddress,
     currentOwnerAddress,
     newOwnerAddress,
@@ -119,8 +112,6 @@ type AssignNewOwnerActionsParams = {
   daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
-  /** the id of the role that includes an authorization to update members */
-  roleId: number;
   /** the id of the authorization that has permission to update members */
   authorizationId: number;
   /** the address of the current owner */
@@ -137,7 +128,6 @@ type AssignNewOwnerActionsParams = {
 const assignNewOwnerActions = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   cw4GroupAddress,
   currentOwnerAddress,
   newOwnerAddress,
@@ -148,7 +138,6 @@ const assignNewOwnerActions = ({
   return [
     updateMembersAction({
       authorizationId,
-      roleId,
       cw4GroupAddress,
       updateMembers: {
         add: [
@@ -163,7 +152,6 @@ const assignNewOwnerActions = ({
     assignAction({
       daoRbamAddress,
       authorizationId,
-      roleId,
       assignments: [
         {
           addr: newOwnerAddress,
@@ -179,7 +167,6 @@ const assignNewOwnerActions = ({
     revokeAction({
       daoRbamAddress,
       authorizationId,
-      roleId,
       assignments: [
         {
           addr: newOwnerAddress,
@@ -199,8 +186,6 @@ type AddMemberActions = {
   daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
-  /** the id of the role that includes an authorization to add members */
-  roleId: number;
   /** the id of the authorization that has permission to add members */
   authorizationId: number;
   /** the address of the member to add */
@@ -217,7 +202,6 @@ export const addMemberActions = ({
   daoRbamAddress,
   cw4GroupAddress,
   authorizationId,
-  roleId,
   memberAddress,
   roleIdToAdd,
   withFeegrant,
@@ -225,7 +209,6 @@ export const addMemberActions = ({
 }: AddMemberActions) => [
   updateMembersAction({
     authorizationId,
-    roleId,
     cw4GroupAddress,
     updateMembers: {
       add: [
@@ -240,7 +223,6 @@ export const addMemberActions = ({
   assignAction({
     daoRbamAddress,
     authorizationId,
-    roleId,
     assignments: [
       {
         addr: memberAddress,
@@ -253,7 +235,6 @@ export const addMemberActions = ({
         feegrantGrantAllowanceAction({
           daoAddress,
           authorizationId,
-          roleId,
           memberAddress,
         }),
       ]
@@ -263,8 +244,6 @@ export const addMemberActions = ({
 type FeegrantActionParams = {
   /** the address of the dao */
   daoAddress: string;
-  /** the id of the role that includes an authorization to grant feegrant allowance */
-  roleId: number;
   /** the id of the authorization that has permission to grant feegrant allowance */
   authorizationId: number;
   /** the address of the member to add */
@@ -274,7 +253,6 @@ type FeegrantActionParams = {
 export const feegrantGrantAllowanceAction = ({
   daoAddress,
   authorizationId,
-  roleId,
   memberAddress,
 }: FeegrantActionParams) => {
   // First create a BasicAllowance with no spend limit and no expiration
@@ -300,7 +278,6 @@ export const feegrantGrantAllowanceAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgGrantAllowance.typeUrl,
     value: protoBytes,
   });
@@ -309,7 +286,6 @@ export const feegrantGrantAllowanceAction = ({
 export const feegrantRevokeAllowanceAction = ({
   daoAddress,
   authorizationId,
-  roleId,
   memberAddress,
 }: FeegrantActionParams) => {
   const protoBytes = MsgRevokeAllowance.encode({
@@ -319,7 +295,6 @@ export const feegrantRevokeAllowanceAction = ({
 
   return getStargateAction({
     authorizationId,
-    roleId,
     typeUrl: MsgRevokeAllowance.typeUrl,
     value: protoBytes,
   });
@@ -328,8 +303,6 @@ export const feegrantRevokeAllowanceAction = ({
 type UpdateMemberRoleActionsParams = {
   /** the address of the dao-rbam contract */
   daoRbamAddress: string;
-  /** the id of the role that includes an authorization to update roles */
-  roleId: number;
   /** the id of the authorization that has permission to update roles */
   authorizationId: number;
   /** the address of the member whose role is being updated */
@@ -343,7 +316,6 @@ type UpdateMemberRoleActionsParams = {
 export const updateMemberRoleActions = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   memberAddress,
   newRoleId,
   oldRoleId,
@@ -351,7 +323,6 @@ export const updateMemberRoleActions = ({
   assignAction({
     daoRbamAddress,
     authorizationId,
-    roleId,
     assignments: [
       {
         addr: memberAddress,
@@ -362,7 +333,6 @@ export const updateMemberRoleActions = ({
   revokeAction({
     daoRbamAddress,
     authorizationId,
-    roleId,
     assignments: [
       {
         addr: memberAddress,
@@ -377,8 +347,6 @@ type RemoveMemberActionsParams = {
   daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
-  /** the id of the role that includes an authorization to remove members */
-  roleId: number;
   /** the id of the authorization that has permission to remove members */
   authorizationId: number;
   /** the address of the member to remove */
@@ -395,14 +363,12 @@ export const removeMemberActions = ({
   daoRbamAddress,
   cw4GroupAddress,
   authorizationId,
-  roleId,
   memberAddress,
   memberRoleId,
   withFeegrant,
 }: RemoveMemberActionsParams) => [
   updateMembersAction({
     authorizationId,
-    roleId,
     cw4GroupAddress,
     updateMembers: {
       add: [],
@@ -412,7 +378,6 @@ export const removeMemberActions = ({
   revokeAction({
     daoRbamAddress,
     authorizationId,
-    roleId,
     assignments: [
       {
         addr: memberAddress,
@@ -425,7 +390,6 @@ export const removeMemberActions = ({
         feegrantRevokeAllowanceAction({
           daoAddress,
           authorizationId,
-          roleId,
           memberAddress,
         }),
       ]
@@ -435,8 +399,6 @@ export const removeMemberActions = ({
 type UpdateMembersActionParams = {
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
-  /** the id of the role that includes an authorization to update members */
-  roleId: number;
   /** the id of the authorization that has permission to update members */
   authorizationId: number;
   /** the id of the role to assign to the added member */
@@ -452,11 +414,9 @@ type UpdateMembersActionParams = {
 const updateMembersAction = ({
   cw4GroupAddress,
   authorizationId,
-  roleId,
   updateMembers,
 }: UpdateMembersActionParams) => ({
   authorization_id: authorizationId,
-  role_id: roleId,
   msg: {
     wasm: {
       execute: {
@@ -478,8 +438,6 @@ type Assignment = {
 type UpdateAssignmentsActionParams = {
   /** the address of the dao-rbam contract */
   daoRbamAddress: string;
-  /** the id of the role that includes an authorization to assign roles */
-  roleId: number;
   /** the id of the authorization that has permission to assign roles */
   authorizationId: number;
   /** the list of assignments to assign/revoke */
@@ -489,11 +447,9 @@ type UpdateAssignmentsActionParams = {
 const assignAction = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   assignments,
 }: UpdateAssignmentsActionParams) => ({
   authorization_id: authorizationId,
-  role_id: roleId,
   msg: {
     wasm: {
       execute: {
@@ -512,11 +468,9 @@ const assignAction = ({
 const revokeAction = ({
   daoRbamAddress,
   authorizationId,
-  roleId,
   assignments,
 }: UpdateAssignmentsActionParams) => ({
   authorization_id: authorizationId,
-  role_id: roleId,
   msg: {
     wasm: {
       execute: {

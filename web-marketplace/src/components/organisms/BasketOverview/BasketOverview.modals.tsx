@@ -121,6 +121,8 @@ export const BasketOverviewModals = ({
   const { basketOption, basketInfo, credit, creditBatchDenoms } = basketPutData;
   const { basketToken } = basketTakeData;
 
+  // TODO fix useBasketPutSubmit and useBasketTakeSubmit which rely on dashboard context
+  // which is not available on the basket details page
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],

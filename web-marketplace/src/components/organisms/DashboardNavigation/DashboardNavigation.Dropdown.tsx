@@ -12,6 +12,7 @@ import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AccountType } from 'generated/graphql';
+import { ORG_ENABLED } from 'lib/env';
 
 import { FINISH_ORG_CREATION } from '../RegistryLayout/RegistryLayout.constants';
 import {
@@ -46,7 +47,10 @@ export const AccountSwitcherDropdown = ({
       | AccountOption
       | { id: typeof CREATE_ORGANIZATION_FORM_ID }
     )[] = [...filteredAccounts];
-    if (unfinalizedOrgCreation || (!hasOrganization && onCreateOrganization)) {
+    if (
+      ORG_ENABLED &&
+      (unfinalizedOrgCreation || (!hasOrganization && onCreateOrganization))
+    ) {
       options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }
     return options;

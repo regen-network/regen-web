@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import {
   creditSendAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
@@ -13,6 +13,7 @@ import type { Item } from 'web-components/src/components/modal/TxModal';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { getAccountUrl } from 'lib/block-explorer';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import {
   Send2Event,
   SendFailureEvent,
@@ -63,12 +64,11 @@ const useCreditSendSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
@@ -91,7 +91,6 @@ const useCreditSendSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -102,7 +101,6 @@ const useCreditSendSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditSendAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           sender: accountAddress, // DAO address
           recipient,
@@ -185,12 +183,12 @@ const useCreditSendSubmit = ({
                 name:
                   credits[creditSendOpen].projectName ||
                   credits[creditSendOpen].projectId,
-                url: `/project/${credits[creditSendOpen].projectId}`,
+                url: getProjectPath(credits[creditSendOpen].projectId),
               },
             },
             {
               label: _(msg`credit batch id`),
-              value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+              value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
             },
             {
               label: _(msg`amount sent`),
@@ -214,7 +212,6 @@ const useCreditSendSubmit = ({
       isOrganizationDashboard,
       feeGranter,
       signAndBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

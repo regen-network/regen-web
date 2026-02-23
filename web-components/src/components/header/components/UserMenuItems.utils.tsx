@@ -95,7 +95,7 @@ export const getUserMenuItems = ({
       label: textContent.personalDashboard,
     },
     // Separator (organization actions section)
-    (createOrganization ||
+    (orgEnabled && createOrganization ||
       organizationProfile ||
       (unfinalizedOrgCreation && finishOrgCreation)) && {
       children: <Separator className="w-full my-[14px]" />,

@@ -25,7 +25,7 @@ import { postData } from 'utils/fetch/postData';
 import {
   authzGrantAction,
   getAccountAssignment,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   sellOrderAction,
   wrapRbamActions,
 } from 'utils/rbam.utils';
@@ -601,15 +601,14 @@ export const useMigrateProjects = ({
           | ReturnType<typeof getMsgExecuteContract>
           | undefined;
         let authzMsgs: EncodeObject[] = [];
-        const { roleId, authorizationId } = getRoleAuthorizationIds({
+        const { authorizationId } = getAuthorizationId({
           type: 'organization',
           currentUserRole,
           authorizationName: 'can_manage_sell_orders',
         });
-        if (selectedSellOrders.length > 0 && roleId && authorizationId) {
+        if (selectedSellOrders.length > 0 && authorizationId) {
           const executeActionsMsg = sellOrderAction({
             authorizationId,
-            roleId,
             ...{
               seller: dao.address,
               orders: selectedSellOrders.map(order => ({
@@ -651,7 +650,6 @@ export const useMigrateProjects = ({
               rbamAddress: dao.daoRbamAddress,
               actions: msgTypes.map(typeUrl =>
                 authzGrantAction({
-                  roleId,
                   authorizationId,
                   granter: dao.address,
                   grantee: grantee as string,

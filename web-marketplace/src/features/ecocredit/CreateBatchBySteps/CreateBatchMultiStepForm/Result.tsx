@@ -17,6 +17,7 @@ import {
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+import { getCreditBatchPath } from 'lib/bridge';
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
 import { Link } from 'components/atoms';
@@ -134,7 +135,7 @@ const SuccessResult = ({
           label={_(msg`batch denom`)}
           value={{
             name: batchDenom,
-            url: `/credit-batches/${batchDenom}`,
+            url: getCreditBatchPath(batchDenom),
           }}
           linkComponent={Link}
         />
@@ -154,7 +155,7 @@ const SuccessResult = ({
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton component={Link} href={`/credit-batches/${batchDenom}`}>
+        <OutlinedButton component={Link} href={getCreditBatchPath(batchDenom)}>
           <Trans>SEE CREDIT BATCH</Trans>
         </OutlinedButton>
       </Box>

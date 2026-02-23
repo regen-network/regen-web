@@ -21,7 +21,7 @@ export const LayoutFooter = () => {
     /^\/project-pages$/.test(pathname) ||
     /^\/project\/[^\/]+\/buy$/.test(pathname);
 
-  const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
+  const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: _(msg`Explore`),
       items: [
@@ -32,15 +32,6 @@ export const LayoutFooter = () => {
         {
           title: _(msg`Credit Classes`),
           href: '/#credit-classes',
-        },
-      ],
-    },
-    {
-      title: _(msg`Trade`),
-      items: [
-        {
-          title: 'NCT',
-          href: '/baskets/eco.uC.NCT',
         },
       ],
     },

@@ -5,13 +5,14 @@ import { regen } from '@regen-network/api';
 import type { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import {
   basketPutAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
 import type { FormValues as BasketPutFormValues } from 'web-components/src/components/form/BasketPutForm/BasketPutForm';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import {
   PutInBasket2Event,
   PutInBasketFailureEvent,
@@ -60,16 +61,14 @@ const useBasketPutSubmit = ({
     isOrganizationDashboard,
     organizationRole,
     organizationRbamAddress,
-    organizationDaoAddress,
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
@@ -93,7 +92,6 @@ const useBasketPutSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -104,7 +102,6 @@ const useBasketPutSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = basketPutAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           basketDenom: values.basketDenom,
@@ -165,14 +162,14 @@ const useBasketPutSubmit = ({
               label: _(msg`project`),
               value: {
                 name: credit.projectName || credit.projectId,
-                url: `/project/${credit.projectId}`,
+                url: getProjectPath(credit.projectId),
               },
             },
             {
               label: _(msg`credit batch id`),
               value: {
                 name: credit.denom,
-                url: `/credit-batches/${credit.denom}`,
+                url: getCreditBatchPath(credit.denom),
               },
             },
             {
@@ -210,7 +207,6 @@ const useBasketPutSubmit = ({
       credit.projectName,
       accountAddress,
       isOrganizationDashboard,
-      roleId,
       organizationRbamAddress,
       feeGranter,
       wallet?.address,

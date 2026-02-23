@@ -194,7 +194,6 @@ export default function useCreateBatchSubmit(): Return {
     const organizationDaoAddress = locationState?.organizationDaoAddress;
     const organizationRbamAddress = locationState?.organizationRbamAddress;
     const organizationAuthorizationId = locationState?.authorizationId;
-    const organizationRoleId = locationState?.roleId;
 
     let message:
       | {
@@ -222,8 +221,7 @@ export default function useCreateBatchSubmit(): Return {
       if (
         organizationDaoAddress &&
         organizationRbamAddress &&
-        organizationAuthorizationId &&
-        organizationRoleId
+        organizationAuthorizationId
       ) {
         // Ensure all issuance fields have default values for protobuf encoding
         const issuance = (message.value.issuance || []).map(item => ({
@@ -250,7 +248,6 @@ export default function useCreateBatchSubmit(): Return {
         const executeActionsMsg = getExecuteActionsStargate([
           {
             authorizationId: organizationAuthorizationId,
-            roleId: organizationRoleId,
             typeUrl: message.typeUrl,
             value: protoBytes,
           },

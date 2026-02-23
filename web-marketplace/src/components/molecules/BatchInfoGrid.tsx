@@ -10,6 +10,8 @@ import {
   formatDate,
 } from 'web-components/src/utils/format';
 
+import { getCreditClassPath, getProjectPath } from 'lib/bridge';
+
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
 
@@ -38,20 +40,22 @@ export const BatchInfoGrid: React.FC<
           <Box component="span" sx={{ textTransform: 'capitalize' }}>
             <LinkWithArrow
               label={projectName || '-'}
-              href={projectOnChainId ? `/project/${projectOnChainId}` : ''}
+              href={projectOnChainId ? getProjectPath(projectOnChainId) : ''}
             />
           </Box>
         </BatchDetail>
       </GridItem>
-      <GridItem>
-        <BatchDetail label={_(msg`Credit Class`)}>
-          <LinkWithArrow
-            target="_self"
-            href={`/credit-classes/${batch.classId}`}
-            label={batch?.classId || '-'}
-          />
-        </BatchDetail>
-      </GridItem>
+      {batch?.classId && (
+        <GridItem>
+          <BatchDetail label={_(msg`Credit Class`)}>
+            <LinkWithArrow
+              target="_self"
+              href={getCreditClassPath(batch?.classId)}
+              label={batch?.classId}
+            />
+          </BatchDetail>
+        </GridItem>
+      )}
       <GridItem>
         <BatchDetail label={_(msg`Batch start and end date`)}>
           {batchDate(batch?.startDate) + ' - ' + batchDate(batch?.endDate)}

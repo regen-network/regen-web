@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import {
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   updateProjectAdminAction,
   updateProjectMetadataAction,
   wrapRbamActions,
@@ -12,6 +12,7 @@ import {
 
 import { ProjectFieldsFragment } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
+import { getProjectPath } from 'lib/bridge';
 import { generateIri } from 'lib/db/api/metadata-graph';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getAnchoredProjectBaseMetadata } from 'lib/rdf';
@@ -64,7 +65,7 @@ const useProjectEditSubmit = ({
   const { _ } = useLingui();
   const { wallet } = useWallet();
 
-  const { roleId, authorizationId } = getRoleAuthorizationIds({
+  const { authorizationId } = getAuthorizationId({
     type: 'project',
     currentUserRole,
     authorizationName: 'can_manage_projects',
@@ -93,9 +94,9 @@ const useProjectEditSubmit = ({
             admin,
             newMetadata: iriResponse.iri,
           };
-          if (adminDao?.address && authorizationId && roleId) {
+          if (adminDao?.address && authorizationId) {
             actions.push(
-              updateProjectMetadataAction({ authorizationId, roleId, ...msg }),
+              updateProjectMetadataAction({ authorizationId, ...msg }),
             );
           } else msgs.push(updateProjectMetadata(msg));
         }
@@ -106,10 +107,8 @@ const useProjectEditSubmit = ({
             admin,
             newAdmin,
           };
-          if (adminDao?.address && authorizationId && roleId) {
-            actions.push(
-              updateProjectAdminAction({ authorizationId, roleId, ...msg }),
-            );
+          if (adminDao?.address && authorizationId) {
+            actions.push(updateProjectAdminAction({ authorizationId, ...msg }));
           } else
             msgs.push(
               updateProjectAdmin({
@@ -140,7 +139,7 @@ const useProjectEditSubmit = ({
                 label: 'project',
                 value: {
                   name: metadata['schema:name'] || '',
-                  url: `/project/${projectId}`,
+                  url: getProjectPath(projectId),
                 },
               },
             ];
@@ -192,7 +191,6 @@ const useProjectEditSubmit = ({
       onTxSuccessful,
       onBroadcast,
       authorizationId,
-      roleId,
       adminDao?.address,
       feeGranter,
       wallet?.address,

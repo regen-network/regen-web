@@ -71,12 +71,7 @@ const FooterItem: React.FC<React.PropsWithChildren<FooterItemProps>> = ({
 
 const Footer: React.FC<
   React.PropsWithChildren<{
-    footerItems: [
-      FooterItemProps,
-      FooterItemProps,
-      FooterItemProps,
-      FooterItemProps,
-    ];
+    footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
     termsUrl: string;
     privacyUrl: string;
     iconLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
@@ -119,7 +114,7 @@ const Footer: React.FC<
     >
       <Section>
         <Grid container spacing={10} sx={{ mt: 3 }}>
-          <Grid item xs={12} lg={4}>
+          <Grid item xs={12} lg={3}>
             <Box
               pb={[0, 8]}
               display="flex"
@@ -135,31 +130,24 @@ const Footer: React.FC<
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={2} sx={{ mt: 5 }}>
+          <Grid item xs={12} sm={4} lg={3} sx={sxs.footerItem}>
             <FooterItem
               title={footerItems[0].title}
               items={footerItems[0].items}
               linkComponent={LinkComponent}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={2} sx={sxs.footerItem}>
+          <Grid item xs={12} sm={4} lg={3} sx={sxs.footerItem}>
             <FooterItem
               title={footerItems[1].title}
               items={footerItems[1].items}
               linkComponent={LinkComponent}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={2} sx={sxs.footerItem}>
+          <Grid item xs={12} sm={4} lg={3} sx={sxs.footerItem}>
             <FooterItem
               title={footerItems[2].title}
               items={footerItems[2].items}
-              linkComponent={LinkComponent}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3} lg={2} sx={sxs.footerItem}>
-            <FooterItem
-              title={footerItems[3].title}
-              items={footerItems[3].items}
               linkComponent={LinkComponent}
             />
           </Grid>

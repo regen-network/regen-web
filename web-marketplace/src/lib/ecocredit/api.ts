@@ -503,6 +503,36 @@ export const queryBatches = async ({
   }
 };
 
+export const queryAllBatches = async ({
+  client,
+  request,
+}: QueryBatchesProps): Promise<QueryBatchesResponse> => {
+  try {
+    let batches: BatchInfo[] = [];
+    let response: QueryBatchesResponse | undefined;
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
+        request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
+      }
+      response = await client.regen.ecocredit.v1.batches({
+        pagination: request?.pagination,
+      });
+      batches.push(...response.batches);
+    }
+    return { batches };
+  } catch (err) {
+    throw new Error(
+      `Error in the Batches query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
 // BatchesByClass
 
 export interface QueryBatchesByClassProps extends RPCQueryClientProps {

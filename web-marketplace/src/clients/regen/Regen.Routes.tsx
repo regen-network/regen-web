@@ -22,13 +22,11 @@ import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loade
 import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
 import { EditProfile } from 'legacy-pages/Dashboard/Dashboard.EditProfile';
 import { DashboardSettings } from 'legacy-pages/Dashboard/Dashboard.Settings';
-import MyBridge from 'legacy-pages/Dashboard/MyBridge';
-import { MyBridgableEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
-import { MyBridgedEcocreditsTable } from 'legacy-pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
 import MyCreditBatches from 'legacy-pages/Dashboard/MyCreditBatches';
 import MyCreditClasses from 'legacy-pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'legacy-pages/Dashboard/MyEcocredits';
 import MyProjects from 'legacy-pages/Dashboard/MyProjects';
+import { DeprecatedBasketDetails } from 'legacy-pages/DeprecatedBasketDetails/DeprecatedBasketDetails';
 import { ecocreditBatchesLoader } from 'legacy-pages/EcocreditBatches/EcocreditBatches.loader';
 import Faucet from 'legacy-pages/Faucet';
 import { homeLoader } from 'legacy-pages/Home/Home.loader';
@@ -43,9 +41,9 @@ import { safeLazy } from 'utils/safeLazy';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
-import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { ORG_ENABLED } from 'lib/env';
+import { BRIDGE_BASKET_DENOM, BRIDGE_CLASS_ID, ORG_ENABLED } from 'lib/env';
+import { useWallet } from 'lib/wallet/wallet';
 
 // import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { AuthRoute } from 'components/atoms/AuthRoute';
@@ -64,11 +62,19 @@ const AllProjects = safeLazy(
   () => import('../../legacy-pages/Projects/AllProjects'),
 );
 const BasicInfo = safeLazy(() => import('../../legacy-pages/BasicInfo'));
-const BatchDetails = safeLazy(() => import('../../legacy-pages/BatchDetails'));
 const BasketDetails = safeLazy(
   () => import('../../legacy-pages/BasketDetails'),
 );
+const BridgeBlockedBatchDetails = safeLazy(
+  () => import('../../legacy-pages/BridgeBlockedBatchDetails'),
+);
 const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
+const DeprecatedBatchDetails = safeLazy(
+  () => import('../../legacy-pages/DeprecatedBatchDetails'),
+);
+const DeprecatedCreditClassDetails = safeLazy(
+  () => import('../../legacy-pages/DeprecatedCreditClassDetails'),
+);
 const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
 
 const ChooseCreditClassPage = safeLazy(
@@ -207,14 +213,6 @@ export const getRegenRoutes = ({
         element={<KeplrOrAuthRoute component={MyEcocredits} />}
       />
       <Route
-        path="portfolio/bridge"
-        element={<KeplrRoute component={MyBridge} />}
-      >
-        <Route index element={<MyBridgableEcocreditsTable />} />
-        <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-        <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
-      </Route>
-      <Route
         path="projects"
         element={<KeplrOrAuthRoute component={MyProjects} />}
       />
@@ -331,10 +329,27 @@ export const getRegenRoutes = ({
             path="ecocredits/create-batch"
             element={<KeplrRoute component={CreateBatch} />}
           />
+          <Route
+            path={`baskets/${BRIDGE_BASKET_DENOM}`}
+            element={<NotFoundPage />}
+          />
+          <Route
+            path="baskets/deprecated/:basketDenom"
+            element={<DeprecatedBasketDetails />}
+          />
           <Route path="baskets/:basketDenom" element={<BasketDetails />} />
           <Route
+            path="credit-batches/deprecated/:batchDenom"
+            element={<DeprecatedBatchDetails />}
+            loader={batchDetailsLoader({
+              reactQueryClient,
+              rpcQueryClient,
+              languageCode,
+            })}
+          />
+          <Route
             path="credit-batches/:batchDenom"
-            element={<BatchDetails />}
+            element={<BridgeBlockedBatchDetails />}
             loader={batchDetailsLoader({
               reactQueryClient,
               rpcQueryClient,
@@ -412,7 +427,15 @@ export const getRegenRoutes = ({
               element={<KeplrOrAuthRoute component={CreateOrganization} />}
             />
           )}
+          <Route
+            path={`credit-classes/${BRIDGE_CLASS_ID}`}
+            element={<NotFoundPage />}
+          />
           <Route path="credit-classes">
+            <Route
+              path="deprecated/:creditClassId"
+              element={<DeprecatedCreditClassDetails />}
+            />
             <Route path=":creditClassId" element={<CreditClassDetails />} />
             <Route
               path="create"

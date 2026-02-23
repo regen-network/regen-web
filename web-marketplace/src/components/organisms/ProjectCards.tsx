@@ -9,6 +9,7 @@ import { makeStyles } from 'tss-react/mui';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { getProjectPath } from 'lib/bridge';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,
@@ -129,7 +130,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
             <AppLink
               className={styles.swipeItem}
               key={projectId || i}
-              href={`/project/${projectId}`}
+              href={getProjectPath(projectId as string)}
             >
               <LinkedProject project={project} />
             </AppLink>
@@ -156,7 +157,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
             >
               <AppLink
                 className={styles.projectCard}
-                href={`/project/${projectId}`}
+                href={getProjectPath(projectId as string)}
               >
                 <LinkedProject project={project} />
               </AppLink>

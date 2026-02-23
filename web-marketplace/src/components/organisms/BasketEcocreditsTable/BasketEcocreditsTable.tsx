@@ -17,6 +17,11 @@ import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
+import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
@@ -98,7 +103,7 @@ export const BasketEcocreditsTable: React.FC<
           variant="skeleton"
         >
           <Link
-            href={`/project/${credit.projectId}`}
+            href={getProjectPath(credit.projectId)}
             target="_blank"
             sx={tableStyles.ellipsisColumn}
           >
@@ -110,7 +115,7 @@ export const BasketEcocreditsTable: React.FC<
           isLoading={!credit.denom}
           variant="skeleton"
         >
-          <Link href={`/credit-batches/${credit.denom}`}>{credit.denom}</Link>
+          <Link href={getCreditBatchPath(credit.denom)}>{credit.denom}</Link>
         </WithLoader>,
         <AccountLink key={`issuer-${credit.issuer}`} address={credit.issuer} />,
         formatNumber({
@@ -122,12 +127,16 @@ export const BasketEcocreditsTable: React.FC<
           isLoading={credit.classId === ''}
           variant="skeleton"
         >
-          <Link
-            href={`/credit-classes/${credit.classId}`}
-            sx={tableStyles.ellipsisContentColumn}
-          >
-            {credit?.className && <BlockContent content={credit?.className} />}
-          </Link>
+          {credit.classId && (
+            <Link
+              href={getCreditClassPath(credit.classId)}
+              sx={tableStyles.ellipsisContentColumn}
+            >
+              {credit?.className && (
+                <BlockContent content={credit?.className} />
+              )}
+            </Link>
+          )}
         </WithLoader>,
         <GreyText key={`start-${credit.startDate}`}>
           {formatDate(credit.startDate)}

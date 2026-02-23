@@ -9,6 +9,7 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { BRIDGE_CLASS_ID } from 'lib/env';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
@@ -43,7 +44,11 @@ export const UserSellOrdersToolbar = ({
     isPaginatedQuery: false,
   });
   const tradableCredits =
-    credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
+    credits?.filter(
+      credit =>
+        Number(credit.balance?.tradableAmount) > 0 &&
+        credit.classId !== BRIDGE_CLASS_ID,
+    ) || [];
   const hasTradableCredits = tradableCredits.length > 0;
   const canStartSellFlow = canManageSellOrders && hasTradableCredits;
 

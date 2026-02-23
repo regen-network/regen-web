@@ -6,6 +6,7 @@ import {
 } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { getProjectPath } from 'lib/bridge';
 import { IS_TERRASOS } from 'lib/env';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
@@ -64,7 +65,7 @@ export const normalizeProjectsWithOrderData = ({
       area: 0,
       areaUnit: '',
       purchaseInfo,
-      href: `/project/${project.id}`,
+      href: getProjectPath(project.id),
       sellOrders: sellOrdersNormalized,
       metadata: project.metadata,
       creditClassId: project.classId,

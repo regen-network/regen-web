@@ -10,7 +10,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { getBaseDenom } from 'utils/ibc/getBaseDenom';
 import {
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   sellOrderAction,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
@@ -23,6 +23,7 @@ import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { ALL_PROJECTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery.constants';
@@ -80,12 +81,11 @@ const useCreateSellOrderSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageSellOrdersAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_sell_orders',
-    });
+  const { authorizationId: manageSellOrdersAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_sell_orders',
+  });
 
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
@@ -102,7 +102,6 @@ const useCreateSellOrderSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageSellOrdersAuthId
@@ -113,7 +112,6 @@ const useCreateSellOrderSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = sellOrderAction({
-          roleId,
           authorizationId: manageSellOrdersAuthId,
           seller: accountAddress, // DAO address
           orders: [
@@ -292,12 +290,12 @@ const useCreateSellOrderSubmit = ({
             label: _(msg`project`),
             value: {
               name: projectName ?? projectId,
-              url: `/project/${projectId}`,
+              url: getProjectPath(projectId),
             },
           },
           {
             label: _(msg`credit batch id`),
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+            value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
           },
           {
             label: _(msg`amount of credits`),
@@ -315,7 +313,6 @@ const useCreateSellOrderSubmit = ({
       credits,
       signAndBroadcast,
       onTxBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageSellOrdersAuthId,

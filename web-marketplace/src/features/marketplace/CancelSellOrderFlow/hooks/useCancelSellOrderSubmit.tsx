@@ -8,7 +8,7 @@ import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { getBaseDenom } from 'utils/ibc/getBaseDenom';
 import {
   cancelSellOrderAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
@@ -20,6 +20,7 @@ import {
 
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import { microToDenom } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { useWallet } from 'lib/wallet/wallet';
@@ -70,12 +71,11 @@ const useCancelSellOrderSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageSellOrdersAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_sell_orders',
-    });
+  const { authorizationId: manageSellOrdersAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_sell_orders',
+  });
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -89,13 +89,11 @@ const useCancelSellOrderSubmit = ({
 
     if (
       isOrganizationDashboard &&
-      roleId &&
       manageSellOrdersAuthId &&
       organizationRbamAddress &&
       wallet?.address
     ) {
       const action = cancelSellOrderAction({
-        roleId,
         authorizationId: manageSellOrdersAuthId,
         seller: accountAddress, // DAO address
         sellOrderId: BigInt(selectedSellOrder.id),
@@ -175,12 +173,12 @@ const useCancelSellOrderSubmit = ({
           label: _(msg`project`),
           value: {
             name: selectedSellOrder.project?.name || projectId,
-            url: `/project/${projectId}`,
+            url: getProjectPath(projectId),
           },
         },
         {
           label: _(msg`credit batch id`),
-          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+          value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
         },
         {
           label: _(msg`amount`),
@@ -200,7 +198,6 @@ const useCancelSellOrderSubmit = ({
     setIsProcessingModalOpen,
     setSelectedSellOrder,
     isOrganizationDashboard,
-    roleId,
     manageSellOrdersAuthId,
     organizationRbamAddress,
     wallet?.address,

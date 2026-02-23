@@ -17,6 +17,7 @@ import { Body, Label, Title } from 'web-components/src/components/typography';
 import { truncateHash } from 'web-components/src/utils/truncate';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getProjectPath } from 'lib/bridge';
 import {
   getProjectCardButtonMapping,
   SEE_LESS,
@@ -139,7 +140,9 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
         <OutlinedButton
           sx={{ margin: '0 auto' }}
           role="link"
-          onClick={() => router.push(`/project/${currentProjectId}`)}
+          onClick={() =>
+            router.push(getProjectPath(currentProjectId as string))
+          }
         >
           {buttons.view.text}
         </OutlinedButton>

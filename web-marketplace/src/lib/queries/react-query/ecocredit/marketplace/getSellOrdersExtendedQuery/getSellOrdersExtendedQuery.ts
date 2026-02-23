@@ -7,6 +7,7 @@ import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getBaseDenom';
 
 import { FetchSimplePriceResponse } from 'lib/coingecko';
+import { BRIDGE_CLASS_ID } from 'lib/env';
 import { DenomWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
@@ -48,9 +49,14 @@ export const getSellOrdersExtendedQuery = ({
       sellOrders.push(...response.sellOrders);
     }
 
+    const filteredSellOrders = sellOrders.filter(
+      sellOrder =>
+        !BRIDGE_CLASS_ID || !sellOrder.batchDenom.includes(BRIDGE_CLASS_ID),
+    );
+
     // Find sell orders that have ibc askDenom and gather their hash
     const ibcDenomHashes = uniq(
-      sellOrders
+      filteredSellOrders
         .filter(sellOrder => sellOrder.askDenom.includes(IBC_DENOM_PREFIX))
         .map(sellOrder => sellOrder.askDenom.replace(IBC_DENOM_PREFIX, '')),
     );
@@ -73,7 +79,7 @@ export const getSellOrdersExtendedQuery = ({
       });
 
     // Update sell orders by replacing ibc denoms with base denom from Denom if needed
-    const sellOrdersWithBaseDenom = sellOrders.map(sellOrder => {
+    const sellOrdersWithBaseDenom = filteredSellOrders.map(sellOrder => {
       const denom = denoms?.find(denom =>
         sellOrder.askDenom.includes(denom.hash),
       );

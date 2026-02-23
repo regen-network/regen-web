@@ -6,9 +6,10 @@ import {
 } from '@tanstack/react-query';
 import { getClient, getSanityClient } from 'app/ApolloClient';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import { isBridgeClassIdPrefix } from 'lib/bridge';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -24,11 +25,11 @@ import {
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-interface ProjectPageProps {
+export interface ProjectPageProps {
   params: Promise<{ id: string; lang: string }>;
 }
 
-const getProject = cache(async (id: string, lang: string) => {
+export const getProject = cache(async (id: string, lang: string) => {
   try {
     const isOnChainId = getIsOnChainId(id);
     const isOffChainUuid = getIsUuid(id);
@@ -92,6 +93,7 @@ const getProject = cache(async (id: string, lang: string) => {
     );
 
     return {
+      onChainProjectId,
       projectMetadata: metadataResponse,
       projectPageMetadata: offChainProject?.metadata,
       slug,
@@ -106,7 +108,12 @@ const getProject = cache(async (id: string, lang: string) => {
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
-  const { projectMetadata, projectPageMetadata } = await getProject(id, lang);
+  const { projectMetadata, projectPageMetadata, onChainProjectId } =
+    await getProject(id, lang);
+  if (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId)) {
+    return;
+  }
+
   const title =
     projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
   const description = projectPageMetadata?.['schema:description'];
@@ -129,7 +136,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id, lang } = await params;
 
   const sanityClient = await getSanityClient();
-  const { rpcQueryClient, queryClient, slug } = await getProject(id, lang);
+  const { rpcQueryClient, queryClient, slug, onChainProjectId } =
+    await getProject(id, lang);
+  if (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId)) {
+    return notFound();
+  }
   if (slug) {
     redirect(`/${lang}/project/${slug}`);
   }

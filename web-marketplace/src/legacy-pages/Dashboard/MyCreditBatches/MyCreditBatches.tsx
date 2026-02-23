@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useTheme } from '@mui/material';
-import { getRoleAuthorizationIds } from 'utils/rbam.utils';
+import { getAuthorizationId } from 'utils/rbam.utils';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/src/components/empty-state';
@@ -37,7 +37,7 @@ export const MyCreditBatches = (): JSX.Element => {
     ? isOrganizationOwner || isOrganizationAdmin
     : isIssuer;
 
-  const { roleId, authorizationId } = getRoleAuthorizationIds({
+  const { authorizationId } = getAuthorizationId({
     type: 'organization',
     currentUserRole: organizationRole,
     authorizationName: 'can_manage_credit_issuance',
@@ -47,8 +47,7 @@ export const MyCreditBatches = (): JSX.Element => {
     isOrganizationDashboard &&
       organizationDaoAddress &&
       organizationRbamAddress &&
-      authorizationId &&
-      roleId,
+      authorizationId,
   );
 
   const createBatchState = hasOrgExecutionContext
@@ -57,7 +56,6 @@ export const MyCreditBatches = (): JSX.Element => {
         organizationDaoAddress,
         organizationRbamAddress,
         authorizationId,
-        roleId,
       }
     : undefined;
 

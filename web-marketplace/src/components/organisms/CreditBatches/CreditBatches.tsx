@@ -21,6 +21,11 @@ import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 import {
+  getCreditBatchPath,
+  getCreditClassPath,
+  getProjectPath,
+} from 'lib/bridge';
+import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
@@ -135,28 +140,35 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
 
           result.push(
             <WithLoader isLoading={!batch.projectName} variant="skeleton">
-              <Link
-                href={`/project/${batch?.projectId}`}
-                className="block truncate max-w-[125px]"
-              >
-                {batch?.projectName}
-              </Link>
+              {batch?.projectId && (
+                <Link
+                  href={getProjectPath(batch?.projectId)}
+                  className="block truncate max-w-[125px]"
+                >
+                  {batch?.projectName}
+                </Link>
+              )}
             </WithLoader>,
             <WithLoader
               isLoading={!batch.classId}
               variant="skeleton"
               key="classId"
             >
-              <Link
-                href={`${LINK_PREFIX}/credit-classes/${batch.classId}`}
-                className="block truncate max-w-[125px]"
-              >
-                <BlockContent className="truncate" content={batch.className} />
-              </Link>
+              {batch.classId && (
+                <Link
+                  href={`${LINK_PREFIX}${getCreditClassPath(batch.classId)}`}
+                  className="block truncate max-w-[125px]"
+                >
+                  <BlockContent
+                    className="truncate"
+                    content={batch.className}
+                  />
+                </Link>
+              )}
             </WithLoader>,
             <Link
               className={classes.noWrap}
-              href={`${LINK_PREFIX}/credit-batches/${batch.denom}`}
+              href={`${LINK_PREFIX}${getCreditBatchPath(batch.denom)}`}
             >
               {batch.denom}
             </Link>,

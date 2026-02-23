@@ -5,7 +5,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   updateProjectAdminAction,
   wrapRbamActions,
 } from 'utils/rbam.utils';
@@ -65,18 +65,17 @@ export const useHandleTxDelivered = ({
               ),
             );
           }
-          const { roleId, authorizationId } = getRoleAuthorizationIds({
+          const { authorizationId } = getAuthorizationId({
             type: 'organization',
             currentUserRole: organizationRole,
             authorizationName: 'can_manage_projects',
           });
-          if (!roleId || !authorizationId) {
+          if (!authorizationId) {
             throw new Error(
               _(msg`You do not have permission to update projects`),
             );
           }
           const updateProjectAdminActionMsg = updateProjectAdminAction({
-            roleId,
             authorizationId,
             ...{
               projectId: projectOnChainId,

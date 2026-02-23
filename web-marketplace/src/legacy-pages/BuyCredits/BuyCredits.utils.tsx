@@ -21,6 +21,7 @@ import { truncate } from 'web-components/src/utils/truncate';
 
 import { apiUri } from 'lib/apiUri';
 import { getHashUrl } from 'lib/block-explorer';
+import { getProjectPath } from 'lib/bridge';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
@@ -300,7 +301,7 @@ export const getCardItems = ({
     label: i18n._(msg`project`),
     value: {
       name: project.name,
-      url: `/project/${project.id}`,
+      url: getProjectPath(project.id),
     },
   },
   {

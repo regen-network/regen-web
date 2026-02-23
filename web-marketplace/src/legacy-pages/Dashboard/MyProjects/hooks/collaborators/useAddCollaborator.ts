@@ -43,7 +43,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
   const { signAndBroadcast } = useMsgClient();
 
   const {
-    projectRoleId,
     projectAuthorizationId,
     refetchCollaborators,
     orgDaoAddress,
@@ -62,8 +61,7 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
         !cw4GroupAddress ||
         !role ||
         !currentUserRole ||
-        !projectAuthorizationId ||
-        !projectRoleId
+        !projectAuthorizationId
       ) {
         setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
         return;
@@ -79,7 +77,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
                 daoRbamAddress,
                 cw4GroupAddress,
                 authorizationId: projectAuthorizationId,
-                roleId: projectRoleId,
                 memberAddress: addressOrEmail,
                 roleIdToAdd: projectRoleIdToAdd,
                 withFeegrant: true,
@@ -117,7 +114,6 @@ export function useAddCollaborator(params: CollaboratorsHookParams) {
       cw4GroupAddress,
       currentUserRole,
       projectAuthorizationId,
-      projectRoleId,
       setErrorBannerText,
       _,
       refetchCollaborators,

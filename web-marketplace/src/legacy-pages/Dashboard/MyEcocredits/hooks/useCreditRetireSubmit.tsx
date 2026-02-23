@@ -5,7 +5,7 @@ import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   creditRetireAction,
-  getRoleAuthorizationIds,
+  getAuthorizationId,
   wrapRbamActions,
 } from 'web-marketplace/src/utils/rbam.utils';
 
@@ -13,6 +13,7 @@ import type { Item } from 'web-components/src/components/modal/TxModal';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
+import { getCreditBatchPath, getProjectPath } from 'lib/bridge';
 import { getAllRetirementsByOwnerQueryKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getAllRetirementsByOwner/getAllRetirementsByOwner.constants';
 import {
   Retire2Event,
@@ -70,12 +71,11 @@ const useCreditRetireSubmit = ({
     feeGranter,
   } = useDashboardContext();
 
-  const { roleId, authorizationId: manageCreditsAuthId } =
-    getRoleAuthorizationIds({
-      type: 'organization',
-      currentUserRole: organizationRole,
-      authorizationName: 'can_manage_credits',
-    });
+  const { authorizationId: manageCreditsAuthId } = getAuthorizationId({
+    type: 'organization',
+    currentUserRole: organizationRole,
+    authorizationName: 'can_manage_credits',
+  });
 
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
@@ -99,7 +99,6 @@ const useCreditRetireSubmit = ({
 
       if (isOrganizationDashboard) {
         if (
-          !roleId ||
           !organizationRbamAddress ||
           !wallet?.address ||
           !manageCreditsAuthId
@@ -110,7 +109,6 @@ const useCreditRetireSubmit = ({
         }
         // Organization context: wrap in RBAM execute_actions
         const action = creditRetireAction({
-          roleId,
           authorizationId: manageCreditsAuthId,
           owner: accountAddress, // DAO address
           credits: [
@@ -185,12 +183,12 @@ const useCreditRetireSubmit = ({
               name:
                 credits[creditRetireOpen].projectName ||
                 credits[creditRetireOpen].projectId,
-              url: `/project/${credits[creditRetireOpen].projectId}`,
+              url: getProjectPath(credits[creditRetireOpen].projectId),
             },
           },
           {
             label: _(msg`credit batch id`),
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+            value: { name: batchDenom, url: getCreditBatchPath(batchDenom) },
           },
           {
             label: _(msg`amount retired`),
@@ -210,7 +208,6 @@ const useCreditRetireSubmit = ({
       isOrganizationDashboard,
       feeGranter,
       signAndBroadcast,
-      roleId,
       organizationRbamAddress,
       wallet?.address,
       manageCreditsAuthId,

@@ -96,53 +96,6 @@ export const getProfileUrl = (account: {
   return `/profiles/${identifier}`;
 };
 
-type GetPortfolioTabsParams = {
-  portfolioLabel: string;
-  bridgeLabel: string;
-  basePath: string;
-};
-
-export const getPortfolioTabs = ({
-  portfolioLabel,
-  bridgeLabel,
-  basePath,
-}: GetPortfolioTabsParams): IconTabProps[] => [
-  {
-    label: portfolioLabel,
-    href: `${basePath}/portfolio`,
-    icon: <CreditsIcon fontSize="small" linearGradient />,
-  },
-  {
-    label: bridgeLabel,
-    href: `${basePath}/portfolio/bridge`,
-    icon: <BridgeIcon linearGradient />,
-  },
-];
-
-export const getActivePortfolioTab = (
-  tabs: IconTabProps[],
-  pathname: string,
-): number => {
-  const normalizedPath = pathname.endsWith('/')
-    ? pathname.slice(0, -1)
-    : pathname;
-
-  return Math.max(
-    tabs.findIndex(tab => {
-      const normalizedHref = tab.href?.endsWith('/')
-        ? tab.href.slice(0, -1)
-        : tab.href;
-
-      if (normalizedHref?.endsWith('/bridge')) {
-        return normalizedPath.startsWith(normalizedHref);
-      }
-
-      return normalizedPath === normalizedHref;
-    }),
-    0,
-  );
-};
-
 type MetadataKey = 'banner' | 'website_link' | 'twitter_link';
 
 type GetMetadataActionParams = {
@@ -150,7 +103,6 @@ type GetMetadataActionParams = {
   nextValue?: string | null;
   previousValue?: string | null;
   authorizationId: number;
-  roleId: number;
   daoAddress: string;
 };
 
@@ -159,7 +111,6 @@ export const getMetadataAction = ({
   nextValue,
   previousValue,
   authorizationId,
-  roleId,
   daoAddress,
 }: GetMetadataActionParams): WasmExecuteAction | undefined => {
   const normalizedNext = nextValue ?? null;
@@ -179,7 +130,6 @@ export const getMetadataAction = ({
   if (normalizedNext) {
     return {
       authorizationId,
-      roleId,
       contract: daoAddress,
       msg: {
         set_item: {
@@ -193,7 +143,6 @@ export const getMetadataAction = ({
   if (normalizedPrevious) {
     return {
       authorizationId,
-      roleId,
       contract: daoAddress,
       msg: {
         remove_item: {

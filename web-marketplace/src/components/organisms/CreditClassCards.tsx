@@ -12,6 +12,7 @@ import { ProgramImageChildren } from 'web-components/src/components/cards/Projec
 import { Account } from 'web-components/src/components/user/UserInfo';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { getCreditClassPath } from 'lib/bridge';
 import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
@@ -80,7 +81,7 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
               description={<BlockContent content={c?.shortDescriptionRaw} />}
               imgSrc={getSanityImgSrc(c?.image)}
               onClick={() => {
-                const path = c?.path ? `/credit-classes/${c.path}` : undefined;
+                const path = c?.path ? getCreditClassPath(c.path) : undefined;
                 if (path) navigate(path);
               }}
               title={title}

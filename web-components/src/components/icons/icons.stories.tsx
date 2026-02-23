@@ -141,7 +141,6 @@ import { SpreadsheetFileIcon } from './SpreadsheetFileIcon';
 import SuccessIcon from './SuccessIcon';
 import TakeFromBasketIcon from './TakeFromBasketIcon';
 import TotalCreditsIcon from './TotalCreditsIcon';
-import ToucanIcon from './ToucanIcon';
 import TradeableIcon from './TradeableIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
@@ -398,7 +397,6 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<TakeFromBasketIcon />} label="TakeFromBasketIcon" />
     <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
     <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
-    <LabeledIcon icon={<ToucanIcon />} label="ToucanIcon" />
     <LabeledIcon
       icon={<TradeableIcon sx={{ color: 'grey.600' }} />}
       label="tradeableIcon"

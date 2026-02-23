@@ -22,6 +22,7 @@ import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceIn
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Title } from 'web-components/src/components/typography/Title';
 
+import { getProjectPath } from 'lib/bridge';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { OptimizedImage } from 'components/atoms/OptimizedImage';
@@ -197,7 +198,9 @@ const ProjectDashboardBanner = ({
                 startIcon={<EyeIcon />}
                 onClick={() =>
                   // project page belongs to next app router so we need to use next router
-                  router.push(`/project/${project.slug || project.id}`)
+                  router.push(
+                    getProjectPath((project.slug || project.id) as string),
+                  )
                 }
               >
                 {_(VIEW)}

@@ -750,6 +750,8 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:11
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:230
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -1894,8 +1896,13 @@ msgstr ""
 msgid "Data Deficient"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:6
 #: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:52
 msgid "Data Posts"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:3
+msgid "data posts table"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:16
@@ -1911,6 +1918,11 @@ msgstr ""
 msgid "date"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:229
+msgid "Date Created"
+msgstr ""
+
 #: src/components/organisms/Documentation/Documentation.constants.ts:10
 #~ msgid "Date of upload"
 #~ msgstr ""
@@ -1922,6 +1934,10 @@ msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:6
 msgid "Delete"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:16
+msgid "Delete Post"
 msgstr ""
 
 #: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.constants.tsx:9
@@ -1991,6 +2007,7 @@ msgstr ""
 msgid "Don’t see anything? <0>Resend email</0>."
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:256
 #: src/components/organisms/MediaSection.tsx:50
 #: src/legacy-pages/Post/Post.constants.ts:16
 #: src/lib/constants/shared.constants.tsx:24
@@ -2128,6 +2145,10 @@ msgstr ""
 
 #: src/legacy-pages/Dashboard/MyCreditClasses/MyCreditClasses.constants.ts:3
 msgid "edit credit class"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:15
+msgid "Edit Draft"
 msgstr ""
 
 #: src/legacy-pages/Projects/AllProjects/AllProjects.constants.ts:7
@@ -2399,6 +2420,8 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:13
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:232
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -3368,6 +3391,10 @@ msgstr ""
 #~ msgid "No credits issued"
 #~ msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:4
+msgid "No data posts to display"
+msgstr ""
+
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:64
 #: src/components/organisms/EcocreditsTable.tsx:70
 msgid "No ecocredits to display"
@@ -3953,6 +3980,8 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:231
 msgid "Privacy"
 msgstr ""
 
@@ -3962,6 +3991,18 @@ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:404
 msgid "Privacy settings"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:19
+msgid "Private"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:20
+msgid "Private files"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:21
+msgid "Private locations"
 msgstr ""
 
 #: src/components/organisms/DeletePostWarningModal/DeletePostWarningModal.constants.ts:4
@@ -4216,6 +4257,10 @@ msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:30
 msgid "Provide personal contact information for this organization."
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:18
+msgid "Public"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
@@ -5381,6 +5426,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:228
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
@@ -5557,6 +5604,7 @@ msgstr ""
 msgid "Unregistered projects"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:249
 #: src/legacy-pages/Post/Post.constants.ts:17
 msgid "Untitled"
 msgstr ""
@@ -5592,6 +5640,10 @@ msgstr ""
 #. placeholder {1}: result.reason
 #: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:230
 msgid "Updating Offchain Project {0} failed: {1}"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:7
+msgid "Upload data, provide updates, and anchor your information to the blockchain for full transparency and accountability."
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26

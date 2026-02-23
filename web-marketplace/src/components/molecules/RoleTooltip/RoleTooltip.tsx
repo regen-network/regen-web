@@ -1,17 +1,14 @@
 import { Trans } from '@lingui/react/macro';
 
+import { Link } from 'components/atoms/Link';
+
 export const RoleTooltip = ({ docsUrl }: { docsUrl: string }) => {
   return (
     <Trans>
       Learn more about roles{' '}
-      <a
-        href={docsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-sc-text-link border-none bg-transparent cursor-pointer pl-0 font-bold"
-      >
+      <Link href={docsUrl} className="text-sc-text-link font-bold">
         in our docs
-      </a>
+      </Link>
     </Trans>
   );
 };

@@ -6,12 +6,17 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useLingui } from '@lingui/react';
+import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box } from '@mui/material';
 import { useInfiniteQuery, useQueries } from '@tanstack/react-query';
+import { Feature, Point } from 'geojson';
 import { useAtom } from 'jotai';
+import { useDelete } from 'legacy-pages/Post/hooks/useDelete';
 import uniq from 'lodash/uniq';
+import { parse } from 'wellknown';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
@@ -22,6 +27,8 @@ import { DataPostsTable } from 'components/organisms/DataPostsTable';
 import { DataPost } from 'components/organisms/DataPostsTable/DataPostsTable.types';
 import { mapPostToDataPost } from 'components/organisms/DataPostsTable/DataPostsTable.utils';
 import { useSortedDataPosts } from 'components/organisms/DataPostsTable/useSortedDataPosts';
+import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
+import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
 import { useFetchProject } from './hooks/useFetchProject';
 
@@ -35,8 +42,13 @@ import { useFetchProject } from './hooks/useFetchProject';
  */
 const DataPosts = (): JSX.Element => {
   const { _ } = useLingui();
-  const { project, isLoading } =
-    useOutletContext<ReturnType<typeof useFetchProject>>();
+  const { project, isLoading, openCreatePostModal, setDraftPost } =
+    useOutletContext<
+      ReturnType<typeof useFetchProject> & {
+        openCreatePostModal: () => void;
+        setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+      }
+    >();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -124,21 +136,69 @@ const DataPosts = (): JSX.Element => {
 
   const noPosts = !isPostsLoading && dataPosts.length === 0;
 
+  // Build a lookup: iri → raw Post (needed for edit draft to reconstruct file data)
+  const postsByIri = useMemo(() => {
+    const map = new Map<string, Post>();
+    posts.forEach(p => map.set(p.iri, p));
+    return map;
+  }, [posts]);
+
+  // ----- Delete post -----
+  const [deleteIri, setDeleteIri] = useState<string | undefined>();
+  const {
+    deletePost,
+    open: deleteOpen,
+    onClose: deleteOnClose,
+    onOpen: deleteOnOpen,
+  } = useDelete({
+    iri: deleteIri,
+    offChainProjectId: project.offChainId,
+  });
+
   // ----- Sorting -----
   const { sortedPosts, sortCallbacks } = useSortedDataPosts({
     posts: dataPosts,
   });
 
   // ----- Action handlers -----
-  const handleEditDraft = useCallback((post: DataPost) => {
-    // TODO: Navigate to the post editing flow (PostFlow) with the draft data
-    void post;
-  }, []);
+  const handleEditDraft = useCallback(
+    (dataPost: DataPost) => {
+      const post = postsByIri.get(dataPost.iri);
+      if (!post) return;
 
-  const handleDeletePost = useCallback((post: DataPost) => {
-    // TODO: Open confirmation modal and call delete mutation
-    void post;
-  }, []);
+      const projectLocation = project?.location as GeocodeFeature;
+      setDraftPost({
+        iri: post.iri,
+        title: post.contents?.title,
+        comment: post.contents?.comment,
+        published: post.published,
+        privacyType: post.privacy,
+        files: post.contents?.files?.map(file => ({
+          ...file,
+          location:
+            file.locationType === 'none'
+              ? projectLocation
+              : ({
+                  type: 'Feature',
+                  geometry: parse(file.location.wkt) as Point,
+                  properties: {},
+                } as Feature<Point>),
+          url: post.filesUrls?.[file.iri] as string,
+          mimeType: post.filesMimeTypes?.[file.iri] as string,
+        })),
+      });
+      openCreatePostModal();
+    },
+    [postsByIri, project?.location, setDraftPost, openCreatePostModal],
+  );
+
+  const handleDeletePost = useCallback(
+    (post: DataPost) => {
+      setDeleteIri(post.iri);
+      deleteOnOpen();
+    },
+    [deleteOnOpen],
+  );
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -151,6 +211,11 @@ const DataPosts = (): JSX.Element => {
         onEditDraft={handleEditDraft}
         onDeletePost={handleDeletePost}
         sortCallbacks={sortCallbacks}
+      />
+      <DeletePostWarningModal
+        onDelete={deletePost}
+        open={deleteOpen}
+        onClose={deleteOnClose}
       />
     </Box>
   );

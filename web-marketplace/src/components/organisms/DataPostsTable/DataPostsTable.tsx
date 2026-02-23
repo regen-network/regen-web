@@ -9,7 +9,9 @@ import { TableActionButtons } from 'web-components/src/components/buttons/TableA
 import DocumentIcon from 'web-components/src/components/icons/DocumentIcon';
 import { DraftIcon } from 'web-components/src/components/icons/DraftIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
+import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
+import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
@@ -124,7 +126,7 @@ export const DataPostsTable: React.FC<
       buttons.push({
         label: _(DELETE_POST_ACTION),
         onClick: () => onDeletePost(post),
-        icon: <TrashIcon />,
+        icon: <TrashIcon className="text-error-300" />,
       });
     }
 
@@ -158,7 +160,7 @@ export const DataPostsTable: React.FC<
             className="bg-bc-red-300"
             labelClassName="font-normal"
             label={_(PRIVATE_FILES_LABEL)}
-            icon={<LockIcon className="w-[16px] h-[16px]" />}
+            icon={<PrivateFile className="w-[16px] h-[16px]" />}
           />
         );
       case 'private_locations':
@@ -167,7 +169,7 @@ export const DataPostsTable: React.FC<
             className="bg-bc-red-300"
             labelClassName="font-normal"
             label={_(PRIVATE_LOCATIONS_LABEL)}
-            icon={<LockIcon className="w-[16px] h-[16px]" />}
+            icon={<LocationIcon className="w-[16px] h-[16px]" />}
           />
         );
       default:

@@ -96,6 +96,7 @@ const MyProjects = (): JSX.Element => {
               onClick={() => {
                 navigate(`/project-pages/${DRAFT_ID}/account`, {
                   state: {
+                    from: location.pathname,
                     fromDashboard: true,
                     isOrganization: isOrganizationDashboard,
                   },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
@@ -61,6 +61,7 @@ const ProjectDashboardBanner = ({
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const router = useRouter();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const truncatedPlace = truncateEnd(
     project.place ?? '',
@@ -217,9 +218,13 @@ const ProjectDashboardBanner = ({
                     if (isDraft) {
                       const currentStep =
                         projectsCurrentStep[id] || 'basic-info';
-                      navigate(`/project-pages/${id}/${currentStep}`);
+                      navigate(`/project-pages/${id}/${currentStep}`, {
+                        state: { from: location.pathname },
+                      });
                     } else {
-                      navigate(`/project-pages/${id}/edit/basic-info`);
+                      navigate(`/project-pages/${id}/edit/basic-info`, {
+                        state: { from: location.pathname },
+                      });
                     }
                   }}
                 >

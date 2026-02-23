@@ -1,6 +1,13 @@
-import { MutableRefObject, useCallback, useRef, useState } from 'react';
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Outlet,
+  useLocation,
   useNavigate,
   useOutletContext,
   useParams,
@@ -62,6 +69,7 @@ const defaultProjectCreateContext: ContextType = {
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const navigate = useNavigate();
+  const location = useLocation();
   const dao = useDaoOrganization();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
@@ -84,6 +92,17 @@ export const ProjectCreate = (): JSX.Element => {
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
+  const originPathRef = useRef<string | null>(null);
+
+  // Capture the entry path only once, when the layout first mounts.
+  // Child subroute navigations will change `location` but we only want the original.
+  useEffect(() => {
+    if (originPathRef.current === null) {
+      originPathRef.current =
+        (location.state as { from?: string } | null)?.from ?? null;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const graphqlClient = useApolloClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -98,6 +117,17 @@ export const ProjectCreate = (): JSX.Element => {
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
 
   const handleRequestClose = useCallback(() => {
+    // If we know where the user came from, send them back there.
+    if (originPathRef.current) {
+      navigate(originPathRef.current, { replace: true });
+      return;
+    }
+    // Fallback: new draft projects have no meaningful manage page yet → homepage.
+    if (projectId === DRAFT_ID) {
+      navigate('/', { replace: true });
+      return;
+    }
+    // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
     if (
       isOrganizationAccount ||
@@ -108,9 +138,9 @@ export const ProjectCreate = (): JSX.Element => {
     else navigate(`/dashboard/${projectPath}`, { replace: true });
   }, [
     navigate,
-    isOrganizationAccount,
-    offChainProject,
     projectId,
+    isOrganizationAccount,
+    offChainProject?.adminDaoAddress,
     dao?.address,
   ]);
 

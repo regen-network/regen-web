@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { SortCallbacksType } from 'web-components/src/components/table/ActionsTable';
 import { Order } from 'web-components/src/components/table/Table.utils';
@@ -21,14 +21,21 @@ export const useSortedDataPosts = ({
 }: Params): SortedDataPostsResponse => {
   const [sort, setSort] = useState<DataPostsSortType>('createdAt-desc');
 
-  const sortCallbacks = Object.values(DATA_POSTS_COLUMN_MAPPING).map(header =>
-    header.sortEnabled
-      ? (order: Order) =>
-          setSort(`${header.sortKey}-${order}` as DataPostsSortType)
-      : undefined,
+  const sortCallbacks = useMemo(
+    () =>
+      Object.values(DATA_POSTS_COLUMN_MAPPING).map(header =>
+        header.sortEnabled
+          ? (order: Order) =>
+              setSort(`${header.sortKey}-${order}` as DataPostsSortType)
+          : undefined,
+      ),
+    [],
   );
 
-  const sortedPosts = sortDataPosts([...posts], sort);
+  const sortedPosts = useMemo(
+    () => sortDataPosts([...posts], sort),
+    [posts, sort],
+  );
 
   return {
     sortedPosts,

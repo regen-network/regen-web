@@ -37,7 +37,7 @@ const PostFilesCardsDesktop = ({
       <FilePreview
         preview={file.url ? filesPreviews[file.url] : undefined}
         pdfPageHeight={196}
-        className="h-[196px] w-[100%]"
+        className="h-[196px] w-full"
         key={file.url}
         file={file}
         showName

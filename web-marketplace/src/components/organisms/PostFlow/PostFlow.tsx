@@ -90,10 +90,10 @@ export const PostFlow = ({
   const { activeAccount } = useAuth();
   const userDao = useDaoOrganization();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
-  const [isDraftEditedModalLabel, setIsDraftEditedModalLabel] = useState<
+  const [draftEditedModalLabel, setDraftEditedModalLabel] = useState<
     string | undefined
   >(undefined);
-  const [isDraftDeletedModalLabel, setIsDraftDeletedModalLabel] = useState<
+  const [draftDeletedModalLabel, setDraftDeletedModalLabel] = useState<
     string | undefined
   >(undefined);
   const [editedData, setEditedData] = useState<PostFormSchemaType | undefined>(
@@ -213,7 +213,7 @@ export const PostFlow = ({
             if (resp.status === 404) {
               // We set iri to undefined to re-create the post
               setEditedData({ ...data, iri: undefined });
-              setIsDraftDeletedModalLabel(modalLabel);
+              setDraftDeletedModalLabel(modalLabel);
               return;
             }
             throw new Error(
@@ -228,7 +228,7 @@ export const PostFlow = ({
           ) {
             // We need to overwrite iri in case it has changed
             setEditedData({ ...data, iri: existingPost.iri });
-            setIsDraftEditedModalLabel(modalLabel);
+            setDraftEditedModalLabel(modalLabel);
             return;
           }
         } catch (e) {
@@ -389,28 +389,28 @@ export const PostFlow = ({
         bodyText={_(DISCARD_CHANGES_BODY)}
         buttonText={_(DISCARD_CHANGES_BUTTON)}
       />
-      {editedData && isDraftEditedModalLabel && (
+      {editedData && draftEditedModalLabel && (
         <EditedDraftModal
-          open={!!isDraftEditedModalLabel}
-          shouldSaveDraft={isDraftEditedModalLabel === DRAFT_SUBMIT_LABEL}
-          onCancel={() => setIsDraftEditedModalLabel(undefined)}
+          open={!!draftEditedModalLabel}
+          shouldSaveDraft={draftEditedModalLabel === DRAFT_SUBMIT_LABEL}
+          onCancel={() => setDraftEditedModalLabel(undefined)}
           onSubmit={async () => {
-            setIsDraftEditedModalLabel(undefined);
+            setDraftEditedModalLabel(undefined);
             await saveDataPost(editedData);
           }}
-          onClose={() => setIsDraftEditedModalLabel(undefined)}
+          onClose={() => setDraftEditedModalLabel(undefined)}
         />
       )}
-      {editedData && isDraftDeletedModalLabel && (
+      {editedData && draftDeletedModalLabel && (
         <DeletedDraftModal
-          open={!!isDraftDeletedModalLabel}
-          shouldSaveDraft={isDraftDeletedModalLabel === DRAFT_SUBMIT_LABEL}
-          onCancel={() => setIsDraftDeletedModalLabel(undefined)}
+          open={!!draftDeletedModalLabel}
+          shouldSaveDraft={draftDeletedModalLabel === DRAFT_SUBMIT_LABEL}
+          onCancel={() => setDraftDeletedModalLabel(undefined)}
           onSubmit={async () => {
-            setIsDraftDeletedModalLabel(undefined);
+            setDraftDeletedModalLabel(undefined);
             await saveDataPost(editedData);
           }}
-          onClose={() => setIsDraftDeletedModalLabel(undefined)}
+          onClose={() => setDraftDeletedModalLabel(undefined)}
         />
       )}
     </>

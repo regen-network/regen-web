@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/regen-network/regen-web/compare/v2.12.0...v2.12.1) (2026-02-23)
+
+### Bug Fixes
+
+- dao rbam alpha2 version ([#2808](https://github.com/regen-network/regen-web/issues/2808)) ([65bdd85](https://github.com/regen-network/regen-web/commit/65bdd85d6d0beca6edf374325ec00bd660a1e494))
+- NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID ([eb477f2](https://github.com/regen-network/regen-web/commit/eb477f205b25ad9874ad8dceb5fb7875b14962d1))
+- org enabled ui ([bbfa952](https://github.com/regen-network/regen-web/commit/bbfa952fa5cb0398f0db77bbc158e9ef2797bb15))
+- rm role_id ([acba64b](https://github.com/regen-network/regen-web/commit/acba64bf98139630fe148f3b29f62131be998c26))
+
 # [2.12.0](https://github.com/regen-network/regen-web/compare/v2.11.1...v2.12.0) (2026-02-10)
 
 ### Bug Fixes

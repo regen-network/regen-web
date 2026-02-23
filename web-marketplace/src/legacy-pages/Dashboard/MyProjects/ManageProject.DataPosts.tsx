@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   ApolloClient,
@@ -45,17 +45,31 @@ const DataPosts = (): JSX.Element => {
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 10,
       offset: 0,
     });
 
   // ----- Fetch posts (same pattern as DataStream) -----
-  const { data: postsData, isLoading: isPostsLoading } = useInfiniteQuery(
+  const {
+    data: postsData,
+    isLoading: isPostsLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
     getPostsQuery({
       projectId: project.offChainId,
       languageCode: selectedLanguage,
     }),
   );
+
+  // Fetch all pages so the table has the complete dataset for
+  // client-side pagination.
+  useEffect(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // Flatten all pages into a single Post[] array
   const posts: Post[] = useMemo(
@@ -131,7 +145,7 @@ const DataPosts = (): JSX.Element => {
       <DataPostsTable
         posts={sortedPosts}
         noPosts={noPosts}
-        isLoading={isLoading || isPostsLoading}
+        isLoading={isLoading || isPostsLoading || isFetchingNextPage}
         onTableChange={setPaginationParams}
         initialPaginationParams={paginationParams}
         onEditDraft={handleEditDraft}

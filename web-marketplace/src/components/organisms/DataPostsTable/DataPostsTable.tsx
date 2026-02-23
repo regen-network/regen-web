@@ -32,7 +32,6 @@ import {
 
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
-
 import { SEE_HELP_DOCS } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.constants';
 
 import {

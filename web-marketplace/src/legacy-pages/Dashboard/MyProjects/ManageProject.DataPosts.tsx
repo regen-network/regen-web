@@ -23,6 +23,8 @@ import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPo
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
+import { ROLE_VIEWER } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { DataPostsTable } from 'components/organisms/DataPostsTable';
 import { DataPost } from 'components/organisms/DataPostsTable/DataPostsTable.types';
 import { mapPostToDataPost } from 'components/organisms/DataPostsTable/DataPostsTable.utils';
@@ -42,13 +44,16 @@ import { useFetchProject } from './hooks/useFetchProject';
  */
 const DataPosts = (): JSX.Element => {
   const { _ } = useLingui();
-  const { project, isLoading, openCreatePostModal, setDraftPost } =
+  const { project, isLoading, openCreatePostModal, setDraftPost, role } =
     useOutletContext<
       ReturnType<typeof useFetchProject> & {
         openCreatePostModal: () => void;
         setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+        role?: ProjectRole;
       }
     >();
+
+  const isViewer = role === ROLE_VIEWER;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -211,6 +216,7 @@ const DataPosts = (): JSX.Element => {
         onEditDraft={handleEditDraft}
         onDeletePost={handleDeletePost}
         sortCallbacks={sortCallbacks}
+        isViewer={isViewer}
       />
       <DeletePostWarningModal
         onDelete={deletePost}

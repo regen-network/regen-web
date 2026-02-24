@@ -15,12 +15,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import truncate from 'lodash/truncate';
 
-import { AccountByAddrQuery, Maybe } from 'generated/graphql';
+import { AccountByAddrWithDaosQuery, Maybe } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { getAccountByAddrWithDaosQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrWithDaosQuery/getAccountByAddrWithDaosQuery';
 import { ConnectEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -79,7 +79,7 @@ export type WalletContextType = {
   isConnected: boolean;
   accountChanging: boolean;
   isKeplrMobileWeb: boolean;
-  accountByAddr?: AccountByAddrQuery['accountByAddr'];
+  accountByAddr?: AccountByAddrWithDaosQuery['accountByAddr'];
 };
 
 const WalletContext = createContext<WalletContextType>({
@@ -204,7 +204,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const { data: accountByAddrData, isFetching } = useQuery(
-    getAccountByAddrQuery({
+    getAccountByAddrWithDaosQuery({
       client: graphqlClient,
       addr: wallet?.address ?? '',
       enabled: !!wallet?.address && !!graphqlClient && !!csrfData,

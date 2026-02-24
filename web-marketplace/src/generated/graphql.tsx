@@ -2177,7 +2177,7 @@ export type CreatePostTokenPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostIri?: Maybe<Post>;
+  postByPostId?: Maybe<Post>;
   /** An edge for our `PostToken`. May be used by Relay 1. */
   postTokenEdge?: Maybe<PostTokensEdge>;
 };
@@ -2212,7 +2212,7 @@ export type CreatePostTranslationPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postByIri?: Maybe<Post>;
+  postById?: Maybe<Post>;
   /** An edge for our `PostTranslation`. May be used by Relay 1. */
   postTranslationEdge?: Maybe<PostTranslationsEdge>;
 };
@@ -4227,6 +4227,16 @@ export type DeletePasscodePayloadPasscodeEdgeArgs = {
   orderBy?: Maybe<Array<PasscodesOrderBy>>;
 };
 
+/** All input for the `deletePostById` mutation. */
+export type DeletePostByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+};
+
 /** All input for the `deletePostByIri` mutation. */
 export type DeletePostByIriInput = {
   /**
@@ -4310,7 +4320,7 @@ export type DeletePostTokenPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostIri?: Maybe<Post>;
+  postByPostId?: Maybe<Post>;
   /** An edge for our `PostToken`. May be used by Relay 1. */
   postTokenEdge?: Maybe<PostTokensEdge>;
 };
@@ -4321,14 +4331,14 @@ export type DeletePostTokenPayloadPostTokenEdgeArgs = {
   orderBy?: Maybe<Array<PostTokensOrderBy>>;
 };
 
-/** All input for the `deletePostTranslationByIriAndLanguageCode` mutation. */
-export type DeletePostTranslationByIriAndLanguageCodeInput = {
+/** All input for the `deletePostTranslationByIdAndLanguageCode` mutation. */
+export type DeletePostTranslationByIdAndLanguageCodeInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars['String']>;
-  iri: Scalars['String'];
+  id: Scalars['UUID'];
   languageCode: Scalars['String'];
 };
 
@@ -4357,7 +4367,7 @@ export type DeletePostTranslationPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postByIri?: Maybe<Post>;
+  postById?: Maybe<Post>;
   /** An edge for our `PostTranslation`. May be used by Relay 1. */
   postTranslationEdge?: Maybe<PostTranslationsEdge>;
 };
@@ -5319,8 +5329,8 @@ export type MetadataGraph = Node & {
   nodeId: Scalars['ID'];
   iri: Scalars['String'];
   createdAt: Scalars['Datetime'];
-  updatedAt: Scalars['Datetime'];
   metadata: Scalars['JSON'];
+  updatedAt: Scalars['Datetime'];
   /** Reads and enables pagination through a set of `MetadataGraphTranslation`. */
   metadataGraphTranslationsByIri: MetadataGraphTranslationsConnection;
 };
@@ -5346,10 +5356,10 @@ export type MetadataGraphCondition = {
   iri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `updatedAt` field. */
-  updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `metadata` field. */
   metadata?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** A filter to be used against `MetadataGraph` object types. All fields are combined with a logical ‘and.’ */
@@ -5368,16 +5378,16 @@ export type MetadataGraphFilter = {
 export type MetadataGraphInput = {
   iri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  updatedAt?: Maybe<Scalars['Datetime']>;
   metadata: Scalars['JSON'];
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** Represents an update to a `MetadataGraph`. Fields that are set will be updated. */
 export type MetadataGraphPatch = {
   iri?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Datetime']>;
-  updatedAt?: Maybe<Scalars['Datetime']>;
   metadata?: Maybe<Scalars['JSON']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 export type MetadataGraphTranslation = Node & {
@@ -5501,10 +5511,10 @@ export enum MetadataGraphsOrderBy {
   IriDesc = 'IRI_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
-  UpdatedAtAsc = 'UPDATED_AT_ASC',
-  UpdatedAtDesc = 'UPDATED_AT_DESC',
   MetadataAsc = 'METADATA_ASC',
   MetadataDesc = 'METADATA_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5650,10 +5660,12 @@ export type Mutation = {
   updatePost?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
   updatePostByIri?: Maybe<UpdatePostPayload>;
+  /** Updates a single `Post` using a unique key and a patch. */
+  updatePostById?: Maybe<UpdatePostPayload>;
   /** Updates a single `PostTranslation` using its globally unique id and a patch. */
   updatePostTranslation?: Maybe<UpdatePostTranslationPayload>;
   /** Updates a single `PostTranslation` using a unique key and a patch. */
-  updatePostTranslationByIriAndLanguageCode?: Maybe<UpdatePostTranslationPayload>;
+  updatePostTranslationByIdAndLanguageCode?: Maybe<UpdatePostTranslationPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -5792,10 +5804,12 @@ export type Mutation = {
   deletePost?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
   deletePostByIri?: Maybe<DeletePostPayload>;
+  /** Deletes a single `Post` using a unique key. */
+  deletePostById?: Maybe<DeletePostPayload>;
   /** Deletes a single `PostTranslation` using its globally unique id. */
   deletePostTranslation?: Maybe<DeletePostTranslationPayload>;
   /** Deletes a single `PostTranslation` using a unique key. */
-  deletePostTranslationByIriAndLanguageCode?: Maybe<DeletePostTranslationPayload>;
+  deletePostTranslationByIdAndLanguageCode?: Maybe<DeletePostTranslationPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -6281,14 +6295,20 @@ export type MutationUpdatePostByIriArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostByIdArgs = {
+  input: UpdatePostByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePostTranslationArgs = {
   input: UpdatePostTranslationInput;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePostTranslationByIriAndLanguageCodeArgs = {
-  input: UpdatePostTranslationByIriAndLanguageCodeInput;
+export type MutationUpdatePostTranslationByIdAndLanguageCodeArgs = {
+  input: UpdatePostTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -6707,14 +6727,20 @@ export type MutationDeletePostByIriArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostByIdArgs = {
+  input: DeletePostByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeletePostTranslationArgs = {
   input: DeletePostTranslationInput;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePostTranslationByIriAndLanguageCodeArgs = {
-  input: DeletePostTranslationByIriAndLanguageCodeInput;
+export type MutationDeletePostTranslationByIdAndLanguageCodeArgs = {
+  input: DeletePostTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -7407,19 +7433,20 @@ export type Post = Node & {
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
   canDownloadFiles: Scalars['Boolean'];
+  id: Scalars['UUID'];
   /** Reads a single `Account` that is related to this `Post`. */
   accountByCreatorAccountId?: Maybe<Account>;
   /** Reads a single `Project` that is related to this `Post`. */
   projectByProjectId?: Maybe<Project>;
   /** Reads and enables pagination through a set of `PostToken`. */
-  postTokensByPostIri: PostTokensConnection;
+  postTokensByPostId: PostTokensConnection;
   /** Reads and enables pagination through a set of `PostTranslation`. */
-  postTranslationsByIri: PostTranslationsConnection;
+  postTranslationsById: PostTranslationsConnection;
 };
 
 
 /** Project posts */
-export type PostPostTokensByPostIriArgs = {
+export type PostPostTokensByPostIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -7431,7 +7458,7 @@ export type PostPostTokensByPostIriArgs = {
 
 
 /** Project posts */
-export type PostPostTranslationsByIriArgs = {
+export type PostPostTranslationsByIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -7462,6 +7489,8 @@ export type PostCondition = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `canDownloadFiles` field. */
   canDownloadFiles?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
 };
 
 /** A filter to be used against `Post` object types. All fields are combined with a logical ‘and.’ */
@@ -7487,6 +7516,7 @@ export type PostInput = {
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
   canDownloadFiles?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['UUID']>;
 };
 
 /** Represents an update to a `Post`. Fields that are set will be updated. */
@@ -7500,6 +7530,7 @@ export type PostPatch = {
   published?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
   canDownloadFiles?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['UUID']>;
 };
 
 /**
@@ -7522,10 +7553,10 @@ export type PostToken = Node & {
   nodeId: Scalars['ID'];
   id: Scalars['UUID'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  postIri: Scalars['String'];
   token: Scalars['String'];
+  postId: Scalars['UUID'];
   /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostIri?: Maybe<Post>;
+  postByPostId?: Maybe<Post>;
 };
 
 /**
@@ -7537,26 +7568,26 @@ export type PostTokenCondition = {
   id?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `postIri` field. */
-  postIri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `token` field. */
   token?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `postId` field. */
+  postId?: Maybe<Scalars['UUID']>;
 };
 
 /** An input for mutations affecting `PostToken` */
 export type PostTokenInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
-  postIri: Scalars['String'];
   token?: Maybe<Scalars['String']>;
+  postId: Scalars['UUID'];
 };
 
 /** Represents an update to a `PostToken`. Fields that are set will be updated. */
 export type PostTokenPatch = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
-  postIri?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
+  postId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `PostToken` values. */
@@ -7588,10 +7619,10 @@ export enum PostTokensOrderBy {
   IdDesc = 'ID_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
-  PostIriAsc = 'POST_IRI_ASC',
-  PostIriDesc = 'POST_IRI_DESC',
   TokenAsc = 'TOKEN_ASC',
   TokenDesc = 'TOKEN_DESC',
+  PostIdAsc = 'POST_ID_ASC',
+  PostIdDesc = 'POST_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7600,12 +7631,12 @@ export type PostTranslation = Node & {
   __typename?: 'PostTranslation';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID'];
-  iri: Scalars['String'];
   languageCode: Scalars['String'];
   contents?: Maybe<Scalars['JSON']>;
   translationDate?: Maybe<Scalars['Datetime']>;
+  id: Scalars['UUID'];
   /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postByIri?: Maybe<Post>;
+  postById?: Maybe<Post>;
 };
 
 /**
@@ -7613,14 +7644,14 @@ export type PostTranslation = Node & {
  * tested for equality and combined with a logical ‘and.’
  */
 export type PostTranslationCondition = {
-  /** Checks for equality with the object’s `iri` field. */
-  iri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `languageCode` field. */
   languageCode?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `contents` field. */
   contents?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `translationDate` field. */
   translationDate?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
 };
 
 /** A filter to be used against `PostTranslation` object types. All fields are combined with a logical ‘and.’ */
@@ -7637,18 +7668,18 @@ export type PostTranslationFilter = {
 
 /** An input for mutations affecting `PostTranslation` */
 export type PostTranslationInput = {
-  iri: Scalars['String'];
   languageCode: Scalars['String'];
   contents?: Maybe<Scalars['JSON']>;
   translationDate?: Maybe<Scalars['Datetime']>;
+  id: Scalars['UUID'];
 };
 
 /** Represents an update to a `PostTranslation`. Fields that are set will be updated. */
 export type PostTranslationPatch = {
-  iri?: Maybe<Scalars['String']>;
   languageCode?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['JSON']>;
   translationDate?: Maybe<Scalars['Datetime']>;
+  id?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `PostTranslation` values. */
@@ -7676,14 +7707,14 @@ export type PostTranslationsEdge = {
 /** Methods to use when ordering `PostTranslation`. */
 export enum PostTranslationsOrderBy {
   Natural = 'NATURAL',
-  IriAsc = 'IRI_ASC',
-  IriDesc = 'IRI_DESC',
   LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
   LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
   ContentsAsc = 'CONTENTS_ASC',
   ContentsDesc = 'CONTENTS_DESC',
   TranslationDateAsc = 'TRANSLATION_DATE_ASC',
   TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7731,6 +7762,8 @@ export enum PostsOrderBy {
   UpdatedAtDesc = 'UPDATED_AT_DESC',
   CanDownloadFilesAsc = 'CAN_DOWNLOAD_FILES_ASC',
   CanDownloadFilesDesc = 'CAN_DOWNLOAD_FILES_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -8584,7 +8617,8 @@ export type Query = Node & {
   organizationProjectByOrganizationIdAndProjectId?: Maybe<OrganizationProject>;
   organizationProjectByProjectId?: Maybe<OrganizationProject>;
   postByIri?: Maybe<Post>;
-  postTranslationByIriAndLanguageCode?: Maybe<PostTranslation>;
+  postById?: Maybe<Post>;
+  postTranslationByIdAndLanguageCode?: Maybe<PostTranslation>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
@@ -9184,8 +9218,14 @@ export type QueryPostByIriArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryPostTranslationByIriAndLanguageCodeArgs = {
-  iri: Scalars['String'];
+export type QueryPostByIdArgs = {
+  id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPostTranslationByIdAndLanguageCodeArgs = {
+  id: Scalars['UUID'];
   languageCode: Scalars['String'];
 };
 
@@ -9881,7 +9921,6 @@ export type ShaclGraph = Node & {
   nodeId: Scalars['ID'];
   uri: Scalars['String'];
   createdAt: Scalars['Datetime'];
-  updatedAt: Scalars['Datetime'];
   graph: Scalars['JSON'];
 };
 
@@ -9894,8 +9933,6 @@ export type ShaclGraphCondition = {
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `updatedAt` field. */
-  updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `graph` field. */
   graph?: Maybe<Scalars['JSON']>;
 };
@@ -9916,7 +9953,6 @@ export type ShaclGraphFilter = {
 export type ShaclGraphInput = {
   uri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  updatedAt?: Maybe<Scalars['Datetime']>;
   graph: Scalars['JSON'];
 };
 
@@ -9924,7 +9960,6 @@ export type ShaclGraphInput = {
 export type ShaclGraphPatch = {
   uri?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Datetime']>;
-  updatedAt?: Maybe<Scalars['Datetime']>;
   graph?: Maybe<Scalars['JSON']>;
 };
 
@@ -9957,8 +9992,6 @@ export enum ShaclGraphsOrderBy {
   UriDesc = 'URI_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
-  UpdatedAtAsc = 'UPDATED_AT_ASC',
-  UpdatedAtDesc = 'UPDATED_AT_DESC',
   GraphAsc = 'GRAPH_ASC',
   GraphDesc = 'GRAPH_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -10881,6 +10914,18 @@ export type UpdatePasscodePayloadPasscodeEdgeArgs = {
   orderBy?: Maybe<Array<PasscodesOrderBy>>;
 };
 
+/** All input for the `updatePostById` mutation. */
+export type UpdatePostByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Post` being updated. */
+  postPatch: PostPatch;
+  id: Scalars['UUID'];
+};
+
 /** All input for the `updatePostByIri` mutation. */
 export type UpdatePostByIriInput = {
   /**
@@ -10970,7 +11015,7 @@ export type UpdatePostTokenPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostIri?: Maybe<Post>;
+  postByPostId?: Maybe<Post>;
   /** An edge for our `PostToken`. May be used by Relay 1. */
   postTokenEdge?: Maybe<PostTokensEdge>;
 };
@@ -10981,8 +11026,8 @@ export type UpdatePostTokenPayloadPostTokenEdgeArgs = {
   orderBy?: Maybe<Array<PostTokensOrderBy>>;
 };
 
-/** All input for the `updatePostTranslationByIriAndLanguageCode` mutation. */
-export type UpdatePostTranslationByIriAndLanguageCodeInput = {
+/** All input for the `updatePostTranslationByIdAndLanguageCode` mutation. */
+export type UpdatePostTranslationByIdAndLanguageCodeInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
@@ -10990,7 +11035,7 @@ export type UpdatePostTranslationByIriAndLanguageCodeInput = {
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `PostTranslation` being updated. */
   postTranslationPatch: PostTranslationPatch;
-  iri: Scalars['String'];
+  id: Scalars['UUID'];
   languageCode: Scalars['String'];
 };
 
@@ -11020,7 +11065,7 @@ export type UpdatePostTranslationPayload = {
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
   /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postByIri?: Maybe<Post>;
+  postById?: Maybe<Post>;
   /** An edge for our `PostTranslation`. May be used by Relay 1. */
   postTranslationEdge?: Maybe<PostTranslationsEdge>;
 };
@@ -11697,6 +11742,39 @@ export type AccountByAddrQuery = (
   )> }
 );
 
+export type AccountByAddrWithDaosQueryVariables = Exact<{
+  addr: Scalars['String'];
+}>;
+
+
+export type AccountByAddrWithDaosQuery = (
+  { __typename?: 'Query' }
+  & { accountByAddr?: Maybe<(
+    { __typename?: 'Account' }
+    & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'stripeConnectedAccountId'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ), daosByAssignmentAccountIdAndDaoAddress: (
+      { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Dao' }
+        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'stripeConnectedAccountId'>
+        & { organizationByDaoAddress?: Maybe<(
+          { __typename?: 'Organization' }
+          & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
+        )>, projectByAdminDaoAddress?: Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'onChainId' | 'id'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type AccountByCustodialAddressQueryVariables = Exact<{
   custodialAddress: Scalars['String'];
 }>;
@@ -11946,6 +12024,7 @@ export type DaoByAddressQuery = (
 export type DaoByAddressWithAssignmentsQueryVariables = Exact<{
   address: Scalars['String'];
   daoAccountsOrderBy?: Maybe<Array<AccountsOrderBy> | AccountsOrderBy>;
+  includePrivate?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -12569,6 +12648,78 @@ export function useAccountByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type AccountByAddrQueryHookResult = ReturnType<typeof useAccountByAddrQuery>;
 export type AccountByAddrLazyQueryHookResult = ReturnType<typeof useAccountByAddrLazyQuery>;
 export type AccountByAddrQueryResult = Apollo.QueryResult<AccountByAddrQuery, AccountByAddrQueryVariables>;
+export const AccountByAddrWithDaosDocument = gql`
+    query AccountByAddrWithDaos($addr: String!) {
+  accountByAddr(addr: $addr) {
+    id
+    addr
+    name
+    type
+    image
+    bgImage
+    description
+    websiteLink
+    twitterLink
+    stripeConnectedAccountId
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
+    daosByAssignmentAccountIdAndDaoAddress {
+      nodes {
+        address
+        daoRbamAddress
+        cw4GroupAddress
+        canUseStripeConnect
+        stripeConnectedAccountId
+        organizationByDaoAddress {
+          id
+          name
+          description
+          image
+          bgImage
+          websiteLink
+          twitterLink
+        }
+        projectByAdminDaoAddress {
+          onChainId
+          id
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountByAddrWithDaosQuery__
+ *
+ * To run a query within a React component, call `useAccountByAddrWithDaosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountByAddrWithDaosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountByAddrWithDaosQuery({
+ *   variables: {
+ *      addr: // value for 'addr'
+ *   },
+ * });
+ */
+export function useAccountByAddrWithDaosQuery(baseOptions: Apollo.QueryHookOptions<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>(AccountByAddrWithDaosDocument, options);
+      }
+export function useAccountByAddrWithDaosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>(AccountByAddrWithDaosDocument, options);
+        }
+export type AccountByAddrWithDaosQueryHookResult = ReturnType<typeof useAccountByAddrWithDaosQuery>;
+export type AccountByAddrWithDaosLazyQueryHookResult = ReturnType<typeof useAccountByAddrWithDaosLazyQuery>;
+export type AccountByAddrWithDaosQueryResult = Apollo.QueryResult<AccountByAddrWithDaosQuery, AccountByAddrWithDaosQueryVariables>;
 export const AccountByCustodialAddressDocument = gql`
     query AccountByCustodialAddress($custodialAddress: String!) {
   accountByCustodialAddress(custodialAddress: $custodialAddress) {
@@ -13082,7 +13233,7 @@ export type DaoByAddressQueryHookResult = ReturnType<typeof useDaoByAddressQuery
 export type DaoByAddressLazyQueryHookResult = ReturnType<typeof useDaoByAddressLazyQuery>;
 export type DaoByAddressQueryResult = Apollo.QueryResult<DaoByAddressQuery, DaoByAddressQueryVariables>;
 export const DaoByAddressWithAssignmentsDocument = gql`
-    query DaoByAddressWithAssignments($address: String!, $daoAccountsOrderBy: [AccountsOrderBy!]) {
+    query DaoByAddressWithAssignments($address: String!, $daoAccountsOrderBy: [AccountsOrderBy!], $includePrivate: Boolean = true) {
   daoByAddress(address: $address) {
     address
     daoRbamAddress
@@ -13095,7 +13246,7 @@ export const DaoByAddressWithAssignmentsDocument = gql`
         image
         addr
         title
-        privateAccountById {
+        privateAccountById @include(if: $includePrivate) {
           email
           googleEmail
         }
@@ -13127,6 +13278,7 @@ export const DaoByAddressWithAssignmentsDocument = gql`
  *   variables: {
  *      address: // value for 'address'
  *      daoAccountsOrderBy: // value for 'daoAccountsOrderBy'
+ *      includePrivate: // value for 'includePrivate'
  *   },
  * });
  */

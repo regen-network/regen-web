@@ -1,4 +1,5 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import Separator from '../../atoms/Separator';
 import { CopyButtonProps } from '../../buttons/CopyButton';
 import { TextButton } from '../../buttons/TextButton';
@@ -20,6 +21,7 @@ type TextContent = {
   organization: string;
   createOrganization: string;
   finishOrgCreation: string;
+  createOrgDisabledTooltip: string;
 };
 
 export type ExtendedUserMenuProfile = UserMenuProfile & {
@@ -36,6 +38,7 @@ interface GetUserMenuItemsParams {
   unfinalizedOrgCreation?: boolean;
   textContent: TextContent;
   orgEnabled?: boolean;
+  loginDisabled: boolean;
 }
 
 const className = 'pl-20';
@@ -52,6 +55,7 @@ export const getUserMenuItems = ({
   finishOrgCreation,
   textContent,
   orgEnabled,
+  loginDisabled,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     // Personal card
@@ -149,7 +153,17 @@ export const getUserMenuItems = ({
     orgEnabled &&
       !organizationProfile &&
       createOrganization && {
-        children: (
+        children: loginDisabled ? (
+          <InfoTooltip
+            title={textContent.createOrgDisabledTooltip}
+            arrow
+            placement="top"
+          >
+            <TextButton className="pl-20 text-[11px] bg-[linear-gradient(180deg,#ACACAC_0%,#CCC_100%)] bg-clip-text text-[transparent] cursor-default">
+              + {textContent.createOrganization}
+            </TextButton>
+          </InfoTooltip>
+        ) : (
           <TextButton
             className="pl-20 text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]"
             onClick={createOrganization}

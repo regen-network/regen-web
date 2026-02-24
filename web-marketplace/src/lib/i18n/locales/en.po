@@ -353,7 +353,7 @@ msgstr ""
 msgid "Account switch detected! "
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:63
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:70
 msgid "Account switcher"
 msgstr ""
 
@@ -1291,7 +1291,7 @@ msgstr ""
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:68
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:67
 msgid "Collaborators"
 msgstr ""
 
@@ -1452,8 +1452,8 @@ msgstr ""
 msgid "Could not parse batch denom"
 msgstr ""
 
-#: src/hooks/org-members/useMembersContext.ts:181
-#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:117
+#: src/hooks/org-members/useMembersContext.ts:182
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useCollaboratorsContext.ts:120
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
@@ -1657,7 +1657,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:58
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:57
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1879,7 +1879,7 @@ msgstr ""
 msgid "Data Deficient"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:53
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:52
 msgid "Data Posts"
 msgstr ""
 
@@ -2332,7 +2332,7 @@ msgid "Factor:"
 msgstr ""
 
 #. placeholder {0}: errors.join('\n')
-#: src/hooks/org-members/useMembersContext.ts:235
+#: src/hooks/org-members/useMembersContext.ts:236
 msgid ""
 "Failed for projects:\n"
 "{0}"
@@ -2997,7 +2997,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:63
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:62
 msgid "Manage Credits"
 msgstr ""
 
@@ -3017,7 +3017,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:131
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:130
 msgid "manage project tabs"
 msgstr ""
 
@@ -3679,6 +3679,10 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:46
 msgid "Please connect with the Keplr extension on desktop to create an organization"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:47
+msgid "Please connect with the Keplr extension on desktop to finish creating organization"
 msgstr ""
 
 #: src/legacy-pages/Post/Post.constants.ts:4

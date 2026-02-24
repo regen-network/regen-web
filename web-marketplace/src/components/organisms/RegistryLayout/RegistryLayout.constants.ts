@@ -43,3 +43,5 @@ export const PERSONAL_DASHBOARD = msg`Personal dashboard`;
 export const ORGANIZATION_DASHBOARD = msg`Organization dashboard`;
 export const ORGANIZATION = msg`organization`;
 export const CONNECT_TO_KEPLR_ORGANIZATION = msg`Please connect with Keplr to create an organization`;
+export const CREATE_ORG_DISABLED_TOOLTIP = msg`Please connect with the Keplr extension on desktop to create an organization`;
+export const FINISH_ORG_CREATION_DISABLED_TOOLTIP = msg`Please connect with the Keplr extension on desktop to finish creating organization`;

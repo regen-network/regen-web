@@ -1,6 +1,8 @@
 query DaoByAddressWithAssignments(
   $address: String!
   $daoAccountsOrderBy: [AccountsOrderBy!]
+  # Set to Boolean (optional) and default to true
+  $includePrivate: Boolean = true
 ) {
   daoByAddress(address: $address) {
     address
@@ -14,7 +16,7 @@ query DaoByAddressWithAssignments(
         image
         addr
         title
-        privateAccountById {
+        privateAccountById @include(if: $includePrivate) {
           email
           googleEmail
         }

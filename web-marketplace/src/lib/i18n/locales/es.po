@@ -752,8 +752,7 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a con
 msgid "Attest"
 msgstr "Dar fe"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:11
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:230
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:236
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr "Autor"
@@ -1304,7 +1303,7 @@ msgstr "Acciones de los colaboradores"
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr "La función de colaborador es para proyectos que forman parte de una organización."
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:67
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:82
 msgid "Collaborators"
 msgstr "Colaboradores"
 
@@ -1670,7 +1669,7 @@ msgstr "Emisión de crédito"
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:57
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:72
 msgid "Credit Issuance"
 msgstr "Emisión de crédito"
 
@@ -1914,8 +1913,7 @@ msgstr "Los datos se transferirán de este perfil:"
 msgid "date"
 msgstr "fecha"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:229
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:235
 msgid "Date Created"
 msgstr "Fecha de creación"
 
@@ -1932,7 +1930,7 @@ msgstr "avatar predeterminado"
 msgid "Delete"
 msgstr "Borrar"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:16
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
 msgid "Delete Post"
 msgstr "Eliminar publicación"
 
@@ -2003,7 +2001,6 @@ msgstr "¿No ves nada?"
 msgid "Don’t see anything? <0>Resend email</0>."
 msgstr "¿No ves nada? <0>Reenviar correo electrónico</0>."
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:256
 #: src/components/organisms/MediaSection.tsx:50
 #: src/legacy-pages/Post/Post.constants.ts:16
 #: src/lib/constants/shared.constants.tsx:24
@@ -2143,7 +2140,7 @@ msgstr "Editar"
 msgid "edit credit class"
 msgstr "editar clase de credito"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:15
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
 msgid "Edit Draft"
 msgstr "Editar borrador"
 
@@ -2418,8 +2415,7 @@ msgstr "Nombre del archivo"
 msgid "file name(s)"
 msgstr "nombre(s) de archivo"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:13
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:232
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:238
 #: src/components/organisms/PostForm/PostForm.tsx:294
 msgid "Files"
 msgstr "Archivos"
@@ -3045,7 +3041,7 @@ msgstr "Administrar clases de crédito"
 msgid "Manage credits"
 msgstr "Administrar créditos"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:62
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:77
 msgid "Manage Credits"
 msgstr "Administrar créditos"
 
@@ -3065,7 +3061,7 @@ msgstr "Administrar cartera"
 msgid "Manage Project"
 msgstr "Administrar proyecto"
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:130
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:140
 msgid "manage project tabs"
 msgstr "administrar pestañas de proyectos"
 
@@ -3966,8 +3962,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo utilizabas la tierra?"
 
 #: src/components/layout/Layout.Footer.tsx:105
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:231
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:237
 msgid "Privacy"
 msgstr "Privacidad"
 
@@ -3980,16 +3975,16 @@ msgid "Privacy settings"
 msgstr "Configuración de privacidad"
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:19
-msgid "Private"
-msgstr "Privado"
+#~ msgid "Private"
+#~ msgstr "Privado"
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:20
-msgid "Private files"
-msgstr "Archivos privados"
+#~ msgid "Private files"
+#~ msgstr "Archivos privados"
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:21
-msgid "Private locations"
-msgstr "Ubicaciones privadas"
+#~ msgid "Private locations"
+#~ msgstr "Ubicaciones privadas"
 
 #: src/components/organisms/DeletePostWarningModal/DeletePostWarningModal.constants.ts:4
 msgid "Proceed with caution: this cannot be undone!"
@@ -4245,7 +4240,7 @@ msgstr "Pestañas de proyectos"
 msgid "Provide personal contact information for this organization."
 msgstr "Proporcione información de contacto personal para esta organización."
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:18
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
 msgid "Public"
 msgstr "Público"
 
@@ -5384,8 +5379,7 @@ msgstr "Cronología"
 #~ msgstr "Marca de tiempo"
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:228
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:234
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
@@ -5562,7 +5556,6 @@ msgstr "Sin nombre"
 msgid "Unregistered projects"
 msgstr "Proyectos no registrados"
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:249
 #: src/legacy-pages/Post/Post.constants.ts:17
 msgid "Untitled"
 msgstr "Intitulado"

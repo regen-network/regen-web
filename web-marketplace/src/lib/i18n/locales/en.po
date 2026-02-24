@@ -746,8 +746,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:11
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:230
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:236
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -1298,7 +1297,7 @@ msgstr ""
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:67
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:82
 msgid "Collaborators"
 msgstr ""
 
@@ -1664,7 +1663,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:57
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:72
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1908,8 +1907,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:229
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:235
 msgid "Date Created"
 msgstr ""
 
@@ -1926,7 +1924,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:16
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:10
 msgid "Delete Post"
 msgstr ""
 
@@ -1997,7 +1995,6 @@ msgstr ""
 msgid "Don’t see anything? <0>Resend email</0>."
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:256
 #: src/components/organisms/MediaSection.tsx:50
 #: src/legacy-pages/Post/Post.constants.ts:16
 #: src/lib/constants/shared.constants.tsx:24
@@ -2137,7 +2134,7 @@ msgstr ""
 msgid "edit credit class"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:15
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
 msgid "Edit Draft"
 msgstr ""
 
@@ -2410,8 +2407,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:13
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:232
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:238
 #: src/components/organisms/PostForm/PostForm.tsx:294
 msgid "Files"
 msgstr ""
@@ -3037,7 +3033,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:62
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:77
 msgid "Manage Credits"
 msgstr ""
 
@@ -3057,7 +3053,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:130
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:140
 msgid "manage project tabs"
 msgstr ""
 
@@ -3958,8 +3954,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:105
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:231
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:237
 msgid "Privacy"
 msgstr ""
 
@@ -3972,16 +3967,16 @@ msgid "Privacy settings"
 msgstr ""
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:19
-msgid "Private"
-msgstr ""
+#~ msgid "Private"
+#~ msgstr ""
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:20
-msgid "Private files"
-msgstr ""
+#~ msgid "Private files"
+#~ msgstr ""
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:21
-msgid "Private locations"
-msgstr ""
+#~ msgid "Private locations"
+#~ msgstr ""
 
 #: src/components/organisms/DeletePostWarningModal/DeletePostWarningModal.constants.ts:4
 msgid "Proceed with caution: this cannot be undone!"
@@ -4237,7 +4232,7 @@ msgstr ""
 msgid "Provide personal contact information for this organization."
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:18
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:12
 msgid "Public"
 msgstr ""
 
@@ -5376,8 +5371,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:228
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:234
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
@@ -5554,7 +5548,6 @@ msgstr ""
 msgid "Unregistered projects"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:249
 #: src/legacy-pages/Post/Post.constants.ts:17
 msgid "Untitled"
 msgstr ""

@@ -15,9 +15,5 @@ export interface ProjectBannerProps {
     | 'offChain'
   >;
   canEdit?: boolean;
-  canCreatePost?: boolean;
-  createPostDisabled?: boolean;
-  onCreatePost: () => void;
   migrateProject?: () => Promise<void>;
-  createPostTooltipText?: string;
 }

@@ -120,14 +120,6 @@ const ManageProject = () => {
         <ProjectDashboardBanner
           project={project}
           canEdit={canEditProject}
-          canCreatePost={canCreatePost}
-          onCreatePost={openCreatePostModal}
-          createPostDisabled={createPostDisabled}
-          createPostTooltipText={
-            loginDisabled
-              ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
-              : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
-          }
           // We need an offchain ID to migrate
           migrateProject={project.offChainId ? migrateProject : undefined}
         />
@@ -153,6 +145,11 @@ const ManageProject = () => {
           openCreatePostModal,
           setDraftPost,
           role,
+          canCreatePost,
+          createPostDisabled,
+          createPostTooltipText: loginDisabled
+            ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
+            : _(CREATE_POST_DISABLED_TOOLTIP_TEXT),
         }}
       />
 

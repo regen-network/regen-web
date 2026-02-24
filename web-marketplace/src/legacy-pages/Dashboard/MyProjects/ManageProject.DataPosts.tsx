@@ -44,14 +44,25 @@ import { useFetchProject } from './hooks/useFetchProject';
  */
 const DataPosts = (): JSX.Element => {
   const { _ } = useLingui();
-  const { project, isLoading, openCreatePostModal, setDraftPost, role } =
-    useOutletContext<
-      ReturnType<typeof useFetchProject> & {
-        openCreatePostModal: () => void;
-        setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
-        role?: ProjectRole;
-      }
-    >();
+  const {
+    project,
+    isLoading,
+    openCreatePostModal,
+    setDraftPost,
+    role,
+    canCreatePost,
+    createPostDisabled,
+    createPostTooltipText,
+  } = useOutletContext<
+    ReturnType<typeof useFetchProject> & {
+      openCreatePostModal: () => void;
+      setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+      role?: ProjectRole;
+      canCreatePost?: boolean;
+      createPostDisabled?: boolean;
+      createPostTooltipText?: string;
+    }
+  >();
 
   const isViewer = role === ROLE_VIEWER;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -217,6 +228,10 @@ const DataPosts = (): JSX.Element => {
         onDeletePost={handleDeletePost}
         sortCallbacks={sortCallbacks}
         isViewer={isViewer}
+        onCreatePost={openCreatePostModal}
+        canCreatePost={canCreatePost}
+        createPostDisabled={createPostDisabled}
+        createPostTooltipText={createPostTooltipText}
       />
       <DeletePostWarningModal
         onDelete={deletePost}

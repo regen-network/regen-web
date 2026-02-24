@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
-import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import { useRouter } from 'next/navigation';
 import useClickOutside from 'utils/hooks/useClickOutside';
@@ -19,7 +18,6 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
 // import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Title } from 'web-components/src/components/typography/Title';
 
 import { getProjectPath } from 'lib/bridge';
@@ -49,11 +47,7 @@ import { truncateEnd } from './ProjectDashboardBanner.utils';
 const ProjectDashboardBanner = ({
   project,
   canEdit,
-  canCreatePost,
-  onCreatePost,
   migrateProject,
-  createPostDisabled,
-  createPostTooltipText,
 }: ProjectBannerProps) => {
   const { _ } = useLingui();
   const theme = useTheme();
@@ -226,28 +220,6 @@ const ProjectDashboardBanner = ({
                   {_(EDIT)}
                 </ContainedButton>
               )}
-              {canCreatePost &&
-                (createPostDisabled ? (
-                  <InfoTooltip
-                    arrow
-                    title={createPostTooltipText}
-                    placement="top"
-                  >
-                    <span>
-                      <ContainedButton
-                        onClick={onCreatePost}
-                        disabled
-                        className="h-full"
-                      >
-                        {_(CREATE_POST)}
-                      </ContainedButton>
-                    </span>
-                  </InfoTooltip>
-                ) : (
-                  <ContainedButton onClick={onCreatePost}>
-                    {_(CREATE_POST)}
-                  </ContainedButton>
-                ))}
             </div>
           </div>
         </div>

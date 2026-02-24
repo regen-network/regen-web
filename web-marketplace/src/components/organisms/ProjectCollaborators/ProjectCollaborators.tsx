@@ -19,6 +19,7 @@ import {
   COLLABORATORS_DESCRIPTION,
   INVITE_COLLABORATORS,
   PROJECT_COLLABORATORS,
+  PROJECT_ROLES_DOCS_URL,
 } from './ProjectCollaborators.constants';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 import { getRoleItems } from './ProjectCollaborators.utils';
@@ -72,6 +73,7 @@ export const ProjectCollaborators = ({
         sortDir={sortDir}
         context={PROJECT_CONTEXT}
         showMobileInvite={true}
+        roleTooltipDocsUrl={PROJECT_ROLES_DOCS_URL}
       >
         {isProjectDao ? (
           (col, canAdmin) => (

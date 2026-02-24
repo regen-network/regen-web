@@ -28,3 +28,6 @@ export const ACTION_EDIT_MY_PROFILE = msg`Edit my profile`;
 export const ACTION_EDIT_ORG_ROLE = msg`Edit organization role`;
 export const COLLABORATOR_ACTIONS_ARIA_LABEL = msg`Collaborator actions`;
 export const SELECT_ROLE_ARIA_LABEL = msg`Select role`;
+
+export const PROJECT_ROLES_DOCS_URL =
+  'https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-project-collaborators#id-3.-project-roles-and-permissions';

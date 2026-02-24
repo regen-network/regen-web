@@ -9,6 +9,7 @@ import {
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 
+import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
@@ -24,9 +25,11 @@ import { PersonalProfileSchemaType } from '../BaseMembersTable/modals/modals.sch
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   INVITE_MEMBERS,
+  ORG_ROLES_DOCS_URL,
   ORGANIZATION_MEMBERS,
   ORGANIZATION_MEMBERS_DESCRIPTION,
   VISIBILITY_ON_PROFILE,
+  VISIBILITY_TOOLTIP,
 } from './OrganizationMembers.constants';
 import { getRoleItems } from './OrganizationMembers.utils';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
@@ -122,6 +125,8 @@ export const OrganizationMembersBase = ({
     cfg.hideOwnerOption && currentUserRole !== ROLE_OWNER,
   );
 
+  const visibilityTooltipContent = _(VISIBILITY_TOOLTIP);
+
   return (
     <>
       <BaseMembersTable
@@ -139,6 +144,8 @@ export const OrganizationMembersBase = ({
         sortDir={sortDir}
         context={ORGANIZATION_CONTEXT}
         additionalColumns={[_(VISIBILITY_ON_PROFILE)]}
+        additionalColumnTooltips={[visibilityTooltipContent]}
+        roleTooltipDocsUrl={ORG_ROLES_DOCS_URL}
         showMobileInvite={cfg.showMobileInvite}
         hideHeader={!cfg.showHeader}
         hideDescription={!cfg.showDescription}
@@ -202,7 +209,7 @@ export const OrganizationMembersBase = ({
               />
             </div>
             {/* Desktop visibility */}
-            <div className="hidden xl:flex w-[150px] justify-end items-center">
+            <div className="hidden xl:flex w-[180px] justify-center items-center">
               <VisibilitySwitch
                 checked={member.visible}
                 disabled={!canAdmin}

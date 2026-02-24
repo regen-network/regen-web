@@ -5,7 +5,7 @@ export const INVITE_MEMBERS = msg`Invite Member`;
 export const ORGANIZATION_MEMBERS_DESCRIPTION = msg`Organization members have permissions for all projects associated with an organization`;
 export const NAME = msg`NAME`;
 export const ROLE = msg`ROLE`;
-export const VISIBILITY_ON_PROFILE = msg`VISIBILITY ON PROFILE`;
+export const VISIBILITY_ON_PROFILE = msg`VISIBILITY ON PUBLIC PROFILE`;
 export const EDIT_PROFILE = msg`EDIT PROFILE`;
 export const PLEASE_CONTACT_ADMIN_VISIBILITY = msg`Please contact your administrator to change your visibility.`;
 export const VISIBLE = msg`Visible`;
@@ -22,3 +22,7 @@ export const ROLE_EDITOR_DESCRIPTION = msg`Has full control of projects and cred
 
 export const ROLE_VIEWER_LABEL = msg`Viewer`;
 export const ROLE_VIEWER_DESCRIPTION = msg`Can view all data across all projects, even when private.`;
+
+export const VISIBILITY_TOOLTIP = msg`Choose whether this user is visible on the organization's public profile`;
+export const ORG_ROLES_DOCS_URL =
+  'https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-organization-members#id-1.-understanding-organization-roles';

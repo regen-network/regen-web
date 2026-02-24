@@ -2661,8 +2661,8 @@ msgid "In order to buy and retire ecocredits using credit card payment, we may g
 msgstr "Para comprar y retirar ecocréditos mediante pago con tarjeta de crédito, podemos generar una dirección de billetera alojada dedicada para usar como destinatario de los créditos de blockchain retirados. No envíe fondos ni créditos comercializables a esta dirección, ya que no podrá iniciar transacciones desde esta cuenta.<0>Más información»</0>"
 
 #: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:4
-msgid "in our docs"
-msgstr "en nuestros documentos"
+#~ msgid "in our docs"
+#~ msgstr "en nuestros documentos"
 
 #: src/components/organisms/AdditionalityForm.tsx:141
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
@@ -2864,10 +2864,10 @@ msgid "Learn more about creating a credit class»"
 msgstr "Obtenga más información sobre cómo crear una clase de crédito»"
 
 #: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:3
-msgid "Learn more about roles"
-msgstr "Obtenga más información sobre los roles"
+#~ msgid "Learn more about roles"
+#~ msgstr "Obtenga más información sobre los roles"
 
-#: src/components/molecules/RoleTooltip/RoleTooltip.tsx:5
+#: src/components/molecules/RoleTooltip/RoleTooltip.tsx:7
 msgid "Learn more about roles <0>in our docs</0>"
 msgstr "Obtenga más información sobre los roles <0>en nuestra documentación</0>"
 

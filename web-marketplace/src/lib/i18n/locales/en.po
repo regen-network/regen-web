@@ -2653,8 +2653,8 @@ msgid "In order to buy and retire ecocredits using credit card payment, we may g
 msgstr ""
 
 #: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:4
-msgid "in our docs"
-msgstr ""
+#~ msgid "in our docs"
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:141
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
@@ -2856,10 +2856,10 @@ msgid "Learn more about creating a credit class»"
 msgstr ""
 
 #: src/components/molecules/RoleTooltip/RoleTooltip.constants.ts:3
-msgid "Learn more about roles"
-msgstr ""
+#~ msgid "Learn more about roles"
+#~ msgstr ""
 
-#: src/components/molecules/RoleTooltip/RoleTooltip.tsx:5
+#: src/components/molecules/RoleTooltip/RoleTooltip.tsx:7
 msgid "Learn more about roles <0>in our docs</0>"
 msgstr ""
 

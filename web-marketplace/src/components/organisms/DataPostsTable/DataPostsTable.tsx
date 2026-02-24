@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import { Box } from '@mui/material';
 import {
   DRAFT,
   POST_IS_PRIVATE,
@@ -241,73 +240,52 @@ export const DataPostsTable: React.FC<
           rows={
             /* eslint-disable react/jsx-key */
             posts?.map(post => [
-              <Box
-                sx={{
-                  maxWidth: '250px',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}
+              <div
+                className="max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap"
                 title={post.title}
               >
-                <Box component="span" sx={{ fontWeight: 700 }}>
+                <span className="font-bold">
                   {post.title || <em>{_(UNTITLED)}</em>}
-                </Box>
+                </span>
                 {!post.published && (
                   <span className="ml-10 inline-flex items-center gap-[2px] px-[8px] py-[2px] text-[0.75rem] rounded bg-bc-neutral-300 text-bc-neutral-500 font-bold">
                     <DraftIcon className="w-[14px] h-[14px]" />
                     {_(DRAFT)}
                   </span>
                 )}
-              </Box>,
-              <Box
-                sx={{ whiteSpace: 'nowrap' }}
-                className="text-bc-neutral-400"
-              >
+              </div>,
+              <div className="whitespace-nowrap text-bc-neutral-400">
                 {formatDate(post.createdAt, undefined, true)}
-              </Box>,
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              </div>,
+              <div className="flex items-center gap-[16px]">
                 <UserAvatar
                   src={post.authorAvatarUrl}
                   alt={post.author}
                   size="md"
                   href={post.authorProfileLink}
                 />
-                <Box sx={{ minWidth: 0 }}>
-                  <Box
-                    sx={{
-                      fontWeight: 700,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      maxWidth: '150px',
-                    }}
+                <div className="min-w-0">
+                  <div
+                    className="font-bold overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"
                     title={post.author}
                   >
                     {post.author}
-                  </Box>
+                  </div>
                   {post.authorCompany && (
-                    <Box
-                      sx={{
-                        fontSize: '0.75rem',
-                        color: 'info.dark',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        maxWidth: '150px',
-                      }}
+                    <div
+                      className="text-[0.75rem] text-[#545555] overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"
                       title={post.authorCompany}
                     >
                       {post.authorCompany}
-                    </Box>
+                    </div>
                   )}
-                </Box>
-              </Box>,
-              <Box>{renderPrivacyTag(post.privacy)}</Box>,
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                </div>
+              </div>,
+              <div>{renderPrivacyTag(post.privacy)}</div>,
+              <div className="flex items-center gap-[8px]">
                 {post.filesCount}
                 <DocumentIcon sx={{ fontSize: 18, color: 'info.main' }} />
-              </Box>,
+              </div>,
             ]) ?? []
           }
         />

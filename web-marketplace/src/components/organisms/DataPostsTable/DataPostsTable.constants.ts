@@ -1,7 +1,6 @@
 import { msg } from '@lingui/core/macro';
 
 export const DATA_POSTS_TABLE_LABEL = msg`data posts table`;
-export const NO_DATA_POSTS_TITLE = msg`No data posts to display`;
 
 export const DATA_POSTS_TITLE = msg`Data Posts`;
 export const DATA_POSTS_DESCRIPTION = msg`Upload data, provide updates, and anchor your information to the blockchain for full transparency and accountability.`;

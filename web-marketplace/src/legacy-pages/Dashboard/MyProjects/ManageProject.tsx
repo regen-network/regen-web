@@ -158,6 +158,7 @@ const ManageProject = () => {
           offChainProject,
           openCreatePostModal,
           setDraftPost,
+          role,
         }}
       />
 

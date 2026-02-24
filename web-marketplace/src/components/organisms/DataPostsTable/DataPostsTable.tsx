@@ -193,7 +193,7 @@ export const DataPostsTable: React.FC<
   return (
     <WithLoader isLoading={isLoading} variant="skeleton">
       <div className="w-full pt-30 md:pt-[30px] bg-bc-neutral-0 rounded-lg border border-solid border-bc-neutral-300">
-        <div className="mb-10 my-[30px]">
+        <div className="mb-10 mx-[30px]">
           <Title variant="h4">
             {_(DATA_POSTS_TITLE)}
             {(posts?.length ?? 0) > 0 && (

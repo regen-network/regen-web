@@ -122,16 +122,16 @@ export const ProjectCreate = (): JSX.Element => {
 
   const handleRequestClose = useCallback(() => {
     // If we know where the user came from, send them back there.
-    // We use Next.js router.push() (not React Router navigate) because the origin
+    // We use Next.js router.replace() (not React Router navigate) because the origin
     // may be a Next.js App Router page (e.g. /project/slug) that lives outside
     // React Router's route tree.
     if (originPathRef.current) {
-      router.push(originPathRef.current);
+      router.replace(originPathRef.current);
       return;
     }
     // Fallback: new draft projects have no meaningful manage page yet → homepage.
     if (projectId === DRAFT_ID) {
-      router.push('/');
+      router.replace('/');
       return;
     }
     // Fallback for existing projects: dashboard manage page.
@@ -141,8 +141,8 @@ export const ProjectCreate = (): JSX.Element => {
       (offChainProject?.adminDaoAddress &&
         offChainProject?.adminDaoAddress === dao?.address)
     )
-      router.push(`/dashboard/organization/${projectPath}`);
-    else router.push(`/dashboard/${projectPath}`);
+      router.replace(`/dashboard/organization/${projectPath}`);
+    else router.replace(`/dashboard/${projectPath}`);
   }, [
     router,
     projectId,

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -23,6 +23,7 @@ const ListProject = () => {
   const { activeAccountId, activeAccount } = useAuth();
   const router = useRouter();
   const isConnectingRef = useRef(false);
+  const pathname = usePathname();
 
   const {
     isModalOpen,
@@ -51,7 +52,12 @@ const ListProject = () => {
         }}
         onClick={
           activeAccountId
-            ? () => router.push(`/project-pages/${DRAFT_ID}/account`)
+            ? () =>
+                router.push(
+                  `/project-pages/${DRAFT_ID}/account?from=${encodeURIComponent(
+                    pathname,
+                  )}`,
+                )
             : onButtonClick
         }
       >

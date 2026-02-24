@@ -8,7 +8,6 @@ import {
 import {
   Outlet,
   useLocation,
-  useNavigate,
   useOutletContext,
   useParams,
 } from 'react-router-dom';
@@ -19,6 +18,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { useRouter } from 'next/navigation';
 
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
@@ -68,7 +68,7 @@ const defaultProjectCreateContext: ContextType = {
 
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
+  const router = useRouter();
   const location = useLocation();
   const dao = useDaoOrganization();
 
@@ -96,10 +96,14 @@ export const ProjectCreate = (): JSX.Element => {
 
   // Capture the entry path only once, when the layout first mounts.
   // Child subroute navigations will change `location` but we only want the original.
+  // We check both React Router state (set by navigate() callers) and a `?from` query
+  // param (set by Next.js router.push() callers that can't pass router state).
   useEffect(() => {
     if (originPathRef.current === null) {
-      originPathRef.current =
+      const fromState =
         (location.state as { from?: string } | null)?.from ?? null;
+      const fromParam = new URLSearchParams(location.search).get('from');
+      originPathRef.current = fromState ?? fromParam;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -118,13 +122,16 @@ export const ProjectCreate = (): JSX.Element => {
 
   const handleRequestClose = useCallback(() => {
     // If we know where the user came from, send them back there.
+    // We use Next.js router.push() (not React Router navigate) because the origin
+    // may be a Next.js App Router page (e.g. /project/slug) that lives outside
+    // React Router's route tree.
     if (originPathRef.current) {
-      navigate(originPathRef.current, { replace: true });
+      router.push(originPathRef.current);
       return;
     }
     // Fallback: new draft projects have no meaningful manage page yet → homepage.
     if (projectId === DRAFT_ID) {
-      navigate('/', { replace: true });
+      router.push('/');
       return;
     }
     // Fallback for existing projects: dashboard manage page.
@@ -134,10 +141,10 @@ export const ProjectCreate = (): JSX.Element => {
       (offChainProject?.adminDaoAddress &&
         offChainProject?.adminDaoAddress === dao?.address)
     )
-      navigate(`/dashboard/organization/${projectPath}`, { replace: true });
-    else navigate(`/dashboard/${projectPath}`, { replace: true });
+      router.push(`/dashboard/organization/${projectPath}`);
+    else router.push(`/dashboard/${projectPath}`);
   }, [
-    navigate,
+    router,
     projectId,
     isOrganizationAccount,
     offChainProject?.adminDaoAddress,

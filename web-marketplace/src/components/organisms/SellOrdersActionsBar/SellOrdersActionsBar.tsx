@@ -128,7 +128,7 @@ export const SellOrdersActionsBar = ({
                   router.push(
                     `/project-pages/${
                       onChainProjectId ?? offChainProjectId
-                    }/edit/basic-info`,
+                    }/edit/basic-info?from=${encodeURIComponent(pathname)}`,
                   )
                 }
               >

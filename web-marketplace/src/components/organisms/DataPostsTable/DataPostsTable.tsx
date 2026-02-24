@@ -192,8 +192,8 @@ export const DataPostsTable: React.FC<
 
   return (
     <WithLoader isLoading={isLoading} variant="skeleton">
-      <div className="w-full px-10 py-30 md:p-40 bg-bc-neutral-0 rounded-lg border border-solid border-bc-neutral-300">
-        <div className="mb-10">
+      <div className="w-full px-10 py-30 md:pt-[30px] bg-bc-neutral-0 rounded-lg border border-solid border-bc-neutral-300">
+        <div className="mb-10 ml-[40px]">
           <Title variant="h4">
             {_(DATA_POSTS_TITLE)}
             {(posts?.length ?? 0) > 0 && (
@@ -203,7 +203,7 @@ export const DataPostsTable: React.FC<
             )}
           </Title>
         </div>
-        <p className="text-sc-text-paragraph mb-30 mt-0 max-w-[551px]">
+        <p className="text-sc-text-paragraph mb-30 mx-[30px] mt-0 max-w-[551px]">
           {_(DATA_POSTS_DESCRIPTION)}{' '}
           <button
             className="p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none inline-flex items-center gap-3 group align-middle"

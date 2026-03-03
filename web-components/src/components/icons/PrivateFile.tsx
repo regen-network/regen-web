@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const PrivateFile = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" fill="none" {...props}>
+  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" {...props}>
     <g clip-path="url(#clip0_2339_7111)">
       <path
         fillRule="evenodd"

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const LocationIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" fill="none" {...props}>
+  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" {...props}>
     <g clip-path="url(#clip0_2339_7155)">
       <path
         d="M16 7.17188C16 12.7019 10.0633 16.9629 8.75362 17.8357C8.59668 17.9403 8.40332 17.9403 8.24638 17.8357C6.9367 16.9629 1 12.7019 1 7.17188C1 3.21096 4.35786 0 8.5 0C12.6421 0 16 3.21096 16 7.17188Z"

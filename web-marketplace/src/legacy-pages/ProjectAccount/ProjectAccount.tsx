@@ -145,12 +145,17 @@ export const ProjectAccount = (): JSX.Element | null => {
   // 2. State is properly initialized (for dashboard redirects)
   useEffect(() => {
     const canNavigate =
-      !isLoadingIsIssuer &&
-      (shouldSkip || (fromDashboard && isStateReady));
+      !isLoadingIsIssuer && (shouldSkip || (fromDashboard && isStateReady));
     if (canNavigate) {
       navigateNext();
     }
-  }, [shouldSkip, isLoadingIsIssuer, navigateNext, fromDashboard, isStateReady]);
+  }, [
+    shouldSkip,
+    isLoadingIsIssuer,
+    navigateNext,
+    fromDashboard,
+    isStateReady,
+  ]);
 
   // Show loading while:
   // 1. Checking issuer status

@@ -409,9 +409,7 @@ export const PostForm = ({
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <span className="inline-flex items-center justify-center w-[24px] h-[24px] rounded-full bg-ac-primary-200 mr-15 shrink-0">
-                    <UnlockIcon className="w-[14px] h-[14px]" />
-                  </span>
+                  <UnlockIcon className="mr-15" />
                   <Trans>Make the entire post public</Trans>
                 </span>
               }
@@ -428,9 +426,7 @@ export const PostForm = ({
             <Radio
               label={
                 <div className={cn('flex items-center')}>
-                  <span className="inline-flex items-center justify-center w-[24px] h-[24px] rounded-full bg-bc-red-300 mr-15 shrink-0">
-                    <LocationIcon className="w-[14px] h-[14px]" />
-                  </span>
+                  <LocationIcon className="mr-15" />
                   <Trans>Make the location data private</Trans>
                 </div>
               }
@@ -465,9 +461,7 @@ export const PostForm = ({
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <span className="inline-flex items-center justify-center w-[24px] h-[24px] rounded-full bg-bc-red-300 mr-15 shrink-0">
-                    <PrivateFile className="w-[14px] h-[14px]" />
-                  </span>
+                  <PrivateFile className="mr-15" />
                   <Trans>Make the files and location data private</Trans>
                 </span>
               }
@@ -501,9 +495,7 @@ export const PostForm = ({
             <Radio
               label={
                 <span className={cn('flex items-center')}>
-                  <span className="inline-flex items-center justify-center w-[24px] h-[24px] rounded-full bg-bc-red-300 mr-15 shrink-0">
-                    <LockIcon className="w-[14px] h-[14px]" />
-                  </span>
+                  <LockIcon className="mr-15" />
                   <Trans>Make the entire post private</Trans>
                 </span>
               }

@@ -23,7 +23,6 @@ import { Body } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useAuth } from 'lib/auth/auth';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.constants';
@@ -49,6 +48,8 @@ type Props = {
   projectLocation?: GeocodeFeature;
   openCreatePostModal: () => void;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+  canManagePost: boolean;
+  canViewPost: boolean;
 };
 
 export const DataStream = ({
@@ -59,16 +60,14 @@ export const DataStream = ({
   projectLocation,
   openCreatePostModal,
   setDraftPost,
+  canManagePost,
+  canViewPost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
   const hash = useHash();
-
-  const isAdmin =
-    !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
 
   const queryClient = useQueryClient();
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery(
@@ -111,7 +110,7 @@ export const DataStream = ({
             titleAlign="left"
             className="mb-50 sm:mb-[100px] pt-0"
           >
-            {isAdmin && adminDescription && projectLocation && (
+            {canManagePost && adminDescription && projectLocation && (
               <div className="mt-15">
                 <Body className="mb-15 max-w-[683px]" size="lg" component="div">
                   <BlockContent content={adminDescription} />
@@ -158,13 +157,14 @@ export const DataStream = ({
                         post={post}
                         index={i}
                         postsLength={posts.length}
-                        isAdmin={isAdmin}
+                        canManagePost={canManagePost}
                         adminAccountId={adminAccountId}
                         offChainProjectId={offChainProjectId}
                         adminAddr={adminAddr}
                         setDraftPost={setDraftPost}
                         projectLocation={projectLocation}
                         openCreatePostModal={openCreatePostModal}
+                        canViewPost={canViewPost}
                       />
                     ))}
                   </Timeline>

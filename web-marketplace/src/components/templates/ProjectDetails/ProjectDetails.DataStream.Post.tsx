@@ -68,25 +68,27 @@ type Props = {
   post: Post;
   index: number;
   postsLength: number;
-  isAdmin: boolean;
   adminAccountId?: string | null;
   offChainProjectId?: string;
   adminAddr?: string | null;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   projectLocation: GeocodeFeature;
   openCreatePostModal: () => void;
+  canManagePost: boolean;
+  canViewPost: boolean;
 };
 export const DataStreamPost = ({
   offChainProjectId,
   post,
   index,
   postsLength,
-  isAdmin,
   adminAccountId,
   adminAddr,
   setDraftPost,
   projectLocation,
   openCreatePostModal,
+  canManagePost,
+  canViewPost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -196,7 +198,7 @@ export const DataStreamPost = ({
           <TimelineConnector className="bg-grey-300 w-1" />
         </TimelineSeparator>
         <TimelineContent className="-mt-30 mb-30 pr-0 pl-0">
-          {post.contents && (post.privacy !== 'private' || isAdmin) && (
+          {post.contents && (post.privacy !== 'private' || canViewPost) && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
               onClick={() =>
@@ -224,7 +226,7 @@ export const DataStreamPost = ({
                 timestamp: post.createdAt,
                 tag: creatorIsAdmin ? _(ADMIN) : undefined,
               }}
-              isAdmin={isAdmin}
+              canManagePost={canManagePost}
               sharePublicLink={() => {
                 copyTextToClipboard(
                   LINK_PREFIX
@@ -241,6 +243,8 @@ export const DataStreamPost = ({
               preview={preview}
               onEditDraft={() => {
                 setDraftPost({
+                  id: post.id,
+                  updatedAt: new Date(post.updatedAt),
                   iri: post.iri,
                   title: post.contents?.title,
                   comment: post.contents?.comment,
@@ -265,7 +269,7 @@ export const DataStreamPost = ({
               linkComponent={Link}
             />
           )}
-          {post.privacy === 'private' && !isAdmin && (
+          {post.privacy === 'private' && !canViewPost && (
             <div className="flex items-center px-[16px] py-30 sm:p-30">
               <LockIcon className="w-[18px] h-[18px]" />
               <Subtitle size="lg">{_(PRIVATE_POST)}</Subtitle>
@@ -273,7 +277,7 @@ export const DataStreamPost = ({
           )}
         </TimelineContent>
       </TimelineItem>
-      {isAdmin && (
+      {canManagePost && (
         <DeletePostWarningModal
           onDelete={deletePost}
           open={open}

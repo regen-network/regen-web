@@ -51,8 +51,9 @@ import { ProjectStorySection } from 'components/organisms/ProjectStorySection/Pr
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import {
-  getCanCreatePost,
   getCanEditProject,
+  getCanManagePost,
+  getCanViewPost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
@@ -336,7 +337,8 @@ function ProjectDetails(): JSX.Element {
   const { canEdit: canEditProject } = getCanEditProject({
     role,
   });
-  const { canCreatePost } = getCanCreatePost({ role });
+  const canManagePost = getCanManagePost({ role });
+  const canViewPost = getCanViewPost({ role });
 
   // Fetch organization data if project belongs to an organization
   const organizationId =
@@ -384,7 +386,7 @@ function ProjectDetails(): JSX.Element {
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
           canEditProject={canEditProject}
-          canCreatePost={canCreatePost}
+          canCreatePost={canManagePost}
           onBuyButtonClick={() => {
             onBuyButtonClick({
               projectId,
@@ -514,6 +516,8 @@ function ProjectDetails(): JSX.Element {
         projectLocation={projectLocation}
         openCreatePostModal={openCreatePostModal}
         setDraftPost={setDraftPost}
+        canManagePost={canManagePost}
+        canViewPost={canViewPost}
       />
 
       <ProjectDetailsTableTabs
@@ -566,12 +570,14 @@ function ProjectDetails(): JSX.Element {
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
           initialValues={{
+            id: draftPost?.id,
             iri: draftPost?.iri,
             title: draftPost?.title || '',
             comment: draftPost?.comment || '',
             files: draftPost?.files || [],
             privacyType: draftPost?.privacyType || 'public',
             published: draftPost?.published || true,
+            updatedAt: draftPost?.updatedAt,
           }}
           setDraftPost={setDraftPost}
         />

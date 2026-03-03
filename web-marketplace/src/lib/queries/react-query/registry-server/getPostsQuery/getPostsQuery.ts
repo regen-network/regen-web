@@ -34,5 +34,5 @@ export const getPostsQuery = ({
     }
   },
   getNextPageParam: (lastPage: PostsQueryResponse) => lastPage?.next,
-  initialPageParam: new Date().toISOString(),
+  initialPageParam: '',
 });

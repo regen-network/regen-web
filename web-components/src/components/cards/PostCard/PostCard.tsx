@@ -25,7 +25,7 @@ interface PostCardProps {
   author: User;
   signers?: Array<User>;
   privacyLabel?: string;
-  isAdmin?: boolean;
+  canManagePost?: boolean;
   numberOfFiles?: number;
   sharePublicLink: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
@@ -47,7 +47,7 @@ export default function PostCard({
   author,
   signers,
   privacyLabel,
-  isAdmin,
+  canManagePost,
   numberOfFiles,
   sharePublicLink,
   sharePrivateLink,
@@ -71,7 +71,7 @@ export default function PostCard({
     >
       <ActionButton
         draft={!!draftLabel}
-        isAdmin={isAdmin}
+        canManagePost={canManagePost}
         sharePublicLink={sharePublicLink}
         sharePrivateLink={sharePrivateLink}
         onDelete={onDelete}
@@ -247,14 +247,15 @@ export default function PostCard({
             </Box>
           </Grid>
         )}
-        {!hasFile && (
+        {!hasFile && (privacyLabel || draftLabel) && (
           <Grid
+            className="xl:absolute xl:-top-[7px] xl:right-[25px]"
             item
             xs="auto"
             sx={{
               flexShrink: 0,
               marginRight: '10px',
-              marginBottom: { xs: '0px', md: '20px', xlg: '0px' },
+              marginBottom: { xs: '0px', md: '20px', xl: '0px' },
             }}
           >
             {!draftLabel && privacyLabel && (

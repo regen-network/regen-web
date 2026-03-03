@@ -39,6 +39,14 @@ const ManageProject = () => {
   const createPostDisabled =
     !activeAccountId || project.draft || !project.location;
 
+  // Derive dashboard base path from current URL so tab hrefs work on both
+  // the personal dashboard (/dashboard) and org dashboard (/dashboard/organization)
+  const dashboardBasePath = location.pathname.startsWith(
+    '/dashboard/organization',
+  )
+    ? '/dashboard/organization'
+    : '/dashboard';
+
   const [postProjectId, setPostProjectId] = useState<string | undefined>();
   const [postOffChainProjectId, setPostOffChainProjectId] = useState<
     string | undefined
@@ -66,24 +74,24 @@ const ManageProject = () => {
       // Data posts, credit issuance and manage credits tabs are hidden until implemented
       {
         label: _(msg`Data Posts`),
-        href: `/dashboard/projects/${projectId}/manage/data-posts`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/data-posts`,
       },
       {
         label: _(msg`Credit Issuance`),
-        href: `/dashboard/projects/${projectId}/manage/credit-issuance`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/credit-issuance`,
         hidden: true,
       },
       {
         label: _(msg`Manage Credits`),
-        href: `/dashboard/projects/${projectId}/manage/manage-credits`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/manage-credits`,
         hidden: true,
       },
       {
         label: _(msg`Collaborators`),
-        href: `/dashboard/projects/${projectId}/manage/collaborators`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/collaborators`,
       },
     ],
-    [_, projectId],
+    [_, dashboardBasePath, projectId],
   );
 
   const activeTab = useMemo(

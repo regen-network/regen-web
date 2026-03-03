@@ -1,14 +1,13 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { useLingui } from '@lingui/react';
 import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box } from '@mui/material';
-import { useInfiniteQuery, useQueries } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
 import { useAtom } from 'jotai';
 import { useDelete } from 'legacy-pages/Post/hooks/useDelete';
@@ -20,15 +19,19 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
-import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
+import {
+  getPostsPageQuery,
+  PostsSortField,
+  PostsSortOrder,
+} from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsPageQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { ROLE_VIEWER } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { DataPostsTable } from 'components/organisms/DataPostsTable';
+import { DATA_POSTS_COLUMN_MAPPING } from 'components/organisms/DataPostsTable/DataPostsTable.constants';
 import { DataPost } from 'components/organisms/DataPostsTable/DataPostsTable.types';
 import { mapPostToDataPost } from 'components/organisms/DataPostsTable/DataPostsTable.utils';
-import { useSortedDataPosts } from 'components/organisms/DataPostsTable/useSortedDataPosts';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
@@ -38,12 +41,13 @@ import { useFetchProject } from './hooks/useFetchProject';
  * ManageProject.DataPosts — route child for the "Data Posts" tab
  * on the project manage dashboard.
  *
- * Fetches posts via the same `getPostsQuery` infinite-query used by
- * the DataStream section, resolves each unique `creatorAccountId`
+ * Fetches posts via offset/limit server-side pagination
+ * (`getPostsPageQuery`), resolves each unique `creatorAccountId`
  * via `getAccountByIdQuery`, then maps to the `DataPost` view-model.
+ *
+ * Server-side pagination requires regen-server#563.
  */
 const DataPosts = (): JSX.Element => {
-  const { _ } = useLingui();
   const {
     project,
     isLoading,
@@ -77,36 +81,50 @@ const DataPosts = (): JSX.Element => {
       offset: 0,
     });
 
-  // ----- Fetch posts (same pattern as DataStream) -----
-  const {
-    data: postsData,
-    isLoading: isPostsLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery(
-    getPostsQuery({
+  const { page, rowsPerPage } = paginationParams;
+
+  // ----- Sort state (server-side) -----
+  const [sortField, setSortField] = useState<PostsSortField>('created_at');
+  const [sortOrder, setSortOrder] = useState<PostsSortOrder>('desc');
+
+  const sortCallbacks = useMemo(
+    () =>
+      Object.values(DATA_POSTS_COLUMN_MAPPING).map(header =>
+        header.sortEnabled
+          ? (order: 'asc' | 'desc') => {
+              setSortField(header.sortKey as PostsSortField);
+              setSortOrder(order);
+              // Reset to first page on sort change
+              setPaginationParams(prev => ({ ...prev, page: 0, offset: 0 }));
+            }
+          : undefined,
+      ),
+    [],
+  );
+
+  // ----- Fetch posts (server-side pagination + sorting) -----
+  const { data: postsData, isLoading: isPostsLoading } = useQuery(
+    getPostsPageQuery({
       projectId: project.offChainId,
+      offset: page * rowsPerPage,
+      limit: rowsPerPage,
       languageCode: selectedLanguage,
+      sort: sortField,
+      sortOrder: sortOrder,
     }),
   );
 
-  // Fetch all pages so the table has the complete dataset for
-  // client-side pagination.
-  useEffect(() => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  // Flatten all pages into a single Post[] array
   const posts: Post[] = useMemo(
-    () =>
-      postsData?.pages.reduce<Post[]>(
-        (acc, page) => (page?.posts ? [...acc, ...page.posts] : acc),
-        [],
-      ) ?? [],
-    [postsData],
+    () => postsData?.posts ?? [],
+    [postsData?.posts],
+  );
+  const totalPosts = postsData?.totalCount ?? 0;
+
+  // Merge server-provided total into pagination params so ActionsTable
+  // can display correct page controls ("X–Y of Z").
+  const paginationParamsWithCount = useMemo(
+    () => ({ ...paginationParams, count: totalPosts }),
+    [paginationParams, totalPosts],
   );
 
   // ----- Resolve unique creator accounts -----
@@ -150,7 +168,7 @@ const DataPosts = (): JSX.Element => {
     [posts, accountMap],
   );
 
-  const noPosts = !isPostsLoading && dataPosts.length === 0;
+  const noPosts = !isPostsLoading && totalPosts === 0;
 
   // Build a lookup: iri → raw Post (needed for edit draft to reconstruct file data)
   const postsByIri = useMemo(() => {
@@ -169,11 +187,6 @@ const DataPosts = (): JSX.Element => {
   } = useDelete({
     iri: deleteIri,
     offChainProjectId: project.offChainId,
-  });
-
-  // ----- Sorting -----
-  const { sortedPosts, sortCallbacks } = useSortedDataPosts({
-    posts: dataPosts,
   });
 
   // ----- Action handlers -----
@@ -219,11 +232,12 @@ const DataPosts = (): JSX.Element => {
   return (
     <Box sx={{ width: '100%' }}>
       <DataPostsTable
-        posts={sortedPosts}
+        posts={dataPosts}
         noPosts={noPosts}
-        isLoading={isLoading || isPostsLoading || isFetchingNextPage}
+        isLoading={isLoading || isPostsLoading}
         onTableChange={setPaginationParams}
-        initialPaginationParams={paginationParams}
+        initialPaginationParams={paginationParamsWithCount}
+        isIgnoreOffset
         onEditDraft={handleEditDraft}
         onDeletePost={handleDeletePost}
         sortCallbacks={sortCallbacks}

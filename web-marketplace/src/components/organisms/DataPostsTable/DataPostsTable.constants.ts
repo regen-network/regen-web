@@ -25,9 +25,9 @@ export const DATA_POSTS_COLUMN_MAPPING: Record<
   DATA_POSTS_HEADERS,
   { sortKey: string; sortEnabled?: boolean }
 > = {
-  [DATA_POSTS_HEADERS.TITLE]: { sortKey: 'title', sortEnabled: true },
+  [DATA_POSTS_HEADERS.TITLE]: { sortKey: 'name', sortEnabled: true },
   [DATA_POSTS_HEADERS.DATE_CREATED]: {
-    sortKey: 'createdAt',
+    sortKey: 'created_at',
     sortEnabled: true,
   },
   [DATA_POSTS_HEADERS.AUTHOR]: { sortKey: 'author', sortEnabled: true },

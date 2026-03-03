@@ -6,6 +6,14 @@ export type PostsQueryResponse = {
   next?: string;
 } | null;
 
+/**
+ * Response shape for the offset/limit paginated posts endpoint.
+ */
+export type PostsPageQueryResponse = {
+  posts: Post[];
+  totalCount: number;
+} | null;
+
 export type GetPostsQueryParams = {
   projectId?: string;
   next?: string;

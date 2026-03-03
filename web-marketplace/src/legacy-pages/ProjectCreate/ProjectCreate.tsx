@@ -1,7 +1,13 @@
-import { MutableRefObject, useCallback, useRef, useState } from 'react';
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Outlet,
-  useNavigate,
+  useLocation,
   useOutletContext,
   useParams,
 } from 'react-router-dom';
@@ -12,6 +18,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { useRouter } from 'next/navigation';
 
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
@@ -19,6 +26,7 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -60,7 +68,9 @@ const defaultProjectCreateContext: ContextType = {
 
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const location = useLocation();
+  const dao = useDaoOrganization();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
@@ -82,6 +92,21 @@ export const ProjectCreate = (): JSX.Element => {
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
+  const originPathRef = useRef<string | null>(null);
+
+  // Capture the entry path only once, when the layout first mounts.
+  // Child subroute navigations will change `location` but we only want the original.
+  // We check both React Router state (set by navigate() callers) and a `?from` query
+  // param (set by Next.js router.push() callers that can't pass router state).
+  useEffect(() => {
+    if (originPathRef.current === null) {
+      const fromState =
+        (location.state as { from?: string } | null)?.from ?? null;
+      const fromParam = new URLSearchParams(location.search).get('from');
+      originPathRef.current = fromState ?? fromParam;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const graphqlClient = useApolloClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -96,10 +121,35 @@ export const ProjectCreate = (): JSX.Element => {
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
 
   const handleRequestClose = useCallback(() => {
-    if (isOrganizationAccount || offChainProject?.adminDaoAddress)
-      navigate('/dashboard/organization', { replace: true });
-    else navigate('/dashboard', { replace: true });
-  }, [navigate, isOrganizationAccount, offChainProject]);
+    // If we know where the user came from, send them back there.
+    // We use Next.js router.replace() (not React Router navigate) because the origin
+    // may be a Next.js App Router page (e.g. /project/slug) that lives outside
+    // React Router's route tree.
+    if (originPathRef.current) {
+      router.replace(originPathRef.current);
+      return;
+    }
+    // Fallback: new draft projects have no meaningful manage page yet → homepage.
+    if (projectId === DRAFT_ID) {
+      router.replace('/');
+      return;
+    }
+    // Fallback for existing projects: dashboard manage page.
+    const projectPath = `projects/${projectId}/manage`;
+    if (
+      isOrganizationAccount ||
+      (offChainProject?.adminDaoAddress &&
+        offChainProject?.adminDaoAddress === dao?.address)
+    )
+      router.replace(`/dashboard/organization/${projectPath}`);
+    else router.replace(`/dashboard/${projectPath}`);
+  }, [
+    router,
+    projectId,
+    isOrganizationAccount,
+    offChainProject?.adminDaoAddress,
+    dao?.address,
+  ]);
 
   return (
     <>

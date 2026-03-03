@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
@@ -28,10 +28,10 @@ import { useCreateProjectContext } from '../ProjectCreate/ProjectCreate';
 export const ProjectAccount = (): JSX.Element | null => {
   const { _ } = useLingui();
   const { projectId } = useParams();
-  const location = useLocation();
-  const state = location.state as
-    | { fromDashboard?: boolean; isOrganization?: boolean }
-    | undefined;
+  const [searchParams] = useSearchParams();
+  const fromPath = searchParams.get('from');
+  const fromDashboard = !!fromPath;
+  const isOrganizationParam = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
   const dao = useDaoOrganization();
   const {
@@ -88,9 +88,9 @@ export const ProjectAccount = (): JSX.Element | null => {
     // Don't run if we've already initialized or accounts aren't ready
     if (initializedRef.current) return;
 
-    if (state?.fromDashboard) {
-      // Coming from dashboard - use the passed state
-      const isOrg = !!state.isOrganization;
+    if (fromDashboard) {
+      // Coming from dashboard - use the passed params
+      const isOrg = isOrganizationParam;
       const address = isOrg
         ? organizationAccount?.address
         : personalAccount?.address;
@@ -116,7 +116,8 @@ export const ProjectAccount = (): JSX.Element | null => {
       setIsStateReady(true);
     }
   }, [
-    state,
+    fromDashboard,
+    isOrganizationParam,
     organizationAccount?.address,
     personalAccount?.address,
     projectCreatorAddress,
@@ -144,19 +145,24 @@ export const ProjectAccount = (): JSX.Element | null => {
   // 2. State is properly initialized (for dashboard redirects)
   useEffect(() => {
     const canNavigate =
-      !isLoadingIsIssuer &&
-      (shouldSkip || (state?.fromDashboard && isStateReady));
+      !isLoadingIsIssuer && (shouldSkip || (fromDashboard && isStateReady));
     if (canNavigate) {
       navigateNext();
     }
-  }, [shouldSkip, isLoadingIsIssuer, navigateNext, state, isStateReady]);
+  }, [
+    shouldSkip,
+    isLoadingIsIssuer,
+    navigateNext,
+    fromDashboard,
+    isStateReady,
+  ]);
 
   // Show loading while:
   // 1. Checking issuer status
   // 2. Processing dashboard redirect (waiting for state to be ready)
   // 3. User should skip this page
   const showLoading =
-    isLoadingIsIssuer || (state?.fromDashboard && !isStateReady) || shouldSkip;
+    isLoadingIsIssuer || (fromDashboard && !isStateReady) || shouldSkip;
 
   if (showLoading) {
     return (

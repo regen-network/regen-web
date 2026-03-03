@@ -1,20 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import { useCreateProjectContext } from '../ProjectCreate';
 
 export const useProjectSaveAndExit = () => {
   const { formRef, shouldNavigateRef, isOrganizationAccount } =
     useCreateProjectContext();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const saveAndExit = async (): Promise<void> => {
     if (shouldNavigateRef) {
       shouldNavigateRef.current = false;
       await formRef?.current?.submitForm(true);
-      shouldNavigateRef.current = true;
     }
-    if (isOrganizationAccount) navigate('/dashboard/organization/projects');
-    else navigate('/dashboard/projects');
+    if (isOrganizationAccount) router.push('/dashboard/organization/projects');
+    else router.push('/dashboard/projects');
   };
 
   return saveAndExit;

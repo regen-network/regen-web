@@ -118,6 +118,7 @@ export const SellOrdersActionsBar = ({
                   `/project-pages/${
                     onChainProjectId ?? offChainProjectId
                   }/edit/basic-info`,
+                  { state: { from: location.pathname } },
                 )
               }
             >

@@ -113,7 +113,8 @@ export const ProjectCreate = (): JSX.Element => {
       const fromState =
         (location.state as { from?: string } | null)?.from ?? null;
       const fromParam = new URLSearchParams(location.search).get('from');
-      const safeFromParam = fromParam && isSafeRelativePath(fromParam) ? fromParam : null;
+      const safeFromParam =
+        fromParam && isSafeRelativePath(fromParam) ? fromParam : null;
       originPathRef.current = fromState ?? safeFromParam;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

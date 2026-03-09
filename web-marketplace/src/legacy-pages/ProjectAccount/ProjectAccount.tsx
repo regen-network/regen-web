@@ -30,7 +30,7 @@ export const ProjectAccount = (): JSX.Element | null => {
   const { projectId } = useParams();
   const [searchParams] = useSearchParams();
   const fromPath = searchParams.get('from');
-  const fromDashboard = !!fromPath;
+  const hasOriginPath = !!fromPath;
   const isOrganizationParam = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
   const dao = useDaoOrganization();
@@ -79,7 +79,7 @@ export const ProjectAccount = (): JSX.Element | null => {
   const shouldSkip =
     !dao || !activeAccount || !personalAccount || !organizationAccount;
 
-  // Track if we've initialized from dashboard state
+  // Track if we've initialized from origin path state
   const initializedRef = useRef(false);
   const [isStateReady, setIsStateReady] = useState(false);
 
@@ -88,8 +88,8 @@ export const ProjectAccount = (): JSX.Element | null => {
     // Don't run if we've already initialized or accounts aren't ready
     if (initializedRef.current) return;
 
-    if (fromDashboard) {
-      // Coming from dashboard - use the passed params
+    if (hasOriginPath) {
+      // Coming from an origin path - use the passed params
       const isOrg = isOrganizationParam;
       const address = isOrg
         ? organizationAccount?.address
@@ -116,7 +116,7 @@ export const ProjectAccount = (): JSX.Element | null => {
       setIsStateReady(true);
     }
   }, [
-    fromDashboard,
+    hasOriginPath,
     isOrganizationParam,
     organizationAccount?.address,
     personalAccount?.address,
@@ -142,10 +142,10 @@ export const ProjectAccount = (): JSX.Element | null => {
 
   // Navigate away if user should skip this step, but only after:
   // 1. Issuer check completes
-  // 2. State is properly initialized (for dashboard redirects)
+  // 2. State is properly initialized (for origin path redirects)
   useEffect(() => {
     const canNavigate =
-      !isLoadingIsIssuer && (shouldSkip || (fromDashboard && isStateReady));
+      !isLoadingIsIssuer && (shouldSkip || (hasOriginPath && isStateReady));
     if (canNavigate) {
       navigateNext();
     }
@@ -153,16 +153,16 @@ export const ProjectAccount = (): JSX.Element | null => {
     shouldSkip,
     isLoadingIsIssuer,
     navigateNext,
-    fromDashboard,
+    hasOriginPath,
     isStateReady,
   ]);
 
   // Show loading while:
   // 1. Checking issuer status
-  // 2. Processing dashboard redirect (waiting for state to be ready)
+  // 2. Processing origin path redirect (waiting for state to be ready)
   // 3. User should skip this page
   const showLoading =
-    isLoadingIsIssuer || (fromDashboard && !isStateReady) || shouldSkip;
+    isLoadingIsIssuer || (hasOriginPath && !isStateReady) || shouldSkip;
 
   if (showLoading) {
     return (

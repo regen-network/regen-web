@@ -66,6 +66,16 @@ const defaultProjectCreateContext: ContextType = {
   setIsOrganizationAccount: () => void 0,
 };
 
+/** Returns true only for same-origin relative paths, blocking open-redirect attacks. */
+const isSafeRelativePath = (path: string): boolean => {
+  try {
+    const resolved = new URL(path, window.location.origin);
+    return resolved.origin === window.location.origin;
+  } catch {
+    return false;
+  }
+};
+
 export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const router = useRouter();
@@ -103,7 +113,8 @@ export const ProjectCreate = (): JSX.Element => {
       const fromState =
         (location.state as { from?: string } | null)?.from ?? null;
       const fromParam = new URLSearchParams(location.search).get('from');
-      originPathRef.current = fromState ?? fromParam;
+      const safeFromParam = fromParam && isSafeRelativePath(fromParam) ? fromParam : null;
+      originPathRef.current = fromState ?? safeFromParam;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

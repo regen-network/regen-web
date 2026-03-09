@@ -246,7 +246,10 @@ export const PostForm = ({
     <Form
       className={cn('max-w-full w-[560px]', className)}
       form={form}
-      onSubmit={onSubmit}
+      onSubmit={() => {
+        setValue('published', true);
+        onSubmit && onSubmit(form.getValues());
+      }}
       fieldsetClassName="min-w-full"
     >
       <Title

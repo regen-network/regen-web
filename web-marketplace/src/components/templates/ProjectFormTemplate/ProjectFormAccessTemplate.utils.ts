@@ -3,6 +3,7 @@ import {
   ROLE_AUTHOR,
   ROLE_EDITOR,
   ROLE_OWNER,
+  ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 
@@ -16,16 +17,23 @@ export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   };
 };
 
-type GetCanCreatePostParams = {
-  role?: ProjectRole;
+type GetCanManagePostParams = GetCanEditProjectParams;
+
+export const getCanManagePost = ({ role }: GetCanManagePostParams) => {
+  return (
+    role === ROLE_OWNER ||
+    role === ROLE_ADMIN ||
+    role === ROLE_EDITOR ||
+    role === ROLE_AUTHOR
+  );
 };
 
-export const getCanCreatePost = ({ role }: GetCanCreatePostParams) => {
-  return {
-    canCreatePost:
-      role === ROLE_OWNER ||
-      role === ROLE_ADMIN ||
-      role === ROLE_EDITOR ||
-      role === ROLE_AUTHOR,
-  };
+export const getCanViewPost = ({ role }: GetCanManagePostParams) => {
+  return (
+    role === ROLE_OWNER ||
+    role === ROLE_ADMIN ||
+    role === ROLE_EDITOR ||
+    role === ROLE_AUTHOR ||
+    role === ROLE_VIEWER
+  );
 };

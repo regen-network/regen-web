@@ -50,3 +50,6 @@ export const POST_CREATED_SIGNING_FAILED = msg`You successfully created this pos
 export const CREATE_DATA_POST = msg`Create Data Post`;
 export const DRAFT_CREATED = msg`Draft created!`;
 export const DRAFT_SAVED = msg`Draft saved!`;
+
+export const DRAFT_SUBMIT_LABEL = 'save';
+export const PUBLISH_SUBMIT_LABEL = 'publish';

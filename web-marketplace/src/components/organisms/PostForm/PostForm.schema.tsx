@@ -11,6 +11,7 @@ type PostFormSchemaParams = {
 
 export const getPostFormSchema = ({ requiredMessage }: PostFormSchemaParams) =>
   z.object({
+    id: z.string().optional(),
     iri: z.string().optional(),
     title: z.string().max(POST_MAX_TITLE_LENGTH).min(1),
     comment: z.string().min(1),
@@ -18,6 +19,7 @@ export const getPostFormSchema = ({ requiredMessage }: PostFormSchemaParams) =>
     privacyType: z.custom<PostPrivacyType>(val => !!val, requiredMessage),
     published: z.boolean(),
     disallowFileDownloads: z.boolean().optional(),
+    updatedAt: z.date().optional(),
   });
 
 export type PostFormSchemaType = z.infer<ReturnType<typeof getPostFormSchema>>;

@@ -164,6 +164,7 @@ function ProjectDetails(): JSX.Element {
     onChainCreditClassId,
     creditClassOnChain,
     cardSellOrders,
+    sellOrders,
     slug,
     noProjectFound,
     anchoredMetadata,
@@ -325,6 +326,7 @@ function ProjectDetails(): JSX.Element {
   const projectLocation = projectMetadata?.['schema:location'];
 
   const isTerrasos = normalizedProject.type === 'TerrasosProjectInfo';
+  const hasSellOrders = sellOrders.length > 0;
   const { role } = useCanAccessManageProjectWithRole({
     onChainProject,
     offChainProject,
@@ -388,11 +390,15 @@ function ProjectDetails(): JSX.Element {
           canEditProject={canEditProject}
           canCreatePost={canManagePost}
           onBuyButtonClick={() => {
-            onBuyButtonClick({
-              projectId,
-              loading: loadingSanityProject || loadingBuySellOrders,
-              cardSellOrders,
-            });
+            if (isTerrasos) {
+              window.open(`/project/${projectId}/buy`, '_blank');
+            } else {
+              onBuyButtonClick({
+                projectId,
+                loading: loadingSanityProject || loadingBuySellOrders,
+                cardSellOrders,
+              });
+            }
           }}
           onChainProjectId={onChainProjectId}
           offChainProjectId={offChainProject?.id}
@@ -416,6 +422,7 @@ function ProjectDetails(): JSX.Element {
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
           isTerrasos={isTerrasos}
+          hasSellOrders={hasSellOrders}
         >
           {!canEditProject &&
             isPrefinanceProject &&

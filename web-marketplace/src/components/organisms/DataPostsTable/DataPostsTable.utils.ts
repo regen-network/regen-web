@@ -4,7 +4,7 @@ import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPo
 import { DataPost } from './DataPostsTable.types';
 
 /**
- * Map a canonical `Post` (from the registry API) plus optional resolved
+ * Map a canonical `Post` (from the regen server API) plus optional resolved
  * account data into the flattened `DataPost` view-model used by the table.
  */
 export const mapPostToDataPost = (

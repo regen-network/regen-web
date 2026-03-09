@@ -11,7 +11,6 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQuery } from '@tanstack/react-query';
-import { Feature, Point } from 'geojson';
 import { useAtom, useSetAtom } from 'jotai';
 import {
   DEFAULT_NAME,
@@ -27,7 +26,6 @@ import {
   UNTITLED,
 } from 'legacy-pages/Post/Post.constants';
 import { useRouter } from 'next/navigation';
-import { parse } from 'wellknown';
 
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import { BubbleIcon } from 'web-components/src/components/icons/BubbleIcon';
@@ -58,6 +56,7 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { Link } from 'components/atoms';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
+import { mapPostToDraft } from 'components/organisms/PostForm/PostForm.mapDraft';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
 import {
@@ -267,28 +266,7 @@ export const DataStreamPost = ({
               file={file}
               preview={preview}
               onEditDraft={() => {
-                setDraftPost({
-                  id: post.id,
-                  updatedAt: new Date(post.updatedAt),
-                  iri: post.iri,
-                  title: post.contents?.title,
-                  comment: post.contents?.comment,
-                  published: post.published,
-                  privacyType: post.privacy,
-                  files: post.contents?.files?.map(file => ({
-                    ...file,
-                    location:
-                      file.locationType === 'none'
-                        ? projectLocation
-                        : ({
-                            type: 'Feature',
-                            geometry: parse(file.location.wkt) as Point,
-                            properties: {},
-                          } as Feature<Point>),
-                    url: post.filesUrls?.[file.iri] as string,
-                    mimeType: post.filesMimeTypes?.[file.iri] as string,
-                  })),
-                });
+                setDraftPost(mapPostToDraft(post, projectLocation));
                 openCreatePostModal();
               }}
               linkComponent={Link}

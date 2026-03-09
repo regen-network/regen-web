@@ -222,7 +222,7 @@ export const getRegenRoutes = ({
         path="projects/:projectId/manage"
         element={<KeplrOrAuthRoute component={ManageProject} />}
       >
-        <Route index element={<Navigate to="collaborators" />} />
+        <Route index element={<Navigate to="data-posts" />} />
         <Route path="collaborators" element={<Collaborators />} />
         <Route path="data-posts" element={<DataPosts />} />
       </Route>

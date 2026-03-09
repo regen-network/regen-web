@@ -46,7 +46,10 @@ const Popup = dynamic(() => import('react-map-gl').then(mod => mod.Popup), {
   ssr: false,
 });
 
-type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
+type Props = Pick<
+  PostFilesProps,
+  'files' | 'mapboxToken' | 'canViewPrivatePost'
+> & {
   privateFiles: boolean;
   privateLocations: boolean;
   filesPreviews: FilesPreviews;
@@ -58,7 +61,7 @@ type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
 const PostFilesPublic = ({
   files,
   mapboxToken,
-  isAdmin,
+  canViewPrivatePost,
   privateFiles,
   privateLocations,
   filesPreviews,
@@ -291,7 +294,7 @@ const PostFilesPublic = ({
             canDownloadFiles={canDownloadFiles}
           />
         )}
-        {isAdmin && (privateLocations || privateFiles) && (
+        {canViewPrivatePost && (privateLocations || privateFiles) && (
           <Tag
             className="top-20 left-20 sm:left-[110px] absolute bg-error-300"
             icon={<LockIcon width="18" height="18" />}

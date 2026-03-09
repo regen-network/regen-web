@@ -18,8 +18,9 @@ import { Link } from 'components/atoms';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/ProjectDashboardBanner';
 import {
+  getCanCreatePost,
   getCanEditProject,
-  getCanManagePost,
+  getCanSeeOrManagePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
@@ -97,7 +98,9 @@ const ManageProject = () => {
   const { canEdit: canEditProject } = getCanEditProject({
     role,
   });
-  const canManagePost = getCanManagePost({ role });
+  const canCreatePost = getCanCreatePost({
+    role,
+  });
 
   if (isLoading) return <Loading />;
 
@@ -109,7 +112,7 @@ const ManageProject = () => {
         <ProjectDashboardBanner
           project={project}
           canEdit={canEditProject}
-          canCreatePost={canManagePost}
+          canCreatePost={canCreatePost}
           onCreatePost={() => {
             setPostProjectId(project.id);
             setPostOffChainProjectId(project.offChainId);
@@ -141,7 +144,7 @@ const ManageProject = () => {
       {/* Content section */}
       <Outlet context={{ project, isLoading, offChainProject }} />
 
-      {canManagePost && postProjectId && (
+      {canCreatePost && postProjectId && (
         <PostFlow
           onModalClose={() => {
             setPostProjectId(undefined);

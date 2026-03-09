@@ -37,7 +37,7 @@ import {
 
 type Props = {
   projectHref: string;
-  isAdmin: boolean;
+  canManagePost: boolean;
   title: string;
   creatorAccount: AccountByIdQuery['accountById'];
   adminAccountId: string;
@@ -51,7 +51,7 @@ type Props = {
 
 export const PostHeader = ({
   projectHref,
-  isAdmin,
+  canManagePost,
   title,
   creatorAccount,
   creatorIsAdmin,
@@ -74,7 +74,7 @@ export const PostHeader = ({
   return (
     <Section
       className={`max-w-[750px] m-auto pt-60 pb-30 ${
-        !isAdmin && privateFiles ? 'sm:pb-35' : 'sm:pb-60'
+        !canManagePost && privateFiles ? 'sm:pb-35' : 'sm:pb-60'
       } sm:pt-[100px]  sm:px-0`}
     >
       <div className="flex justify-between">
@@ -98,7 +98,7 @@ export const PostHeader = ({
           {_(ALL_POSTS)}
         </TextButton>
 
-        {isAdmin ? (
+        {canManagePost ? (
           <div className="flex items-center">
             {privatePost && (
               <Tag
@@ -166,7 +166,7 @@ export const PostHeader = ({
           }}
         />
       )}
-      {isAdmin && (
+      {canManagePost && (
         <DeletePostWarningModal
           onDelete={deletePost}
           open={open}

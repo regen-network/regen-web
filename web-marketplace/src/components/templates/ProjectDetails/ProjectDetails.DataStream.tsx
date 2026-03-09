@@ -29,6 +29,7 @@ import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPo
 import { PostsQueryResponse } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useHash } from 'hooks/useHash';
 
@@ -48,8 +49,7 @@ type Props = {
   projectLocation?: GeocodeFeature;
   openCreatePostModal: () => void;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
-  canManagePost: boolean;
-  canViewPost: boolean;
+  role?: ProjectRole;
 };
 
 export const DataStream = ({
@@ -60,8 +60,7 @@ export const DataStream = ({
   projectLocation,
   openCreatePostModal,
   setDraftPost,
-  canManagePost,
-  canViewPost,
+  role,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -157,14 +156,13 @@ export const DataStream = ({
                         post={post}
                         index={i}
                         postsLength={posts.length}
-                        canManagePost={canManagePost}
                         adminAccountId={adminAccountId}
                         offChainProjectId={offChainProjectId}
                         adminAddr={adminAddr}
                         setDraftPost={setDraftPost}
                         projectLocation={projectLocation}
                         openCreatePostModal={openCreatePostModal}
-                        canViewPost={canViewPost}
+                        role={role}
                       />
                     ))}
                   </Timeline>

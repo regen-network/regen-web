@@ -36,6 +36,15 @@ import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schem
 
 import { useFetchProject } from './hooks/useFetchProject';
 
+/**
+ * ManageProject.DataPosts — route child for the "Data Posts" tab
+ * on the project manage dashboard.
+ *
+ * Fetches posts via offset/limit server-side pagination
+ * (`getPostsPageQuery`), resolves each unique `creatorAccountId`
+ * via `getAccountByIdQuery`, then maps to the `DataPost` view-model.
+ */
+
 const DataPosts = (): JSX.Element => {
   const {
     project,

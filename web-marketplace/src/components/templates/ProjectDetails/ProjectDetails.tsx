@@ -51,9 +51,10 @@ import { ProjectStorySection } from 'components/organisms/ProjectStorySection/Pr
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import {
+  getCanCreatePost,
   getCanEditProject,
-  getCanManagePost,
-  getCanViewPost,
+  getCanSeeOrManagePost,
+  getCanViewPrivatePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
@@ -337,8 +338,9 @@ function ProjectDetails(): JSX.Element {
   const { canEdit: canEditProject } = getCanEditProject({
     role,
   });
-  const canManagePost = getCanManagePost({ role });
-  const canViewPost = getCanViewPost({ role });
+  const canCreatePost = getCanCreatePost({
+    role,
+  });
 
   // Fetch organization data if project belongs to an organization
   const organizationId =
@@ -386,7 +388,7 @@ function ProjectDetails(): JSX.Element {
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
           canEditProject={canEditProject}
-          canCreatePost={canManagePost}
+          canCreatePost={canCreatePost}
           onBuyButtonClick={() => {
             onBuyButtonClick({
               projectId,
@@ -516,8 +518,6 @@ function ProjectDetails(): JSX.Element {
         projectLocation={projectLocation}
         openCreatePostModal={openCreatePostModal}
         setDraftPost={setDraftPost}
-        canManagePost={canManagePost}
-        canViewPost={canViewPost}
       />
 
       <ProjectDetailsTableTabs

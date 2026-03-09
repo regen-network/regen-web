@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -138,8 +138,8 @@ export const DataPostsTable: React.FC<
       });
     }
 
-    // "Delete Post" is available for published posts only
-    if (post.published && onDeletePost) {
+    // "Delete Post" is available for both draft and published posts
+    if (onDeletePost) {
       buttons.push({
         label: _(DELETE_POST_ACTION),
         onClick: () => onDeletePost(post),
@@ -151,48 +151,51 @@ export const DataPostsTable: React.FC<
     return <TableActionButtons buttons={buttons} />;
   };
 
-  const renderPrivacyTag = (privacy: DataPost['privacy']) => {
-    switch (privacy) {
-      case 'public':
-        return (
-          <Tag
-            className="bg-ac-primary-200"
-            labelClassName="font-normal"
-            label={_(PUBLIC_LABEL)}
-            icon={<UnlockIcon className="w-[14px] h-[14px]" />}
-          />
-        );
-      case 'private':
-        return (
-          <Tag
-            className="bg-bc-red-300"
-            labelClassName="font-normal"
-            label={_(POST_IS_PRIVATE)}
-            icon={<LockIcon className="w-[16px] h-[16px]" />}
-          />
-        );
-      case 'private_files':
-        return (
-          <Tag
-            className="bg-bc-red-300"
-            labelClassName="font-normal"
-            label={_(FILES_ARE_PRIVATE)}
-            icon={<PrivateFile className="w-[16px] h-[16px]" />}
-          />
-        );
-      case 'private_locations':
-        return (
-          <Tag
-            className="bg-bc-red-300"
-            labelClassName="font-normal"
-            label={_(LOCATIONS_ARE_PRIVATE)}
-            icon={<LocationIcon className="w-[16px] h-[16px]" />}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  const renderPrivacyTag = useCallback(
+    (privacy: DataPost['privacy']) => {
+      switch (privacy) {
+        case 'public':
+          return (
+            <Tag
+              className="bg-ac-primary-200"
+              labelClassName="font-normal"
+              label={_(PUBLIC_LABEL)}
+              icon={<UnlockIcon className="w-[14px] h-[14px]" />}
+            />
+          );
+        case 'private':
+          return (
+            <Tag
+              className="bg-bc-red-300"
+              labelClassName="font-normal"
+              label={_(POST_IS_PRIVATE)}
+              icon={<LockIcon className="w-[16px] h-[16px]" />}
+            />
+          );
+        case 'private_files':
+          return (
+            <Tag
+              className="bg-bc-red-300"
+              labelClassName="font-normal"
+              label={_(FILES_ARE_PRIVATE)}
+              icon={<PrivateFile className="w-[16px] h-[16px]" />}
+            />
+          );
+        case 'private_locations':
+          return (
+            <Tag
+              className="bg-bc-red-300"
+              labelClassName="font-normal"
+              label={_(LOCATIONS_ARE_PRIVATE)}
+              icon={<LocationIcon className="w-[16px] h-[16px]" />}
+            />
+          );
+        default:
+          return null;
+      }
+    },
+    [_],
+  );
 
   const renderCreatePostButton = () => {
     if (!canCreatePost) return null;

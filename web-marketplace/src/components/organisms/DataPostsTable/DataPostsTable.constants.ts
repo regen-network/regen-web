@@ -21,17 +21,24 @@ export enum DATA_POSTS_HEADERS {
   FILES = 'files',
 }
 
+/** Sort key constants matching the server-side field names. */
+export const SORT_KEY_NAME = 'name';
+export const SORT_KEY_CREATED_AT = 'created_at';
+export const SORT_KEY_AUTHOR = 'author';
+export const SORT_KEY_PRIVACY = 'privacy';
+export const SORT_KEY_FILES_COUNT = 'filesCount';
+
 export const DATA_POSTS_COLUMN_MAPPING: Record<
   DATA_POSTS_HEADERS,
   { sortKey: string; sortEnabled?: boolean }
 > = {
-  [DATA_POSTS_HEADERS.TITLE]: { sortKey: 'name', sortEnabled: true },
+  [DATA_POSTS_HEADERS.TITLE]: { sortKey: SORT_KEY_NAME, sortEnabled: true },
   [DATA_POSTS_HEADERS.DATE_CREATED]: {
-    sortKey: 'created_at',
+    sortKey: SORT_KEY_CREATED_AT,
     sortEnabled: true,
   },
-  [DATA_POSTS_HEADERS.AUTHOR]: { sortKey: 'author', sortEnabled: true },
-  [DATA_POSTS_HEADERS.PRIVACY]: { sortKey: 'privacy' },
-  [DATA_POSTS_HEADERS.FILES]: { sortKey: 'filesCount' },
+  [DATA_POSTS_HEADERS.AUTHOR]: { sortKey: SORT_KEY_AUTHOR, sortEnabled: true },
+  [DATA_POSTS_HEADERS.PRIVACY]: { sortKey: SORT_KEY_PRIVACY },
+  [DATA_POSTS_HEADERS.FILES]: { sortKey: SORT_KEY_FILES_COUNT },
 };
 /* eslint-enable lingui/no-unlocalized-strings */

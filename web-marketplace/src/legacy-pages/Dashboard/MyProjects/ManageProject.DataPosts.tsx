@@ -8,11 +8,9 @@ import {
 import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box } from '@mui/material';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { Feature, Point } from 'geojson';
 import { useAtom } from 'jotai';
 import { useDelete } from 'legacy-pages/Post/hooks/useDelete';
 import uniq from 'lodash/uniq';
-import { parse } from 'wellknown';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
@@ -33,20 +31,11 @@ import { DATA_POSTS_COLUMN_MAPPING } from 'components/organisms/DataPostsTable/D
 import { DataPost } from 'components/organisms/DataPostsTable/DataPostsTable.types';
 import { mapPostToDataPost } from 'components/organisms/DataPostsTable/DataPostsTable.utils';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
+import { mapPostToDraft } from 'components/organisms/PostForm/PostForm.mapDraft';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
 import { useFetchProject } from './hooks/useFetchProject';
 
-/**
- * ManageProject.DataPosts — route child for the "Data Posts" tab
- * on the project manage dashboard.
- *
- * Fetches posts via offset/limit server-side pagination
- * (`getPostsPageQuery`), resolves each unique `creatorAccountId`
- * via `getAccountByIdQuery`, then maps to the `DataPost` view-model.
- *
- * Server-side pagination requires regen-server#563.
- */
 const DataPosts = (): JSX.Element => {
   const {
     project,
@@ -196,26 +185,7 @@ const DataPosts = (): JSX.Element => {
       if (!post) return;
 
       const projectLocation = project?.location as GeocodeFeature;
-      setDraftPost({
-        iri: post.iri,
-        title: post.contents?.title,
-        comment: post.contents?.comment,
-        published: post.published,
-        privacyType: post.privacy,
-        files: post.contents?.files?.map(file => ({
-          ...file,
-          location:
-            file.locationType === 'none'
-              ? projectLocation
-              : ({
-                  type: 'Feature',
-                  geometry: parse(file.location.wkt) as Point,
-                  properties: {},
-                } as Feature<Point>),
-          url: post.filesUrls?.[file.iri] as string,
-          mimeType: post.filesMimeTypes?.[file.iri] as string,
-        })),
-      });
+      setDraftPost(mapPostToDraft(post, projectLocation));
       openCreatePostModal();
     },
     [postsByIri, project?.location, setDraftPost, openCreatePostModal],

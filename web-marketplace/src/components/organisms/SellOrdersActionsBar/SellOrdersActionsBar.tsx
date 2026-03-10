@@ -4,7 +4,7 @@ import { ReactNode, useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
+import { MANAGE_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { usePathname, useRouter } from 'next/navigation';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
@@ -124,14 +124,14 @@ export const SellOrdersActionsBar = ({
               <ContainedButton
                 onClick={() =>
                   router.push(
-                    `/project-pages/${
+                    `/dashboard/projects/${
                       onChainProjectId ?? offChainProjectId
-                    }/edit/basic-info?from=${encodeURIComponent(pathname)}`,
+                    }/manage`,
                   )
                 }
               >
                 <EditIcon className="mr-10" sx={{ color: '#fff' }} />
-                {_(EDIT_PROJECT)}
+                {_(MANAGE_PROJECT)}
               </ContainedButton>
             )}
           </>

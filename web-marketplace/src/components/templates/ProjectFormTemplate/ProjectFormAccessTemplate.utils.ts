@@ -17,23 +17,56 @@ export const getCanEditProject = ({ role }: GetCanEditProjectParams) => {
   };
 };
 
-type GetCanManagePostParams = GetCanEditProjectParams;
+type GetCanCreatePostParams = GetCanEditProjectParams;
 
-export const getCanManagePost = ({ role }: GetCanManagePostParams) => {
+export function getCanCreatePost({ role }: GetCanCreatePostParams) {
   return (
     role === ROLE_OWNER ||
     role === ROLE_ADMIN ||
     role === ROLE_EDITOR ||
     role === ROLE_AUTHOR
   );
+}
+
+type CheckPostParams = {
+  role?: ProjectRole;
+  creatorAccountId?: string;
+  currentAccountId?: string;
 };
 
-export const getCanViewPost = ({ role }: GetCanManagePostParams) => {
-  return (
+export function getCanSeeOrManagePost({
+  role,
+  creatorAccountId,
+  currentAccountId,
+}: CheckPostParams) {
+  if (
     role === ROLE_OWNER ||
     role === ROLE_ADMIN ||
     role === ROLE_EDITOR ||
-    role === ROLE_AUTHOR ||
-    role === ROLE_VIEWER
-  );
-};
+    (role === ROLE_AUTHOR &&
+      creatorAccountId &&
+      creatorAccountId === currentAccountId)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export function getCanViewPrivatePost({
+  role,
+  creatorAccountId,
+  currentAccountId,
+}: CheckPostParams) {
+  if (
+    role === ROLE_OWNER ||
+    role === ROLE_ADMIN ||
+    role === ROLE_EDITOR ||
+    role === ROLE_VIEWER ||
+    (role === ROLE_AUTHOR &&
+      creatorAccountId &&
+      creatorAccountId === currentAccountId)
+  ) {
+    return true;
+  }
+  return false;
+}

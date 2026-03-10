@@ -21,6 +21,7 @@ Public.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files,
   photoCredit: 'Photo credit',
+  canViewPrivatePost: false,
   readMoreText,
 };
 
@@ -32,6 +33,7 @@ PrivateLocations.args = {
   privacyType: 'private_locations',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
+  canViewPrivatePost: false,
   readMoreText,
 };
 
@@ -43,6 +45,7 @@ PrivateFiles.args = {
   privacyType: 'private_files',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
+  canViewPrivatePost: false,
   readMoreText,
 };
 
@@ -54,7 +57,7 @@ PrivateLocationsAsAdmin.args = {
   privacyType: 'private_locations',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
-  isAdmin: true,
+  canViewPrivatePost: true,
   readMoreText,
 };
 
@@ -66,6 +69,6 @@ PrivateFilesAsAdmin.args = {
   privacyType: 'private_files',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
-  isAdmin: true,
+  canViewPrivatePost: true,
   readMoreText,
 };

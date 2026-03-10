@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Point } from 'geojson';
 import { useAtom } from 'jotai';
+import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProjects/hooks/useCanAccessManageProjectWithRole';
 import NotFoundPage from 'legacy-pages/NotFound';
 import Linkify from 'linkify-react';
 import Image from 'next/image';
@@ -20,12 +21,20 @@ import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 import { formatDate } from 'web-components/src/utils/format';
 
+import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { LESS, MORE, PHOTO_CREDIT, READ } from 'lib/constants/shared.constants';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
+import { useWallet } from 'lib/wallet/wallet';
+
+import {
+  getCanSeeOrManagePost,
+  getCanViewPrivatePost,
+} from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import bgShadow from '../../../public/png/bg-shadow.png';
 import {
@@ -46,7 +55,10 @@ function Post(): JSX.Element {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
-  const { activeAccountId } = useAuth();
+  const { queryClient } = useLedger();
+  const { wallet } = useWallet();
+
+  const { activeAccountId: currentAccountId } = useAuth();
   const { data, isFetching } = useQuery(
     getPostQuery({
       iri,
@@ -70,11 +82,27 @@ function Post(): JSX.Element {
       id: projectId,
     }),
   );
+  const offChainProject = offchainProjectByIdData?.data?.projectById;
+  const { data: onChainProjectData, isFetching: loadingOnChainProject } =
+    useQuery(
+      getProjectQuery({
+        request: {
+          projectId: offChainProject?.onChainId as string,
+        },
+        client: queryClient,
+        enabled: !!queryClient && !!offChainProject?.onChainId,
+      }),
+    );
+  const onChainProject = onChainProjectData?.project;
+  const { role } = useCanAccessManageProjectWithRole({
+    onChainProject,
+    offChainProject,
+    activeAccountId: currentAccountId,
+    wallet,
+  });
+  const loadingProject = loadingOnChainProject || loadingOffchainProjectById;
 
-  const offchainProject = offchainProjectByIdData?.data?.projectById;
-  const adminAccountId = offchainProject?.adminAccountId;
-  const isAdmin =
-    !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
+  const adminAccountId = offChainProject?.adminAccountId;
   const privacyType = data?.privacy;
   const privatePostError = data?.error === 'private post';
   const privatePost = data?.privacy === 'private';
@@ -105,13 +133,13 @@ function Post(): JSX.Element {
       }),
     [data?.contents?.files, data?.filesMimeTypes, data?.filesUrls],
   );
-
+  const creatorAccountId = data?.creatorAccountId;
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
       client: graphqlClient,
       languageCode: selectedLanguage,
-      id: data?.creatorAccountId ?? '',
-      enabled: !!data?.creatorAccountId && !!graphqlClient,
+      id: creatorAccountId ?? '',
+      enabled: !!creatorAccountId && !!graphqlClient,
     }),
   );
   const creatorAccount = creatorAccountData?.accountById;
@@ -119,26 +147,54 @@ function Post(): JSX.Element {
   const createdAt = formatDate(data?.createdAt, 'MMMM D, YYYY | h:mm A');
   const creatorIsAdmin = creatorAccount?.id === adminAccountId;
 
+  const canManagePost = useMemo(
+    () =>
+      getCanSeeOrManagePost({
+        role,
+        creatorAccountId,
+        currentAccountId,
+      }),
+    [role, creatorAccountId, currentAccountId],
+  );
+  const canViewPrivatePost = useMemo(
+    () =>
+      getCanViewPrivatePost({
+        role,
+        creatorAccountId,
+        currentAccountId,
+      }),
+    [role, creatorAccountId, currentAccountId],
+  );
+  const canViewDraftPost = useMemo(
+    () =>
+      getCanSeeOrManagePost({
+        role,
+        creatorAccountId,
+        currentAccountId,
+      }),
+    [role, creatorAccountId, currentAccountId],
+  );
+
   return (
     <>
-      {!isFetching && (!data || (isAdmin && !data?.published)) ? (
+      {!isFetching && (!data || (canViewDraftPost && !data?.published)) ? (
         <NotFoundPage />
       ) : (
         <>
-          {!loadingOffchainProjectById && !isAdmin && privatePostError && (
+          {!loadingProject && !canViewPrivatePost && privatePostError && (
             <PostPrivate />
           )}
-          {!loadingOffchainProjectById &&
+          {!loadingProject &&
             data?.contents &&
-            (!privatePostError || isAdmin) && (
+            (!privatePostError || canViewPrivatePost) && (
               <>
                 <PostHeader
                   projectHref={`/project/${
-                    offchainProject?.slug ??
-                    offchainProject?.onChainId ??
+                    offChainProject?.slug ??
+                    offChainProject?.onChainId ??
                     projectId
                   }`}
-                  isAdmin={isAdmin}
+                  canManagePost={canManagePost}
                   title={data.contents.title || _(UNTITLED)}
                   creatorAccount={creatorAccount}
                   adminAccountId={adminAccountId}
@@ -153,7 +209,7 @@ function Post(): JSX.Element {
                 {privacyType && files && files.length > 0 && (
                   <div
                     className={`${
-                      !isAdmin && privateFiles
+                      !canViewPrivatePost && privateFiles
                         ? 'max-w-[750px] sm:mb-[35px] px-[16px] sm:px-0'
                         : 'max-w-[942px] sm:mb-[70px]'
                     } m-auto relative mb-30`}
@@ -162,7 +218,7 @@ function Post(): JSX.Element {
                       photoCredit={_(PHOTO_CREDIT)}
                       privacyType={privacyType}
                       mapboxToken={MAPBOX_TOKEN}
-                      isAdmin={isAdmin}
+                      canViewPrivatePost={canViewPrivatePost}
                       files={files}
                       hasToken={hasToken}
                       adminPrivateLabel={
@@ -179,7 +235,7 @@ function Post(): JSX.Element {
                       }}
                       canDownloadFiles={!!data.canDownloadFiles}
                     />
-                    {(isAdmin || !privateFiles) && (
+                    {(canViewPrivatePost || !privateFiles) && (
                       <Image
                         className="hidden sm:block absolute top-[17px] left-20 z-[-1]"
                         src={bgShadow}
@@ -206,10 +262,10 @@ function Post(): JSX.Element {
                   creatorAccount={creatorAccount}
                   creatorIsAdmin={creatorIsAdmin}
                   registryAddr={
-                    offchainProject?.creditClassByCreditClassId
+                    offChainProject?.creditClassByCreditClassId
                       ?.accountByRegistryId?.addr
                   }
-                  adminAddr={offchainProject?.accountByAdminAccountId?.addr}
+                  adminAddr={offChainProject?.accountByAdminAccountId?.addr}
                 />
 
                 <PostFooter prevIri={data?.prevIri} nextIri={data?.nextIri} />

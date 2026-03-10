@@ -50,6 +50,7 @@ type Props = {
   openCreatePostModal: () => void;
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   role?: ProjectRole;
+  canCreatePost: boolean;
 };
 
 export const DataStream = ({
@@ -61,6 +62,7 @@ export const DataStream = ({
   openCreatePostModal,
   setDraftPost,
   role,
+  canCreatePost,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -109,7 +111,7 @@ export const DataStream = ({
             titleAlign="left"
             className="mb-50 sm:mb-[100px] pt-0"
           >
-            {canManagePost && adminDescription && projectLocation && (
+            {canCreatePost && adminDescription && projectLocation && (
               <div className="mt-15">
                 <Body className="mb-15 max-w-[683px]" size="lg" component="div">
                   <BlockContent content={adminDescription} />

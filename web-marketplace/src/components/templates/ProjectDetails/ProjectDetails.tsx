@@ -527,6 +527,8 @@ function ProjectDetails(): JSX.Element {
         projectLocation={projectLocation}
         openCreatePostModal={openCreatePostModal}
         setDraftPost={setDraftPost}
+        role={role}
+        canCreatePost={canCreatePost}
       />
 
       <ProjectDetailsTableTabs

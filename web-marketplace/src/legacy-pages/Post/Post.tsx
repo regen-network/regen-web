@@ -33,7 +33,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import {
   getCanSeeOrManagePost,
-  getCanViewDraftPost,
   getCanViewPrivatePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
@@ -168,7 +167,7 @@ function Post(): JSX.Element {
   );
   const canViewDraftPost = useMemo(
     () =>
-      getCanViewDraftPost({
+      getCanSeeOrManagePost({
         role,
         creatorAccountId,
         currentAccountId,

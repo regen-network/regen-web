@@ -70,21 +70,3 @@ export function getCanViewPrivatePost({
   }
   return false;
 }
-
-export function getCanViewDraftPost({
-  role,
-  creatorAccountId,
-  currentAccountId,
-}: CheckPostParams) {
-  if (
-    role === ROLE_OWNER ||
-    role === ROLE_ADMIN ||
-    role === ROLE_EDITOR ||
-    (role === ROLE_AUTHOR &&
-      creatorAccountId &&
-      creatorAccountId === currentAccountId)
-  ) {
-    return true;
-  }
-  return false;
-}

@@ -21,6 +21,7 @@ import { useCanAccessManageProjectWithRole } from 'legacy-pages/Dashboard/MyProj
 import { useFeeGranter } from 'legacy-pages/Dashboard/MyProjects/hooks/useFeeGranter';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { startCase } from 'lodash';
+import { useRouter } from 'next/navigation';
 
 import Banner from 'web-components/src/components/banner';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
@@ -101,6 +102,7 @@ function ProjectEdit(): JSX.Element {
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
   const { queryClient } = useLedger();
+  const router = useRouter();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -240,10 +242,10 @@ function ProjectEdit(): JSX.Element {
       if (isFormDirty) {
         setIsWarningModalOpen(path);
       } else {
-        navigate(path);
+        router.push(path);
       }
     } else {
-      navigate('/dashboard/projects');
+      router.push('/dashboard/projects');
     }
   };
 

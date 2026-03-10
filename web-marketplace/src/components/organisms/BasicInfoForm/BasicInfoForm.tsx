@@ -107,7 +107,9 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     async (values: BasicInfoFormSchemaType, slugIndex: number) => {
       try {
         const slugEnd = slugIndex ? `-${slugIndex + 1}` : '';
-        const slug = `${slugify(values['schema:name'])}${slugEnd}`;
+        const slug = values['schema:name']
+          ? `${slugify(values['schema:name'])}${slugEnd}`
+          : undefined;
         if (!isEdit && projectId === DRAFT_ID) {
           const shouldNavigateNow =
             shouldNavigateRef?.current && !isOrganizationAccount;

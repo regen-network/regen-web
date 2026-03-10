@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
+import { MANAGE_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
@@ -115,14 +115,14 @@ export const SellOrdersActionsBar = ({
             <ContainedButton
               onClick={() =>
                 navigate(
-                  `/project-pages/${
+                  `/dashboard/projects/${
                     onChainProjectId ?? offChainProjectId
-                  }/edit/basic-info`,
+                  }/manage`,
                 )
               }
             >
               <EditIcon className="mr-10" sx={{ color: '#fff' }} />
-              {_(EDIT_PROJECT)}
+              {_(MANAGE_PROJECT)}
             </ContainedButton>
           </>
         ) : (

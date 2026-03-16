@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
@@ -28,10 +28,10 @@ import { useCreateProjectContext } from '../ProjectCreate/ProjectCreate';
 export const ProjectAccount = (): JSX.Element | null => {
   const { _ } = useLingui();
   const { projectId } = useParams();
-  const location = useLocation();
-  const state = location.state as
-    | { fromDashboard?: boolean; isOrganization?: boolean }
-    | undefined;
+  const [searchParams] = useSearchParams();
+  const fromPath = searchParams.get('from');
+  const hasOriginPath = !!fromPath;
+  const isOrganizationParam = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
   const dao = useDaoOrganization();
   const {
@@ -79,7 +79,7 @@ export const ProjectAccount = (): JSX.Element | null => {
   const shouldSkip =
     !dao || !activeAccount || !personalAccount || !organizationAccount;
 
-  // Track if we've initialized from dashboard state
+  // Track if we've initialized from origin path state
   const initializedRef = useRef(false);
   const [isStateReady, setIsStateReady] = useState(false);
 
@@ -88,9 +88,9 @@ export const ProjectAccount = (): JSX.Element | null => {
     // Don't run if we've already initialized or accounts aren't ready
     if (initializedRef.current) return;
 
-    if (state?.fromDashboard) {
-      // Coming from dashboard - use the passed state
-      const isOrg = !!state.isOrganization;
+    if (hasOriginPath) {
+      // Coming from an origin path - use the passed params
+      const isOrg = isOrganizationParam;
       const address = isOrg
         ? organizationAccount?.address
         : personalAccount?.address;
@@ -116,7 +116,8 @@ export const ProjectAccount = (): JSX.Element | null => {
       setIsStateReady(true);
     }
   }, [
-    state,
+    hasOriginPath,
+    isOrganizationParam,
     organizationAccount?.address,
     personalAccount?.address,
     projectCreatorAddress,
@@ -141,22 +142,27 @@ export const ProjectAccount = (): JSX.Element | null => {
 
   // Navigate away if user should skip this step, but only after:
   // 1. Issuer check completes
-  // 2. State is properly initialized (for dashboard redirects)
+  // 2. State is properly initialized (for origin path redirects)
   useEffect(() => {
     const canNavigate =
-      !isLoadingIsIssuer &&
-      (shouldSkip || (state?.fromDashboard && isStateReady));
+      !isLoadingIsIssuer && (shouldSkip || (hasOriginPath && isStateReady));
     if (canNavigate) {
       navigateNext();
     }
-  }, [shouldSkip, isLoadingIsIssuer, navigateNext, state, isStateReady]);
+  }, [
+    shouldSkip,
+    isLoadingIsIssuer,
+    navigateNext,
+    hasOriginPath,
+    isStateReady,
+  ]);
 
   // Show loading while:
   // 1. Checking issuer status
-  // 2. Processing dashboard redirect (waiting for state to be ready)
+  // 2. Processing origin path redirect (waiting for state to be ready)
   // 3. User should skip this page
   const showLoading =
-    isLoadingIsIssuer || (state?.fromDashboard && !isStateReady) || shouldSkip;
+    isLoadingIsIssuer || (hasOriginPath && !isStateReady) || shouldSkip;
 
   if (showLoading) {
     return (

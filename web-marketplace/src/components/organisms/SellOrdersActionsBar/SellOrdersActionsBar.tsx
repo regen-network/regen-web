@@ -12,8 +12,8 @@ import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
-import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
@@ -53,6 +53,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
+  isManagedByUserOrganization?: boolean;
 };
 
 export const SellOrdersActionsBar = ({
@@ -76,6 +77,7 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
+  isManagedByUserOrganization,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const pathname = usePathname();
@@ -90,6 +92,9 @@ export const SellOrdersActionsBar = ({
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const showAdminButtons = canEditProject || canCreatePost;
+  const dashboardBasePath = isManagedByUserOrganization
+    ? '/dashboard/organization'
+    : '/dashboard';
 
   return (
     <StickyBar>
@@ -124,7 +129,7 @@ export const SellOrdersActionsBar = ({
               <ContainedButton
                 onClick={() =>
                   router.push(
-                    `/dashboard/projects/${
+                    `${dashboardBasePath}/projects/${
                       onChainProjectId ?? offChainProjectId
                     }/manage`,
                   )

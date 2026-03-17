@@ -33,7 +33,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, LINK_PREFIX } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getOrganizationByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByIdQuery/getOrganizationByIdQuery';
@@ -293,6 +293,7 @@ function ProjectDetails(): JSX.Element {
       projectPrefinancing,
     ],
   );
+  console.log('normalizedProject', normalizedProject);
 
   const { data: terrasosBookCallData } = useQuery(
     getTerrasosBookCallQuery({
@@ -325,7 +326,9 @@ function ProjectDetails(): JSX.Element {
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
 
-  const isTerrasos = normalizedProject.type === 'TerrasosProjectInfo';
+  const isTerrasos =
+    offChainProject?.metadata?.['@type'] === 'TerrasosProjectInfo';
+
   const hasSellOrders = sellOrders.length > 0;
   const { role } = useCanAccessManageProjectWithRole({
     onChainProject,
@@ -391,7 +394,7 @@ function ProjectDetails(): JSX.Element {
           canCreatePost={canManagePost}
           onBuyButtonClick={() => {
             if (isTerrasos) {
-              window.open(`/project/${projectId}/buy`, '_blank');
+              window.open(`${LINK_PREFIX}/project/${projectId}/buy`, '_blank');
             } else {
               onBuyButtonClick({
                 projectId,

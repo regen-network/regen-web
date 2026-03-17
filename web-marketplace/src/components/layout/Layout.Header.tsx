@@ -13,9 +13,9 @@ import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
-import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
 import { connectWalletDescription } from 'lib/constants/shared.constants';
 import { ORG_ENABLED } from 'lib/env';
@@ -24,6 +24,7 @@ import { useWallet, Wallet } from 'lib/wallet/wallet';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
+import { LanguageSwitcher } from 'components/organisms/RegistryLayout/RegistryLayout.LanguageSwitcher';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../lib/ledger';
@@ -62,7 +63,6 @@ import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../organisms/UserAccountSettings/UserAccountSettings.constants';
-import { LanguageSwitcher } from 'components/organisms/RegistryLayout/RegistryLayout.LanguageSwitcher';
 
 const getProfileLink = (
   activeAccount: Maybe<AccountFieldsFragment> | undefined,

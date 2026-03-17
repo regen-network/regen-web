@@ -293,7 +293,6 @@ function ProjectDetails(): JSX.Element {
       projectPrefinancing,
     ],
   );
-  console.log('normalizedProject', normalizedProject);
 
   const { data: terrasosBookCallData } = useQuery(
     getTerrasosBookCallQuery({
@@ -394,7 +393,11 @@ function ProjectDetails(): JSX.Element {
           canCreatePost={canManagePost}
           onBuyButtonClick={() => {
             if (isTerrasos) {
-              window.open(`${LINK_PREFIX}/project/${projectId}/buy`, '_blank');
+              window.open(
+                `${LINK_PREFIX}/project/${projectId}/buy`,
+                '_blank',
+                'noopener,noreferrer',
+              );
             } else {
               onBuyButtonClick({
                 projectId,

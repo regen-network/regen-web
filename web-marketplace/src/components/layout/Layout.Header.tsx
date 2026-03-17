@@ -15,6 +15,7 @@ import { getUserMenuItems } from 'web-components/src/components/header/component
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
 import { connectWalletDescription } from 'lib/constants/shared.constants';
 import { ORG_ENABLED } from 'lib/env';
@@ -61,6 +62,7 @@ import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../organisms/UserAccountSettings/UserAccountSettings.constants';
+import { LanguageSwitcher } from 'components/organisms/RegistryLayout/RegistryLayout.LanguageSwitcher';
 
 const getProfileLink = (
   activeAccount: Maybe<AccountFieldsFragment> | undefined,
@@ -166,6 +168,8 @@ export const LayoutHeader = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
+  const isHome = pathname === '/';
+
   return (
     <>
       <Header
@@ -182,13 +186,12 @@ export const LayoutHeader = () => {
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {clientConfig.listProject && <ListProject />}
-            {/* // Commenting out temporarily until content translations completed
             <LanguageSwitcher
               className={cn(
                 'mr-25 mt-1 hidden lg:block',
                 isHome && 'text-sc-button-text-icon-light',
               )}
-            /> */}
+            />
             {chainId && accountOrWallet && (
               <UserMenuItems
                 nameOrAddress={

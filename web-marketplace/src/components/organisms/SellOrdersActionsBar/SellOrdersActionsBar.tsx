@@ -13,7 +13,7 @@ import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
-import EditIcon from 'web-components/src/components/icons/EditIcon';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
@@ -130,7 +130,7 @@ export const SellOrdersActionsBar = ({
                   )
                 }
               >
-                <EditIcon className="mr-10" sx={{ color: '#fff' }} />
+                <CogIcon className="mr-10 text-grey-0" />
                 {_(MANAGE_PROJECT)}
               </ContainedButton>
             )}

@@ -37,7 +37,10 @@ const Collaborators = (): JSX.Element => {
     isLoading: isCollaboratorsLoading,
   } = useCollaborators(project, daoAccountsOrderBy);
 
-  const { migrateProject } = useMigrateProject(project, true);
+  const { migrateProject } = useMigrateProject({
+    project,
+    navigateToOrg: true,
+  });
 
   const { createOrganization } = useOrganizationActions();
 

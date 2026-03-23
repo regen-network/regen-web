@@ -83,7 +83,10 @@ const ManageProject = () => {
     [tabs, location.pathname],
   );
 
-  const { migrateProject } = useMigrateProject(project, true);
+  const { migrateProject } = useMigrateProject({
+    project,
+    navigateToOrg: true,
+  });
 
   const { canAccessManageProject, role } = useCanAccessManageProjectWithRole({
     onChainProject,

@@ -4,14 +4,16 @@ import { useMigrateProjects } from 'legacy-pages/CreateOrganization/hooks/useMig
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
-
-export const useMigrateProject = (
-  project?: NormalizeProject,
-  navigateToOrg: boolean = false,
-) => {
+export const useMigrateProject = ({
+  project,
+  navigateToOrg = false,
+  feeGranter,
+}: {
+  project?: NormalizeProject;
+  navigateToOrg?: boolean;
+  feeGranter?: string;
+}) => {
   const navigate = useNavigate();
-  const orgDao = useDaoOrganization();
 
   const { migrateProjects } = useMigrateProjects({
     projects: project ? [project] : [],
@@ -20,7 +22,7 @@ export const useMigrateProject = (
         ? () =>
             navigate(`/dashboard/organization/projects/${project.id}/manage`)
         : undefined,
-    feeGranter: orgDao?.address,
+    feeGranter,
   });
 
   const migrateProject = useCallback(

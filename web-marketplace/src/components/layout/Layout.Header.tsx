@@ -188,7 +188,7 @@ export const LayoutHeader = () => {
             {clientConfig.listProject && <ListProject />}
             <LanguageSwitcher
               className={cn(
-                'mr-25 mt-1 hidden lg:block',
+                'mr-10 lg:mr-25 mt-1',
                 isHome && 'text-sc-button-text-icon-light',
               )}
             />

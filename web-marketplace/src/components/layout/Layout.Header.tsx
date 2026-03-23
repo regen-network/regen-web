@@ -35,6 +35,7 @@ import { ListProject } from '../organisms/ListProject/ListProject';
 import { LoginButton } from '../organisms/LoginButton/LoginButton';
 import { useHasPrefinanceProjects } from '../organisms/RegistryLayout/hooks/useHasPrefinanceProjects';
 import {
+  getNormalizedPathname,
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
@@ -77,15 +78,23 @@ const getProfileLink = (
 export const LayoutHeader = () => {
   const { _ } = useLingui();
   const pathname = usePathname();
+
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, disconnect, accountByAddr, loginDisabled } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
-  const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
-  const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
-  const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  const clientConfig = getClientConfig();
+  const normalizedPathname = getNormalizedPathname(pathname);
 
+  const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
+  const isTransparent = useMemo(
+    () => getIsTransparent(normalizedPathname),
+    [normalizedPathname],
+  );
+  const borderBottom = useMemo(
+    () => getBorderBottom(normalizedPathname),
+    [normalizedPathname],
+  );
+  const clientConfig = getClientConfig();
   const hasPrefinanceProjects = useHasPrefinanceProjects();
   const profileLink = getProfileLink(activeAccount, wallet);
   const personalDashboardLink = '/dashboard';
@@ -164,11 +173,11 @@ export const LayoutHeader = () => {
     ],
   );
 
-  const color = headerColors[pathname]
-    ? headerColors[pathname]
+  const color = headerColors[normalizedPathname]
+    ? headerColors[normalizedPathname]
     : theme.palette.primary.light;
 
-  const isHome = pathname === '/';
+  const isHome = normalizedPathname === '/';
 
   return (
     <>
@@ -189,7 +198,7 @@ export const LayoutHeader = () => {
             <LanguageSwitcher
               className={cn(
                 'mr-10 lg:mr-25 mt-1',
-                isHome && 'text-sc-button-text-icon-light',
+                isHome && 'md:text-sc-button-text-icon-light',
               )}
             />
             {chainId && accountOrWallet && (

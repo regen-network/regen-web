@@ -5,6 +5,7 @@ import { HeaderColors } from 'web-components/src/components/header';
 import { Item } from 'web-components/src/components/header/components/HeaderMenuItem/HeaderMenuItem';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
+import { LOCALE_PREFIX_REGEX } from 'lib/i18n/locales';
 
 import { Link } from 'components/atoms';
 
@@ -56,15 +57,28 @@ export const getMenuItems = (
   ];
 };
 
-export const getIsTransparent = (pathname: string): boolean =>
-  pathname === '/' ||
-  [
-    '/buyers',
-    '/create-methodology',
-    '/methodology-review-process',
-    '/create-credit-class',
-    '/project-developers',
-  ].some(route => pathname.startsWith(route));
+export const getNormalizedPathname = (pathname: string): string => {
+  const strippedPathname = pathname.replace(LOCALE_PREFIX_REGEX, '');
+
+  return strippedPathname
+    ? strippedPathname.startsWith('/')
+      ? strippedPathname
+      : `/${strippedPathname}`
+    : '/';
+};
+
+export const getIsTransparent = (normalizedPathname: string): boolean => {
+  return (
+    normalizedPathname === '/' ||
+    [
+      '/buyers',
+      '/create-methodology',
+      '/methodology-review-process',
+      '/create-credit-class',
+      '/project-developers',
+    ].some(route => normalizedPathname.startsWith(route))
+  );
+};
 
 export const getHeaderColors = (theme: Theme): HeaderColors => ({
   '/': theme.palette.primary.main,
@@ -75,5 +89,8 @@ export const getHeaderColors = (theme: Theme): HeaderColors => ({
   '/methodology-review-process': theme.palette.primary.main,
 });
 
-export const getBorderBottom = (pathname: string): boolean =>
-  ['/project-pages', '/projects'].some(route => pathname.startsWith(route));
+export const getBorderBottom = (normalizedPathname: string): boolean => {
+  return ['/project-pages', '/projects'].some(route =>
+    normalizedPathname.startsWith(route),
+  );
+};

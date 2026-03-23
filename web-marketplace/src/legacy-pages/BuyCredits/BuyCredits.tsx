@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { useRouter } from 'next/navigation';
 
 import { Loading } from 'web-components/src/components/loading';
 
+import { chooseHowToPurchaseModalAtom } from 'lib/atoms/modals.atoms';
 import { getProjectPath, isBridgeClassIdPrefix } from 'lib/bridge';
+import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
@@ -24,6 +26,8 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 export const BuyCredits = () => {
   const { projectId } = useParams();
   const router = useRouter();
+  const { activeWalletAddr } = useWallet();
+  const setChooseHowToPurchaseModal = useSetAtom(chooseHowToPurchaseModalAtom);
   const { accountCanBuy, isLoading: loadingAccountCanBuy } =
     useAccountCanBuy(projectId);
 
@@ -46,13 +50,34 @@ export const BuyCredits = () => {
     [cardSellOrders],
   );
 
-  const canEnterBuy = accountCanBuy || hasCardOrders;
+  const canEnterBuy =
+    !isBuyFlowDisabled &&
+    (hasCardOrders || (!!activeWalletAddr && accountCanBuy));
   const isLoadingAll = loadingAccountCanBuy || loadingBuySellOrders;
 
   useEffect(() => {
     if (isLoadingAll) return;
-    if (!canEnterBuy) router.replace(getProjectPath(projectId as string));
-  }, [isLoadingAll, canEnterBuy, router, projectId]);
+    if (canEnterBuy) return;
+
+    if (!hasCardOrders && !activeWalletAddr && !isBuyFlowDisabled) {
+      setChooseHowToPurchaseModal(atom => {
+        atom.open = true;
+        atom.projectId = projectId;
+      });
+      return;
+    }
+
+    router.replace(getProjectPath(projectId as string));
+  }, [
+    isLoadingAll,
+    canEnterBuy,
+    hasCardOrders,
+    activeWalletAddr,
+    isBuyFlowDisabled,
+    setChooseHowToPurchaseModal,
+    router,
+    projectId,
+  ]);
 
   useNavigateToSlug(slug, '/buy');
 
@@ -146,9 +171,6 @@ export const BuyCredits = () => {
             cardDetails={cardDetails}
             project={projectsWithOrderData[0]}
             projectId={projectId}
-            loadingSanityProject={loadingSanityProject}
-            isBuyFlowDisabled={isBuyFlowDisabled}
-            loadingBuySellOrders={loadingBuySellOrders}
           />
         </MultiStepTemplate>
       </>

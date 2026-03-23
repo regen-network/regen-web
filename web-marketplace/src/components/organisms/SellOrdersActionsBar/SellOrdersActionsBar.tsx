@@ -53,7 +53,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
-  isTerrasos?: boolean;
+  isTerrasosProject?: boolean;
   hasSellOrders?: boolean;
 };
 
@@ -78,7 +78,7 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
-  isTerrasos,
+  isTerrasosProject,
   hasSellOrders,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
@@ -171,7 +171,7 @@ export const SellOrdersActionsBar = ({
                 </Box>
               )}
             {(!isCommunityCredit ||
-              (isTerrasos && !hasSellOrders) ||
+              (isTerrasosProject && !hasSellOrders) ||
               (!onChainProjectId && isPrefinanceProject)) && (
               <OutlinedButton
                 onClick={onBookCallButtonClick}
@@ -190,7 +190,7 @@ export const SellOrdersActionsBar = ({
                 {_(BOOK_CALL)}
               </OutlinedButton>
             )}
-            {(IS_REGEN || (isTerrasos && hasSellOrders)) &&
+            {(IS_REGEN || (isTerrasosProject && hasSellOrders)) &&
               onBuyButtonClick &&
               !!onChainProjectId &&
               !!onChainCreditClassId && (

@@ -325,7 +325,7 @@ function ProjectDetails(): JSX.Element {
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
 
-  const isTerrasos =
+  const isTerrasosProject =
     offChainProject?.metadata?.['@type'] === 'TerrasosProjectInfo';
 
   const hasSellOrders = sellOrders.length > 0;
@@ -383,7 +383,7 @@ function ProjectDetails(): JSX.Element {
 
       {(onChainProjectId ||
         isPrefinanceProject ||
-        isTerrasos ||
+        isTerrasosProject ||
         (hasManageAccess && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
@@ -392,7 +392,7 @@ function ProjectDetails(): JSX.Element {
           canEditProject={canEditProject}
           canCreatePost={canManagePost}
           onBuyButtonClick={() => {
-            if (isTerrasos) {
+            if (IS_TERRASOS) {
               window.open(
                 `${LINK_PREFIX}/project/${projectId}/buy`,
                 '_blank',
@@ -427,7 +427,7 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
-          isTerrasos={isTerrasos}
+          isTerrasosProject={isTerrasosProject}
           hasSellOrders={hasSellOrders}
         >
           {!canEditProject &&

@@ -385,7 +385,7 @@ export function useProjectsWithOrders({
           return isFromSelectedCreditClasses && hasSelectedBuyingOptions;
         })
         .filter(project => {
-          if (IS_REGEN) return true;
+          if (IS_REGEN || !!projectId) return true;
 
           const hasRegion =
             regionSelected.length === 0
@@ -415,6 +415,7 @@ export function useProjectsWithOrders({
       regionSelected,
       environmentTypeSelected,
       marketTypeSelected,
+      projectId,
     ],
   );
 

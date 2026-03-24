@@ -164,7 +164,6 @@ function ProjectDetails(): JSX.Element {
     onChainCreditClassId,
     creditClassOnChain,
     cardSellOrders,
-    sellOrders,
     slug,
     noProjectFound,
     anchoredMetadata,
@@ -328,7 +327,6 @@ function ProjectDetails(): JSX.Element {
   const isTerrasosProject =
     offChainProject?.metadata?.['@type'] === 'TerrasosProjectInfo';
 
-  const hasSellOrders = sellOrders.length > 0;
   const { role } = useCanAccessManageProjectWithRole({
     onChainProject,
     offChainProject,
@@ -427,8 +425,6 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
-          isTerrasosProject={isTerrasosProject}
-          hasSellOrders={hasSellOrders}
         >
           {!canEditProject &&
             isPrefinanceProject &&

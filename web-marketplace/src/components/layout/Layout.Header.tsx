@@ -35,11 +35,11 @@ import { ListProject } from '../organisms/ListProject/ListProject';
 import { LoginButton } from '../organisms/LoginButton/LoginButton';
 import { useHasPrefinanceProjects } from '../organisms/RegistryLayout/hooks/useHasPrefinanceProjects';
 import {
-  getNormalizedPathname,
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
+  getNormalizedPathname,
 } from '../organisms/RegistryLayout/RegistryLayout.config';
 import {
   AVATAR_ALT,

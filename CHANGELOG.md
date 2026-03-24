@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.2](https://github.com/regen-network/regen-web/compare/v2.12.1...v2.12.2) (2026-03-24)
+
+### Bug Fixes
+
+- migrate project to org ([aaace2f](https://github.com/regen-network/regen-web/commit/aaace2f99f4c46c7e198cb14f80fb9840d98b71b))
+
 ## [2.12.1](https://github.com/regen-network/regen-web/compare/v2.12.0...v2.12.1) (2026-02-23)
 
 ### Bug Fixes

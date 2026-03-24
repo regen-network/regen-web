@@ -30,6 +30,7 @@ import {
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
+import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -97,7 +98,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const setErrorCode = useSetAtom(errorCodeAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
-  const { migrateProject } = useMigrateProject();
+  const daoOrganization = useDaoOrganization();
+  const { migrateProject } = useMigrateProject({
+    feeGranter: daoOrganization?.address,
+  });
 
   useEffect(() => {
     isDirtyRef.current = isDirty;

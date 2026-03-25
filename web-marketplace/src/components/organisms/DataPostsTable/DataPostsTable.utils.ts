@@ -1,3 +1,5 @@
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/Dashboard/Dashboard.constants';
+
 import { AccountByIdQuery } from 'generated/graphql';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
@@ -20,7 +22,7 @@ export const mapPostToDataPost = (
     title: post.contents?.title ?? '',
     createdAt: post.createdAt,
     author: account?.name ?? post.creatorAccountId,
-    authorAvatarUrl: account?.image ?? undefined,
+    authorAvatarUrl: account?.image || DEFAULT_PROFILE_USER_AVATAR,
     authorProfileLink: account?.addr ? `/profiles/${account.addr}` : undefined,
     authorCompany: organization?.name ?? undefined,
     privacy: post.privacy,

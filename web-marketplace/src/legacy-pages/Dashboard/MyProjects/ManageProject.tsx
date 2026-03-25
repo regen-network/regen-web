@@ -156,6 +156,7 @@ const ManageProject = () => {
           project,
           isLoading,
           offChainProject,
+          canCreatePost: canManagePost,
           openCreatePostModal,
           setDraftPost,
           role,
@@ -191,6 +192,7 @@ const ManageProject = () => {
           setDraftPost={setDraftPost}
           disableScrollLock={true}
           offChainProject={offChainProject}
+          navigateToProjectOnCreate={false}
         />
       )}
     </>

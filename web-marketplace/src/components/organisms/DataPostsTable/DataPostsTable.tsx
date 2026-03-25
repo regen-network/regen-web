@@ -38,6 +38,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
+import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { SEE_HELP_DOCS } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.constants';
 import {
@@ -117,39 +118,42 @@ export const DataPostsTable: React.FC<
     [_, posts?.length, isIgnoreOffset],
   );
 
-  const renderActionButtons: RenderActionButtonsFunc = i => {
-    if (isViewer) return null;
-    if (!posts) return null;
-    const post = posts[i];
-    if (!post) return null;
+  const renderActionButtons = useCallback<RenderActionButtonsFunc>(
+    i => {
+      if (isViewer) return null;
+      if (!posts) return null;
+      const post = posts[i];
+      if (!post) return null;
 
-    const buttons: {
-      label: string;
-      onClick: () => void;
-      icon?: JSX.Element;
-    }[] = [];
+      const buttons: {
+        label: string;
+        onClick: () => void;
+        icon?: JSX.Element;
+      }[] = [];
 
-    // "Edit Draft" is available for posts still in draft mode
-    if (!post.published && onEditDraft) {
-      buttons.push({
-        label: _(EDIT_DRAFT_ACTION),
-        onClick: () => onEditDraft(post),
-        icon: <EditIcon />,
-      });
-    }
+      // "Edit Draft" is available for posts still in draft mode
+      if (!post.published && onEditDraft) {
+        buttons.push({
+          label: _(EDIT_DRAFT_ACTION),
+          onClick: () => onEditDraft(post),
+          icon: <EditIcon />,
+        });
+      }
 
-    // "Delete Post" is available for both draft and published posts
-    if (onDeletePost) {
-      buttons.push({
-        label: _(DELETE_POST_ACTION),
-        onClick: () => onDeletePost(post),
-        icon: <TrashIcon className="text-error-300" />,
-      });
-    }
+      // "Delete Post" is available for both draft and published posts
+      if (onDeletePost) {
+        buttons.push({
+          label: _(DELETE_POST_ACTION),
+          onClick: () => onDeletePost(post),
+          icon: <TrashIcon className="text-error-300" />,
+        });
+      }
 
-    if (buttons.length === 0) return null;
-    return <TableActionButtons buttons={buttons} />;
-  };
+      if (buttons.length === 0) return null;
+      return <TableActionButtons buttons={buttons} />;
+    },
+    [_, isViewer, onDeletePost, onEditDraft, posts],
+  );
 
   const renderPrivacyTag = useCallback(
     (privacy: DataPost['privacy']) => {
@@ -271,9 +275,12 @@ export const DataPostsTable: React.FC<
                   className="max-w-[250px] overflow-hidden text-ellipsis whitespace-nowrap"
                   title={post.title}
                 >
-                  <span className="font-bold">
+                  <Link
+                    className="font-bold text-grey-700"
+                    href={`/post/${post.iri}`}
+                  >
                     {post.title || <em>{_(UNTITLED)}</em>}
-                  </span>
+                  </Link>
                   {!post.published && (
                     <span className="ml-10 inline-flex items-center gap-[2px] px-[8px] py-[2px] text-[0.75rem] rounded bg-bc-neutral-300 text-bc-neutral-500 font-bold">
                       <DraftIcon className="w-[14px] h-[14px]" />

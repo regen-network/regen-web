@@ -116,32 +116,31 @@ export const SignModal = ({
   }, [activeAccount, dao, _]);
 
   // Track whether we've initialized with org default (to avoid overwriting user selection)
-  const [hasInitializedWithOrg, setHasInitializedWithOrg] = useState(
-    () => !!dao?.address,
-  );
+  const [hasInitialized, setHasInitialized] = useState(() => !!dao?.address);
 
-  // Default to organization if available, otherwise personal
+  // Default to personal
   const [selectedAddress, setSelectedAddress] = useState(
-    () => dao?.address || activeAccount?.addr || '',
+    () => activeAccount?.addr || '',
   );
 
-  // When dao data loads asynchronously, default to org if we haven't already
+  // When dao data loads asynchronously, default to org if isOrganizationProject and we haven't already
   useEffect(() => {
-    if (dao?.address && !hasInitializedWithOrg) {
+    if (dao?.address && !hasInitialized && isOrganizationProject) {
       setSelectedAddress(dao.address);
-      setHasInitializedWithOrg(true);
+      setHasInitialized(true);
     }
-  }, [dao?.address, hasInitializedWithOrg]);
+  }, [dao?.address, hasInitialized, isOrganizationProject]);
 
-  // Reset form and selection state when modal opens
   useEffect(() => {
     if (open) {
       form.reset({ verified: false });
-      // Reset to org default if available, otherwise personal
-      setSelectedAddress(dao?.address || activeAccount?.addr || '');
-      setHasInitializedWithOrg(!!dao?.address);
+      // Reset to org default if available and isOrganizationProject, otherwise personal
+      setSelectedAddress(
+        (isOrganizationProject ? dao?.address : activeAccount?.addr) || '',
+      );
+      setHasInitialized(!!dao?.address);
     }
-  }, [open, dao?.address, activeAccount?.addr, form]);
+  }, [open, dao?.address, activeAccount?.addr, form, isOrganizationProject]);
 
   const selectedAccount = accounts.find(
     account => account.address === selectedAddress,

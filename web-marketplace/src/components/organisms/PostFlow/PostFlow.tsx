@@ -63,6 +63,7 @@ type Props = {
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   disableScrollLock?: boolean;
   offChainProject?: ProjectFieldsFragment | null;
+  navigateToProjectOnCreate: boolean;
 };
 
 export const PostFlow = ({
@@ -76,6 +77,7 @@ export const PostFlow = ({
   setDraftPost,
   disableScrollLock = false,
   offChainProject,
+  navigateToProjectOnCreate,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const fileNamesToDeleteRef = useRef<string[]>([]);
@@ -274,11 +276,12 @@ export const PostFlow = ({
           setDraftPost(undefined);
         }
         onModalClose();
-        router.push(
-          `/project/${
-            projectSlug ?? offChainProjectId ?? projectId
-          }#data-stream`,
-        );
+        if (navigateToProjectOnCreate)
+          router.push(
+            `/project/${
+              projectSlug ?? offChainProjectId ?? projectId
+            }#data-stream`,
+          );
       }
     }
   }, [
@@ -298,6 +301,7 @@ export const PostFlow = ({
     setBannerText,
     setDraftPost,
     setProcessingModalAtom,
+    navigateToProjectOnCreate,
   ]);
 
   const onClose = useCallback(

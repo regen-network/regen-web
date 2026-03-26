@@ -20,7 +20,6 @@ export async function fetchHasPrefinanceProjects({
       query: getAllSanityProjectsQuery({ sanityClient, languageCode }),
       reactQueryClient: queryClient,
     });
-    console.log('allSanityProjects', allSanityProjects);
 
     const allOffChainProjects = await getFromCacheOrFetch({
       query: getAllOffchainProjectsQuery({
@@ -29,7 +28,6 @@ export async function fetchHasPrefinanceProjects({
       }),
       reactQueryClient: queryClient,
     });
-    console.log('allOffChainProjects', allOffChainProjects);
 
     const prefinanceProjects =
       allOffChainProjects?.data?.allProjects?.nodes?.filter(project => {
@@ -43,7 +41,6 @@ export async function fetchHasPrefinanceProjects({
 
     return (prefinanceProjects?.length ?? 0) > 0;
   } catch (error) {
-    console.error('Error fetching prefinance projects', error);
     return false; // Return false if there's an error fetching projects
   }
 }

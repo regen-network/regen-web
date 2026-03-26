@@ -11,7 +11,7 @@ import { normalizeError } from 'legacy-pages/ErrorPage/ErrorPage.utils';
 
 import ErrorView from 'web-components/src/components/views/ErrorView';
 
-import unhappyBee from '../../public/png/unhappy-bee.png';
+import unhappyBee from '../../../public/png/unhappy-bee.png';
 
 export default function Error({ error }: { error: Error }) {
   const { _ } = useLingui();

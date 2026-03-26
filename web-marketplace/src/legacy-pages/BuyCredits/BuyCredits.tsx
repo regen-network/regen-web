@@ -44,6 +44,9 @@ export const BuyCredits = () => {
     slug,
     noProjectFound,
   } = useGetProject({ projectId });
+  console.log('loadingBuySellOrders', loadingBuySellOrders);
+  console.log('loadingAccountCanBuy', loadingAccountCanBuy);
+  console.log('loadingAccountCanBuy', loadingAccountCanBuy);
 
   const hasCardOrders = useMemo(
     () => (cardSellOrders && cardSellOrders.length > 0) || false,
@@ -125,8 +128,6 @@ export const BuyCredits = () => {
     }
   }, [paymentOption, retiring, setRetiring]);
 
-  if (loadingAccountCanBuy) return <Loading />;
-
   if (
     noProjectFound ||
     (onChainProjectId && isBridgeClassIdPrefix(onChainProjectId))
@@ -135,7 +136,9 @@ export const BuyCredits = () => {
 
   return (
     <WithLoader
-      isLoading={loadingBuySellOrders || loadingSanityProject}
+      isLoading={
+        loadingAccountCanBuy || loadingBuySellOrders || loadingSanityProject
+      }
       className="flex w-full items-center justify-center h-[500px]"
     >
       <>

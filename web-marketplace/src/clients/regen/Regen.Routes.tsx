@@ -265,11 +265,11 @@ export const getRegenRoutes = ({
       {/* Main routes WITH header/footer */}
       <Route
         element={<RegistryLayout />}
-        loader={registryLayoutLoader({
-          queryClient: reactQueryClient,
-          apolloClient,
-          languageCode,
-        })}
+        // loader={registryLayoutLoader({
+        //   queryClient: reactQueryClient,
+        //   apolloClient,
+        //   languageCode,
+        // })}
       >
         <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
           <Route

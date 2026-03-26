@@ -29,7 +29,6 @@ export interface ProjectPageProps {
   params: Promise<{ id: string; lang: string }>;
 }
 
-// TODO Add error handling or retry logic in getProject() within app/[lang]/project/[id]/page.tsx to gracefully handle RPC query failures rather than letting them crash the page.
 export const getProject = cache(async (id: string, lang: string) => {
   try {
     const isOnChainId = getIsOnChainId(id);

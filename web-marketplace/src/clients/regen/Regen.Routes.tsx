@@ -19,7 +19,6 @@ import * as Sentry from '@sentry/react';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { batchDetailsLoader } from 'legacy-pages/BatchDetails/BatchDetails.loader';
-import { BuyCredits } from 'legacy-pages/BuyCredits/BuyCredits';
 import { CertificatePage } from 'legacy-pages/Certificate/Certificate';
 import { EditProfile } from 'legacy-pages/Dashboard/Dashboard.EditProfile';
 import { DashboardSettings } from 'legacy-pages/Dashboard/Dashboard.Settings';
@@ -69,6 +68,7 @@ const BasketDetails = safeLazy(
 const BridgeBlockedBatchDetails = safeLazy(
   () => import('../../legacy-pages/BridgeBlockedBatchDetails'),
 );
+const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
 const DeprecatedBatchDetails = safeLazy(
   () => import('../../legacy-pages/DeprecatedBatchDetails'),
 );

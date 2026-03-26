@@ -19,6 +19,9 @@ type LoaderType = {
 export const registryLayoutLoader =
   ({ queryClient, apolloClient, languageCode }: LoaderType) =>
   async () => {
+    console.log('queryClient', queryClient);
+    console.log('apolloClient', apolloClient);
+    console.log('languageCode', languageCode);
     return fetchHasPrefinanceProjects({
       queryClient,
       apolloClient,

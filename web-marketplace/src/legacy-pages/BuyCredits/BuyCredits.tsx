@@ -4,8 +4,6 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { useRouter } from 'next/navigation';
 
-import { Loading } from 'web-components/src/components/loading';
-
 import { chooseHowToPurchaseModalAtom } from 'lib/atoms/modals.atoms';
 import { getProjectPath, isBridgeClassIdPrefix } from 'lib/bridge';
 import { useWallet } from 'lib/wallet/wallet';
@@ -44,9 +42,6 @@ export const BuyCredits = () => {
     slug,
     noProjectFound,
   } = useGetProject({ projectId });
-  console.log('loadingBuySellOrders', loadingBuySellOrders);
-  console.log('loadingAccountCanBuy', loadingAccountCanBuy);
-  console.log('loadingAccountCanBuy', loadingAccountCanBuy);
 
   const hasCardOrders = useMemo(
     () => (cardSellOrders && cardSellOrders.length > 0) || false,

@@ -30,8 +30,8 @@ export const ProjectAccount = (): JSX.Element | null => {
   const { projectId } = useParams();
   const [searchParams] = useSearchParams();
   const fromPath = searchParams.get('from');
-  const hasOriginPath = !!fromPath;
-  const isOrganizationParam = searchParams.get('isOrganization') === 'true';
+  const fromDashboard = !!fromPath && fromPath.includes('dashboard');
+  const isOrg = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
   const dao = useDaoOrganization();
   const {
@@ -88,9 +88,8 @@ export const ProjectAccount = (): JSX.Element | null => {
     // Don't run if we've already initialized or accounts aren't ready
     if (initializedRef.current) return;
 
-    if (hasOriginPath) {
-      // Coming from an origin path - use the passed params
-      const isOrg = isOrganizationParam;
+    if (fromDashboard) {
+      // Coming from dashboard - use the passed params
       const address = isOrg
         ? organizationAccount?.address
         : personalAccount?.address;
@@ -116,8 +115,8 @@ export const ProjectAccount = (): JSX.Element | null => {
       setIsStateReady(true);
     }
   }, [
-    hasOriginPath,
-    isOrganizationParam,
+    fromDashboard,
+    isOrg,
     organizationAccount?.address,
     personalAccount?.address,
     projectCreatorAddress,
@@ -145,7 +144,7 @@ export const ProjectAccount = (): JSX.Element | null => {
   // 2. State is properly initialized (for origin path redirects)
   useEffect(() => {
     const canNavigate =
-      !isLoadingIsIssuer && (shouldSkip || (hasOriginPath && isStateReady));
+      !isLoadingIsIssuer && (shouldSkip || (fromDashboard && isStateReady));
     if (canNavigate) {
       navigateNext();
     }
@@ -153,16 +152,16 @@ export const ProjectAccount = (): JSX.Element | null => {
     shouldSkip,
     isLoadingIsIssuer,
     navigateNext,
-    hasOriginPath,
+    fromDashboard,
     isStateReady,
   ]);
 
   // Show loading while:
   // 1. Checking issuer status
-  // 2. Processing origin path redirect (waiting for state to be ready)
+  // 2. Processing dashboard redirect (waiting for state to be ready)
   // 3. User should skip this page
   const showLoading =
-    isLoadingIsIssuer || (hasOriginPath && !isStateReady) || shouldSkip;
+    isLoadingIsIssuer || (fromDashboard && !isStateReady) || shouldSkip;
 
   if (showLoading) {
     return (

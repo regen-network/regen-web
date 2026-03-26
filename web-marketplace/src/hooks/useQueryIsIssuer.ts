@@ -19,14 +19,11 @@ function useQueryIsIssuer({ address, enabled = true }: Props) {
   const { wallet } = useWallet();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
+  const queryEnabled = enabled && !!activeAddress && !!graphqlClient;
 
-  const {
-    data: classesByIssuerData,
-    isFetching,
-    isFetched,
-  } = useQuery(
+  const { data: classesByIssuerData, isFetching } = useQuery(
     getClassesByIssuerQuery({
-      enabled: !!activeAddress && !!graphqlClient && enabled,
+      enabled: queryEnabled,
       client: graphqlClient,
       issuer: activeAddress,
     }),
@@ -35,7 +32,10 @@ function useQueryIsIssuer({ address, enabled = true }: Props) {
   const isIssuer =
     (classesByIssuerData?.data.allClassIssuers?.nodes?.length ?? 0) > 0;
 
-  return { isIssuer, isLoadingIsIssuer: isFetching || !isFetched };
+  return {
+    isIssuer,
+    isLoadingIsIssuer: isFetching,
+  };
 }
 
 export { useQueryIsIssuer };

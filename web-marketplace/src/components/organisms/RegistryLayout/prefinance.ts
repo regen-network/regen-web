@@ -15,25 +15,32 @@ export async function fetchHasPrefinanceProjects({
   apolloClient: ApolloClient<NormalizedCacheObject>;
   languageCode: string;
 }): Promise<boolean> {
-  const allSanityProjects = await getFromCacheOrFetch({
-    query: getAllSanityProjectsQuery({ sanityClient, languageCode }),
-    reactQueryClient: queryClient,
-  });
-
-  const allOffChainProjects = await getFromCacheOrFetch({
-    query: getAllOffchainProjectsQuery({ client: apolloClient, languageCode }),
-    reactQueryClient: queryClient,
-  });
-
-  const prefinanceProjects =
-    allOffChainProjects?.data?.allProjects?.nodes?.filter(project => {
-      const sanityProject = allSanityProjects?.allProject?.find(
-        sanityProject =>
-          sanityProject.projectId === project?.id ||
-          sanityProject.projectId === project?.slug,
-      );
-      return sanityProject?.projectPrefinancing?.isPrefinanceProject;
+  try {
+    const allSanityProjects = await getFromCacheOrFetch({
+      query: getAllSanityProjectsQuery({ sanityClient, languageCode }),
+      reactQueryClient: queryClient,
     });
 
-  return (prefinanceProjects?.length ?? 0) > 0;
+    const allOffChainProjects = await getFromCacheOrFetch({
+      query: getAllOffchainProjectsQuery({
+        client: apolloClient,
+        languageCode,
+      }),
+      reactQueryClient: queryClient,
+    });
+
+    const prefinanceProjects =
+      allOffChainProjects?.data?.allProjects?.nodes?.filter(project => {
+        const sanityProject = allSanityProjects?.allProject?.find(
+          sanityProject =>
+            sanityProject.projectId === project?.id ||
+            sanityProject.projectId === project?.slug,
+        );
+        return sanityProject?.projectPrefinancing?.isPrefinanceProject;
+      });
+
+    return (prefinanceProjects?.length ?? 0) > 0;
+  } catch (error) {
+    return false; // Return false if there's an error fetching projects
+  }
 }

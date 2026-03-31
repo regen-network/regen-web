@@ -45,12 +45,10 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { BRIDGE_BASKET_DENOM, BRIDGE_CLASS_ID, ORG_ENABLED } from 'lib/env';
 import { useWallet } from 'lib/wallet/wallet';
 
-// import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
-import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
@@ -263,14 +261,7 @@ export const getRegenRoutes = ({
   return createRoutesFromElements(
     <>
       {/* Main routes WITH header/footer */}
-      <Route
-        element={<RegistryLayout />}
-        loader={registryLayoutLoader({
-          queryClient: reactQueryClient,
-          apolloClient,
-          languageCode,
-        })}
-      >
+      <Route element={<RegistryLayout />}>
         <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
           <Route
             index

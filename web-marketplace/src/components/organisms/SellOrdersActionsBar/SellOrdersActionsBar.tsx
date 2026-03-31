@@ -53,7 +53,6 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
-  isTerrasos?: boolean;
 };
 
 export const SellOrdersActionsBar = ({
@@ -77,7 +76,6 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
-  isTerrasos,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const pathname = usePathname();
@@ -169,7 +167,6 @@ export const SellOrdersActionsBar = ({
                 </Box>
               )}
             {(!isCommunityCredit ||
-              isTerrasos ||
               (!onChainProjectId && isPrefinanceProject)) && (
               <OutlinedButton
                 onClick={onBookCallButtonClick}
@@ -188,49 +185,46 @@ export const SellOrdersActionsBar = ({
                 {_(BOOK_CALL)}
               </OutlinedButton>
             )}
-            {IS_REGEN &&
-              onBuyButtonClick &&
-              !!onChainProjectId &&
-              !!onChainCreditClassId && (
-                <InfoTooltip
-                  title={
-                    isSoldOut
-                      ? _(SOLD_OUT_TOOLTIP)
-                      : isBuyButtonDisabled
-                      ? _(BUY_DISABLED_TOOLTIP)
-                      : ''
-                  }
-                  arrow
-                  placement="top"
-                >
-                  <span>
-                    <ContainedButton
-                      startIcon={
-                        <CurrentCreditsIcon height="18px" width="18px" />
-                      }
-                      onClick={() => {
-                        track<Buy1Event>('buy1', {
-                          url: pathname,
-                          buttonLocation: 'stickyNav',
-                          projectName,
-                          projectId: onChainProjectId,
-                          creditClassId: onChainCreditClassId,
-                          creditClassName,
-                        });
-                        onBuyButtonClick();
-                      }}
-                      disabled={isBuyButtonDisabled}
-                      sx={{
-                        height: '100%',
-                        backgroundImage:
-                          'linear-gradient(197deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1) 14.67%, rgba(var(--sc-gradient-lighter-gradient-300) / 1) 97.14%)',
-                      }}
-                    >
-                      {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
-                    </ContainedButton>
-                  </span>
-                </InfoTooltip>
-              )}
+            {onBuyButtonClick && !!onChainProjectId && !!onChainCreditClassId && (
+              <InfoTooltip
+                title={
+                  isSoldOut
+                    ? _(SOLD_OUT_TOOLTIP)
+                    : isBuyButtonDisabled
+                    ? _(BUY_DISABLED_TOOLTIP)
+                    : ''
+                }
+                arrow
+                placement="top"
+              >
+                <span>
+                  <ContainedButton
+                    startIcon={
+                      <CurrentCreditsIcon height="18px" width="18px" />
+                    }
+                    onClick={() => {
+                      track<Buy1Event>('buy1', {
+                        url: pathname,
+                        buttonLocation: 'stickyNav',
+                        projectName,
+                        projectId: onChainProjectId,
+                        creditClassId: onChainCreditClassId,
+                        creditClassName,
+                      });
+                      onBuyButtonClick();
+                    }}
+                    disabled={isBuyButtonDisabled}
+                    sx={{
+                      height: '100%',
+                      backgroundImage:
+                        'linear-gradient(197deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1) 14.67%, rgba(var(--sc-gradient-lighter-gradient-300) / 1) 97.14%)',
+                    }}
+                  >
+                    {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
+                  </ContainedButton>
+                </span>
+              </InfoTooltip>
+            )}
           </>
         )}
         {children}

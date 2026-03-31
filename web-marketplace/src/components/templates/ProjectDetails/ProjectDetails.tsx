@@ -33,7 +33,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, LINK_PREFIX } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getOrganizationByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getOrganizationByIdQuery/getOrganizationByIdQuery';
@@ -324,7 +324,9 @@ function ProjectDetails(): JSX.Element {
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
 
-  const isTerrasos = normalizedProject.type === 'TerrasosProjectInfo';
+  const isTerrasosProject =
+    offChainProject?.metadata?.['@type'] === 'TerrasosProjectInfo';
+
   const { role } = useCanAccessManageProjectWithRole({
     onChainProject,
     offChainProject,
@@ -379,7 +381,7 @@ function ProjectDetails(): JSX.Element {
 
       {(onChainProjectId ||
         isPrefinanceProject ||
-        isTerrasos ||
+        isTerrasosProject ||
         (hasManageAccess && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
@@ -388,11 +390,19 @@ function ProjectDetails(): JSX.Element {
           canEditProject={canEditProject}
           canCreatePost={canManagePost}
           onBuyButtonClick={() => {
-            onBuyButtonClick({
-              projectId,
-              loading: loadingSanityProject || loadingBuySellOrders,
-              cardSellOrders,
-            });
+            if (IS_TERRASOS) {
+              window.open(
+                `${LINK_PREFIX}/project/${projectId}/buy`,
+                '_blank',
+                'noopener,noreferrer',
+              );
+            } else {
+              onBuyButtonClick({
+                projectId,
+                loading: loadingSanityProject || loadingBuySellOrders,
+                cardSellOrders,
+              });
+            }
           }}
           onChainProjectId={onChainProjectId}
           offChainProjectId={offChainProject?.id}
@@ -415,7 +425,6 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
-          isTerrasos={isTerrasos}
         >
           {!canEditProject &&
             isPrefinanceProject &&

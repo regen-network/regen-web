@@ -89,9 +89,6 @@ type Props = {
   cardDetails?: CardDetails;
   project?: NormalizeProject;
   projectId: string | undefined;
-  loadingSanityProject: boolean;
-  isBuyFlowDisabled: boolean;
-  loadingBuySellOrders: boolean;
 };
 
 const stripe = loadStripe(stripeKey || '');
@@ -111,9 +108,6 @@ export const BuyCreditsForm = ({
   cardDetails,
   project,
   projectId,
-  loadingSanityProject,
-  isBuyFlowDisabled,
-  loadingBuySellOrders,
 }: Props) => {
   const { data, activeStep, handleSaveNext, handleSave, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
@@ -140,6 +134,7 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
+
   const [warningModalState, setWarningModalState] = useState({
     openModal: false,
     creditsAvailable: 0,
@@ -184,28 +179,6 @@ export const BuyCreditsForm = ({
     );
     setPaymentOption(prev => data?.paymentOption || prev);
   }, [data.retiring, data?.paymentOption, setPaymentOption, setRetiring]);
-
-  useEffect(() => {
-    if (
-      !loadingSanityProject &&
-      !loadingBuySellOrders &&
-      cardSellOrders.length === 0 &&
-      ((loaded && !wallet?.address) || isBuyFlowDisabled) &&
-      !warningModalContent.current
-    ) {
-      // Else if there's no connected wallet address or buy disabled, redirect to project page
-      router.replace(`/project/${projectId}`);
-    }
-  }, [
-    loadingSanityProject,
-    loadingBuySellOrders,
-    loaded,
-    wallet?.address,
-    router,
-    projectId,
-    cardSellOrders.length,
-    isBuyFlowDisabled,
-  ]);
 
   const creditsAmount = data?.[CREDITS_AMOUNT];
   const currencyAmount = data?.[CURRENCY_AMOUNT];

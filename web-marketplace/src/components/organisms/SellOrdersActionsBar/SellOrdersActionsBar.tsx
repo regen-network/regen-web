@@ -4,7 +4,7 @@ import { ReactNode, useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
+import { MANAGE_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { usePathname, useRouter } from 'next/navigation';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
@@ -12,8 +12,8 @@ import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
-import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
@@ -53,6 +53,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
+  isManagedByUserOrganization?: boolean;
 };
 
 export const SellOrdersActionsBar = ({
@@ -76,6 +77,7 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
+  isManagedByUserOrganization,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const pathname = usePathname();
@@ -90,6 +92,9 @@ export const SellOrdersActionsBar = ({
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const showAdminButtons = canEditProject || canCreatePost;
+  const dashboardBasePath = isManagedByUserOrganization
+    ? '/dashboard/organization'
+    : '/dashboard';
 
   return (
     <StickyBar>
@@ -124,14 +129,14 @@ export const SellOrdersActionsBar = ({
               <ContainedButton
                 onClick={() =>
                   router.push(
-                    `/project-pages/${
+                    `${dashboardBasePath}/projects/${
                       onChainProjectId ?? offChainProjectId
-                    }/edit/basic-info?from=${encodeURIComponent(pathname)}`,
+                    }/manage`,
                   )
                 }
               >
-                <EditIcon className="mr-10" sx={{ color: '#fff' }} />
-                {_(EDIT_PROJECT)}
+                <CogIcon className="mr-10 text-grey-0" />
+                {_(MANAGE_PROJECT)}
               </ContainedButton>
             )}
           </>

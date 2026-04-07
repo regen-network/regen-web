@@ -3040,6 +3040,10 @@ msgstr ""
 msgid "Manage Portfolio"
 msgstr ""
 
+#: src/legacy-pages/ProjectEdit/ProjectEdit.constants.ts:6
+msgid "manage project"
+msgstr ""
+
 #: src/legacy-pages/Dashboard/MyProjects/MyProjects.constants.ts:9
 msgid "Manage Project"
 msgstr ""

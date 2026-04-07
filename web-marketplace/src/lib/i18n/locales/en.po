@@ -337,7 +337,7 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
-#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:196
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:195
 msgid "Account"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 msgid "Asset"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:163
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:161
 msgid "Attach a signature"
 msgstr ""
 
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -1073,7 +1073,7 @@ msgid "Cancelled credits have been removed from from the credit batch's tradable
 msgstr ""
 
 #. placeholder {0}: resp.statusText
-#: src/components/organisms/PostFlow/PostFlow.tsx:220
+#: src/components/organisms/PostFlow/PostFlow.tsx:222
 msgid "Cannot get existing post: {0}"
 msgstr ""
 
@@ -1243,7 +1243,7 @@ msgstr ""
 msgid "Choose the photo that will show at the top of the project page and in project preview cards."
 msgstr ""
 
-#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:192
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:191
 msgid "Choose where to create this project"
 msgstr ""
 
@@ -1917,7 +1917,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
 msgid "Date Created"
 msgstr ""
 
@@ -2425,7 +2425,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:268
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:269
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -2620,7 +2620,7 @@ msgstr ""
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:182
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:180
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
@@ -3563,7 +3563,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:36
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:97
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:96
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:71
 msgid "Organization"
 msgstr ""
@@ -3673,7 +3673,7 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:112
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:111
 #: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:56
 msgid "Personal"
 msgstr ""
@@ -3980,7 +3980,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:268
 msgid "Privacy"
 msgstr ""
 
@@ -4821,11 +4821,11 @@ msgstr ""
 msgid "Show off-chain projects"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:213
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:211
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:193
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:191
 msgid "Sign as"
 msgstr ""
 
@@ -4837,7 +4837,7 @@ msgstr ""
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:170
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:168
 msgid "Sign this post"
 msgstr ""
 
@@ -4874,7 +4874,7 @@ msgstr ""
 msgid "SKIP"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:207
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:205
 msgid "skip this step"
 msgstr ""
 
@@ -5293,7 +5293,7 @@ msgstr ""
 msgid "This information will appear on any posts that you author."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:173
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:171
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
@@ -5413,7 +5413,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:264
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"

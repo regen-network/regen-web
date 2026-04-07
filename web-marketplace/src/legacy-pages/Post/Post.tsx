@@ -165,19 +165,10 @@ function Post(): JSX.Element {
       }),
     [role, creatorAccountId, currentAccountId],
   );
-  const canViewDraftPost = useMemo(
-    () =>
-      getCanSeeOrManagePost({
-        role,
-        creatorAccountId,
-        currentAccountId,
-      }),
-    [role, creatorAccountId, currentAccountId],
-  );
 
   return (
     <>
-      {!isFetching && (!data || (canViewDraftPost && !data?.published)) ? (
+      {!isFetching && (!data || (canManagePost && !data?.published)) ? (
         <NotFoundPage />
       ) : (
         <>

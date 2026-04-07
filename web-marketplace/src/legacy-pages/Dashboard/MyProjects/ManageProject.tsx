@@ -156,7 +156,7 @@ const ManageProject = () => {
           project,
           isLoading,
           offChainProject,
-          canCreatePost: canManagePost,
+          canCreatePost,
           openCreatePostModal,
           setDraftPost,
           role,

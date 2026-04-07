@@ -69,7 +69,7 @@ import {
 } from 'components/organisms/SellerSetupAccount/hooks/useStripeAccount.constants';
 import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getNewProjectRoleId } from 'hooks/org-members/utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 import useMsgClient from 'hooks/useMsgClient';
 
 import {
@@ -116,7 +116,14 @@ export const useMigrateProjects = ({
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
+  // When feeGranter is set it IS the org DAO address (post-creation migration).
+  // During the creation flow itself the org may not have funds yet so feeGranter is unset;
+  // fall back to the first org in that case.
+  const dao = feeGranter
+    ? daoOrganizations.find(d => d?.address === feeGranter) ??
+      daoOrganizations[0]
+    : daoOrganizations[0];
   const { activeAccountId, activeAccount, privActiveAccount } = useAuth();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));

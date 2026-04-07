@@ -36,7 +36,6 @@ export const AccountSwitcherDropdown = ({
   accounts,
   activeAddress,
   onSelect,
-  hasOrganization = true,
   onCreateOrganization,
   unfinalizedOrgCreation = false,
   unfinalizedOrgName,
@@ -54,14 +53,11 @@ export const AccountSwitcherDropdown = ({
       | AccountOption
       | { id: typeof CREATE_ORGANIZATION_FORM_ID }
     )[] = [...filteredAccounts];
-    if (
-      ORG_ENABLED &&
-      (unfinalizedOrgCreation || (!hasOrganization && onCreateOrganization))
-    ) {
+    if (ORG_ENABLED && (unfinalizedOrgCreation || onCreateOrganization)) {
       options.push({ id: CREATE_ORGANIZATION_FORM_ID });
     }
     return options;
-  }, [accounts, hasOrganization, onCreateOrganization, unfinalizedOrgCreation]);
+  }, [accounts, onCreateOrganization, unfinalizedOrgCreation]);
 
   return (
     <ul

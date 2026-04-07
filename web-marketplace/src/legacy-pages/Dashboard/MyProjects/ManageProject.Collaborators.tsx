@@ -11,7 +11,7 @@ import { ROLE_EDITOR } from 'components/organisms/ActionDropdown/ActionDropdown.
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { useUpdateCollaborators } from './hooks/collaborators';
 import { useCollaborators } from './hooks/collaborators/useCollaborators';
@@ -23,11 +23,14 @@ const Collaborators = (): JSX.Element => {
     useOutletContext<ReturnType<typeof useFetchProject>>();
   const { activeAccountId } = useAuth();
   const navigate = useNavigate();
-  const daoOrganization = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
+
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
 
   const {
     projectDao,
@@ -35,7 +38,7 @@ const Collaborators = (): JSX.Element => {
     activeAccountOrgAssignment,
     collaborators,
     isLoading: isCollaboratorsLoading,
-  } = useCollaborators(project, daoAccountsOrderBy);
+  } = useCollaborators(project, daoAccountsOrderBy, projectOrgId);
 
   const { migrateProject } = useMigrateProject({
     project,
@@ -75,7 +78,7 @@ const Collaborators = (): JSX.Element => {
     <ProjectCollaborators
       canMigrate={canMigrate}
       isProjectDao={!!projectDao}
-      partOfOrganization={!!daoOrganization}
+      partOfOrganization={daoOrganizations.length > 0}
       offChainId={project.offChainId}
       isDraftOnChainProject={isDraftOnChainProject}
       migrateProject={migrateProject}
@@ -92,7 +95,13 @@ const Collaborators = (): JSX.Element => {
       onAddMember={addCollaborator}
       onUpdateRole={updateCollaboratorRole}
       onRemove={removeCollaborator}
-      onEditOrgRole={() => navigate(`/dashboard/organization/members`)}
+      onEditOrgRole={() => {
+        const orgDao = daoOrganizations.find(
+          dao => dao?.organizationByDaoAddress?.id === projectOrgId,
+        );
+        const orgAddress = orgDao?.address ?? daoOrganizations[0]?.address;
+        navigate(`/dashboard/organization/${orgAddress}/members`);
+      }}
       currentDaoAddress={projectDao?.address}
     />
   );

@@ -1,12 +1,12 @@
 import { ProjectFieldsFragment } from 'generated/graphql';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 type UseFeeGranterParams = {
   offChainProject?: ProjectFieldsFragment | null;
 };
 export const useFeeGranter = ({ offChainProject }: UseFeeGranterParams) => {
-  const dao = useDaoOrganization();
+  const daos = useDaoOrganizations();
   // If user is external project collaborator (not part of org, only project)
   // he needs to pay for tx fees.
   // Else if user part of organization the project belongs to, fees are handled by organization through feegrant.
@@ -14,12 +14,11 @@ export const useFeeGranter = ({ offChainProject }: UseFeeGranterParams) => {
   const projectOrgId =
     offChainProject?.organizationProjectByProjectId?.organizationId;
 
-  const feeGranter =
-    adminDao?.address &&
-    projectOrgId &&
-    dao?.organizationByDaoAddress?.id === projectOrgId
-      ? dao?.address
+  // Find the user's org that matches the project's org
+  const matchingDao =
+    adminDao?.address && projectOrgId
+      ? daos.find(dao => dao?.organizationByDaoAddress?.id === projectOrgId)
       : undefined;
 
-  return feeGranter;
+  return matchingDao?.address;
 };

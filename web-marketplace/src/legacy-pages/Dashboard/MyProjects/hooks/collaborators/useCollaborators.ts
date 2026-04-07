@@ -28,11 +28,12 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 export const useCollaborators = (
   project: NormalizeProject,
   daoAccountsOrderBy: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc,
+  projectOrgId?: string | null,
 ) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -40,7 +41,7 @@ export const useCollaborators = (
   const { _ } = useLingui();
   const { loginDisabled } = useWallet();
 
-  const daoOrganization = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
   const { activeAccountId } = useAuth();
 
   const {
@@ -55,6 +56,18 @@ export const useCollaborators = (
       includePrivate: !loginDisabled,
     }),
   );
+
+  // Find the user's org that owns this project
+  const daoOrganization = useMemo(
+    () =>
+      projectOrgId
+        ? daoOrganizations.find(
+            dao => dao?.organizationByDaoAddress?.id === projectOrgId,
+          )
+        : daoOrganizations[0],
+    [daoOrganizations, projectOrgId],
+  );
+
   const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
     useQuery(
       getDaoByAddressWithAssignmentsQuery({

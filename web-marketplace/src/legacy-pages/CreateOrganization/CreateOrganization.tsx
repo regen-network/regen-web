@@ -17,14 +17,12 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 import { useWallet } from 'lib/wallet/wallet';
 
 import { FormRef } from 'components/molecules/Form/Form';
-import { useOrganizationMenuProfile } from 'components/organisms/RegistryLayout/hooks/useOrganizationMenuProfile';
 
 import {
   MultiStepTemplate,
   useMultiStep,
 } from '../../components/templates/MultiStepTemplate';
 import {
-  CREATE_ORG_ALREADY_IN_ORG_MESSAGE,
   CREATE_ORG_CANCEL_LABEL,
   CREATE_ORG_CLOSE_ARIA_LABEL,
   CREATE_ORG_CONFIRM_DISCARD_LABEL,
@@ -209,25 +207,6 @@ export default function CreateOrganizationPage(): JSX.Element {
     if (!matchedProgress) return 0;
     return Math.min(matchedProgress.step, steps.length - 1);
   }, [matchedProgress, steps]);
-
-  const { menuOrganizationProfile, unfinalizedOrgCreation } =
-    useOrganizationMenuProfile({
-      activeAccount,
-      wallet,
-    });
-
-  useEffect(() => {
-    if (menuOrganizationProfile && !unfinalizedOrgCreation) {
-      setErrorBannerText(_(CREATE_ORG_ALREADY_IN_ORG_MESSAGE));
-      navigate('/dashboard', { replace: true });
-    }
-  }, [
-    menuOrganizationProfile,
-    unfinalizedOrgCreation,
-    navigate,
-    setErrorBannerText,
-    _,
-  ]);
 
   useEffect(() => {
     if (loginDisabled) {

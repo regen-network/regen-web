@@ -8,12 +8,12 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getAssignmentsWithProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAssignmentsWithProjectQuery/getAssignmentsWithProjectsQuery';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 export const useMembersProjects = (accountId?: string, disabled = false) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   const { data: assignmentsData, isFetching: isAssignmentsLoading } = useQuery(
     getAssignmentsWithProjectsQuery({
@@ -36,19 +36,31 @@ export const useMembersProjects = (accountId?: string, disabled = false) => {
     [assignmentsData, disabled],
   );
 
+  // Build a set of all org IDs the user belongs to
+  const orgIds = useMemo(
+    () =>
+      new Set(
+        daoOrganizations
+          .map(dao => dao?.organizationByDaoAddress?.id)
+          .filter(Boolean),
+      ),
+    [daoOrganizations],
+  );
+
   // Compute projects current user is an external member of
   // (ie member is part of project DAO but not part the organization project)
   const externalMemberProjects = useMemo(
     () =>
-      dao?.organizationByDaoAddress?.id
-        ? // If user is part of an organization, filter out projects that belong to that organization on its user dashboard/profile
+      orgIds.size > 0
+        ? // If user is part of any organization, filter out projects that belong to those organizations on its user dashboard/profile
           allMemberProjects?.filter(
             project =>
-              project?.organizationProjectByProjectId?.organizationId !==
-              dao?.organizationByDaoAddress?.id,
+              !orgIds.has(
+                project?.organizationProjectByProjectId?.organizationId,
+              ),
           )
         : allMemberProjects,
-    [allMemberProjects, dao],
+    [allMemberProjects, orgIds],
   );
 
   return {

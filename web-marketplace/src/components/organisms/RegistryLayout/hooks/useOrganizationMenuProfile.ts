@@ -9,7 +9,7 @@ import {
 import type { AccountByIdQuery } from 'generated/graphql';
 import type { Wallet } from 'lib/wallet/wallet';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { getAddress } from '../RegistryLayout.utils';
 
@@ -37,31 +37,35 @@ export const useOrganizationMenuProfile = ({
   const unfinalizedOrgCreation = !!unfinishedEntry;
   const unfinalizedOrgName = unfinishedEntry?.name;
 
-  const organizationDao = useDaoOrganization();
-  const organizationProfile = organizationDao?.organizationByDaoAddress;
+  const organizationDaos = useDaoOrganizations();
 
-  const menuOrganizationProfile = useMemo(() => {
-    if (!organizationProfile || !organizationDao) return undefined;
+  const menuOrganizationProfiles = useMemo(
+    () =>
+      organizationDaos
+        .map(dao => {
+          const profile = dao?.organizationByDaoAddress;
+          if (!profile || !dao?.address) return null;
+          const daoAddress = dao.address;
+          return {
+            id: daoAddress,
+            name: profile.name?.trim() || _(DEFAULT_NAME),
+            profileImage:
+              profile.image?.trim() || DEFAULT_PROFILE_COMPANY_AVATAR,
+            truncatedAddress: getAddress({ walletAddress: daoAddress }),
+            address: daoAddress,
+            profileLink: `/profiles/${daoAddress}`,
+            dashboardLink: `/dashboard/organization/${daoAddress}`,
+          };
+        })
+        .filter((p): p is NonNullable<typeof p> => p !== null),
+    [_, organizationDaos],
+  );
 
-    const daoAddress = organizationDao.address;
-    const organizationName =
-      organizationProfile.name?.trim() || _(DEFAULT_NAME);
-
-    const organizationImage =
-      organizationProfile?.image?.trim() || DEFAULT_PROFILE_COMPANY_AVATAR;
-
-    return {
-      id: daoAddress,
-      name: organizationName,
-      profileImage: organizationImage,
-      truncatedAddress: getAddress({ walletAddress: daoAddress }),
-      address: daoAddress,
-      profileLink: `/profiles/${daoAddress}`,
-      dashboardLink: '/dashboard/organization',
-    };
-  }, [_, organizationDao, organizationProfile]);
+  // Keep singular for any code that only needs to know if there's at least one org
+  const menuOrganizationProfile = menuOrganizationProfiles[0] ?? undefined;
 
   return {
+    menuOrganizationProfiles,
     menuOrganizationProfile,
     unfinalizedOrgCreation,
     unfinalizedOrgName,

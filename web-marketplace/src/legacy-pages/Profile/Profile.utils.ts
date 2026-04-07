@@ -1,3 +1,5 @@
-export const getDashboardRoute = (isOrg: boolean): string => {
-  return isOrg ? '/dashboard/organization' : '/dashboard';
+export const getDashboardRoute = (orgDaoAddress?: string | null): string => {
+  return orgDaoAddress
+    ? `/dashboard/organization/${orgDaoAddress}`
+    : '/dashboard';
 };

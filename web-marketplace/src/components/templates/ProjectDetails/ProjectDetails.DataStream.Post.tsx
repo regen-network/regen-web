@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -49,15 +49,21 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { LINK_PREFIX } from 'lib/env';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { Link } from 'components/atoms';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
+import {
+  getCanSeeOrManagePost,
+  getCanViewPrivatePost,
+} from '../ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import {
   FILES_ARE_PRIVATE,
   LOCATIONS_ARE_PRIVATE,
@@ -74,8 +80,7 @@ type Props = {
   setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   projectLocation: GeocodeFeature;
   openCreatePostModal: () => void;
-  canManagePost: boolean;
-  canViewPost: boolean;
+  role?: ProjectRole;
 };
 export const DataStreamPost = ({
   offChainProjectId,
@@ -87,8 +92,7 @@ export const DataStreamPost = ({
   setDraftPost,
   projectLocation,
   openCreatePostModal,
-  canManagePost,
-  canViewPost,
+  role,
 }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -104,17 +108,38 @@ export const DataStreamPost = ({
     iri,
     offChainProjectId,
   });
+  const { activeAccountId: currentAccountId } = useAuth();
 
+  const creatorAccountId = post.creatorAccountId;
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
       client: graphqlClient,
-      id: post.creatorAccountId,
+      id: creatorAccountId,
       enabled: !!graphqlClient,
       languageCode: selectedLanguage,
     }),
   );
   const creatorAccount = creatorAccountData?.accountById;
   const creatorIsAdmin = creatorAccount?.id === adminAccountId;
+
+  const canManagePost = useMemo(
+    () =>
+      getCanSeeOrManagePost({
+        role,
+        creatorAccountId,
+        currentAccountId,
+      }),
+    [role, creatorAccountId, currentAccountId],
+  );
+  const canViewPost = useMemo(
+    () =>
+      getCanViewPrivatePost({
+        role,
+        creatorAccountId,
+        currentAccountId,
+      }),
+    [role, creatorAccountId, currentAccountId],
+  );
 
   const { events } = useAttestEvents({
     iri,

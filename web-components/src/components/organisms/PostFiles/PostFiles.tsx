@@ -23,7 +23,7 @@ export type PostFilesProps = {
   privacyType: PostPrivacyType;
   files: Array<PostFile>;
   mapboxToken?: string;
-  isAdmin: boolean;
+  canViewPrivatePost: boolean;
   hasToken?: boolean;
   photoCredit: string;
   adminPrivateLabel: string;
@@ -37,7 +37,7 @@ const PostFiles = ({
   privacyType,
   files,
   mapboxToken,
-  isAdmin = false,
+  canViewPrivatePost,
   hasToken = false,
   photoCredit,
   adminPrivateLabel,
@@ -73,15 +73,15 @@ const PostFiles = ({
     <div
       className={cn(
         'w-[100%]',
-        (isPublic || privateLocations || isAdmin) && 'lg:h-[550px]',
+        (isPublic || privateLocations || canViewPrivatePost) && 'lg:h-[550px]',
       )}
     >
-      {(isPublic || isAdmin || hasToken) && (
+      {(isPublic || hasToken) && (
         <PostFilesPublic
           files={files}
           filesPreviews={filesPreviews}
           mapboxToken={mapboxToken}
-          isAdmin={isAdmin}
+          canViewPrivatePost={canViewPrivatePost}
           privateLocations={privateLocations}
           privateFiles={privateFiles}
           adminPrivateLabel={adminPrivateLabel}
@@ -89,7 +89,7 @@ const PostFiles = ({
           canDownloadFiles={canDownloadFiles}
         />
       )}
-      {!isAdmin && !hasToken && privateLocations && (
+      {!canViewPrivatePost && !hasToken && privateLocations && (
         <PostFilesPrivateLocations
           photoCredit={photoCredit}
           files={files}
@@ -97,7 +97,7 @@ const PostFiles = ({
           label={privateLocationsLabel}
         />
       )}
-      {!isAdmin && !hasToken && privateFiles && (
+      {!canViewPrivatePost && !hasToken && privateFiles && (
         <PostFilesPrivateFiles label={privateFilesLabel} />
       )}
     </div>

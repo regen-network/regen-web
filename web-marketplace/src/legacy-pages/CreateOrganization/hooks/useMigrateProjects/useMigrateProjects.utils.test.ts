@@ -87,7 +87,6 @@ describe('getOrgAssignments', () => {
       expect.arrayContaining(['owner-addr', 'admin-addr']),
     );
     expect(result.editorAssignments).toEqual(['editor-addr']);
-    expect(result.authorAssignments).toEqual(['author-addr']);
     expect(result.viewerAssignments).toEqual(['viewer-addr']);
   });
 

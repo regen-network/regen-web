@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -8,42 +9,79 @@ import {
   ROLE_VIEWER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
-import { getCanManagePost } from './ProjectFormAccessTemplate.utils';
+import { getCanSeeOrManagePost } from './ProjectFormAccessTemplate.utils';
+
+const creatorAccountId = uuidv4();
+const otherAccountId = uuidv4();
 
 describe('ProjectFormAccessTemplate.utils', () => {
-  describe('getCanManagePostWithRole', () => {
-    it('should allow creating posts for owner role', () => {
-      const result = getCanManagePost({ role: ROLE_OWNER });
+  describe('getCanSeeOrManagePost', () => {
+    it('should allow managing post for owner role', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_OWNER,
+        creatorAccountId,
+        currentAccountId: creatorAccountId,
+      });
 
       expect(result).toBe(true);
     });
 
-    it('should allow creating posts for admin role', () => {
-      const result = getCanManagePost({ role: ROLE_ADMIN });
+    it('should allow managing post for admin role', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_ADMIN,
+        creatorAccountId,
+        currentAccountId: creatorAccountId,
+      });
 
       expect(result).toBe(true);
     });
 
-    it('should allow creating posts for editor role', () => {
-      const result = getCanManagePost({ role: ROLE_EDITOR });
+    it('should allow managing post for editor role', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_EDITOR,
+        creatorAccountId,
+        currentAccountId: creatorAccountId,
+      });
 
       expect(result).toBe(true);
     });
 
-    it('should allow creating posts for author role', () => {
-      const result = getCanManagePost({ role: ROLE_AUTHOR });
+    it('should allow managing post for author role that is the creator', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_AUTHOR,
+        creatorAccountId,
+        currentAccountId: creatorAccountId,
+      });
 
       expect(result).toBe(true);
     });
 
-    it('should not allow creating posts for viewer role', () => {
-      const result = getCanManagePost({ role: ROLE_VIEWER });
+    it('should not allow managing post for author role that is not the creator', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_AUTHOR,
+        creatorAccountId,
+        currentAccountId: otherAccountId,
+      });
 
       expect(result).toBe(false);
     });
 
-    it('should not allow creating posts when role is undefined', () => {
-      const result = getCanManagePost({ role: undefined });
+    it('should not allow managing post for viewer role', () => {
+      const result = getCanSeeOrManagePost({
+        role: ROLE_VIEWER,
+        creatorAccountId,
+        currentAccountId: otherAccountId,
+      });
+
+      expect(result).toBe(false);
+    });
+
+    it('should not allow managing post when role is undefined', () => {
+      const result = getCanSeeOrManagePost({
+        role: undefined,
+        creatorAccountId,
+        currentAccountId: otherAccountId,
+      });
 
       expect(result).toBe(false);
     });

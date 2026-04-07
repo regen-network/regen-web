@@ -37,6 +37,7 @@ export const useOrganizationActions = () => {
 
   const {
     menuOrganizationProfile,
+    menuOrganizationProfiles,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
   } = useOrganizationMenuProfile({
@@ -94,6 +95,7 @@ export const useOrganizationActions = () => {
     createOrganization,
     finishOrgCreation,
     menuOrganizationProfile,
+    menuOrganizationProfiles,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
     isConnectWalletModalOpen: isModalOpen,

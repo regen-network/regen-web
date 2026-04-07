@@ -28,7 +28,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { MISSING_REQUIRED_PARAMS } from 'hooks/org-members/constants';
 import { findAssignment, getAuthorizationName } from 'hooks/org-members/utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { useFeeGranter } from '../useFeeGranter';
 import { CollaboratorsHookParams, RefetchCollaboratorsParams } from './types';
@@ -44,8 +44,19 @@ export function useCollaboratorsContext(params: CollaboratorsHookParams) {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setErrorCode = useSetAtom(errorCodeAtom);
   const setErrorModal = useSetAtom(errorModalAtom);
-  const daoOrganization = useDaoOrganization();
-  const orgDaoAddress = daoOrganization?.address;
+  const daoOrganizations = useDaoOrganizations();
+  // Find the org that owns this project for cache invalidation
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+  const orgDaoAddress = useMemo(
+    () =>
+      projectOrgId
+        ? daoOrganizations.find(
+            dao => dao?.organizationByDaoAddress?.id === projectOrgId,
+          )?.address
+        : daoOrganizations[0]?.address,
+    [daoOrganizations, projectOrgId],
+  );
   const { loginDisabled } = useWallet();
 
   const { refetch } = useQuery(

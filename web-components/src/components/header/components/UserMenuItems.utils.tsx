@@ -32,7 +32,7 @@ interface GetUserMenuItemsParams {
   linkComponent: LinkComponentProp;
   navLinkComponent: LinkComponentProp;
   profile?: ExtendedUserMenuProfile;
-  organizationProfile?: ExtendedUserMenuProfile;
+  organizationProfiles?: ExtendedUserMenuProfile[];
   createOrganization?: () => void;
   finishOrgCreation?: () => void;
   unfinalizedOrgCreation?: boolean;
@@ -49,15 +49,24 @@ export const getUserMenuItems = ({
   navLinkComponent,
   pathname,
   profile,
-  organizationProfile,
+  organizationProfiles,
   createOrganization,
   unfinalizedOrgCreation,
   finishOrgCreation,
   textContent,
   orgEnabled,
   loginDisabled,
-}: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
-  [
+}: GetUserMenuItemsParams): HeaderDropdownItemProps[] => {
+  const resolvedOrgProfiles = organizationProfiles ?? [];
+
+  const hasOrgProfiles = resolvedOrgProfiles.length > 0;
+  const hasOrgSection =
+    !!orgEnabled &&
+    (hasOrgProfiles ||
+      !!createOrganization ||
+      (unfinalizedOrgCreation && !!finishOrgCreation));
+
+  return [
     // Personal card
     profile && {
       children: (
@@ -99,59 +108,67 @@ export const getUserMenuItems = ({
       label: textContent.personalDashboard,
     },
     // Separator (organization actions section)
-    (orgEnabled && createOrganization ||
-      organizationProfile ||
-      (unfinalizedOrgCreation && finishOrgCreation)) && {
-      children: <Separator className="w-full my-[14px]" />,
+    hasOrgSection && {
+      children: (
+        <Separator
+          className={`w-full ${hasOrgProfiles ? 'my-[14px]' : 'mb-0'}`}
+        />
+      ),
     },
-    // Organization card (no hover link)
+    // One block per organization
+    ...(orgEnabled
+      ? resolvedOrgProfiles.flatMap((orgProfile, i) => [
+          // Organization card (no hover link)
+          {
+            children: (
+              <div className="w-full">
+                <div className="px-10">
+                  <UserMenuItemProfile
+                    {...orgProfile}
+                    profileLink={undefined}
+                    personalProfileText={textContent.personalProfile}
+                    copyText={textContent.copyText}
+                    linkComponent={linkComponent}
+                  />
+                </div>
+              </div>
+            ),
+          },
+          // Organization profile item
+          !unfinalizedOrgCreation && {
+            pathname,
+            linkComponent: navLinkComponent,
+            href: orgProfile.profileLink,
+            labelClassName,
+            className: 'pl-[17px]',
+            iconClassName: 'mr-[11px]',
+            icon: <OrgProfileIcon linearGradient />,
+            label: textContent.organizationProfile,
+          },
+          // Organization dashboard
+          !unfinalizedOrgCreation && {
+            pathname,
+            linkComponent: navLinkComponent,
+            href: orgProfile.dashboardLink,
+            labelClassName,
+            className,
+            icon: <CogIcon linearGradient />,
+            label: textContent.organizationDashboard,
+          },
+          // Separator between orgs (not after the last one)
+          i < resolvedOrgProfiles.length - 1 && {
+            children: <Separator className="w-full my-[8px]" />,
+          },
+        ])
+      : []),
+    // Separator before create organization CTA (when orgs already exist)
     orgEnabled &&
-      organizationProfile && {
-        children: (
-          <div className="w-full">
-            <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
-              {textContent.organization}
-            </div>
-            <div className="px-10">
-              <UserMenuItemProfile
-                {...organizationProfile}
-                profileLink={undefined}
-                personalProfileText={textContent.personalProfile}
-                copyText={textContent.copyText}
-                linkComponent={linkComponent}
-              />
-            </div>
-          </div>
-        ),
+      createOrganization &&
+      hasOrgProfiles && {
+        children: <Separator className="w-full mb-0" />,
       },
-    // Organization profile item
+    // Create organization CTA
     orgEnabled &&
-      organizationProfile &&
-      !unfinalizedOrgCreation && {
-        pathname,
-        linkComponent: navLinkComponent,
-        href: organizationProfile.profileLink,
-        labelClassName,
-        className: 'pl-[17px]',
-        iconClassName: 'mr-[11px]',
-        icon: <OrgProfileIcon linearGradient />,
-        label: textContent.organizationProfile,
-      },
-    // Organization dashboard
-    orgEnabled &&
-      organizationProfile &&
-      !unfinalizedOrgCreation && {
-        pathname,
-        linkComponent: navLinkComponent,
-        href: organizationProfile.dashboardLink,
-        labelClassName,
-        className,
-        icon: <CogIcon linearGradient />,
-        label: textContent.organizationDashboard,
-      },
-    // Create organization CTA (when no org)
-    orgEnabled &&
-      !organizationProfile &&
       createOrganization && {
         children: loginDisabled ? (
           <InfoTooltip
@@ -188,6 +205,7 @@ export const getUserMenuItems = ({
       },
     // Bottom separator
     {
-      children: <Separator className="h-1 w-full my-[14px]" />,
+      children: <Separator className="h-1 w-full mt-0 mb-[14px]" />,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];
+};

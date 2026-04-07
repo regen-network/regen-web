@@ -57,7 +57,7 @@ WithOrganization.args = {
       logoutText="Log out"
       loginText="Login"
       profile={profile}
-      organizationProfile={organizationProfile}
+      organizationProfiles={[organizationProfile]}
       createOrganization={action('createOrganization')}
     />
   ),
@@ -75,11 +75,11 @@ WithUnfinalizedOrganization.args = {
       logoutText="Log out"
       loginText="Login"
       profile={profile}
-      organizationProfile={{
+      organizationProfiles={[{
         ...organizationProfile,
         address: undefined,
         profileLink: undefined,
-      }}
+      }]}
       createOrganization={action('createOrganization')}
       finishOrgCreation={action('finishOrgCreation')}
       unfinalizedOrgCreation

@@ -22,11 +22,10 @@ import {
   BaseMemberRole,
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
 import { ROLE_HIERARCHY } from './constants';
 
-export const useMembers = () => {
+export const useMembers = ({ orgAddress }: { orgAddress?: string }) => {
   const { _ } = useLingui();
   const { loginDisabled } = useWallet();
 
@@ -46,13 +45,11 @@ export const useMembers = () => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const daoOrganization = useDaoOrganization();
-
   const { data } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
-      enabled: !!graphqlClient && !!daoOrganization?.address,
-      address: daoOrganization?.address as string,
+      enabled: !!graphqlClient && !!orgAddress,
+      address: orgAddress as string,
       daoAccountsOrderBy,
       includePrivate: !loginDisabled,
     }),
@@ -107,8 +104,7 @@ export const useMembers = () => {
                 hasWalletAddress: !!acc?.addr,
                 isCurrentUser: acc?.id === activeAccountId,
                 organization:
-                  daoOrganization?.organizationByDaoAddress?.name ||
-                  _(DEFAULT_NAME),
+                  dao?.organizationByDaoAddress?.name || _(DEFAULT_NAME),
                 email:
                   acc?.privateAccountById?.email ||
                   acc?.privateAccountById?.googleEmail ||
@@ -118,7 +114,7 @@ export const useMembers = () => {
             : null;
         }) ?? []
       ).filter(Boolean) as Member[],
-    [dao, assignmentsByAccountId, activeAccountId, _, daoOrganization],
+    [dao, activeAccountId, _, assignmentsByAccountId],
   );
 
   return {

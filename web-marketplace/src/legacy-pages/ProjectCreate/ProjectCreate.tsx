@@ -26,7 +26,7 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -46,6 +46,8 @@ type ContextType = {
   setProjectCreatorAddress: (address?: string) => void;
   isOrganizationAccount: boolean;
   setIsOrganizationAccount: (isOrg: boolean) => void;
+  organizationAddress?: string;
+  setOrganizationAddress: (address?: string) => void;
 };
 
 const defaultProjectCreateContext: ContextType = {
@@ -64,6 +66,8 @@ const defaultProjectCreateContext: ContextType = {
   setProjectCreatorAddress: () => void 0,
   isOrganizationAccount: false,
   setIsOrganizationAccount: () => void 0,
+  organizationAddress: undefined,
+  setOrganizationAddress: () => void 0,
 };
 
 /** Returns true only for same-origin relative paths, blocking open-redirect attacks. */
@@ -80,7 +84,7 @@ export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const router = useRouter();
   const location = useLocation();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
@@ -95,6 +99,9 @@ export const ProjectCreate = (): JSX.Element => {
   >();
 
   const [isOrganizationAccount, setIsOrganizationAccount] = useState(false);
+  const [organizationAddress, setOrganizationAddress] = useState<
+    string | undefined
+  >();
 
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
     projectsState?.find(project => project.id === projectId)?.draft,
@@ -148,19 +155,25 @@ export const ProjectCreate = (): JSX.Element => {
     }
     // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
-    if (
-      isOrganizationAccount ||
-      (offChainProject?.adminDaoAddress &&
-        offChainProject?.adminDaoAddress === dao?.address)
-    )
-      router.replace(`/dashboard/organization/${projectPath}`);
+    // Find org whose DAO address matches the project's admin DAO
+    const matchingOrg = offChainProject?.adminDaoAddress
+      ? daoOrganizations.find(
+          dao => dao?.address === offChainProject.adminDaoAddress,
+        )
+      : undefined;
+    if (isOrganizationAccount || matchingOrg)
+      router.replace(
+        `/dashboard/organization/${
+          matchingOrg?.address ?? daoOrganizations[0]?.address
+        }/${projectPath}`,
+      );
     else router.replace(`/dashboard/${projectPath}`);
   }, [
     router,
     projectId,
     isOrganizationAccount,
     offChainProject?.adminDaoAddress,
-    dao?.address,
+    daoOrganizations,
   ]);
 
   return (
@@ -191,6 +204,8 @@ export const ProjectCreate = (): JSX.Element => {
             setProjectCreatorAddress,
             isOrganizationAccount,
             setIsOrganizationAccount,
+            organizationAddress,
+            setOrganizationAddress,
           }}
         />
       </div>

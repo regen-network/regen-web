@@ -444,7 +444,7 @@ export const getRegenRoutes = ({
         </Route>
 
         <Route
-          path="dashboard/organization"
+          path="dashboard/organization/:orgAddress"
           element={<KeplrOrAuthRoute component={Dashboard} />}
           errorElement={<ErrorPage />}
         >

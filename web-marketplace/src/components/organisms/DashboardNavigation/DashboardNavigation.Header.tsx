@@ -23,7 +23,6 @@ type Props = DashboardNavHeaderData & {
   onViewProfileClick?: (href: string) => void;
   hasWalletAddress?: boolean;
   wallet?: String;
-  hasOrganization?: boolean;
   onCreateOrganization: () => void;
   unfinalizedOrgCreation?: boolean;
   unfinalizedOrgName?: string;
@@ -38,7 +37,6 @@ export const DashboardNavHeader = ({
   onViewProfileClick,
   hasWalletAddress = true,
   wallet,
-  hasOrganization = true,
   onCreateOrganization,
   unfinalizedOrgCreation = false,
   unfinalizedOrgName,
@@ -146,7 +144,6 @@ export const DashboardNavHeader = ({
             if (selectedAddress !== activeAccount.address)
               onAccountSelect?.(selectedAddress);
           }}
-          hasOrganization={hasOrganization}
           onCreateOrganization={() => {
             setOpen(false);
             onCreateOrganization();

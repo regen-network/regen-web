@@ -57,7 +57,6 @@ export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
   activeAddress?: string;
   onSelect: (address: string) => void;
-  hasOrganization?: boolean;
   onCreateOrganization?: () => void;
   unfinalizedOrgCreation?: boolean;
   unfinalizedOrgName?: string;

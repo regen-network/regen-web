@@ -183,3 +183,5 @@ fabric.properties
 .env
 dump-*
 tmp
+
+.claude/settings.local.json

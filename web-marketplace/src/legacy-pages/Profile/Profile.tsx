@@ -154,7 +154,7 @@ export const Profile = (): JSX.Element => {
     0,
   );
   const dashboardRoute = useMemo(
-    () => getDashboardRoute(!!organization),
+    () => getDashboardRoute(organization?.daoAddress),
     [organization],
   );
   const manageButtonConfig = [
@@ -227,8 +227,8 @@ export const Profile = (): JSX.Element => {
   };
 
   const editLink = isOwnProfile
-    ? organization
-      ? '/dashboard/organization/profile'
+    ? organization?.daoAddress
+      ? `/dashboard/organization/${organization.daoAddress}/profile`
       : '/dashboard/profile'
     : '';
 

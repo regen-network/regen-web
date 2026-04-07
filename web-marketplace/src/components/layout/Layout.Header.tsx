@@ -105,6 +105,7 @@ export const LayoutHeader = () => {
     createOrganization,
     finishOrgCreation,
     menuOrganizationProfile,
+    menuOrganizationProfiles,
     unfinalizedOrgCreation,
     isConnectWalletModalOpen,
     handleConnectWalletModalClose,
@@ -131,11 +132,10 @@ export const LayoutHeader = () => {
           address: wallet?.address,
         }),
         orgEnabled: ORG_ENABLED,
-        organizationProfile: menuOrganizationProfile,
-        createOrganization:
-          !menuOrganizationProfile && !unfinalizedOrgCreation
-            ? createOrganization
-            : undefined,
+        organizationProfiles: menuOrganizationProfiles,
+        createOrganization: !unfinalizedOrgCreation
+          ? createOrganization
+          : undefined,
         unfinalizedOrgCreation,
         finishOrgCreation: unfinalizedOrgCreation
           ? finishOrgCreation
@@ -165,7 +165,7 @@ export const LayoutHeader = () => {
       _,
       profileLink,
       wallet?.address,
-      menuOrganizationProfile,
+      menuOrganizationProfiles,
       createOrganization,
       unfinalizedOrgCreation,
       finishOrgCreation,

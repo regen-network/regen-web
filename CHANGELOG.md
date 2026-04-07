@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/regen-network/regen-web/compare/v2.12.2...v2.13.0) (2026-04-07)
+
+### Bug Fixes
+
+- APP-868 close project edit/create ([#2801](https://github.com/regen-network/regen-web/issues/2801)) ([933c7f6](https://github.com/regen-network/regen-web/commit/933c7f6ba6518818933dec53274018de89b4e3e0))
+- APP-873 image not showing on post page ([#2805](https://github.com/regen-network/regen-web/issues/2805)) ([653d889](https://github.com/regen-network/regen-web/commit/653d889d7ca522e31fcaf59a635e2c7e21a6aa35))
+- APP-875 disable create org and fix dashboard when using wallet connect ([#2804](https://github.com/regen-network/regen-web/issues/2804)) ([f8a734d](https://github.com/regen-network/regen-web/commit/f8a734dd7edf8c901992f600fdd5a14c2473e350))
+- APP-881 text to reflect what author can do ([#2803](https://github.com/regen-network/regen-web/issues/2803)) ([16bd8f4](https://github.com/regen-network/regen-web/commit/16bd8f4a0eba7527d363064131c4fc261ae73dc9))
+- create project from web2 account ([#2817](https://github.com/regen-network/regen-web/issues/2817)) ([4d15710](https://github.com/regen-network/regen-web/commit/4d1571094842a1933d2a583c12ab7e1f244a6cb7))
+- revert project roles strings to plain english ([#2807](https://github.com/regen-network/regen-web/issues/2807)) ([03f8b88](https://github.com/regen-network/regen-web/commit/03f8b88abe1f093861648ce72cb0448e8d272165))
+
+### Features
+
+- APP-799 support for data post multi-user editing ([#2793](https://github.com/regen-network/regen-web/issues/2793)) ([b382b6a](https://github.com/regen-network/regen-web/commit/b382b6afbbf5a4c4bfd2528972395d07d9c83dc8))
+- APP-859 tooltips for collaborator and member tables ([#2800](https://github.com/regen-network/regen-web/issues/2800)) ([bf25a73](https://github.com/regen-network/regen-web/commit/bf25a731d839500766d124a80d946a1638ffb102))
+- APP-886 Add buy credits button to Terrasos project pages, if sell orders exist. ([#2813](https://github.com/regen-network/regen-web/issues/2813)) ([3829bdc](https://github.com/regen-network/regen-web/commit/3829bdce0b344984ef4b59ba5ef68bbf19ece6c9))
+
 ## [2.12.2](https://github.com/regen-network/regen-web/compare/v2.12.1...v2.12.2) (2026-03-24)
 
 ### Bug Fixes

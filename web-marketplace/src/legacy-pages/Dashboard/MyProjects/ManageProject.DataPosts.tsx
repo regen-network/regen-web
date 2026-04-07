@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box } from '@mui/material';
 import { useQueries, useQuery } from '@tanstack/react-query';
@@ -46,6 +47,7 @@ import { useFetchProject } from './hooks/useFetchProject';
  */
 
 const DataPosts = (): JSX.Element => {
+  const { _ } = useLingui();
   const {
     project,
     isLoading,
@@ -161,9 +163,9 @@ const DataPosts = (): JSX.Element => {
   const dataPosts: DataPost[] = useMemo(
     () =>
       posts.map(post =>
-        mapPostToDataPost(post, accountMap.get(post.creatorAccountId)),
+        mapPostToDataPost(post, _, accountMap.get(post.creatorAccountId)),
       ),
-    [posts, accountMap],
+    [posts, _, accountMap],
   );
 
   const noPosts = !isPostsLoading && totalPosts === 0;

@@ -22,12 +22,18 @@ import {
   BaseMemberRole,
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { ROLE_HIERARCHY } from './constants';
 
 export const useMembers = ({ orgAddress }: { orgAddress?: string }) => {
   const { _ } = useLingui();
   const { loginDisabled } = useWallet();
+  const daoOrganizations = useDaoOrganizations();
+  const currentDaoOrganization = useMemo(
+    () => daoOrganizations.find(dao => dao?.address === orgAddress),
+    [daoOrganizations, orgAddress],
+  );
 
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
@@ -104,7 +110,8 @@ export const useMembers = ({ orgAddress }: { orgAddress?: string }) => {
                 hasWalletAddress: !!acc?.addr,
                 isCurrentUser: acc?.id === activeAccountId,
                 organization:
-                  dao?.organizationByDaoAddress?.name || _(DEFAULT_NAME),
+                  currentDaoOrganization?.organizationByDaoAddress?.name ||
+                  _(DEFAULT_NAME),
                 email:
                   acc?.privateAccountById?.email ||
                   acc?.privateAccountById?.googleEmail ||
@@ -114,7 +121,7 @@ export const useMembers = ({ orgAddress }: { orgAddress?: string }) => {
             : null;
         }) ?? []
       ).filter(Boolean) as Member[],
-    [dao, activeAccountId, _, assignmentsByAccountId],
+    [dao, activeAccountId, _, assignmentsByAccountId, currentDaoOrganization],
   );
 
   return {

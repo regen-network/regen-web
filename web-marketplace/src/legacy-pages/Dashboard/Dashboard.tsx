@@ -167,8 +167,7 @@ export const Dashboard = () => {
   const organizationDao = useMemo(
     () =>
       orgAddressParam
-        ? organizationDaos.find(dao => dao?.address === orgAddressParam) ??
-          organizationDaos[0]
+        ? organizationDaos.find(dao => dao?.address === orgAddressParam)
         : organizationDaos[0],
     [organizationDaos, orgAddressParam],
   );
@@ -187,8 +186,8 @@ export const Dashboard = () => {
 
   const buildOrgAccount = useCallback(
     (
-      dao: typeof organizationDaos[number],
       daoAssignments: typeof assignments,
+      dao?: typeof organizationDaos[number],
     ): DashboardNavAccount | undefined => {
       if (!dao?.address) return undefined;
       const assignment = getAccountAssignment({
@@ -216,7 +215,7 @@ export const Dashboard = () => {
 
   // Active org account (used for dashboard context / permissions)
   const organizationAccount = useMemo<DashboardNavAccount | undefined>(
-    () => buildOrgAccount(organizationDao, assignments),
+    () => buildOrgAccount(assignments, organizationDao),
     [buildOrgAccount, organizationDao, assignments],
   );
 
@@ -226,10 +225,10 @@ export const Dashboard = () => {
       organizationDaos
         .map(dao =>
           buildOrgAccount(
-            dao,
             // Use already-fetched assignments for the active org; other orgs won't have
             // assignment data loaded here — that's fine for display purposes.
             dao?.address === organizationAddress ? assignments : undefined,
+            dao,
           ),
         )
         .filter((a): a is DashboardNavAccount => !!a),

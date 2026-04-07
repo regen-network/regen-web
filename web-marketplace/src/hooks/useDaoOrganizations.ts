@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
 
-import type { Dao } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-export const useDaoOrganizations = (): Array<Dao | null> => {
+export const useDaoOrganizations = () => {
   const { activeAccount } = useAuth();
   const { loginDisabled, accountByAddr } = useWallet();
 
-  const daos: Array<Dao | null> = useMemo(
+  const daos = useMemo(
     () =>
       (loginDisabled
         ? accountByAddr?.daosByAssignmentAccountIdAndDaoAddress?.nodes

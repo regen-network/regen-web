@@ -4,7 +4,7 @@ import {
   UISellOrderInfo,
 } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
-import { getClassImageWithProjectDefault } from 'utils/image/classImage';
+import { getClassImage } from 'utils/image/classImage';
 
 import {
   AccountFieldsFragment,
@@ -29,6 +29,8 @@ import { Wallet } from 'lib/wallet/wallet';
 import { MIN_USD_CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
+import defaultProject from '../../../../public/jpg/default-project.jpg';
 
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (OffChainProjectToNormalize | undefined)[];
@@ -148,7 +150,7 @@ export const normalizeProjectWithMetadata = ({
   projectPrefinancing,
   wallet,
 }: NormalizeProjectWithMetadataParams): NormalizeProject => {
-  const creditClassImage = getClassImageWithProjectDefault({
+  const creditClassImage = getClassImage({
     metadata: classMetadata,
     sanityClass,
   });
@@ -174,7 +176,6 @@ export const normalizeProjectWithMetadata = ({
     projectWithOrderData?.sellOrders || [],
     offChainProject?.sellOrdersByProjectId?.nodes,
   );
-
   return {
     ...projectWithOrderData,
     id: projectId,
@@ -205,7 +206,8 @@ export const normalizeProjectWithMetadata = ({
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       creditClassImage ||
-      projectWithOrderData?.imgSrc,
+      projectWithOrderData?.imgSrc ||
+      defaultProject.src,
     location: projectMetadata?.['schema:location'],
     place:
       projectMetadata?.['schema:location']?.place_name ||

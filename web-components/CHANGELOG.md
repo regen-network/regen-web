@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/regen-network/regen-web/compare/v2.12.2...v2.13.0) (2026-04-07)
+
+### Bug Fixes
+
+- APP-873 image not showing on post page ([#2805](https://github.com/regen-network/regen-web/issues/2805)) ([653d889](https://github.com/regen-network/regen-web/commit/653d889d7ca522e31fcaf59a635e2c7e21a6aa35))
+- APP-875 disable create org and fix dashboard when using wallet connect ([#2804](https://github.com/regen-network/regen-web/issues/2804)) ([f8a734d](https://github.com/regen-network/regen-web/commit/f8a734dd7edf8c901992f600fdd5a14c2473e350))
+
+### Features
+
+- APP-799 support for data post multi-user editing ([#2793](https://github.com/regen-network/regen-web/issues/2793)) ([b382b6a](https://github.com/regen-network/regen-web/commit/b382b6afbbf5a4c4bfd2528972395d07d9c83dc8))
+
 ## [2.12.1](https://github.com/regen-network/regen-web/compare/v2.12.0...v2.12.1) (2026-02-23)
 
 ### Bug Fixes

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
@@ -30,8 +30,6 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const { classes: styles, cx } = useMobileMenuStyles();
   const theme = useTheme();
-  // eslint-disable-next-line lingui/no-unlocalized-strings
-  const isTouchScreen = useMediaQuery('(pointer: coarse)');
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
@@ -50,7 +48,6 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
         <HamburgerIcon
           className={cx(styles.hamburger, styles.icon)}
           onClick={handleToggle}
-          onMouseLeave={isTouchScreen ? handleClose : undefined}
           width="29px"
           height="22px"
           sx={{ ml: { xs: isUserLoggedIn ? 0 : 2, sm: 4 } }}
@@ -62,6 +59,8 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
         anchor="right"
         open={open}
         onClose={handleClose}
+        ModalProps={{ sx: { top: theme.spacing(15) } }}
+        PaperProps={{ onClick: handleClose }}
       >
         <CloseIcon
           className={cx(styles.close, styles.icon)}

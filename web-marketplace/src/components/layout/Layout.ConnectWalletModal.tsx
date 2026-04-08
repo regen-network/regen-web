@@ -74,7 +74,6 @@ export const LayoutConnectWalletModal = (): JSX.Element => {
                 alt="keplr"
                 width={21}
                 height={21}
-                className="mr-[8px]"
               />
             ),
           }}

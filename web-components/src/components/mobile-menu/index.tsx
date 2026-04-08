@@ -60,6 +60,10 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
         open={open}
         onClose={handleClose}
         ModalProps={{ sx: { top: theme.spacing(15) } }}
+        // Intentional: clicking anywhere inside the drawer (menu items, links,
+        // or blank space) closes it. Consumers passing interactive elements via
+        // websiteExtras that should NOT close the drawer must call
+        // e.stopPropagation() on those elements.
         PaperProps={{ onClick: handleClose }}
       >
         <CloseIcon

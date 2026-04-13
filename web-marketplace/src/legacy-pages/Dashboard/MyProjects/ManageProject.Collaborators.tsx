@@ -78,7 +78,7 @@ const Collaborators = (): JSX.Element => {
     <ProjectCollaborators
       canMigrate={canMigrate}
       isProjectDao={!!projectDao}
-      partOfOrganizations={daoOrganizations.length > 0}
+      organizations={daoOrganizations}
       offChainId={project.offChainId}
       isDraftOnChainProject={isDraftOnChainProject}
       migrateProject={migrateProject}

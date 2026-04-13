@@ -26,12 +26,21 @@ export const useMigrateProject = ({
   });
 
   const migrateProject = useCallback(
-    async (projectId?: string, projectName?: string) => {
+    async ({
+      projectId,
+      projectName,
+      organizationAddress,
+    }: {
+      projectId?: string;
+      projectName?: string;
+      organizationAddress?: string;
+    }) => {
       const id = projectId || project?.id;
       if (!id) return;
       await migrateProjects({
         selectedProjectIds: [id],
         newProjectName: projectName,
+        organizationAddress,
       });
     },
     [migrateProjects, project?.id],

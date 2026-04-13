@@ -3,7 +3,7 @@ export interface AccountOption {
   name?: string;
   address?: string;
   image?: string;
-  type: 'user' | 'org';
+  type?: 'user' | 'org';
   displayName?: string;
 }
 

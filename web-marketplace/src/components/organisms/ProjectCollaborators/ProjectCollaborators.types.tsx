@@ -5,6 +5,8 @@ import {
   MemberData,
   ProjectRole,
 } from '../BaseMembersTable/BaseMembersTable.types';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMigrateProject';
 
 export type Collaborator = Member & { canEditOrgRole?: boolean };
 export interface ProjectCollaboratorsProps {
@@ -17,8 +19,8 @@ export interface ProjectCollaboratorsProps {
   onEditOrgRole: () => void;
   isProjectDao: boolean;
   canMigrate: boolean;
-  partOfOrganizations: boolean;
-  migrateProject: () => Promise<void>;
+  organizations: ReturnType<typeof useDaoOrganizations>;
+  migrateProject: ReturnType<typeof useMigrateProject>['migrateProject'];
   createOrganization: () => void;
   offChainId?: string | null;
   currentDaoAddress?: string;

@@ -6,22 +6,19 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'legacy-pages/Dashboard/Dashboard.constants';
 
-import type { AccountByIdQuery } from 'generated/graphql';
 import type { Wallet } from 'lib/wallet/wallet';
 
 import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { getAddress } from '../RegistryLayout.utils';
 
-type UseOrganizationMenuProfileParams = {
-  activeAccount: AccountByIdQuery['accountById'];
+type useOrganizationMenuProfilesParams = {
   wallet: Wallet | null | undefined;
 };
 
-export const useOrganizationMenuProfile = ({
-  activeAccount,
+export const useOrganizationMenuProfiles = ({
   wallet,
-}: UseOrganizationMenuProfileParams) => {
+}: useOrganizationMenuProfilesParams) => {
   const { _ } = useLingui();
   const organizationProgress = useOrganizationProgress();
   const walletAddress = wallet?.address;
@@ -61,12 +58,8 @@ export const useOrganizationMenuProfile = ({
     [_, organizationDaos],
   );
 
-  // Keep singular for any code that only needs to know if there's at least one org
-  const menuOrganizationProfile = menuOrganizationProfiles[0] ?? undefined;
-
   return {
     menuOrganizationProfiles,
-    menuOrganizationProfile,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
   };

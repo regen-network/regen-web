@@ -100,6 +100,7 @@ type UseMigrateProjectsParams = {
   // It's not set when migrating project from the organization creation flow
   // since the organization dao doesn't have any funds yet at this point.
   feeGranter?: string;
+  orgDaoAddress?: string;
 };
 
 export const useMigrateProjects = ({
@@ -108,6 +109,7 @@ export const useMigrateProjects = ({
   data,
   onSuccess,
   feeGranter,
+  orgDaoAddress,
 }: UseMigrateProjectsParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -117,13 +119,13 @@ export const useMigrateProjects = ({
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
   const daoOrganizations = useDaoOrganizations();
-  // When feeGranter is set it IS the org DAO address (post-creation migration).
-  // During the creation flow itself the org may not have funds yet so feeGranter is unset;
-  // fall back to the first org in that case.
-  const dao = feeGranter
-    ? daoOrganizations.find(d => d?.address === feeGranter) ??
-      daoOrganizations[0]
-    : daoOrganizations[0];
+  const dao = useMemo(
+    () =>
+      orgDaoAddress
+        ? daoOrganizations.find(d => d?.address === orgDaoAddress)
+        : undefined,
+    [orgDaoAddress, daoOrganizations],
+  );
   const { activeAccountId, activeAccount, privActiveAccount } = useAuth();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));

@@ -1,5 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
-import { StdFee } from '@cosmjs/stargate';
+import { useCallback, useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -18,18 +17,19 @@ import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import useMsgClient, { defaultFee } from 'hooks/useMsgClient';
 
 import { CAP_AMOUNT_TO_SEND } from './CreateOrganization.constants';
 
 type SendRegenModalProps = RegenModalProps & {
   completeCreation: () => void;
+  orgAddress?: string;
 };
 export const SendRegenModal = ({
   open,
   onClose,
   completeCreation,
+  orgAddress,
 }: SendRegenModalProps) => {
   const { _ } = useLingui();
   const { queryClient } = useLedger();
@@ -37,7 +37,6 @@ export const SendRegenModal = ({
   const { signAndBroadcast } = useMsgClient();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
-  const dao = useDaoOrganization();
 
   const { data: balanceData, isLoading: isLoadingBalance } = useQuery(
     getBalanceQuery({
@@ -68,7 +67,7 @@ export const SendRegenModal = ({
       !amountToSend ||
       amountToSend <= 0n ||
       !wallet?.address ||
-      !dao?.address
+      !orgAddress
     ) {
       setErrorBannerText(_(msg`Missing required parameters`));
       return;
@@ -79,7 +78,7 @@ export const SendRegenModal = ({
         msgs: [
           cosmos.bank.v1beta1.MessageComposer.withTypeUrl.send({
             fromAddress: wallet?.address,
-            toAddress: dao?.address,
+            toAddress: orgAddress,
             amount: [
               {
                 denom: REGEN_DENOM,
@@ -108,7 +107,7 @@ export const SendRegenModal = ({
     signAndBroadcast,
     amountToSend,
     wallet?.address,
-    dao?.address,
+    orgAddress,
     setProcessingModalAtom,
     setErrorBannerText,
     onClose,

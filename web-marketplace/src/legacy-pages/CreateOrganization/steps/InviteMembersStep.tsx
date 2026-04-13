@@ -4,12 +4,18 @@ import { Body } from 'web-components/src/components/typography';
 
 import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 import { OrganizationMembersInviteTable } from 'components/organisms/OrganizationMembers/InviteMembers/InviteMembers.Table';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useMembers } from 'hooks/org-members/useMembers';
 
+import { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
+
 export const InviteMembersStep = () => {
+  const { data } = useMultiStep<OrganizationMultiStepData>();
+
+  const orgAddress = data?.dao?.daoAddress;
   const { dao, members, currentUserRole, daoAccountsOrderBy, toggleSort } =
-    useMembers();
+    useMembers({ orgAddress });
 
   const { addMember, removeMember, updateRole, updateVisibility } =
     useUpdateMembers({
@@ -47,6 +53,7 @@ export const InviteMembersStep = () => {
           onUpload={onUpload}
           sortDir={daoAccountsOrderBy}
           daoWithAddress={daoData?.daoByAddress}
+          currentDaoAddress={orgAddress}
         />
       )}
     </div>

@@ -20,7 +20,6 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { BaseRoleDropdown } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown';
 import { VisibilitySwitch } from 'components/organisms/OrganizationMembers/OrganizationMembers.VisibilitySwitch';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useDebounce } from 'hooks/useDebounce';
 
 import {
@@ -71,7 +70,6 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
   const { _ } = useLingui();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
-  const currentDaoOrganization = useDaoOrganization();
 
   const form = useZodForm({
     schema: getInviteSchema(_, isOrg),
@@ -113,41 +111,18 @@ export const InviteMemberModal = <T extends BaseMemberRole>({
     const accs = accounts?.getAccountsByNameOrAddr?.nodes || [];
     if (accs.length === 1) {
       const acc = accs[0];
-      if (isOrg) {
-        // Check only assignment within an organization
-        const dao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-          dao => !!dao?.organizationByDaoAddress,
-        );
-        if (dao && currentDaoOrganization) {
-          // provided address already belongs to the current organization/project
-          if (dao.address === currentDaoOrganization.address) {
-            setError('addressOrEmail', {
-              message: _(
-                msg`This user is already a member of the organization`,
-              ),
-            });
-          } else {
-            // provided address belongs to a different organization
-            setError('addressOrEmail', {
-              message: _(
-                msg`This member already belongs to another organization.`,
-              ),
-            });
-          }
-        }
-      } else if (currentDaoAddress) {
-        const sameProjectDao =
-          acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
-            otherDao => otherDao?.address === currentDaoAddress,
-          );
-        if (sameProjectDao) {
-          setError('addressOrEmail', {
-            message: _(msg`This user is already a collaborator of the project`),
-          });
-        }
+      const sameDao = acc?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+        otherDao => otherDao?.address === currentDaoAddress,
+      );
+      if (sameDao) {
+        setError('addressOrEmail', {
+          message: isOrg
+            ? _(msg`This user is already a member of the organization`)
+            : _(msg`This user is already a collaborator of the project`),
+        });
       }
     }
-  }, [accounts, currentDaoOrganization, setError, _, isOrg, currentDaoAddress]);
+  }, [accounts, setError, _, isOrg, currentDaoAddress]);
 
   return (
     <Modal

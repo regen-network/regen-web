@@ -153,6 +153,7 @@ function CreateOrganizationContent({
           open={sendRegenModalOpen}
           onClose={() => setSendRegenModalOpen(false)}
           completeCreation={completeCreation}
+          orgAddress={data?.dao?.daoAddress}
         />
       )}
     </>

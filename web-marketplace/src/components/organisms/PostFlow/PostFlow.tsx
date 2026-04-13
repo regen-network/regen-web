@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
@@ -33,7 +33,7 @@ import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getP
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
@@ -90,7 +90,17 @@ export const PostFlow = ({
   const [isSignModalOpen, setIsSignModalOpen] = useState(false);
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
-  const userDao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+  const isOrganizationProject = useMemo(
+    () =>
+      !!projectOrgId &&
+      daoOrganizations.some(
+        dao => dao?.organizationByDaoAddress?.id === projectOrgId,
+      ),
+    [projectOrgId, daoOrganizations],
+  );
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [draftEditedModalLabel, setDraftEditedModalLabel] = useState<
     string | undefined
@@ -362,12 +372,8 @@ export const PostFlow = ({
         iri={iri}
         published={createdPostData?.published}
         hasAddress={hasAddress}
-        isOrganizationProject={
-          // Show selector if user is part of the project's organization or we're on the org dashboard
-          !!offChainProject?.organizationProjectByProjectId?.organizationId &&
-          userDao?.organizationByDaoAddress?.id ===
-            offChainProject?.organizationProjectByProjectId?.organizationId
-        }
+        isOrganizationProject={isOrganizationProject}
+        projectOrgId={projectOrgId}
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);

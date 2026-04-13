@@ -20,7 +20,7 @@ import {
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { ProjectAccountSelector } from 'components/organisms/ProjectAccountSelector/ProjectAccountSelector';
 import { OnboardingFormTemplate } from 'components/templates/ProjectFormTemplate/OnboardingFormTemplate';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useCreateProjectContext } from '../ProjectCreate/ProjectCreate';
@@ -33,7 +33,7 @@ export const ProjectAccount = (): JSX.Element | null => {
   const fromDashboard = !!fromPath && fromPath.includes('dashboard');
   const isOrg = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
   const {
     projectCreatorAddress,
     setProjectCreatorAddress,
@@ -58,26 +58,29 @@ export const ProjectAccount = (): JSX.Element | null => {
         : null,
     [activeAccount, _],
   );
-  const organizationAccount = useMemo(
-    (): AccountOption | null =>
-      dao
-        ? {
-            name: dao.organizationByDaoAddress?.name || _(UNNAMED),
-            address: dao.address ?? '',
-            type: ORG,
-            image: getDefaultAvatar({
-              type: AccountType.Organization,
-            }),
-            displayName: _(msg`Organization`),
-          }
-        : null,
-    [dao, _],
+  const organizationAccounts = useMemo(
+    (): AccountOption[] =>
+      daoOrganizations
+        .filter(dao => !!dao)
+        .map(dao => ({
+          name: dao!.organizationByDaoAddress?.name || _(UNNAMED),
+          address: dao!.address ?? '',
+          type: ORG,
+          image: getDefaultAvatar({ type: AccountType.Organization }),
+          displayName: _(msg`Organization`),
+        })),
+    [daoOrganizations, _],
   );
 
-  // If user has a DAO organization, they have permission to create projects for it
-  // (useDaoOrganization only returns DAOs where the user has an assignment)
+  // Skip this step if the user has no orgs (they can only create under personal)
   const shouldSkip =
-    !dao || !activeAccount || !personalAccount || !organizationAccount;
+    daoOrganizations.length === 0 || !activeAccount || !personalAccount;
+
+  // Extract the org address from the origin path (e.g. /dashboard/organization/<addr>/...)
+  const orgAddressFromPath = useMemo(
+    () => fromPath?.match(/\/dashboard\/organization\/([^/]+)/)?.[1],
+    [fromPath],
+  );
 
   // Track if we've initialized from origin path state
   const initializedRef = useRef(false);
@@ -91,7 +94,7 @@ export const ProjectAccount = (): JSX.Element | null => {
     if (fromDashboard) {
       // Coming from dashboard - use the passed params
       const address = isOrg
-        ? organizationAccount?.address
+        ? orgAddressFromPath ?? organizationAccounts[0]?.address
         : personalAccount?.address;
 
       if (address) {
@@ -106,18 +109,19 @@ export const ProjectAccount = (): JSX.Element | null => {
       initializedRef.current = true;
       setSelectedAddress(projectCreatorAddress);
       setIsStateReady(true);
-    } else if (organizationAccount?.address) {
-      // Default to organization if available
+    } else if (organizationAccounts[0]?.address) {
+      // Default to first organization if available
       initializedRef.current = true;
-      setSelectedAddress(organizationAccount.address);
-      setProjectCreatorAddress(organizationAccount.address);
+      setSelectedAddress(organizationAccounts[0].address);
+      setProjectCreatorAddress(organizationAccounts[0].address);
       setIsOrganizationAccount(true);
       setIsStateReady(true);
     }
   }, [
     fromDashboard,
     isOrg,
-    organizationAccount?.address,
+    orgAddressFromPath,
+    organizationAccounts,
     personalAccount?.address,
     projectCreatorAddress,
     setProjectCreatorAddress,
@@ -171,10 +175,7 @@ export const ProjectAccount = (): JSX.Element | null => {
     );
   }
 
-  const accounts: [AccountOption, AccountOption] = [
-    personalAccount,
-    organizationAccount,
-  ];
+  const accounts: AccountOption[] = [personalAccount, ...organizationAccounts];
 
   const handleAccountSelect = (address: string) => {
     const selected = accounts.find(opt => opt.address === address);

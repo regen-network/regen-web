@@ -16,6 +16,7 @@ export const OrganizationMembersInviteTable = ({
   onSaveProfile,
   onUpload,
   daoWithAddress,
+  currentDaoAddress,
 }: BaseProps): JSX.Element => {
   return (
     <OrganizationMembersBase
@@ -32,6 +33,7 @@ export const OrganizationMembersInviteTable = ({
       onSaveProfile={onSaveProfile}
       onUpload={onUpload}
       daoWithAddress={daoWithAddress}
+      currentDaoAddress={currentDaoAddress}
     />
   );
 };

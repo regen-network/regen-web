@@ -38,6 +38,7 @@ export const Members = () => {
       onSaveProfile={saveProfile}
       onUpload={onUpload}
       daoWithAddress={daoData?.daoByAddress}
+      currentDaoAddress={organizationDaoAddress}
     />
   );
 };

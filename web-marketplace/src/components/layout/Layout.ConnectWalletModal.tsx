@@ -72,7 +72,8 @@ export const LayoutConnectWalletModal = (): JSX.Element => {
               <Image
                 src={keplrWalletExtension}
                 alt="keplr"
-                className="w-[21px] mr-[8px]"
+                width={21}
+                height={21}
               />
             ),
           }}

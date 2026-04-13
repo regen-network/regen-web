@@ -13,8 +13,6 @@ export type DataPost = {
   authorAvatarUrl?: string;
   /** Author profile link (e.g. /profiles/:id) */
   authorProfileLink?: string;
-  /** Author company or organization name */
-  authorCompany?: string;
   /** Privacy setting of the post */
   privacy: PostPrivacyType;
   /** Number of files attached to the post */

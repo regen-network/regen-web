@@ -305,14 +305,6 @@ export const DataPostsTable: React.FC<
                     >
                       {post.author}
                     </div>
-                    {post.authorCompany && (
-                      <div
-                        className="text-[0.75rem] text-[#545555] overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"
-                        title={post.authorCompany}
-                      >
-                        {post.authorCompany}
-                      </div>
-                    )}
                   </div>
                 </div>,
                 <div>{renderPrivacyTag(post.privacy)}</div>,

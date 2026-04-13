@@ -16,11 +16,6 @@ export const mapPostToDataPost = (
   _: TranslatorType,
   account?: AccountByIdQuery['accountById'] | null,
 ): DataPost => {
-  const organization =
-    account?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.filter(
-      dao => !!dao?.organizationByDaoAddress,
-    )[0]?.organizationByDaoAddress;
-
   return {
     iri: post.iri,
     title: post.contents?.title ?? '',
@@ -32,7 +27,6 @@ export const mapPostToDataPost = (
       : account?.id
       ? `/profiles/${account.id}`
       : undefined,
-    authorCompany: organization?.name ?? undefined,
     privacy: post.privacy,
     filesCount: post.contents?.files?.length ?? 0,
     published: post.published ?? true,

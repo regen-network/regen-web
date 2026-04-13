@@ -23,6 +23,7 @@ import {
 } from './ProjectCollaborators.constants';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 import { getRoleItems } from './ProjectCollaborators.utils';
+import { MigrateProjectSelectOrgModal } from '../MigrateProjectSelectOrgModal/MigrateProjectSelectOrgModal';
 
 export const ProjectCollaborators = ({
   collaborators,
@@ -33,7 +34,7 @@ export const ProjectCollaborators = ({
   sortDir,
   onEditOrgRole,
   isProjectDao,
-  partOfOrganizations,
+  organizations,
   canMigrate,
   migrateProject,
   offChainId,
@@ -50,6 +51,7 @@ export const ProjectCollaborators = ({
 
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [isSelectOrgModalOpen, setIsSelectOrgModalOpen] = useState(false);
   const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
   const [showPersonalProfileModal, setShowPersonalProfileModal] =
     useState(false);
@@ -58,6 +60,7 @@ export const ProjectCollaborators = ({
     useInviteMember();
 
   const roleOptions = getRoleItems(_);
+  const partOfOrganizations = organizations.length > 0;
 
   return (
     <>
@@ -152,7 +155,11 @@ export const ProjectCollaborators = ({
               canMigrate && offChainId && !isDraftOnChainProject ? (
                 <OutlinedButton
                   // avoid passing the click event as first argument of migrateProject
-                  onClick={() => void migrateProject()}
+                  onClick={
+                    organizations.length > 1
+                      ? () => {}
+                      : () => void migrateProject({})
+                  }
                   className="mt-25"
                 >
                   {_(MIGRATE_PROJECT)}
@@ -207,6 +214,11 @@ export const ProjectCollaborators = ({
           currentDaoAddress={currentDaoAddress}
         />
       )}
+      <MigrateProjectSelectOrgModal
+        isOpen={isSelectOrgModalOpen}
+        onClose={() => setIsSelectOrgModalOpen(false)}
+        onMigrate={migrateProject}
+      />
     </>
   );
 };

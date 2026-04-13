@@ -135,7 +135,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
           if (isOrganizationAccount) {
             try {
               setProcessingModal(atom => void (atom.open = true));
-              await migrateProject(newProjectId, values['schema:name']);
+              await migrateProject({
+                projectId: newProjectId,
+                projectName: values['schema:name'],
+              });
               setProcessingModal(atom => void (atom.open = false));
               if (shouldNavigateRef?.current) {
                 navigate(`/project-pages/${newProjectId}/location`);

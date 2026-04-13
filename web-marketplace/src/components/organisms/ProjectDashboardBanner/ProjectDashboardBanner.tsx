@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
+import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import { useRouter } from 'next/navigation';
 import useClickOutside from 'utils/hooks/useClickOutside';
@@ -18,14 +19,22 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
 // import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Title } from 'web-components/src/components/typography/Title';
 
 import { getProjectPath } from 'lib/bridge';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { OptimizedImage } from 'components/atoms/OptimizedImage';
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { useEligibleOrganizations } from 'hooks/useEligibleOrganizations';
 
 import defaultProject from '../../../../public/jpg/default-project.jpg';
+import { MigrateProjectSelectOrgModal } from '../MigrateProjectSelectOrgModal/MigrateProjectSelectOrgModal';
 import {
   BACKGROUND_IMAGE_ALT,
   // CONVERT_TO_DRAFT,
@@ -62,9 +71,17 @@ const ProjectDashboardBanner = ({
   );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSelectOrgModalOpen, setIsSelectOrgModalOpen] = useState(false);
   const menuContainerRef = useClickOutside<HTMLDivElement>(() => {
     setIsMenuOpen(false);
   });
+
+  const { eligibleOrganizations } = useEligibleOrganizations([
+    ROLE_OWNER,
+    ROLE_ADMIN,
+    ROLE_EDITOR,
+  ]);
+  const canMigrate = eligibleOrganizations.length > 0;
 
   const menuItems = [
     // Commented items are fully not implemented yet
@@ -84,8 +101,16 @@ const ProjectDashboardBanner = ({
       label: _(MIGRATE_PROJECT),
       color: 'text-bc-neutral-700',
       icon: <ArrowDownIcon direction="next" fontSize="medium" hasGradient />,
-      action: migrateProject,
-      hidden: !!project.adminDaoAddress || !migrateProject,
+      action:
+        eligibleOrganizations.length > 1
+          ? () => setIsSelectOrgModalOpen(true)
+          : migrateProject && !!eligibleOrganizations?.[0]
+          ? () =>
+              migrateProject({
+                organizationAddress: eligibleOrganizations?.[0]?.address,
+              })
+          : undefined,
+      hidden: !!project.adminDaoAddress || !migrateProject || !canMigrate,
     },
     // {
     //   label: _(DELETE_PROJECT),
@@ -101,140 +126,150 @@ const ProjectDashboardBanner = ({
     project.imgSrc === defaultProject.src ? 'object-[0%_20%]' : '';
 
   return (
-    <div className="relative w-full mt-20 ">
-      <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
-        <div className="absolute inset-0">
-          <OptimizedImage
-            src={project.imgSrc}
-            alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
-            className={`w-full h-full object-cover ${defaultImagePosition}`}
-          />
-        </div>
-        <div
-          className="absolute inset-0"
-          style={{
-            maskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
-            WebkitMaskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
-          }}
-        >
-          <OptimizedImage
-            src={project.imgSrc}
-            alt=""
-            className={`w-full h-full object-cover scale-110 blur-sm ${defaultImagePosition}`}
-          />
-        </div>
+    <>
+      <div className="relative w-full mt-20 ">
+        <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
+          <div className="absolute inset-0">
+            <OptimizedImage
+              src={project.imgSrc}
+              alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
+              className={`w-full h-full object-cover ${defaultImagePosition}`}
+            />
+          </div>
+          <div
+            className="absolute inset-0"
+            style={{
+              maskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
+              WebkitMaskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
+            }}
+          >
+            <OptimizedImage
+              src={project.imgSrc}
+              alt=""
+              className={`w-full h-full object-cover scale-110 blur-sm ${defaultImagePosition}`}
+            />
+          </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-[#000] bg-opacity-20" />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-[#000] bg-opacity-20" />
 
-        {/* Content */}
-        <div className="relative z-10 p-20 pb-30 flex flex-col">
-          {/* Top right menu button */}
-          {menuItems.length > 0 && (
-            <div className="flex justify-end" ref={menuContainerRef}>
-              <div className="absolute top-4 right-4">
-                <button
-                  onClick={() => setIsMenuOpen(o => !o)}
-                  aria-haspopup="true"
-                  aria-expanded={isMenuOpen}
-                  aria-label={_(TOGGLE_PROJECT_OPTIONS)}
-                  className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
-                >
-                  <HorizontalDotsIcon sx={{ color: 'white' }} />
-                </button>
-              </div>
-              {isMenuOpen && (
-                <div className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10">
-                  {menuItems.map((item, idx) => (
-                    <button
-                      key={idx}
-                      className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
-                      onClick={() => {
-                        setIsMenuOpen(false);
-                        item.action && item.action();
-                      }}
-                    >
-                      {item.icon}
-                      {item.label}
-                    </button>
-                  ))}
+          {/* Content */}
+          <div className="relative z-10 p-20 pb-30 flex flex-col">
+            {/* Top right menu button */}
+            {menuItems.length > 0 && (
+              <div className="flex justify-end" ref={menuContainerRef}>
+                <div className="absolute top-4 right-4">
+                  <button
+                    onClick={() => setIsMenuOpen(o => !o)}
+                    aria-haspopup="true"
+                    aria-expanded={isMenuOpen}
+                    aria-label={_(TOGGLE_PROJECT_OPTIONS)}
+                    className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
+                  >
+                    <HorizontalDotsIcon sx={{ color: 'white' }} />
+                  </button>
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Project info and buttons */}
-          <div className="flex flex-col justify-end xl:max-w-[70%]">
-            <Title
-              variant="h3"
-              className="text-bc-neutral-0 line-clamp-2 text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)] mb-20"
-            >
-              {projectName}
-            </Title>
-
-            {/* Address + area */}
-            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
-              <ProjectPlaceInfo
-                place={truncatedPlace}
-                area={project.area}
-                areaUnit={getAbbreviation(
-                  getAreaUnit(_, project.areaUnit as qudtUnit, project.area),
+                {isMenuOpen && (
+                  <div className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10">
+                    {menuItems.map((item, idx) => (
+                      <button
+                        key={idx}
+                        className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          item.action && item.action();
+                        }}
+                      >
+                        {item.icon}
+                        {item.label}
+                      </button>
+                    ))}
+                  </div>
                 )}
-                smFontSize="0.8125rem"
-                fontSize="14px"
-                color="white"
-                iconClassName="text-bc-neutral-0"
-              />
-            </div>
+              </div>
+            )}
 
-            <div className="flex flex-row gap-15 h-[42px]">
-              <OutlinedButton
-                startIcon={<EyeIcon />}
-                onClick={() =>
-                  // project page belongs to next app router so we need to use next router
-                  router.push(
-                    getProjectPath((project.slug || project.id) as string),
-                  )
-                }
+            {/* Project info and buttons */}
+            <div className="flex flex-col justify-end xl:max-w-[70%]">
+              <Title
+                variant="h3"
+                className="text-bc-neutral-0 line-clamp-2 text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)] mb-20"
               >
-                {_(VIEW)}
-              </OutlinedButton>
+                {projectName}
+              </Title>
 
-              {canEdit && (
-                <ContainedButton
-                  startIcon={<EditIcon sx={{ color: 'white' }} />}
-                  onClick={() => {
-                    const id = project?.id;
-                    if (!id) return;
+              {/* Address + area */}
+              <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere] drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
+                <ProjectPlaceInfo
+                  place={truncatedPlace}
+                  area={project.area}
+                  areaUnit={getAbbreviation(
+                    getAreaUnit(_, project.areaUnit as qudtUnit, project.area),
+                  )}
+                  smFontSize="0.8125rem"
+                  fontSize="14px"
+                  color="white"
+                  iconClassName="text-bc-neutral-0"
+                />
+              </div>
 
-                    const isDraft = project.offChain && project.draft;
-                    if (isDraft) {
-                      const currentStep =
-                        projectsCurrentStep[id] || 'basic-info';
-                      router.push(
-                        `/project-pages/${id}/${currentStep}?from=${encodeURIComponent(
-                          location.pathname,
-                        )}`,
-                      );
-                    } else {
-                      router.push(
-                        `/project-pages/${id}/edit/basic-info?from=${encodeURIComponent(
-                          location.pathname,
-                        )}`,
-                      );
-                    }
-                  }}
+              <div className="flex flex-row gap-15 h-[42px]">
+                <OutlinedButton
+                  startIcon={<EyeIcon />}
+                  onClick={() =>
+                    // project page belongs to next app router so we need to use next router
+                    router.push(
+                      getProjectPath((project.slug || project.id) as string),
+                    )
+                  }
                 >
-                  {_(EDIT)}
-                </ContainedButton>
-              )}
+                  {_(VIEW)}
+                </OutlinedButton>
+
+                {canEdit && (
+                  <ContainedButton
+                    startIcon={<EditIcon sx={{ color: 'white' }} />}
+                    onClick={() => {
+                      const id = project?.id;
+                      if (!id) return;
+
+                      const isDraft = project.offChain && project.draft;
+                      if (isDraft) {
+                        const currentStep =
+                          projectsCurrentStep[id] || 'basic-info';
+                        router.push(
+                          `/project-pages/${id}/${currentStep}?from=${encodeURIComponent(
+                            location.pathname,
+                          )}`,
+                        );
+                      } else {
+                        router.push(
+                          `/project-pages/${id}/edit/basic-info?from=${encodeURIComponent(
+                            location.pathname,
+                          )}`,
+                        );
+                      }
+                    }}
+                  >
+                    {_(EDIT)}
+                  </ContainedButton>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* menu moved inside positioned container above */}
-    </div>
+        {/* menu moved inside positioned container above */}
+      </div>
+      {migrateProject && (
+        <MigrateProjectSelectOrgModal
+          open={isSelectOrgModalOpen}
+          onClose={() => setIsSelectOrgModalOpen(false)}
+          migrateProject={migrateProject}
+          eligibleOrganizations={eligibleOrganizations}
+        />
+      )}
+    </>
   );
 };
 

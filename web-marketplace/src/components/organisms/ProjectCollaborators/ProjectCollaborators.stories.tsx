@@ -45,7 +45,7 @@ export const Default = (
     | 'onEditOrgRole'
     | 'isProjectDao'
     | 'canMigrate'
-    | 'partOfOrganizations'
+    | 'organizations'
     | 'createOrganization'
     | 'migrateProject'
     | 'isDraftOnChainProject'
@@ -140,7 +140,7 @@ Default.args = {
   onEditOrgRole: action('edit-org-role'),
   isProjectDao: true,
   canMigrate: true,
-  partOfOrganizations: true,
+  organizations: [],
   createOrganization: action('create-organization'),
   migrateProject: action('migrate-project'),
   currentDaoAddress: 'dao1xyz...',

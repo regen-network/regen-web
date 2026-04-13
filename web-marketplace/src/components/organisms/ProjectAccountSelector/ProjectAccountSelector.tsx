@@ -99,19 +99,24 @@ export const ProjectAccountSelector = ({
       onMouseDown={menuPortal ? event => event.stopPropagation() : undefined}
       onTouchStart={menuPortal ? event => event.stopPropagation() : undefined}
     >
-      {accounts.map(account => {
+      {accounts.map((account, index) => {
         const isSelected = account.address === selectedAddress;
         const key = account.address ?? account.name;
         const isSelectable = !!account.address;
+        const showGroupLabel =
+          (account?.type && index === 0) ||
+          account.type !== accounts[index - 1]?.type;
 
         return (
           <li key={key} role="option" aria-selected={isSelected}>
-            <Body
-              size="md"
-              className="font-bold text-bc-neutral-700 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
-            >
-              {account.displayName}
-            </Body>
+            {showGroupLabel && account.displayName && (
+              <Body
+                size="md"
+                className="font-bold text-bc-neutral-700 px-[20px] pt-[10px] pb-[5px] bg-bc-neutral-0"
+              >
+                {account.displayName}
+              </Body>
+            )}
             <button
               type="button"
               disabled={!isSelectable}

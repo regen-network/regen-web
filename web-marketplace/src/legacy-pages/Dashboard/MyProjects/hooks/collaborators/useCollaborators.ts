@@ -28,7 +28,7 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { Collaborator } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.types';
-import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 export const useCollaborators = (
   project: NormalizeProject,
@@ -41,7 +41,6 @@ export const useCollaborators = (
   const { _ } = useLingui();
   const { loginDisabled } = useWallet();
 
-  const daoOrganizations = useDaoOrganizations();
   const { activeAccountId } = useAuth();
 
   const {
@@ -57,16 +56,7 @@ export const useCollaborators = (
     }),
   );
 
-  // Find the user's org that owns this project
-  const daoOrganization = useMemo(
-    () =>
-      projectOrgId
-        ? daoOrganizations.find(
-            dao => dao?.organizationByDaoAddress?.id === projectOrgId,
-          )
-        : daoOrganizations[0],
-    [daoOrganizations, projectOrgId],
-  );
+  const daoOrganization = useProjectOrgDao({ projectOrgId });
 
   const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
     useQuery(

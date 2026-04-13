@@ -27,6 +27,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 
 import { FormRef } from 'components/molecules/Form/Form';
 import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -138,6 +139,10 @@ export const ProjectCreate = (): JSX.Element => {
     }),
   );
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
+  const projectOrgDao = useProjectOrgDao({
+    projectOrgId:
+      offChainProject?.organizationProjectByProjectId?.organizationId,
+  });
 
   const handleRequestClose = useCallback(() => {
     // If we know where the user came from, send them back there.
@@ -155,16 +160,10 @@ export const ProjectCreate = (): JSX.Element => {
     }
     // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
-    // Find org whose DAO address matches the project's admin DAO
-    const matchingOrg = offChainProject?.adminDaoAddress
-      ? daoOrganizations.find(
-          dao => dao?.address === offChainProject.adminDaoAddress,
-        )
-      : undefined;
-    if (isOrganizationAccount || matchingOrg)
+    if (isOrganizationAccount || projectOrgDao)
       router.replace(
         `/dashboard/organization/${
-          matchingOrg?.address ?? daoOrganizations[0]?.address
+          projectOrgDao?.address ?? daoOrganizations[0]?.address
         }/${projectPath}`,
       );
     else router.replace(`/dashboard/${projectPath}`);
@@ -172,7 +171,7 @@ export const ProjectCreate = (): JSX.Element => {
     router,
     projectId,
     isOrganizationAccount,
-    offChainProject?.adminDaoAddress,
+    projectOrgDao,
     daoOrganizations,
   ]);
 

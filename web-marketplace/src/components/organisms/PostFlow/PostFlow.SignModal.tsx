@@ -32,7 +32,7 @@ import {
 } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { ProjectAccountSelector } from 'components/organisms/ProjectAccountSelector/ProjectAccountSelector';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { signModalSchema } from './PostFlow.SignModal.schema';
 
@@ -45,6 +45,7 @@ type SignModalProps = {
   published?: boolean;
   hasAddress: boolean;
   isOrganizationProject?: boolean;
+  projectOrgId?: string | null;
 } & RegenModalProps;
 
 export const SignModal = ({
@@ -55,6 +56,7 @@ export const SignModal = ({
   published,
   hasAddress,
   isOrganizationProject = false,
+  projectOrgId,
 }: SignModalProps) => {
   const { _ } = useLingui();
   const form = useZodForm({
@@ -80,7 +82,7 @@ export const SignModal = ({
     }),
   );
   const { activeAccount } = useAuth();
-  const dao = useDaoOrganization();
+  const dao = useProjectOrgDao({ projectOrgId });
 
   const accounts = useMemo(() => {
     const opts: AccountOption[] = [];

@@ -17,7 +17,7 @@ export interface ProjectCollaboratorsProps {
   onEditOrgRole: () => void;
   isProjectDao: boolean;
   canMigrate: boolean;
-  partOfOrganization: boolean;
+  partOfOrganizations: boolean;
   migrateProject: () => Promise<void>;
   createOrganization: () => void;
   offChainId?: string | null;

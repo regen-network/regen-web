@@ -32,6 +32,7 @@ export const MigrateProjectsStep = ({
     projects,
     handleSaveNext,
     data,
+    orgDaoAddress: data?.dao?.daoAddress,
   });
 
   return (

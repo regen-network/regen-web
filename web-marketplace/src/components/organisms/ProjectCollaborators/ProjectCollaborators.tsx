@@ -33,7 +33,7 @@ export const ProjectCollaborators = ({
   sortDir,
   onEditOrgRole,
   isProjectDao,
-  partOfOrganization,
+  partOfOrganizations,
   canMigrate,
   migrateProject,
   offChainId,
@@ -140,7 +140,7 @@ export const ProjectCollaborators = ({
                 organization
               </Trans>
             </Title>
-            {!partOfOrganization && (
+            {!partOfOrganizations && (
               <Body className="pt-10 text-bc-neutral-500 max-w-[614px] mx-auto">
                 <Trans>
                   You can create an organization and migrate your personal
@@ -148,7 +148,7 @@ export const ProjectCollaborators = ({
                 </Trans>
               </Body>
             )}
-            {partOfOrganization ? (
+            {partOfOrganizations ? (
               canMigrate && offChainId && !isDraftOnChainProject ? (
                 <OutlinedButton
                   // avoid passing the click event as first argument of migrateProject

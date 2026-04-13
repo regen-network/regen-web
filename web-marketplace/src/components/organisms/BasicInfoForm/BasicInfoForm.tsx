@@ -30,7 +30,7 @@ import {
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -46,9 +46,6 @@ import {
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 import { useSubmitCreateProject } from './hooks/useSubmitCreateProject';
-
-const getPendingProjectStorageKey = (draftId?: string) =>
-  `create-project-pending-id-${draftId ?? 'draft'}`;
 
 interface BasicInfoFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
@@ -66,8 +63,13 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const { projectId } = useParams();
   const navigate = useNavigate();
   const saveAndExit = useProjectSaveAndExit();
-  const { formRef, shouldNavigateRef, isDraftRef, isOrganizationAccount } =
-    useCreateProjectContext();
+  const {
+    formRef,
+    shouldNavigateRef,
+    isDraftRef,
+    isOrganizationAccount,
+    organizationAddress,
+  } = useCreateProjectContext();
   const basicInfoFormSchema = useMemo(
     () =>
       getBasicInfoFormSchema({
@@ -98,7 +100,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const setErrorCode = useSetAtom(errorCodeAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
-  const daoOrganization = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
+  const daoOrganization = useMemo(
+    () => daoOrganizations.find(org => org?.address === organizationAddress),
+    [daoOrganizations, organizationAddress],
+  );
   const { migrateProject } = useMigrateProject({
     feeGranter: daoOrganization?.address,
   });

@@ -104,7 +104,6 @@ export const LayoutHeader = () => {
     walletsUiConfig,
     createOrganization,
     finishOrgCreation,
-    menuOrganizationProfile,
     menuOrganizationProfiles,
     unfinalizedOrgCreation,
     isConnectWalletModalOpen,

@@ -106,7 +106,8 @@ const Collaborators = (): JSX.Element => {
           dao => dao?.organizationByDaoAddress?.id === projectOrgId,
         );
         const orgAddress = orgDao?.address ?? daoOrganizations[0]?.address;
-        navigate(`/dashboard/organization/${orgAddress}/members`);
+        if (orgAddress)
+          navigate(`/dashboard/organization/${orgAddress}/members`);
       }}
       currentDaoAddress={projectDao?.address}
     />

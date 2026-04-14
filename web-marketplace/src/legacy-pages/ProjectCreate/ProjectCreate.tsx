@@ -155,9 +155,7 @@ export const ProjectCreate = (): JSX.Element => {
     const projectPath = `projects/${projectId}/manage`;
     if (isOrganizationAccount || projectOrgDao)
       router.replace(
-        `/dashboard/organization/${
-          projectOrgDao?.address ?? daoOrganizations[0]?.address
-        }/${projectPath}`,
+        `/dashboard/organization/${projectOrgDao?.address}/${projectPath}`,
       );
     else router.replace(`/dashboard/${projectPath}`);
   }, [

@@ -140,7 +140,7 @@ Default.args = {
   onEditOrgRole: action('edit-org-role'),
   isProjectDao: true,
   organizations: [],
-  eligableOrganizations: [],
+  eligibleOrganizations: [],
   createOrganization: action('create-organization'),
   migrateProject: action('migrate-project'),
   currentDaoAddress: 'dao1xyz...',

@@ -13,6 +13,10 @@ import { useAuth } from 'lib/auth/auth';
 
 import { ProjectPageFooter } from 'components/molecules';
 import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import {
   ORG,
   UNNAMED,
   USER,
@@ -20,7 +24,7 @@ import {
 import { AccountOption } from 'components/organisms/DashboardNavigation/DashboardNavigation.types';
 import { ProjectAccountSelector } from 'components/organisms/ProjectAccountSelector/ProjectAccountSelector';
 import { OnboardingFormTemplate } from 'components/templates/ProjectFormTemplate/OnboardingFormTemplate';
-import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useEligibleOrganizations } from 'hooks/useEligibleOrganizations';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useCreateProjectContext } from '../ProjectCreate/ProjectCreate';
@@ -33,7 +37,6 @@ export const ProjectAccount = (): JSX.Element | null => {
   const fromDashboard = !!fromPath && fromPath.includes('dashboard');
   const isOrg = searchParams.get('isOrganization') === 'true';
   const { activeAccount } = useAuth();
-  const daoOrganizations = useDaoOrganizations();
   const {
     projectCreatorAddress,
     setProjectCreatorAddress,
@@ -58,23 +61,32 @@ export const ProjectAccount = (): JSX.Element | null => {
         : null,
     [activeAccount, _],
   );
+
+  // Only owner and admin roles are eligible to create projects under an organization
+  const { eligibleOrganizations, loading: eligibleOrganizationsLoading } =
+    useEligibleOrganizations([ROLE_OWNER, ROLE_ADMIN]);
+
   const organizationAccounts = useMemo(
     (): AccountOption[] =>
-      daoOrganizations
+      eligibleOrganizations
         .filter(dao => !!dao)
         .map(dao => ({
           name: dao!.organizationByDaoAddress?.name || _(UNNAMED),
           address: dao!.address ?? '',
           type: ORG,
-          image: getDefaultAvatar({ type: AccountType.Organization }),
+          image:
+            dao!.organizationByDaoAddress?.image ||
+            getDefaultAvatar({ type: AccountType.Organization }),
           displayName: _(msg`Organization`),
         })),
-    [daoOrganizations, _],
+    [eligibleOrganizations, _],
   );
 
-  // Skip this step if the user has no orgs (they can only create under personal)
+  // Skip this step if the user has no eligible orgs (they can only create under personal)
   const shouldSkip =
-    daoOrganizations.length === 0 || !activeAccount || !personalAccount;
+    (!eligibleOrganizationsLoading && eligibleOrganizations.length === 0) ||
+    !activeAccount ||
+    !personalAccount;
 
   // Extract the org address from the origin path (e.g. /dashboard/organization/<addr>/...)
   const orgAddressFromPath = useMemo(
@@ -93,9 +105,7 @@ export const ProjectAccount = (): JSX.Element | null => {
 
     if (fromDashboard) {
       // Coming from dashboard - use the passed params
-      const address = isOrg
-        ? orgAddressFromPath ?? organizationAccounts[0]?.address
-        : personalAccount?.address;
+      const address = isOrg ? orgAddressFromPath : personalAccount?.address;
 
       if (address) {
         initializedRef.current = true;

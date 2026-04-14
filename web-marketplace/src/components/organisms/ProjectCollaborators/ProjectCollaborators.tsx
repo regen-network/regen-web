@@ -14,6 +14,7 @@ import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { useInviteMember } from '../BaseMembersTable/modals/hooks/useInviteMember';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
+import { MigrateProjectSelectOrgModal } from '../MigrateProjectSelectOrgModal/MigrateProjectSelectOrgModal';
 import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import {
   COLLABORATORS_DESCRIPTION,
@@ -23,7 +24,6 @@ import {
 } from './ProjectCollaborators.constants';
 import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 import { getRoleItems } from './ProjectCollaborators.utils';
-import { MigrateProjectSelectOrgModal } from '../MigrateProjectSelectOrgModal/MigrateProjectSelectOrgModal';
 
 export const ProjectCollaborators = ({
   collaborators,
@@ -35,7 +35,7 @@ export const ProjectCollaborators = ({
   onEditOrgRole,
   isProjectDao,
   organizations,
-  canMigrate,
+  eligibleOrganizations,
   migrateProject,
   offChainId,
   createOrganization,
@@ -152,13 +152,18 @@ export const ProjectCollaborators = ({
               </Body>
             )}
             {partOfOrganizations ? (
-              canMigrate && offChainId && !isDraftOnChainProject ? (
+              eligibleOrganizations.length > 0 &&
+              offChainId &&
+              !isDraftOnChainProject ? (
                 <OutlinedButton
-                  // avoid passing the click event as first argument of migrateProject
                   onClick={
-                    organizations.length > 1
-                      ? () => {}
-                      : () => void migrateProject({})
+                    eligibleOrganizations.length > 1
+                      ? () => setIsSelectOrgModalOpen(true)
+                      : () =>
+                          void migrateProject({
+                            organizationAddress:
+                              eligibleOrganizations?.[0]?.address,
+                          })
                   }
                   className="mt-25"
                 >
@@ -215,9 +220,10 @@ export const ProjectCollaborators = ({
         />
       )}
       <MigrateProjectSelectOrgModal
-        isOpen={isSelectOrgModalOpen}
+        open={isSelectOrgModalOpen}
         onClose={() => setIsSelectOrgModalOpen(false)}
-        onMigrate={migrateProject}
+        migrateProject={migrateProject}
+        eligibleOrganizations={eligibleOrganizations}
       />
     </>
   );

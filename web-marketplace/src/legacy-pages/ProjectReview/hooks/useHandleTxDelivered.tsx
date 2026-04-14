@@ -18,6 +18,7 @@ import { getUnanchoredProjectMetadata } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { getOnChainProjectId } from '../ProjectReview.util';
 
@@ -26,7 +27,7 @@ type UseHandleTxDeliveredParams = {
     deliverTxResponse?: DeliverTxResponse | undefined,
   ) => void;
   organizationRole?: string;
-  organizationDao?: Dao | null;
+  organizationDao?: ReturnType<typeof useProjectOrgDao>;
   projectAdminDaoAddress?: string | null;
   editPath: string;
   metadata: ProjectMetadataLD;

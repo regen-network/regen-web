@@ -32,8 +32,9 @@ export const MigrateProjectsStep = ({
     projects,
     handleSaveNext,
     data,
-    orgDaoAddress: data?.dao?.daoAddress,
   });
+
+  const orgDaoAddress = data?.dao?.daoAddress;
 
   return (
     <div>
@@ -46,7 +47,7 @@ export const MigrateProjectsStep = ({
 
       <MigrateProjects
         projects={projects}
-        onSubmit={migrateProjects}
+        onSubmit={formValues => migrateProjects(formValues, orgDaoAddress)}
         setIsSubmitting={setIsSubmitting}
         setIsValid={setIsValid}
         formRef={formRef}

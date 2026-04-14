@@ -161,8 +161,6 @@ export const useCollaborators = (
 
   return {
     projectDao,
-    isOrgOwnerAdmin,
-    activeAccountOrgAssignment,
     collaborators,
     isLoading:
       isLoadingProjectsAssignments ||

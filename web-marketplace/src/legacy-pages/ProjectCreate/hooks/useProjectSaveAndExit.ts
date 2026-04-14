@@ -7,7 +7,7 @@ export const useProjectSaveAndExit = () => {
     formRef,
     shouldNavigateRef,
     isOrganizationAccount,
-    organizationAddress,
+    projectCreatorAddress,
   } = useCreateProjectContext();
   const router = useRouter();
 
@@ -16,8 +16,8 @@ export const useProjectSaveAndExit = () => {
       shouldNavigateRef.current = false;
       await formRef?.current?.submitForm(true);
     }
-    if (isOrganizationAccount && organizationAddress)
-      router.push(`/dashboard/organization/${organizationAddress}/projects`);
+    if (isOrganizationAccount && projectCreatorAddress)
+      router.push(`/dashboard/organization/${projectCreatorAddress}/projects`);
     else router.push('/dashboard/projects');
   };
 

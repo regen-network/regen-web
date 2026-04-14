@@ -7,12 +7,17 @@ import { Loading } from 'web-components/src/components/loading';
 import { AccountsOrderBy } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 
-import { ROLE_EDITOR } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
+import { useEligibleOrganizations } from '../../../hooks/useEligibleOrganizations';
 import { useUpdateCollaborators } from './hooks/collaborators';
 import { useCollaborators } from './hooks/collaborators/useCollaborators';
 import { useFetchProject } from './hooks/useFetchProject';
@@ -34,8 +39,6 @@ const Collaborators = (): JSX.Element => {
 
   const {
     projectDao,
-    isOrgOwnerAdmin,
-    activeAccountOrgAssignment,
     collaborators,
     isLoading: isCollaboratorsLoading,
   } = useCollaborators(project, daoAccountsOrderBy, projectOrgId);
@@ -47,8 +50,11 @@ const Collaborators = (): JSX.Element => {
 
   const { createOrganization } = useOrganizationActions();
 
-  const canMigrate =
-    isOrgOwnerAdmin || activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
+  const { eligibleOrganizations } = useEligibleOrganizations([
+    ROLE_OWNER,
+    ROLE_ADMIN,
+    ROLE_EDITOR,
+  ]);
 
   const currentUserRole = useMemo(
     () =>
@@ -76,9 +82,9 @@ const Collaborators = (): JSX.Element => {
 
   return (
     <ProjectCollaborators
-      canMigrate={canMigrate}
       isProjectDao={!!projectDao}
       organizations={daoOrganizations}
+      eligibleOrganizations={eligibleOrganizations}
       offChainId={project.offChainId}
       isDraftOnChainProject={isDraftOnChainProject}
       migrateProject={migrateProject}

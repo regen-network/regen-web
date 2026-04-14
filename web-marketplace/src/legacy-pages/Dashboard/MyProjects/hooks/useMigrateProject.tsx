@@ -37,11 +37,10 @@ export const useMigrateProject = ({
     }) => {
       const id = projectId || project?.id;
       if (!id) return;
-      await migrateProjects({
-        selectedProjectIds: [id],
-        newProjectName: projectName,
+      await migrateProjects(
+        { selectedProjectIds: [id], newProjectName: projectName },
         organizationAddress,
-      });
+      );
     },
     [migrateProjects, project?.id],
   );

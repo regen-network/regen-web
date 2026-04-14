@@ -30,7 +30,6 @@ import {
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
-import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
@@ -68,8 +67,9 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     shouldNavigateRef,
     isDraftRef,
     isOrganizationAccount,
-    organizationAddress,
+    projectCreatorAddress,
   } = useCreateProjectContext();
+
   const basicInfoFormSchema = useMemo(
     () =>
       getBasicInfoFormSchema({
@@ -100,13 +100,8 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const setErrorCode = useSetAtom(errorCodeAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
   const { submitCreateProject } = useSubmitCreateProject();
-  const daoOrganizations = useDaoOrganizations();
-  const daoOrganization = useMemo(
-    () => daoOrganizations.find(org => org?.address === organizationAddress),
-    [daoOrganizations, organizationAddress],
-  );
   const { migrateProject } = useMigrateProject({
-    feeGranter: daoOrganization?.address,
+    feeGranter: isOrganizationAccount ? projectCreatorAddress : undefined,
   });
 
   useEffect(() => {
@@ -138,6 +133,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
               await migrateProject({
                 projectId: newProjectId,
                 projectName: values['schema:name'],
+                organizationAddress: projectCreatorAddress,
               });
               setProcessingModal(atom => void (atom.open = false));
               if (shouldNavigateRef?.current) {
@@ -210,6 +206,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       setErrorModal,
       setErrorCode,
       navigate,
+      projectCreatorAddress,
     ],
   );
 

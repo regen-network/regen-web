@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useAtom } from 'jotai';
-import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import { useRouter } from 'next/navigation';
 import useClickOutside from 'utils/hooks/useClickOutside';

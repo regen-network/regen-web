@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { projectsDraftState } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import { useRouter } from 'next/navigation';
+import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -22,6 +23,10 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
@@ -76,6 +81,15 @@ const MyProjects = (): JSX.Element => {
     isLoading: isLoadingOrganizationByDaoAddress,
   });
 
+  const role = getAccountAssignment({
+    accountId: activeAccountId,
+    assignments:
+      organizationData?.organizationByDaoAddress?.daoByDaoAddress
+        ?.assignmentsByDaoAddress?.nodes,
+  })?.roleName;
+  const canCreateProjects =
+    !isOrganizationDashboard || [ROLE_OWNER, ROLE_ADMIN].includes(role || '');
+
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
 
   const setProjectsDraftState = useSetAtom(projectsDraftState);
@@ -89,7 +103,7 @@ const MyProjects = (): JSX.Element => {
   return (
     <>
       <Grid container spacing={8}>
-        {activeAccountId && (
+        {activeAccountId && canCreateProjects && (
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
               buttonText={MY_PROJECTS_BUTTON_TEXT}

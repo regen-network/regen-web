@@ -47,8 +47,6 @@ type ContextType = {
   setProjectCreatorAddress: (address?: string) => void;
   isOrganizationAccount: boolean;
   setIsOrganizationAccount: (isOrg: boolean) => void;
-  organizationAddress?: string;
-  setOrganizationAddress: (address?: string) => void;
 };
 
 const defaultProjectCreateContext: ContextType = {
@@ -67,8 +65,6 @@ const defaultProjectCreateContext: ContextType = {
   setProjectCreatorAddress: () => void 0,
   isOrganizationAccount: false,
   setIsOrganizationAccount: () => void 0,
-  organizationAddress: undefined,
-  setOrganizationAddress: () => void 0,
 };
 
 /** Returns true only for same-origin relative paths, blocking open-redirect attacks. */
@@ -100,9 +96,6 @@ export const ProjectCreate = (): JSX.Element => {
   >();
 
   const [isOrganizationAccount, setIsOrganizationAccount] = useState(false);
-  const [organizationAddress, setOrganizationAddress] = useState<
-    string | undefined
-  >();
 
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
     projectsState?.find(project => project.id === projectId)?.draft,
@@ -203,8 +196,6 @@ export const ProjectCreate = (): JSX.Element => {
             setProjectCreatorAddress,
             isOrganizationAccount,
             setIsOrganizationAccount,
-            organizationAddress,
-            setOrganizationAddress,
           }}
         />
       </div>

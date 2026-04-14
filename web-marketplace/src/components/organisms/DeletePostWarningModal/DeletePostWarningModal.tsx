@@ -5,12 +5,9 @@ import { CancelButtonFooter } from 'web-components/src/components/organisms/Canc
 import { Body, Title } from 'web-components/src/components/typography';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
-import {
-  BODY,
-  CANCEL,
-  DELETE,
-  TITLE,
-} from './DeletePostWarningModal.constants';
+import { WHOOPS_CANCEL } from 'lib/constants/shared.constants';
+
+import { BODY, DELETE, TITLE } from './DeletePostWarningModal.constants';
 
 type DeletePostWarningModalProps = {
   onDelete: () => void;
@@ -35,7 +32,7 @@ export const DeletePostWarningModal = ({
           root: 'bg-none bg-error-300 hover:bg-error-200 hover:text-grey-0',
         }}
         label={_(DELETE)}
-        cancelLabel={_(CANCEL)}
+        cancelLabel={_(WHOOPS_CANCEL)}
         onCancel={onClose}
         onClick={onDelete}
       />

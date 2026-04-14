@@ -12173,7 +12173,7 @@ export type OrganizationFieldsFragment = (
       { __typename?: 'AssignmentsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Assignment' }
-        & Pick<Assignment, 'roleName'>
+        & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId' | 'visible'>
         & { accountByAccountId?: Maybe<(
           { __typename?: 'Account' }
           & Pick<Account, 'id' | 'name' | 'image' | 'addr' | 'title'>
@@ -12579,7 +12579,10 @@ export const OrganizationFieldsFragmentDoc = gql`
   daoByDaoAddress {
     assignmentsByDaoAddress(condition: {visible: true}) {
       nodes {
+        accountId
         roleName
+        onChainRoleId
+        visible
         accountByAccountId {
           id
           name

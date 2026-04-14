@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -49,6 +49,12 @@ export const MigrateProjectSelectOrgModal = ({
   const [selectedAddress, setSelectedAddress] = useState(
     organizationAccounts[0]?.address ?? '',
   );
+
+  useEffect(() => {
+    if (!selectedAddress && organizationAccounts[0]?.address) {
+      setSelectedAddress(organizationAccounts[0].address);
+    }
+  }, [organizationAccounts, selectedAddress]);
 
   return (
     <Modal open={open} onClose={onClose}>

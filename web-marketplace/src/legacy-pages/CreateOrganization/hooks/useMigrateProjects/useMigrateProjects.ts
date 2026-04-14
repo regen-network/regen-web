@@ -96,7 +96,7 @@ type UseMigrateProjectsParams = {
   handleSaveNext?: (formValues: OrganizationMultiStepData) => void;
   data?: OrganizationMultiStepData;
   // Migrating a single project callback from the project dashboard
-  onSuccess?: () => void;
+  onSuccess?: (organizationAddress?: string) => void;
   // Optional fee granter address (organization dao) when migrating projects
   // after organization creation.
   // It's not set when migrating project from the organization creation flow
@@ -723,7 +723,7 @@ export const useMigrateProjects = ({
               if (handleSaveNext && data)
                 handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
-              if (onSuccess) onSuccess();
+              if (onSuccess) onSuccess(organizationAddress);
             },
             onError: error => {
               setProcessingModalAtom(atom => void (atom.open = false));

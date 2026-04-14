@@ -130,6 +130,7 @@ export const MyEcocredits = (): JSX.Element => {
     isOrganizationDashboard,
     isOrganizationOwner,
     isOrganizationAdmin,
+    organizationDaoAddress,
   } = useDashboardContext();
   const canManagePortfolioActions =
     !isOrganizationDashboard || isOrganizationOwner || isOrganizationAdmin;
@@ -180,7 +181,7 @@ export const MyEcocredits = (): JSX.Element => {
       // Navigate to correct sell orders page based on context
       navigate(
         isOrganizationDashboard
-          ? '/dashboard/organization/sell-orders'
+          ? `/dashboard/organization/${organizationDaoAddress}/sell-orders`
           : '/dashboard/sell-orders',
       );
     }

@@ -53,7 +53,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
-  projectOrganizationId?: string | null;
+  projectOrgDaoAddress?: string | null;
 };
 
 export const SellOrdersActionsBar = ({
@@ -77,7 +77,7 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
-  projectOrganizationId,
+  projectOrgDaoAddress,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const pathname = usePathname();
@@ -92,8 +92,8 @@ export const SellOrdersActionsBar = ({
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const showAdminButtons = canEditProject || canCreatePost;
-  const dashboardBasePath = projectOrganizationId
-    ? `/dashboard/organization/${projectOrganizationId}`
+  const dashboardBasePath = projectOrgDaoAddress
+    ? `/dashboard/organization/${projectOrgDaoAddress}`
     : '/dashboard';
 
   return (

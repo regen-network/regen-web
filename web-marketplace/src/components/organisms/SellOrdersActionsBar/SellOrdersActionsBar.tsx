@@ -53,7 +53,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
-  isManagedByUserOrganization?: boolean;
+  projectOrganizationId?: string | null;
 };
 
 export const SellOrdersActionsBar = ({
@@ -77,7 +77,7 @@ export const SellOrdersActionsBar = ({
   onClickCreatePost,
   isCreatePostButtonDisabled,
   tooltipText,
-  isManagedByUserOrganization,
+  projectOrganizationId,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const pathname = usePathname();
@@ -92,8 +92,8 @@ export const SellOrdersActionsBar = ({
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const showAdminButtons = canEditProject || canCreatePost;
-  const dashboardBasePath = isManagedByUserOrganization
-    ? '/dashboard/organization'
+  const dashboardBasePath = projectOrganizationId
+    ? `/dashboard/organization/${projectOrganizationId}`
     : '/dashboard';
 
   return (

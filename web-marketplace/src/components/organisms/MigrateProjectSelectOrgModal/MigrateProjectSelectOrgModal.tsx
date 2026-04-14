@@ -75,6 +75,7 @@ export const MigrateProjectSelectOrgModal = ({
           label={_(msg`yes, migrate`)}
           cancelLabel={_(WHOOPS_CANCEL)}
           onCancel={onClose}
+          disabled={!selectedAddress}
           onClick={() =>
             migrateProject({ organizationAddress: selectedAddress })
           }

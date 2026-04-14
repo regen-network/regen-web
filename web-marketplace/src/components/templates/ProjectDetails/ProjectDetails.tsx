@@ -53,11 +53,9 @@ import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersAction
 import {
   getCanCreatePost,
   getCanEditProject,
-  getCanSeeOrManagePost,
-  getCanViewPrivatePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useLedger } from '../../../ledger';
@@ -113,7 +111,6 @@ function ProjectDetails(): JSX.Element {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { activeAccount } = useAuth();
-  const dao = useDaoOrganization();
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [draftPost, setDraftPost] = useState<
     Partial<PostFormSchemaType> | undefined
@@ -349,9 +346,9 @@ function ProjectDetails(): JSX.Element {
   // Fetch organization data if project belongs to an organization
   const organizationId =
     offChainProject?.organizationProjectByProjectId?.organizationId;
-  const userOrganizationId = dao?.organizationByDaoAddress?.id;
-  const isManagedByUserOrganization =
-    !!organizationId && organizationId === userOrganizationId;
+  const userOrgDao = useProjectOrgDao({ projectOrgId: organizationId });
+  const projectOrganizationId = userOrgDao?.organizationByDaoAddress?.id;
+
   const { data: organizationData } = useQuery(
     getOrganizationByIdQuery({
       client: graphqlClient,
@@ -432,7 +429,7 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
-          isManagedByUserOrganization={isManagedByUserOrganization}
+          projectOrganizationId={projectOrganizationId}
         >
           {!canEditProject &&
             isPrefinanceProject &&

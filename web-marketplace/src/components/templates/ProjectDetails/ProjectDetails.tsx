@@ -55,8 +55,8 @@ import {
   getCanEditProject,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { useLedger } from '../../../ledger';
 import { NotFoundPage } from '../../../legacy-pages/NotFound/NotFound';
@@ -347,7 +347,7 @@ function ProjectDetails(): JSX.Element {
   const organizationId =
     offChainProject?.organizationProjectByProjectId?.organizationId;
   const userOrgDao = useProjectOrgDao({ projectOrgId: organizationId });
-  const projectOrganizationId = userOrgDao?.organizationByDaoAddress?.id;
+  const projectOrgDaoAddress = userOrgDao?.address;
 
   const { data: organizationData } = useQuery(
     getOrganizationByIdQuery({
@@ -429,7 +429,7 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
-          projectOrganizationId={projectOrganizationId}
+          projectOrgDaoAddress={projectOrgDaoAddress}
         >
           {!canEditProject &&
             isPrefinanceProject &&

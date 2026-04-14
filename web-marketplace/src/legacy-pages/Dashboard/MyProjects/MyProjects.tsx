@@ -149,7 +149,7 @@ const MyProjects = (): JSX.Element => {
                       // Navigate to new manage project page
                       navigate(
                         isOrganizationDashboard
-                          ? `/dashboard/organization/projects/${project.id}/manage`
+                          ? `/dashboard/organization/${organizationDaoAddress}/projects/${project.id}/manage`
                           : `/dashboard/projects/${project.id}/manage`,
                       );
                     }}

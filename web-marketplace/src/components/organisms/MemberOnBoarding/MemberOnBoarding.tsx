@@ -74,9 +74,9 @@ export const MemberOnBoarding = ({
       dao?.projectByAdminDaoAddress?.id;
     const path = projectId
       ? `/dashboard/projects/${projectId}/manage/collaborators`
-      : '/dashboard/organization/members';
+      : `/dashboard/organization/${daoAddress}/members`;
     router.push(path);
-  }, [router, dao]);
+  }, [router, dao, daoAddress]);
 
   const {
     isConfirmationModalOpen,

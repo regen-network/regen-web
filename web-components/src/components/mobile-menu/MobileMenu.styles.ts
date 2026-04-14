@@ -8,6 +8,10 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
     alignItems: 'unset',
   },
   drawer: {
+    // The modal root container must also be offset so it doesn't cover the
+    // header, otherwise the hamburger icon cannot receive click events while
+    // the drawer is open (the full-screen modal overlay intercepts them).
+    top: theme.spacing(15),
     '& .MuiDrawer-paper': {
       backgroundColor: theme.palette.primary.light,
       width: '85%',

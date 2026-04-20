@@ -153,11 +153,16 @@ export const ProjectCreate = (): JSX.Element => {
     }
     // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
-    if (isOrganizationAccount || projectOrgDao)
-      router.replace(
-        `/dashboard/organization/${projectOrgDao?.address}/${projectPath}`,
-      );
-    else router.replace(`/dashboard/${projectPath}`);
+    if (isOrganizationAccount || projectOrgDao) {
+      if (projectOrgDao?.address) {
+        router.replace(
+          `/dashboard/organization/${projectOrgDao?.address}/${projectPath}`,
+        );
+      } else {
+        // If projectOrgDao hasn't loaded, safer to go to dashboard root than risk a broken link.
+        router.replace('/dashboard');
+      }
+    } else router.replace(`/dashboard/${projectPath}`);
   }, [
     router,
     projectId,

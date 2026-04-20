@@ -17,5 +17,5 @@ export interface ProjectBannerProps {
     | 'offChain'
   >;
   canEdit?: boolean;
-  migrateProject?: () => ReturnType<typeof useMigrateProject>['migrateProject'];
+  migrateProject?: ReturnType<typeof useMigrateProject>['migrateProject'];
 }

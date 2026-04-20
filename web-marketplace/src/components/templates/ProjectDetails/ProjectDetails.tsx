@@ -597,6 +597,7 @@ function ProjectDetails(): JSX.Element {
             updatedAt: draftPost?.updatedAt,
           }}
           setDraftPost={setDraftPost}
+          navigateToProjectOnCreate
         />
       )}
     </Box>

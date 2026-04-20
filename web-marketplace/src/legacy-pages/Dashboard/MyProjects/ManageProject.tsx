@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -39,6 +39,14 @@ const ManageProject = () => {
   const createPostDisabled =
     !activeAccountId || project.draft || !project.location;
 
+  // Derive dashboard base path from current URL so tab hrefs work on both
+  // the personal dashboard (/dashboard) and org dashboard (/dashboard/organization)
+  const dashboardBasePath = location.pathname.startsWith(
+    '/dashboard/organization',
+  )
+    ? '/dashboard/organization'
+    : '/dashboard';
+
   const [postProjectId, setPostProjectId] = useState<string | undefined>();
   const [postOffChainProjectId, setPostOffChainProjectId] = useState<
     string | undefined
@@ -46,30 +54,44 @@ const ManageProject = () => {
   const [postProjectName, setPostProjectName] = useState<string | undefined>();
   const [postProjectSlug, setPostProjectSlug] = useState<string | undefined>();
 
+  // Draft post state used when editing a draft from the DataPosts table
+  const [draftPost, setDraftPost] = useState<
+    | Partial<
+        import('components/organisms/PostForm/PostForm.schema').PostFormSchemaType
+      >
+    | undefined
+  >();
+
+  const openCreatePostModal = useCallback(() => {
+    setPostProjectId(project.id);
+    setPostOffChainProjectId(project.offChainId);
+    setPostProjectName(project.name);
+    setPostProjectSlug(project.slug);
+  }, [project.id, project.offChainId, project.name, project.slug]);
+
   const tabs = useMemo(
     () => [
       // Data posts, credit issuance and manage credits tabs are hidden until implemented
       {
         label: _(msg`Data Posts`),
-        href: `/dashboard/projects/${projectId}/manage/data-posts`,
-        hidden: true,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/data-posts`,
       },
       {
         label: _(msg`Credit Issuance`),
-        href: `/dashboard/projects/${projectId}/manage/credit-issuance`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/credit-issuance`,
         hidden: true,
       },
       {
         label: _(msg`Manage Credits`),
-        href: `/dashboard/projects/${projectId}/manage/manage-credits`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/manage-credits`,
         hidden: true,
       },
       {
         label: _(msg`Collaborators`),
-        href: `/dashboard/projects/${projectId}/manage/collaborators`,
+        href: `${dashboardBasePath}/projects/${projectId}/manage/collaborators`,
       },
     ],
-    [_, projectId],
+    [_, dashboardBasePath, projectId],
   );
 
   const activeTab = useMemo(
@@ -112,19 +134,6 @@ const ManageProject = () => {
         <ProjectDashboardBanner
           project={project}
           canEdit={canEditProject}
-          canCreatePost={canCreatePost}
-          onCreatePost={() => {
-            setPostProjectId(project.id);
-            setPostOffChainProjectId(project.offChainId);
-            setPostProjectName(project.name);
-            setPostProjectSlug(project.slug);
-          }}
-          createPostDisabled={createPostDisabled}
-          createPostTooltipText={
-            loginDisabled
-              ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
-              : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
-          }
           // We need an offchain ID to migrate
           migrateProject={project.offChainId ? migrateProject : undefined}
         />
@@ -142,7 +151,21 @@ const ManageProject = () => {
       </div>
 
       {/* Content section */}
-      <Outlet context={{ project, isLoading, offChainProject }} />
+      <Outlet
+        context={{
+          project,
+          isLoading,
+          offChainProject,
+          canCreatePost,
+          openCreatePostModal,
+          setDraftPost,
+          role,
+          createPostDisabled,
+          createPostTooltipText: loginDisabled
+            ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
+            : _(CREATE_POST_DISABLED_TOOLTIP_TEXT),
+        }}
+      />
 
       {canCreatePost && postProjectId && (
         <PostFlow
@@ -151,6 +174,7 @@ const ManageProject = () => {
             setPostOffChainProjectId(undefined);
             setPostProjectName(undefined);
             setPostProjectSlug(undefined);
+            setDraftPost(undefined);
           }}
           projectLocation={project?.location as GeocodeFeature}
           projectId={postProjectId}
@@ -158,14 +182,17 @@ const ManageProject = () => {
           projectName={postProjectName}
           projectSlug={postProjectSlug}
           initialValues={{
-            title: '',
-            comment: '',
-            files: [],
-            privacyType: 'public',
-            published: true,
+            iri: draftPost?.iri,
+            title: draftPost?.title || '',
+            comment: draftPost?.comment || '',
+            files: draftPost?.files || [],
+            privacyType: draftPost?.privacyType || 'public',
+            published: draftPost?.published ?? true,
           }}
+          setDraftPost={setDraftPost}
           disableScrollLock={true}
           offChainProject={offChainProject}
+          navigateToProjectOnCreate={false}
         />
       )}
     </>

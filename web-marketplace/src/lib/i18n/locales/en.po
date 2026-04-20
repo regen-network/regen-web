@@ -337,7 +337,7 @@ msgstr ""
 msgid "About Us"
 msgstr ""
 
-#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:190
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:195
 msgid "Account"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Account switcher"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:248
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:254
 msgid "Acres"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 msgid "Asset"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:162
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:161
 msgid "Attach a signature"
 msgstr ""
 
@@ -750,6 +750,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -766,7 +767,7 @@ msgstr ""
 msgid "avg price per credit"
 msgstr ""
 
-#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:295
+#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:297
 msgid "back to projects"
 msgstr ""
 
@@ -1072,7 +1073,7 @@ msgid "Cancelled credits have been removed from from the credit batch's tradable
 msgstr ""
 
 #. placeholder {0}: resp.statusText
-#: src/components/organisms/PostFlow/PostFlow.tsx:220
+#: src/components/organisms/PostFlow/PostFlow.tsx:222
 msgid "Cannot get existing post: {0}"
 msgstr ""
 
@@ -1144,7 +1145,7 @@ msgstr ""
 msgid "Change payment card"
 msgstr ""
 
-#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:327
+#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:329
 msgid "Changes have been saved"
 msgstr ""
 
@@ -1242,7 +1243,7 @@ msgstr ""
 msgid "Choose the photo that will show at the top of the project page and in project preview cards."
 msgstr ""
 
-#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:186
+#: src/legacy-pages/ProjectAccount/ProjectAccount.tsx:191
 msgid "Choose where to create this project"
 msgstr ""
 
@@ -1285,7 +1286,7 @@ msgstr ""
 msgid "Close menu"
 msgstr ""
 
-#: src/legacy-pages/ProjectCreate/ProjectCreate.tsx:109
+#: src/legacy-pages/ProjectCreate/ProjectCreate.tsx:171
 msgid "Close project creation"
 msgstr ""
 
@@ -1306,7 +1307,7 @@ msgstr ""
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:67
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:89
 msgid "Collaborators"
 msgstr ""
 
@@ -1672,7 +1673,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:57
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:79
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1894,8 +1895,13 @@ msgstr ""
 msgid "Data Deficient"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:52
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:5
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:75
 msgid "Data Posts"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:3
+msgid "data posts table"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:16
@@ -1911,6 +1917,10 @@ msgstr ""
 msgid "date"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
+msgid "Date Created"
+msgstr ""
+
 #: src/components/organisms/Documentation/Documentation.constants.ts:10
 #~ msgid "Date of upload"
 #~ msgstr ""
@@ -1923,6 +1933,14 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:6
 msgid "Delete"
 msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
+msgid "Delete post"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:9
+#~ msgid "Delete Post"
+#~ msgstr ""
 
 #: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.constants.tsx:9
 msgid "Delete project"
@@ -2130,6 +2148,14 @@ msgstr ""
 msgid "edit credit class"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:8
+msgid "Edit draft"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:8
+#~ msgid "Edit Draft"
+#~ msgstr ""
+
 #: src/legacy-pages/Projects/AllProjects/AllProjects.constants.ts:7
 msgid "Edit filters"
 msgstr ""
@@ -2188,7 +2214,7 @@ msgstr ""
 msgid "Edit Project - Access Denied"
 msgstr ""
 
-#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:313
+#: src/legacy-pages/ProjectEdit/ProjectEdit.tsx:315
 msgid "Edit Project Page"
 msgstr ""
 
@@ -2399,6 +2425,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:269
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -2531,7 +2558,7 @@ msgstr ""
 msgid "hectares"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:244
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:250
 msgid "Hectares"
 msgstr ""
 
@@ -2593,7 +2620,7 @@ msgstr ""
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
 #~ msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:181
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:180
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
@@ -3024,7 +3051,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:62
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:84
 msgid "Manage Credits"
 msgstr ""
 
@@ -3048,7 +3075,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:130
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:142
 msgid "manage project tabs"
 msgstr ""
 
@@ -3187,7 +3214,7 @@ msgstr ""
 msgid "Migrate Projects from Personal Account"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:143
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:149
 msgid "Migration Failed"
 msgstr ""
 
@@ -3953,6 +3980,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:268
 msgid "Privacy"
 msgstr ""
 
@@ -4216,6 +4244,10 @@ msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:30
 msgid "Provide personal contact information for this organization."
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:11
+msgid "Public"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
@@ -4526,7 +4558,7 @@ msgstr ""
 msgid "Retirement reason"
 msgstr ""
 
-#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:144
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:150
 msgid "Retry"
 msgstr ""
 
@@ -4789,11 +4821,11 @@ msgstr ""
 msgid "Show off-chain projects"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:212
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:211
 msgid "sign"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:192
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:191
 msgid "Sign as"
 msgstr ""
 
@@ -4805,7 +4837,7 @@ msgstr ""
 msgid "Sign the transaction with Keplr Mobile Wallet"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:169
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:168
 msgid "Sign this post"
 msgstr ""
 
@@ -4842,7 +4874,7 @@ msgstr ""
 msgid "SKIP"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:206
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:205
 msgid "skip this step"
 msgstr ""
 
@@ -5261,7 +5293,7 @@ msgstr ""
 msgid "This information will appear on any posts that you author."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:172
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:171
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
@@ -5381,6 +5413,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
@@ -5592,6 +5625,10 @@ msgstr ""
 #. placeholder {1}: result.reason
 #: src/legacy-pages/CreateOrganization/hooks/useMigrateProjects/useMigrateProjects.ts:230
 msgid "Updating Offchain Project {0} failed: {1}"
+msgstr ""
+
+#: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:6
+msgid "Upload data, provide updates, and anchor your information to the blockchain for full transparency and accountability."
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26

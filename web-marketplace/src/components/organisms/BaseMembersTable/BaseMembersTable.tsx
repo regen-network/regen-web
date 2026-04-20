@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -9,6 +8,8 @@ import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionM
 import { Title } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
+
+import { Link } from 'components/atoms';
 
 import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import {
@@ -70,7 +71,6 @@ export const BaseMembersTable = <T extends BaseUser>({
   showActionsColumn = true,
 }: BaseMembersTableProps<T>) => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
 
   const isProjectContext = context === PROJECT_CONTEXT;
 
@@ -125,9 +125,9 @@ export const BaseMembersTable = <T extends BaseUser>({
       )}
 
       {!hideHelpDocs && (
-        <button
+        <Link
           className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
-          onClick={() => navigate('/docs')}
+          href="TODO"
         >
           {_(SEE_HELP_DOCS)}
           <SmallArrowIcon
@@ -138,7 +138,7 @@ export const BaseMembersTable = <T extends BaseUser>({
             }}
             className="group-hover:translate-x-3 "
           />
-        </button>
+        </Link>
       )}
 
       {/* mobile invite under subtitle */}

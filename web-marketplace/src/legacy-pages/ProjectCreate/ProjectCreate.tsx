@@ -163,13 +163,7 @@ export const ProjectCreate = (): JSX.Element => {
         router.replace('/dashboard');
       }
     } else router.replace(`/dashboard/${projectPath}`);
-  }, [
-    router,
-    projectId,
-    isOrganizationAccount,
-    projectOrgDao,
-    daoOrganizations,
-  ]);
+  }, [router, projectId, isOrganizationAccount, projectOrgDao]);
 
   return (
     <>

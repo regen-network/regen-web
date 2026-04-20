@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { CREATE_POST } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
@@ -106,7 +105,6 @@ export const DataPostsTable: React.FC<
   createPostTooltipText,
 }) => {
   const { _ } = useLingui();
-  const navigate = useNavigate();
 
   const labelDisplayedRows = useMemo(
     () =>
@@ -225,9 +223,9 @@ export const DataPostsTable: React.FC<
         <div className="mb-10 mx-[30px] flex items-center justify-between">
           <Title variant="h4">
             {_(DATA_POSTS_TITLE)}
-            {(posts?.length ?? 0) > 0 && (
+            {(initialPaginationParams?.count ?? 0) > 0 && (
               <span className="pl-[2px] text-bc-neutral-400 font-normal">
-                ({posts?.length})
+                ({initialPaginationParams?.count})
               </span>
             )}
           </Title>
@@ -235,9 +233,9 @@ export const DataPostsTable: React.FC<
         </div>
         <p className="text-sc-text-paragraph mb-30 mx-[30px] mt-0 max-w-[551px]">
           {_(DATA_POSTS_DESCRIPTION)}{' '}
-          <button
+          <Link
             className="p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none inline-flex items-center gap-3 group align-middle"
-            onClick={() => navigate('/docs')}
+            href="TODO"
           >
             {_(SEE_HELP_DOCS)}
             <SmallArrowIcon
@@ -248,7 +246,7 @@ export const DataPostsTable: React.FC<
               }}
               className="group-hover:translate-x-3 "
             />
-          </button>
+          </Link>
         </p>
         {!noPosts && (
           <ActionsTable

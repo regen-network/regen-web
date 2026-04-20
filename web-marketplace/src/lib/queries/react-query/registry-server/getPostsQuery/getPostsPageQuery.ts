@@ -59,7 +59,7 @@ export const getPostsPageQuery = ({
         method: 'GET',
         credentials: 'include',
       });
-      if (resp.status === 200 || resp.status === 401) {
+      if (resp.status === 200) {
         return await resp.json();
       } else {
         return null;

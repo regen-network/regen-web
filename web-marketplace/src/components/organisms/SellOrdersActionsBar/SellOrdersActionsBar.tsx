@@ -168,7 +168,7 @@ export const SellOrdersActionsBar = ({
                       />
                     )}
                   </Box>
-                  <Subtitle>{prefinancePrice ?? avgPricePerTonLabel}</Subtitle>
+                  <Subtitle>{avgPricePerTonLabel ?? prefinancePrice}</Subtitle>
                 </Box>
               )}
             {(!isCommunityCredit ||

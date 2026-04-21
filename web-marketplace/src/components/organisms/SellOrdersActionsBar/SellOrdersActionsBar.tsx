@@ -143,7 +143,7 @@ export const SellOrdersActionsBar = ({
         ) : (
           <>
             {((!isPrefinanceProject && !isBuyButtonDisabled) || !isSoldOut) &&
-              (prefinancePrice ||
+              ((isPrefinanceProject && prefinancePrice) ||
                 (avgPricePerTonLabel && !!onChainProjectId)) && (
                 <Box
                   sx={{

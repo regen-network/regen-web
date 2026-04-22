@@ -39,6 +39,7 @@ export const ProjectCollaborators = ({
   offChainId,
   createOrganization,
   currentDaoAddress,
+  isDraftOnChainProject,
 }: ProjectCollaboratorsProps) => {
   const { _ } = useLingui();
   const currentMember = useMemo(
@@ -148,7 +149,7 @@ export const ProjectCollaborators = ({
               </Body>
             )}
             {partOfOrganization ? (
-              canMigrate && offChainId ? (
+              canMigrate && offChainId && !isDraftOnChainProject ? (
                 <OutlinedButton
                   // avoid passing the click event as first argument of migrateProject
                   onClick={() => void migrateProject()}
@@ -162,7 +163,9 @@ export const ProjectCollaborators = ({
                   placement="top"
                   title={_(
                     offChainId
-                      ? msg`You must be an Owner, Admin or Editor of your organization to migrate a project.`
+                      ? isDraftOnChainProject
+                        ? msg`Draft on-chain projects cannot be migrated. Please publish your project to migrate.`
+                        : msg`You must be an Owner, Admin or Editor of your organization to migrate a project.`
                       : msg`Offchain project id is needed to migrate a project. Edit project description or media to create one.`,
                   )}
                 >

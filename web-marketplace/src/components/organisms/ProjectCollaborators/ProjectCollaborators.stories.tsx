@@ -48,6 +48,7 @@ export const Default = (
     | 'partOfOrganization'
     | 'createOrganization'
     | 'migrateProject'
+    | 'isDraftOnChainProject'
   >,
 ) => {
   const [collaborators, setCollaborators] = useState(mockCollaborators || []);
@@ -143,4 +144,5 @@ Default.args = {
   createOrganization: action('create-organization'),
   migrateProject: action('migrate-project'),
   currentDaoAddress: 'dao1xyz...',
+  isDraftOnChainProject: false,
 };

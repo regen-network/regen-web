@@ -119,5 +119,12 @@ export const useFetchProject = () => {
     isFetchingProjectByOnChainId ||
     isFetchingSanityCreditClasses;
 
-  return { project, creditClassId, onChainProject, offChainProject, isLoading };
+  const isDraftOnChainProject = !!project.draft && !!creditClassId;
+  return {
+    project,
+    isDraftOnChainProject,
+    onChainProject,
+    offChainProject,
+    isLoading,
+  };
 };

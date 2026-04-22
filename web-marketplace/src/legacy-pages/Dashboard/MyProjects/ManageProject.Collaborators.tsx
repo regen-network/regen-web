@@ -19,7 +19,7 @@ import { useFetchProject } from './hooks/useFetchProject';
 import { useMigrateProject } from './hooks/useMigrateProject';
 
 const Collaborators = (): JSX.Element => {
-  const { project, creditClassId, isLoading, offChainProject } =
+  const { project, isDraftOnChainProject, isLoading, offChainProject } =
     useOutletContext<ReturnType<typeof useFetchProject>>();
   const { activeAccountId } = useAuth();
   const navigate = useNavigate();
@@ -46,8 +46,6 @@ const Collaborators = (): JSX.Element => {
 
   const canMigrate =
     isOrgOwnerAdmin || activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
-
-  const isDraftOnChainProject = !!project.draft && !!creditClassId;
 
   const currentUserRole = useMemo(
     () =>

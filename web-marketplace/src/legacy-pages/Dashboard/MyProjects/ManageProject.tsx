@@ -31,8 +31,13 @@ const ManageProject = () => {
   const { _ } = useLingui();
   const location = useLocation();
   const { activeAccountId } = useAuth();
-  const { project, offChainProject, onChainProject, isLoading, creditClassId } =
-    useFetchProject();
+  const {
+    project,
+    offChainProject,
+    onChainProject,
+    isLoading,
+    isDraftOnChainProject,
+  } = useFetchProject();
   const { loginDisabled, wallet } = useWallet();
 
   const createPostDisabled =
@@ -135,7 +140,7 @@ const ManageProject = () => {
           canEdit={canEditProject}
           // We need an offchain ID to migrate
           migrateProject={
-            project.offChainId && !(creditClassId && project.draft)
+            project.offChainId && !isDraftOnChainProject
               ? migrateProject
               : undefined
           }
@@ -157,7 +162,7 @@ const ManageProject = () => {
       <Outlet
         context={{
           project,
-          creditClassId,
+          isDraftOnChainProject,
           isLoading,
           offChainProject,
           canCreatePost,

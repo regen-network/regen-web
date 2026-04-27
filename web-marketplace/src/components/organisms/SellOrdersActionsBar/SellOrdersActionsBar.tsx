@@ -143,7 +143,7 @@ export const SellOrdersActionsBar = ({
         ) : (
           <>
             {((!isPrefinanceProject && !isBuyButtonDisabled) || !isSoldOut) &&
-              (prefinancePrice ||
+              ((isPrefinanceProject && prefinancePrice) ||
                 (avgPricePerTonLabel && !!onChainProjectId)) && (
                 <Box
                   sx={{
@@ -168,7 +168,11 @@ export const SellOrdersActionsBar = ({
                       />
                     )}
                   </Box>
-                  <Subtitle>{prefinancePrice ?? avgPricePerTonLabel}</Subtitle>
+                  <Subtitle>
+                    {isPrefinanceProject
+                      ? prefinancePrice
+                      : avgPricePerTonLabel}
+                  </Subtitle>
                 </Box>
               )}
             {(!isCommunityCredit ||

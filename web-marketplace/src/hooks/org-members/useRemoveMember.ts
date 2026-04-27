@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
-import { getAuthorizationId } from 'utils/rbam.utils';
+import { getAccountAssignment, getAuthorizationId } from 'utils/rbam.utils';
 
 import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
@@ -127,9 +127,10 @@ export function useRemoveMember(params: MembersHookParams) {
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
-            const assignment = projectDao.assignmentsByDaoAddress.nodes.find(
-              a => a?.accountId === id,
-            );
+            const assignment = getAccountAssignment({
+              accountId: id,
+              assignments: projectDao.assignmentsByDaoAddress.nodes,
+            });
             if (!assignment) return null;
 
             const assignedRes = await getFromCacheOrFetch({
@@ -285,10 +286,12 @@ export function useRemoveMember(params: MembersHookParams) {
             if (!project) return;
             const projectDaoAddress =
               project?.projectByProjectId?.adminDaoAddress;
-            const projectRoleName =
-              project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress.nodes?.find(
-                a => a?.accountId === id,
-              )?.roleName;
+            const projectRoleName = getAccountAssignment({
+              accountId: id,
+              assignments:
+                project?.projectByProjectId?.daoByAdminDaoAddress
+                  ?.assignmentsByDaoAddress.nodes,
+            })?.roleName;
             if (!projectDaoAddress || !projectRoleName) return;
             try {
               await deleteAssignment({

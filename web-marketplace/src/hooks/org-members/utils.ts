@@ -465,7 +465,7 @@ const assignAction = ({
   },
 });
 
-const revokeAction = ({
+export const revokeAction = ({
   daoRbamAddress,
   authorizationId,
   assignments,

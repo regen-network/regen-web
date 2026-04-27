@@ -91,6 +91,10 @@ export const useFetchProject = () => {
 
   const { creditClass, creditClassVersion } =
     parseOffChainProject(offChainProject);
+  const creditClassId =
+    creditClass?.onChainId ??
+    onChainProject?.id?.split('-')?.[0] ??
+    offChainProject?.metadata?.['regen:creditClassId'];
 
   const project = {
     ...normalizeProjectWithMetadata({
@@ -102,9 +106,7 @@ export const useFetchProject = () => {
       sanityClass: findSanityCreditClass({
         sanityCreditClassData,
         creditClassIdOrUrl:
-          creditClass?.onChainId ??
-          creditClassVersion?.metadata?.['schema:url'] ??
-          onChainProject?.id?.split('-')?.[0],
+          creditClassId ?? creditClassVersion?.metadata?.['schema:url'],
       }),
     }),
     id: projectId as string,
@@ -117,5 +119,12 @@ export const useFetchProject = () => {
     isFetchingProjectByOnChainId ||
     isFetchingSanityCreditClasses;
 
-  return { project, onChainProject, offChainProject, isLoading };
+  const isDraftOnChainProject = !!project.draft && !!creditClassId;
+  return {
+    project,
+    isDraftOnChainProject,
+    onChainProject,
+    offChainProject,
+    isLoading,
+  };
 };

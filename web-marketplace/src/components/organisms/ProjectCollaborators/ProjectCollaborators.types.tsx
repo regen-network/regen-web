@@ -22,4 +22,5 @@ export interface ProjectCollaboratorsProps {
   createOrganization: () => void;
   offChainId?: string | null;
   currentDaoAddress?: string;
+  isDraftOnChainProject: boolean;
 }

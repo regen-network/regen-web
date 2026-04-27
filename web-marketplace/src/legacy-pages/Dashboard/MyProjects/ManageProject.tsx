@@ -20,7 +20,6 @@ import ProjectDashboardBanner from 'components/organisms/ProjectDashboardBanner/
 import {
   getCanCreatePost,
   getCanEditProject,
-  getCanSeeOrManagePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 
 import { useCanAccessManageProjectWithRole } from './hooks/useCanAccessManageProjectWithRole';
@@ -32,8 +31,13 @@ const ManageProject = () => {
   const { _ } = useLingui();
   const location = useLocation();
   const { activeAccountId } = useAuth();
-  const { project, offChainProject, onChainProject, isLoading } =
-    useFetchProject();
+  const {
+    project,
+    offChainProject,
+    onChainProject,
+    isLoading,
+    isDraftOnChainProject,
+  } = useFetchProject();
   const { loginDisabled, wallet } = useWallet();
 
   const createPostDisabled =
@@ -135,7 +139,11 @@ const ManageProject = () => {
           project={project}
           canEdit={canEditProject}
           // We need an offchain ID to migrate
-          migrateProject={project.offChainId ? migrateProject : undefined}
+          migrateProject={
+            project.offChainId && !isDraftOnChainProject
+              ? migrateProject
+              : undefined
+          }
         />
       )}
 
@@ -154,6 +162,7 @@ const ManageProject = () => {
       <Outlet
         context={{
           project,
+          isDraftOnChainProject,
           isLoading,
           offChainProject,
           canCreatePost,

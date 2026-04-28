@@ -18,9 +18,12 @@ import {
 
 import { Assignment } from 'generated/graphql';
 
-import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { ROLE_HIERARCHY } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants';
-import { orgRoles, projectRoles } from 'hooks/org-members/constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  orgRoles,
+  projectRoles,
+  ROLE_HIERARCHY,
+} from 'hooks/org-members/constants';
 
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
 
@@ -267,8 +270,8 @@ export function getAccountAssignment<
 
     if (!selectedAssignment?.roleName) return assignment;
 
-    return ROLE_HIERARCHY[assignment.roleName as BaseMemberRole] >
-      ROLE_HIERARCHY[selectedAssignment.roleName as BaseMemberRole]
+    return ROLE_HIERARCHY[assignment.roleName as ProjectRole] >
+      ROLE_HIERARCHY[selectedAssignment.roleName as ProjectRole]
       ? assignment
       : selectedAssignment;
   }, null);

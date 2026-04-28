@@ -120,40 +120,39 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       });
       const currentUserIsAdmin = assignedCurrentUserRes?.assigned;
       const ownerRoleId = getNewOrgRoleId(ROLE_OWNER);
-      const orgOwnerActions =
-        role === ROLE_OWNER
-          ? [
-              ...(currentUserIsAdmin
-                ? [
-                    revokeAction({
-                      daoRbamAddress,
-                      authorizationId,
-                      assignments: [
-                        {
-                          addr: wallet.address,
-                          role_id: ownerRoleId,
-                        },
-                      ],
-                    }),
-                  ]
-                : updateMemberRoleActions({
+      const orgOwnerActions = roleIsOwner
+        ? [
+            ...(currentUserIsAdmin
+              ? [
+                  revokeAction({
                     daoRbamAddress,
                     authorizationId,
-                    memberAddress: wallet.address,
-                    newRoleId: adminRoleId,
-                    oldRoleId: ownerRoleId,
-                  })),
-              updateAuthorizationAction({
-                daoRbamAddress,
-                cw4GroupAddress,
-                authorizationId,
-                newOwnerAddress: memberAddress,
-                authorizationIdToUpdate: orgRoles['admin'].authorizations[
-                  'can_manage_members_except_owner'
-                ] as number,
-              }),
-            ]
-          : [];
+                    assignments: [
+                      {
+                        addr: wallet.address,
+                        role_id: ownerRoleId,
+                      },
+                    ],
+                  }),
+                ]
+              : updateMemberRoleActions({
+                  daoRbamAddress,
+                  authorizationId,
+                  memberAddress: wallet.address,
+                  newRoleId: adminRoleId,
+                  oldRoleId: ownerRoleId,
+                })),
+            updateAuthorizationAction({
+              daoRbamAddress,
+              cw4GroupAddress,
+              authorizationId,
+              newOwnerAddress: memberAddress,
+              authorizationIdToUpdate: orgRoles['admin'].authorizations[
+                'can_manage_members_except_owner'
+              ] as number,
+            }),
+          ]
+        : [];
 
       // Check if old role is assigned
       // If member was initially added with email address and added a wallet address later on,
@@ -250,8 +249,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             const projectOwnerRoleId = getNewProjectRoleId(ROLE_OWNER);
 
             const projectOwnerActions =
-              currentUserOldAssignment?.roleName === ROLE_OWNER &&
-              role === ROLE_OWNER
+              currentUserOldAssignment?.roleName === ROLE_OWNER && roleIsOwner
                 ? [
                     ...(currentUserIsAdmin
                       ? [

@@ -22,8 +22,9 @@ import {
   BaseMemberRole,
   Member,
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
-import { ROLE_HIERARCHY } from 'components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
+
+import { ROLE_HIERARCHY } from './constants';
 
 export const useMembers = () => {
   const { _ } = useLingui();

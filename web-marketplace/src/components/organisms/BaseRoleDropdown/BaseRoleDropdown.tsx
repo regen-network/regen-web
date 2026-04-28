@@ -8,6 +8,8 @@ import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionM
 import { Body } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { ROLE_HIERARCHY } from 'hooks/org-members/constants';
+
 import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
@@ -16,7 +18,6 @@ import {
   MUST_HAVE_BLOCKCHAIN_ACCOUNT,
   OWNER_ADMIN_CAN_EDIT,
   OWNER_CAN_EDIT_SELF,
-  ROLE_HIERARCHY,
 } from './BaseRoleDropdown.constants';
 
 export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({

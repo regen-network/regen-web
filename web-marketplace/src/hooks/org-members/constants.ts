@@ -3,6 +3,15 @@
 
 import { msg } from '@lingui/core/macro';
 
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+
 type OrgRole = {
   roleId: number;
   authorizations: {
@@ -64,7 +73,7 @@ export const orgRoles: {
   viewer: { roleId: 25, authorizations: {} },
 };
 
-type ProjectRole = {
+type ProjectRoleAuth = {
   roleId: number;
   authorizations: {
     can_manage_members?: number;
@@ -78,11 +87,11 @@ type ProjectRole = {
 };
 
 export const projectRoles: {
-  owner: ProjectRole;
-  admin: ProjectRole;
-  editor: ProjectRole;
-  author: ProjectRole;
-  viewer: ProjectRole;
+  owner: ProjectRoleAuth;
+  admin: ProjectRoleAuth;
+  editor: ProjectRoleAuth;
+  author: ProjectRoleAuth;
+  viewer: ProjectRoleAuth;
 } = {
   owner: {
     roleId: 1,
@@ -128,3 +137,11 @@ export const projectRoles: {
 export const MISSING_REQUIRED_PARAMS = msg`missing required parameters`;
 export const MEMBER_NOT_FOUND = msg`member not found`;
 export const MEMBER_REMOVED = msg`This user has been removed from your organization`;
+
+export const ROLE_HIERARCHY: Record<ProjectRole, number> = {
+  [ROLE_VIEWER]: 0,
+  [ROLE_AUTHOR]: 1,
+  [ROLE_EDITOR]: 2,
+  [ROLE_ADMIN]: 3,
+  [ROLE_OWNER]: 4,
+};

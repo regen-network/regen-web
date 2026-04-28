@@ -47,6 +47,7 @@ export type BaseProps = {
   onSaveProfile: (data: PersonalProfileSchemaType) => Promise<void>;
   onUpload: (imageFile: File) => Promise<{ url: string }>;
   daoWithAddress?: DaoByAddressQuery['daoByAddress'];
+  currentDaoAddress?: string;
 };
 
 type VariantConfig = {
@@ -100,6 +101,7 @@ export const OrganizationMembersBase = ({
   onUpload,
   config: overrideConfig = {},
   daoWithAddress,
+  currentDaoAddress,
 }: OrganizationMembersBaseProps) => {
   const cfg: VariantConfig = { ...defaultConfig[variant], ...overrideConfig };
   const { _ } = useLingui();
@@ -256,6 +258,7 @@ export const OrganizationMembersBase = ({
           daoWithAddress={daoWithAddress}
           currentMember={currentMember}
           roleOptions={roleOptions}
+          currentDaoAddress={currentDaoAddress}
         />
       )}
     </>

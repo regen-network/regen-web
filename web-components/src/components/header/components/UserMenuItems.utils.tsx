@@ -9,6 +9,7 @@ import PersonalProfileIcon from '../../icons/PersonalProfileIcon';
 import SmallArrowIcon from '../../icons/SmallArrowIcon';
 import { LinkComponentProp } from '../../modal/ConfirmModal';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
+import { CollapsibleUserMenuSection } from './UserMenuItems.CollapsibleUserMenuSection';
 import { UserMenuItemProfile, UserMenuProfile } from './UserMenuItem.Profile';
 
 type TextContent = {
@@ -32,7 +33,7 @@ interface GetUserMenuItemsParams {
   linkComponent: LinkComponentProp;
   navLinkComponent: LinkComponentProp;
   profile?: ExtendedUserMenuProfile;
-  organizationProfile?: ExtendedUserMenuProfile;
+  organizationProfiles?: ExtendedUserMenuProfile[];
   createOrganization?: () => void;
   finishOrgCreation?: () => void;
   unfinalizedOrgCreation?: boolean;
@@ -49,109 +50,123 @@ export const getUserMenuItems = ({
   navLinkComponent,
   pathname,
   profile,
-  organizationProfile,
+  organizationProfiles,
   createOrganization,
   unfinalizedOrgCreation,
   finishOrgCreation,
   textContent,
   orgEnabled,
   loginDisabled,
-}: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
-  [
-    // Personal card
+}: GetUserMenuItemsParams): HeaderDropdownItemProps[] => {
+  const resolvedOrgProfiles = organizationProfiles ?? [];
+
+  const hasOrgProfiles = resolvedOrgProfiles.length > 0;
+  const hasOrgSection =
+    !!orgEnabled &&
+    (hasOrgProfiles ||
+      !!createOrganization ||
+      (unfinalizedOrgCreation && !!finishOrgCreation));
+
+  return [
     profile && {
       children: (
-        <div className="w-full">
+        <div className="flex flex-col w-full">
           <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
             {textContent.signedInAs}
           </div>
-          <div className="px-10">
-            <UserMenuItemProfile
-              {...profile}
-              profileLink={undefined}
-              personalProfileText={textContent.personalProfile}
-              copyText={textContent.copyText}
-              linkComponent={linkComponent}
-              showCheckIcon
-            />
-          </div>
+          <CollapsibleUserMenuSection
+            pathname={pathname}
+            labelClassName={labelClassName}
+            linkComponent={navLinkComponent}
+            items={[
+              {
+                href: profile.profileLink,
+                label: textContent.personalProfile,
+                className,
+                icon: <PersonalProfileIcon linearGradient />,
+              },
+              {
+                href: profile.dashboardLink,
+                label: textContent.personalDashboard,
+                className,
+                icon: <CogIcon linearGradient />,
+              },
+            ]}
+            header={
+              <div className="w-full px-10">
+                <UserMenuItemProfile
+                  {...profile}
+                  profileLink={undefined}
+                  personalProfileText={textContent.personalProfile}
+                  copyText={textContent.copyText}
+                  linkComponent={linkComponent}
+                  showCheckIcon
+                />
+              </div>
+            }
+          />
         </div>
       ),
     },
-    // Personal profile item
-    profile && {
-      pathname,
-      linkComponent: navLinkComponent,
-      href: profile.profileLink,
-      labelClassName,
-      className,
-      icon: <PersonalProfileIcon linearGradient />,
-      label: textContent.personalProfile,
+    hasOrgSection && {
+      children: (
+        <Separator className={`w-full ${hasOrgProfiles ? 'mt-5 mb-0' : 'mb-0'}`} />
+      ),
     },
-    // Personal dashboard
-    {
-      pathname,
-      linkComponent: navLinkComponent,
-      href: profile?.dashboardLink,
-      labelClassName,
-      className,
-      icon: <CogIcon linearGradient />,
-      label: textContent.personalDashboard,
-    },
-    // Separator (organization actions section)
-    (orgEnabled && createOrganization ||
-      organizationProfile ||
-      (unfinalizedOrgCreation && finishOrgCreation)) && {
-      children: <Separator className="w-full my-[14px]" />,
-    },
-    // Organization card (no hover link)
-    orgEnabled &&
-      organizationProfile && {
-        children: (
-          <div className="w-full">
-            <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
-              {textContent.organization}
-            </div>
-            <div className="px-10">
-              <UserMenuItemProfile
-                {...organizationProfile}
-                profileLink={undefined}
-                personalProfileText={textContent.personalProfile}
-                copyText={textContent.copyText}
-                linkComponent={linkComponent}
+    ...(orgEnabled
+      ? resolvedOrgProfiles.flatMap((orgProfile, i) => [
+          {
+            children: (
+              <CollapsibleUserMenuSection
+                pathname={pathname}
+                labelClassName={labelClassName}
+                linkComponent={navLinkComponent}
+                items={[
+                  {
+                    href: !unfinalizedOrgCreation
+                      ? orgProfile.profileLink
+                      : undefined,
+                    label: textContent.organizationProfile,
+                    className: 'pl-[17px]',
+                    iconClassName: 'mr-[11px]',
+                    icon: <OrgProfileIcon linearGradient />,
+                  },
+                  {
+                    href: !unfinalizedOrgCreation
+                      ? orgProfile.dashboardLink
+                      : undefined,
+                    label: textContent.organizationDashboard,
+                    className,
+                    icon: <CogIcon linearGradient />,
+                  },
+                ]}
+                header={
+                  <div className="w-full">
+                    <div className="px-10">
+                      <UserMenuItemProfile
+                        {...orgProfile}
+                        profileLink={undefined}
+                        personalProfileText={textContent.personalProfile}
+                        copyText={textContent.copyText}
+                        linkComponent={linkComponent}
+                      />
+                    </div>
+                  </div>
+                }
               />
-            </div>
-          </div>
-        ),
-      },
-    // Organization profile item
+            ),
+          },
+          i < resolvedOrgProfiles.length - 1 && {
+            children: <Separator className="w-full mt-5 mb-0" />,
+          },
+        ])
+      : []),
     orgEnabled &&
-      organizationProfile &&
-      !unfinalizedOrgCreation && {
-        pathname,
-        linkComponent: navLinkComponent,
-        href: organizationProfile.profileLink,
-        labelClassName,
-        className: 'pl-[17px]',
-        iconClassName: 'mr-[11px]',
-        icon: <OrgProfileIcon linearGradient />,
-        label: textContent.organizationProfile,
+      createOrganization &&
+      hasOrgProfiles && {
+        children: <Separator className="w-full mb-0" />,
       },
-    // Organization dashboard
     orgEnabled &&
-      organizationProfile &&
-      !unfinalizedOrgCreation && {
-        pathname,
-        linkComponent: navLinkComponent,
-        href: organizationProfile.dashboardLink,
-        labelClassName,
-        className,
-        icon: <CogIcon linearGradient />,
-        label: textContent.organizationDashboard,
-      },
-    // Create organization CTA (when no org)
-    orgEnabled &&
-      !organizationProfile &&
       createOrganization && {
         children: loginDisabled ? (
           <InfoTooltip
@@ -172,7 +187,6 @@ export const getUserMenuItems = ({
           </TextButton>
         ),
       },
-    // Finish org creation CTA
     orgEnabled &&
       unfinalizedOrgCreation &&
       finishOrgCreation && {
@@ -186,8 +200,8 @@ export const getUserMenuItems = ({
           </TextButton>
         ),
       },
-    // Bottom separator
     {
-      children: <Separator className="h-1 w-full my-[14px]" />,
+      children: <Separator className="h-1 w-full mt-0 mb-[14px]" />,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];
+};

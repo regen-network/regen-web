@@ -199,16 +199,22 @@ export const getSwitchDashboardPath = ({
   personalBatchesLoading,
   targetHasWalletAddress,
 }: GetSwitchDashboardPathParams): string => {
-  // Determine source and target base paths
-  const fromBase = isOrganizationDashboard
-    ? orgDashboardBasePath
-    : personalDashboardBasePath;
   const toBase = targetIsOrg ? orgDashboardBasePath : personalDashboardBasePath;
 
-  // Extract the current section from the pathname
-  const rawSuffix = pathname.startsWith(fromBase)
-    ? pathname.slice(fromBase.length)
-    : '';
+  // Extract the current section from the pathname.
+  // When switching org→org the source base path has a different :orgAddress than
+  // `orgDashboardBasePath` (which already points at the target org), so we
+  // strip the dynamic prefix pattern instead of relying on an exact prefix match.
+  let rawSuffix = '';
+  if (isOrganizationDashboard) {
+    // Match /dashboard/organization/<any-address>/<rest>
+    const orgMatch = pathname.match(
+      /^\/dashboard\/organization\/[^/]+(\/.*)?$/,
+    );
+    rawSuffix = orgMatch?.[1] ?? '';
+  } else if (pathname.startsWith(personalDashboardBasePath)) {
+    rawSuffix = pathname.slice(personalDashboardBasePath.length);
+  }
   const suffix = rawSuffix.replace(/^\/+/, '').replace(/\/+$/, '');
 
   // If no section, just return the base path

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-export const useDaoOrganization = () => {
+export const useDaoOrganizations = () => {
   const { activeAccount } = useAuth();
   const { loginDisabled, accountByAddr } = useWallet();
 
@@ -15,11 +15,9 @@ export const useDaoOrganization = () => {
     [activeAccount, accountByAddr, loginDisabled],
   );
 
-  // find the DAO that is an organization
-  const dao = useMemo(
-    () => daos?.find(dao => !!dao?.organizationByDaoAddress),
+  // return all DAOs that are organizations
+  return useMemo(
+    () => daos.filter(dao => !!dao?.organizationByDaoAddress),
     [daos],
   );
-
-  return dao;
 };

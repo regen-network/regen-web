@@ -44,8 +44,8 @@ export const Default = (
     | 'onRemove'
     | 'onEditOrgRole'
     | 'isProjectDao'
-    | 'canMigrate'
-    | 'partOfOrganization'
+    | 'eligibleOrganizations'
+    | 'organizations'
     | 'createOrganization'
     | 'migrateProject'
     | 'isDraftOnChainProject'
@@ -139,8 +139,8 @@ Default.args = {
   onRemove: action('collaborator-removed'),
   onEditOrgRole: action('edit-org-role'),
   isProjectDao: true,
-  canMigrate: true,
-  partOfOrganization: true,
+  organizations: [],
+  eligibleOrganizations: [],
   createOrganization: action('create-organization'),
   migrateProject: action('migrate-project'),
   currentDaoAddress: 'dao1xyz...',

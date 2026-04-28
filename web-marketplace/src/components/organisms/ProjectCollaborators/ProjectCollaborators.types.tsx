@@ -1,4 +1,8 @@
+import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMigrateProject';
+
 import { AccountsOrderBy } from 'generated/graphql';
+
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import {
   Member,
@@ -16,9 +20,10 @@ export interface ProjectCollaboratorsProps {
   onRemove: (id: string) => Promise<void>;
   onEditOrgRole: () => void;
   isProjectDao: boolean;
-  canMigrate: boolean;
-  partOfOrganization: boolean;
-  migrateProject: () => Promise<void>;
+  organizations: ReturnType<typeof useDaoOrganizations>;
+  // eligibleOrganizations are the organizations where the user has permissions to migrate the project to
+  eligibleOrganizations: ReturnType<typeof useDaoOrganizations>;
+  migrateProject: ReturnType<typeof useMigrateProject>['migrateProject'];
   createOrganization: () => void;
   offChainId?: string | null;
   currentDaoAddress?: string;

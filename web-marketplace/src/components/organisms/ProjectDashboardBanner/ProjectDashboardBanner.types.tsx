@@ -1,3 +1,5 @@
+import { useMigrateProject } from 'legacy-pages/Dashboard/MyProjects/hooks/useMigrateProject';
+
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 export interface ProjectBannerProps {
@@ -15,5 +17,5 @@ export interface ProjectBannerProps {
     | 'offChain'
   >;
   canEdit?: boolean;
-  migrateProject?: () => Promise<void>;
+  migrateProject?: ReturnType<typeof useMigrateProject>['migrateProject'];
 }

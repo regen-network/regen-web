@@ -118,7 +118,6 @@ export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
       }}
       collapsed={collapsed}
       onToggleCollapse={handleToggleCollapse}
-      hasOrganization={false}
     />
   );
 };

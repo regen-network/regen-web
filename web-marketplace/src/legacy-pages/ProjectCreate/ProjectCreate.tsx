@@ -26,7 +26,8 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -80,7 +81,7 @@ export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const router = useRouter();
   const location = useLocation();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
@@ -131,6 +132,10 @@ export const ProjectCreate = (): JSX.Element => {
     }),
   );
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
+  const projectOrgDao = useProjectOrgDao({
+    projectOrgId:
+      offChainProject?.organizationProjectByProjectId?.organizationId,
+  });
 
   const handleRequestClose = useCallback(() => {
     // If we know where the user came from, send them back there.
@@ -148,20 +153,17 @@ export const ProjectCreate = (): JSX.Element => {
     }
     // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
-    if (
-      isOrganizationAccount ||
-      (offChainProject?.adminDaoAddress &&
-        offChainProject?.adminDaoAddress === dao?.address)
-    )
-      router.replace(`/dashboard/organization/${projectPath}`);
-    else router.replace(`/dashboard/${projectPath}`);
-  }, [
-    router,
-    projectId,
-    isOrganizationAccount,
-    offChainProject?.adminDaoAddress,
-    dao?.address,
-  ]);
+    if (isOrganizationAccount || projectOrgDao) {
+      if (projectOrgDao?.address) {
+        router.replace(
+          `/dashboard/organization/${projectOrgDao?.address}/${projectPath}`,
+        );
+      } else {
+        // If projectOrgDao hasn't loaded, safer to go to dashboard root than risk a broken link.
+        router.replace('/dashboard');
+      }
+    } else router.replace(`/dashboard/${projectPath}`);
+  }, [router, projectId, isOrganizationAccount, projectOrgDao]);
 
   return (
     <>

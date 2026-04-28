@@ -14,6 +14,7 @@ import { Modals } from '../BaseMembersTable/BaseMembersTable.Modals';
 import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
 import { useInviteMember } from '../BaseMembersTable/modals/hooks/useInviteMember';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
+import { MigrateProjectSelectOrgModal } from '../MigrateProjectSelectOrgModal/MigrateProjectSelectOrgModal';
 import { MIGRATE_PROJECT } from '../ProjectDashboardBanner/ProjectDashboardBanner.constants';
 import {
   COLLABORATORS_DESCRIPTION,
@@ -33,8 +34,8 @@ export const ProjectCollaborators = ({
   sortDir,
   onEditOrgRole,
   isProjectDao,
-  partOfOrganization,
-  canMigrate,
+  organizations,
+  eligibleOrganizations,
   migrateProject,
   offChainId,
   createOrganization,
@@ -50,6 +51,7 @@ export const ProjectCollaborators = ({
 
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [isSelectOrgModalOpen, setIsSelectOrgModalOpen] = useState(false);
   const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
   const [showPersonalProfileModal, setShowPersonalProfileModal] =
     useState(false);
@@ -58,6 +60,7 @@ export const ProjectCollaborators = ({
     useInviteMember();
 
   const roleOptions = getRoleItems(_);
+  const partOfOrganizations = organizations.length > 0;
 
   return (
     <>
@@ -140,7 +143,7 @@ export const ProjectCollaborators = ({
                 organization
               </Trans>
             </Title>
-            {!partOfOrganization && (
+            {!partOfOrganizations && (
               <Body className="pt-10 text-bc-neutral-500 max-w-[614px] mx-auto">
                 <Trans>
                   You can create an organization and migrate your personal
@@ -148,11 +151,20 @@ export const ProjectCollaborators = ({
                 </Trans>
               </Body>
             )}
-            {partOfOrganization ? (
-              canMigrate && offChainId && !isDraftOnChainProject ? (
+            {partOfOrganizations ? (
+              eligibleOrganizations.length > 0 &&
+              offChainId &&
+              !isDraftOnChainProject ? (
                 <OutlinedButton
-                  // avoid passing the click event as first argument of migrateProject
-                  onClick={() => void migrateProject()}
+                  onClick={
+                    eligibleOrganizations.length > 1
+                      ? () => setIsSelectOrgModalOpen(true)
+                      : () =>
+                          void migrateProject({
+                            organizationAddress:
+                              eligibleOrganizations?.[0]?.address,
+                          })
+                  }
                   className="mt-25"
                 >
                   {_(MIGRATE_PROJECT)}
@@ -207,6 +219,12 @@ export const ProjectCollaborators = ({
           currentDaoAddress={currentDaoAddress}
         />
       )}
+      <MigrateProjectSelectOrgModal
+        open={isSelectOrgModalOpen}
+        onClose={() => setIsSelectOrgModalOpen(false)}
+        migrateProject={migrateProject}
+        eligibleOrganizations={eligibleOrganizations}
+      />
     </>
   );
 };

@@ -11,10 +11,10 @@ import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { useLoginData } from '../../LoginButton/hooks/useLoginData';
-import { useOrganizationMenuProfile } from './useOrganizationMenuProfile';
+import { useOrganizationMenuProfiles } from './useOrganizationMenuProfiles';
 
 export const useOrganizationActions = () => {
-  const { activeAccount, privActiveAccount } = useAuth();
+  const { privActiveAccount } = useAuth();
   const { wallet, connect, isConnected } = useWallet();
   const {
     modalState,
@@ -36,11 +36,10 @@ export const useOrganizationActions = () => {
   }, [setShouldResumeConnectWalletFlow]);
 
   const {
-    menuOrganizationProfile,
+    menuOrganizationProfiles,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
-  } = useOrganizationMenuProfile({
-    activeAccount,
+  } = useOrganizationMenuProfiles({
     wallet,
   });
   const router = useRouter();
@@ -93,7 +92,7 @@ export const useOrganizationActions = () => {
     walletsUiConfig,
     createOrganization,
     finishOrgCreation,
-    menuOrganizationProfile,
+    menuOrganizationProfiles,
     unfinalizedOrgCreation,
     unfinalizedOrgName,
     isConnectWalletModalOpen: isModalOpen,

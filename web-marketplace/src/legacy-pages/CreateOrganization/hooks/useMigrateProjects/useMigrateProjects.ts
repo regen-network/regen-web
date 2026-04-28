@@ -32,6 +32,8 @@ import {
 import { timer } from 'utils/timer';
 
 import {
+  DaoByAddressWithAssignmentsDocument,
+  DaoByAddressWithAssignmentsQuery,
   useUpdateProjectByIdMutation,
   useUpdateSellOrderMutation,
 } from 'generated/graphql';
@@ -69,7 +71,7 @@ import {
 } from 'components/organisms/SellerSetupAccount/hooks/useStripeAccount.constants';
 import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getNewProjectRoleId } from 'hooks/org-members/utils';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 import useMsgClient from 'hooks/useMsgClient';
 
 import {
@@ -94,7 +96,7 @@ type UseMigrateProjectsParams = {
   handleSaveNext?: (formValues: OrganizationMultiStepData) => void;
   data?: OrganizationMultiStepData;
   // Migrating a single project callback from the project dashboard
-  onSuccess?: () => void;
+  onSuccess?: (organizationAddress?: string) => void;
   // Optional fee granter address (organization dao) when migrating projects
   // after organization creation.
   // It's not set when migrating project from the organization creation flow
@@ -116,7 +118,7 @@ export const useMigrateProjects = ({
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const { signAndBroadcast } = useMsgClient();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
   const { activeAccountId, activeAccount, privActiveAccount } = useAuth();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -143,25 +145,6 @@ export const useMigrateProjects = ({
       languageCode: selectedLanguage,
     }),
   );
-
-  const { data: orgAssignmentsData, isLoading: isLoadingOrgAssignments } =
-    useQuery(
-      getDaoByAddressWithAssignmentsQuery({
-        client: graphqlClient,
-        enabled: !!graphqlClient && !!dao?.address,
-        address: dao?.address as string,
-      }),
-    );
-
-  const currentUserRole = useMemo(
-    () =>
-      getAccountAssignment({
-        accountId: activeAccountId,
-        assignments:
-          orgAssignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes,
-      })?.roleName,
-    [orgAssignmentsData, activeAccountId],
-  ) as BaseMemberRole | undefined;
 
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
@@ -318,7 +301,10 @@ export const useMigrateProjects = ({
   );
 
   const reloadData = useCallback(
-    async (selectedProjects: NormalizeProject[]) => {
+    async (
+      selectedProjects: NormalizeProject[],
+      daoAddress?: string | null,
+    ) => {
       await Promise.all(
         selectedProjects.map(async project => {
           if (project.offChainId)
@@ -369,28 +355,24 @@ export const useMigrateProjects = ({
         }),
         refetchType: 'all',
       });
-      if (dao) {
+      if (daoAddress) {
         await reactQueryClient.invalidateQueries({
-          queryKey: getOrganizationProjectsByDaoAddressQueryKey({
-            daoAddress: dao.address,
-          }),
+          queryKey: getOrganizationProjectsByDaoAddressQueryKey({ daoAddress }),
           refetchType: 'all',
         });
         await reactQueryClient.invalidateQueries({
-          queryKey: getOrganizationByDaoAddressQueryKey({
-            daoAddress: dao.address,
-          }),
+          queryKey: getOrganizationByDaoAddressQueryKey({ daoAddress }),
           refetchType: 'all',
         });
       }
       reloadBalances();
     },
-    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances, dao],
+    [reactQueryClient, wallet?.address, activeAccountId, reloadBalances],
   );
 
   const migrateProjects = useCallback(
-    async (values: FormValues) => {
-      if (isLoadingSellOrders || isLoadingCredits || isLoadingOrgAssignments) {
+    async (values: FormValues, organizationAddress?: string) => {
+      if (isLoadingSellOrders || isLoadingCredits) {
         // prevent submission while loading data
         return;
       }
@@ -403,15 +385,32 @@ export const useMigrateProjects = ({
         setErrorBannerText(_(CREATE_ORG_SIGNING_CLIENT_ERROR));
         return;
       }
-      const organizationId = dao?.organizationByDaoAddress?.id;
-      if (!organizationId) {
-        setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
-        return;
-      }
+      // Resolve DAO from the organizationAddress passed as second param
+      const dao = daoOrganizations.find(
+        d => d?.address === organizationAddress,
+      );
       if (!dao) {
         setErrorBannerText(_(CREATE_ORG_DAO_ADDRESS_REQUIRED_ERROR));
         return;
       }
+      const organizationId = dao.organizationByDaoAddress?.id;
+      if (!organizationId) {
+        setErrorBannerText(_(CREATE_ORG_ORGANIZATION_ID_REQUIRED_ERROR));
+        return;
+      }
+      // Fetch org assignments via React Query (uses cache when available)
+      const orgAssignmentsData = await reactQueryClient.fetchQuery(
+        getDaoByAddressWithAssignmentsQuery({
+          client: graphqlClient,
+          address: dao.address as string,
+          enabled: true,
+        }),
+      );
+      const currentUserRole = getAccountAssignment({
+        accountId: activeAccountId,
+        assignments:
+          orgAssignmentsData?.daoByAddress?.assignmentsByDaoAddress?.nodes,
+      })?.roleName as BaseMemberRole | undefined;
       if (!cwAdminFactoryAddr) {
         throw new Error(_(CREATE_ORG_CW_ADMIN_FACTORY_ADDRESS_ERROR));
       }
@@ -720,11 +719,11 @@ export const useMigrateProjects = ({
                 }
               }
 
-              await reloadData(selectedProjects);
+              await reloadData(selectedProjects, dao.address);
               if (handleSaveNext && data)
                 handleSaveNext({ ...data, ...values });
               setProcessingModalAtom(atom => void (atom.open = false));
-              if (onSuccess) onSuccess();
+              if (onSuccess) onSuccess(organizationAddress);
             },
             onError: error => {
               setProcessingModalAtom(atom => void (atom.open = false));
@@ -740,7 +739,7 @@ export const useMigrateProjects = ({
       isLoadingCredits,
       wallet?.address,
       signingCosmWasmClient,
-      dao,
+      daoOrganizations,
       handleSaveNext,
       data,
       setErrorBannerText,
@@ -748,10 +747,11 @@ export const useMigrateProjects = ({
       setProcessingModalAtom,
       projects,
       credits,
-      isLoadingOrgAssignments,
       sellOrdersData,
       signAndBroadcast,
       reactQueryClient,
+      graphqlClient,
+      activeAccountId,
       updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
       privActiveAccount?.can_use_stripe_connect,
@@ -759,8 +759,6 @@ export const useMigrateProjects = ({
       token,
       reloadData,
       retryCsrfRequest,
-      currentUserRole,
-      orgAssignmentsData,
       onSuccess,
       feeGranter,
     ],

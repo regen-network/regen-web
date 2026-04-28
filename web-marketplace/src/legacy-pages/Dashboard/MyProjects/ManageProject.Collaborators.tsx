@@ -7,12 +7,17 @@ import { Loading } from 'web-components/src/components/loading';
 import { AccountsOrderBy } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 
-import { ROLE_EDITOR } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from 'components/organisms/ProjectCollaborators/ProjectCollaborators';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
+import { useEligibleOrganizations } from '../../../hooks/useEligibleOrganizations';
 import { useUpdateCollaborators } from './hooks/collaborators';
 import { useCollaborators } from './hooks/collaborators/useCollaborators';
 import { useFetchProject } from './hooks/useFetchProject';
@@ -23,19 +28,20 @@ const Collaborators = (): JSX.Element => {
     useOutletContext<ReturnType<typeof useFetchProject>>();
   const { activeAccountId } = useAuth();
   const navigate = useNavigate();
-  const daoOrganization = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
     AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
   >(AccountsOrderBy.NameAsc);
 
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+
   const {
     projectDao,
-    isOrgOwnerAdmin,
-    activeAccountOrgAssignment,
     collaborators,
     isLoading: isCollaboratorsLoading,
-  } = useCollaborators(project, daoAccountsOrderBy);
+  } = useCollaborators(project, daoAccountsOrderBy, projectOrgId);
 
   const { migrateProject } = useMigrateProject({
     project,
@@ -44,8 +50,11 @@ const Collaborators = (): JSX.Element => {
 
   const { createOrganization } = useOrganizationActions();
 
-  const canMigrate =
-    isOrgOwnerAdmin || activeAccountOrgAssignment?.roleName === ROLE_EDITOR;
+  const { eligibleOrganizations } = useEligibleOrganizations([
+    ROLE_OWNER,
+    ROLE_ADMIN,
+    ROLE_EDITOR,
+  ]);
 
   const currentUserRole = useMemo(
     () =>
@@ -73,9 +82,9 @@ const Collaborators = (): JSX.Element => {
 
   return (
     <ProjectCollaborators
-      canMigrate={canMigrate}
       isProjectDao={!!projectDao}
-      partOfOrganization={!!daoOrganization}
+      organizations={daoOrganizations}
+      eligibleOrganizations={eligibleOrganizations}
       offChainId={project.offChainId}
       isDraftOnChainProject={isDraftOnChainProject}
       migrateProject={migrateProject}
@@ -92,7 +101,14 @@ const Collaborators = (): JSX.Element => {
       onAddMember={addCollaborator}
       onUpdateRole={updateCollaboratorRole}
       onRemove={removeCollaborator}
-      onEditOrgRole={() => navigate(`/dashboard/organization/members`)}
+      onEditOrgRole={() => {
+        const orgDao = daoOrganizations.find(
+          dao => dao?.organizationByDaoAddress?.id === projectOrgId,
+        );
+        const orgAddress = orgDao?.address ?? daoOrganizations[0]?.address;
+        if (orgAddress)
+          navigate(`/dashboard/organization/${orgAddress}/members`);
+      }}
       currentDaoAddress={projectDao?.address}
     />
   );

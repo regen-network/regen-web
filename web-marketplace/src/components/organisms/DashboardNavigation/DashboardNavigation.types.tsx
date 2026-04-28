@@ -3,7 +3,7 @@ export interface AccountOption {
   name?: string;
   address?: string;
   image?: string;
-  type: 'user' | 'org';
+  type?: 'user' | 'org';
   displayName?: string;
 }
 
@@ -57,7 +57,6 @@ export interface AccountSwitcherDropdownProps {
   accounts: AccountOption[];
   activeAddress?: string;
   onSelect: (address: string) => void;
-  hasOrganization?: boolean;
   onCreateOrganization?: () => void;
   unfinalizedOrgCreation?: boolean;
   unfinalizedOrgName?: string;

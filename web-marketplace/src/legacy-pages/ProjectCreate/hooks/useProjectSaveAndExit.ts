@@ -3,8 +3,12 @@ import { useRouter } from 'next/navigation';
 import { useCreateProjectContext } from '../ProjectCreate';
 
 export const useProjectSaveAndExit = () => {
-  const { formRef, shouldNavigateRef, isOrganizationAccount } =
-    useCreateProjectContext();
+  const {
+    formRef,
+    shouldNavigateRef,
+    isOrganizationAccount,
+    projectCreatorAddress,
+  } = useCreateProjectContext();
   const router = useRouter();
 
   const saveAndExit = async (): Promise<void> => {
@@ -12,7 +16,8 @@ export const useProjectSaveAndExit = () => {
       shouldNavigateRef.current = false;
       await formRef?.current?.submitForm(true);
     }
-    if (isOrganizationAccount) router.push('/dashboard/organization/projects');
+    if (isOrganizationAccount && projectCreatorAddress)
+      router.push(`/dashboard/organization/${projectCreatorAddress}/projects`);
     else router.push('/dashboard/projects');
   };
 

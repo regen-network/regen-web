@@ -113,6 +113,7 @@ export const LESS = msg`less`;
 export const MORE = msg`more`;
 export const MAX_REFETCH_ATTEMPTS = 15;
 export const REFETCH_DELAY_MS = 500;
+export const WHOOPS_CANCEL = msg`whoops, cancel`;
 
 // Components
 

@@ -44,12 +44,10 @@ const ManageProject = () => {
     !activeAccountId || project.draft || !project.location;
 
   // Derive dashboard base path from current URL so tab hrefs work on both
-  // the personal dashboard (/dashboard) and org dashboard (/dashboard/organization)
-  const dashboardBasePath = location.pathname.startsWith(
-    '/dashboard/organization',
-  )
-    ? '/dashboard/organization'
-    : '/dashboard';
+  // the personal dashboard (/dashboard) and org dashboard (/dashboard/organization/:orgAddress)
+  const dashboardBasePath =
+    location.pathname.match(/^(\/dashboard\/organization\/[^/]+)/)?.[1] ??
+    '/dashboard';
 
   const [postProjectId, setPostProjectId] = useState<string | undefined>();
   const [postOffChainProjectId, setPostOffChainProjectId] = useState<

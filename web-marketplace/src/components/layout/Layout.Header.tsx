@@ -13,6 +13,7 @@ import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
@@ -23,6 +24,7 @@ import { useWallet, Wallet } from 'lib/wallet/wallet';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
+import { LanguageSwitcher } from 'components/organisms/RegistryLayout/RegistryLayout.LanguageSwitcher';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../lib/ledger';
@@ -37,6 +39,7 @@ import {
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
+  getNormalizedPathname,
 } from '../organisms/RegistryLayout/RegistryLayout.config';
 import {
   AVATAR_ALT,
@@ -75,15 +78,23 @@ const getProfileLink = (
 export const LayoutHeader = () => {
   const { _ } = useLingui();
   const pathname = usePathname();
+
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, disconnect, accountByAddr, loginDisabled } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
-  const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
-  const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
-  const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  const clientConfig = getClientConfig();
+  const normalizedPathname = getNormalizedPathname(pathname);
 
+  const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
+  const isTransparent = useMemo(
+    () => getIsTransparent(normalizedPathname),
+    [normalizedPathname],
+  );
+  const borderBottom = useMemo(
+    () => getBorderBottom(normalizedPathname),
+    [normalizedPathname],
+  );
+  const clientConfig = getClientConfig();
   const hasPrefinanceProjects = useHasPrefinanceProjects();
   const profileLink = getProfileLink(activeAccount, wallet);
   const personalDashboardLink = '/dashboard';
@@ -162,9 +173,11 @@ export const LayoutHeader = () => {
     ],
   );
 
-  const color = headerColors[pathname]
-    ? headerColors[pathname]
+  const color = headerColors[normalizedPathname]
+    ? headerColors[normalizedPathname]
     : theme.palette.primary.light;
+
+  const isHome = normalizedPathname === '/';
 
   return (
     <>
@@ -182,13 +195,12 @@ export const LayoutHeader = () => {
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {clientConfig.listProject && <ListProject />}
-            {/* // Commenting out temporarily until content translations completed
             <LanguageSwitcher
               className={cn(
-                'mr-25 mt-1 hidden lg:block',
-                isHome && 'text-sc-button-text-icon-light',
+                'mr-10 lg:mr-25 mt-1',
+                isHome && 'md:text-sc-button-text-icon-light',
               )}
-            /> */}
+            />
             {chainId && accountOrWallet && (
               <UserMenuItems
                 nameOrAddress={

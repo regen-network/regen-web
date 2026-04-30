@@ -97,17 +97,20 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
 
       // Check if current user is admin to know if we need to revoke the owner role
       // from current user or just update it to admin
-      const assignedCurrentUserRes = await getFromCacheOrFetch({
-        reactQueryClient,
-        query: getAssignedQuery({
-          client: signingCosmWasmClient,
-          addr: wallet.address,
-          roleId: adminRoleId,
-          daoRbamAddress,
-          enabled: roleIsOwner,
-        }),
-      });
-      const currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+      let currentUserIsAdmin: boolean | undefined = false;
+      if (roleIsOwner) {
+        const assignedCurrentUserRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: wallet.address,
+            roleId: adminRoleId,
+            daoRbamAddress,
+            enabled: roleIsOwner,
+          }),
+        });
+        currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+      }
       const ownerRoleId = getNewProjectRoleId(ROLE_OWNER);
 
       const projectOwnerActions = roleIsOwner

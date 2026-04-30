@@ -108,17 +108,19 @@ export function useUpdateMemberRole(params: MembersHookParams) {
 
       // Check if current user is admin to know if we need to revoke the owner role
       // from current user or just update it to admin
-      const assignedCurrentUserRes = await getFromCacheOrFetch({
-        reactQueryClient,
-        query: getAssignedQuery({
-          client: signingCosmWasmClient,
-          addr: wallet.address,
-          roleId: adminRoleId,
-          daoRbamAddress,
-          enabled: roleIsOwner,
-        }),
-      });
-      const currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+      let currentUserIsAdmin: boolean | undefined = false;
+      if (roleIsOwner) {
+        const assignedCurrentUserRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: wallet.address,
+            roleId: adminRoleId,
+            daoRbamAddress,
+          }),
+        });
+        currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+      }
       const ownerRoleId = getNewOrgRoleId(ROLE_OWNER);
       const orgOwnerActions = roleIsOwner
         ? [
@@ -235,17 +237,20 @@ export function useUpdateMemberRole(params: MembersHookParams) {
 
             // Check if current user is admin to know if we need to revoke the owner role
             // from current user or just update it to admin
-            const assignedCurrentUserRes = await getFromCacheOrFetch({
-              reactQueryClient,
-              query: getAssignedQuery({
-                client: signingCosmWasmClient,
-                addr: wallet.address,
-                roleId: projectAdminRoleId,
-                daoRbamAddress: projectDao.daoRbamAddress,
-                enabled: roleIsOwner,
-              }),
-            });
-            const currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+            let currentUserIsAdmin: boolean | undefined = false;
+            if (roleIsOwner) {
+              const assignedCurrentUserRes = await getFromCacheOrFetch({
+                reactQueryClient,
+                query: getAssignedQuery({
+                  client: signingCosmWasmClient,
+                  addr: wallet.address,
+                  roleId: projectAdminRoleId,
+                  daoRbamAddress: projectDao.daoRbamAddress,
+                  enabled: roleIsOwner,
+                }),
+              });
+              currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+            }
             const projectOwnerRoleId = getNewProjectRoleId(ROLE_OWNER);
 
             const projectOwnerActions =

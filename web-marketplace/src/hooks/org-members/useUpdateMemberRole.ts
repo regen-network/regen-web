@@ -246,7 +246,6 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   addr: wallet.address,
                   roleId: projectAdminRoleId,
                   daoRbamAddress: projectDao.daoRbamAddress,
-                  enabled: roleIsOwner,
                 }),
               });
               currentUserIsAdmin = assignedCurrentUserRes?.assigned;

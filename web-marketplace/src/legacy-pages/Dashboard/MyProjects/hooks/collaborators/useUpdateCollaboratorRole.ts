@@ -106,7 +106,6 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
             addr: wallet.address,
             roleId: adminRoleId,
             daoRbamAddress,
-            enabled: roleIsOwner,
           }),
         });
         currentUserIsAdmin = assignedCurrentUserRes?.assigned;

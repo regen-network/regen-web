@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -97,7 +98,7 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
 
       // Check if current user is admin to know if we need to revoke the owner role
       // from current user or just update it to admin
-      let currentUserIsAdmin: boolean | undefined = false;
+      let currentUserIsAdmin = false;
       if (roleIsOwner) {
         const assignedCurrentUserRes = await getFromCacheOrFetch({
           reactQueryClient,
@@ -108,7 +109,13 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
             daoRbamAddress,
           }),
         });
-        currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+        if (!assignedCurrentUserRes) {
+          setErrorBannerText(
+            _(msg`Could not verify your current role. Please try again.`),
+          );
+          return;
+        }
+        currentUserIsAdmin = assignedCurrentUserRes.assigned;
       }
       const ownerRoleId = getNewProjectRoleId(ROLE_OWNER);
 
@@ -158,7 +165,15 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
           daoRbamAddress,
         }),
       });
-      const assigned = assignedRes?.assigned;
+      if (!assignedRes) {
+        setErrorBannerText(
+          _(
+            msg`Could not verify the existing role assignment. Please try again.`,
+          ),
+        );
+        return;
+      }
+      const assigned = assignedRes.assigned;
 
       // If member was not assigned on chain, then we only add him
       // revoking the old role will be done off chain only

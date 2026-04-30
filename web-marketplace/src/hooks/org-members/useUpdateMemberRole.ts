@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -108,7 +109,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
 
       // Check if current user is admin to know if we need to revoke the owner role
       // from current user or just update it to admin
-      let currentUserIsAdmin: boolean | undefined = false;
+      let currentUserIsAdmin = false;
       if (roleIsOwner) {
         const assignedCurrentUserRes = await getFromCacheOrFetch({
           reactQueryClient,
@@ -119,7 +120,13 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             daoRbamAddress,
           }),
         });
-        currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+        if (!assignedCurrentUserRes) {
+          setErrorBannerText(
+            _(msg`Could not verify your current role. Please try again.`),
+          );
+          return;
+        }
+        currentUserIsAdmin = assignedCurrentUserRes.assigned;
       }
       const ownerRoleId = getNewOrgRoleId(ROLE_OWNER);
       const orgOwnerActions = roleIsOwner
@@ -168,7 +175,15 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           daoRbamAddress,
         }),
       });
-      const assigned = assignedRes?.assigned;
+      if (!assignedRes) {
+        setErrorBannerText(
+          _(
+            msg`Could not verify the existing role assignment. Please try again.`,
+          ),
+        );
+        return;
+      }
+      const assigned = assignedRes.assigned;
 
       // If member was not assigned on chain, then we only add him
       // revoking the old role will be done off chain only
@@ -198,6 +213,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       };
 
       const offchainProjectAssignmentsToDelete: AssignmentToDelete[] = [];
+      let hasProjectAssignmentQueryError = false;
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
@@ -237,7 +253,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
 
             // Check if current user is admin to know if we need to revoke the owner role
             // from current user or just update it to admin
-            let currentUserIsAdmin: boolean | undefined = false;
+            let currentUserIsAdmin = false;
             if (roleIsOwner) {
               const assignedCurrentUserRes = await getFromCacheOrFetch({
                 reactQueryClient,
@@ -248,7 +264,14 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   daoRbamAddress: projectDao.daoRbamAddress,
                 }),
               });
-              currentUserIsAdmin = assignedCurrentUserRes?.assigned;
+              if (!assignedCurrentUserRes) {
+                hasProjectAssignmentQueryError = true;
+                setErrorBannerText(
+                  _(msg`Could not verify your current role. Please try again.`),
+                );
+                return null;
+              }
+              currentUserIsAdmin = assignedCurrentUserRes.assigned;
             }
             const projectOwnerRoleId = getNewProjectRoleId(ROLE_OWNER);
 
@@ -297,7 +320,16 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 daoRbamAddress: projectDao.daoRbamAddress,
               }),
             });
-            const assigned = assignedRes?.assigned;
+            if (!assignedRes) {
+              hasProjectAssignmentQueryError = true;
+              setErrorBannerText(
+                _(
+                  msg`Could not verify the existing role assignment. Please try again.`,
+                ),
+              );
+              return null;
+            }
+            const assigned = assignedRes.assigned;
 
             if (!assigned && project.projectByProjectId?.adminDaoAddress)
               offchainProjectAssignmentsToDelete.push({
@@ -334,6 +366,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           })
           .filter(Boolean) || [],
       )) as ExecuteInstruction[];
+      if (hasProjectAssignmentQueryError) return;
 
       const msgs = [orgExecuteInstruction, ...projectExecuteInstructions].map(
         instruction =>

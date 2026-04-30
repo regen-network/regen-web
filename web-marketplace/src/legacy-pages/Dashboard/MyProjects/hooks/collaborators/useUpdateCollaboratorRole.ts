@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -31,6 +32,7 @@ import {
 import {
   addMemberActions,
   getNewProjectRoleId,
+  revokeAction,
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from 'hooks/org-members/utils';
@@ -91,27 +93,65 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
       // If we assign member the owner role,
       // it means we need to downgrade current user to admin
       // and update the 'can_manage_members_except_owner' authorization to use the new owner address
-      const projectOwnerActions =
-        role === ROLE_OWNER
-          ? [
-              ...updateMemberRoleActions({
-                daoRbamAddress,
-                authorizationId: projectAuthorizationId,
-                memberAddress: wallet.address,
-                newRoleId: getNewProjectRoleId(ROLE_ADMIN),
-                oldRoleId: getNewProjectRoleId(ROLE_OWNER),
-              }),
-              updateAuthorizationAction({
-                daoRbamAddress,
-                cw4GroupAddress,
-                authorizationId: projectAuthorizationId,
-                newOwnerAddress: memberAddress,
-                authorizationIdToUpdate: projectRoles['admin'].authorizations[
-                  'can_manage_members_except_owner'
-                ] as number,
-              }),
-            ]
-          : [];
+      const roleIsOwner = role === ROLE_OWNER;
+      const adminRoleId = getNewProjectRoleId(ROLE_ADMIN);
+
+      // Check if current user is admin to know if we need to revoke the owner role
+      // from current user or just update it to admin
+      let currentUserIsAdmin = false;
+      if (roleIsOwner) {
+        const assignedCurrentUserRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: wallet.address,
+            roleId: adminRoleId,
+            daoRbamAddress,
+          }),
+        });
+        if (!assignedCurrentUserRes) {
+          setErrorBannerText(
+            _(msg`Could not verify your current role. Please try again.`),
+          );
+          return;
+        }
+        currentUserIsAdmin = assignedCurrentUserRes.assigned;
+      }
+      const ownerRoleId = getNewProjectRoleId(ROLE_OWNER);
+
+      const projectOwnerActions = roleIsOwner
+        ? [
+            ...(currentUserIsAdmin
+              ? [
+                  revokeAction({
+                    daoRbamAddress,
+                    authorizationId: projectAuthorizationId,
+                    assignments: [
+                      {
+                        addr: wallet.address,
+                        role_id: ownerRoleId,
+                      },
+                    ],
+                  }),
+                ]
+              : updateMemberRoleActions({
+                  daoRbamAddress,
+                  authorizationId: projectAuthorizationId,
+                  memberAddress: wallet.address,
+                  newRoleId: adminRoleId,
+                  oldRoleId: ownerRoleId,
+                })),
+            updateAuthorizationAction({
+              daoRbamAddress,
+              cw4GroupAddress,
+              authorizationId: projectAuthorizationId,
+              newOwnerAddress: memberAddress,
+              authorizationIdToUpdate: projectRoles['admin'].authorizations[
+                'can_manage_members_except_owner'
+              ] as number,
+            }),
+          ]
+        : [];
 
       // Check if old role is assigned
       // If member was initially added with email address and added a wallet address later on,
@@ -125,7 +165,15 @@ export function useUpdateCollaboratorRole(params: CollaboratorsHookParams) {
           daoRbamAddress,
         }),
       });
-      const assigned = assignedRes?.assigned;
+      if (!assignedRes) {
+        setErrorBannerText(
+          _(
+            msg`Could not verify the existing role assignment. Please try again.`,
+          ),
+        );
+        return;
+      }
+      const assigned = assignedRes.assigned;
 
       // If member was not assigned on chain, then we only add him
       // revoking the old role will be done off chain only

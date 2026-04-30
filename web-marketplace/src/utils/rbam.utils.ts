@@ -18,7 +18,12 @@ import {
 
 import { Assignment } from 'generated/graphql';
 
-import { orgRoles, projectRoles } from 'hooks/org-members/constants';
+import { ProjectRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  orgRoles,
+  projectRoles,
+  ROLE_HIERARCHY,
+} from 'hooks/org-members/constants';
 
 import { getMsgExecuteContract, getStargateAction } from './cosmwasm';
 
@@ -245,17 +250,29 @@ export function getAuthorizationId({
   return { authorizationId };
 }
 
-type GetAccountAssignmentParams = {
+type GetAccountAssignmentParams<
+  T extends Pick<Assignment, 'accountId' | 'roleName'>,
+> = {
   accountId?: string;
-  assignments?: Array<Pick<
-    Assignment,
-    'accountId' | 'roleName' | 'visible' | 'onChainRoleId'
-  > | null>;
+  assignments?: Array<T | null> | null;
 };
 
-export function getAccountAssignment({
-  accountId,
-  assignments,
-}: GetAccountAssignmentParams) {
-  return assignments?.find(assignment => assignment?.accountId === accountId);
+export function getAccountAssignment<
+  T extends Pick<Assignment, 'accountId' | 'roleName'>,
+>({ accountId, assignments }: GetAccountAssignmentParams<T>) {
+  return assignments?.reduce<T | null>((selectedAssignment, assignment) => {
+    if (
+      !assignment ||
+      assignment.accountId !== accountId ||
+      !assignment.roleName
+    )
+      return selectedAssignment;
+
+    if (!selectedAssignment?.roleName) return assignment;
+
+    return ROLE_HIERARCHY[assignment.roleName as ProjectRole] >
+      ROLE_HIERARCHY[selectedAssignment.roleName as ProjectRole]
+      ? assignment
+      : selectedAssignment;
+  }, null);
 }

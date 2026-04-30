@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { getMsgExecuteContract } from 'utils/cosmwasm';
-import { getAuthorizationId } from 'utils/rbam.utils';
+import { getAccountAssignment, getAuthorizationId } from 'utils/rbam.utils';
 
 import {
   useDeleteAssignmentMutation,
@@ -40,6 +41,7 @@ import {
   getAuthorizationName,
   getNewOrgRoleId,
   getNewProjectRoleId,
+  revokeAction,
   updateAuthorizationAction,
   updateMemberRoleActions,
 } from './utils';
@@ -102,27 +104,64 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       // If we assign member the owner role,
       // it means we need to downgrade current user to admin
       // and update the 'can_manage_members_except_owner' authorization to use the new owner address
-      const orgOwnerActions =
-        role === ROLE_OWNER
-          ? [
-              ...updateMemberRoleActions({
-                daoRbamAddress,
-                authorizationId,
-                memberAddress: wallet.address,
-                newRoleId: getNewOrgRoleId(ROLE_ADMIN),
-                oldRoleId: getNewOrgRoleId(ROLE_OWNER),
-              }),
-              updateAuthorizationAction({
-                daoRbamAddress,
-                cw4GroupAddress,
-                authorizationId,
-                newOwnerAddress: memberAddress,
-                authorizationIdToUpdate: orgRoles['admin'].authorizations[
-                  'can_manage_members_except_owner'
-                ] as number,
-              }),
-            ]
-          : [];
+      const roleIsOwner = role === ROLE_OWNER;
+      const adminRoleId = getNewOrgRoleId(ROLE_ADMIN);
+
+      // Check if current user is admin to know if we need to revoke the owner role
+      // from current user or just update it to admin
+      let currentUserIsAdmin = false;
+      if (roleIsOwner) {
+        const assignedCurrentUserRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: wallet.address,
+            roleId: adminRoleId,
+            daoRbamAddress,
+          }),
+        });
+        if (!assignedCurrentUserRes) {
+          setErrorBannerText(
+            _(msg`Could not verify your current role. Please try again.`),
+          );
+          return;
+        }
+        currentUserIsAdmin = assignedCurrentUserRes.assigned;
+      }
+      const ownerRoleId = getNewOrgRoleId(ROLE_OWNER);
+      const orgOwnerActions = roleIsOwner
+        ? [
+            ...(currentUserIsAdmin
+              ? [
+                  revokeAction({
+                    daoRbamAddress,
+                    authorizationId,
+                    assignments: [
+                      {
+                        addr: wallet.address,
+                        role_id: ownerRoleId,
+                      },
+                    ],
+                  }),
+                ]
+              : updateMemberRoleActions({
+                  daoRbamAddress,
+                  authorizationId,
+                  memberAddress: wallet.address,
+                  newRoleId: adminRoleId,
+                  oldRoleId: ownerRoleId,
+                })),
+            updateAuthorizationAction({
+              daoRbamAddress,
+              cw4GroupAddress,
+              authorizationId,
+              newOwnerAddress: memberAddress,
+              authorizationIdToUpdate: orgRoles['admin'].authorizations[
+                'can_manage_members_except_owner'
+              ] as number,
+            }),
+          ]
+        : [];
 
       // Check if old role is assigned
       // If member was initially added with email address and added a wallet address later on,
@@ -136,7 +175,15 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           daoRbamAddress,
         }),
       });
-      const assigned = assignedRes?.assigned;
+      if (!assignedRes) {
+        setErrorBannerText(
+          _(
+            msg`Could not verify the existing role assignment. Please try again.`,
+          ),
+        );
+        return;
+      }
+      const assigned = assignedRes.assigned;
 
       // If member was not assigned on chain, then we only add him
       // revoking the old role will be done off chain only
@@ -166,6 +213,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       };
 
       const offchainProjectAssignmentsToDelete: AssignmentToDelete[] = [];
+      let hasProjectAssignmentQueryError = false;
       const projectExecuteInstructions = (await Promise.all(
         projectsCurrentUserCanManageMembers
           ?.map(async project => {
@@ -184,33 +232,72 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
-            const oldAssignment = projectDao.assignmentsByDaoAddress.nodes.find(
-              a => a?.accountId === id,
-            );
+            const oldAssignment = getAccountAssignment({
+              accountId: id,
+              assignments: projectDao.assignmentsByDaoAddress.nodes,
+            });
 
             // if the user is in the org but not in this project anymore,
             // we do not add him back to the project
             if (!oldAssignment) return null;
 
-            const currentUserOldAssignment =
-              projectDao.assignmentsByDaoAddress.nodes.find(
-                a => a?.accountId === activeAccountId,
-              );
+            const currentUserOldAssignment = getAccountAssignment({
+              accountId: activeAccountId,
+              assignments: projectDao.assignmentsByDaoAddress.nodes,
+            });
 
             // If current user is owner of the project,
             // we need to downgrade current user to admin
             // and update the 'can_manage_members_except_owner' authorization to use the new owner address
+            const projectAdminRoleId = getNewProjectRoleId(ROLE_ADMIN);
+
+            // Check if current user is admin to know if we need to revoke the owner role
+            // from current user or just update it to admin
+            let currentUserIsAdmin = false;
+            if (roleIsOwner) {
+              const assignedCurrentUserRes = await getFromCacheOrFetch({
+                reactQueryClient,
+                query: getAssignedQuery({
+                  client: signingCosmWasmClient,
+                  addr: wallet.address,
+                  roleId: projectAdminRoleId,
+                  daoRbamAddress: projectDao.daoRbamAddress,
+                }),
+              });
+              if (!assignedCurrentUserRes) {
+                hasProjectAssignmentQueryError = true;
+                setErrorBannerText(
+                  _(msg`Could not verify your current role. Please try again.`),
+                );
+                return null;
+              }
+              currentUserIsAdmin = assignedCurrentUserRes.assigned;
+            }
+            const projectOwnerRoleId = getNewProjectRoleId(ROLE_OWNER);
+
             const projectOwnerActions =
-              currentUserOldAssignment?.roleName === ROLE_OWNER &&
-              role === ROLE_OWNER
+              currentUserOldAssignment?.roleName === ROLE_OWNER && roleIsOwner
                 ? [
-                    ...updateMemberRoleActions({
-                      daoRbamAddress: projectDao.daoRbamAddress,
-                      authorizationId: projectAuthorizationId!,
-                      memberAddress: wallet.address,
-                      newRoleId: getNewProjectRoleId(ROLE_ADMIN),
-                      oldRoleId: getNewProjectRoleId(ROLE_OWNER),
-                    }),
+                    ...(currentUserIsAdmin
+                      ? [
+                          revokeAction({
+                            daoRbamAddress: projectDao.daoRbamAddress,
+                            authorizationId: projectAuthorizationId!,
+                            assignments: [
+                              {
+                                addr: wallet.address,
+                                role_id: projectOwnerRoleId,
+                              },
+                            ],
+                          }),
+                        ]
+                      : updateMemberRoleActions({
+                          daoRbamAddress: projectDao.daoRbamAddress,
+                          authorizationId: projectAuthorizationId!,
+                          memberAddress: wallet.address,
+                          newRoleId: projectAdminRoleId,
+                          oldRoleId: projectOwnerRoleId,
+                        })),
                     updateAuthorizationAction({
                       daoRbamAddress: projectDao.daoRbamAddress,
                       cw4GroupAddress: projectDao.cw4GroupAddress,
@@ -233,7 +320,16 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 daoRbamAddress: projectDao.daoRbamAddress,
               }),
             });
-            const assigned = assignedRes?.assigned;
+            if (!assignedRes) {
+              hasProjectAssignmentQueryError = true;
+              setErrorBannerText(
+                _(
+                  msg`Could not verify the existing role assignment. Please try again.`,
+                ),
+              );
+              return null;
+            }
+            const assigned = assignedRes.assigned;
 
             if (!assigned && project.projectByProjectId?.adminDaoAddress)
               offchainProjectAssignmentsToDelete.push({
@@ -270,6 +366,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           })
           .filter(Boolean) || [],
       )) as ExecuteInstruction[];
+      if (hasProjectAssignmentQueryError) return;
 
       const msgs = [orgExecuteInstruction, ...projectExecuteInstructions].map(
         instruction =>
@@ -386,10 +483,12 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             if (!project) return;
             const projectDaoAddress =
               project?.projectByProjectId?.adminDaoAddress;
-            const projectOldRoleName =
-              project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress.nodes?.find(
-                a => a?.accountId === id,
-              )?.roleName;
+            const projectOldRoleName = getAccountAssignment({
+              accountId: id,
+              assignments:
+                project?.projectByProjectId?.daoByAdminDaoAddress
+                  ?.assignmentsByDaoAddress.nodes,
+            })?.roleName;
             if (!projectDaoAddress || !projectOldRoleName) return;
             await updateAssignment({
               variables: {

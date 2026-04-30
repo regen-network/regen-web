@@ -24,6 +24,8 @@ import {
 } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 
+import { ROLE_HIERARCHY } from './constants';
+
 export const useMembers = () => {
   const { _ } = useLingui();
   const { loginDisabled } = useWallet();
@@ -58,29 +60,49 @@ export const useMembers = () => {
 
   const dao = data?.daoByAddress;
 
+  const assignmentsByAccountId = useMemo(() => {
+    const assignments = dao?.assignmentsByDaoAddress?.nodes ?? [];
+    type Assignment = NonNullable<typeof assignments[number]>;
+
+    return assignments.reduce((map, assignment) => {
+      if (!assignment?.accountId || !assignment?.roleName) return map;
+
+      const assignmentRole = assignment.roleName as BaseMemberRole;
+      const currentAssignment = map.get(assignment.accountId);
+      const currentAssignmentRole = currentAssignment?.roleName as
+        | BaseMemberRole
+        | undefined;
+
+      if (
+        !currentAssignment ||
+        !currentAssignmentRole ||
+        ROLE_HIERARCHY[assignmentRole] > ROLE_HIERARCHY[currentAssignmentRole]
+      ) {
+        map.set(assignment.accountId, assignment);
+      }
+
+      return map;
+    }, new Map<string, Assignment>());
+  }, [dao?.assignmentsByDaoAddress?.nodes]);
+
   const currentUserRole = useMemo(
-    () =>
-      dao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountId === activeAccountId,
-      )?.roleName,
-    [dao, activeAccountId],
+    () => assignmentsByAccountId.get(activeAccountId ?? '')?.roleName,
+    [assignmentsByAccountId, activeAccountId],
   ) as BaseMemberRole | undefined;
 
   const members = useMemo(
     () =>
       (
         dao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(acc => {
-          const assignment = dao?.assignmentsByDaoAddress?.nodes?.find(
-            assignment => acc?.id === assignment?.accountId,
-          );
+          const assignment = assignmentsByAccountId.get(acc?.id ?? '');
           return assignment
             ? {
                 id: acc?.id,
                 name: acc?.name || _(DEFAULT_NAME),
                 title: acc?.title,
                 avatar: acc?.image || DEFAULT_PROFILE_USER_AVATAR,
-                role: assignment?.roleName,
-                visible: assignment?.visible,
+                role: assignment.roleName as BaseMemberRole,
+                visible: assignment.visible,
                 address: acc?.addr,
                 hasWalletAddress: !!acc?.addr,
                 isCurrentUser: acc?.id === activeAccountId,
@@ -91,13 +113,14 @@ export const useMembers = () => {
                   acc?.privateAccountById?.email ||
                   acc?.privateAccountById?.googleEmail ||
                   truncate(acc?.addr),
-                onChainRoleId: parseInt(assignment?.onChainRoleId),
+                onChainRoleId: parseInt(assignment.onChainRoleId),
               }
             : null;
         }) ?? []
       ).filter(Boolean) as Member[],
-    [dao, activeAccountId, _, daoOrganization],
+    [dao, assignmentsByAccountId, activeAccountId, _, daoOrganization],
   );
+
   return {
     members,
     currentUserRole,

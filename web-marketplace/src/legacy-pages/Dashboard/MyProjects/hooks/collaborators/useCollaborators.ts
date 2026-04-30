@@ -104,9 +104,10 @@ export const useCollaborators = (
       (
         projectDao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(
           (acc, i) => {
-            const assignment = projectDao?.assignmentsByDaoAddress?.nodes?.find(
-              assignment => acc?.id === assignment?.accountId,
-            );
+            const assignment = getAccountAssignment({
+              accountId: acc?.id,
+              assignments: projectDao?.assignmentsByDaoAddress?.nodes,
+            });
             // Find organization collaborator is part of
             const daos =
               accounts[i]?.accountById?.daosByAssignmentAccountIdAndDaoAddress

@@ -12,7 +12,7 @@ export const getAssignedQuery = ({
   queryFn: async () => {
     try {
       const resp = await client.queryContractSmart(params.daoRbamAddress, {
-        is_assigned_role: { addr: params.addr, role_id: params.roleId },
+        assigned: { addr: params.addr, role_id: params.roleId },
       });
       return resp;
     } catch (e) {

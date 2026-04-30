@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.1](https://github.com/regen-network/regen-web/compare/v2.13.0...v2.13.1) (2026-04-30)
+
+### Bug Fixes
+
+- getAssigned query and other related fixes ([0abf3c9](https://github.com/regen-network/regen-web/commit/0abf3c9711fea03aaf3db6044fe1ec91a3caf7e3))
+
 # [2.13.0](https://github.com/regen-network/regen-web/compare/v2.12.2...v2.13.0) (2026-04-07)
 
 ### Bug Fixes

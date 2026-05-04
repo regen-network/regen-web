@@ -15,6 +15,7 @@ type Props = {
   tabs: IconTabProps[];
   tabOuterClassName?: string;
   title?: string;
+  children?: React.ReactNode;
 };
 
 export const TableTabs = ({
@@ -22,6 +23,7 @@ export const TableTabs = ({
   sx = [],
   tabOuterClassName,
   title,
+  children,
 }: Props) => {
   const theme = useTheme();
   if (tabs.length === 0) {
@@ -42,6 +44,7 @@ export const TableTabs = ({
           {title}
         </Title>
       )}
+      {children}
       <IconTabs
         tabs={tabs}
         size="xl"

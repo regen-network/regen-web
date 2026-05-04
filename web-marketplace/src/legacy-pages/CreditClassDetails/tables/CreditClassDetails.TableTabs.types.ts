@@ -11,5 +11,6 @@ export type CreditClassDetailsTableTabsProps = {
   creditBatches?: BatchInfoWithSupply[];
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
+  creditsForSale?: number;
   _: TranslatorType;
 };

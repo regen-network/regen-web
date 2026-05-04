@@ -4,11 +4,7 @@ import { useLingui } from '@lingui/react';
 import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
 
-import BufferPoolCreditsIcon from 'web-components/src/components/icons/BufferPoolCredits';
-import CreditsForSaleIcon from 'web-components/src/components/icons/CreditsForSale';
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
-import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
-import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
 import CreditsTradeableAltIcon from 'web-components/src/components/icons/CreditsTradeableAlt';
 import { LabeledValue } from 'web-components/src/components/text-layouts';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -18,13 +14,16 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
-  BUFFER_POOL_CREDITS_TOOLTIP,
+  BufferPoolCreditsValue,
+  ForSaleCreditsValue,
+  IssuedCreditsValue,
+  RetiredCreditsValue,
+  TradableCreditsValue,
+} from './BatchTotals.items';
+import {
   ESCROWED_CREDITS_TOOLTIP,
-  FOR_SALE_CREDITS_TOOLTIP,
   formatNumberOptions,
-  ISSUED_CREDITS_TOOLTIP,
   REGISTERED_CREDITS_TOOLTIP,
-  RETIRED_CREDITS_TOOLTIP,
   SOLD_OUT,
   TRADEABLE_CREDITS_TOOLTIP,
 } from './ProjectBatchTotals.constants';
@@ -66,6 +65,12 @@ export function ProjectBatchTotals({
 
   // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
+  const creditsTooltip = getCreditsTooltip({
+    isSoldOut: tooltipIsSoldOut,
+    project: projectWithOrderData,
+    _,
+  });
+
   return (
     <div
       className={cn(
@@ -75,79 +80,67 @@ export function ProjectBatchTotals({
         className,
       )}
     >
-      <LabeledValue
-        label={complianceCredits ? _(msg`Credits Registered`) : _(msg`Issued`)}
-        tooltipLabel={
-          complianceCredits
-            ? _(REGISTERED_CREDITS_TOOLTIP)
-            : _(ISSUED_CREDITS_TOOLTIP)
-        }
-        number={
-          complianceCredits
-            ? totals.registeredAmount
-            : totals.tradableAmount +
-              totals.retiredAmount +
-              totals.bufferPoolAmount
-        }
-        formatNumberOptions={formatNumberOptions}
-        icon={<CreditsIssuedIcon />}
-        tooltipClassName={tooltipClassName}
-      />
-      {!complianceCredits && (
+      {complianceCredits ? (
         <LabeledValue
-          label={_(msg`For sale`)}
-          tooltipLabel={_(FOR_SALE_CREDITS_TOOLTIP)}
-          tooltipNumber={getCreditsTooltip({
-            isSoldOut: tooltipIsSoldOut,
-            project: projectWithOrderData,
-            _,
-          })}
+          label={_(REGISTERED_CREDITS_TOOLTIP)}
+          tooltipLabel={_(REGISTERED_CREDITS_TOOLTIP)}
+          number={totals.registeredAmount}
+          formatNumberOptions={formatNumberOptions}
+          icon={<CreditsIssuedIcon />}
+          tooltipClassName={tooltipClassName}
+        />
+      ) : (
+        <IssuedCreditsValue
+          number={
+            totals.tradableAmount +
+            totals.retiredAmount +
+            totals.bufferPoolAmount
+          }
+          tooltipClassName={tooltipClassName}
+        />
+      )}
+      {!complianceCredits && (
+        <ForSaleCreditsValue
+          tooltipNumber={creditsTooltip}
           number={isSoldOut ? undefined : totals.forSaleAmount}
           badgeLabel={isSoldOut ? _(SOLD_OUT) : undefined}
-          formatNumberOptions={formatNumberOptions}
-          icon={<CreditsForSaleIcon />}
           tooltipClassName={tooltipClassName}
         />
       )}
-      <LabeledValue
-        label={IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Tradable`)}
-        tooltipLabel={
-          complianceCredits
-            ? _(TRADEABLE_CREDITS_TOOLTIP)
-            : `${_(TRADEABLE_CREDITS_TOOLTIP)} ${_(ESCROWED_CREDITS_TOOLTIP)}`
-        }
-        tooltipNumber={
-          !complianceCredits
-            ? getCreditsTooltip({
-                isSoldOut: tooltipIsSoldOut,
-                project: projectWithOrderData,
-                _,
-              })
-            : undefined
-        }
-        number={totals.tradableAmount}
-        formatNumberOptions={formatNumberOptions}
-        icon={
-          IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />
-        }
-        tooltipClassName={tooltipClassName}
-      />
-      {totals.bufferPoolAmount > 0 && (
+      {IS_TERRASOS ? (
         <LabeledValue
-          label={_(msg`Buffer Pool`)}
-          tooltipLabel={_(BUFFER_POOL_CREDITS_TOOLTIP)}
-          number={totals.bufferPoolAmount}
+          label={_(msg`Credits Available`)}
+          tooltipLabel={
+            complianceCredits
+              ? _(TRADEABLE_CREDITS_TOOLTIP)
+              : `${_(TRADEABLE_CREDITS_TOOLTIP)} ${_(ESCROWED_CREDITS_TOOLTIP)}`
+          }
+          tooltipNumber={!complianceCredits ? creditsTooltip : undefined}
+          number={totals.tradableAmount}
           formatNumberOptions={formatNumberOptions}
-          icon={<BufferPoolCreditsIcon />}
+          icon={<CreditsTradeableAltIcon />}
+          tooltipClassName={tooltipClassName}
+        />
+      ) : (
+        <TradableCreditsValue
+          tooltipLabel={
+            complianceCredits
+              ? _(TRADEABLE_CREDITS_TOOLTIP)
+              : `${_(TRADEABLE_CREDITS_TOOLTIP)} ${_(ESCROWED_CREDITS_TOOLTIP)}`
+          }
+          tooltipNumber={!complianceCredits ? creditsTooltip : undefined}
+          number={totals.tradableAmount}
           tooltipClassName={tooltipClassName}
         />
       )}
-      <LabeledValue
-        label={_(msg`Retired`)}
-        tooltipLabel={_(RETIRED_CREDITS_TOOLTIP)}
+      {totals.bufferPoolAmount > 0 && (
+        <BufferPoolCreditsValue
+          number={totals.bufferPoolAmount}
+          tooltipClassName={tooltipClassName}
+        />
+      )}
+      <RetiredCreditsValue
         number={totals.retiredAmount}
-        formatNumberOptions={formatNumberOptions}
-        icon={<CreditsRetiredIcon />}
         tooltipClassName={tooltipClassName}
       />
     </div>

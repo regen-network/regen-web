@@ -88,8 +88,12 @@ const CreditClassDetailsSimple: React.FC<
   });
 
   const { isKeplrMobileWeb } = useWallet();
-  const { creditTypeData, creditTypeSanity, generationMethods } =
-    useCreditClassDetails({ onChainClass, metadata });
+  const {
+    creditTypeData,
+    creditTypeSanity,
+    generationMethods,
+    creditsForSale,
+  } = useCreditClassDetails({ onChainClass, metadata });
 
   const activities =
     metadata?.['regen:projectActivities'] ||
@@ -304,6 +308,7 @@ const CreditClassDetailsSimple: React.FC<
           creditBatches={batchesWithSupply}
           initialPaginationParams={paginationParams}
           onTableChange={setPaginationParams}
+          creditsForSale={creditsForSale}
           _={_}
         />
       </div>

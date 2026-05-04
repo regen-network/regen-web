@@ -6,6 +6,7 @@ import {
   INVALID_DATE,
   INVALID_JSON,
   INVALID_REGEN_ADDRESS,
+  INVALID_START_END_DATE,
   INVALID_VCS_RETIREMENT,
   REQUIRED_MESSAGE,
 } from 'lib/constants/shared.constants';
@@ -55,6 +56,7 @@ function CreateBatchBySteps(): React.ReactElement {
         invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
         invalidAmount: _(INVALID_AMOUNT),
         invalidDate: _(INVALID_DATE),
+        invalidStartEndDate: _(INVALID_START_END_DATE),
         invalidVCSRetirement: _(INVALID_VCS_RETIREMENT),
         invalidJSON: _(INVALID_JSON),
         vcsMetadataSchema,

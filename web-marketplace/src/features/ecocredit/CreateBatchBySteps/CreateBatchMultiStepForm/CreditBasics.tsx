@@ -69,6 +69,7 @@ export const getJSONSchema = ({ invalidJSON }: getJSONSchemaParams) =>
 type getCreditBasicsValidationSchemaFieldsParams = {
   requiredMessage: string;
   invalidDate: string;
+  invalidStartEndDate: string;
   vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
   JSONSchema: ReturnType<typeof getJSONSchema>;
 };
@@ -76,12 +77,16 @@ type getCreditBasicsValidationSchemaFieldsParams = {
 export const getCreditBasicsValidationSchemaFields = ({
   requiredMessage,
   invalidDate,
+  invalidStartEndDate,
   vcsMetadataSchema,
   JSONSchema,
 }: getCreditBasicsValidationSchemaFieldsParams) => ({
   projectId: Yup.string().required(requiredMessage),
   startDate: Yup.date().required(requiredMessage).typeError(invalidDate),
-  endDate: Yup.date().required(requiredMessage).typeError(invalidDate),
+  endDate: Yup.date()
+    .required(requiredMessage)
+    .typeError(invalidDate)
+    .max(Yup.ref('endDate'), invalidStartEndDate),
   // Verified Carbon Standard (VCS) credits (the ones starting with C01) require a specific schema
   // different than the one for all other projects
   metadata: Yup.object().when('projectId', {
@@ -94,6 +99,7 @@ export const getCreditBasicsValidationSchemaFields = ({
 type getCreditBasicsValidationSchemaParams = {
   requiredMessage: string;
   invalidDate: string;
+  invalidStartEndDate: string;
   invalidVCSRetirement: string;
   invalidJSON: string;
 };
@@ -101,6 +107,7 @@ type getCreditBasicsValidationSchemaParams = {
 export const getCreditBasicsValidationSchema = ({
   requiredMessage,
   invalidDate,
+  invalidStartEndDate,
   invalidVCSRetirement,
   invalidJSON,
 }: getCreditBasicsValidationSchemaParams) =>
@@ -108,6 +115,7 @@ export const getCreditBasicsValidationSchema = ({
     getCreditBasicsValidationSchemaFields({
       requiredMessage,
       invalidDate,
+      invalidStartEndDate,
       vcsMetadataSchema: getVcsMetadataSchema({
         requiredMessage,
         invalidVCSRetirement,

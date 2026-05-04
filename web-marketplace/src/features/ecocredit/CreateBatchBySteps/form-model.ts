@@ -29,6 +29,7 @@ type GetFormModelParams = {
   invalidRegenAddress: string;
   invalidAmount: string;
   invalidDate: string;
+  invalidStartEndDate: string;
   invalidVCSRetirement: string;
   invalidJSON: string;
   vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
@@ -41,6 +42,7 @@ export const getFormModel = ({
   invalidRegenAddress,
   invalidAmount,
   invalidDate,
+  invalidStartEndDate,
   invalidVCSRetirement,
   invalidJSON,
   vcsMetadataSchema,
@@ -77,6 +79,7 @@ export const getFormModel = ({
     getCreditBasicsValidationSchema({
       requiredMessage,
       invalidDate,
+      invalidStartEndDate,
       invalidVCSRetirement,
       invalidJSON,
     }),
@@ -92,6 +95,7 @@ export const getFormModel = ({
   validationSchemaFields: {
     ...getCreditBasicsValidationSchemaFields({
       invalidDate,
+      invalidStartEndDate,
       vcsMetadataSchema,
       JSONSchema,
       requiredMessage,

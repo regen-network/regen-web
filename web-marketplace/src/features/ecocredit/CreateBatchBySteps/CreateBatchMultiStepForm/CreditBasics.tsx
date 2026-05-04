@@ -4,7 +4,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Box, IconButton, Link } from '@mui/material';
-import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 
@@ -67,25 +66,9 @@ export const getJSONSchema = ({ invalidJSON }: getJSONSchemaParams) =>
     (value, context) => !!value && isValidJSON(value),
   );
 
-type getIsPastDateTestParams = {
-  invalidPastDate: string;
-};
-
-export const getIsPastDateTest = ({
-  invalidPastDate,
-}: getIsPastDateTestParams) => ({
-  name: 'is-past-date',
-  message: invalidPastDate,
-  test: (value: Date | undefined) => {
-    if (!value) return false;
-    return isPast(value);
-  },
-});
-
 type getCreditBasicsValidationSchemaFieldsParams = {
   requiredMessage: string;
   invalidDate: string;
-  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
   vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
   JSONSchema: ReturnType<typeof getJSONSchema>;
 };
@@ -93,19 +76,16 @@ type getCreditBasicsValidationSchemaFieldsParams = {
 export const getCreditBasicsValidationSchemaFields = ({
   requiredMessage,
   invalidDate,
-  isPastDateTest,
   vcsMetadataSchema,
   JSONSchema,
 }: getCreditBasicsValidationSchemaFieldsParams) => ({
   projectId: Yup.string().required(requiredMessage),
   startDate: Yup.date()
     .required(requiredMessage)
-    .typeError(invalidDate)
-    .test({ ...isPastDateTest }),
+    .typeError(invalidDate),
   endDate: Yup.date()
     .required(requiredMessage)
-    .typeError(invalidDate)
-    .test({ ...isPastDateTest }),
+    .typeError(invalidDate),
   // Verified Carbon Standard (VCS) credits (the ones starting with C01) require a specific schema
   // different than the one for all other projects
   metadata: Yup.object().when('projectId', {
@@ -118,7 +98,6 @@ export const getCreditBasicsValidationSchemaFields = ({
 type getCreditBasicsValidationSchemaParams = {
   requiredMessage: string;
   invalidDate: string;
-  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
   invalidVCSRetirement: string;
   invalidJSON: string;
 };
@@ -126,7 +105,6 @@ type getCreditBasicsValidationSchemaParams = {
 export const getCreditBasicsValidationSchema = ({
   requiredMessage,
   invalidDate,
-  isPastDateTest,
   invalidVCSRetirement,
   invalidJSON,
 }: getCreditBasicsValidationSchemaParams) =>
@@ -134,7 +112,6 @@ export const getCreditBasicsValidationSchema = ({
     getCreditBasicsValidationSchemaFields({
       requiredMessage,
       invalidDate,
-      isPastDateTest,
       vcsMetadataSchema: getVcsMetadataSchema({
         requiredMessage,
         invalidVCSRetirement,
@@ -216,7 +193,7 @@ export default function CreditBasics({
             placeholder={_(msg`Start Date`)}
             name="startDate"
             required
-            maxDate={values.endDate || new Date()}
+            maxDate={values.endDate}
             component={DatePickField}
           />
         </Box>
@@ -227,7 +204,6 @@ export default function CreditBasics({
             name="endDate"
             required
             minDate={values.startDate}
-            maxDate={new Date()}
             component={DatePickField}
           />
         </Box>

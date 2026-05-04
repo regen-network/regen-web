@@ -5,7 +5,6 @@ import {
   INVALID_AMOUNT,
   INVALID_DATE,
   INVALID_JSON,
-  INVALID_PAST_DATE,
   INVALID_REGEN_ADDRESS,
   INVALID_VCS_RETIREMENT,
   REQUIRED_MESSAGE,
@@ -15,7 +14,6 @@ import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
 import CreateBatchMultiStepForm from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 import {
-  getIsPastDateTest,
   getJSONSchema,
   getVcsMetadataSchema,
 } from './CreateBatchMultiStepForm/CreditBasics';
@@ -30,15 +28,6 @@ import getFormModel from './form-model';
 
 function CreateBatchBySteps(): React.ReactElement {
   const { _ } = useLingui();
-
-  // We need to ensure batches are not created with dates in the past
-  const isPastDateTest = useMemo(
-    () =>
-      getIsPastDateTest({
-        invalidPastDate: _(INVALID_PAST_DATE),
-      }),
-    [_],
-  );
 
   // Schema for Verified Carbon Standard projects
   const vcsMetadataSchema = useMemo(
@@ -68,12 +57,11 @@ function CreateBatchBySteps(): React.ReactElement {
         invalidDate: _(INVALID_DATE),
         invalidVCSRetirement: _(INVALID_VCS_RETIREMENT),
         invalidJSON: _(INVALID_JSON),
-        isPastDateTest,
         vcsMetadataSchema,
         JSONSchema,
         _,
       }),
-    [JSONSchema, _, isPastDateTest, vcsMetadataSchema],
+    [JSONSchema, _, vcsMetadataSchema],
   );
 
   return (

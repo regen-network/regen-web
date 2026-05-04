@@ -69,7 +69,6 @@ export const REQUIREMENT_AGREEMENT = msg`You must agree to continue`;
 export const INVALID_AMOUNT = msg`Please enter a valid amount`;
 export const INSUFFICIENT_CREDITS = "You don't have enough credits";
 export const INVALID_DATE = msg`Invalid date`;
-export const INVALID_PAST_DATE = msg`Must be a date in the past`;
 export const INVALID_URL = msg`Please enter a valid URL`;
 export const INVALID_VCS_RETIREMENT =
   'Please enter a valid VCS retirement serial number';

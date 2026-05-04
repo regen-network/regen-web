@@ -17,7 +17,6 @@ import {
   creditBasicsInitialValues,
   getCreditBasicsValidationSchema,
   getCreditBasicsValidationSchemaFields,
-  getIsPastDateTest,
   getJSONSchema,
   getVcsMetadataSchema,
 } from './CreateBatchMultiStepForm/CreditBasics';
@@ -32,7 +31,6 @@ type GetFormModelParams = {
   invalidDate: string;
   invalidVCSRetirement: string;
   invalidJSON: string;
-  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
   vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
   JSONSchema: ReturnType<typeof getJSONSchema>;
   _: TranslatorType;
@@ -45,7 +43,6 @@ export const getFormModel = ({
   invalidDate,
   invalidVCSRetirement,
   invalidJSON,
-  isPastDateTest,
   vcsMetadataSchema,
   JSONSchema,
   _,
@@ -80,7 +77,6 @@ export const getFormModel = ({
     getCreditBasicsValidationSchema({
       requiredMessage,
       invalidDate,
-      isPastDateTest,
       invalidVCSRetirement,
       invalidJSON,
     }),
@@ -96,7 +92,6 @@ export const getFormModel = ({
   validationSchemaFields: {
     ...getCreditBasicsValidationSchemaFields({
       invalidDate,
-      isPastDateTest,
       vcsMetadataSchema,
       JSONSchema,
       requiredMessage,

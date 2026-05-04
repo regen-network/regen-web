@@ -80,12 +80,8 @@ export const getCreditBasicsValidationSchemaFields = ({
   JSONSchema,
 }: getCreditBasicsValidationSchemaFieldsParams) => ({
   projectId: Yup.string().required(requiredMessage),
-  startDate: Yup.date()
-    .required(requiredMessage)
-    .typeError(invalidDate),
-  endDate: Yup.date()
-    .required(requiredMessage)
-    .typeError(invalidDate),
+  startDate: Yup.date().required(requiredMessage).typeError(invalidDate),
+  endDate: Yup.date().required(requiredMessage).typeError(invalidDate),
   // Verified Carbon Standard (VCS) credits (the ones starting with C01) require a specific schema
   // different than the one for all other projects
   metadata: Yup.object().when('projectId', {

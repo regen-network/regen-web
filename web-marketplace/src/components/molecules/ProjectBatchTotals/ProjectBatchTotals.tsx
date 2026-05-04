@@ -4,6 +4,8 @@ import { useLingui } from '@lingui/react';
 import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
 
+import BufferPoolCreditsIcon from 'web-components/src/components/icons/BufferPoolCredits';
+import CreditsForSaleIcon from 'web-components/src/components/icons/CreditsForSale';
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
 import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
 import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
@@ -16,6 +18,7 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
+  BUFFER_POOL_CREDITS_TOOLTIP,
   ESCROWED_CREDITS_TOOLTIP,
   FOR_SALE_CREDITS_TOOLTIP,
   formatNumberOptions,
@@ -82,7 +85,9 @@ export function ProjectBatchTotals({
         number={
           complianceCredits
             ? totals.registeredAmount
-            : totals.tradableAmount + totals.retiredAmount
+            : totals.tradableAmount +
+              totals.retiredAmount +
+              totals.bufferPoolAmount
         }
         formatNumberOptions={formatNumberOptions}
         icon={<CreditsIssuedIcon />}
@@ -100,7 +105,7 @@ export function ProjectBatchTotals({
           number={isSoldOut ? undefined : totals.forSaleAmount}
           badgeLabel={isSoldOut ? _(SOLD_OUT) : undefined}
           formatNumberOptions={formatNumberOptions}
-          icon={<CreditsIssuedIcon />}
+          icon={<CreditsForSaleIcon />}
           tooltipClassName={tooltipClassName}
         />
       )}
@@ -127,6 +132,16 @@ export function ProjectBatchTotals({
         }
         tooltipClassName={tooltipClassName}
       />
+      {totals.bufferPoolAmount > 0 && (
+        <LabeledValue
+          label={_(msg`Buffer Pool`)}
+          tooltipLabel={_(BUFFER_POOL_CREDITS_TOOLTIP)}
+          number={totals.bufferPoolAmount}
+          formatNumberOptions={formatNumberOptions}
+          icon={<BufferPoolCreditsIcon />}
+          tooltipClassName={tooltipClassName}
+        />
+      )}
       <LabeledValue
         label={_(msg`Retired`)}
         tooltipLabel={_(RETIRED_CREDITS_TOOLTIP)}

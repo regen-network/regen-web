@@ -1822,9 +1822,9 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
-#~ msgid "Credits Registered"
-#~ msgstr ""
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:85
+msgid "Credits Registered"
+msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
 msgid "Credits Retired"

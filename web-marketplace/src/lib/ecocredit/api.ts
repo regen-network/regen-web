@@ -89,15 +89,19 @@ export const getBatchesTotal = (
 
     if (bufferPoolAccounts?.length) {
       const totalIssued = totals.tradableAmount + totals.retiredAmount;
-      totals.bufferPoolAmount = parseFloat(
+      const calculatedBufferPoolAmount = parseFloat(
         bufferPoolAccounts
           .reduce((acc, account) => {
             const allocationPercent = parseFloat(
-              account['regen:poolAllocation'].replace('%', ''),
+              account['regen:poolAllocation']?.replace('%', '') || '0',
             );
             return acc + (totalIssued * allocationPercent) / 100;
           }, 0)
           .toFixed(6),
+      );
+      totals.bufferPoolAmount = Math.min(
+        totals.tradableAmount,
+        calculatedBufferPoolAmount,
       );
       totals.tradableAmount -= totals.bufferPoolAmount;
     }

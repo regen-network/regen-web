@@ -82,7 +82,7 @@ export function ProjectBatchTotals({
     >
       {complianceCredits ? (
         <LabeledValue
-          label={_(REGISTERED_CREDITS_TOOLTIP)}
+          label={_(msg`Credits Registered`)}
           tooltipLabel={_(REGISTERED_CREDITS_TOOLTIP)}
           number={totals.registeredAmount}
           formatNumberOptions={formatNumberOptions}

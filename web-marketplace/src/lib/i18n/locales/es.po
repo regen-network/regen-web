@@ -322,7 +322,7 @@ msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con fr
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:11
 msgid "A shared reserve of ecological credits set aside to manage risk. If issued credits are later reversed or invalidated (e.g. due to project underperformance), credits from the buffer pool are retired to maintain environmental integrity."
 msgstr "Una reserva compartida de créditos ecológicos destinada a la gestión de riesgos. Si los créditos emitidos se revierten o invalidan posteriormente (por ejemplo, debido a un rendimiento deficiente del proyecto), los créditos de la reserva se retiran para mantener la integridad ambiental."
 
@@ -940,7 +940,7 @@ msgstr "Breve resumen del proyecto"
 #~ msgid "Budget"
 #~ msgstr "Presupuesto"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:137
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:105
 msgid "Buffer Pool"
 msgstr "Grupo de búfer"
 
@@ -1651,7 +1651,7 @@ msgstr "Clase de crédito"
 msgid "CREDIT CLASS"
 msgstr "CLASE DE CRÉDITO"
 
-#: src/legacy-pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:190
+#: src/legacy-pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:194
 msgid "credit class <0/>"
 msgstr "clase de crédito <0/>"
 
@@ -1743,7 +1743,7 @@ msgstr "créditos"
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
 #: src/components/organisms/Order/Order.Summary.tsx:61
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:312
-#: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.tsx:13
+#: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.tsx:31
 msgid "Credits"
 msgstr "Créditos"
 
@@ -1756,7 +1756,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:112
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1788,7 +1788,7 @@ msgstr "Créditos cancelados"
 msgid "Credits cannot exceed"
 msgstr "Los créditos no pueden exceder"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr "Créditos actualmente disponibles para comprar con moneda fiduciaria o criptomoneda en Regen Marketplace."
 
@@ -1829,8 +1829,8 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
-msgid "Credits Registered"
-msgstr "Créditos registrados"
+#~ msgid "Credits Registered"
+#~ msgstr "Créditos registrados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
 msgid "Credits Retired"
@@ -2525,7 +2525,7 @@ msgstr "Para obtener ayuda para resolver un problema, comuníquese con support@r
 #~ msgid "For Land Stewards"
 #~ msgstr "Para administradores de tierras"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:61
 msgid "For sale"
 msgstr "En venta"
 
@@ -2730,7 +2730,7 @@ msgstr "Para comprar y retirar ecocréditos mediante pago con tarjeta de crédit
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
 msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una densidad de población muy alta, pastan en una unidad de manejo durante un período muy corto de tiempo."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 msgid "Includes escrowed credits."
 msgstr "Incluye créditos en depósito."
 
@@ -2820,7 +2820,7 @@ msgstr "Emisión"
 #~ msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 #~ msgstr "Emite y vende créditos de servicios ecosistémicos a compradores de todo el mundo: recibe un pago por tu gestión ecológica."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:37
 msgid "Issued"
 msgstr "Emitido"
 
@@ -4530,7 +4530,7 @@ msgstr "Retirar créditos ahora"
 msgid "Retire credits upon transfer"
 msgstr "Retirar créditos al momento de la transferencia"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:146
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:119
 msgid "Retired"
 msgstr "Jubilado"
 
@@ -4539,7 +4539,7 @@ msgstr "Jubilado"
 msgid "Retired by"
 msgstr "Retirado por"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
@@ -4931,7 +4931,7 @@ msgstr "Cuentas sociales"
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:11
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:12
 #: src/lib/constants/shared.constants.tsx:177
 msgid "Sold Out"
 msgstr "Agotado"
@@ -5248,11 +5248,15 @@ msgstr "El lugar de la retirada puede ser el lugar donde usted vive o donde oper
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "La estructura, los procedimientos y los requisitos para el registro de proyectos, la cuantificación, el seguimiento, el reporte y la verificación (MRV) y la emisión de créditos relacionados con un determinado tipo de crédito."
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+msgid "The total amount of credits that were issued to this credit class."
+msgstr "El importe total de los créditos que se emitieron para esta clase de crédito."
+
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
 msgid "The total amount of credits that were issued to this project."
 msgstr "Monto total de créditos que se emitieron para este proyecto."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "The total amount of credits that were registered to this project."
 msgstr "La cantidad total de créditos que se registraron en este proyecto."
 
@@ -5530,7 +5534,7 @@ msgstr "Identificación del token del proyecto Toucan"
 msgid "Toucan Vintage Token Id"
 msgstr "Identificación de token vintage de tucán"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:87
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:128
 msgid "Tradable"
 msgstr "Negociable"
@@ -5547,7 +5551,7 @@ msgstr "Créditos negociables"
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 #~ msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Tradable credits have not yet been retired and can be held, sold, or sent to another party."
 msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 

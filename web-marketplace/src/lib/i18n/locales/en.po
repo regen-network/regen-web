@@ -316,7 +316,7 @@ msgstr ""
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:11
 msgid "A shared reserve of ecological credits set aside to manage risk. If issued credits are later reversed or invalidated (e.g. due to project underperformance), credits from the buffer pool are retired to maintain environmental integrity."
 msgstr ""
 
@@ -934,7 +934,7 @@ msgstr ""
 #~ msgid "Budget"
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:137
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:105
 msgid "Buffer Pool"
 msgstr ""
 
@@ -1645,7 +1645,7 @@ msgstr ""
 msgid "CREDIT CLASS"
 msgstr ""
 
-#: src/legacy-pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:190
+#: src/legacy-pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:194
 msgid "credit class <0/>"
 msgstr ""
 
@@ -1737,7 +1737,7 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
 #: src/components/organisms/Order/Order.Summary.tsx:61
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:312
-#: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.tsx:13
+#: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.tsx:31
 msgid "Credits"
 msgstr ""
 
@@ -1750,7 +1750,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:112
 msgid "Credits Available"
 msgstr ""
 
@@ -1782,7 +1782,7 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr ""
 
@@ -1823,8 +1823,8 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
-msgid "Credits Registered"
-msgstr ""
+#~ msgid "Credits Registered"
+#~ msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
 msgid "Credits Retired"
@@ -2517,7 +2517,7 @@ msgstr ""
 #~ msgid "For Land Stewards"
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:61
 msgid "For sale"
 msgstr ""
 
@@ -2722,7 +2722,7 @@ msgstr ""
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 msgid "Includes escrowed credits."
 msgstr ""
 
@@ -2812,7 +2812,7 @@ msgstr ""
 #~ msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:37
 msgid "Issued"
 msgstr ""
 
@@ -4522,7 +4522,7 @@ msgstr ""
 msgid "Retire credits upon transfer"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:146
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:119
 msgid "Retired"
 msgstr ""
 
@@ -4531,7 +4531,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -4923,7 +4923,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:11
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:12
 #: src/lib/constants/shared.constants.tsx:177
 msgid "Sold Out"
 msgstr ""
@@ -5240,11 +5240,15 @@ msgstr ""
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+msgid "The total amount of credits that were issued to this credit class."
+msgstr ""
+
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "The total amount of credits that were registered to this project."
 msgstr ""
 
@@ -5522,7 +5526,7 @@ msgstr ""
 msgid "Toucan Vintage Token Id"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
+#: src/components/molecules/ProjectBatchTotals/BatchTotals.items.tsx:87
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:128
 msgid "Tradable"
 msgstr ""
@@ -5539,7 +5543,7 @@ msgstr ""
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Tradable credits have not yet been retired and can be held, sold, or sent to another party."
 msgstr ""
 

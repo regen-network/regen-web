@@ -22,7 +22,7 @@ msgstr ""
 msgid " Exit to homepage "
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:97
+#: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr ""
 
@@ -93,11 +93,11 @@ msgstr ""
 #~ msgid "{description}"
 #~ msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:236
+#: src/lib/constants/shared.constants.tsx:235
 msgid "{from}–{displayedTo} of {count}"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:237
+#: src/lib/constants/shared.constants.tsx:236
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr ""
 
@@ -179,7 +179,7 @@ msgstr ""
 #~ msgid "+ add another issuer'"
 #~ msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:316
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:288
 msgid "+ add certification"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "+ create post"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:98
+#: src/lib/constants/shared.constants.tsx:97
 msgid "+ see more"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "actions"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:107
+#: src/lib/constants/shared.constants.tsx:106
 msgid "Actions"
 msgstr ""
 
@@ -382,13 +382,13 @@ msgid "Active account is required to create an organization."
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:42
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:45
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
 #: src/legacy-pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:24
-#: src/lib/constants/shared.constants.tsx:190
+#: src/lib/constants/shared.constants.tsx:189
 msgid "Actual number of credits issued may be different from the estimated issuance."
 msgstr ""
 
@@ -451,11 +451,11 @@ msgid "Additional certification url"
 msgstr ""
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.AdditionalInfo.tsx:49
-#: src/lib/constants/shared.constants.tsx:203
+#: src/lib/constants/shared.constants.tsx:202
 msgid "additional certifications"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:272
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:244
 msgid "Additional Certifications"
 msgstr ""
 
@@ -515,7 +515,7 @@ msgstr ""
 msgid "all profiles"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:21
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:22
 #: src/legacy-pages/Projects/Projects.tsx:116
 msgid "All projects"
 msgstr ""
@@ -698,7 +698,7 @@ msgid "Are you sure you want to delete this post?"
 msgstr ""
 
 #: src/legacy-pages/CreateOrganization/CreateOrganization.constants.ts:18
-#: src/lib/constants/shared.constants.tsx:87
+#: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
@@ -750,7 +750,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -759,7 +759,7 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:178
+#: src/lib/constants/shared.constants.tsx:177
 msgid "Avg Price"
 msgstr ""
 
@@ -878,7 +878,7 @@ msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:183
 #: src/legacy-pages/ProjectFinished/ProjectFinished.tsx:100
-#: src/lib/constants/shared.constants.tsx:95
+#: src/lib/constants/shared.constants.tsx:94
 msgid "blockchain record"
 msgstr ""
 
@@ -938,7 +938,7 @@ msgstr ""
 #~ msgid "Buy"
 #~ msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:223
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:232
 msgid "BUY"
 msgstr ""
 
@@ -954,7 +954,7 @@ msgstr ""
 #~ msgid "buy credits"
 #~ msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:223
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:232
 msgid "BUY CREDITS"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "buy ecocredits"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:210
+#: src/lib/constants/shared.constants.tsx:209
 msgid "Buy ecocredits"
 msgstr ""
 
@@ -1029,12 +1029,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete data posts."
-msgstr ""
+#~ msgid "Can create, edit, and delete data posts."
+#~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-#~ msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
-#~ msgstr ""
+msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:9
 msgid "Can edit all project page info and posts. Cannot manage users or credits."
@@ -1194,7 +1194,7 @@ msgstr ""
 msgid "Choose a specific location on the map"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:120
+#: src/lib/constants/shared.constants.tsx:119
 msgid "Choose any ecocredits that are eligible for this basket.<0>Learn more»</0>"
 msgstr ""
 
@@ -1291,7 +1291,7 @@ msgid "Close project creation"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/lib/constants/shared.constants.tsx:96
+#: src/lib/constants/shared.constants.tsx:95
 msgid "CLOSE WINDOW"
 msgstr ""
 
@@ -1303,11 +1303,11 @@ msgstr ""
 msgid "Collaborator actions"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:137
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:138
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:89
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:94
 msgid "Collaborators"
 msgstr ""
 
@@ -1319,7 +1319,7 @@ msgstr ""
 msgid "Collapse sidebar"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:173
+#: src/lib/constants/shared.constants.tsx:172
 msgid "coming soon"
 msgstr ""
 
@@ -1367,7 +1367,7 @@ msgstr ""
 msgid "Congrats! Your purchase was successful."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:94
+#: src/lib/constants/shared.constants.tsx:93
 msgid "Congrats! Your transaction was successful."
 msgstr ""
 
@@ -1452,7 +1452,7 @@ msgstr ""
 msgid "Copy and paste an embeddable video url. Supported types include: YouTube, Facebook, Vimeo, Twitch, and DailyMotion."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:101
+#: src/lib/constants/shared.constants.tsx:100
 msgid "Copy link to profile"
 msgstr ""
 
@@ -1473,8 +1473,20 @@ msgstr ""
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
+#: src/hooks/org-members/useUpdateMemberRole.ts:181
+#: src/hooks/org-members/useUpdateMemberRole.ts:327
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useUpdateCollaboratorRole.ts:171
+msgid "Could not verify the existing role assignment. Please try again."
+msgstr ""
+
+#: src/hooks/org-members/useUpdateMemberRole.ts:125
+#: src/hooks/org-members/useUpdateMemberRole.ts:270
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useUpdateCollaboratorRole.ts:114
+msgid "Could not verify your current role. Please try again."
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:59
-#: src/lib/constants/shared.constants.tsx:163
+#: src/lib/constants/shared.constants.tsx:162
 msgid "Country"
 msgstr ""
 
@@ -1486,7 +1498,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:178
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:181
 msgid "create an organization"
 msgstr ""
 
@@ -1497,7 +1509,7 @@ msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:130
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:200
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:55
 msgid "Create Credit Batch"
 msgstr ""
 
@@ -1542,7 +1554,7 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:241
+#: src/lib/constants/shared.constants.tsx:240
 msgid "Creating an organization requires signing a blockchain transaction. Learn more about wallets in our <0>user guide.</0>"
 msgstr ""
 
@@ -1550,7 +1562,7 @@ msgstr ""
 msgid "credit activity table"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:57
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:54
 msgid "Credit Basics"
 msgstr ""
 
@@ -1603,7 +1615,7 @@ msgid "Credit card orders are hidden"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
-#: src/lib/constants/shared.constants.tsx:200
+#: src/lib/constants/shared.constants.tsx:199
 msgid "credit class"
 msgstr ""
 
@@ -1673,7 +1685,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:79
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:84
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1773,11 +1785,11 @@ msgstr ""
 #~ msgid "Credits for"
 #~ msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:185
+#: src/lib/constants/shared.constants.tsx:184
 msgid "credits for sale"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:74
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:71
 msgid "Credits have been issued!"
 msgstr ""
 
@@ -1793,7 +1805,7 @@ msgstr ""
 #~ msgid "Credits issued"
 #~ msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:174
+#: src/lib/constants/shared.constants.tsx:173
 msgid "credits purchased"
 msgstr ""
 
@@ -1896,7 +1908,7 @@ msgid "Data Deficient"
 msgstr ""
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:5
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:75
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:80
 msgid "Data Posts"
 msgstr ""
 
@@ -1917,7 +1929,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:264
 msgid "Date Created"
 msgstr ""
 
@@ -2019,6 +2031,10 @@ msgstr ""
 msgid "Draft created!"
 msgstr ""
 
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:167
+msgid "Draft on-chain projects cannot be migrated. Please publish your project to migrate."
+msgstr ""
+
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:52
 msgid "Draft saved!"
 msgstr ""
@@ -2045,7 +2061,7 @@ msgid "Ecocredit batch ID"
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:46
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:51
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:52
 msgid "Ecocredit batches"
 msgstr ""
 
@@ -2105,7 +2121,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/legacy-pages/Projects/hooks/useClientFilters.tsx:134
-#: src/lib/constants/shared.constants.tsx:105
+#: src/lib/constants/shared.constants.tsx:104
 msgid "Ecosystem"
 msgstr ""
 
@@ -2197,7 +2213,7 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:100
+#: src/lib/constants/shared.constants.tsx:99
 msgid "Edit Profile"
 msgstr ""
 
@@ -2264,8 +2280,8 @@ msgstr ""
 msgid "end date"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:225
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:226
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:198
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
 msgid "End Date"
 msgstr ""
 
@@ -2302,7 +2318,7 @@ msgstr ""
 msgid "Equivalent to"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:176
+#: src/lib/constants/shared.constants.tsx:175
 msgid "Error fetching price"
 msgstr ""
 
@@ -2311,7 +2327,7 @@ msgid "Error getting ISO string for jurisdiction. Please edit your location."
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:23
-#: src/lib/constants/shared.constants.tsx:184
+#: src/lib/constants/shared.constants.tsx:183
 msgid "estimated issuance"
 msgstr ""
 
@@ -2337,7 +2353,7 @@ msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:90
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:136
-#: src/lib/constants/shared.constants.tsx:155
+#: src/lib/constants/shared.constants.tsx:154
 msgid "Explain the reason you are retiring these credits"
 msgstr ""
 
@@ -2425,7 +2441,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:269
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -2467,7 +2483,7 @@ msgstr ""
 #: src/components/molecules/PlanStepper.tsx:19
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:40
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:41
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:72
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:69
 msgid "Finished"
 msgstr ""
 
@@ -2649,7 +2665,7 @@ msgstr ""
 msgid "If you proceed, you will lose all the unsaved changes you made. This cannot be undone."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:88
+#: src/lib/constants/shared.constants.tsx:87
 msgid "If you proceed, you will lose all unsaved changes you made. This cannot be undone."
 msgstr ""
 
@@ -2738,11 +2754,11 @@ msgstr ""
 msgid "Invalid email or REGEN address"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:79
+#: src/lib/constants/shared.constants.tsx:78
 msgid "Invalid Polygon address"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:78
+#: src/lib/constants/shared.constants.tsx:77
 msgid "Invalid regen address"
 msgstr ""
 
@@ -2913,7 +2929,7 @@ msgstr ""
 msgid "Least Concern"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:112
+#: src/lib/constants/shared.constants.tsx:111
 msgid "less"
 msgstr ""
 
@@ -2961,7 +2977,7 @@ msgid "Location data available on request"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:102
-#: src/lib/constants/shared.constants.tsx:156
+#: src/lib/constants/shared.constants.tsx:155
 msgid "Location of retirement"
 msgstr ""
 
@@ -3051,7 +3067,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:84
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:89
 msgid "Manage Credits"
 msgstr ""
 
@@ -3075,7 +3091,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:142
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:153
 msgid "manage project tabs"
 msgstr ""
 
@@ -3116,7 +3132,7 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:148
+#: src/lib/constants/shared.constants.tsx:147
 msgid "Maximum {maximumFractionDigits} decimal places"
 msgstr ""
 
@@ -3149,7 +3165,7 @@ msgstr ""
 #~ msgid "Member has been removed from your organization."
 #~ msgstr ""
 
-#: src/hooks/org-members/constants.ts:129
+#: src/hooks/org-members/constants.ts:138
 msgid "member not found"
 msgstr ""
 
@@ -3178,7 +3194,7 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:201
+#: src/lib/constants/shared.constants.tsx:200
 msgid "methodology"
 msgstr ""
 
@@ -3226,7 +3242,7 @@ msgstr ""
 msgid "Minimum of 1 recipient"
 msgstr ""
 
-#: src/hooks/org-members/constants.ts:128
+#: src/hooks/org-members/constants.ts:137
 msgid "missing required parameters"
 msgstr ""
 
@@ -3251,7 +3267,7 @@ msgid "monitor"
 msgstr ""
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:5
-#: src/lib/constants/shared.constants.tsx:113
+#: src/lib/constants/shared.constants.tsx:112
 msgid "more"
 msgstr ""
 
@@ -3277,15 +3293,15 @@ msgid "MsgCreateProject Error"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:72
-msgid "Must be a date in the past"
-msgstr ""
+#~ msgid "Must be a date in the past"
+#~ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:4
 msgid "Must be at least"
 msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:6
-#: src/lib/constants/shared.constants.tsx:83
+#: src/lib/constants/shared.constants.tsx:82
 msgid "Must be positive"
 msgstr ""
 
@@ -3476,7 +3492,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:166
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:169
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3497,15 +3513,15 @@ msgstr ""
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:4
 msgid "Only the owner can change their role."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:3
 msgid "Only the owner or admin can edit user roles."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:109
+#: src/lib/constants/shared.constants.tsx:108
 msgid "Oops! Page not found."
 msgstr ""
 
@@ -3707,11 +3723,11 @@ msgstr ""
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:339
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:208
-#: src/lib/constants/shared.constants.tsx:99
+#: src/lib/constants/shared.constants.tsx:98
 msgid "Photo credit"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:84
+#: src/lib/constants/shared.constants.tsx:83
 msgid "Please check your email"
 msgstr ""
 
@@ -3719,7 +3735,7 @@ msgstr ""
 msgid "Please choose a country"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:80
+#: src/lib/constants/shared.constants.tsx:79
 msgid "Please choose a denom"
 msgstr ""
 
@@ -3778,7 +3794,7 @@ msgid "Please correct the errors above"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:112
-#: src/lib/constants/shared.constants.tsx:161
+#: src/lib/constants/shared.constants.tsx:160
 msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations."
 msgstr ""
 
@@ -3790,19 +3806,19 @@ msgstr ""
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:73
+#: src/lib/constants/shared.constants.tsx:72
 msgid "Please enter a valid URL"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:76
+#: src/lib/constants/shared.constants.tsx:75
 msgid "Please enter a valid VCS Project ID"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:86
+#: src/lib/constants/shared.constants.tsx:85
 msgid "Please enter the code from that email:"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:77
+#: src/lib/constants/shared.constants.tsx:76
 msgid "Please enter valid JSON-LD"
 msgstr ""
 
@@ -3838,7 +3854,7 @@ msgstr ""
 msgid "Please switch to this address in Keplr to access this profile."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:90
+#: src/lib/constants/shared.constants.tsx:89
 msgid "Please wait while transaction processes"
 msgstr ""
 
@@ -3877,7 +3893,7 @@ msgid "Postal code"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:170
-#: src/lib/constants/shared.constants.tsx:165
+#: src/lib/constants/shared.constants.tsx:164
 msgid "Postal Code"
 msgstr ""
 
@@ -3889,16 +3905,16 @@ msgstr ""
 msgid "PQR Request"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:182
+#: src/lib/constants/shared.constants.tsx:181
 msgid "prefinance"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:27
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:28
 #: src/legacy-pages/Projects/Projects.tsx:126
 msgid "Prefinance projects"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:214
+#: src/lib/constants/shared.constants.tsx:213
 msgid "prefinance this project"
 msgstr ""
 
@@ -3926,7 +3942,7 @@ msgstr ""
 msgid "Previous "
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:183
+#: src/lib/constants/shared.constants.tsx:182
 msgid "price"
 msgstr ""
 
@@ -3946,7 +3962,7 @@ msgstr ""
 msgid "PRICE (USD)"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:187
+#: src/lib/constants/shared.constants.tsx:186
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr ""
 
@@ -3980,7 +3996,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:268
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
 msgid "Privacy"
 msgstr ""
 
@@ -4057,7 +4073,7 @@ msgstr ""
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/EcocreditsTable.tsx:88
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:172
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:87
 #: src/legacy-pages/Certificate/Certificate.constants.ts:14
 #: src/legacy-pages/Certificate/Certificate.utils.ts:38
@@ -4080,7 +4096,7 @@ msgstr ""
 msgid "Project activity"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:104
+#: src/lib/constants/shared.constants.tsx:103
 msgid "Project Activity"
 msgstr ""
 
@@ -4212,7 +4228,7 @@ msgid "Project timeline"
 msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:114
-#: src/lib/constants/shared.constants.tsx:202
+#: src/lib/constants/shared.constants.tsx:201
 msgid "project type"
 msgstr ""
 
@@ -4228,7 +4244,7 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:61
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:64
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:82
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/legacy-pages/Profile/Profile.tsx:110
 msgid "Projects"
@@ -4296,7 +4312,7 @@ msgstr ""
 msgid "ratings"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:111
+#: src/lib/constants/shared.constants.tsx:110
 msgid "read"
 msgstr ""
 
@@ -4321,11 +4337,11 @@ msgstr ""
 msgid "Recipient address"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:62
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:59
 msgid "Recipient(s)"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:63
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:60
 msgid "Recipients"
 msgstr ""
 
@@ -4554,7 +4570,7 @@ msgstr ""
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:126
 #: src/components/organisms/Order/Order.Summary.tsx:119
 #: src/legacy-pages/Certificate/Certificate.constants.ts:17
-#: src/lib/constants/shared.constants.tsx:151
+#: src/lib/constants/shared.constants.tsx:150
 msgid "Retirement reason"
 msgstr ""
 
@@ -4565,8 +4581,8 @@ msgstr ""
 #: src/components/molecules/PlanStepper.tsx:18
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:36
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:67
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:68
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:64
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:65
 #: src/legacy-pages/ProjectReview/ProjectReview.tsx:210
 msgid "Review"
 msgstr ""
@@ -4805,7 +4821,7 @@ msgid "share"
 msgstr ""
 
 #: src/legacy-pages/Certificate/Certificate.tsx:92
-#: src/lib/constants/shared.constants.tsx:106
+#: src/lib/constants/shared.constants.tsx:105
 msgid "Share"
 msgstr ""
 
@@ -4899,7 +4915,7 @@ msgid "Social and Cultural Index"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
-#: src/lib/constants/shared.constants.tsx:177
+#: src/lib/constants/shared.constants.tsx:176
 msgid "Sold Out"
 msgstr ""
 
@@ -4940,8 +4956,8 @@ msgid "Sorry, you don’t have any REGEN to cover transaction fees"
 msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:195
-#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
-#: src/lib/constants/shared.constants.tsx:92
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:72
+#: src/lib/constants/shared.constants.tsx:91
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
@@ -4961,8 +4977,8 @@ msgstr ""
 msgid "start date"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:215
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:216
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:188
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:189
 msgid "Start Date"
 msgstr ""
 
@@ -4981,12 +4997,12 @@ msgstr ""
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:145
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:195
 #: src/lib/constants/shared.constants.tsx:60
-#: src/lib/constants/shared.constants.tsx:164
+#: src/lib/constants/shared.constants.tsx:163
 msgid "State / Region"
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:39
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:40
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 msgid "Stats"
 msgstr ""
 
@@ -5161,7 +5177,7 @@ msgstr ""
 #~ msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 #~ msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:236
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:208
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr ""
 
@@ -5181,7 +5197,7 @@ msgstr ""
 msgid "The organization profile has been updated on-chain but hasn't been indexed yet. Please reload the page in a few moments to see the changes."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:110
+#: src/lib/constants/shared.constants.tsx:109
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr ""
 
@@ -5207,7 +5223,7 @@ msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:106
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:166
-#: src/lib/constants/shared.constants.tsx:158
+#: src/lib/constants/shared.constants.tsx:157
 msgid "The retirement location can be where you live or your business operates."
 msgstr ""
 
@@ -5318,7 +5334,7 @@ msgid "This is the median average price for all open sell orders in this credit 
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:6
-#: src/lib/constants/shared.constants.tsx:180
+#: src/lib/constants/shared.constants.tsx:179
 msgid "This is the median average price of all open sell orders for this project."
 msgstr ""
 
@@ -5340,7 +5356,7 @@ msgstr ""
 msgid "This may take some time if your file size is large."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:91
+#: src/lib/constants/shared.constants.tsx:90
 msgid "This may take up to 15 seconds."
 msgstr ""
 
@@ -5376,7 +5392,7 @@ msgstr ""
 msgid "This user has been removed from the project"
 msgstr ""
 
-#: src/hooks/org-members/constants.ts:130
+#: src/hooks/org-members/constants.ts:139
 msgid "This user has been removed from your organization"
 msgstr ""
 
@@ -5413,7 +5429,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:263
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
@@ -5672,15 +5688,15 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:15
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:6
 msgid "User must have a blockchain account."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:103
+#: src/lib/constants/shared.constants.tsx:102
 msgid "user profile avatar"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:102
+#: src/lib/constants/shared.constants.tsx:101
 msgid "user profile background image"
 msgstr ""
 
@@ -5720,7 +5736,7 @@ msgstr ""
 msgid "vcs retirement serial number"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:244
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:216
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:94
 msgid "VCS retirement serial number"
 msgstr ""
@@ -5781,7 +5797,7 @@ msgstr ""
 msgid "view credit class doc"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:175
+#: src/lib/constants/shared.constants.tsx:174
 msgid "view details"
 msgstr ""
 
@@ -5801,7 +5817,7 @@ msgstr ""
 msgid "view methodology"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:108
+#: src/lib/constants/shared.constants.tsx:107
 msgid "view on ledger"
 msgstr ""
 
@@ -5833,7 +5849,7 @@ msgstr ""
 #~ msgid "View Profile"
 #~ msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:220
+#: src/lib/constants/shared.constants.tsx:219
 msgid "view project"
 msgstr ""
 
@@ -5873,7 +5889,7 @@ msgstr ""
 msgid "view transactions"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:93
+#: src/lib/constants/shared.constants.tsx:92
 msgid "view your portfolio"
 msgstr ""
 
@@ -5886,15 +5902,15 @@ msgstr ""
 msgid "Viewer"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:197
+#: src/lib/constants/shared.constants.tsx:196
 msgid "vintage id"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:198
+#: src/lib/constants/shared.constants.tsx:197
 msgid "vintage id (serial number)"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:199
+#: src/lib/constants/shared.constants.tsx:198
 msgid "vintage period"
 msgstr ""
 
@@ -5915,7 +5931,7 @@ msgstr ""
 #~ msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
 #~ msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:132
+#: src/lib/constants/shared.constants.tsx:131
 msgid "Visit Our Homepage <0> Instead</0>"
 msgstr ""
 
@@ -5981,7 +5997,7 @@ msgid "We will send your receipt to the email address below, which is already li
 msgstr ""
 
 #: src/legacy-pages/VerifyEmail/VerifyEmail.tsx:49
-#: src/lib/constants/shared.constants.tsx:85
+#: src/lib/constants/shared.constants.tsx:84
 msgid "We've just sent a confirmation email to:"
 msgstr ""
 
@@ -6042,7 +6058,7 @@ msgstr ""
 msgid "yes, delete"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:89
+#: src/lib/constants/shared.constants.tsx:88
 msgid "yes, discard"
 msgstr ""
 
@@ -6098,11 +6114,11 @@ msgstr ""
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:153
+#: src/lib/constants/shared.constants.tsx:152
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:144
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:145
 msgid "You can create an organization and migrate your personal projects to it."
 msgstr ""
 
@@ -6220,11 +6236,11 @@ msgstr ""
 msgid "You must agree to continue"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:5
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:165
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:168
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 

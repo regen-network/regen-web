@@ -3,6 +3,7 @@ import { sxToArray } from 'utils/mui/sxToArray';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
+import { Title } from 'web-components/src/components/typography';
 import {
   containerPaddingX,
   containerStyles,
@@ -13,9 +14,15 @@ type Props = {
   sx?: SxProps<Theme>;
   tabs: IconTabProps[];
   tabOuterClassName?: string;
+  title?: string;
 };
 
-export const TableTabs = ({ tabs, sx = [], tabOuterClassName }: Props) => {
+export const TableTabs = ({
+  tabs,
+  sx = [],
+  tabOuterClassName,
+  title,
+}: Props) => {
   const theme = useTheme();
   if (tabs.length === 0) {
     return null;
@@ -30,6 +37,11 @@ export const TableTabs = ({ tabs, sx = [], tabOuterClassName }: Props) => {
         ...sxToArray(sx),
       ]}
     >
+      {title && (
+        <Title className="pb-40" variant="h2">
+          {title}
+        </Title>
+      )}
       <IconTabs
         tabs={tabs}
         size="xl"

@@ -316,6 +316,10 @@ msgstr ""
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
+msgid "A shared reserve of ecological credits set aside to manage risk. If issued credits are later reversed or invalidated (e.g. due to project underperformance), credits from the buffer pool are retired to maintain environmental integrity."
+msgstr ""
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:49
 msgid "A taxon is extinct in the wild when it is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range."
 msgstr ""
@@ -382,7 +386,7 @@ msgid "Active account is required to create an organization."
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:42
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:45
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
 #: src/legacy-pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr ""
@@ -515,7 +519,7 @@ msgstr ""
 msgid "all profiles"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:21
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:22
 #: src/legacy-pages/Projects/Projects.tsx:116
 msgid "All projects"
 msgstr ""
@@ -750,7 +754,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -930,6 +934,10 @@ msgstr ""
 #~ msgid "Budget"
 #~ msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:137
+msgid "Buffer Pool"
+msgstr ""
+
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.BufferPoolAccounts.tsx:27
 msgid "buffer pool accounts"
 msgstr ""
@@ -938,7 +946,7 @@ msgstr ""
 #~ msgid "Buy"
 #~ msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:223
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:232
 msgid "BUY"
 msgstr ""
 
@@ -954,7 +962,7 @@ msgstr ""
 #~ msgid "buy credits"
 #~ msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:223
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:232
 msgid "BUY CREDITS"
 msgstr ""
 
@@ -1029,12 +1037,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-msgid "Can create, edit, and delete data posts."
-msgstr ""
+#~ msgid "Can create, edit, and delete data posts."
+#~ msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:12
-#~ msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
-#~ msgstr ""
+msgid "Can create, edit, and delete their own data posts. Cannot see private post data."
+msgstr ""
 
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:9
 msgid "Can edit all project page info and posts. Cannot manage users or credits."
@@ -1303,11 +1311,11 @@ msgstr ""
 msgid "Collaborator actions"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:137
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:138
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:89
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:94
 msgid "Collaborators"
 msgstr ""
 
@@ -1473,6 +1481,18 @@ msgstr ""
 msgid "Could not refetch assignments, you might need to reload the page later"
 msgstr ""
 
+#: src/hooks/org-members/useUpdateMemberRole.ts:181
+#: src/hooks/org-members/useUpdateMemberRole.ts:327
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useUpdateCollaboratorRole.ts:171
+msgid "Could not verify the existing role assignment. Please try again."
+msgstr ""
+
+#: src/hooks/org-members/useUpdateMemberRole.ts:125
+#: src/hooks/org-members/useUpdateMemberRole.ts:270
+#: src/legacy-pages/Dashboard/MyProjects/hooks/collaborators/useUpdateCollaboratorRole.ts:114
+msgid "Could not verify your current role. Please try again."
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:59
 #: src/lib/constants/shared.constants.tsx:163
 msgid "Country"
@@ -1486,7 +1506,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:178
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:181
 msgid "create an organization"
 msgstr ""
 
@@ -1673,7 +1693,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:79
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:84
 msgid "Credit Issuance"
 msgstr ""
 
@@ -1717,6 +1737,7 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
 #: src/components/organisms/Order/Order.Summary.tsx:61
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:312
+#: src/legacy-pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.tsx:13
 msgid "Credits"
 msgstr ""
 
@@ -1729,7 +1750,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:108
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
 msgid "Credits Available"
 msgstr ""
 
@@ -1801,7 +1822,7 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:76
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
 msgid "Credits Registered"
 msgstr ""
 
@@ -1896,7 +1917,7 @@ msgid "Data Deficient"
 msgstr ""
 
 #: src/components/organisms/DataPostsTable/DataPostsTable.constants.ts:5
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:75
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:80
 msgid "Data Posts"
 msgstr ""
 
@@ -1917,7 +1938,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:264
 msgid "Date Created"
 msgstr ""
 
@@ -2019,6 +2040,10 @@ msgstr ""
 msgid "Draft created!"
 msgstr ""
 
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:167
+msgid "Draft on-chain projects cannot be migrated. Please publish your project to migrate."
+msgstr ""
+
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:52
 msgid "Draft saved!"
 msgstr ""
@@ -2045,7 +2070,7 @@ msgid "Ecocredit batch ID"
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:46
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:51
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:52
 msgid "Ecocredit batches"
 msgstr ""
 
@@ -2425,7 +2450,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:269
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -2492,7 +2517,7 @@ msgstr ""
 #~ msgid "For Land Stewards"
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:93
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "For sale"
 msgstr ""
 
@@ -2787,7 +2812,7 @@ msgstr ""
 #~ msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:76
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
 msgid "Issued"
 msgstr ""
 
@@ -3051,7 +3076,7 @@ msgstr ""
 msgid "Manage credits"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:84
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:89
 msgid "Manage Credits"
 msgstr ""
 
@@ -3075,7 +3100,7 @@ msgstr ""
 msgid "Manage Project"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:142
+#: src/legacy-pages/Dashboard/MyProjects/ManageProject.tsx:153
 msgid "manage project tabs"
 msgstr ""
 
@@ -3149,7 +3174,7 @@ msgstr ""
 #~ msgid "Member has been removed from your organization."
 #~ msgstr ""
 
-#: src/hooks/org-members/constants.ts:129
+#: src/hooks/org-members/constants.ts:138
 msgid "member not found"
 msgstr ""
 
@@ -3226,7 +3251,7 @@ msgstr ""
 msgid "Minimum of 1 recipient"
 msgstr ""
 
-#: src/hooks/org-members/constants.ts:128
+#: src/hooks/org-members/constants.ts:137
 msgid "missing required parameters"
 msgstr ""
 
@@ -3476,7 +3501,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:166
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:169
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3497,11 +3522,11 @@ msgstr ""
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:4
 msgid "Only the owner can change their role."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:3
 msgid "Only the owner or admin can edit user roles."
 msgstr ""
 
@@ -3893,7 +3918,7 @@ msgstr ""
 msgid "prefinance"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:27
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:28
 #: src/legacy-pages/Projects/Projects.tsx:126
 msgid "Prefinance projects"
 msgstr ""
@@ -3980,7 +4005,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:268
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
 msgid "Privacy"
 msgstr ""
 
@@ -4228,7 +4253,7 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:61
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:64
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:82
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:35
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
 #: src/legacy-pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/legacy-pages/Profile/Profile.tsx:110
 msgid "Projects"
@@ -4497,7 +4522,7 @@ msgstr ""
 msgid "Retire credits upon transfer"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:131
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:146
 msgid "Retired"
 msgstr ""
 
@@ -4898,7 +4923,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:11
 #: src/lib/constants/shared.constants.tsx:177
 msgid "Sold Out"
 msgstr ""
@@ -4986,7 +5011,7 @@ msgid "State / Region"
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:39
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:40
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 msgid "Stats"
 msgstr ""
 
@@ -5376,7 +5401,7 @@ msgstr ""
 msgid "This user has been removed from the project"
 msgstr ""
 
-#: src/hooks/org-members/constants.ts:130
+#: src/hooks/org-members/constants.ts:139
 msgid "This user has been removed from your organization"
 msgstr ""
 
@@ -5413,7 +5438,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:263
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
@@ -5497,7 +5522,7 @@ msgstr ""
 msgid "Toucan Vintage Token Id"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:108
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:113
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:128
 msgid "Tradable"
 msgstr ""
@@ -5672,7 +5697,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:15
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:6
 msgid "User must have a blockchain account."
 msgstr ""
 
@@ -6102,7 +6127,7 @@ msgstr ""
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:144
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:145
 msgid "You can create an organization and migrate your personal projects to it."
 msgstr ""
 
@@ -6220,11 +6245,11 @@ msgstr ""
 msgid "You must agree to continue"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:5
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:165
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:168
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 

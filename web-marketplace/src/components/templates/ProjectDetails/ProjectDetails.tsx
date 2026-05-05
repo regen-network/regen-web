@@ -199,6 +199,7 @@ function ProjectDetails(): JSX.Element {
   const { totals: batchesTotal } = getBatchesTotal(
     batchesWithSupply ?? [],
     projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.creditsAvailable,
+    creditClassMetadata?.['regen:bufferPoolAccounts'],
   );
 
   const {

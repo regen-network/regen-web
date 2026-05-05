@@ -47,6 +47,7 @@ import { TablePaginationParams } from 'web-components/src/components/table/Actio
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { QueryClient as RPCQueryClient } from 'ledger';
 import { getMetadata } from 'lib/db/api/metadata-graph';
+import { BufferPoolAccount } from 'lib/db/types/json-ld/credit-class-metadata';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -65,6 +66,7 @@ import { ECOCREDIT_MESSAGE_TYPES } from './constants';
 export const getBatchesTotal = (
   batches: BatchInfoWithSupply[],
   creditsForSale?: number,
+  bufferPoolAccounts?: BufferPoolAccount[],
 ): {
   totals: BatchTotalsForProject;
 } => {
@@ -81,8 +83,29 @@ export const getBatchesTotal = (
         retiredAmount: 0,
         tradableAmount: 0,
         forSaleAmount: creditsForSale ?? 0,
+        bufferPoolAmount: 0,
       },
     );
+
+    if (bufferPoolAccounts?.length) {
+      const totalIssued = totals.tradableAmount + totals.retiredAmount;
+      const calculatedBufferPoolAmount = parseFloat(
+        bufferPoolAccounts
+          .reduce((acc, account) => {
+            const allocationPercent = parseFloat(
+              account['regen:poolAllocation']?.replace('%', '') || '0',
+            );
+            return acc + (totalIssued * allocationPercent) / 100;
+          }, 0)
+          .toFixed(6),
+      );
+      totals.bufferPoolAmount = Math.min(
+        totals.tradableAmount,
+        calculatedBufferPoolAmount,
+      );
+      totals.tradableAmount -= totals.bufferPoolAmount;
+    }
+
     return { totals };
   } catch (err) {
     throw new Error(`Could not get batches total ${err}`);

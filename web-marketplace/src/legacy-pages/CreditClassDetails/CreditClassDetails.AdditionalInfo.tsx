@@ -97,9 +97,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
           value={verificationMethod}
         />
         <MetaDetail label={_(msg`measured GHGs`)} value={measuredGHGs} />
-        <BufferPoolAccounts
-          bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}
-        />
+        <BufferPoolAccounts bufferPoolAccounts={bufferPoolAccounts} />
         {unknownFields.map(([fieldName, value]) => (
           <MetaDetail
             key={fieldName}

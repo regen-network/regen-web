@@ -16,6 +16,7 @@ import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
 import { BubbleIcon } from './BubbleIcon';
+import BufferPoolCreditsIcon from './BufferPoolCredits';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
@@ -36,6 +37,7 @@ import { CreditBatchLightIcon } from './CreditBatchLightIcon';
 import CreditCardIcon from './CreditCardIcon';
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
+import CreditsForSaleIcon from './CreditsForSale';
 import CreditsIssuedIcon from './CreditsIssued';
 import CreditsRetiredIcon from './CreditsRetired';
 import CreditsTradeableIcon from './CreditsTradeable';
@@ -231,6 +233,7 @@ export const allIcons = (): JSX.Element => (
 
     <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
     <LabeledIcon icon={<BubbleIcon />} label="BubbleIcon" />
+    <LabeledIcon icon={<BufferPoolCreditsIcon />} label="BufferPoolCreditsIcon" />
     <LabeledIcon
       icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
       label="CelebrateRegenIcon"
@@ -260,6 +263,7 @@ export const allIcons = (): JSX.Element => (
       label="CreditClassIcon"
     />
     <LabeledIcon icon={<ClipboardIcon />} label="ClipboardIcon" />
+    <LabeledIcon icon={<CreditsForSaleIcon />} label="CreditsForSaleIcon" />
     <LabeledIcon icon={<CreditsIssuedIcon />} label="CreditsIssuedIcon" />
     <LabeledIcon icon={<CreditsTradeableIcon />} label="CreditsTradeableIcon" />
     <LabeledIcon icon={<CreditsRetiredIcon />} label="CreditsRetiredIcon" />

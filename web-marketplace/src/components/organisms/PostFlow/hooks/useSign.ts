@@ -31,8 +31,8 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { messageActionEquals } from 'lib/ecocredit/constants';
-import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
-import { getTxsEventQueryKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
+import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/tx/getTxsEventQuery/getTxsEventQuery';
+import { getTxsEventQueryKey } from 'lib/queries/react-query/cosmos/tx/getTxsEventQuery/getTxsEventQuery.utils';
 import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressWithAssignmentsQuery/getDaoByAddressWithAssignmentsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 

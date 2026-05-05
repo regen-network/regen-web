@@ -17856,6 +17856,22 @@
             "deprecationReason": null
           },
           {
+            "name": "canUsePlatformFiatSettlement",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "organizationByDaoAddress",
             "description": "Reads a single `Organization` that is related to this `Dao`.",
             "args": [],
@@ -19326,6 +19342,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
+            "description": "Checks for equality with the object’s `canUsePlatformFiatSettlement` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -19421,6 +19449,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -19499,6 +19539,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null,
@@ -20176,6 +20228,18 @@
           },
           {
             "name": "STRIPE_CONNECTED_ACCOUNT_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CAN_USE_PLATFORM_FIAT_SETTLEMENT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CAN_USE_PLATFORM_FIAT_SETTLEMENT_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -41191,6 +41255,22 @@
             "deprecationReason": null
           },
           {
+            "name": "canUsePlatformFiatSettlement",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "accountById",
             "description": "Reads a single `Account` that is related to this `PrivateAccount`.",
             "args": [],
@@ -41279,6 +41359,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
+            "description": "Checks for equality with the object’s `canUsePlatformFiatSettlement` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -41350,6 +41442,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -41412,6 +41516,18 @@
           },
           {
             "name": "canUseStripeConnect",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "canUsePlatformFiatSettlement",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -41619,6 +41735,18 @@
           },
           {
             "name": "CAN_USE_STRIPE_CONNECT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CAN_USE_PLATFORM_FIAT_SETTLEMENT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CAN_USE_PLATFORM_FIAT_SETTLEMENT_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -51074,6 +51202,31 @@
           },
           {
             "name": "userCanStripeConnect",
+            "description": null,
+            "args": [
+              {
+                "name": "acc",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "UUID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "userCanUsePlatformFiatSettlement",
             "description": null,
             "args": [
               {

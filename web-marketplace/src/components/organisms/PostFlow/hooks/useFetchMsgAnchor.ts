@@ -14,7 +14,7 @@ import {
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { messageActionEquals } from 'lib/ecocredit/constants';
-import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
+import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/tx/getTxsEventQuery/getTxsEventQuery';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
 import {

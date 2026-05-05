@@ -11,7 +11,7 @@ import {
   messageActionEquals,
 } from 'lib/ecocredit/constants';
 import { normalizeBatchesWithData } from 'lib/normalizers/batches/normalizeBatchesWithData';
-import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
+import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/tx/getTxsEventQuery/getTxsEventQuery';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery/getSupplyQuery';

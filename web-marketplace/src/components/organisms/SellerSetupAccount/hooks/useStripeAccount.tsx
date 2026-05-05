@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { EncodeObject } from '@cosmjs/proto-signing';
 import { cosmos } from '@regen-network/api';
 import { GenericAuthorization } from '@regen-network/api/cosmos/authz/v1beta1/authz';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
 import { postData } from 'utils/fetch/postData';
@@ -17,11 +17,16 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
+import { AUTHZ_GRANTS_KEY } from 'lib/queries/react-query/cosmos/authz/getGrantsQuery/getGrantsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import useMsgClient from 'hooks/useMsgClient';
 
 import { grantee, msgTypes } from './useStripeAccount.constants';
+
+type SetupAccountParams = {
+  createStripeAccount?: boolean;
+};
 
 /**
  * Custom React hook to manage Stripe connected account interactions.
@@ -44,9 +49,11 @@ const useStripeAccount = () => {
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const reactQueryClient = useQueryClient();
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const {
     feeGranter,
+    selectedAccount,
     organizationRole,
     isOrganizationDashboard,
     organizationRbamAddress,
@@ -61,100 +68,123 @@ const useStripeAccount = () => {
     [isOrganizationDashboard, organizationDaoAddress],
   );
 
-  const setupAccount = useCallback(async () => {
-    if (activeAccount?.addr && token && grantee) {
-      const { authorizationId } = getAuthorizationId({
-        type: 'organization',
-        currentUserRole: organizationRole,
-        authorizationName: 'can_manage_sell_orders',
-      });
+  const setupAccount = useCallback(
+    async (params?: SetupAccountParams) => {
+      const shouldCreateStripeAccount =
+        params?.createStripeAccount ?? !!selectedAccount?.canUseStripeConnect;
 
-      let grants: EncodeObject[] = [];
       if (
-        isOrganizationDashboard &&
-        organizationRole &&
-        organizationDaoAddress &&
-        organizationRbamAddress &&
-        authorizationId
+        activeAccount?.addr &&
+        grantee &&
+        (!shouldCreateStripeAccount || token)
       ) {
-        grants = [
-          wrapRbamActions({
-            walletAddress: activeAccount?.addr,
-            rbamAddress: organizationRbamAddress,
-            actions: msgTypes.map(typeUrl =>
-              authzGrantAction({
-                authorizationId,
-                granter: organizationDaoAddress,
-                grantee: grantee as string,
-                grant: {
-                  authorization: GenericAuthorization.toProtoMsg({
-                    msg: typeUrl,
-                  }),
-                },
-              }),
-            ),
-          }),
-        ];
-      } else {
-        grants = msgTypes.map(typeUrl =>
-          cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
-            granter: activeAccount?.addr as string,
-            grantee: grantee as string,
-            grant: {
-              authorization: GenericAuthorization.toProtoMsg({ msg: typeUrl }),
-            },
-          }),
-        );
-      }
+        const { authorizationId } = getAuthorizationId({
+          type: 'organization',
+          currentUserRole: organizationRole,
+          authorizationName: 'can_manage_sell_orders',
+        });
 
-      await signAndBroadcast(
-        {
-          msgs: grants,
-          feeGranter,
-          fee: 'auto',
-        },
-        (): void => {
-          setProcessingModalAtom(atom => void (atom.open = true));
-        },
-        {
-          onError: async (error?: Error) => {
-            setProcessingModalAtom(atom => void (atom.open = false));
-            setErrorBannerText(String(error));
+        let grants: EncodeObject[] = [];
+        if (
+          isOrganizationDashboard &&
+          organizationRole &&
+          organizationDaoAddress &&
+          organizationRbamAddress &&
+          authorizationId
+        ) {
+          grants = [
+            wrapRbamActions({
+              walletAddress: activeAccount?.addr,
+              rbamAddress: organizationRbamAddress,
+              actions: msgTypes.map(typeUrl =>
+                authzGrantAction({
+                  authorizationId,
+                  granter: organizationDaoAddress,
+                  grantee: grantee as string,
+                  grant: {
+                    authorization: GenericAuthorization.toProtoMsg({
+                      msg: typeUrl,
+                    }),
+                  },
+                }),
+              ),
+            }),
+          ];
+        } else {
+          grants = msgTypes.map(typeUrl =>
+            cosmos.authz.v1beta1.MessageComposer.withTypeUrl.grant({
+              granter: activeAccount?.addr as string,
+              grantee: grantee as string,
+              grant: {
+                authorization: GenericAuthorization.toProtoMsg({
+                  msg: typeUrl,
+                }),
+              },
+            }),
+          );
+        }
+
+        await signAndBroadcast(
+          {
+            msgs: grants,
+            feeGranter,
+            fee: 'auto',
           },
-          onSuccess: async () => {
-            try {
-              await postData({
-                url: `${apiUri}/marketplace/v1/stripe/accounts`,
-                data: stripeDaoData,
-                token,
-                retryCsrfRequest,
-                onSuccess: async response => {
-                  setProcessingModalAtom(atom => void (atom.open = false));
-                  window.location.href = response.url;
-                },
-              });
-            } catch (error) {
+          (): void => {
+            setProcessingModalAtom(atom => void (atom.open = true));
+          },
+          {
+            onError: async (error?: Error) => {
               setProcessingModalAtom(atom => void (atom.open = false));
               setErrorBannerText(String(error));
-            }
+            },
+            onSuccess: async () => {
+              await reactQueryClient.invalidateQueries({
+                queryKey: [AUTHZ_GRANTS_KEY],
+              });
+
+              if (!shouldCreateStripeAccount) {
+                setProcessingModalAtom(atom => void (atom.open = false));
+                return;
+              }
+
+              try {
+                await postData({
+                  url: `${apiUri}/marketplace/v1/stripe/accounts`,
+                  data: stripeDaoData,
+                  token: token as string,
+                  retryCsrfRequest,
+                  onSuccess: async response => {
+                    setProcessingModalAtom(atom => void (atom.open = false));
+                    window.location.href = response.url;
+                  },
+                });
+              } catch (error) {
+                setProcessingModalAtom(atom => void (atom.open = false));
+                setErrorBannerText(String(error));
+              }
+            },
           },
-        },
-      );
-    }
-  }, [
-    activeAccount?.addr,
-    retryCsrfRequest,
-    setErrorBannerText,
-    setProcessingModalAtom,
-    signAndBroadcast,
-    token,
-    feeGranter,
-    isOrganizationDashboard,
-    organizationRole,
-    organizationRbamAddress,
-    organizationDaoAddress,
-    stripeDaoData,
-  ]);
+        );
+      }
+    },
+    [
+      activeAccount?.addr,
+      reactQueryClient,
+      retryCsrfRequest,
+      setErrorBannerText,
+      setProcessingModalAtom,
+      signAndBroadcast,
+      token,
+      feeGranter,
+      isOrganizationDashboard,
+      organizationRole,
+      organizationRbamAddress,
+      organizationDaoAddress,
+      stripeDaoData,
+      selectedAccount?.canUseStripeConnect,
+    ],
+  );
 
   const openLoginLink = useCallback(async () => {
     if (token) {

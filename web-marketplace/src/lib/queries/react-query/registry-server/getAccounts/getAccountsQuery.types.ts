@@ -8,6 +8,7 @@ export type PrivateAccount = {
   google: string | null;
   google_email: string | null;
   can_use_stripe_connect: boolean;
+  can_use_platform_fiat_settlement: boolean;
 };
 
 export type Accounts = {

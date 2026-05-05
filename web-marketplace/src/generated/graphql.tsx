@@ -3059,6 +3059,7 @@ export type Dao = Node & {
   cw4GroupAddress: Scalars['String'];
   canUseStripeConnect: Scalars['Boolean'];
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  canUsePlatformFiatSettlement: Scalars['Boolean'];
   /** Reads a single `Organization` that is related to this `Dao`. */
   organizationByDaoAddress?: Maybe<Organization>;
   /**
@@ -3263,6 +3264,8 @@ export type DaoCondition = {
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `stripeConnectedAccountId` field. */
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `canUsePlatformFiatSettlement` field. */
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** An input for mutations affecting `Dao` */
@@ -3273,6 +3276,7 @@ export type DaoInput = {
   cw4GroupAddress: Scalars['String'];
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Dao`. Fields that are set will be updated. */
@@ -3283,6 +3287,7 @@ export type DaoPatch = {
   cw4GroupAddress?: Maybe<Scalars['String']>;
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
   stripeConnectedAccountId?: Maybe<Scalars['String']>;
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values, with data from `SellOrder`. */
@@ -3394,6 +3399,8 @@ export enum DaosOrderBy {
   CanUseStripeConnectDesc = 'CAN_USE_STRIPE_CONNECT_DESC',
   StripeConnectedAccountIdAsc = 'STRIPE_CONNECTED_ACCOUNT_ID_ASC',
   StripeConnectedAccountIdDesc = 'STRIPE_CONNECTED_ACCOUNT_ID_DESC',
+  CanUsePlatformFiatSettlementAsc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_ASC',
+  CanUsePlatformFiatSettlementDesc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7779,6 +7786,7 @@ export type PrivateAccount = Node & {
   /** Email corresponding to the google account used for logging in, which can be different from the main account email */
   googleEmail?: Maybe<Scalars['String']>;
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  canUsePlatformFiatSettlement: Scalars['Boolean'];
   /** Reads a single `Account` that is related to this `PrivateAccount`. */
   accountById?: Maybe<Account>;
 };
@@ -7798,6 +7806,8 @@ export type PrivateAccountCondition = {
   googleEmail?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `canUseStripeConnect` field. */
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `canUsePlatformFiatSettlement` field. */
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** An input for mutations affecting `PrivateAccount` */
@@ -7808,6 +7818,7 @@ export type PrivateAccountInput = {
   /** Email corresponding to the google account used for logging in, which can be different from the main account email */
   googleEmail?: Maybe<Scalars['String']>;
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `PrivateAccount`. Fields that are set will be updated. */
@@ -7818,6 +7829,7 @@ export type PrivateAccountPatch = {
   /** Email corresponding to the google account used for logging in, which can be different from the main account email */
   googleEmail?: Maybe<Scalars['String']>;
   canUseStripeConnect?: Maybe<Scalars['Boolean']>;
+  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `PrivateAccount` values. */
@@ -7855,6 +7867,8 @@ export enum PrivateAccountsOrderBy {
   GoogleEmailDesc = 'GOOGLE_EMAIL_DESC',
   CanUseStripeConnectAsc = 'CAN_USE_STRIPE_CONNECT_ASC',
   CanUseStripeConnectDesc = 'CAN_USE_STRIPE_CONNECT_DESC',
+  CanUsePlatformFiatSettlementAsc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_ASC',
+  CanUsePlatformFiatSettlementDesc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -8643,6 +8657,7 @@ export type Query = Node & {
   getCurrentAccount?: Maybe<Account>;
   getTxHashForPaymentIntent?: Maybe<Scalars['String']>;
   userCanStripeConnect?: Maybe<Scalars['Boolean']>;
+  userCanUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountTranslation` using its globally unique `ID`. */
@@ -9366,6 +9381,12 @@ export type QueryGetTxHashForPaymentIntentArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryUserCanStripeConnectArgs = {
+  acc?: Maybe<Scalars['UUID']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUserCanUsePlatformFiatSettlementArgs = {
   acc?: Maybe<Scalars['UUID']>;
 };
 
@@ -11762,7 +11783,7 @@ export type AccountByAddrWithDaosQuery = (
       { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Dao' }
-        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'stripeConnectedAccountId'>
+        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'canUsePlatformFiatSettlement' | 'stripeConnectedAccountId'>
         & { organizationByDaoAddress?: Maybe<(
           { __typename?: 'Organization' }
           & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
@@ -11814,7 +11835,7 @@ export type AccountByIdQuery = (
       { __typename?: 'AccountDaosByAssignmentAccountIdAndDaoAddressManyToManyConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Dao' }
-        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'stripeConnectedAccountId'>
+        & Pick<Dao, 'address' | 'daoRbamAddress' | 'cw4GroupAddress' | 'canUseStripeConnect' | 'canUsePlatformFiatSettlement' | 'stripeConnectedAccountId'>
         & { organizationByDaoAddress?: Maybe<(
           { __typename?: 'Organization' }
           & Pick<Organization, 'id' | 'name' | 'description' | 'image' | 'bgImage' | 'websiteLink' | 'twitterLink'>
@@ -12676,6 +12697,7 @@ export const AccountByAddrWithDaosDocument = gql`
         daoRbamAddress
         cw4GroupAddress
         canUseStripeConnect
+        canUsePlatformFiatSettlement
         stripeConnectedAccountId
         organizationByDaoAddress {
           id
@@ -12800,6 +12822,7 @@ export const AccountByIdDocument = gql`
         daoRbamAddress
         cw4GroupAddress
         canUseStripeConnect
+        canUsePlatformFiatSettlement
         stripeConnectedAccountId
         organizationByDaoAddress {
           id

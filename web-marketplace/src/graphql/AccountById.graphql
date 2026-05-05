@@ -39,6 +39,7 @@ query AccountById($id: UUID!) {
         daoRbamAddress
         cw4GroupAddress
         canUseStripeConnect
+        canUsePlatformFiatSettlement
         stripeConnectedAccountId
         organizationByDaoAddress {
           id

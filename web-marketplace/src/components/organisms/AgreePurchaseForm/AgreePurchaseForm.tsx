@@ -108,6 +108,7 @@ export const AgreePurchaseForm = ({
   // reset cardDetailsMissing on unmount
   useEffect(() => {
     return () => {
+      console.log('resetting cardDetailsMissing');
       setCardDetailsMissing(true);
     };
   }, [setCardDetailsMissing]);

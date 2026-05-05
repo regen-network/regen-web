@@ -13,8 +13,8 @@ import {
   INVALID_AMOUNT,
   INVALID_DATE,
   INVALID_JSON,
-  INVALID_PAST_DATE,
   INVALID_REGEN_ADDRESS,
+  INVALID_START_END_DATE,
   INVALID_VCS_RETIREMENT,
   PAGE_NOT_FOUND_BODY,
   PAGE_NOT_FOUND_BUTTON,
@@ -42,7 +42,6 @@ import {
 } from './CreateBatchMultiStepForm.constants';
 import CreditBasics, {
   CreditBasicsFormValues,
-  getIsPastDateTest,
   getJSONSchema,
   getVcsMetadataSchema,
 } from './CreditBasics';
@@ -70,18 +69,10 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   const { _ } = useLingui();
 
   /**
-   * TODO: We should consider refactoring this to get isPastDateTest, vcsMetadataSchema,
+   * TODO: We should consider refactoring this to get vcsMetadataSchema,
    * JSONSchema and potentially formModel as props from the parent component (CreateBatchBySteps).
    * This will reduce redundancy and ensure a single source of truth for these values.
    */
-  const isPastDateTest = useMemo(
-    () =>
-      getIsPastDateTest({
-        invalidPastDate: _(INVALID_PAST_DATE),
-      }),
-    [_],
-  );
-
   const vcsMetadataSchema = useMemo(
     () =>
       getVcsMetadataSchema({
@@ -106,14 +97,14 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
         invalidAmount: _(INVALID_AMOUNT),
         invalidDate: _(INVALID_DATE),
+        invalidStartEndDate: _(INVALID_START_END_DATE),
         invalidVCSRetirement: _(INVALID_VCS_RETIREMENT),
         invalidJSON: _(INVALID_JSON),
-        isPastDateTest,
         vcsMetadataSchema,
         JSONSchema,
         _,
       }),
-    [isPastDateTest, vcsMetadataSchema, JSONSchema, _],
+    [vcsMetadataSchema, JSONSchema, _],
   );
 
   const {

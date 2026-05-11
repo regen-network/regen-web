@@ -6,6 +6,7 @@ import { getBatchesTotal } from 'lib/ecocredit/api';
 
 import { ClassBatchTotals } from 'components/molecules/ClassBatchTotals/ClassBatchTotals';
 import { TableTabs } from 'components/organisms/TableTabs';
+import { useBufferPoolAmount } from 'hooks/useBufferPoolAmount';
 
 import { getCreditClassDetailsTabs } from './CreditClassDetails.TableTabs.config';
 import { CreditClassDetailsTableTabsProps } from './CreditClassDetails.TableTabs.types';
@@ -13,18 +14,24 @@ import { CreditClassDetailsTableTabsProps } from './CreditClassDetails.TableTabs
 export const CreditClassDetailsTableTabs = (
   props: CreditClassDetailsTableTabsProps,
 ) => {
-  const { creditBatches, creditClassMetadata, creditsForSale } = props;
+  const {
+    creditBatches,
+    creditClassMetadata,
+    creditsForSale,
+    onChainCreditClassId,
+  } = props;
   const tabs = getCreditClassDetailsTabs(props);
   const { _ } = useLingui();
 
+  const bufferPoolAmount = useBufferPoolAmount(
+    creditClassMetadata?.['regen:bufferPoolAccounts'],
+    onChainCreditClassId ? `${onChainCreditClassId}-` : undefined,
+  );
+
   const { totals } = useMemo(
     () =>
-      getBatchesTotal(
-        creditBatches ?? [],
-        creditsForSale,
-        creditClassMetadata?.['regen:bufferPoolAccounts'],
-      ),
-    [creditBatches, creditClassMetadata, creditsForSale],
+      getBatchesTotal(creditBatches ?? [], creditsForSale, bufferPoolAmount),
+    [creditBatches, creditsForSale, bufferPoolAmount],
   );
 
   return (

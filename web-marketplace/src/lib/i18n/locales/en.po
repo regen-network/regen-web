@@ -575,7 +575,7 @@ msgstr ""
 msgid "amount now available in usd"
 msgstr ""
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:301
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:309
 msgid "amount of credits"
 msgstr ""
 
@@ -757,6 +757,10 @@ msgstr ""
 #: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
+msgstr ""
+
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:34
+msgid "authorize fiat settlement"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:48
@@ -1580,7 +1584,7 @@ msgstr ""
 
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:180
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:169
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:297
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:305
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:190
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:190
 msgid "credit batch id"
@@ -3115,7 +3119,7 @@ msgstr ""
 msgid "manage sell orders"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:43
 msgid "Manage your Stripe account for fiat purchases"
 msgstr ""
 
@@ -3543,7 +3547,7 @@ msgid "Open menu"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:70
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:81
 msgid "Open sell orders"
 msgstr ""
 
@@ -3979,7 +3983,7 @@ msgid "Price of credits for prefinance projects have specific terms, please clic
 msgstr ""
 
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:148
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:252
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:260
 msgid "price per credit"
 msgstr ""
 
@@ -4074,7 +4078,7 @@ msgstr ""
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:173
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:301
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:162
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:290
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:298
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:181
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:181
 msgid "project"
@@ -4815,7 +4819,7 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:33
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:52
 msgid "set up account"
 msgstr ""
 
@@ -5463,7 +5467,7 @@ msgstr ""
 msgid "Token expired"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:47
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:66
 msgid "tokenization"
 msgstr ""
 
@@ -5901,7 +5905,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:29
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:48
 msgid "view transactions"
 msgstr ""
 
@@ -6232,7 +6236,7 @@ msgstr ""
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:84
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:95
 msgid "You have no tradable credits that can be sold."
 msgstr ""
 

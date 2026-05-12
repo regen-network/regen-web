@@ -57,7 +57,7 @@ export const useHasMarketplaceAuthz = ({
 
   const hasMarketplaceAuthz = useMemo(() => {
     const grantedMsgTypes = new Set(
-      grantsQuery.data?.grants
+      (grantsQuery.data?.grants ?? [])
         .map(getGenericAuthorizationMsg)
         .filter((msgType): msgType is string => !!msgType),
     );

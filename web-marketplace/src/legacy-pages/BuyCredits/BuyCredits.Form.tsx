@@ -354,7 +354,7 @@ export const BuyCreditsForm = ({
   );
 
   const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
-  console.log('activeStep', activeStep, cardDetailsMissing);
+
   return (
     <div
       className={

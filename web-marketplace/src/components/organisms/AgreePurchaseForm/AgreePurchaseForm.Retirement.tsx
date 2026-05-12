@@ -118,7 +118,7 @@ export const Retirement = ({ retiring }: Props) => {
     subscribeNewsletter,
     agreeErpa,
   ]);
-  console.log('retiring', retiring);
+
   return (
     <div className={retiring ? '' : 'hidden'}>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">

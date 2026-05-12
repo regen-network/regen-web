@@ -581,7 +581,7 @@ msgstr "Cantidad ahora disponible en"
 msgid "amount now available in usd"
 msgstr "Cantidad ahora disponible en USD"
 
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:301
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:309
 msgid "amount of credits"
 msgstr "cantidad de créditos"
 
@@ -764,6 +764,10 @@ msgstr "Dar fe"
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr "Autor"
+
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:34
+msgid "authorize fiat settlement"
+msgstr "autorizar liquidación fiduciaria"
 
 #: src/lib/constants/shared.constants.tsx:48
 msgid "Available"
@@ -1586,7 +1590,7 @@ msgstr "Detalles del lote de crédito"
 
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:180
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:169
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:297
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:305
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:190
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:190
 msgid "credit batch id"
@@ -3123,7 +3127,7 @@ msgstr "Administrar proyectos"
 msgid "manage sell orders"
 msgstr "gestionar órdenes de venta"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:43
 msgid "Manage your Stripe account for fiat purchases"
 msgstr "Administra tu cuenta de Stripe para compras con moneda fiduciaria"
 
@@ -3551,7 +3555,7 @@ msgid "Open menu"
 msgstr "Abrir menú"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:70
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:81
 msgid "Open sell orders"
 msgstr "Órdenes de venta abiertas"
 
@@ -3987,7 +3991,7 @@ msgid "Price of credits for prefinance projects have specific terms, please clic
 msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen términos específicos, haga clic en el proyecto para obtener más información."
 
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:148
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:252
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:260
 msgid "price per credit"
 msgstr "precio por crédito"
 
@@ -4082,7 +4086,7 @@ msgstr "Guía del programa"
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:173
 #: src/legacy-pages/BuyCredits/BuyCredits.utils.tsx:301
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:162
-#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:290
+#: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:298
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:181
 #: src/legacy-pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:181
 msgid "project"
@@ -4823,7 +4827,7 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:33
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:52
 msgid "set up account"
 msgstr "configurar cuenta"
 
@@ -5471,7 +5475,7 @@ msgstr "Alternar opciones del proyecto"
 msgid "Token expired"
 msgstr "Token caducado"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:47
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:66
 msgid "tokenization"
 msgstr "tokenización"
 
@@ -5909,7 +5913,7 @@ msgstr "Ver la lista completa de videos de soporte»"
 msgid "view transaction"
 msgstr "ver transacción"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:29
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:48
 msgid "view transactions"
 msgstr "ver transacciones"
 
@@ -6240,7 +6244,7 @@ msgstr "Ingresaste:"
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:84
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:95
 msgid "You have no tradable credits that can be sold."
 msgstr "No tienes créditos negociables que se puedan vender."
 

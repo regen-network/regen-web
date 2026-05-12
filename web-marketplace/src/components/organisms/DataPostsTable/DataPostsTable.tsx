@@ -235,7 +235,7 @@ export const DataPostsTable: React.FC<
           {_(DATA_POSTS_DESCRIPTION)}{' '}
           <Link
             className="p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none inline-flex items-center gap-3 group align-middle"
-            href="TODO"
+            href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/using-regen-data-stream"
           >
             {_(SEE_HELP_DOCS)}
             <SmallArrowIcon

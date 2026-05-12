@@ -127,7 +127,7 @@ export const BaseMembersTable = <T extends BaseUser>({
       {!hideHelpDocs && (
         <Link
           className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
-          href="TODO"
+          href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-project-collaborators"
         >
           {_(SEE_HELP_DOCS)}
           <SmallArrowIcon

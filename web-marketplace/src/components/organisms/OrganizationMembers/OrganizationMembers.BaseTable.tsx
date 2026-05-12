@@ -9,7 +9,6 @@ import {
   GetAccountsByNameOrAddrQuery,
 } from 'generated/graphql';
 
-import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
 import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
@@ -151,6 +150,7 @@ export const OrganizationMembersBase = ({
         hideDescription={!cfg.showDescription}
         hideHelpDocs={!cfg.showHelpDocs}
         showActionsColumn={showActionsColumn}
+        helpDocsUrl="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-organization-members"
       >
         {(member, canAdmin) => (
           <>

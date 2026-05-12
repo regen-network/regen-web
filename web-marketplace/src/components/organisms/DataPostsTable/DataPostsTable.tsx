@@ -16,7 +16,6 @@ import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
-import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
 import { Tag } from 'web-components/src/components/organisms/PostFiles/components/Tag';
@@ -37,9 +36,8 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { Link } from 'components/atoms';
+import { HelpDocsLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { SEE_HELP_DOCS } from 'components/organisms/ProjectCollaborators/ProjectCollaborators.constants';
 import {
   FILES_ARE_PRIVATE,
   LOCATIONS_ARE_PRIVATE,
@@ -233,20 +231,10 @@ export const DataPostsTable: React.FC<
         </div>
         <p className="text-sc-text-paragraph mb-30 mx-[30px] mt-0 max-w-[551px]">
           {_(DATA_POSTS_DESCRIPTION)}{' '}
-          <Link
-            className="p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none inline-flex items-center gap-3 group align-middle"
+          <HelpDocsLink
             href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/using-regen-data-stream"
-          >
-            {_(SEE_HELP_DOCS)}
-            <SmallArrowIcon
-              sx={{
-                height: '16px',
-                width: '16px',
-                transition: 'transform 0.2s',
-              }}
-              className="group-hover:translate-x-3 "
-            />
-          </Link>
+            className="inline-flex align-middle"
+          />
         </p>
         {!noPosts && (
           <ActionsTable

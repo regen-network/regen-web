@@ -3,13 +3,12 @@ import { useLingui } from '@lingui/react';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
 import EmailIcon from 'web-components/src/components/icons/EmailIcon';
-import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 import { Title } from 'web-components/src/components/typography';
 
 import { AccountsOrderBy } from 'generated/graphql';
 
-import { Link } from 'components/atoms';
+import { HelpDocsLink } from 'components/atoms';
 
 import { RoleTooltip } from '../../molecules/RoleTooltip/RoleTooltip';
 import {
@@ -20,7 +19,6 @@ import {
   INVITE,
   NAME,
   ROLE,
-  SEE_HELP_DOCS,
 } from '../ProjectCollaborators/ProjectCollaborators.constants';
 import { PROJECT_CONTEXT } from './BaseMembersTable.constants';
 import {
@@ -48,6 +46,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   hideDescription?: boolean;
   hideHelpDocs?: boolean;
   showActionsColumn?: boolean;
+  helpDocsUrl?: string;
 }
 
 export const BaseMembersTable = <T extends BaseUser>({
@@ -69,6 +68,7 @@ export const BaseMembersTable = <T extends BaseUser>({
   hideDescription = false,
   hideHelpDocs = false,
   showActionsColumn = true,
+  helpDocsUrl,
 }: BaseMembersTableProps<T>) => {
   const { _ } = useLingui();
 
@@ -124,22 +124,7 @@ export const BaseMembersTable = <T extends BaseUser>({
         <p className="text-sc-text-paragraph mb-10 mt-0">{description}</p>
       )}
 
-      {!hideHelpDocs && (
-        <Link
-          className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
-          href="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-project-collaborators"
-        >
-          {_(SEE_HELP_DOCS)}
-          <SmallArrowIcon
-            sx={{
-              height: '16px',
-              width: '16px',
-              transition: 'transform 0.2s',
-            }}
-            className="group-hover:translate-x-3 "
-          />
-        </Link>
-      )}
+      {!hideHelpDocs && helpDocsUrl && <HelpDocsLink href={helpDocsUrl} />}
 
       {/* mobile invite under subtitle */}
       {canAdmin && showMobileInvite && (

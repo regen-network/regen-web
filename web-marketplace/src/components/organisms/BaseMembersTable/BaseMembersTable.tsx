@@ -124,7 +124,9 @@ export const BaseMembersTable = <T extends BaseUser>({
         <p className="text-sc-text-paragraph mb-10 mt-0">{description}</p>
       )}
 
-      {!hideHelpDocs && helpDocsUrl && <HelpDocsLink href={helpDocsUrl} />}
+      {!hideHelpDocs && helpDocsUrl && (
+        <HelpDocsLink href={helpDocsUrl} className="mb-30" />
+      )}
 
       {/* mobile invite under subtitle */}
       {canAdmin && showMobileInvite && (

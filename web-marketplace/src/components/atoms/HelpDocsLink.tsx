@@ -21,7 +21,7 @@ export const HelpDocsLink: React.FC<HelpDocsLinkProps> = ({
   return (
     <Link
       className={cn(
-        'p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group mb-30',
+        'p-0 text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group',
         className,
       )}
       href={href}

@@ -2,6 +2,7 @@ export * from './AccountLink.legacy';
 export * from './BreakText';
 export * from './BreakTextEnd';
 export * from './GreyText';
+export * from './HelpDocsLink';
 export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';

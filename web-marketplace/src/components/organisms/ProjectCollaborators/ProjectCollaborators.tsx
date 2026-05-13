@@ -75,6 +75,7 @@ export const ProjectCollaborators = ({
         context={PROJECT_CONTEXT}
         showMobileInvite={true}
         roleTooltipDocsUrl={PROJECT_ROLES_DOCS_URL}
+        helpDocsUrl="https://guides.regen.network/guides/regen-app-project-developers-and-land-stewards/organizations/manage-project-collaborators"
       >
         {isProjectDao ? (
           (col, canAdmin) => (

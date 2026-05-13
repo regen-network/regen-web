@@ -49,6 +49,7 @@ import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
@@ -193,6 +194,16 @@ export type RouterParams = {
   address?: Maybe<string>;
   languageCode: string;
   basename?: string;
+};
+
+const OrgDashboardRedirect = () => {
+  const organizations = useDaoOrganizations();
+  const firstOrgAddress = organizations[0]?.address;
+  return firstOrgAddress ? (
+    <Navigate to={`/dashboard/organization/${firstOrgAddress}`} replace />
+  ) : (
+    <Navigate to="/dashboard" replace />
+  );
 };
 
 export const getRegenRoutes = ({
@@ -442,6 +453,12 @@ export const getRegenRoutes = ({
           <Route path="certificate/:id" element={<CertificatePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
+
+        <Route
+          path="dashboard/organization"
+          element={<OrgDashboardRedirect />}
+          errorElement={<ErrorPage />}
+        />
 
         <Route
           path="dashboard/organization/:orgAddress"

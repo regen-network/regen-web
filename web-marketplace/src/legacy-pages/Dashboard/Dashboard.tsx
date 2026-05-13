@@ -163,17 +163,18 @@ export const Dashboard = () => {
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
   const organizationDaos = useDaoOrganizations();
-  // The active org is the one matching the URL param; fall back to the first org
+  // /dashboard/organization is handled by OrgDashboardRedirect, so orgAddressParam
+  // is always set here. Returns undefined when the user isn't a member of the org,
+  // which triggers the redirect effect below.
   const organizationDao = useMemo(
     () =>
       orgAddressParam
         ? organizationDaos.find(dao => dao?.address === orgAddressParam)
-        : organizationDaos[0],
+        : undefined,
     [organizationDaos, orgAddressParam],
   );
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
-
   const { data, isLoading: isOrgDataLoading } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
@@ -225,8 +226,10 @@ export const Dashboard = () => {
       organizationDaos
         .map(dao =>
           buildOrgAccount(
-            // Use already-fetched assignments for the active org; other orgs won't have
-            // assignment data loaded here — that's fine for display purposes.
+            // Only the active org gets assignments data; non-active orgs will have
+            // roleName: undefined here. organizationRole correctness depends on
+            // selectedAccount resolving to organizationAccount (built separately
+            // with full assignments) rather than one of these nav entries used for display purposes.
             dao?.address === organizationAddress ? assignments : undefined,
             dao,
           ),

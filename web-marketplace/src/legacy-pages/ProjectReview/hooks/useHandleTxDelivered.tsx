@@ -10,7 +10,7 @@ import {
   wrapRbamActions,
 } from 'utils/rbam.utils';
 
-import { useUpdateProjectByIdMutation } from 'generated/graphql';
+import { Dao, useUpdateProjectByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
@@ -18,7 +18,7 @@ import { getUnanchoredProjectMetadata } from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { getOnChainProjectId } from '../ProjectReview.util';
 
@@ -27,6 +27,7 @@ type UseHandleTxDeliveredParams = {
     deliverTxResponse?: DeliverTxResponse | undefined,
   ) => void;
   organizationRole?: string;
+  organizationDao?: ReturnType<typeof useProjectOrgDao>;
   projectAdminDaoAddress?: string | null;
   editPath: string;
   metadata: ProjectMetadataLD;
@@ -35,6 +36,7 @@ type UseHandleTxDeliveredParams = {
 export const useHandleTxDelivered = ({
   setDeliverTxResponse,
   organizationRole,
+  organizationDao,
   projectAdminDaoAddress,
   editPath,
   metadata,
@@ -43,7 +45,6 @@ export const useHandleTxDelivered = ({
   const { wallet } = useWallet();
   const { signingCosmWasmClient } = useLedger();
   const { projectId } = useParams();
-  const organizationDao = useDaoOrganization();
   const [updateProject] = useUpdateProjectByIdMutation();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();

@@ -1,11 +1,14 @@
+import { useDashboardContext } from 'legacy-pages/Dashboard/Dashboard.context';
+
 import { useInviteMember } from 'components/organisms/BaseMembersTable/modals/hooks/useInviteMember';
 import { OrganizationMembers } from 'components/organisms/OrganizationMembers/OrganizationMembers';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useMembers } from 'hooks/org-members/useMembers';
 
 export const Members = () => {
+  const { organizationDaoAddress } = useDashboardContext();
   const { dao, members, currentUserRole, daoAccountsOrderBy, toggleSort } =
-    useMembers();
+    useMembers({ orgAddress: organizationDaoAddress });
 
   const { addMember, removeMember, updateRole, updateVisibility } =
     useUpdateMembers({
@@ -35,6 +38,7 @@ export const Members = () => {
       onSaveProfile={saveProfile}
       onUpload={onUpload}
       daoWithAddress={daoData?.daoByAddress}
+      currentDaoAddress={organizationDaoAddress}
     />
   );
 };

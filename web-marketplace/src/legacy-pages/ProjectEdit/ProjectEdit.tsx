@@ -237,7 +237,7 @@ function ProjectEdit(): JSX.Element {
         ? `/project-pages/${projectId}/edit`
         : feeGranter
         ? // if there's a feeGranter, user is part of organization
-          '/dashboard/organization/projects'
+          `/dashboard/organization/${feeGranter}/projects`
         : '/dashboard/projects';
       if (isFormDirty) {
         setIsWarningModalOpen(path);

@@ -23,10 +23,12 @@ import { useRouter } from 'next/navigation';
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
@@ -80,7 +82,7 @@ export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const router = useRouter();
   const location = useLocation();
-  const dao = useDaoOrganization();
+  const daoOrganizations = useDaoOrganizations();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
@@ -95,6 +97,9 @@ export const ProjectCreate = (): JSX.Element => {
   >();
 
   const [isOrganizationAccount, setIsOrganizationAccount] = useState(false);
+  const [pendingClose, setPendingClose] = useState(false);
+
+  const { loading: isOrgDaoLoading } = useAuth();
 
   const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
     projectsState?.find(project => project.id === projectId)?.draft,
@@ -131,37 +136,52 @@ export const ProjectCreate = (): JSX.Element => {
     }),
   );
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
+  const projectOrgDao = useProjectOrgDao({
+    projectOrgId:
+      offChainProject?.organizationProjectByProjectId?.organizationId,
+  });
 
-  const handleRequestClose = useCallback(() => {
-    // If we know where the user came from, send them back there.
-    // We use Next.js router.replace() (not React Router navigate) because the origin
-    // may be a Next.js App Router page (e.g. /project/slug) that lives outside
-    // React Router's route tree.
+  const navigateOnClose = useCallback(() => {
     if (originPathRef.current) {
       router.replace(originPathRef.current);
       return;
     }
-    // Fallback: new draft projects have no meaningful manage page yet → homepage.
     if (projectId === DRAFT_ID) {
       router.replace('/');
       return;
     }
-    // Fallback for existing projects: dashboard manage page.
     const projectPath = `projects/${projectId}/manage`;
-    if (
-      isOrganizationAccount ||
-      (offChainProject?.adminDaoAddress &&
-        offChainProject?.adminDaoAddress === dao?.address)
-    )
-      router.replace(`/dashboard/organization/${projectPath}`);
-    else router.replace(`/dashboard/${projectPath}`);
-  }, [
-    router,
-    projectId,
-    isOrganizationAccount,
-    offChainProject?.adminDaoAddress,
-    dao?.address,
-  ]);
+    if (isOrganizationAccount || projectOrgDao) {
+      if (projectOrgDao?.address) {
+        router.replace(
+          `/dashboard/organization/${projectOrgDao.address}/${projectPath}`,
+        );
+      } else {
+        router.replace('/dashboard');
+      }
+    } else {
+      router.replace(`/dashboard/${projectPath}`);
+    }
+  }, [router, projectId, isOrganizationAccount, projectOrgDao]);
+
+  // Once DAO data finishes loading, complete any deferred close navigation.
+  useEffect(() => {
+    if (pendingClose && !isOrgDaoLoading) {
+      setPendingClose(false);
+      navigateOnClose();
+    }
+  }, [pendingClose, isOrgDaoLoading, navigateOnClose]);
+
+  const handleRequestClose = useCallback(() => {
+    // If the user is closing while DAO membership data is still in-flight, defer
+    // navigation until loading settles — otherwise isOrganizationAccount=true with
+    // an unresolved projectOrgDao would silently land them on the wrong dashboard.
+    if (isOrganizationAccount && !projectOrgDao && isOrgDaoLoading) {
+      setPendingClose(true);
+      return;
+    }
+    navigateOnClose();
+  }, [isOrganizationAccount, projectOrgDao, isOrgDaoLoading, navigateOnClose]);
 
   return (
     <>

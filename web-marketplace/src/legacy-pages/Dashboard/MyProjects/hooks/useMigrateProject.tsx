@@ -19,20 +19,30 @@ export const useMigrateProject = ({
     projects: project ? [project] : [],
     onSuccess:
       navigateToOrg && project
-        ? () =>
-            navigate(`/dashboard/organization/projects/${project.id}/manage`)
+        ? (organizationAddress?: string) =>
+            navigate(
+              `/dashboard/organization/${organizationAddress}/projects/${project.id}/manage`,
+            )
         : undefined,
     feeGranter,
   });
 
   const migrateProject = useCallback(
-    async (projectId?: string, projectName?: string) => {
+    async ({
+      projectId,
+      projectName,
+      organizationAddress,
+    }: {
+      projectId?: string;
+      projectName?: string;
+      organizationAddress?: string;
+    }) => {
       const id = projectId || project?.id;
       if (!id) return;
-      await migrateProjects({
-        selectedProjectIds: [id],
-        newProjectName: projectName,
-      });
+      await migrateProjects(
+        { selectedProjectIds: [id], newProjectName: projectName },
+        organizationAddress,
+      );
     },
     [migrateProjects, project?.id],
   );

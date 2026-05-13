@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -15,12 +15,10 @@ import { useRouter } from 'next/navigation';
 import { getAccountAssignment } from 'utils/rbam.utils';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
-import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import type { Account } from 'generated/graphql';
-import { AccountType } from 'generated/graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -35,7 +33,6 @@ import { getDaoByAddressWithAssignmentsQuery } from 'lib/queries/react-query/reg
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import {
@@ -55,7 +52,7 @@ import { AccountOption } from 'components/organisms/DashboardNavigation/Dashboar
 import { useOrganizationActions } from 'components/organisms/RegistryLayout/hooks/useOrganizationActions';
 import { CONNECT_TO_KEPLR_ORGANIZATION } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -79,6 +76,7 @@ export const Dashboard = () => {
     useWallet();
   const { loading, activeAccount, activeAccountId, privActiveAccount } =
     useAuth();
+  const { orgAddress: orgAddressParam } = useParams<{ orgAddress?: string }>();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -108,9 +106,13 @@ export const Dashboard = () => {
     openConnectWalletModal,
   } = useOrganizationActions();
 
-  const orgDashboardBasePath = '/dashboard/organization';
+  const orgDashboardBasePath = orgAddressParam
+    ? `/dashboard/organization/${orgAddressParam}`
+    : '/dashboard/organization';
   const personalDashboardBasePath = '/dashboard';
-  const isOrganizationDashboard = pathname.startsWith(orgDashboardBasePath);
+  const isOrganizationDashboard = pathname.startsWith(
+    '/dashboard/organization',
+  );
   const dashboardBasePath = isOrganizationDashboard
     ? orgDashboardBasePath
     : personalDashboardBasePath;
@@ -160,10 +162,19 @@ export const Dashboard = () => {
     return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
-  const organizationDao = useDaoOrganization();
+  const organizationDaos = useDaoOrganizations();
+  // /dashboard/organization is handled by OrgDashboardRedirect, so orgAddressParam
+  // is always set here. Returns undefined when the user isn't a member of the org,
+  // which triggers the redirect effect below.
+  const organizationDao = useMemo(
+    () =>
+      orgAddressParam
+        ? organizationDaos.find(dao => dao?.address === orgAddressParam)
+        : undefined,
+    [organizationDaos, orgAddressParam],
+  );
   const organizationAddress = organizationDao?.address ?? null;
   const organizationProfile = organizationDao?.organizationByDaoAddress;
-
   const { data, isLoading: isOrgDataLoading } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
       client: graphqlClient,
@@ -174,39 +185,58 @@ export const Dashboard = () => {
   );
   const assignments = data?.daoByAddress?.assignmentsByDaoAddress?.nodes;
 
-  const organizationAccount = useMemo<DashboardNavAccount | undefined>(() => {
-    if (!organizationAddress || !organizationDao) return undefined;
+  const buildOrgAccount = useCallback(
+    (
+      daoAssignments: typeof assignments,
+      dao?: typeof organizationDaos[number],
+    ): DashboardNavAccount | undefined => {
+      if (!dao?.address) return undefined;
+      const assignment = getAccountAssignment({
+        accountId: activeAccountId ?? accountByAddr?.id,
+        assignments: daoAssignments,
+      });
+      const orgProfile = dao.organizationByDaoAddress;
+      const organizationName = orgProfile?.name?.trim();
+      const rawImage = orgProfile?.image?.trim() || '';
+      const organizationImage = rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
+      return {
+        name: organizationName,
+        address: dao.address,
+        type: ORG,
+        image: organizationImage,
+        source: 'dao',
+        roleAccountId: assignment?.accountId ?? undefined,
+        roleName: assignment?.roleName ?? undefined,
+        canUseStripeConnect: dao?.canUseStripeConnect || false,
+        stripeConnectedAccountId: dao?.stripeConnectedAccountId,
+      };
+    },
+    [activeAccountId, accountByAddr?.id],
+  );
 
-    const assignment = getAccountAssignment({
-      accountId: activeAccountId ?? accountByAddr?.id,
-      assignments,
-    });
+  // Active org account (used for dashboard context / permissions)
+  const organizationAccount = useMemo<DashboardNavAccount | undefined>(
+    () => buildOrgAccount(assignments, organizationDao),
+    [buildOrgAccount, organizationDao, assignments],
+  );
 
-    const organizationName = organizationProfile?.name?.trim();
-
-    const rawImage = organizationProfile?.image?.trim() || '';
-    const organizationImage = rawImage || DEFAULT_PROFILE_COMPANY_AVATAR;
-
-    return {
-      name: organizationName,
-      address: organizationAddress,
-      type: ORG,
-      image: organizationImage,
-      source: 'dao',
-      roleAccountId: assignment?.accountId ?? undefined,
-      roleName: assignment?.roleName ?? undefined,
-      canUseStripeConnect: organizationDao?.canUseStripeConnect || false,
-      stripeConnectedAccountId: organizationDao?.stripeConnectedAccountId,
-    };
-  }, [
-    organizationAddress,
-    organizationDao,
-    activeAccountId,
-    organizationProfile?.name,
-    organizationProfile?.image,
-    assignments,
-    accountByAddr?.id,
-  ]);
+  // All org accounts for the nav sidebar
+  const allOrganizationAccounts = useMemo<DashboardNavAccount[]>(
+    () =>
+      organizationDaos
+        .map(dao =>
+          buildOrgAccount(
+            // Only the active org gets assignments data; non-active orgs will have
+            // roleName: undefined here. organizationRole correctness depends on
+            // selectedAccount resolving to organizationAccount (built separately
+            // with full assignments) rather than one of these nav entries used for display purposes.
+            dao?.address === organizationAddress ? assignments : undefined,
+            dao,
+          ),
+        )
+        .filter((a): a is DashboardNavAccount => !!a),
+    [buildOrgAccount, organizationDaos, organizationAddress, assignments],
+  );
 
   const navigationAccounts = useMemo<DashboardNavAccount[]>(() => {
     const accounts: DashboardNavAccount[] = [];
@@ -253,15 +283,15 @@ export const Dashboard = () => {
       accounts.push(personalAccount);
     }
 
-    // Add organization account if it exists
-    if (organizationAccount) {
-      accounts.push(organizationAccount);
+    // Add all organization accounts
+    for (const orgAccount of allOrganizationAccounts) {
+      accounts.push(orgAccount);
     }
 
     return accounts;
   }, [
     activeAccount,
-    organizationAccount,
+    allOrganizationAccounts,
     loginDisabled,
     accountByAddr,
     personalResolvedAddress,
@@ -428,8 +458,26 @@ export const Dashboard = () => {
     if (!target) return;
 
     const targetIsOrg = target.type === ORG;
-    if (targetIsOrg !== isOrganizationDashboard) {
-      navigate(getSwitchDashboardPathCallback(targetIsOrg));
+    if (targetIsOrg) {
+      // Navigate to the org-specific dashboard URL
+      const targetOrgBasePath = `/dashboard/organization/${address}`;
+      const switchPath = getSwitchDashboardPath({
+        pathname,
+        isOrganizationDashboard,
+        targetIsOrg: true,
+        orgDashboardBasePath: targetOrgBasePath,
+        personalDashboardBasePath,
+        organizationProfileItems,
+        personalProfileItems,
+        organizationHasCreditBatches: organizationHasCreditBatches ?? false,
+        personalHasCreditBatches: personalHasCreditBatches ?? false,
+        organizationBatchesLoading,
+        personalBatchesLoading,
+        targetHasWalletAddress: true,
+      });
+      navigate(switchPath);
+    } else if (isOrganizationDashboard) {
+      navigate(getSwitchDashboardPathCallback(false));
     }
 
     setMobileMenuOpen(false);
@@ -576,7 +624,6 @@ export const Dashboard = () => {
                   router.push('/');
                   setMobileMenuOpen(false);
                 }}
-                hasOrganization={!!organizationAccount}
                 onCreateOrganization={() => {
                   setMobileMenuOpen(false);
                   createOrganization();

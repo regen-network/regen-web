@@ -41,7 +41,7 @@ import {
   USER,
 } from 'components/organisms/DashboardNavigation/DashboardNavigation.constants';
 import { useMsgClient } from 'hooks';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import {
   CREATE_DATA_POST,
@@ -99,7 +99,11 @@ export const useSign = ({
   const { activeAccountId } = useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const orgDao = useDaoOrganization();
+
+  const projectOrgId =
+    offChainProject?.organizationProjectByProjectId?.organizationId;
+
+  const orgDao = useProjectOrgDao({ projectOrgId });
   const feeGranter = useFeeGranter({ offChainProject });
 
   const { data } = useQuery(

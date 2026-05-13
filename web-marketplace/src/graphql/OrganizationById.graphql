@@ -16,7 +16,10 @@ fragment organizationFields on Organization {
   daoByDaoAddress {
     assignmentsByDaoAddress(condition: { visible: true }) {
       nodes {
+        accountId
         roleName
+        onChainRoleId
+        visible
         accountByAccountId {
           id
           name

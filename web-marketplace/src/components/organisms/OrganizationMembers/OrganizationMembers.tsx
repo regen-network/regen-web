@@ -15,6 +15,7 @@ export const OrganizationMembers = ({
   onSaveProfile,
   onUpload,
   daoWithAddress,
+  currentDaoAddress,
 }: BaseProps) => {
   return (
     <OrganizationMembersBase
@@ -30,6 +31,7 @@ export const OrganizationMembers = ({
       onSaveProfile={onSaveProfile}
       onUpload={onUpload}
       daoWithAddress={daoWithAddress}
+      currentDaoAddress={currentDaoAddress}
     />
   );
 };

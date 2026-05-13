@@ -16,7 +16,7 @@ type Props = {
   logoutText: string;
   avatarAlt: string;
   profile?: ExtendedUserMenuProfile;
-  organizationProfile?: ExtendedUserMenuProfile;
+  organizationProfiles?: ExtendedUserMenuProfile[];
   createOrganization?: () => void;
   unfinalizedOrgCreation?: boolean;
   finishOrgCreation?: () => void;
@@ -27,7 +27,7 @@ export const ExtraComponent = ({
   avatarAlt,
   logoutText,
   profile,
-  organizationProfile,
+  organizationProfiles,
   createOrganization,
   unfinalizedOrgCreation,
   finishOrgCreation,
@@ -38,7 +38,7 @@ export const ExtraComponent = ({
     navLinkComponent: NavLink,
     pathname: '/',
     profile,
-    organizationProfile,
+    organizationProfiles,
     createOrganization,
     unfinalizedOrgCreation,
     finishOrgCreation,

@@ -51,7 +51,7 @@ import {
   GALLERY_PHOTOS,
   MAIN_PHOTO,
 } from 'components/organisms/MediaForm/MediaForm.constants';
-import { useDaoOrganization } from 'hooks/useDaoOrganization';
+import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
@@ -77,7 +77,6 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
-  const organizationDao = useDaoOrganization();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data, isLoading } = useQuery(
@@ -87,6 +86,11 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       id: projectId,
     }),
   );
+
+  const project = data?.data?.projectById;
+  const organizationDao = useProjectOrgDao({
+    projectOrgId: project?.organizationProjectByProjectId?.organizationId,
+  });
 
   const { data: assignmentsData } = useQuery(
     getDaoByAddressWithAssignmentsQuery({
@@ -129,7 +133,6 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
     setTxModalTitle(_(msg`MsgCreateProject Error`));
   };
 
-  const project = data?.data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const metadata = project?.metadata as ProjectMetadataLD;
   const jurisdiction = useGetJurisdiction({ metadata });
@@ -137,6 +140,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const handleTxDelivered = useHandleTxDelivered({
     setDeliverTxResponse,
     organizationRole,
+    organizationDao,
     projectAdminDaoAddress: project?.adminDaoAddress,
     editPath,
     metadata,

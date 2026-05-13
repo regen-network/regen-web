@@ -27,12 +27,7 @@ export interface CreditClassMetadataLD {
   'regen:primaryImpact': Impact;
   'regen:coBenefits'?: (Impact | string)[]; // Keeping support for string[] for now until C04 metadata is fixed (#1983).
   'regen:measuredGHGs': string[];
-  'regen:bufferPoolAccounts': {
-    // We probably want to simplify this to be just a @list instead,
-    // but keeping as is, until C04 class metadata is updated accordingly (#1983).
-    '@type': 'schema:ItemList';
-    'schema:itemListElement': BufferPoolAccount[];
-  };
+  'regen:bufferPoolAccounts': BufferPoolAccount[];
 }
 
 export type BufferPoolAccount = {

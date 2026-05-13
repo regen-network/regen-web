@@ -17,6 +17,7 @@ type MapToNumber<T> = { [K in keyof T]: number };
 export interface BatchTotalsForProject
   extends MapToNumber<QuerySupplyResponse> {
   forSaleAmount: number;
+  bufferPoolAmount: number;
 }
 
 export interface IBatchInfo extends BatchInfo {}

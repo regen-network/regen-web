@@ -65,6 +65,7 @@ import { ECOCREDIT_MESSAGE_TYPES } from './constants';
 export const getBatchesTotal = (
   batches: BatchInfoWithSupply[],
   creditsForSale?: number,
+  bufferPoolAmount?: number,
 ): {
   totals: BatchTotalsForProject;
 } => {
@@ -81,8 +82,18 @@ export const getBatchesTotal = (
         retiredAmount: 0,
         tradableAmount: 0,
         forSaleAmount: creditsForSale ?? 0,
+        bufferPoolAmount: 0,
       },
     );
+
+    if (bufferPoolAmount) {
+      totals.bufferPoolAmount = Math.min(
+        totals.tradableAmount,
+        bufferPoolAmount,
+      );
+      totals.tradableAmount -= totals.bufferPoolAmount;
+    }
+
     return { totals };
   } catch (err) {
     throw new Error(`Could not get batches total ${err}`);

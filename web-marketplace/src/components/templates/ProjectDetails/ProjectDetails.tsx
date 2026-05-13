@@ -57,6 +57,7 @@ import {
   getCanViewPrivatePost,
 } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
+import { useBufferPoolAmount } from 'hooks/useBufferPoolAmount';
 import { useDaoOrganization } from 'hooks/useDaoOrganization';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
@@ -196,9 +197,14 @@ function ProjectDetails(): JSX.Element {
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({ projectId: String(onChainProjectId) });
+  const bufferPoolAmount = useBufferPoolAmount(
+    creditClassMetadata?.['regen:bufferPoolAccounts'],
+    onChainProjectId ? String(onChainProjectId) : undefined,
+  );
   const { totals: batchesTotal } = getBatchesTotal(
     batchesWithSupply ?? [],
     projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.creditsAvailable,
+    bufferPoolAmount,
   );
 
   const {

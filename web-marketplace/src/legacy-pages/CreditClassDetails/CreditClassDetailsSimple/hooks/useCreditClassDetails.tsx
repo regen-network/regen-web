@@ -1,12 +1,14 @@
+import { useMemo } from 'react';
 import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 
@@ -19,6 +21,7 @@ type Params = {
 
 export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const { queryClient } = useLedger();
+  const reactQueryClient = useQueryClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   // Credit Type
@@ -45,6 +48,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
       creditType.name?.toLowerCase() ===
       creditTypeData?.creditType?.name.toLowerCase(),
   );
+
   // Credit Offset Methods
   const { data: sanityOffsetMethodData } = useQuery(
     getAllOffsetMethodQuery({
@@ -68,5 +72,27 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
     },
   );
 
-  return { creditTypeData, creditTypeSanity, generationMethods };
+  // Sell Orders
+  const { data: sellOrders } = useQuery(
+    getSellOrdersExtendedQuery({
+      enabled: !!queryClient,
+      client: queryClient as QueryClient,
+      reactQueryClient,
+      request: {},
+    }),
+  );
+
+  const creditsForSale = useMemo(() => {
+    if (!sellOrders) return undefined;
+    return sellOrders
+      .filter(order => order.batchDenom.startsWith(`${onChainClass.id}-`))
+      .reduce((total, order) => total + parseFloat(order.quantity), 0);
+  }, [sellOrders, onChainClass.id]);
+
+  return {
+    creditTypeData,
+    creditTypeSanity,
+    generationMethods,
+    creditsForSale,
+  };
 };

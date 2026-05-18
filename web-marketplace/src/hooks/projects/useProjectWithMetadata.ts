@@ -163,6 +163,9 @@ export const useProjectWithMetadata = ({
     }
     if (editOnChain) {
       await reactQueryClient.invalidateQueries({
+        queryKey: getProjectByIdKey(projectId),
+      });
+      await reactQueryClient.invalidateQueries({
         queryKey: getProjectByOnChainIdKey(projectId, selectedLanguage),
       });
       await reactQueryClient.invalidateQueries({

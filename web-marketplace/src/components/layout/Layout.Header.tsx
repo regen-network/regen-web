@@ -197,7 +197,7 @@ export const LayoutHeader = () => {
             <LanguageSwitcher
               className={cn(
                 'mr-10 lg:mr-25 mt-1',
-                isHome && 'md:text-sc-button-text-icon-light',
+                isHome && 'lg:text-sc-button-text-icon-light',
               )}
             />
             {chainId && accountOrWallet && (

@@ -17,10 +17,6 @@ import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 
-import {
-  useAllProjectsPageQuery,
-  useAllSoldOutProjectsQuery,
-} from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassFiltersAtom,
@@ -35,6 +31,8 @@ import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_REGEN } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
+import { getAllProjectsPageQuery } from 'lib/queries/react-query/sanity/getAllProjectsPageQuery/getAllProjectsPageQuery';
+import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 
 import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
@@ -142,9 +140,13 @@ const Projects = (): JSX.Element => {
     0,
   );
 
-  const { data: sanityProjectsPageData } = useAllProjectsPageQuery({
-    client: sanityClient,
-  });
+  const { data: sanityProjectsPageData } = useQuery(
+    getAllProjectsPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
+  );
 
   const gettingStartedResourcesSection =
     sanityProjectsPageData?.allProjectsPage?.[0]
@@ -153,9 +155,13 @@ const Projects = (): JSX.Element => {
   const prefinanceProjectsContent =
     sanityProjectsPageData?.allProjectsPage?.[0]?.prefinanceProjects;
 
-  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
-    client: sanityClient,
-  });
+  const { data: sanitySoldOutProjects } = useQuery(
+    getSoldOutProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
+  );
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
     sanitySoldOutProjects,
   });

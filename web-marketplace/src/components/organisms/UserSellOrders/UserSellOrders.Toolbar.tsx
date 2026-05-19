@@ -12,6 +12,8 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { BRIDGE_CLASS_ID } from 'lib/env';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useHasMarketplaceAuthz } from 'hooks/useHasMarketplaceAuthz';
+
 import { CreateButton } from './UserSellOrders.CreateButton';
 
 const CreateSellOrderFlow = lazy(async () => ({
@@ -51,6 +53,15 @@ export const UserSellOrdersToolbar = ({
     ) || [];
   const hasTradableCredits = tradableCredits.length > 0;
   const canStartSellFlow = canManageSellOrders && hasTradableCredits;
+  const { hasMarketplaceAuthz } = useHasMarketplaceAuthz({
+    enabled: !!selectedAccount?.canUsePlatformFiatSettlement,
+    granter: sellerAddress,
+  });
+  const canCreateFiatOrder =
+    !loginDisabled &&
+    ((!!selectedAccount?.canUseStripeConnect &&
+      !!selectedAccount?.stripeConnectedAccountId) ||
+      (!!selectedAccount?.canUsePlatformFiatSettlement && hasMarketplaceAuthz));
 
   useEffect(() => {
     if (isSellFlowStarted) {
@@ -103,11 +114,7 @@ export const UserSellOrdersToolbar = ({
             credits={tradableCredits}
             refetchSellOrders={refetchSellOrders}
             redirectOnSuccess={false}
-            canCreateFiatOrder={
-              !!selectedAccount?.canUseStripeConnect &&
-              !!selectedAccount?.stripeConnectedAccountId &&
-              !loginDisabled
-            }
+            canCreateFiatOrder={canCreateFiatOrder}
             accountAddress={sellerAddress}
           />
         </Suspense>

@@ -13,4 +13,5 @@ export type DashboardNavAccount = AccountOption & {
   roleName?: string;
   canUseStripeConnect: boolean;
   stripeConnectedAccountId?: string | null;
+  canUsePlatformFiatSettlement: boolean;
 };

@@ -8,14 +8,33 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import Card from 'web-components/src/components/cards/Card';
 import { Title } from 'web-components/src/components/typography';
 
+import { useHasMarketplaceAuthz } from 'hooks/useHasMarketplaceAuthz';
+
 import stripeLogo from '../../../../public/png/logo/stripe.png';
 import tokenization from '../../../../public/svg/tokenization.svg';
 import { useStripeAccount } from './hooks/useStripeAccount';
 
 const SellerSetupAccount = () => {
-  const { selectedAccount } = useDashboardContext();
+  const { selectedAccount, selectedAccountAddress } = useDashboardContext();
   const { setupAccount, openLoginLink } = useStripeAccount();
   const { _ } = useLingui();
+  const { hasMarketplaceAuthz, isPending } = useHasMarketplaceAuthz({
+    enabled: !!selectedAccount?.canUsePlatformFiatSettlement,
+    granter: selectedAccountAddress,
+  });
+
+  if (selectedAccount?.canUsePlatformFiatSettlement) {
+    if (isPending || hasMarketplaceAuthz) return null;
+
+    return (
+      <ContainedButton
+        onClick={() => setupAccount({ createStripeAccount: false })}
+        className="mb-20"
+      >
+        <Trans>authorize fiat settlement</Trans>
+      </ContainedButton>
+    );
+  }
 
   return (
     selectedAccount?.canUseStripeConnect && (
@@ -29,7 +48,7 @@ const SellerSetupAccount = () => {
               <Trans>view transactions</Trans>
             </ContainedButton>
           ) : (
-            <ContainedButton onClick={setupAccount} className="z-1">
+            <ContainedButton onClick={() => setupAccount()} className="z-1">
               <Trans>set up account</Trans>
             </ContainedButton>
           )}

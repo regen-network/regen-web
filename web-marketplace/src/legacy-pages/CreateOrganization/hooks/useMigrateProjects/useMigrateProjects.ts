@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -32,8 +32,6 @@ import {
 import { timer } from 'utils/timer';
 
 import {
-  DaoByAddressWithAssignmentsDocument,
-  DaoByAddressWithAssignmentsQuery,
   useUpdateProjectByIdMutation,
   useUpdateSellOrderMutation,
 } from 'generated/graphql';
@@ -47,6 +45,7 @@ import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { ledgerRPCUri } from 'lib/ledger';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { AUTHZ_GRANTS_KEY } from 'lib/queries/react-query/cosmos/authz/getGrantsQuery/getGrantsQuery.constants';
 import { getProjectKey } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery.constants';
 import { getProjectsByAdminKey } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin.constants';
 import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
@@ -72,6 +71,7 @@ import {
 import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { getNewProjectRoleId } from 'hooks/org-members/utils';
 import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
+import { useHasMarketplaceAuthz } from 'hooks/useHasMarketplaceAuthz';
 import useMsgClient from 'hooks/useMsgClient';
 
 import {
@@ -125,6 +125,14 @@ export const useMigrateProjects = ({
   const [updateSellOrder] = useUpdateSellOrderMutation();
   const [updateProject] = useUpdateProjectByIdMutation();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const shouldCheckMarketplaceAuthz =
+    !!privActiveAccount?.can_use_platform_fiat_settlement &&
+    !!activeAccount?.addr;
+  const { hasMarketplaceAuthz, isPending: isLoadingMarketplaceAuthz } =
+    useHasMarketplaceAuthz({
+      enabled: shouldCheckMarketplaceAuthz,
+      granter: activeAccount?.addr as string,
+    });
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
@@ -145,6 +153,13 @@ export const useMigrateProjects = ({
       languageCode: selectedLanguage,
     }),
   );
+
+  const canMigrateMarketplaceAuthz =
+    !!grantee &&
+    ((!!privActiveAccount?.can_use_stripe_connect &&
+      !!activeAccount?.stripeConnectedAccountId) ||
+      (!!privActiveAccount?.can_use_platform_fiat_settlement &&
+        hasMarketplaceAuthz));
 
   const { credits, reloadBalances, isLoadingCredits } = useFetchEcocredits({
     isPaginatedQuery: false,
@@ -372,7 +387,11 @@ export const useMigrateProjects = ({
 
   const migrateProjects = useCallback(
     async (values: FormValues, organizationAddress?: string) => {
-      if (isLoadingSellOrders || isLoadingCredits) {
+      if (
+        isLoadingSellOrders ||
+        isLoadingCredits ||
+        (shouldCheckMarketplaceAuthz && isLoadingMarketplaceAuthz)
+      ) {
         // prevent submission while loading data
         return;
       }
@@ -629,11 +648,7 @@ export const useMigrateProjects = ({
             actions: [executeActionsMsg],
           });
 
-          if (
-            privActiveAccount?.can_use_stripe_connect &&
-            activeAccount?.stripeConnectedAccountId &&
-            grantee
-          ) {
+          if (canMigrateMarketplaceAuthz) {
             // Ungrant for current account
             const ungrantMsgs = msgTypes.map(typeUrl =>
               cosmos.authz.v1beta1.MessageComposer.withTypeUrl.revoke({
@@ -698,12 +713,16 @@ export const useMigrateProjects = ({
                   walletAddress,
                 );
               await updateCardSellOrders(selectedCardSellOrders, dao.address);
+              if (canMigrateMarketplaceAuthz) {
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [AUTHZ_GRANTS_KEY],
+                });
+              }
 
-              // Transfer stripe connect settings to DAO
+              // Transfer fiat settlement settings to DAO
               if (
                 selectedCardSellOrders.length > 0 &&
-                privActiveAccount?.can_use_stripe_connect &&
-                activeAccount?.stripeConnectedAccountId &&
+                canMigrateMarketplaceAuthz &&
                 token
               ) {
                 try {
@@ -737,6 +756,8 @@ export const useMigrateProjects = ({
     [
       isLoadingSellOrders,
       isLoadingCredits,
+      shouldCheckMarketplaceAuthz,
+      isLoadingMarketplaceAuthz,
       wallet?.address,
       signingCosmWasmClient,
       daoOrganizations,
@@ -754,13 +775,12 @@ export const useMigrateProjects = ({
       activeAccountId,
       updateOffChainProjectAdminAssignments,
       updateCardSellOrders,
-      privActiveAccount?.can_use_stripe_connect,
-      activeAccount?.stripeConnectedAccountId,
       token,
       reloadData,
       retryCsrfRequest,
       onSuccess,
       feeGranter,
+      canMigrateMarketplaceAuthz,
     ],
   );
 

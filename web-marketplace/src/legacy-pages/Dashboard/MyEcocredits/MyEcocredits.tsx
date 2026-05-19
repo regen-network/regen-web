@@ -73,6 +73,7 @@ import { CREDIT_RETIRE_TITLE } from 'components/organisms/Modals/CreditRetireMod
 import { CreditSendModal } from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
 import { Portfolio } from 'components/organisms/Portfolio/Portfolio';
 import { useMsgClient } from 'hooks';
+import { useHasMarketplaceAuthz } from 'hooks/useHasMarketplaceAuthz';
 
 import { useDashboardContext } from '../Dashboard.context';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
@@ -498,17 +499,28 @@ export const MyEcocredits = (): JSX.Element => {
   }
   const shareUrl =
     REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
+  const { hasMarketplaceAuthz } = useHasMarketplaceAuthz({
+    enabled: !!selectedAccount?.canUsePlatformFiatSettlement,
+    granter: selectedAccountAddress,
+  });
 
   const canCreateFiatOrder = useMemo(() => {
-    return (
+    const canUseConnectedStripeAccount =
       !!selectedAccount?.canUseStripeConnect &&
-      !!selectedAccount?.stripeConnectedAccountId &&
+      !!selectedAccount?.stripeConnectedAccountId;
+    const canUsePlatformFiatSettlement =
+      !!selectedAccount?.canUsePlatformFiatSettlement && hasMarketplaceAuthz;
+
+    return (
+      (canUseConnectedStripeAccount || canUsePlatformFiatSettlement) &&
       !loginDisabled
     );
   }, [
+    hasMarketplaceAuthz,
     selectedAccount?.stripeConnectedAccountId,
     loginDisabled,
     selectedAccount?.canUseStripeConnect,
+    selectedAccount?.canUsePlatformFiatSettlement,
   ]);
   const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 

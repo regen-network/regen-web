@@ -181,7 +181,10 @@ const useCreateSellOrderSubmit = ({
       const onSuccess = async (
         deliverTxResponse?: DeliverTxResponse,
       ): Promise<void> => {
-        if (usdDenom && activeAccountId) {
+        if (
+          usdDenom &&
+          (isOrganizationDashboard ? organizationDaoAddress : activeAccountId)
+        ) {
           const data = await reactQueryClient.fetchQuery(
             getProjectIdByOnChainIdQuery({
               client: graphqlClient,
@@ -203,7 +206,12 @@ const useCreateSellOrderSubmit = ({
                   sellOrder: {
                     onChainId: sellOrderId,
                     projectId: offChainProjectId,
-                    sellerAccountId: activeAccountId,
+                    sellerAccountId: isOrganizationDashboard
+                      ? undefined
+                      : activeAccountId,
+                    sellerDaoAddress: isOrganizationDashboard
+                      ? organizationDaoAddress
+                      : undefined,
                     price,
                   },
                 },
@@ -319,6 +327,7 @@ const useCreateSellOrderSubmit = ({
       _,
       track,
       activeAccountId,
+      organizationDaoAddress,
       reactQueryClient,
       graphqlClient,
       createSellOrder,

@@ -12,7 +12,7 @@ import {
 } from 'lib/db/types/json-ld';
 import { getTxHashForBatch } from 'lib/ecocredit/api';
 import { v1Alpha1BatchDenomMapping } from 'lib/ecocredit/ecocredit.config';
-import { GetTxsEventQueryResponse } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.types';
+import { GetTxsEventQueryResponse } from 'lib/queries/react-query/cosmos/tx/getTxsEventQuery/getTxsEventQuery.types';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 

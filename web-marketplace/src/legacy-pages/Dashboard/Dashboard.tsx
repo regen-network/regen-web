@@ -209,6 +209,8 @@ export const Dashboard = () => {
         roleName: assignment?.roleName ?? undefined,
         canUseStripeConnect: dao?.canUseStripeConnect || false,
         stripeConnectedAccountId: dao?.stripeConnectedAccountId,
+        canUsePlatformFiatSettlement:
+          dao?.canUsePlatformFiatSettlement || false,
       };
     },
     [activeAccountId, accountByAddr?.id],
@@ -255,6 +257,7 @@ export const Dashboard = () => {
         | null
         | undefined,
       canUseStripeConnect: boolean,
+      canUsePlatformFiatSettlement: boolean,
     ): DashboardNavAccount | null => {
       if (!account) return null;
 
@@ -266,6 +269,7 @@ export const Dashboard = () => {
         image: account.image ?? undefined,
         source: 'auth',
         canUseStripeConnect,
+        canUsePlatformFiatSettlement,
         stripeConnectedAccountId: account.stripeConnectedAccountId,
       };
     };
@@ -274,9 +278,10 @@ export const Dashboard = () => {
       ? buildPersonalAccount(
           activeAccount,
           !!privActiveAccount?.can_use_stripe_connect,
+          !!privActiveAccount?.can_use_platform_fiat_settlement,
         )
       : loginDisabled
-      ? buildPersonalAccount(accountByAddr, false)
+      ? buildPersonalAccount(accountByAddr, false, false)
       : null;
 
     if (personalAccount) {
@@ -296,6 +301,7 @@ export const Dashboard = () => {
     accountByAddr,
     personalResolvedAddress,
     privActiveAccount?.can_use_stripe_connect,
+    privActiveAccount?.can_use_platform_fiat_settlement,
   ]);
 
   const selectedAccount = useMemo<DashboardNavAccount | undefined>(() => {

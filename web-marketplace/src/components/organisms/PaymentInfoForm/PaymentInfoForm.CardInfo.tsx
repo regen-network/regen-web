@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { Trans } from '@lingui/react/macro';
 import { PaymentElement } from '@stripe/react-stripe-js';
@@ -25,6 +25,7 @@ export const CardInfo = ({
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
   const { handleSave: updateMultiStepData, activeStep, data } = useMultiStep();
+  const [isLinkSelected, setIsLinkSelected] = useState(false);
 
   const createAccount = useWatch({
     control: control,
@@ -38,6 +39,10 @@ export const CardInfo = ({
   useEffect(() => {
     setValue('savePaymentMethod', createAccount);
   }, [createAccount, setValue]);
+
+  useEffect(() => {
+    if (isLinkSelected) setValue('savePaymentMethod', false);
+  }, [isLinkSelected, setValue]);
 
   useEffect(() => {
     updateMultiStepData(
@@ -57,12 +62,15 @@ export const CardInfo = ({
       <PaymentElement
         id="payment-element"
         options={paymentElementOptions}
-        onChange={event => setPaymentInfoValid(event.complete)}
+        onChange={event => {
+          setPaymentInfoValid(event.complete);
+          setIsLinkSelected(event.value.type === 'link');
+        }}
       />
       <CheckboxLabel
         className="pt-30"
         checked={savePaymentMethod}
-        disabled={!createAccount && !accountId}
+        disabled={isLinkSelected || (!createAccount && !accountId)}
         label={
           <Body size="sm" className="text-grey-700">
             <Trans>Save my credit card info for next time</Trans>

@@ -211,6 +211,9 @@ export const PaymentInfoForm = ({
           setError(submitRes?.error?.message);
           return;
         }
+        if (values.savePaymentMethod)
+          elements.update({ setupFutureUsage: 'on_session' });
+
         const { error, confirmationToken } =
           await stripe.createConfirmationToken({
             elements,

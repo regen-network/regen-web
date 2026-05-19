@@ -1,18 +1,21 @@
 import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   findSanityCreditClass,
@@ -25,7 +28,9 @@ export const useFetchProject = () => {
   const { projectId } = useParams();
   const { queryClient } = useLedger();
   const graphqlClient = useApolloClient();
+  const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const reactQueryClient = useQueryClient();
 
   const isOnChainId = getIsOnChainId(projectId);
   const isOffChainUUid = getIsUuid(projectId);
@@ -96,9 +101,26 @@ export const useFetchProject = () => {
     onChainProject?.id?.split('-')?.[0] ??
     offChainProject?.metadata?.['regen:creditClassId'];
 
+  const { data: sellOrders } = useQuery(
+    getSellOrdersExtendedQuery({
+      enabled: !!queryClient && !!onChainProject?.id,
+      client: queryClient as QueryClient,
+      reactQueryClient,
+      request: {},
+    }),
+  );
+
+  const projectWithOrderData = normalizeProjectsWithOrderData({
+    projects: [onChainProject],
+    sanityCreditClassData,
+    userAddress: wallet?.address,
+    sellOrders,
+  })?.[0];
+
   const project = {
     ...normalizeProjectWithMetadata({
       offChainProject,
+      projectWithOrderData,
       projectMetadata: (anchoredMetadata || offChainProject?.metadata) as
         | AnchoredProjectMetadataLD
         | undefined,
@@ -108,6 +130,7 @@ export const useFetchProject = () => {
         creditClassIdOrUrl:
           creditClassId ?? creditClassVersion?.metadata?.['schema:url'],
       }),
+      wallet,
     }),
     id: projectId as string,
   };

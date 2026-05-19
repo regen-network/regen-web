@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -106,9 +106,14 @@ export const AgreePurchaseForm = ({
   ]);
 
   // reset cardDetailsMissing on unmount
+  // use a ref to skip the first cleanup that StrictMode fires during its double-invoke on mount
+  const hasUnmountedOnce = useRef(false);
   useEffect(() => {
     return () => {
-      setCardDetailsMissing(true);
+      if (hasUnmountedOnce.current) {
+        setCardDetailsMissing(true);
+      }
+      hasUnmountedOnce.current = true;
     };
   }, [setCardDetailsMissing]);
 

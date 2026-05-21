@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/regen-network/regen-web/compare/v2.13.1...v2.14.0) (2026-05-21)
+
+### Bug Fixes
+
+- APP-898 mobile menu toggle ([#2824](https://github.com/regen-network/regen-web/issues/2824)) ([3ccd98e](https://github.com/regen-network/regen-web/commit/3ccd98ec28647a298912cf53f1fc22f5b6679fb8))
+
+### Features
+
+- APP-855 implement data posts table in dashboard projects ([#2810](https://github.com/regen-network/regen-web/issues/2810)) ([abdeebd](https://github.com/regen-network/regen-web/commit/abdeebd5a8a799ad950667cdcc33bb06f759a4ab))
+- APP-869 multi org support ([#2820](https://github.com/regen-network/regen-web/issues/2820)) ([ee91c75](https://github.com/regen-network/regen-web/commit/ee91c75a4160e202bb7bb7bedf2e0c7acf0b78b5))
+- APP-882 Update author role permissions ([#2811](https://github.com/regen-network/regen-web/issues/2811)) ([98e3a16](https://github.com/regen-network/regen-web/commit/98e3a1608f3b091d6c05bcd704c1dfcc3014708e))
+- APP-891 allow creation of fiat sell orders from internal RND account ([#2831](https://github.com/regen-network/regen-web/issues/2831)) ([e551000](https://github.com/regen-network/regen-web/commit/e551000f48476f4589fee0a64a38bce058d3148e))
+
 # [2.13.0](https://github.com/regen-network/regen-web/compare/v2.12.2...v2.13.0) (2026-04-07)
 
 ### Bug Fixes

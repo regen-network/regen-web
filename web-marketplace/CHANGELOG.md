@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/regen-network/regen-web/compare/v2.13.1...v2.14.0) (2026-05-21)
+
+### Bug Fixes
+
+- APP-885 Disallow migrating to org for draft on chain projects ([#2826](https://github.com/regen-network/regen-web/issues/2826)) ([06928d5](https://github.com/regen-network/regen-web/commit/06928d5d2effe21061c807a6e1b4fc1f00266d6e))
+- APP-894 offchain project image not displayed in project cards ([#2821](https://github.com/regen-network/regen-web/issues/2821)) ([8ca1954](https://github.com/regen-network/regen-web/commit/8ca19544e8ac9f6531742624205b04590de84eb0))
+- APP-896 keplr wallet image size in ConnectWalletModal ([#2823](https://github.com/regen-network/regen-web/issues/2823)) ([80adf9d](https://github.com/regen-network/regen-web/commit/80adf9d928405dbc8584954f132fc4d0a4babc65))
+- APP-901 discrepancy between prices on /projects and project page ([#2825](https://github.com/regen-network/regen-web/issues/2825)) ([ae37c66](https://github.com/regen-network/regen-web/commit/ae37c664921bc53859f1b70def27f063d96b2411))
+- APP-915 i18n small issues ([#2833](https://github.com/regen-network/regen-web/issues/2833)) ([67e8d25](https://github.com/regen-network/regen-web/commit/67e8d25e2c020dfc918527e88a9bd08dbc407119))
+
+### Features
+
+- APP-855 implement data posts table in dashboard projects ([#2810](https://github.com/regen-network/regen-web/issues/2810)) ([abdeebd](https://github.com/regen-network/regen-web/commit/abdeebd5a8a799ad950667cdcc33bb06f759a4ab))
+- APP-869 multi org support ([#2820](https://github.com/regen-network/regen-web/issues/2820)) ([ee91c75](https://github.com/regen-network/regen-web/commit/ee91c75a4160e202bb7bb7bedf2e0c7acf0b78b5))
+- APP-882 Update author role permissions ([#2811](https://github.com/regen-network/regen-web/issues/2811)) ([98e3a16](https://github.com/regen-network/regen-web/commit/98e3a1608f3b091d6c05bcd704c1dfcc3014708e))
+- APP-887 Change "edit project" on project page ([#2812](https://github.com/regen-network/regen-web/issues/2812)) ([4e16487](https://github.com/regen-network/regen-web/commit/4e164871d5dd42515532458450cb39ed83b367cb))
+- APP-891 allow creation of fiat sell orders from internal RND account ([#2831](https://github.com/regen-network/regen-web/issues/2831)) ([e551000](https://github.com/regen-network/regen-web/commit/e551000f48476f4589fee0a64a38bce058d3148e))
+
 ## [2.13.1](https://github.com/regen-network/regen-web/compare/v2.13.0...v2.13.1) (2026-04-30)
 
 ### Bug Fixes

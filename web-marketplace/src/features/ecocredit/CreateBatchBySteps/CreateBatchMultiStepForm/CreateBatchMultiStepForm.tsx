@@ -222,7 +222,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
                 onSave={submitForm}
                 saveText={activeStep === 2 ? _(SUBMIT_TEXT) : _(SAVE_TEXT)}
                 saveExitText={activeStep === 2 ? _(SAVE_EXIT_TEXT) : ''}
-                saveDisabled={false}
+                saveDisabled={!isValid || isSubmitting}
                 percentComplete={percentComplete}
               />
             )}

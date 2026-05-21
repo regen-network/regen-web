@@ -205,6 +205,10 @@ msgstr ""
 msgid "+ create post"
 msgstr ""
 
+#: src/legacy-pages/Dashboard/MyProjects/MyProjects.constants.ts:7
+msgid "+ create project"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:98
 msgid "+ see more"
 msgstr ""
@@ -516,7 +520,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:22
-#: src/legacy-pages/Projects/Projects.tsx:116
+#: src/legacy-pages/Projects/Projects.tsx:114
 msgid "All projects"
 msgstr ""
 
@@ -754,7 +758,7 @@ msgstr ""
 msgid "Attest"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:265
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:253
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:11
 msgid "Author"
 msgstr ""
@@ -1298,7 +1302,7 @@ msgstr ""
 msgid "Close menu"
 msgstr ""
 
-#: src/legacy-pages/ProjectCreate/ProjectCreate.tsx:173
+#: src/legacy-pages/ProjectCreate/ProjectCreate.tsx:191
 msgid "Close project creation"
 msgstr ""
 
@@ -1315,7 +1319,7 @@ msgstr ""
 msgid "Collaborator actions"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:141
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:142
 msgid "Collaborator feature is for projects that are part of an organization"
 msgstr ""
 
@@ -1510,7 +1514,7 @@ msgstr ""
 msgid "Create a project without a credit class"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:193
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:194
 msgid "create an organization"
 msgstr ""
 
@@ -1941,7 +1945,7 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:264
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:252
 msgid "Date Created"
 msgstr ""
 
@@ -2043,7 +2047,7 @@ msgstr ""
 msgid "Draft created!"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:179
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:180
 msgid "Draft on-chain projects cannot be migrated. Please publish your project to migrate."
 msgstr ""
 
@@ -2453,7 +2457,7 @@ msgstr ""
 msgid "file name(s)"
 msgstr ""
 
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:267
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:255
 #: src/components/organisms/PostForm/PostForm.tsx:297
 msgid "Files"
 msgstr ""
@@ -3508,7 +3512,7 @@ msgstr ""
 #~ msgid "Offchain project id is needed to migrate a project."
 #~ msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:181
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:182
 msgid "Offchain project id is needed to migrate a project. Edit project description or media to create one."
 msgstr ""
 
@@ -3926,7 +3930,7 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:28
-#: src/legacy-pages/Projects/Projects.tsx:126
+#: src/legacy-pages/Projects/Projects.tsx:124
 msgid "Prefinance projects"
 msgstr ""
 
@@ -4012,7 +4016,7 @@ msgid "Prior to adopting these regenerative practices (going back 5 years prior)
 msgstr ""
 
 #: src/components/layout/Layout.Footer.tsx:96
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:266
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:254
 msgid "Privacy"
 msgstr ""
 
@@ -4270,7 +4274,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/legacy-pages/Projects/Projects.tsx:298
+#: src/legacy-pages/Projects/Projects.tsx:304
 msgid "projects tabs"
 msgstr ""
 
@@ -4714,6 +4718,7 @@ msgstr ""
 msgid "see credit class page"
 msgstr ""
 
+#: src/components/atoms/HelpDocsLink.tsx:9
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:24
 msgid "SEE HELP DOCS"
 msgstr ""
@@ -5449,7 +5454,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BaseMembersTable/modals/constants.ts:30
-#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:263
+#: src/components/organisms/DataPostsTable/DataPostsTable.tsx:251
 #: src/components/organisms/MemberOnBoarding/MemberOnBoarding.PersonalProfile.tsx:149
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "Title"
@@ -6142,7 +6147,7 @@ msgstr ""
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:148
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:149
 msgid "You can create an organization and migrate your personal projects to it."
 msgstr ""
 
@@ -6244,6 +6249,10 @@ msgstr ""
 msgid "You have not created any credit classes yet"
 msgstr ""
 
+#: src/legacy-pages/Dashboard/MyProjects/MyProjects.constants.ts:8
+msgid "You have not created any projects yet"
+msgstr ""
+
 #: src/legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3
 msgid "You have not issued any credit batches yet"
 msgstr ""
@@ -6264,7 +6273,7 @@ msgstr ""
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
-#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:180
+#: src/components/organisms/ProjectCollaborators/ProjectCollaborators.tsx:181
 msgid "You must be an Owner, Admin or Editor of your organization to migrate a project."
 msgstr ""
 

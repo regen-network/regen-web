@@ -8,6 +8,7 @@ import { WalletProvider } from 'lib/wallet/wallet';
 
 import { LayoutFooter } from 'components/layout/Layout.Footer';
 import { LayoutHeader } from 'components/layout/Layout.Header';
+import { getNormalizedPathname } from 'components/organisms/RegistryLayout/RegistryLayout.config';
 
 type Props = {
   children: React.ReactNode;
@@ -15,10 +16,11 @@ type Props = {
 
 export const RegenProviders = ({ children }: Props) => {
   const pathname = usePathname();
+  const normalizedPathname = getNormalizedPathname(pathname);
   const isFullScreen =
-    pathname.startsWith('/dashboard') ||
-    pathname.startsWith('/organizations/create') ||
-    pathname.startsWith('/project-pages/');
+    normalizedPathname.startsWith('/dashboard') ||
+    normalizedPathname.startsWith('/organizations/create') ||
+    normalizedPathname.startsWith('/project-pages/');
   return (
     <ChainWrapper>
       <WalletProvider>

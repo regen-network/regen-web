@@ -106,8 +106,8 @@ const MyProjects = (): JSX.Element => {
         {activeAccountId && canCreateProjects && (
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
-              buttonText={MY_PROJECTS_BUTTON_TEXT}
-              emptyTitle={MY_PROJECTS_EMPTY_TITLE}
+              buttonText={_(MY_PROJECTS_BUTTON_TEXT)}
+              emptyTitle={_(MY_PROJECTS_EMPTY_TITLE)}
               isFirstProject={isFirstProject}
               onClick={() => {
                 const params = new URLSearchParams({

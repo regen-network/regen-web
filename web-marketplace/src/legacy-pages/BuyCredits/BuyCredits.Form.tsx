@@ -115,6 +115,7 @@ export const BuyCreditsForm = ({
   const { activeAccount, privActiveAccount } = useAuth();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
+
   const {
     isModalOpen,
     modalState,

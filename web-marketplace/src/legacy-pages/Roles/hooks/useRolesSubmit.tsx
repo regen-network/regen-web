@@ -82,6 +82,8 @@ const useRolesSubmit = ({
         if (values.admin && admin !== values.admin) {
           doUpdateAdmin = true;
           projectPatch.adminAccountId = adminAccountId;
+          // Reset adminDaoAddress in case of migrating from a DAO admin to a user admin
+          projectPatch.adminDaoAddress = null;
         }
         const newMetadata = {
           ...metadata,

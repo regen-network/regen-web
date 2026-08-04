@@ -27,7 +27,6 @@ import { useAuth } from 'lib/auth/auth';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { FormRef } from 'components/molecules/Form/Form';
-import { useDaoOrganizations } from 'hooks/useDaoOrganizations';
 import { useProjectOrgDao } from 'hooks/useProjectOrgDao';
 
 import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
@@ -82,7 +81,6 @@ export const ProjectCreate = (): JSX.Element => {
   const { _ } = useLingui();
   const router = useRouter();
   const location = useLocation();
-  const daoOrganizations = useDaoOrganizations();
 
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =

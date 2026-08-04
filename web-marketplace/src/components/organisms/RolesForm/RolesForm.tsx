@@ -153,6 +153,9 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
+  // We only fetch accounts with given addr and not daos
+  // because migrating to a DAO is not supported:
+  // "migrate project" dedicated feature should be used instead
   const { data: adminAccountData } = useQuery(
     getAccountByAddrQuery({
       addr: admin as string,

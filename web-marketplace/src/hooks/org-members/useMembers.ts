@@ -112,10 +112,7 @@ export const useMembers = ({ orgAddress }: { orgAddress?: string }) => {
                 organization:
                   currentDaoOrganization?.organizationByDaoAddress?.name ||
                   _(DEFAULT_NAME),
-                email:
-                  acc?.privateAccountById?.email ||
-                  acc?.privateAccountById?.googleEmail ||
-                  truncate(acc?.addr),
+                email: acc?.email || acc?.googleEmail || truncate(acc?.addr),
                 onChainRoleId: parseInt(assignment.onChainRoleId),
               }
             : null;

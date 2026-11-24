@@ -71,9 +71,7 @@ export const getOrgAssignments = (
             acc => acc?.id === assignment?.accountId,
           );
         const id = account?.id;
-        const email =
-          account?.privateAccountById?.email ||
-          account?.privateAccountById?.googleEmail;
+        const email = account?.email || account?.googleEmail;
         if (account?.addr) {
           switch (assignment?.roleName) {
             case ROLE_OWNER:

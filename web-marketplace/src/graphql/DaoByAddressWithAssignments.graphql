@@ -16,10 +16,8 @@ query DaoByAddressWithAssignments(
         image
         addr
         title
-        privateAccountById @include(if: $includePrivate) {
-          email
-          googleEmail
-        }
+        email @include(if: $includePrivate)
+        googleEmail @include(if: $includePrivate)
       }
     }
     assignmentsByDaoAddress {

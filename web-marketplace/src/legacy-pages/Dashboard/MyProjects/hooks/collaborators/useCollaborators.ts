@@ -132,10 +132,7 @@ export const useCollaborators = (
                   isCurrentUser: acc?.id === activeAccountId,
                   organization:
                     daoOrganizationForAccount?.organizationByDaoAddress?.name,
-                  email:
-                    acc?.privateAccountById?.email ||
-                    acc?.privateAccountById?.googleEmail ||
-                    truncate(acc?.addr),
+                  email: acc?.email || acc?.googleEmail || truncate(acc?.addr),
                   onChainRoleId: parseInt(assignment?.onChainRoleId),
                   // current user has to be an owner or admin of the collaborator organization
                   canEditOrgRole:

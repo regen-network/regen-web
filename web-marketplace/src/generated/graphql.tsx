@@ -63,13 +63,6 @@ export type Account = Node & {
   projectsByVerifierId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByAdminAccountId: ProjectsConnection;
-  /** Reads a single `PrivateAccount` that is related to this `Account`. */
-  privateAccountById?: Maybe<PrivateAccount>;
-  /**
-   * Reads and enables pagination through a set of `PrivateAccount`.
-   * @deprecated Please use privateAccountById instead
-   */
-  privateAccountsById: PrivateAccountsConnection;
   /** Reads and enables pagination through a set of `Upload`. */
   uploadsByAccountId: UploadsConnection;
   /** Reads and enables pagination through a set of `Post`. */
@@ -80,14 +73,14 @@ export type Account = Node & {
   accountTranslationsById: AccountTranslationsConnection;
   /** Reads and enables pagination through a set of `FiatOrder`. */
   fiatOrdersByAccountId: FiatOrdersConnection;
-  /** Reads and enables pagination through a set of `EmailConfirmationToken`. */
-  emailConfirmationTokensByAccountId: EmailConfirmationTokensConnection;
   /** Reads and enables pagination through a set of `SellOrder`. */
   sellOrdersBySellerAccountId: SellOrdersConnection;
   /** Reads and enables pagination through a set of `Assignment`. */
   assignmentsByAccountId: AssignmentsConnection;
   /** Reads and enables pagination through a set of `OrganizationMemberRemoval`. */
   organizationMemberRemovalsByAccountId: OrganizationMemberRemovalsConnection;
+  email?: Maybe<Scalars['String']>;
+  googleEmail?: Maybe<Scalars['String']>;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -183,17 +176,6 @@ export type AccountProjectsByAdminAccountIdArgs = {
 };
 
 
-export type AccountPrivateAccountsByIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PrivateAccountsOrderBy>>;
-  condition?: Maybe<PrivateAccountCondition>;
-};
-
-
 export type AccountUploadsByAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -247,17 +229,6 @@ export type AccountFiatOrdersByAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
   condition?: Maybe<FiatOrderCondition>;
-};
-
-
-export type AccountEmailConfirmationTokensByAccountIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<EmailConfirmationTokensOrderBy>>;
-  condition?: Maybe<EmailConfirmationTokenCondition>;
 };
 
 
@@ -1533,50 +1504,6 @@ export type CreateAssignmentPayloadAssignmentEdgeArgs = {
   orderBy?: Maybe<Array<AssignmentsOrderBy>>;
 };
 
-/** All input for the `createAuthUserIfNotExists` mutation. */
-export type CreateAuthUserIfNotExistsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `createAuthUserIfNotExists` mutation. */
-export type CreateAuthUserIfNotExistsPayload = {
-  __typename?: 'CreateAuthUserIfNotExistsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
-/** All input for the `createAuthUser` mutation. */
-export type CreateAuthUserInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `createAuthUser` mutation. */
-export type CreateAuthUserPayload = {
-  __typename?: 'CreateAuthUserPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 /** All input for the create `CreditBatch` mutation. */
 export type CreateCreditBatchInput = {
   /**
@@ -1787,41 +1714,6 @@ export type CreateDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
   orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
 };
 
-/** All input for the create `EmailConfirmationToken` mutation. */
-export type CreateEmailConfirmationTokenInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EmailConfirmationToken` to be created by this mutation. */
-  emailConfirmationToken: EmailConfirmationTokenInput;
-};
-
-/** The output of our create `EmailConfirmationToken` mutation. */
-export type CreateEmailConfirmationTokenPayload = {
-  __typename?: 'CreateEmailConfirmationTokenPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `EmailConfirmationToken` that was created by this mutation. */
-  emailConfirmationToken?: Maybe<EmailConfirmationToken>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `EmailConfirmationToken`. */
-  accountByAccountId?: Maybe<Account>;
-  /** An edge for our `EmailConfirmationToken`. May be used by Relay 1. */
-  emailConfirmationTokenEdge?: Maybe<EmailConfirmationTokensEdge>;
-};
-
-
-/** The output of our create `EmailConfirmationToken` mutation. */
-export type CreateEmailConfirmationTokenPayloadEmailConfirmationTokenEdgeArgs = {
-  orderBy?: Maybe<Array<EmailConfirmationTokensOrderBy>>;
-};
-
 /** All input for the create `FiatOrder` mutation. */
 export type CreateFiatOrderInput = {
   /**
@@ -1923,55 +1815,6 @@ export type CreateMetadataGraphTranslationPayload = {
 /** The output of our create `MetadataGraphTranslation` mutation. */
 export type CreateMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArgs = {
   orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
-};
-
-/** All input for the `createNewAccountWithWallet` mutation. */
-export type CreateNewAccountWithWalletInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-  vAccountType?: Maybe<AccountType>;
-};
-
-/** The output of our `createNewAccountWithWallet` mutation. */
-export type CreateNewAccountWithWalletPayload = {
-  __typename?: 'CreateNewAccountWithWalletPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  uuid?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
-/** All input for the `createNewWeb2Account` mutation. */
-export type CreateNewWeb2AccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  vAccountType?: Maybe<AccountType>;
-  vEmail?: Maybe<Scalars['String']>;
-  vGoogle?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `createNewWeb2Account` mutation. */
-export type CreateNewWeb2AccountPayload = {
-  __typename?: 'CreateNewWeb2AccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  uuid?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
 };
 
 /** All input for the create `Organization` mutation. */
@@ -2083,39 +1926,6 @@ export type CreateOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
-/** All input for the create `Passcode` mutation. */
-export type CreatePasscodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Passcode` to be created by this mutation. */
-  passcode: PasscodeInput;
-};
-
-/** The output of our create `Passcode` mutation. */
-export type CreatePasscodePayload = {
-  __typename?: 'CreatePasscodePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Passcode` that was created by this mutation. */
-  passcode?: Maybe<Passcode>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Passcode`. May be used by Relay 1. */
-  passcodeEdge?: Maybe<PasscodesEdge>;
-};
-
-
-/** The output of our create `Passcode` mutation. */
-export type CreatePasscodePayloadPasscodeEdgeArgs = {
-  orderBy?: Maybe<Array<PasscodesOrderBy>>;
-};
-
 /** All input for the create `Post` mutation. */
 export type CreatePostInput = {
   /**
@@ -2153,41 +1963,6 @@ export type CreatePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
 };
 
-/** All input for the create `PostToken` mutation. */
-export type CreatePostTokenInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostToken` to be created by this mutation. */
-  postToken: PostTokenInput;
-};
-
-/** The output of our create `PostToken` mutation. */
-export type CreatePostTokenPayload = {
-  __typename?: 'CreatePostTokenPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostToken` that was created by this mutation. */
-  postToken?: Maybe<PostToken>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostId?: Maybe<Post>;
-  /** An edge for our `PostToken`. May be used by Relay 1. */
-  postTokenEdge?: Maybe<PostTokensEdge>;
-};
-
-
-/** The output of our create `PostToken` mutation. */
-export type CreatePostTokenPayloadPostTokenEdgeArgs = {
-  orderBy?: Maybe<Array<PostTokensOrderBy>>;
-};
-
 /** All input for the create `PostTranslation` mutation. */
 export type CreatePostTranslationInput = {
   /**
@@ -2221,41 +1996,6 @@ export type CreatePostTranslationPayload = {
 /** The output of our create `PostTranslation` mutation. */
 export type CreatePostTranslationPayloadPostTranslationEdgeArgs = {
   orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
-};
-
-/** All input for the create `PrivateAccount` mutation. */
-export type CreatePrivateAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PrivateAccount` to be created by this mutation. */
-  privateAccount: PrivateAccountInput;
-};
-
-/** The output of our create `PrivateAccount` mutation. */
-export type CreatePrivateAccountPayload = {
-  __typename?: 'CreatePrivateAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PrivateAccount` that was created by this mutation. */
-  privateAccount?: Maybe<PrivateAccount>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `PrivateAccount`. */
-  accountById?: Maybe<Account>;
-  /** An edge for our `PrivateAccount`. May be used by Relay 1. */
-  privateAccountEdge?: Maybe<PrivateAccountsEdge>;
-};
-
-
-/** The output of our create `PrivateAccount` mutation. */
-export type CreatePrivateAccountPayloadPrivateAccountEdgeArgs = {
-  orderBy?: Maybe<Array<PrivateAccountsOrderBy>>;
 };
 
 /** All input for the create `Project` mutation. */
@@ -4190,50 +3930,6 @@ export type DeleteOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
-/** All input for the `deletePasscodeById` mutation. */
-export type DeletePasscodeByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `deletePasscode` mutation. */
-export type DeletePasscodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Passcode` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `Passcode` mutation. */
-export type DeletePasscodePayload = {
-  __typename?: 'DeletePasscodePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Passcode` that was deleted by this mutation. */
-  passcode?: Maybe<Passcode>;
-  deletedPasscodeId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Passcode`. May be used by Relay 1. */
-  passcodeEdge?: Maybe<PasscodesEdge>;
-};
-
-
-/** The output of our delete `Passcode` mutation. */
-export type DeletePasscodePayloadPasscodeEdgeArgs = {
-  orderBy?: Maybe<Array<PasscodesOrderBy>>;
-};
-
 /** All input for the `deletePostById` mutation. */
 export type DeletePostByIdInput = {
   /**
@@ -4290,176 +3986,6 @@ export type DeletePostPayload = {
 /** The output of our delete `Post` mutation. */
 export type DeletePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
-};
-
-/** All input for the `deletePostTokenById` mutation. */
-export type DeletePostTokenByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `deletePostToken` mutation. */
-export type DeletePostTokenInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PostToken` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `PostToken` mutation. */
-export type DeletePostTokenPayload = {
-  __typename?: 'DeletePostTokenPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostToken` that was deleted by this mutation. */
-  postToken?: Maybe<PostToken>;
-  deletedPostTokenId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostId?: Maybe<Post>;
-  /** An edge for our `PostToken`. May be used by Relay 1. */
-  postTokenEdge?: Maybe<PostTokensEdge>;
-};
-
-
-/** The output of our delete `PostToken` mutation. */
-export type DeletePostTokenPayloadPostTokenEdgeArgs = {
-  orderBy?: Maybe<Array<PostTokensOrderBy>>;
-};
-
-/** All input for the `deletePostTranslationByIdAndLanguageCode` mutation. */
-export type DeletePostTranslationByIdAndLanguageCodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['UUID'];
-  languageCode: Scalars['String'];
-};
-
-/** All input for the `deletePostTranslation` mutation. */
-export type DeletePostTranslationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PostTranslation` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `PostTranslation` mutation. */
-export type DeletePostTranslationPayload = {
-  __typename?: 'DeletePostTranslationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostTranslation` that was deleted by this mutation. */
-  postTranslation?: Maybe<PostTranslation>;
-  deletedPostTranslationId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postById?: Maybe<Post>;
-  /** An edge for our `PostTranslation`. May be used by Relay 1. */
-  postTranslationEdge?: Maybe<PostTranslationsEdge>;
-};
-
-
-/** The output of our delete `PostTranslation` mutation. */
-export type DeletePostTranslationPayloadPostTranslationEdgeArgs = {
-  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
-};
-
-/** All input for the `deletePrivateAccountByEmail` mutation. */
-export type DeletePrivateAccountByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
-};
-
-/** All input for the `deletePrivateAccountByGoogleEmail` mutation. */
-export type DeletePrivateAccountByGoogleEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Email corresponding to the google account used for logging in, which can be different from the main account email */
-  googleEmail: Scalars['String'];
-};
-
-/** All input for the `deletePrivateAccountByGoogle` mutation. */
-export type DeletePrivateAccountByGoogleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  google: Scalars['String'];
-};
-
-/** All input for the `deletePrivateAccountById` mutation. */
-export type DeletePrivateAccountByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `deletePrivateAccount` mutation. */
-export type DeletePrivateAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PrivateAccount` to be deleted. */
-  nodeId: Scalars['ID'];
-};
-
-/** The output of our delete `PrivateAccount` mutation. */
-export type DeletePrivateAccountPayload = {
-  __typename?: 'DeletePrivateAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PrivateAccount` that was deleted by this mutation. */
-  privateAccount?: Maybe<PrivateAccount>;
-  deletedAccountId?: Maybe<Scalars['ID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `PrivateAccount`. */
-  accountById?: Maybe<Account>;
-  /** An edge for our `PrivateAccount`. May be used by Relay 1. */
-  privateAccountEdge?: Maybe<PrivateAccountsEdge>;
-};
-
-
-/** The output of our delete `PrivateAccount` mutation. */
-export type DeletePrivateAccountPayloadPrivateAccountEdgeArgs = {
-  orderBy?: Maybe<Array<PrivateAccountsOrderBy>>;
 };
 
 /** All input for the `deleteProjectByAdminDaoAddress` mutation. */
@@ -5090,80 +4616,6 @@ export enum DocumentsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-export type EmailConfirmationToken = {
-  __typename?: 'EmailConfirmationToken';
-  id: Scalars['UUID'];
-  createdAt?: Maybe<Scalars['Datetime']>;
-  accountId: Scalars['UUID'];
-  email: Scalars['String'];
-  token: Scalars['String'];
-  /** Reads a single `Account` that is related to this `EmailConfirmationToken`. */
-  accountByAccountId?: Maybe<Account>;
-};
-
-/**
- * A condition to be used against `EmailConfirmationToken` object types. All fields
- * are tested for equality and combined with a logical ‘and.’
- */
-export type EmailConfirmationTokenCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `createdAt` field. */
-  createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `accountId` field. */
-  accountId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `token` field. */
-  token?: Maybe<Scalars['String']>;
-};
-
-/** An input for mutations affecting `EmailConfirmationToken` */
-export type EmailConfirmationTokenInput = {
-  id?: Maybe<Scalars['UUID']>;
-  createdAt?: Maybe<Scalars['Datetime']>;
-  accountId: Scalars['UUID'];
-  email: Scalars['String'];
-  token?: Maybe<Scalars['String']>;
-};
-
-/** A connection to a list of `EmailConfirmationToken` values. */
-export type EmailConfirmationTokensConnection = {
-  __typename?: 'EmailConfirmationTokensConnection';
-  /** A list of `EmailConfirmationToken` objects. */
-  nodes: Array<Maybe<EmailConfirmationToken>>;
-  /** A list of edges which contains the `EmailConfirmationToken` and cursor to aid in pagination. */
-  edges: Array<EmailConfirmationTokensEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `EmailConfirmationToken` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `EmailConfirmationToken` edge in the connection. */
-export type EmailConfirmationTokensEdge = {
-  __typename?: 'EmailConfirmationTokensEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `EmailConfirmationToken` at the end of the edge. */
-  node?: Maybe<EmailConfirmationToken>;
-};
-
-/** Methods to use when ordering `EmailConfirmationToken`. */
-export enum EmailConfirmationTokensOrderBy {
-  Natural = 'NATURAL',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  CreatedAtAsc = 'CREATED_AT_ASC',
-  CreatedAtDesc = 'CREATED_AT_DESC',
-  AccountIdAsc = 'ACCOUNT_ID_ASC',
-  AccountIdDesc = 'ACCOUNT_ID_DESC',
-  EmailAsc = 'EMAIL_ASC',
-  EmailDesc = 'EMAIL_DESC',
-  TokenAsc = 'TOKEN_ASC',
-  TokenDesc = 'TOKEN_DESC'
-}
-
 export type FiatOrder = Node & {
   __typename?: 'FiatOrder';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -5336,8 +4788,8 @@ export type MetadataGraph = Node & {
   nodeId: Scalars['ID'];
   iri: Scalars['String'];
   createdAt: Scalars['Datetime'];
-  metadata: Scalars['JSON'];
   updatedAt: Scalars['Datetime'];
+  metadata: Scalars['JSON'];
   /** Reads and enables pagination through a set of `MetadataGraphTranslation`. */
   metadataGraphTranslationsByIri: MetadataGraphTranslationsConnection;
 };
@@ -5363,10 +4815,10 @@ export type MetadataGraphCondition = {
   iri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `metadata` field. */
-  metadata?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `updatedAt` field. */
   updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 /** A filter to be used against `MetadataGraph` object types. All fields are combined with a logical ‘and.’ */
@@ -5385,16 +4837,16 @@ export type MetadataGraphFilter = {
 export type MetadataGraphInput = {
   iri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
-  metadata: Scalars['JSON'];
   updatedAt?: Maybe<Scalars['Datetime']>;
+  metadata: Scalars['JSON'];
 };
 
 /** Represents an update to a `MetadataGraph`. Fields that are set will be updated. */
 export type MetadataGraphPatch = {
   iri?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Datetime']>;
-  metadata?: Maybe<Scalars['JSON']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 export type MetadataGraphTranslation = Node & {
@@ -5518,10 +4970,10 @@ export enum MetadataGraphsOrderBy {
   IriDesc = 'IRI_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
-  MetadataAsc = 'METADATA_ASC',
-  MetadataDesc = 'METADATA_DESC',
   UpdatedAtAsc = 'UPDATED_AT_ASC',
   UpdatedAtDesc = 'UPDATED_AT_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -5579,14 +5031,6 @@ export type Mutation = {
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
   /** Creates a single `Upload`. */
   createUpload?: Maybe<CreateUploadPayload>;
-  /** Creates a single `PrivateAccount`. */
-  createPrivateAccount?: Maybe<CreatePrivateAccountPayload>;
-  /** Creates a single `EmailConfirmationToken`. */
-  createEmailConfirmationToken?: Maybe<CreateEmailConfirmationTokenPayload>;
-  /** Creates a single `Passcode`. */
-  createPasscode?: Maybe<CreatePasscodePayload>;
-  /** Creates a single `PostToken`. */
-  createPostToken?: Maybe<CreatePostTokenPayload>;
   /** Updates a single `Account` using its globally unique id and a patch. */
   updateAccount?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
@@ -5669,10 +5113,6 @@ export type Mutation = {
   updatePostByIri?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
   updatePostById?: Maybe<UpdatePostPayload>;
-  /** Updates a single `PostTranslation` using its globally unique id and a patch. */
-  updatePostTranslation?: Maybe<UpdatePostTranslationPayload>;
-  /** Updates a single `PostTranslation` using a unique key and a patch. */
-  updatePostTranslationByIdAndLanguageCode?: Maybe<UpdatePostTranslationPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -5713,24 +5153,6 @@ export type Mutation = {
   updateUploadByUrl?: Maybe<UpdateUploadPayload>;
   /** Updates a single `Upload` using a unique key and a patch. */
   updateUploadById?: Maybe<UpdateUploadPayload>;
-  /** Updates a single `PrivateAccount` using its globally unique id and a patch. */
-  updatePrivateAccount?: Maybe<UpdatePrivateAccountPayload>;
-  /** Updates a single `PrivateAccount` using a unique key and a patch. */
-  updatePrivateAccountById?: Maybe<UpdatePrivateAccountPayload>;
-  /** Updates a single `PrivateAccount` using a unique key and a patch. */
-  updatePrivateAccountByEmail?: Maybe<UpdatePrivateAccountPayload>;
-  /** Updates a single `PrivateAccount` using a unique key and a patch. */
-  updatePrivateAccountByGoogle?: Maybe<UpdatePrivateAccountPayload>;
-  /** Updates a single `PrivateAccount` using a unique key and a patch. */
-  updatePrivateAccountByGoogleEmail?: Maybe<UpdatePrivateAccountPayload>;
-  /** Updates a single `Passcode` using its globally unique id and a patch. */
-  updatePasscode?: Maybe<UpdatePasscodePayload>;
-  /** Updates a single `Passcode` using a unique key and a patch. */
-  updatePasscodeById?: Maybe<UpdatePasscodePayload>;
-  /** Updates a single `PostToken` using its globally unique id and a patch. */
-  updatePostToken?: Maybe<UpdatePostTokenPayload>;
-  /** Updates a single `PostToken` using a unique key and a patch. */
-  updatePostTokenById?: Maybe<UpdatePostTokenPayload>;
   /** Deletes a single `Account` using its globally unique id. */
   deleteAccount?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
@@ -5813,10 +5235,6 @@ export type Mutation = {
   deletePostByIri?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
   deletePostById?: Maybe<DeletePostPayload>;
-  /** Deletes a single `PostTranslation` using its globally unique id. */
-  deletePostTranslation?: Maybe<DeletePostTranslationPayload>;
-  /** Deletes a single `PostTranslation` using a unique key. */
-  deletePostTranslationByIdAndLanguageCode?: Maybe<DeletePostTranslationPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -5857,33 +5275,7 @@ export type Mutation = {
   deleteUploadByUrl?: Maybe<DeleteUploadPayload>;
   /** Deletes a single `Upload` using a unique key. */
   deleteUploadById?: Maybe<DeleteUploadPayload>;
-  /** Deletes a single `PrivateAccount` using its globally unique id. */
-  deletePrivateAccount?: Maybe<DeletePrivateAccountPayload>;
-  /** Deletes a single `PrivateAccount` using a unique key. */
-  deletePrivateAccountById?: Maybe<DeletePrivateAccountPayload>;
-  /** Deletes a single `PrivateAccount` using a unique key. */
-  deletePrivateAccountByEmail?: Maybe<DeletePrivateAccountPayload>;
-  /** Deletes a single `PrivateAccount` using a unique key. */
-  deletePrivateAccountByGoogle?: Maybe<DeletePrivateAccountPayload>;
-  /** Deletes a single `PrivateAccount` using a unique key. */
-  deletePrivateAccountByGoogleEmail?: Maybe<DeletePrivateAccountPayload>;
-  /** Deletes a single `Passcode` using its globally unique id. */
-  deletePasscode?: Maybe<DeletePasscodePayload>;
-  /** Deletes a single `Passcode` using a unique key. */
-  deletePasscodeById?: Maybe<DeletePasscodePayload>;
-  /** Deletes a single `PostToken` using its globally unique id. */
-  deletePostToken?: Maybe<DeletePostTokenPayload>;
-  /** Deletes a single `PostToken` using a unique key. */
-  deletePostTokenById?: Maybe<DeletePostTokenPayload>;
   isDaoOwnerOrAdmin?: Maybe<IsDaoOwnerOrAdminPayload>;
-  createAuthUser?: Maybe<CreateAuthUserPayload>;
-  createAuthUserIfNotExists?: Maybe<CreateAuthUserIfNotExistsPayload>;
-  createNewAccountWithWallet?: Maybe<CreateNewAccountWithWalletPayload>;
-  createNewWeb2Account?: Maybe<CreateNewWeb2AccountPayload>;
-  /** Generates a 6 digits random code */
-  randomPasscode?: Maybe<RandomPasscodePayload>;
-  /** Shuffles an incoming string and aggregates the resulting rows to a string */
-  shuffle?: Maybe<ShufflePayload>;
 };
 
 
@@ -6034,30 +5426,6 @@ export type MutationCreateShaclGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUploadArgs = {
   input: CreateUploadInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreatePrivateAccountArgs = {
-  input: CreatePrivateAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateEmailConfirmationTokenArgs = {
-  input: CreateEmailConfirmationTokenInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreatePasscodeArgs = {
-  input: CreatePasscodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreatePostTokenArgs = {
-  input: CreatePostTokenInput;
 };
 
 
@@ -6308,18 +5676,6 @@ export type MutationUpdatePostByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePostTranslationArgs = {
-  input: UpdatePostTranslationInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePostTranslationByIdAndLanguageCodeArgs = {
-  input: UpdatePostTranslationByIdAndLanguageCodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectArgs = {
   input: UpdateProjectInput;
 };
@@ -6436,60 +5792,6 @@ export type MutationUpdateUploadByUrlArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateUploadByIdArgs = {
   input: UpdateUploadByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePrivateAccountArgs = {
-  input: UpdatePrivateAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePrivateAccountByIdArgs = {
-  input: UpdatePrivateAccountByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePrivateAccountByEmailArgs = {
-  input: UpdatePrivateAccountByEmailInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePrivateAccountByGoogleArgs = {
-  input: UpdatePrivateAccountByGoogleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePrivateAccountByGoogleEmailArgs = {
-  input: UpdatePrivateAccountByGoogleEmailInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePasscodeArgs = {
-  input: UpdatePasscodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePasscodeByIdArgs = {
-  input: UpdatePasscodeByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePostTokenArgs = {
-  input: UpdatePostTokenInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePostTokenByIdArgs = {
-  input: UpdatePostTokenByIdInput;
 };
 
 
@@ -6740,18 +6042,6 @@ export type MutationDeletePostByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePostTranslationArgs = {
-  input: DeletePostTranslationInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePostTranslationByIdAndLanguageCodeArgs = {
-  input: DeletePostTranslationByIdAndLanguageCodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectArgs = {
   input: DeleteProjectInput;
 };
@@ -6872,98 +6162,8 @@ export type MutationDeleteUploadByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePrivateAccountArgs = {
-  input: DeletePrivateAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePrivateAccountByIdArgs = {
-  input: DeletePrivateAccountByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePrivateAccountByEmailArgs = {
-  input: DeletePrivateAccountByEmailInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePrivateAccountByGoogleArgs = {
-  input: DeletePrivateAccountByGoogleInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePrivateAccountByGoogleEmailArgs = {
-  input: DeletePrivateAccountByGoogleEmailInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePasscodeArgs = {
-  input: DeletePasscodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePasscodeByIdArgs = {
-  input: DeletePasscodeByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePostTokenArgs = {
-  input: DeletePostTokenInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeletePostTokenByIdArgs = {
-  input: DeletePostTokenByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationIsDaoOwnerOrAdminArgs = {
   input: IsDaoOwnerOrAdminInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateAuthUserArgs = {
-  input: CreateAuthUserInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateAuthUserIfNotExistsArgs = {
-  input: CreateAuthUserIfNotExistsInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateNewAccountWithWalletArgs = {
-  input: CreateNewAccountWithWalletInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateNewWeb2AccountArgs = {
-  input: CreateNewWeb2AccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationRandomPasscodeArgs = {
-  input: RandomPasscodeInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationShuffleArgs = {
-  input: ShuffleInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -6981,12 +6181,12 @@ export type Organization = Node & {
   updatedAt: Scalars['Datetime'];
   legalName: Scalars['String'];
   daoAddress: Scalars['String'];
+  name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
   linkedinLink?: Maybe<Scalars['String']>;
   /** Reads a single `Dao` that is related to this `Organization`. */
   daoByDaoAddress?: Maybe<Dao>;
@@ -7069,6 +6269,8 @@ export type OrganizationCondition = {
   legalName?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `daoAddress` field. */
   daoAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `description` field. */
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
@@ -7079,8 +6281,6 @@ export type OrganizationCondition = {
   twitterLink?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `websiteLink` field. */
   websiteLink?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `linkedinLink` field. */
   linkedinLink?: Maybe<Scalars['String']>;
 };
@@ -7092,12 +6292,12 @@ export type OrganizationInput = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   legalName?: Maybe<Scalars['String']>;
   daoAddress: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   linkedinLink?: Maybe<Scalars['String']>;
 };
 
@@ -7183,12 +6383,12 @@ export type OrganizationPatch = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   legalName?: Maybe<Scalars['String']>;
   daoAddress?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   bgImage?: Maybe<Scalars['String']>;
   twitterLink?: Maybe<Scalars['String']>;
   websiteLink?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   linkedinLink?: Maybe<Scalars['String']>;
 };
 
@@ -7302,6 +6502,8 @@ export enum OrganizationsOrderBy {
   LegalNameDesc = 'LEGAL_NAME_DESC',
   DaoAddressAsc = 'DAO_ADDRESS_ASC',
   DaoAddressDesc = 'DAO_ADDRESS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
@@ -7312,8 +6514,6 @@ export enum OrganizationsOrderBy {
   TwitterLinkDesc = 'TWITTER_LINK_DESC',
   WebsiteLinkAsc = 'WEBSITE_LINK_ASC',
   WebsiteLinkDesc = 'WEBSITE_LINK_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
   LinkedinLinkAsc = 'LINKEDIN_LINK_ASC',
   LinkedinLinkDesc = 'LINKEDIN_LINK_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -7332,99 +6532,6 @@ export type PageInfo = {
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['Cursor']>;
 };
-
-/** Passcodes for signing in with email */
-export type Passcode = Node & {
-  __typename?: 'Passcode';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  id: Scalars['UUID'];
-  createdAt?: Maybe<Scalars['Datetime']>;
-  email: Scalars['String'];
-  consumed: Scalars['Boolean'];
-  code: Scalars['String'];
-  maxTryCount: Scalars['Int'];
-};
-
-/**
- * A condition to be used against `Passcode` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
-export type PasscodeCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `createdAt` field. */
-  createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `consumed` field. */
-  consumed?: Maybe<Scalars['Boolean']>;
-  /** Checks for equality with the object’s `code` field. */
-  code?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `maxTryCount` field. */
-  maxTryCount?: Maybe<Scalars['Int']>;
-};
-
-/** An input for mutations affecting `Passcode` */
-export type PasscodeInput = {
-  id?: Maybe<Scalars['UUID']>;
-  createdAt?: Maybe<Scalars['Datetime']>;
-  email: Scalars['String'];
-  consumed?: Maybe<Scalars['Boolean']>;
-  code?: Maybe<Scalars['String']>;
-  maxTryCount?: Maybe<Scalars['Int']>;
-};
-
-/** Represents an update to a `Passcode`. Fields that are set will be updated. */
-export type PasscodePatch = {
-  id?: Maybe<Scalars['UUID']>;
-  createdAt?: Maybe<Scalars['Datetime']>;
-  email?: Maybe<Scalars['String']>;
-  consumed?: Maybe<Scalars['Boolean']>;
-  code?: Maybe<Scalars['String']>;
-  maxTryCount?: Maybe<Scalars['Int']>;
-};
-
-/** A connection to a list of `Passcode` values. */
-export type PasscodesConnection = {
-  __typename?: 'PasscodesConnection';
-  /** A list of `Passcode` objects. */
-  nodes: Array<Maybe<Passcode>>;
-  /** A list of edges which contains the `Passcode` and cursor to aid in pagination. */
-  edges: Array<PasscodesEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Passcode` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Passcode` edge in the connection. */
-export type PasscodesEdge = {
-  __typename?: 'PasscodesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Passcode` at the end of the edge. */
-  node?: Maybe<Passcode>;
-};
-
-/** Methods to use when ordering `Passcode`. */
-export enum PasscodesOrderBy {
-  Natural = 'NATURAL',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  CreatedAtAsc = 'CREATED_AT_ASC',
-  CreatedAtDesc = 'CREATED_AT_DESC',
-  EmailAsc = 'EMAIL_ASC',
-  EmailDesc = 'EMAIL_DESC',
-  ConsumedAsc = 'CONSUMED_ASC',
-  ConsumedDesc = 'CONSUMED_DESC',
-  CodeAsc = 'CODE_ASC',
-  CodeDesc = 'CODE_DESC',
-  MaxTryCountAsc = 'MAX_TRY_COUNT_ASC',
-  MaxTryCountDesc = 'MAX_TRY_COUNT_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
 
 /** Project posts */
 export type Post = Node & {
@@ -7445,22 +6552,8 @@ export type Post = Node & {
   accountByCreatorAccountId?: Maybe<Account>;
   /** Reads a single `Project` that is related to this `Post`. */
   projectByProjectId?: Maybe<Project>;
-  /** Reads and enables pagination through a set of `PostToken`. */
-  postTokensByPostId: PostTokensConnection;
   /** Reads and enables pagination through a set of `PostTranslation`. */
   postTranslationsById: PostTranslationsConnection;
-};
-
-
-/** Project posts */
-export type PostPostTokensByPostIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PostTokensOrderBy>>;
-  condition?: Maybe<PostTokenCondition>;
 };
 
 
@@ -7553,91 +6646,8 @@ export enum PostPrivacy {
   Public = 'PUBLIC'
 }
 
-/** Table with cryptographically strong random tokens to share data post link */
-export type PostToken = Node & {
-  __typename?: 'PostToken';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  id: Scalars['UUID'];
-  createdAt?: Maybe<Scalars['Datetime']>;
-  token: Scalars['String'];
-  postId: Scalars['UUID'];
-  /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostId?: Maybe<Post>;
-};
-
-/**
- * A condition to be used against `PostToken` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
-export type PostTokenCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `createdAt` field. */
-  createdAt?: Maybe<Scalars['Datetime']>;
-  /** Checks for equality with the object’s `token` field. */
-  token?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `postId` field. */
-  postId?: Maybe<Scalars['UUID']>;
-};
-
-/** An input for mutations affecting `PostToken` */
-export type PostTokenInput = {
-  id?: Maybe<Scalars['UUID']>;
-  createdAt?: Maybe<Scalars['Datetime']>;
-  token?: Maybe<Scalars['String']>;
-  postId: Scalars['UUID'];
-};
-
-/** Represents an update to a `PostToken`. Fields that are set will be updated. */
-export type PostTokenPatch = {
-  id?: Maybe<Scalars['UUID']>;
-  createdAt?: Maybe<Scalars['Datetime']>;
-  token?: Maybe<Scalars['String']>;
-  postId?: Maybe<Scalars['UUID']>;
-};
-
-/** A connection to a list of `PostToken` values. */
-export type PostTokensConnection = {
-  __typename?: 'PostTokensConnection';
-  /** A list of `PostToken` objects. */
-  nodes: Array<Maybe<PostToken>>;
-  /** A list of edges which contains the `PostToken` and cursor to aid in pagination. */
-  edges: Array<PostTokensEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `PostToken` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `PostToken` edge in the connection. */
-export type PostTokensEdge = {
-  __typename?: 'PostTokensEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `PostToken` at the end of the edge. */
-  node?: Maybe<PostToken>;
-};
-
-/** Methods to use when ordering `PostToken`. */
-export enum PostTokensOrderBy {
-  Natural = 'NATURAL',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  CreatedAtAsc = 'CREATED_AT_ASC',
-  CreatedAtDesc = 'CREATED_AT_DESC',
-  TokenAsc = 'TOKEN_ASC',
-  TokenDesc = 'TOKEN_DESC',
-  PostIdAsc = 'POST_ID_ASC',
-  PostIdDesc = 'POST_ID_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-export type PostTranslation = Node & {
+export type PostTranslation = {
   __typename?: 'PostTranslation';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
   languageCode: Scalars['String'];
   contents?: Maybe<Scalars['JSON']>;
   translationDate?: Maybe<Scalars['Datetime']>;
@@ -7681,14 +6691,6 @@ export type PostTranslationInput = {
   id: Scalars['UUID'];
 };
 
-/** Represents an update to a `PostTranslation`. Fields that are set will be updated. */
-export type PostTranslationPatch = {
-  languageCode?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['JSON']>;
-  translationDate?: Maybe<Scalars['Datetime']>;
-  id?: Maybe<Scalars['UUID']>;
-};
-
 /** A connection to a list of `PostTranslation` values. */
 export type PostTranslationsConnection = {
   __typename?: 'PostTranslationsConnection';
@@ -7721,9 +6723,7 @@ export enum PostTranslationsOrderBy {
   TranslationDateAsc = 'TRANSLATION_DATE_ASC',
   TranslationDateDesc = 'TRANSLATION_DATE_DESC',
   IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+  IdDesc = 'ID_DESC'
 }
 
 /** A connection to a list of `Post` values. */
@@ -7771,104 +6771,6 @@ export enum PostsOrderBy {
   CanDownloadFilesDesc = 'CAN_DOWNLOAD_FILES_DESC',
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
-  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
-  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-/** Table to store private account fields like email or google id */
-export type PrivateAccount = Node & {
-  __typename?: 'PrivateAccount';
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars['ID'];
-  id: Scalars['UUID'];
-  email?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  /** Email corresponding to the google account used for logging in, which can be different from the main account email */
-  googleEmail?: Maybe<Scalars['String']>;
-  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
-  canUsePlatformFiatSettlement: Scalars['Boolean'];
-  /** Reads a single `Account` that is related to this `PrivateAccount`. */
-  accountById?: Maybe<Account>;
-};
-
-/**
- * A condition to be used against `PrivateAccount` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type PrivateAccountCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `email` field. */
-  email?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `google` field. */
-  google?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `googleEmail` field. */
-  googleEmail?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `canUseStripeConnect` field. */
-  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
-  /** Checks for equality with the object’s `canUsePlatformFiatSettlement` field. */
-  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
-};
-
-/** An input for mutations affecting `PrivateAccount` */
-export type PrivateAccountInput = {
-  id?: Maybe<Scalars['UUID']>;
-  email?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  /** Email corresponding to the google account used for logging in, which can be different from the main account email */
-  googleEmail?: Maybe<Scalars['String']>;
-  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
-  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
-};
-
-/** Represents an update to a `PrivateAccount`. Fields that are set will be updated. */
-export type PrivateAccountPatch = {
-  id?: Maybe<Scalars['UUID']>;
-  email?: Maybe<Scalars['String']>;
-  google?: Maybe<Scalars['String']>;
-  /** Email corresponding to the google account used for logging in, which can be different from the main account email */
-  googleEmail?: Maybe<Scalars['String']>;
-  canUseStripeConnect?: Maybe<Scalars['Boolean']>;
-  canUsePlatformFiatSettlement?: Maybe<Scalars['Boolean']>;
-};
-
-/** A connection to a list of `PrivateAccount` values. */
-export type PrivateAccountsConnection = {
-  __typename?: 'PrivateAccountsConnection';
-  /** A list of `PrivateAccount` objects. */
-  nodes: Array<Maybe<PrivateAccount>>;
-  /** A list of edges which contains the `PrivateAccount` and cursor to aid in pagination. */
-  edges: Array<PrivateAccountsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `PrivateAccount` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `PrivateAccount` edge in the connection. */
-export type PrivateAccountsEdge = {
-  __typename?: 'PrivateAccountsEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `PrivateAccount` at the end of the edge. */
-  node?: Maybe<PrivateAccount>;
-};
-
-/** Methods to use when ordering `PrivateAccount`. */
-export enum PrivateAccountsOrderBy {
-  Natural = 'NATURAL',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  EmailAsc = 'EMAIL_ASC',
-  EmailDesc = 'EMAIL_DESC',
-  GoogleAsc = 'GOOGLE_ASC',
-  GoogleDesc = 'GOOGLE_DESC',
-  GoogleEmailAsc = 'GOOGLE_EMAIL_ASC',
-  GoogleEmailDesc = 'GOOGLE_EMAIL_DESC',
-  CanUseStripeConnectAsc = 'CAN_USE_STRIPE_CONNECT_ASC',
-  CanUseStripeConnectDesc = 'CAN_USE_STRIPE_CONNECT_DESC',
-  CanUsePlatformFiatSettlementAsc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_ASC',
-  CanUsePlatformFiatSettlementDesc = 'CAN_USE_PLATFORM_FIAT_SETTLEMENT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -8599,14 +7501,6 @@ export type Query = Node & {
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   /** Reads and enables pagination through a set of `Upload`. */
   allUploads?: Maybe<UploadsConnection>;
-  /** Reads and enables pagination through a set of `PrivateAccount`. */
-  allPrivateAccounts?: Maybe<PrivateAccountsConnection>;
-  /** Reads and enables pagination through a set of `EmailConfirmationToken`. */
-  allEmailConfirmationTokens?: Maybe<EmailConfirmationTokensConnection>;
-  /** Reads and enables pagination through a set of `Passcode`. */
-  allPasscodes?: Maybe<PasscodesConnection>;
-  /** Reads and enables pagination through a set of `PostToken`. */
-  allPostTokens?: Maybe<PostTokensConnection>;
   accountById?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
   accountByCustodialAddress?: Maybe<Account>;
@@ -8632,7 +7526,6 @@ export type Query = Node & {
   organizationProjectByProjectId?: Maybe<OrganizationProject>;
   postByIri?: Maybe<Post>;
   postById?: Maybe<Post>;
-  postTranslationByIdAndLanguageCode?: Maybe<PostTranslation>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
@@ -8645,12 +7538,6 @@ export type Query = Node & {
   shaclGraphByUri?: Maybe<ShaclGraph>;
   uploadByUrl?: Maybe<Upload>;
   uploadById?: Maybe<Upload>;
-  privateAccountById?: Maybe<PrivateAccount>;
-  privateAccountByEmail?: Maybe<PrivateAccount>;
-  privateAccountByGoogle?: Maybe<PrivateAccount>;
-  privateAccountByGoogleEmail?: Maybe<PrivateAccount>;
-  passcodeById?: Maybe<Passcode>;
-  postTokenById?: Maybe<PostToken>;
   canManageSellOrder?: Maybe<Scalars['Boolean']>;
   /** Reads and enables pagination through a set of `Account`. */
   getAccountsByNameOrAddr?: Maybe<AccountsConnection>;
@@ -8690,8 +7577,6 @@ export type Query = Node & {
   organizationProject?: Maybe<OrganizationProject>;
   /** Reads a single `Post` using its globally unique `ID`. */
   post?: Maybe<Post>;
-  /** Reads a single `PostTranslation` using its globally unique `ID`. */
-  postTranslation?: Maybe<PostTranslation>;
   /** Reads a single `Project` using its globally unique `ID`. */
   project?: Maybe<Project>;
   /** Reads a single `ProjectPartner` using its globally unique `ID`. */
@@ -8708,12 +7593,6 @@ export type Query = Node & {
   shaclGraph?: Maybe<ShaclGraph>;
   /** Reads a single `Upload` using its globally unique `ID`. */
   upload?: Maybe<Upload>;
-  /** Reads a single `PrivateAccount` using its globally unique `ID`. */
-  privateAccount?: Maybe<PrivateAccount>;
-  /** Reads a single `Passcode` using its globally unique `ID`. */
-  passcode?: Maybe<Passcode>;
-  /** Reads a single `PostToken` using its globally unique `ID`. */
-  postToken?: Maybe<PostToken>;
 };
 
 
@@ -9033,54 +7912,6 @@ export type QueryAllUploadsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAllPrivateAccountsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PrivateAccountsOrderBy>>;
-  condition?: Maybe<PrivateAccountCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllEmailConfirmationTokensArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<EmailConfirmationTokensOrderBy>>;
-  condition?: Maybe<EmailConfirmationTokenCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllPasscodesArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PasscodesOrderBy>>;
-  condition?: Maybe<PasscodeCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllPostTokensArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PostTokensOrderBy>>;
-  condition?: Maybe<PostTokenCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryAccountByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -9239,13 +8070,6 @@ export type QueryPostByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryPostTranslationByIdAndLanguageCodeArgs = {
-  id: Scalars['UUID'];
-  languageCode: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryProjectByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -9315,42 +8139,6 @@ export type QueryUploadByUrlArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryUploadByIdArgs = {
-  id: Scalars['UUID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPrivateAccountByIdArgs = {
-  id: Scalars['UUID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPrivateAccountByEmailArgs = {
-  email: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPrivateAccountByGoogleArgs = {
-  google: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPrivateAccountByGoogleEmailArgs = {
-  googleEmail: Scalars['String'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPasscodeByIdArgs = {
-  id: Scalars['UUID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPostTokenByIdArgs = {
   id: Scalars['UUID'];
 };
 
@@ -9488,12 +8276,6 @@ export type QueryPostArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryPostTranslationArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryProjectArgs = {
   nodeId: Scalars['ID'];
 };
@@ -9538,46 +8320,6 @@ export type QueryShaclGraphArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryUploadArgs = {
   nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPrivateAccountArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPasscodeArgs = {
-  nodeId: Scalars['ID'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryPostTokenArgs = {
-  nodeId: Scalars['ID'];
-};
-
-/** All input for the `randomPasscode` mutation. */
-export type RandomPasscodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `randomPasscode` mutation. */
-export type RandomPasscodePayload = {
-  __typename?: 'RandomPasscodePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  string?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
 };
 
 export type Role = Node & {
@@ -9942,6 +8684,7 @@ export type ShaclGraph = Node & {
   nodeId: Scalars['ID'];
   uri: Scalars['String'];
   createdAt: Scalars['Datetime'];
+  updatedAt: Scalars['Datetime'];
   graph: Scalars['JSON'];
 };
 
@@ -9954,6 +8697,8 @@ export type ShaclGraphCondition = {
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `graph` field. */
   graph?: Maybe<Scalars['JSON']>;
 };
@@ -9974,6 +8719,7 @@ export type ShaclGraphFilter = {
 export type ShaclGraphInput = {
   uri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
   graph: Scalars['JSON'];
 };
 
@@ -9981,6 +8727,7 @@ export type ShaclGraphInput = {
 export type ShaclGraphPatch = {
   uri?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
   graph?: Maybe<Scalars['JSON']>;
 };
 
@@ -10013,34 +8760,13 @@ export enum ShaclGraphsOrderBy {
   UriDesc = 'URI_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
   GraphAsc = 'GRAPH_ASC',
   GraphDesc = 'GRAPH_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
-
-/** All input for the `shuffle` mutation. */
-export type ShuffleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  arg0?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `shuffle` mutation. */
-export type ShufflePayload = {
-  __typename?: 'ShufflePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  string?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
 
 
 /** All input for the `updateAccountByAddr` mutation. */
@@ -10888,53 +9614,6 @@ export type UpdateOrganizationProjectPayloadOrganizationProjectEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationProjectsOrderBy>>;
 };
 
-/** All input for the `updatePasscodeById` mutation. */
-export type UpdatePasscodeByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Passcode` being updated. */
-  passcodePatch: PasscodePatch;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `updatePasscode` mutation. */
-export type UpdatePasscodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `Passcode` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `Passcode` being updated. */
-  passcodePatch: PasscodePatch;
-};
-
-/** The output of our update `Passcode` mutation. */
-export type UpdatePasscodePayload = {
-  __typename?: 'UpdatePasscodePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Passcode` that was updated by this mutation. */
-  passcode?: Maybe<Passcode>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Passcode`. May be used by Relay 1. */
-  passcodeEdge?: Maybe<PasscodesEdge>;
-};
-
-
-/** The output of our update `Passcode` mutation. */
-export type UpdatePasscodePayloadPasscodeEdgeArgs = {
-  orderBy?: Maybe<Array<PasscodesOrderBy>>;
-};
-
 /** All input for the `updatePostById` mutation. */
 export type UpdatePostByIdInput = {
   /**
@@ -10996,191 +9675,6 @@ export type UpdatePostPayload = {
 /** The output of our update `Post` mutation. */
 export type UpdatePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
-};
-
-/** All input for the `updatePostTokenById` mutation. */
-export type UpdatePostTokenByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PostToken` being updated. */
-  postTokenPatch: PostTokenPatch;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `updatePostToken` mutation. */
-export type UpdatePostTokenInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PostToken` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `PostToken` being updated. */
-  postTokenPatch: PostTokenPatch;
-};
-
-/** The output of our update `PostToken` mutation. */
-export type UpdatePostTokenPayload = {
-  __typename?: 'UpdatePostTokenPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostToken` that was updated by this mutation. */
-  postToken?: Maybe<PostToken>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Post` that is related to this `PostToken`. */
-  postByPostId?: Maybe<Post>;
-  /** An edge for our `PostToken`. May be used by Relay 1. */
-  postTokenEdge?: Maybe<PostTokensEdge>;
-};
-
-
-/** The output of our update `PostToken` mutation. */
-export type UpdatePostTokenPayloadPostTokenEdgeArgs = {
-  orderBy?: Maybe<Array<PostTokensOrderBy>>;
-};
-
-/** All input for the `updatePostTranslationByIdAndLanguageCode` mutation. */
-export type UpdatePostTranslationByIdAndLanguageCodeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PostTranslation` being updated. */
-  postTranslationPatch: PostTranslationPatch;
-  id: Scalars['UUID'];
-  languageCode: Scalars['String'];
-};
-
-/** All input for the `updatePostTranslation` mutation. */
-export type UpdatePostTranslationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PostTranslation` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `PostTranslation` being updated. */
-  postTranslationPatch: PostTranslationPatch;
-};
-
-/** The output of our update `PostTranslation` mutation. */
-export type UpdatePostTranslationPayload = {
-  __typename?: 'UpdatePostTranslationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PostTranslation` that was updated by this mutation. */
-  postTranslation?: Maybe<PostTranslation>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Post` that is related to this `PostTranslation`. */
-  postById?: Maybe<Post>;
-  /** An edge for our `PostTranslation`. May be used by Relay 1. */
-  postTranslationEdge?: Maybe<PostTranslationsEdge>;
-};
-
-
-/** The output of our update `PostTranslation` mutation. */
-export type UpdatePostTranslationPayloadPostTranslationEdgeArgs = {
-  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
-};
-
-/** All input for the `updatePrivateAccountByEmail` mutation. */
-export type UpdatePrivateAccountByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PrivateAccount` being updated. */
-  privateAccountPatch: PrivateAccountPatch;
-  email: Scalars['String'];
-};
-
-/** All input for the `updatePrivateAccountByGoogleEmail` mutation. */
-export type UpdatePrivateAccountByGoogleEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PrivateAccount` being updated. */
-  privateAccountPatch: PrivateAccountPatch;
-  /** Email corresponding to the google account used for logging in, which can be different from the main account email */
-  googleEmail: Scalars['String'];
-};
-
-/** All input for the `updatePrivateAccountByGoogle` mutation. */
-export type UpdatePrivateAccountByGoogleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PrivateAccount` being updated. */
-  privateAccountPatch: PrivateAccountPatch;
-  google: Scalars['String'];
-};
-
-/** All input for the `updatePrivateAccountById` mutation. */
-export type UpdatePrivateAccountByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `PrivateAccount` being updated. */
-  privateAccountPatch: PrivateAccountPatch;
-  id: Scalars['UUID'];
-};
-
-/** All input for the `updatePrivateAccount` mutation. */
-export type UpdatePrivateAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The globally unique `ID` which will identify a single `PrivateAccount` to be updated. */
-  nodeId: Scalars['ID'];
-  /** An object where the defined keys will be set on the `PrivateAccount` being updated. */
-  privateAccountPatch: PrivateAccountPatch;
-};
-
-/** The output of our update `PrivateAccount` mutation. */
-export type UpdatePrivateAccountPayload = {
-  __typename?: 'UpdatePrivateAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `PrivateAccount` that was updated by this mutation. */
-  privateAccount?: Maybe<PrivateAccount>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Account` that is related to this `PrivateAccount`. */
-  accountById?: Maybe<Account>;
-  /** An edge for our `PrivateAccount`. May be used by Relay 1. */
-  privateAccountEdge?: Maybe<PrivateAccountsEdge>;
-};
-
-
-/** The output of our update `PrivateAccount` mutation. */
-export type UpdatePrivateAccountPayloadPrivateAccountEdgeArgs = {
-  orderBy?: Maybe<Array<PrivateAccountsOrderBy>>;
 };
 
 /** All input for the `updateProjectByAdminDaoAddress` mutation. */
@@ -12058,11 +10552,7 @@ export type DaoByAddressWithAssignmentsQuery = (
       { __typename?: 'DaoAccountsByAssignmentDaoAddressAndAccountIdManyToManyConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Account' }
-        & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
-        & { privateAccountById?: Maybe<(
-          { __typename?: 'PrivateAccount' }
-          & Pick<PrivateAccount, 'email' | 'googleEmail'>
-        )> }
+        & MakeOptional<Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title' | 'email' | 'googleEmail'>, 'email' | 'googleEmail'>
       )>> }
     ), assignmentsByDaoAddress: (
       { __typename?: 'AssignmentsConnection' }
@@ -12239,11 +10729,7 @@ export type OrganizationProjectsByDaoAddressQuery = (
                 & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId'>
                 & { accountByAccountId?: Maybe<(
                   { __typename?: 'Account' }
-                  & Pick<Account, 'addr'>
-                  & { privateAccountById?: Maybe<(
-                    { __typename?: 'PrivateAccount' }
-                    & Pick<PrivateAccount, 'email' | 'googleEmail'>
-                  )> }
+                  & Pick<Account, 'addr' | 'email' | 'googleEmail'>
                 )> }
               )>> }
             ) }
@@ -13272,10 +11758,8 @@ export const DaoByAddressWithAssignmentsDocument = gql`
         image
         addr
         title
-        privateAccountById @include(if: $includePrivate) {
-          email
-          googleEmail
-        }
+        email @include(if: $includePrivate)
+        googleEmail @include(if: $includePrivate)
       }
     }
     assignmentsByDaoAddress {
@@ -13567,10 +12051,8 @@ export const OrganizationProjectsByDaoAddressDocument = gql`
                 accountId
                 accountByAccountId {
                   addr
-                  privateAccountById {
-                    email
-                    googleEmail
-                  }
+                  email
+                  googleEmail
                 }
                 roleName
                 onChainRoleId

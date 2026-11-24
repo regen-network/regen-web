@@ -238,8 +238,7 @@ export function useAddMember(params: MembersHookParams) {
             const isMemberOfProject =
               project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes.some(
                 assignment =>
-                  assignment?.accountByAccountId?.privateAccountById?.email ===
-                  addressOrEmail,
+                  assignment?.accountByAccountId?.email === addressOrEmail,
               );
             // then we keep his/her role there unchanged
             return !isMemberOfProject;

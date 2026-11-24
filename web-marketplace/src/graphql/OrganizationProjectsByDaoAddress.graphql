@@ -12,10 +12,8 @@ query OrganizationProjectsByDaoAddress($daoAddress: String!) {
                 accountId
                 accountByAccountId {
                   addr
-                  privateAccountById {
-                    email
-                    googleEmail
-                  }
+                  email
+                  googleEmail
                 }
                 roleName
                 onChainRoleId

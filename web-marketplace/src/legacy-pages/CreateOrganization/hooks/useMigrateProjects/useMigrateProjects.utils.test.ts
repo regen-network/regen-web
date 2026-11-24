@@ -44,19 +44,8 @@ const createOrgAssignmentsData = (
         image: null,
         addr: assignment.addr ?? null,
         title: null,
-        privateAccountById: assignment.email
-          ? {
-              __typename: 'PrivateAccount',
-              email: assignment.email ?? null,
-              googleEmail: assignment.googleEmail ?? null,
-            }
-          : assignment.googleEmail
-          ? {
-              __typename: 'PrivateAccount',
-              email: null,
-              googleEmail: assignment.googleEmail,
-            }
-          : null,
+        email: assignment.email ?? null,
+        googleEmail: assignment.googleEmail ?? null,
       })),
     },
     assignmentsByDaoAddress: {

@@ -93,7 +93,7 @@ const useProjectCreateSubmit = ({
           | undefined;
 
         try {
-          iriResponse = await generateIri(metadata);
+          iriResponse = await generateIri(metadata, reactQueryClient);
           if (!iriResponse) return;
         } catch (err) {
           throw new Error(err as string);

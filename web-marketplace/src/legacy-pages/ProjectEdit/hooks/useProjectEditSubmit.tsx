@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
+import { useQueryClient } from '@tanstack/react-query';
 import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import {
   getAuthorizationId,
@@ -64,6 +65,7 @@ const useProjectEditSubmit = ({
 }: Props): UseProjectEditSubmitParams => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const reactQueryClient = useQueryClient();
 
   const { authorizationId } = getAuthorizationId({
     type: 'project',
@@ -80,6 +82,7 @@ const useProjectEditSubmit = ({
     ): Promise<void> => {
       const iriResponse = await generateIri(
         getAnchoredProjectBaseMetadata(metadata, creditClassId),
+        reactQueryClient,
       );
       if (!iriResponse) return;
       const msgs = [];
@@ -183,6 +186,7 @@ const useProjectEditSubmit = ({
     },
     [
       creditClassId,
+      reactQueryClient,
       projectId,
       admin,
       _,

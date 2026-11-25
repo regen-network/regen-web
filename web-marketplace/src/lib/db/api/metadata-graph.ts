@@ -1,7 +1,10 @@
+import type { QueryClient as ReactQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { QueryClient } from 'ledger';
 import { apiUri } from 'lib/apiUri';
+import { CSRF_ERROR } from 'lib/errors/apiErrors';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { jsonLdCompact } from 'lib/rdf';
 
 type GetMetadataProps = {
@@ -79,10 +82,36 @@ type IriFromMetadata<T> = IriFromMetadataSuccess<T>;
 
 export async function generateIri<T>(
   metadata: T,
+  reactQueryClient: ReactQueryClient,
 ): Promise<IriFromMetadata<T> | undefined> {
-  try {
-    const response = await axios.post(apiUri + iriUrl, metadata);
+  const postMetadata = async (csrfToken: string | undefined) => {
+    const response = await axios.post<IriFromMetadata<T>>(
+      apiUri + iriUrl,
+      metadata,
+      {
+        withCredentials: true,
+        headers: { 'X-CSRF-TOKEN': csrfToken },
+      },
+    );
     return response.data;
+  };
+
+  try {
+    const csrfToken = await reactQueryClient.fetchQuery(getCsrfTokenQuery({}));
+    return await postMetadata(csrfToken).catch(async err => {
+      if (
+        !axios.isAxiosError(err) ||
+        err.response?.status !== 403 ||
+        err.response.data?.error !== CSRF_ERROR
+      ) {
+        throw err;
+      }
+
+      const refreshedToken = await reactQueryClient.fetchQuery(
+        getCsrfTokenQuery({ staleTime: 0 }),
+      );
+      return postMetadata(refreshedToken);
+    });
   } catch (err) {
     // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error(`Error in iri generation service: ${err}`);

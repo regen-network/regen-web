@@ -4,6 +4,7 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import { regen } from '@regen-network/api';
 import { MsgCreateBatch } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/regen/ecocredit/v1/types';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import {
   getExecuteActionsStargate,
   getMsgExecuteContract,
@@ -49,7 +50,11 @@ function prepareVCSMetadata(
   return metadata;
 }
 
-async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
+async function prepareMsg(
+  issuer: string,
+  data: CreateBatchFormValues,
+  reactQueryClient: QueryClient,
+) {
   if (!data.metadata) return;
 
   // Complete the metadata for the batch creation
@@ -72,7 +77,7 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     | undefined;
 
   try {
-    iriResponse = await generateIri(metadata);
+    iriResponse = await generateIri(metadata, reactQueryClient);
     if (!iriResponse) return;
   } catch (err) {
     throw new Error(err as string);
@@ -158,6 +163,7 @@ export default function useCreateBatchSubmit(): Return {
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
   const location = useLocation();
+  const reactQueryClient = useQueryClient();
 
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
@@ -206,7 +212,7 @@ export default function useCreateBatchSubmit(): Return {
     if (status === 'idle' || status === 'message') {
       try {
         setStatus('message');
-        message = await prepareMsg(actualIssuer, data);
+        message = await prepareMsg(actualIssuer, data, reactQueryClient);
       } catch (err) {
         setError(err as string);
       }

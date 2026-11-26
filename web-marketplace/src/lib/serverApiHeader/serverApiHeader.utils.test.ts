@@ -5,7 +5,7 @@ import {
   withServerRequestHeader,
 } from './serverApiHeader.utils';
 
-const API = 'https://api.regen.network';
+const API = 'https://api.example.com';
 const SECRET = 'test-secret';
 
 const setup = (secret: string | undefined = SECRET, apiUri = API) => {
@@ -59,10 +59,10 @@ describe('withServerRequestHeader', () => {
 
   it.each([
     ['another host', 'https://resolver.example.com/regen:x'],
-    ['a look-alike host', 'https://api.regen.network.evil.com/x'],
-    ['a subdomain of the API host', 'https://x.api.regen.network/x'],
-    ['the same host over http', 'http://api.regen.network/x'],
-    ['the same host on another port', 'https://api.regen.network:8443/x'],
+    ['a look-alike host', 'https://api.example.com.evil.com/x'],
+    ['a subdomain of the API host', 'https://x.api.example.com/x'],
+    ['the same host over http', 'http://api.example.com/x'],
+    ['the same host on another port', 'https://api.example.com:8443/x'],
     ['the Sanity API', 'https://abc.api.sanity.io/v1/graphql'],
   ])('leaves requests to %s untouched', async (_, url) => {
     const { inner, wrapped } = setup();

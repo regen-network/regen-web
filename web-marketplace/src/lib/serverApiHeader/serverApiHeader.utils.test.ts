@@ -148,6 +148,22 @@ describe('withServerRequestHeader redirects', () => {
     expect(call(1)[1]?.redirect).toBe('manual');
   });
 
+  it.each([
+    ['the Request signal', undefined],
+    ['the init signal', new AbortController().signal],
+    ['the explicit null signal', null],
+  ] as const)('uses %s on a same-origin redirect', async (_, initSignal) => {
+    const { wrapped, call } = setupWith(redirectTo('/next'));
+    const request = new Request(`${API}/start`, {
+      signal: new AbortController().signal,
+    });
+    const init = initSignal === undefined ? undefined : { signal: initSignal };
+
+    await wrapped(request, init);
+
+    expect(call(1)[1]?.signal).toBe(init ? init.signal : request.signal);
+  });
+
   it('stops following a chain that leaves the API origin', async () => {
     const { inner, wrapped } = setupWith(
       redirectTo(`${API}/a`),

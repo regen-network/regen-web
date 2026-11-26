@@ -49,21 +49,18 @@ export function withServerRequestHeader(
     if (originOf(url) !== apiOrigin) {
       return fetchImpl(input, init);
     }
-    const headers = new Headers(
-      init?.headers ?? (input instanceof Request ? input.headers : undefined),
-    );
+    const request = input instanceof Request ? input : undefined;
+    const headers = new Headers(init?.headers ?? request?.headers);
     headers.set(SERVER_REQUEST_HEADER, secret);
 
-    const redirect =
-      init?.redirect ?? (input instanceof Request ? input.redirect : 'follow');
+    const redirect = init?.redirect ?? request?.redirect ?? 'follow';
     if (redirect !== 'follow') {
       // 'manual' or 'error': fetch doesn't follow redirects either way
       return fetchImpl(input, { ...init, headers, redirect });
     }
 
-    const method = (
-      init?.method ?? (input instanceof Request ? input.method : 'GET')
-    ).toUpperCase();
+    const method = (init?.method ?? request?.method ?? 'GET').toUpperCase();
+    const signal = init?.signal === undefined ? request?.signal : init.signal;
     let response = await fetchImpl(input, {
       ...init,
       headers,
@@ -86,7 +83,7 @@ export function withServerRequestHeader(
         method,
         headers,
         redirect: 'manual',
-        signal: init?.signal,
+        signal,
       });
     }
     return response;

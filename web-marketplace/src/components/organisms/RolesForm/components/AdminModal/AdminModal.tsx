@@ -1,9 +1,15 @@
-import { useMemo } from 'react';
-import { useFormState } from 'react-hook-form';
+import { useEffect, useMemo } from 'react';
+import { useFormState, useWatch } from 'react-hook-form';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
@@ -11,8 +17,10 @@ import {
   INVALID_REGEN_ADDRESS,
   REQUIRED_MESSAGE,
 } from 'lib/constants/shared.constants';
+import { getDaoByAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getDaoByAddressQuery/getDaoByAddressQuery';
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useDebounce } from 'hooks/useDebounce';
 
 import { ModalTemplate } from '../ModalTemplate/ModalTemplate';
 import {
@@ -53,12 +61,34 @@ function AdminModal({
     defaultValues: {
       ...initialValues,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const { isSubmitting, errors, isValid } = useFormState({
     control: form.control,
   });
+
+  const newAddress = useWatch({ control: form.control, name: 'newAddress' });
+  const debouncedNewAddress = useDebounce(newAddress);
+  const graphqlClient =
+    useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const { data: daoData, isLoading: isDaoLoading } = useQuery(
+    getDaoByAddressQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!debouncedNewAddress,
+      address: debouncedNewAddress,
+    }),
+  );
+
+  useEffect(() => {
+    if (daoData?.daoByAddress) {
+      form.setError('newAddress', {
+        message: _(
+          msg`Updating the project admin to a DAO address is not supported`,
+        ),
+      });
+    }
+  }, [daoData, form, _]);
 
   return (
     <ModalTemplate
@@ -67,7 +97,7 @@ function AdminModal({
       onClose={onClose}
       form={form}
       handleSubmit={form.handleSubmit(onSubmit)}
-      submitDisabled={!isValid || isSubmitting}
+      submitDisabled={!isValid || isSubmitting || isDaoLoading}
       submitLabel={_(SUBMIT_LABEL)}
     >
       <TextField

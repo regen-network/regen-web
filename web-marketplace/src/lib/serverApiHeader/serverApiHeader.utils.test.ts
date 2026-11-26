@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+  MAX_REDIRECTS,
   SERVER_REQUEST_HEADER,
   withServerRequestHeader,
 } from './serverApiHeader.utils';
@@ -91,4 +92,102 @@ describe('withServerRequestHeader', () => {
     await wrapped('/local/path');
     expect(inner).toHaveBeenCalledWith('/local/path', undefined);
   });
+});
+
+describe('withServerRequestHeader redirects', () => {
+  const redirectTo = (location: string, status = 302) =>
+    new Response(null, { status, headers: { location } });
+
+  // Returns the given responses in order, then 200
+  const setupWith = (...responses: Response[]) => {
+    const inner = vi.fn(async () => responses.shift() ?? new Response('ok'));
+    const wrapped = withServerRequestHeader(inner as unknown as typeof fetch, {
+      apiUri: API,
+      secret: SECRET,
+    });
+    const call = (i: number) =>
+      inner.mock.calls[i] as unknown as Parameters<typeof fetch>;
+    return { inner, wrapped, call };
+  };
+
+  it('never lets fetch follow redirects itself for API requests', async () => {
+    const { wrapped, call } = setupWith();
+    await wrapped(`${API}/marketplace/v1/graphql`, { method: 'POST' });
+    expect(call(0)[1]?.redirect).toBe('manual');
+  });
+
+  it('does not follow a redirect to another origin', async () => {
+    const { inner, wrapped } = setupWith(
+      redirectTo('https://evil.example.com/collect'),
+    );
+    const res = await wrapped(`${API}/data/v2/metadata-graph/regen:x`);
+    expect(res.status).toBe(302);
+    expect(inner).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([
+    ['another scheme', 'http://api.example.com/x'],
+    ['another port', 'https://api.example.com:8443/x'],
+    ['a protocol-relative URL', '//evil.example.com/x'],
+  ])('does not follow a redirect to %s', async (_, location) => {
+    const { inner, wrapped } = setupWith(redirectTo(location));
+    await wrapped(`${API}/ledger`);
+    expect(inner).toHaveBeenCalledTimes(1);
+  });
+
+  it('follows a same-origin redirect of a GET, keeping the header', async () => {
+    const { inner, wrapped, call } = setupWith(
+      redirectTo('/data/v2/metadata-graph/regen:y', 308),
+    );
+    const res = await wrapped(`${API}/data/v2/metadata-graph/regen:x`);
+    expect(res.status).toBe(200);
+    expect(inner).toHaveBeenCalledTimes(2);
+    expect(call(1)[0]).toBe(`${API}/data/v2/metadata-graph/regen:y`);
+    const headers = new Headers(call(1)[1]?.headers);
+    expect(headers.get(SERVER_REQUEST_HEADER)).toBe(SECRET);
+    expect(call(1)[1]?.redirect).toBe('manual');
+  });
+
+  it('stops following a chain that leaves the API origin', async () => {
+    const { inner, wrapped } = setupWith(
+      redirectTo(`${API}/a`),
+      redirectTo('https://evil.example.com/b'),
+    );
+    const res = await wrapped(`${API}/start`);
+    expect(res.status).toBe(302);
+    expect(res.headers.get('location')).toBe('https://evil.example.com/b');
+    expect(inner).toHaveBeenCalledTimes(2);
+  });
+
+  it('does not follow redirects of a POST', async () => {
+    const { inner, wrapped } = setupWith(redirectTo(`${API}/other`, 307));
+    const res = await wrapped(`${API}/marketplace/v1/graphql`, {
+      method: 'POST',
+      body: '{}',
+    });
+    expect(res.status).toBe(307);
+    expect(inner).toHaveBeenCalledTimes(1);
+  });
+
+  it(`stops after ${MAX_REDIRECTS} same-origin redirects`, async () => {
+    const loop = Array.from({ length: 10 }, (_, i) =>
+      redirectTo(`${API}/${i}`),
+    );
+    const { inner, wrapped } = setupWith(...loop);
+    const res = await wrapped(`${API}/start`);
+    expect(res.status).toBe(302);
+    expect(inner).toHaveBeenCalledTimes(MAX_REDIRECTS + 1);
+  });
+
+  it.each(['manual', 'error'] as const)(
+    "keeps the caller's redirect: '%s'",
+    async redirect => {
+      const { inner, wrapped, call } = setupWith(
+        redirectTo('https://evil.example.com/x'),
+      );
+      await wrapped(`${API}/x`, { redirect });
+      expect(inner).toHaveBeenCalledTimes(1);
+      expect(call(0)[1]?.redirect).toBe(redirect);
+    },
+  );
 });

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/regen-network/regen-web/compare/v2.14.0...v2.14.1) (2026-11-26)
+
+### Bug Fixes
+
+- APP-913 disable 'save credit card' if Link is used ([#2835](https://github.com/regen-network/regen-web/issues/2835)) ([48c6e61](https://github.com/regen-network/regen-web/commit/48c6e61623ba486af52bb86dc1bc7e49e82d2218))
+- hardcoded saveDisabled ([393aee4](https://github.com/regen-network/regen-web/commit/393aee43fee831bc8935ff6ce3c3d6ff3986dd80))
+- read member emails from account.email instead of the private schema ([#2844](https://github.com/regen-network/regen-web/issues/2844)) ([9144a75](https://github.com/regen-network/regen-web/commit/9144a75181a13752acfccfa1e71b455d59215eeb))
+- send session and CSRF token when generating IRIs ([#2845](https://github.com/regen-network/regen-web/issues/2845)) ([b8e954b](https://github.com/regen-network/regen-web/commit/b8e954b9bdfdf6f8d6198b76b7edf0285a76a3c3))
+- server-side rendering ([#2846](https://github.com/regen-network/regen-web/issues/2846)) ([93ce088](https://github.com/regen-network/regen-web/commit/93ce08817b264a53148b2f847b729a61945e9b6d))
+- use || instead of ?? to support empty string case in ProjectMetadata creditClassId declaration ([#2840](https://github.com/regen-network/regen-web/issues/2840)) ([3a119ad](https://github.com/regen-network/regen-web/commit/3a119ad88465a6119646f34abe7660717c9f3ada))
+
 # [2.14.0](https://github.com/regen-network/regen-web/compare/v2.13.1...v2.14.0) (2026-05-21)
 
 ### Bug Fixes

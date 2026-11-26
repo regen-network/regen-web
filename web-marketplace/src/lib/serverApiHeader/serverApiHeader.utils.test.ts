@@ -117,11 +117,14 @@ describe('withServerRequestHeader redirects', () => {
   });
 
   it('does not follow a redirect to another origin', async () => {
-    const { inner, wrapped } = setupWith(
-      redirectTo('https://evil.example.com/collect'),
-    );
+    const redirect = new Response('redirect body', {
+      status: 302,
+      headers: { location: 'https://evil.example.com/collect' },
+    });
+    const { inner, wrapped } = setupWith(redirect);
     const res = await wrapped(`${API}/data/v2/metadata-graph/regen:x`);
     expect(res.status).toBe(302);
+    expect(await res.text()).toBe('redirect body');
     expect(inner).toHaveBeenCalledTimes(1);
   });
 
@@ -146,6 +149,25 @@ describe('withServerRequestHeader redirects', () => {
     const headers = new Headers(call(1)[1]?.headers);
     expect(headers.get(SERVER_REQUEST_HEADER)).toBe(SECRET);
     expect(call(1)[1]?.redirect).toBe('manual');
+  });
+
+  it('starts canceling the discarded body before following a redirect', async () => {
+    const [redirectBody, otherBranch] = new ReadableStream().tee();
+    const cancel = vi.spyOn(redirectBody, 'cancel');
+    const redirect = new Response(redirectBody, {
+      status: 302,
+      headers: { location: '/next' },
+    });
+    const { inner, wrapped } = setupWith(redirect);
+
+    const res = await wrapped(`${API}/start`);
+
+    expect(await res.text()).toBe('ok');
+    expect(cancel).toHaveBeenCalledTimes(1);
+    expect(cancel.mock.invocationCallOrder[0]).toBeLessThan(
+      inner.mock.invocationCallOrder[1],
+    );
+    await otherBranch.cancel();
   });
 
   it.each([

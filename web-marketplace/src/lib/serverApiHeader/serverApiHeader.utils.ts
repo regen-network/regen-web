@@ -78,6 +78,8 @@ export function withServerRequestHeader(
       ) {
         break;
       }
+      // Cancellation of a cloned body can wait for the other stream branch.
+      void response.body?.cancel().catch(() => undefined);
       url = next.href;
       response = await fetchImpl(url, {
         method,
